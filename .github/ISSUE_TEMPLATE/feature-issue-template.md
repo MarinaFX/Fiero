@@ -1,5 +1,5 @@
 ---
-name: Feature issue template
+name: Feature Issue Template
 about: 'Adding new functionalities to our product. '
 title: 'Ex: [FEATURE] <US 7 | TK 115> Implement challenge creation view'
 labels: Feature
