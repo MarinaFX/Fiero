@@ -7,13 +7,14 @@ assignees: ''
 
 ---
 
-# Title ✏️: Here's an Issue Title. Please, keep it short, simple and readable at a glance. 
+# Title ✏️
+> Here's an Issue Title. Please, keep it short, simple and readable at a glance. 
 
-# Description 📝: 
-## Current behaviour 🚫: 
+# Description 📝
+## Current behaviour 🚫
 > Here is an Issue Description. Please, insert richer details about the Bug being reported. Describe in words the current behaviour. 
 
-## Expected Behaviour ✅: 
+## Expected Behaviour ✅
 > Here is another Issue Description. Please, insert richer details about the expected behaviour. Describe in words how the code should behave, inputs and outputs. 
 
 # **How to Reproduce** 🪞
@@ -27,7 +28,7 @@ Steps to reproduce the behaviour:
 ## **Screenshots/Videos** 📱
 If applicable, add screenshots to help explain your problem.
 
-## Techinical Details 🤓: 
+## Techinical Developer Details 🤓
  - Device: [e.g. iPhone6]
  - OS: [e.g. iOS8.1]
  - Version [e.g. 22]
