@@ -224,7 +224,14 @@ enum Tokens {
         case `default`
         case small
         
-        //var lineHeight:
+        var lineHeight: CGFloat {
+            switch self {
+                case .default:
+                    return CGFloat(1.0)
+                case .small:
+                    return CGFloat(1.2)
+            }
+        }
     }
     
     //MARK: - Spacing
