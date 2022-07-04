@@ -1,0 +1,51 @@
+# Staging workflow. 
+# The purpose of this workflow is to keep the application tested when new features arrives.
+
+name: test_pipeline
+
+# Triggers to be activated each time there's a push on both Staging and Development branches
+on:
+  push:
+    branches:
+      - staging 
+  pull_request:
+    branches:
+      - dev
+
+# Official job to build the application
+jobs:
+  build:
+    name: Build Project
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.4.1
+        
+      - name: Build
+        run: |
+          xcodebuild build \
+          -scheme ${{ secrets.APP_BUILD_TARGET }} \
+          -destination "platform=iOS Simulator,name=iPhone 12,OS=15.2" \
+
+# Official job to test the application. When running on Dev or any branch it runs the tests of the new feature. When running on Staging runs all tests
+  test:
+    name: Test Project
+    needs: build
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.4.1
+
+      - name: Test
+        run: |
+          xcodebuild \
+          -allowProvisioningUpdates \
+          -scheme ${{ secrets.APP_BUILD_TARGET }} \
+          -destination "platform=iOS Simulator,name=iPhone 12,OS=15.2" \
+          test \
