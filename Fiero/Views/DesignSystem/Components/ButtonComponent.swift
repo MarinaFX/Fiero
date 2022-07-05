@@ -34,3 +34,5 @@ struct ButtonComponent_Previews: PreviewProvider {
         ButtonComponent(style: .primary(isEnabled: true), text: "Estou pronto!", action: .constant {})
     }
 }
+
+//test
