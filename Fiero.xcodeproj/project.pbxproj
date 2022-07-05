@@ -104,9 +104,9 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				CCA3C2442874C088007F6597 /* ViewModels */,
 				1B8FB399286F6E7600B9F868 /* Views */,
-				1B8FB398286F6E6D00B9F868 /* ViewModels */,
-				1B8FB397286F6E6300B9F868 /* Models */,
+				CCA3C2452874C090007F6597 /* Models */,
 				1B4135B828597E8900C7094A /* FieroApp.swift */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
@@ -140,20 +140,6 @@
 			path = FieroUITests;
 			sourceTree = "<group>";
 		};
-		1B8FB397286F6E6300B9F868 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		1B8FB398286F6E6D00B9F868 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +164,20 @@
 				1B8FB39B286F6E8700B9F868 /* Components */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		CCA3C2442874C088007F6597 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CCA3C2452874C090007F6597 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
