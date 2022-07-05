@@ -14,6 +14,7 @@
 		1B4135CA28597E8F00C7094A /* FieroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135C928597E8F00C7094A /* FieroTests.swift */; };
 		1B4135D428597E8F00C7094A /* FieroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D328597E8F00C7094A /* FieroUITests.swift */; };
 		1B4135D628597E8F00C7094A /* FieroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */; };
+		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1BDE554128738CE3004F63DD /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE554028738CE3004F63DD /* PrimaryTextField.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		1B4135CF28597E8F00C7094A /* FieroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FieroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135D328597E8F00C7094A /* FieroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITests.swift; sourceTree = "<group>"; };
 		1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1BDE554028738CE3004F63DD /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				1B5B7CDB2874BF4F00B4628F /* Extensions */,
 				1B8FB399286F6E7600B9F868 /* Views */,
 				1B8FB398286F6E6D00B9F868 /* ViewModels */,
 				1B8FB397286F6E6300B9F868 /* Models */,
@@ -132,6 +135,14 @@
 				1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */,
 			);
 			path = FieroUITests;
+			sourceTree = "<group>";
+		};
+		1B5B7CDB2874BF4F00B4628F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1B8FB397286F6E6300B9F868 /* Models */ = {
@@ -306,6 +317,7 @@
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1BDE554128738CE3004F63DD /* PrimaryTextField.swift in Sources */,
+				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
