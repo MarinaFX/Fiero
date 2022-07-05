@@ -211,14 +211,14 @@ enum Tokens {
         
         //MARK: - Font Family
         enum Familiy {
-            case sfprodisplay
-            case sfprorounded
+            case support
+            case base
             
             var value: Font.Design {
                 switch self {
-                    case .sfprodisplay:
+                    case .support:
                         return .default
-                    case .sfprorounded:
+                    case .base:
                         return .rounded
                 }
             }
