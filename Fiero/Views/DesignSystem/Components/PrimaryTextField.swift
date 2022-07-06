@@ -32,7 +32,7 @@ struct FlemisView: View {
                 .textFieldStyle(PrimaryTextFieldStyle())
                 .padding(Tokens.Spacing.xs.value)
         }
-        .background(Color.black)
+        .background(Color.purple)
     }
 }
 

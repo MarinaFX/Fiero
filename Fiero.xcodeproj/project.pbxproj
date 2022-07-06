@@ -109,7 +109,6 @@
 				1B8FB399286F6E7600B9F868 /* Views */,
 				CCA3C2452874C090007F6597 /* Models */,
 				1B4135B828597E8900C7094A /* FieroApp.swift */,
-				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
 				1B4135BE28597E8F00C7094A /* Preview Content */,
 			);
@@ -152,6 +151,7 @@
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
 			);
 			path = Views;
@@ -160,6 +160,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1BDE554028738CE3004F63DD /* PrimaryTextField.swift */,
 				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
 				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
 			);
@@ -178,7 +179,6 @@
 		CCA3C2442874C088007F6597 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				1BDE554028738CE3004F63DD /* PrimaryTextField.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
