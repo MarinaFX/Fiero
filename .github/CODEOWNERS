@@ -1,0 +1,12 @@
+# Fiero CODEOWNERS rules
+# CodeOwners from Fiero inc
+
+# Any .swift files must be reviewed by: 
+*.swift    @MarinaFX @jgabrielbiazus @LucasJusto @illuminatyy
+
+# Any .YML files must be reviewed by: 
+*.yml    @MarinaFX 
+
+# Any documentation from the project must be reviewed by the Scrum Master and Product Owner
+/docs/*    @MarinaFX @jgabrielbiazus
+
