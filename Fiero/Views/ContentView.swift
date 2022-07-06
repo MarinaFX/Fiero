@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        CustomTextFieldView(type: .none, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA. QUANDO CHEGA O FINAL DE SEMANA, QUERO DEITAR NA MINHA CAMA", isWrong: .constant(true), text: .constant("flemis"))
+            .padding(Tokens.Spacing.xs.value)
     }
 }
 

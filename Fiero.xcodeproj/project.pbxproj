@@ -15,6 +15,9 @@
 		1B4135D428597E8F00C7094A /* FieroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D328597E8F00C7094A /* FieroUITests.swift */; };
 		1B4135D628597E8F00C7094A /* FieroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */; };
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
+		1B5B7CDF2875FE4300B4628F /* SecurePrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDE2875FE4300B4628F /* SecurePrimaryTextField.swift */; };
+		1B5B7CE12876005C00B4628F /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE02876005C00B4628F /* CustomTextFieldView.swift */; };
+		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1BDE554128738CE3004F63DD /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDE554028738CE3004F63DD /* PrimaryTextField.swift */; };
 		CCA3C23D287382DD007F6597 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C23C287382DD007F6597 /* ButtonComponent.swift */; };
@@ -50,6 +53,9 @@
 		1B4135D328597E8F00C7094A /* FieroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITests.swift; sourceTree = "<group>"; };
 		1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		1B5B7CDE2875FE4300B4628F /* SecurePrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePrimaryTextField.swift; sourceTree = "<group>"; };
+		1B5B7CE02876005C00B4628F /* CustomTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
+		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1BDE554028738CE3004F63DD /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
 		CCA3C23C287382DD007F6597 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
@@ -148,6 +154,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1B5B7CE228761F2B00B4628F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +177,8 @@
 				1BDE554028738CE3004F63DD /* PrimaryTextField.swift */,
 				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
 				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
+				1B5B7CDE2875FE4300B4628F /* SecurePrimaryTextField.swift */,
+				1B5B7CE02876005C00B4628F /* CustomTextFieldView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -170,6 +186,7 @@
 		1B8FB39E286F6EF300B9F868 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				1B5B7CE228761F2B00B4628F /* Enums */,
 				1B8FB39C286F6EEF00B9F868 /* Tokens.swift */,
 				1B8FB39B286F6E8700B9F868 /* Components */,
 			);
@@ -323,10 +340,13 @@
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1BDE554128738CE3004F63DD /* PrimaryTextField.swift in Sources */,
+				1B5B7CDF2875FE4300B4628F /* SecurePrimaryTextField.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				CCA3C23D287382DD007F6597 /* ButtonComponent.swift in Sources */,
 				CCA3C2412874847D007F6597 /* ButtonStyles.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
+				1B5B7CE12876005C00B4628F /* CustomTextFieldView.swift in Sources */,
+				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
