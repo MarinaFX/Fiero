@@ -119,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				1B5B7CDB2874BF4F00B4628F /* Extensions */,
-				CCA3C2442874C088007F6597 /* ViewModels */,
 				1B8FB399286F6E7600B9F868 /* Views */,
 				1B4135B828597E8900C7094A /* FieroApp.swift */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
@@ -185,8 +184,6 @@
 				CCA3C2462875FFD0007F6597 /* Button */,
 				F888EBFF2876003B00445FED /* Alert */,
 				1BDE554028738CE3004F63DD /* PrimaryTextField.swift */,
-				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
-				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
 				1B5B7CDE2875FE4300B4628F /* SecurePrimaryTextField.swift */,
 				1B5B7CE02876005C00B4628F /* CustomTextFieldView.swift */,
 			);
@@ -203,20 +200,11 @@
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		F888EBFF2876003B00445FED /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				F888EC00287600C300445FED /* AlertStyles.swift */,
-				F888EC022876010200445FED /* AlertComponent.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
 				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
+				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -228,6 +216,15 @@
 				CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */,
 			);
 			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		F888EBFF2876003B00445FED /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				F888EC00287600C300445FED /* AlertStyles.swift */,
+				F888EC022876010200445FED /* AlertComponent.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
