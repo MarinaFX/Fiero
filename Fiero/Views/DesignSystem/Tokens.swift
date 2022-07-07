@@ -11,15 +11,15 @@ import SwiftUI
 /**
  Usage:
  let someColor = Tokens.Colors.Brand.primaryColor
- let view = Text("").background(someColor.color)
+ let view = Text("").background(someColor.value)
  
- let colorArray = Tokens.Colors.Brand.allCases.map(\.color)
+ let colorArray = Tokens.Colors.Brand.allCases.map(\.value)
  colorArray[0]
  
  OR
  
  let EnumColorArray = Tokens.Colors.Brand.allCases
- colorArray[0].color
+ colorArray[0].value
  
  */
 enum Tokens {
@@ -28,7 +28,7 @@ enum Tokens {
         case none
         case small
         
-        var blur: CGFloat {
+        var value: CGFloat {
             switch self {
                 case .none:
                     return CGFloat(0.0)
@@ -45,7 +45,7 @@ enum Tokens {
             case small
             case circular
             
-            var borderRadius: CGFloat {
+            var value: CGFloat {
                 switch self {
                     case .none:
                         return CGFloat(0.0)
@@ -53,6 +53,30 @@ enum Tokens {
                         return CGFloat(8.0)
                     case .circular:
                         return CGFloat(500.0)
+                }
+            }
+        }
+        
+        enum BorderWidth {
+            case none
+            case hairline
+            case thin
+            case thick
+            case heavy
+            
+            
+            var value: CGFloat {
+                switch self {
+                    case .none:
+                        return CGFloat(0)
+                    case .hairline:
+                        return CGFloat(0.5)
+                    case .thin:
+                        return CGFloat(1)
+                    case .thick:
+                        return CGFloat(2)
+                    case .heavy:
+                        return CGFloat(4)
                 }
             }
         }
@@ -71,7 +95,7 @@ enum Tokens {
                 case dark
                 
                 //TODO: .light and .dark to be defined
-                var color: Color {
+                var value: Color {
                     switch self {
                         case .pure:
                             return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
@@ -90,7 +114,7 @@ enum Tokens {
                 case dark
                 
                 //TODO: .light and .dark to be defined
-                var color: Color {
+                var value: Color {
                     switch self {
                         case .pure:
                             return Color(red: 1, green: 0.251, blue: 0.137, opacity: 1)
@@ -112,7 +136,7 @@ enum Tokens {
                 case light
                 case dark
                 
-                var color: Color {
+                var value: Color {
                     switch self {
                         case .pure:
                             return Color(red: 0, green: 0, blue: 0, opacity: 1)
@@ -130,7 +154,7 @@ enum Tokens {
                 case light
                 case dark
                 
-                var color: Color {
+                var value: Color {
                     switch self {
                         case .pure:
                             return Color(red: 1, green: 1, blue: 1, opacity: 1)
@@ -147,7 +171,7 @@ enum Tokens {
         enum Highlight {
             case wrong
             
-            var color: Color {
+            var value: Color {
                 switch self {
                     case .wrong:
                         return Color(red: 1, green: 0, blue: 0, opacity: 1)
@@ -167,7 +191,7 @@ enum Tokens {
             case lg
             case xg
             
-            var size: CGFloat {
+            var value: CGFloat {
                 switch self {
                 case .xxs:
                     return CGFloat(12)
@@ -187,14 +211,14 @@ enum Tokens {
         
         //MARK: - Font Family
         enum Familiy {
-            case sfprodisplay
-            case sfprorounded
+            case support
+            case base
             
-            var family: Font.Design {
+            var value: Font.Design {
                 switch self {
-                    case .sfprodisplay:
+                    case .support:
                         return .default
-                    case .sfprorounded:
+                    case .base:
                         return .rounded
                 }
             }
@@ -206,7 +230,7 @@ enum Tokens {
             case bold
             case black
             
-            var weight: Font.Weight {
+            var value: Font.Weight {
                 switch self {
                     case .regular:
                         return .regular
@@ -224,7 +248,7 @@ enum Tokens {
         case `default`
         case small
         
-        var lineHeight: CGFloat {
+        var value: CGFloat {
             switch self {
                 case .default:
                     return CGFloat(1.0)
@@ -248,7 +272,7 @@ enum Tokens {
         case xxl
         case xxxl
         
-        var spacing: Double {
+        var value: Double {
             switch self {
                 case .quarck:
                     return 4.0
