@@ -9,11 +9,14 @@ import Foundation
 import SwiftUI
 
 struct PrimaryTextFieldStyle: TextFieldStyle {
+    var variant: Variant = .primary
+    var wrong: Bool = false
+    
     func _body(configuration: TextField<_Label>) -> some View {
         configuration
             .multilineTextAlignment(.leading)
             .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
-            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            .foregroundColor(variant == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
             .padding(Tokens.Spacing.xxxs.value)
             .frame(maxWidth: .infinity)
             .background(borderView)
@@ -21,7 +24,10 @@ struct PrimaryTextFieldStyle: TextFieldStyle {
     
     var borderView: some View {
         RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
-            .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: Tokens.Border.BorderWidth.thin.value)
+            .stroke(variant == .primary ?
+                    (wrong ? Tokens.Colors.Highlight.wrong.value : Tokens.Colors.Neutral.High.pure.value) :
+                        (wrong ? Tokens.Colors.Highlight.wrong.value : Tokens.Colors.Neutral.Low.pure.value),
+                    lineWidth: Tokens.Border.BorderWidth.thin.value)
     }
 }
 
@@ -29,7 +35,7 @@ struct FlemisView: View {
     var body: some View {
         VStack {
             TextField("Flemis", text: .constant("Flemis"))
-                .textFieldStyle(PrimaryTextFieldStyle())
+                .textFieldStyle(PrimaryTextFieldStyle(variant: .secondary, wrong: false))
                 .padding(Tokens.Spacing.xs.value)
         }
         .background(Color.purple)
