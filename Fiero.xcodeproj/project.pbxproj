@@ -17,6 +17,8 @@
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		CCA3C23D287382DD007F6597 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C23C287382DD007F6597 /* ButtonComponent.swift */; };
 		CCA3C2412874847D007F6597 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C2402874847D007F6597 /* ButtonStyles.swift */; };
+		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
+		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		CCA3C23C287382DD007F6597 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		CCA3C2402874847D007F6597 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
+		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +151,8 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
-				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
+				CCA3C2472875FFE6007F6597 /* Checkbox */,
+				CCA3C2462875FFD0007F6597 /* Button */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -174,6 +178,24 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CCA3C2462875FFD0007F6597 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3C2402874847D007F6597 /* ButtonStyles.swift */,
+				CCA3C23C287382DD007F6597 /* ButtonComponent.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		CCA3C2472875FFE6007F6597 /* Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3C24828760002007F6597 /* CheckboxComponent.swift */,
+				CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */,
+			);
+			path = Checkbox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +328,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
+				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				CCA3C23D287382DD007F6597 /* ButtonComponent.swift in Sources */,
@@ -469,7 +493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = S3769X94PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -499,7 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = S3769X94PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

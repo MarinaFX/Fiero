@@ -16,8 +16,10 @@ struct ButtonComponent: View {
         Button(action: action, label: {
             Text(text)
                 .foregroundColor(style.fontColor)
-                .fontWeight(style.fontWeight)
-                .font(.system(size: style.fontSize, weight: style.fontWeight, design: style.fontFamily))
+                .font(.custom("SFUIDisplay",
+                               size: style.fontSize,
+                               relativeTo: .body))
+//TODO: - Ajust Text Font (New Tokens)
                 .padding(style.padding)
                 .frame(maxWidth: .infinity)
                 .background(style.backgroundColor)
