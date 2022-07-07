@@ -30,7 +30,7 @@ struct GlassPhormism: View {
     var body: some View {
         ZStack {
             Image("LoginBackground")
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.5, alignment: .center)
+                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.53, alignment: .center)
 //                .offset(x: 0, y: -50)
                 .blur(radius: 10)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -42,7 +42,7 @@ struct GlassPhormism: View {
                             Text("Boas vindas, desafiante")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
-                                .padding(.top, Tokens.Spacing.xxs.value)
+                            //TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -53,23 +53,23 @@ struct GlassPhormism: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                    
-                            // Something here
-                    
+                            //Button and CheckBox
+                            CheckboxComponent(style: .unchecked(isDark: true), text: "Concordo com os termos de uso")
                             ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: .constant {})
                         }
+                        //Last elements
                         HStack{
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
                             Button("Faça Login!") {
-                                print("Button tapped!")
+                                //Do Something Here
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                         }
-                        .padding(.bottom, Tokens.Spacing.xxs.value)
                     }
+                        .padding(.vertical, Tokens.Spacing.xxs.value)
                 )
         }
     }
