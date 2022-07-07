@@ -14,18 +14,18 @@ enum ButtonStyles {
     var backgroundColor: Color {
         switch self {
         case .primary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Brand.Primary.pure.color : Tokens.Colors.Neutral.Low.light.color
+            return isEnabled ? Tokens.Colors.Brand.Primary.pure.value : Tokens.Colors.Neutral.Low.light.value
         case .secondary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.High.pure.color : Tokens.Colors.Neutral.Low.light.color
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.light.value
         }
     }
     
     var padding: Double {
-        return Tokens.Spacing.xxxs.spacing
+        return Tokens.Spacing.xxxs.value
     }
     
     var borderRadius: CGFloat {
-        return Tokens.Border.BorderRadius.small.borderRadius
+        return Tokens.Border.BorderRadius.small.value
     }
     
     var isEnabled: Bool {
@@ -41,21 +41,21 @@ enum ButtonStyles {
     var fontColor: Color {
         switch self {
         case .primary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.High.pure.color : Tokens.Colors.Neutral.High.dark.color
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
         case .secondary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.Low.pure.color : Tokens.Colors.Neutral.High.dark.color
+            return isEnabled ? Tokens.Colors.Neutral.Low.pure.value : Tokens.Colors.Neutral.High.dark.value
         }
     }
     
     var fontFamily: Font.Design {
-        return Tokens.Fonts.Familiy.sfprodisplay.family
+        return Tokens.Fonts.Familiy.support.value
     }
     
     var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.regular.weight
+        return Tokens.Fonts.Weight.regular.value
     }
     
     var fontSize: CGFloat {
-        return Tokens.Fonts.Size.xs.size
+        return Tokens.Fonts.Size.xs.value
     }
 }
