@@ -17,7 +17,7 @@ struct CheckboxComponent: View {
             Image(systemName: style.imageName)
                 .foregroundColor(style.color)
                 .font(.custom("SFUIDisplay",
-                              size: Tokens.Fonts.Size.sm.size,
+                              size: Tokens.Fonts.Size.sm.value,
                               relativeTo: .body))
             Text(text)
                 .foregroundColor(style.color)

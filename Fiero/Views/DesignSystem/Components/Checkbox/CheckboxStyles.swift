@@ -14,23 +14,23 @@ enum CheckboxStyles {
     //TODO: - Modify Tokens .value
     
     var fontSize: CGFloat {
-        return Tokens.Fonts.Size.xs.size
+        return Tokens.Fonts.Size.xs.value
     }
     
     var fontFamily: Font.Design {
-        return Tokens.Fonts.Familiy.sfprodisplay.family
+        return Tokens.Fonts.Familiy.support.value
     }
     
     var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.regular.weight
+        return Tokens.Fonts.Weight.regular.value
     }
     
     var color: Color {
         switch self {
         case .unchecked(let isDark):
-            return isDark ? Tokens.Colors.Neutral.High.pure.color : Tokens.Colors.Neutral.Low.pure.color
+            return isDark ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .checked(let isDark):
-            return isDark ? Tokens.Colors.Neutral.High.pure.color : Tokens.Colors.Neutral.Low.pure.color
+            return isDark ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         }
     }
     
@@ -44,6 +44,6 @@ enum CheckboxStyles {
     }
     
     var padding: Double {
-        return Tokens.Spacing.nano.spacing
+        return Tokens.Spacing.nano.value
     }
 }
