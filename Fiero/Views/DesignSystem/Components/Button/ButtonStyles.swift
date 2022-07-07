@@ -10,8 +10,6 @@ enum ButtonStyles {
     case primary(isEnabled: Bool)
     case secondary(isEnabled: Bool)
     
-    //TODO: - Modify Tokens .value
-    
     //MARK: - Button variables
     var backgroundColor: Color {
         switch self {
