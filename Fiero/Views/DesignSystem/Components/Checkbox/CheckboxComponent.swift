@@ -16,15 +16,11 @@ struct CheckboxComponent: View {
         HStack {
             Image(systemName: style.imageName)
                 .foregroundColor(style.color)
-                .font(.custom("SFUIDisplay",
-                              size: Tokens.Fonts.Size.sm.value,
-                              relativeTo: .body))
+                .font(.custom("SFUIDisplay",size: Tokens.Fonts.Size.sm.value,relativeTo: .body))
             Text(text)
                 .foregroundColor(style.color)
-                .font(.custom("SFUIDisplay",
-                               size: style.fontSize,
-                               relativeTo: .body))
-//TODO: - Ajust Text Font (New Tokens)
+                .font(.custom("SFUIDisplay",size: style.fontSize,relativeTo: .body))
+            //TODO: - Ajust Text Font (New Tokens)
         }
         .padding(.horizontal, style.padding)
     }
