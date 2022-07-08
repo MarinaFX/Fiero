@@ -52,7 +52,7 @@ enum ButtonStyles {
     }
     
     var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.regular.value
+        return Tokens.Fonts.Weight.bold.value
     }
     
     var fontSize: CGFloat {

@@ -37,9 +37,9 @@ struct CustomTextFieldView: View {
     var placeholder: String = "Placeholder"
     var helperText: String = ""
     
-    @State private var isSecure: Bool = false
-    @Binding var isWrong: Bool
-    @Binding var text: String
+    @State private(set) var isSecure: Bool = false
+    @Binding private(set) var isWrong: Bool
+    @Binding private(set) var text: String
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -63,11 +63,11 @@ struct CustomTextFieldView: View {
                         if #available(iOS 15.0, *) {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
-                                .tint(Tokens.Colors.Neutral.Low.pure.value)
+                                .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         } else {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
-                                .accentColor(Tokens.Colors.Neutral.Low.pure.value)
+                                .accentColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         }
                     })
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
@@ -87,7 +87,7 @@ struct CustomTextFieldView: View {
 
 struct CustomTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextFieldView(type: .both, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA. QUANDO CHEGA O FINAL DE SEMANA, QUERO DEITAR NA MINHA CAMA", isWrong: .constant(true), text: .constant("flemis"))
+        CustomTextFieldView(type: .both, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA. QUANDO CHEGA O FINAL DE SEMANA, QUERO DEITAR NA MINHA CAMA", isSecure: false, isWrong: .constant(true), text: .constant("flemis"))
             .padding(Tokens.Spacing.xs.value)
     }
 }

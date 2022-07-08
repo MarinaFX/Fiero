@@ -10,7 +10,8 @@ import SwiftUI
 struct ButtonComponent: View {
     @State var style: ButtonStyles
     @State var text: String
-    @Binding var action: () -> Void
+    
+    var action: () -> Void
     
     var body: some View {
         Button(action: action, label: {
@@ -30,7 +31,7 @@ struct ButtonComponent: View {
 
 struct ButtonComponent_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonComponent(style: .primary(isEnabled: true), text: "Estou pronto!", action: .constant {})
+        ButtonComponent(style: .primary(isEnabled: true), text: "Estou pronto!", action: { })
     }
 }
 
