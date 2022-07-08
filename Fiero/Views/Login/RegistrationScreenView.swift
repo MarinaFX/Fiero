@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegistrationScreen: View {
+struct RegistrationScreenView: View {
     
     @State var moving = false
     
@@ -57,7 +57,9 @@ struct GlassPhormism: View {
                             CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
                             })
-                            ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: .constant {})
+                            ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: {
+                                //create user account
+                            })
                         }
                         //Last elements
                         HStack{
