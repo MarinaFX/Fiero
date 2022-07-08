@@ -11,7 +11,7 @@ struct CheckboxComponent: View {
     @State var style: CheckboxStyles
     @State var text: String
     @State var isChecked: Bool = false
-    @State var tapHandler: (_ isChecked: Bool) -> Void
+    var tapHandler: (_ isChecked: Bool) -> Void
     
     var body: some View {
         HStack {
