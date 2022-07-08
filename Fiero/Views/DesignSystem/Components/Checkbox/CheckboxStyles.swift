@@ -8,10 +8,8 @@
 import SwiftUI
 
 enum CheckboxStyles {
-    case unchecked(isDark: Bool)
-    case checked(isDark: Bool)
-    
-    //TODO: - Modify Tokens .value
+    case light
+    case dark
     
     var fontSize: CGFloat {
         return Tokens.Fonts.Size.xs.value
@@ -27,19 +25,10 @@ enum CheckboxStyles {
     
     var color: Color {
         switch self {
-        case .unchecked(let isDark):
-            return isDark ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
-        case .checked(let isDark):
-            return isDark ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
-        }
-    }
-    
-    var imageName: String {
-        switch self {
-        case .unchecked:
-            return "square"
-        case .checked:
-            return "checkmark.square"
+        case .light:
+            return Tokens.Colors.Neutral.Low.pure.value
+        case .dark:
+            return Tokens.Colors.Neutral.High.pure.value
         }
     }
     
