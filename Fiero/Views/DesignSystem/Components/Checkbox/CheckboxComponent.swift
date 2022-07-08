@@ -26,10 +26,8 @@ struct CheckboxComponent: View {
                 }
             Text(text)
                 .foregroundColor(style.color)
-                .font(.custom("SFUIDisplay",
-                               size: style.fontSize,
-                               relativeTo: .body))
-//TODO: - Ajust Text Font (New Tokens)
+                .font(.custom("SFUIDisplay",size: style.fontSize,relativeTo: .body))
+            //TODO: - Ajust Text Font (New Tokens)
         }
         .padding(.horizontal, style.padding)
     }
