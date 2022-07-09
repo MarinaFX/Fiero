@@ -9,13 +9,14 @@ import SwiftUI
 
 struct RegistrationScreenView: View {
     
+    @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
     @State var moving = false
     
     var body: some View {
         ZStack {
             Image("LoginBackground")
                 .scaledToFill()
-            GlassPhormism()
+            GlassPhormism(userRegistrationViewModel: self.userRegistrationViewModel)
 //                .offset(x: 0, y: 50)
         }
         .ignoresSafeArea()
@@ -23,6 +24,7 @@ struct RegistrationScreenView: View {
 }
 struct GlassPhormism: View {
     
+    @ObservedObject var userRegistrationViewModel: UserRegistrationViewModel
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
@@ -57,8 +59,20 @@ struct GlassPhormism: View {
                             CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
                             })
-                            ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: {
-                                //create user account
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: "Criar conta!",
+                                            action: {
+                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password)) { response in
+                                        if response == .userCreated {
+                                            
+                                        }
+                                        else {
+                                            //present error while creating account alert
+                                        }
+                                    }
+                                }
                             })
                         }
                         //Last elements
@@ -66,11 +80,21 @@ struct GlassPhormism: View {
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
-                            Button("Faça Login!") {
-                                //Do Something Here
+                            
+                            NavigationLink(destination: AccountLoginView()){
+                                    Text("Faça Login!")
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(.system(size: Tokens.Fonts.Size.xs.value,
+                                          weight: Tokens.Fonts.Weight.bold.value,
+                                          design: Tokens.Fonts.Familiy.support.value))
+                            //.buttonStyle(.plain)
+                            
+//                            Button("Faça Login!") {
+//                                //Do Something Here
+//                            }
+//                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+//                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                         }
                     }
                         .padding(.vertical, Tokens.Spacing.xxs.value)
