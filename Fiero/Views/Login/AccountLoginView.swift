@@ -104,7 +104,6 @@ struct BlurredSquaredView<Content>: View where Content: View {
                     .frame(width: UIScreen.main.bounds.width * 0.9,
                            height: UIScreen.main.bounds.height * 0.4, alignment: .center)
                     .padding(.vertical, Tokens.Spacing.xxs.value)
-                    //.padding(.horizontal, Tokens.Spacing.xxxs.value)
                     .background(.ultraThinMaterial)
                     .environment(\.colorScheme, .dark)
                     .clipShape(RoundedRectangle(cornerRadius: 16))

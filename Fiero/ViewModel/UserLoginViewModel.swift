@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 class UserLoginViewModel: ObservableObject {
     
     @Published private(set) var user: User
@@ -24,8 +23,8 @@ class UserLoginViewModel: ObservableObject {
     
     func authenticateUser(email: String, password: String) {
         let userJSON: [String : String] = [
-            "email": email,
-            "password": password
+            "password": password,
+            "email": email
         ]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: userJSON)
@@ -57,6 +56,7 @@ class UserLoginViewModel: ObservableObject {
                         print("finished successfully")
                 }
             }, receiveValue: { [weak self] userResponse in
+                print(userResponse)
                 self?.user = userResponse.user
             })
             .store(in: &cancellables)

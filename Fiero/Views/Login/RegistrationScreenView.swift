@@ -12,6 +12,9 @@ struct RegistrationScreenView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
+    @State private var username: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
     @State var moving = false
     
     //MARK: body
@@ -21,47 +24,7 @@ struct RegistrationScreenView: View {
                 Image("LoginBackground")
                     .scaledToFill()
                 
-                GlassPhormism(userRegistrationViewModel: self.userRegistrationViewModel, presentationMode: self.presentationMode)
-                
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Text("Cancel")
-                        })
-                    })
-                })
-            }
-            .ignoresSafeArea()
-        }
-        .background(NavigationConfigurator { uiViewController in
-            uiViewController.navigationBar.tintColor = .white
-        })
-    }
-}
-struct GlassPhormism: View {
-    //MARK: Variables Setup
-    
-    @ObservedObject var userRegistrationViewModel: UserRegistrationViewModel
-    @State private var username: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @Binding var presentationMode: PresentationMode
-    
-    
-    //MARK: body
-    var body: some View {
-        ZStack {
-            
-            Image("LoginBackground")
-                .frame(width: UIScreen.main.bounds.width * 0.9,
-                       height: UIScreen.main.bounds.height * 0.53, alignment: .center)
-                .blur(radius: 10)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay( RoundedRectangle(cornerRadius: 16)
-                    .stroke(.white, lineWidth: 0.5))
-                .overlay(
+                GlassPhormism {
                     VStack(spacing: Tokens.Spacing.xxxs.value){
                         VStack(spacing: Tokens.Spacing.xxs.value){
                             Text("Boas vindas, desafiante")
@@ -107,14 +70,73 @@ struct GlassPhormism: View {
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
                             
                             Button("Faça Login!") {
-                                self.presentationMode.dismiss()
+                                self.presentationMode.wrappedValue.dismiss()
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                         }
                     }
-                        .padding(.vertical, Tokens.Spacing.xxs.value)
+                }
+                
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Text("Cancel")
+                        })
+                    })
+                })
+            }
+            .ignoresSafeArea()
+        }
+        .background(NavigationConfigurator { uiViewController in
+            uiViewController.navigationBar.tintColor = .white
+        })
+    }
+}
+struct GlassPhormism<Content>: View where Content: View {
+    //MARK: Variables Setup
+    
+    @ViewBuilder var content: Content
+    
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content()
+    }
+    
+    //MARK: body
+    var body: some View {
+        
+        if #available(iOS 15.0, *) {
+            content
+                .frame(width: UIScreen.main.bounds.width * 0.9,
+                       height: UIScreen.main.bounds.height * 0.53, alignment: .center)
+                .padding(.vertical, Tokens.Spacing.xxs.value)
+                .background(.ultraThinMaterial)
+                .environment(\.colorScheme, .dark)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.white, lineWidth: 0.5)
                 )
+        }
+        else {
+            ZStack {
+                Image("LoginBackground")
+                    .frame(width: UIScreen.main.bounds.width * 0.9,
+                           height: UIScreen.main.bounds.height * 0.53,
+                           alignment: .center)
+                    .blur(radius: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                        .stroke(.white, lineWidth: 0.5)
+                    )
+                    .overlay(
+                        content
+                            .padding(.vertical, Tokens.Spacing.xxs.value)
+                    )
+            }
         }
     }
 }
