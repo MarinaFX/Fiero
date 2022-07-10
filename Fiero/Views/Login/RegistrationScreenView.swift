@@ -8,32 +8,55 @@
 import SwiftUI
 
 struct RegistrationScreenView: View {
-    
+    //MARK: Variables Setup
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
     @State var moving = false
     
+    //MARK: body
     var body: some View {
-        ZStack {
-            Image("LoginBackground")
-                .scaledToFill()
-            GlassPhormism(userRegistrationViewModel: self.userRegistrationViewModel)
-//                .offset(x: 0, y: 50)
+        NavigationView {
+            ZStack {
+                Image("LoginBackground")
+                    .scaledToFill()
+                
+                GlassPhormism(userRegistrationViewModel: self.userRegistrationViewModel, presentationMode: self.presentationMode)
+                
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Text("Cancel")
+                        })
+                    })
+                })
+            }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
+        .background(NavigationConfigurator { uiViewController in
+            uiViewController.navigationBar.tintColor = .white
+        })
     }
 }
 struct GlassPhormism: View {
+    //MARK: Variables Setup
     
     @ObservedObject var userRegistrationViewModel: UserRegistrationViewModel
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @Binding var presentationMode: PresentationMode
     
+    
+    //MARK: body
     var body: some View {
         ZStack {
+            
             Image("LoginBackground")
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.53, alignment: .center)
-//                .offset(x: 0, y: -50)
+                .frame(width: UIScreen.main.bounds.width * 0.9,
+                       height: UIScreen.main.bounds.height * 0.53, alignment: .center)
                 .blur(radius: 10)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay( RoundedRectangle(cornerRadius: 16)
@@ -44,7 +67,8 @@ struct GlassPhormism: View {
                             Text("Boas vindas, desafiante")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
-                            //TextFilds elements
+                            
+                            //MARK: TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -55,7 +79,8 @@ struct GlassPhormism: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                            //Button and CheckBox
+                            
+                            //MARK: Button and CheckBox
                             CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
                             })
@@ -69,32 +94,23 @@ struct GlassPhormism: View {
                                             
                                         }
                                         else {
-                                            //present error while creating account alert
+                                            //TODO: present error while creating account alert
                                         }
                                     }
                                 }
                             })
                         }
-                        //Last elements
+                        //MARK: Last elements
                         HStack{
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
                             
-                            NavigationLink(destination: AccountLoginView()){
-                                    Text("Faça Login!")
+                            Button("Faça Login!") {
+                                self.presentationMode.dismiss()
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(.system(size: Tokens.Fonts.Size.xs.value,
-                                          weight: Tokens.Fonts.Weight.bold.value,
-                                          design: Tokens.Fonts.Familiy.support.value))
-                            //.buttonStyle(.plain)
-                            
-//                            Button("Faça Login!") {
-//                                //Do Something Here
-//                            }
-//                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-//                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                         }
                     }
                         .padding(.vertical, Tokens.Spacing.xxs.value)

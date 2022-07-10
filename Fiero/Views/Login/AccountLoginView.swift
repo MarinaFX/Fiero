@@ -9,11 +9,16 @@ import SwiftUI
 
 //MARK: - Account Login View
 struct AccountLoginView: View {
-    
     //MARK: Variables Setup
-    @State var isFieldIncorrect = false
+    @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
+    
+    @State private(set) var user: User = .init(email: "", name: "", password: "")
+    @State private var isFieldIncorrect = false
     @State private var emailText: String = ""
     @State private var passwordText: String = ""
+    @State private var isRegistrationSheetShowing: Bool = false
     
     private let namePlaceholder: String = "Name"
     private let emailPlaceholder: String = "E-mail"
@@ -39,17 +44,17 @@ struct AccountLoginView: View {
                         .padding(Tokens.Spacing.nano.value)
                     
                     Button(action: {
-                        
+                        //
                     }, label: {
                         Text("Esqueceu sua senha?")
                             .font(.system(size: Tokens.Fonts.Size.xxs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .underline(true, color: Tokens.Colors.Neutral.High.pure.value)
                     })
+                    .padding(.vertical, Tokens.Spacing.xxxs.value)
                     
                     ButtonComponent(style: .secondary(isEnabled: true), text: "Fazer login!", action: {
-                        print(#function)
-                        //make user login
+                        self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
                     })
                     
                     HStack {
@@ -58,27 +63,25 @@ struct AccountLoginView: View {
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         
                         Button(action: {
-                            
+                            self.isRegistrationSheetShowing.toggle()
                         }, label: {
                             Text("Cadastre-se!")
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
+                        .sheet(isPresented: self.$isRegistrationSheetShowing, content: {
+                            RegistrationScreenView()
+                        })
                     }
+                    .padding(.top, Tokens.Spacing.xxxs.value)
                 }
                 .padding(Tokens.Spacing.xxxs.value)
             }
-//            .offset(x: isFieldIncorrect ? -5 : 0)
-//            .animation(.interpolatingSpring(stiffness: 1500, damping: 12)
-//                .repeatCount(1), value: isFieldIncorrect)
         }
         .ignoresSafeArea()
-        .onTapGesture {
-//            isFieldIncorrect.toggle()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                self.isFieldIncorrect.toggle()
-//            }
-        }
+        .onChange(of: self.userLoginViewModel.user, perform: { user in
+            self.user = user
+        })
     }
 }
 

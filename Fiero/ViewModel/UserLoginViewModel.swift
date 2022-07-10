@@ -11,18 +11,21 @@ import Combine
 
 class UserLoginViewModel: ObservableObject {
     
-    @Published var user: User?
-    
+    @Published private(set) var user: User
+
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/register"
     
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
-    func createUser(user: User) {
+    init() {
+        self.user = User(email: "", name: "", password: "")
+    }
+    
+    func authenticateUser(email: String, password: String) {
         let userJSON: [String : String] = [
-            "email": user.email,
-            "name": user.name,
-            "password": user.password
+            "email": email,
+            "password": password
         ]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: userJSON)

@@ -16,9 +16,7 @@ class UserRegistrationViewModel: ObservableObject {
         case badRequest
         case error
     }
-    
-    //@Published var user: User?
-    
+        
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/register"
     
@@ -48,8 +46,7 @@ class UserRegistrationViewModel: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap( { $0.response })
-            //.decode(type: URLResponse.self, decoder: JSONDecoder())
+            .tryMap({ $0.response })
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
