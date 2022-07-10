@@ -263,6 +263,7 @@ enum Tokens {
         case quarck
         case nano
         case xxxs
+        case defaultMargin
         case xxs
         case xs
         case sm
@@ -280,6 +281,8 @@ enum Tokens {
                     return 8.0
                 case .xxxs:
                     return 16.0
+                case .defaultMargin:
+                    return 20.0
                 case .xxs:
                     return 24.0
                 case .xs:
