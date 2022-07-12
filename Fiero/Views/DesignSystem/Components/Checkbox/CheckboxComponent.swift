@@ -17,17 +17,14 @@ struct CheckboxComponent: View {
         HStack {
             Image(systemName: isChecked ? "checkmark.square" : "square")
                 .foregroundColor(style.color)
-                .font(.custom("SFUIDisplay",
-                              size: Tokens.Fonts.Size.sm.value,
-                              relativeTo: .body))
+                .font(style.iconFont)
                 .onTapGesture {
                     isChecked.toggle()
                     tapHandler(isChecked)
                 }
             Text(text)
                 .foregroundColor(style.color)
-                .font(.custom("SFUIDisplay",size: style.fontSize,relativeTo: .body))
-            //TODO: - Ajust Text Font (New Tokens)
+                .font(style.textFont)
         }
         .padding(.horizontal, style.padding)
     }

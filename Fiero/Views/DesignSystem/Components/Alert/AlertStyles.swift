@@ -20,14 +20,20 @@ enum AlertStyle {
             return Tokens.Colors.Brand.Primary.pure.value
         }
     }
+    
     var borderRadius: CGFloat {
         return Tokens.Border.BorderRadius.small.value
     }
     
-    //MARK: Font variables
-    var fontSize: CGFloat {
-        return Tokens.Fonts.Size.xs.value
+    var padding: Double{
+        return Tokens.Spacing.nano.value
     }
+    
+    //MARK: Font variables
+    var font: Font {
+        return Tokens.FontStyle.callout.font()
+    }
+    
     var fontColor: Color {
         switch self {
         case .primary:
@@ -35,14 +41,5 @@ enum AlertStyle {
         case .secondary:
             return Tokens.Colors.Neutral.High.pure.value
         }
-    }
-    var fontFamily: Font.Design {
-        return Tokens.Fonts.Familiy.support.value
-    }
-    var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.regular.value
-    }
-    var padding: Double{
-        return Tokens.Spacing.nano.value
     }
 }
