@@ -34,7 +34,8 @@ struct AccountLoginView: View {
             BlurredSquaredView(usernameText: self.$emailText) {
                 VStack {
                     Text("Boas vindas, desafiante")
-                        .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
+                        .font(Tokens.FontStyle.title3.font(weigth: .bold,
+                                                           design: .rounded))
                         .foregroundColor(.white)
                                         
                     CustomTextFieldView(type: .none, style: .primary, placeholder: emailPlaceholder, isSecure: false, isWrong: .constant(false), text: self.$emailText)
@@ -47,7 +48,7 @@ struct AccountLoginView: View {
                         //
                     }, label: {
                         Text("Esqueceu sua senha?")
-                            .font(.system(size: Tokens.Fonts.Size.xxs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(Tokens.FontStyle.caption.font())
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .underline(true, color: Tokens.Colors.Neutral.High.pure.value)
                     })
@@ -59,14 +60,15 @@ struct AccountLoginView: View {
                     
                     HStack {
                         Text("Ainda não tem uma conta?")
-                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(Tokens.FontStyle.callout.font())
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         
                         Button(action: {
                             self.isRegistrationSheetShowing.toggle()
                         }, label: {
                             Text("Cadastre-se!")
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                                .font(Tokens.FontStyle.callout.font(weigth: .bold,
+                                                                    design: .rounded))
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
                     }

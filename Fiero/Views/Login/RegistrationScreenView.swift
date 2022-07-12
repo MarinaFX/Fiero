@@ -29,9 +29,9 @@ struct RegistrationScreenView: View {
                         VStack(spacing: Tokens.Spacing.xxs.value){
                             Text("Boas vindas, desafiante")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
-                            
-                            //MARK: TextFilds elements
+                                .font(Tokens.FontStyle.title3.font(weigth: .bold,
+                                                                   design: .rounded))
+                            //TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -67,13 +67,12 @@ struct RegistrationScreenView: View {
                         HStack{
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
-                            
+                                .font(Tokens.FontStyle.callout.font())
                             Button("Faça Login!") {
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(Tokens.FontStyle.callout.font(weigth: .bold))
                         }
                     }
                 }
