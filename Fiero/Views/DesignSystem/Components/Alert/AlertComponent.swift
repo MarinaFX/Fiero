@@ -15,13 +15,13 @@ struct AlertComponent: View {
     var body: some View {
         HStack(spacing: style.padding){
             Image(systemName: image)
+                .font(style.font)
                 .foregroundColor(style.fontColor)
                 .padding(.vertical, style.padding)
                 .padding(.leading, style.padding)
             Text(text)
+                .font(style.font)
                 .foregroundColor(style.fontColor)
-                .fontWeight(style.fontWeight)
-                .font(.system(size: style.fontSize, weight: style.fontWeight, design: style.fontFamily))
                 .padding(.vertical, style.padding)
                 .padding(.trailing, style.padding)
                 

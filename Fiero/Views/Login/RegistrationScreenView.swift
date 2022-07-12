@@ -41,7 +41,8 @@ struct GlassPhormism: View {
                         VStack(spacing: Tokens.Spacing.xxs.value){
                             Text("Boas vindas, desafiante")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
+                                .font(Tokens.FontStyle.title3.font(weigth: .bold,
+                                                                   design: .rounded))
                             //TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
@@ -65,12 +66,12 @@ struct GlassPhormism: View {
                         HStack{
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                                .font(Tokens.FontStyle.callout.font())
                             Button("Faça Login!") {
                                 //Do Something Here
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(Tokens.FontStyle.callout.font(weigth: .bold))
                         }
                     }
                         .padding(.vertical, Tokens.Spacing.xxs.value)

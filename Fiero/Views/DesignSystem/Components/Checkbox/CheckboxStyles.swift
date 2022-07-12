@@ -10,19 +10,17 @@ import SwiftUI
 enum CheckboxStyles {
     case light
     case dark
-    
-    var fontSize: CGFloat {
-        return Tokens.Fonts.Size.xs.value
+   
+    //MARK: - Font variables
+    var iconFont: Font {
+        return Tokens.FontStyle.title3.font()
     }
     
-    var fontFamily: Font.Design {
-        return Tokens.Fonts.Familiy.support.value
+    var textFont: Font {
+        return Tokens.FontStyle.callout.font()
     }
     
-    var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.regular.value
-    }
-    
+    //MARK: - Colors
     var color: Color {
         switch self {
         case .light:
@@ -31,7 +29,7 @@ enum CheckboxStyles {
             return Tokens.Colors.Neutral.High.pure.value
         }
     }
-    
+    //MARK: - Paddings
     var padding: Double {
         return Tokens.Spacing.nano.value
     }
