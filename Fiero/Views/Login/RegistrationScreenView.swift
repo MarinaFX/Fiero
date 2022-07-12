@@ -55,8 +55,10 @@ struct GlassPhormism: View {
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
                             //Button and CheckBox
-                            CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
+                            CheckboxComponent(style: .dark, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
+                            }, action: {
+                                print("clicked")
                             })
                             ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: {
                                 //create user account
