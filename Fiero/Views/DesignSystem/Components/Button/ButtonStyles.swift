@@ -47,15 +47,7 @@ enum ButtonStyles {
         }
     }
     
-    var fontFamily: Font.Design {
-        return Tokens.Fonts.Familiy.support.value
-    }
-    
-    var fontWeight: Font.Weight {
-        return Tokens.Fonts.Weight.bold.value
-    }
-    
-    var fontSize: CGFloat {
-        return Tokens.Fonts.Size.xs.value
+    var font: Font {
+        return Tokens.FontStyle.callout.font()
     }
 }

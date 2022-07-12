@@ -17,7 +17,7 @@ struct ButtonComponent: View {
         Button(action: action, label: {
             Text(text)
                 .foregroundColor(style.fontColor)
-                .font(.system(size: style.fontSize, weight: style.fontWeight, design: style.fontFamily))
+                .font(style.font)
                 .padding(style.padding)
                 .frame(maxWidth: .infinity)
                 .background(style.backgroundColor)

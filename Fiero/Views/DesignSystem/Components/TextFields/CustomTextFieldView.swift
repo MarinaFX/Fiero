@@ -62,11 +62,11 @@ struct CustomTextFieldView: View {
                     }, label: {
                         if #available(iOS 15.0, *) {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                                .font(Tokens.FontStyle.callout.font())
                                 .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         } else {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                                .font(Tokens.FontStyle.callout.font())
                                 .accentColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         }
                     })
@@ -77,7 +77,7 @@ struct CustomTextFieldView: View {
             //MARK: - Helper Text
             if ((type == .helper) || (type == .both)) {
                 Text(self.helperText)
-                    .font(.system(size: Tokens.Fonts.Size.xxs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                    .font(Tokens.FontStyle.caption.font())
                     .foregroundColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
             }
 

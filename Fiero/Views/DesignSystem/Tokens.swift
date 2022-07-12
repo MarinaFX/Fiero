@@ -181,65 +181,49 @@ enum Tokens {
     }
     
     //MARK: - Fonts
-    enum Fonts {
-        //MARK: - Font Sizes
-        enum Size {
-            case xxs
-            case xs
-            case sm
-            case md
-            case lg
-            case xg
-            
-            var value: CGFloat {
-                switch self {
-                case .xxs:
-                    return CGFloat(12)
-                case .xs:
-                    return CGFloat(16)
-                case .sm:
-                    return CGFloat(20)
-                case .md:
-                    return CGFloat(24)
-                case .lg:
-                    return CGFloat(32)
-                case .xg:
-                    return CGFloat(40)
-                }
+    enum FontStyle {
+        case caption2
+        case caption //xxs
+        case footnote
+        case subheadline
+        case callout //xs
+        case body
+        case headline
+        case title3 //sm
+        case title2 //=22 md= 24
+        case title //=28 md= 24
+        case largeTitle //=34 lg =32
+        //xg= 40 
+        
+        var style: Font.TextStyle {
+            switch self {
+            case .caption2:
+                return .caption2
+            case .caption:
+                return .caption
+            case .footnote:
+                return .footnote
+            case .subheadline:
+                return .subheadline
+            case .callout:
+                return .callout
+            case .body:
+                return .body
+            case .headline:
+                return .headline
+            case .title3:
+                return .title3
+            case .title2:
+                return .title2
+            case .title:
+                return .title
+            case .largeTitle:
+                return .largeTitle
             }
         }
         
-        //MARK: - Font Family
-        enum Familiy {
-            case support
-            case base
-            
-            var value: Font.Design {
-                switch self {
-                    case .support:
-                        return .default
-                    case .base:
-                        return .rounded
-                }
-            }
-        }
-        
-        //MARK: - Font Weight
-        enum Weight {
-            case regular
-            case bold
-            case black
-            
-            var value: Font.Weight {
-                switch self {
-                    case .regular:
-                        return .regular
-                    case .bold:
-                        return .bold
-                    case .black:
-                        return .black
-                }
-            }
+        func font(weigth: Font.Weight = .regular, design: Font.Design = .default) -> Font {
+            return Font.system(self.style, design: design).weight(weigth)
         }
     }
     
