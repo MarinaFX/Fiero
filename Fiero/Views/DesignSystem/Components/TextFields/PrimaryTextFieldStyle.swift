@@ -15,7 +15,7 @@ struct PrimaryTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<_Label>) -> some View {
         configuration
             .multilineTextAlignment(.leading)
-            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+            .font(Tokens.FontStyle.callout.font())
             .foregroundColor(variant == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
             .padding(Tokens.Spacing.xxxs.value)
             .frame(maxWidth: .infinity)
