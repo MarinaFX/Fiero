@@ -13,7 +13,7 @@ class UserLoginViewModel: ObservableObject {
     @Published private(set) var user: User
 
     private let BASE_URL: String = "localhost"
-    private let ENDPOINT: String = "/user/register"
+    private let ENDPOINT: String = "/user/login"
     
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     

@@ -77,24 +77,12 @@ struct RegistrationScreenView: View {
                         }
                     }
                 }
-                
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Text("Cancel")
-                        })
-                    })
-                })
             }
             .ignoresSafeArea()
         }
-        .background(NavigationConfigurator { uiViewController in
-            uiViewController.navigationBar.tintColor = .white
-        })
     }
 }
+
 struct GlassPhormism<Content>: View where Content: View {
     //MARK: Variables Setup
     

@@ -69,9 +69,6 @@ struct AccountLoginView: View {
                                 .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
-                        .sheet(isPresented: self.$isRegistrationSheetShowing, content: {
-                            RegistrationScreenView()
-                        })
                     }
                     .padding(.top, Tokens.Spacing.xxxs.value)
                 }
