@@ -26,7 +26,7 @@ class UserRegistrationViewModel: ObservableObject {
         let userJSON: [String : String] = [
             "email": user.email,
             "name": user.name,
-            "password": user.password
+            "password": user.password!
         ]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: userJSON)
