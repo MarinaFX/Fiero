@@ -81,6 +81,12 @@ struct AccountLoginView: View {
         .onChange(of: self.userLoginViewModel.user, perform: { user in
             self.user = user
         })
+        .onAppear {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+            AppDelegate.orientationLock = .portrait // And making sure it stays that way
+        }.onDisappear {
+            AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+        }
     }
 }
 
@@ -100,8 +106,7 @@ struct BlurredSquaredView<Content>: View where Content: View {
     var body: some View {
             if #available(iOS 15.0, *) {
                 content
-                    .frame(width: UIScreen.main.bounds.width * 0.9,
-                           height: UIScreen.main.bounds.height * 0.4, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 350, alignment: .center)
                     .padding(.vertical, Tokens.Spacing.xxs.value)
                     .background(.ultraThinMaterial)
                     .environment(\.colorScheme, .dark)
@@ -113,8 +118,7 @@ struct BlurredSquaredView<Content>: View where Content: View {
             } else {
                 ZStack {
                     Image("LoginBackground")
-                        .frame(width: UIScreen.main.bounds.width * 0.9,
-                               height: UIScreen.main.bounds.height * 0.5, alignment: .center)
+                        .frame(width: UIScreen.main.bounds.width * 0.9, height: 400, alignment: .center)
                         .blur(radius: 10)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         .overlay(
