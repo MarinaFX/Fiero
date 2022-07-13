@@ -42,10 +42,11 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                            
-                            //MARK: Button and CheckBox
-                            CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
+                            //MARK: - Button and CheckBox
+                            CheckboxComponent(style: .dark, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
+                            }, action: {
+                                print("clicked")
                             })
                             
                             ButtonComponent(style: .secondary(isEnabled: true),
