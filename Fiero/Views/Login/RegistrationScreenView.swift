@@ -8,38 +8,29 @@
 import SwiftUI
 
 struct RegistrationScreenView: View {
-    
-    @State var moving = false
-    
-    var body: some View {
-        ZStack {
-            Image("LoginBackground")
-                .scaledToFill()
-            GlassPhormism()
-        }
-        .ignoresSafeArea()
-    }
-}
-struct GlassPhormism: View {
-    
+    //MARK: Variables Setup
+    @Environment(\.presentationMode) var presentationMode
+
+    @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @State var moving = false
     
+    //MARK: body
     var body: some View {
-        ZStack {
-            Image("LoginBackground")
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 447.320, alignment: .center)
-                .blur(radius: 10)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay( RoundedRectangle(cornerRadius: 16)
-                    .stroke(.white, lineWidth: 0.5))
-                .overlay(
+        NavigationView {
+            ZStack {
+                Image("LoginBackground")
+                    .scaledToFill()
+                
+                GlassPhormism {
                     VStack(spacing: Tokens.Spacing.xxxs.value){
                         VStack(spacing: Tokens.Spacing.xxs.value){
                             Text("Boas vindas, desafiante")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.sm.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.base.value))
+                                .font(Tokens.FontStyle.title3.font(weigth: .bold,
+                                                                   design: .rounded))
                             //TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
@@ -51,34 +42,89 @@ struct GlassPhormism: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                            //Button and CheckBox
-                            CheckboxComponent(style: .dark, text: "Concordo com os termos de uso", tapHandler: { isChecked in
+                            //MARK: - Button and CheckBox
+                            CheckboxComponent(style: .dark, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
+                            }, action: {
+                                print("clicked")
                             })
-                            ButtonComponent(style: .secondary(isEnabled: true), text: "Criar conta!", action: {
-                                //create user account
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: "Criar conta!",
+                                            action: {
+                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password)) { response in
+                                        if response == .userCreated {
+                                            
+                                        }
+                                        else {
+                                            //TODO: present error while creating account alert
+                                        }
+                                    }
+                                }
                             })
                         }
-                        //Last elements
+                        //MARK: Last elements
                         HStack{
                             Text("Já tem uma conta?")
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.regular.value, design: Tokens.Fonts.Familiy.support.value))
+                                .font(Tokens.FontStyle.callout.font())
                             Button("Faça Login!") {
-                                //Do Something Here
+                                self.presentationMode.wrappedValue.dismiss()
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(.system(size: Tokens.Fonts.Size.xs.value, weight: Tokens.Fonts.Weight.bold.value, design: Tokens.Fonts.Familiy.support.value))
+                            .font(Tokens.FontStyle.callout.font(weigth: .bold))
                         }
                     }
-                        .padding(.vertical, Tokens.Spacing.xxs.value)
+                }
+            }
+            .ignoresSafeArea()
+        }
+    }
+}
+
+struct GlassPhormism<Content>: View where Content: View {
+    //MARK: Variables Setup
+    
+    @ViewBuilder var content: Content
+    
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content()
+    }
+    
+    //MARK: body
+    var body: some View {
+        
+        if #available(iOS 15.0, *) {
+            content
+                .frame(width: UIScreen.main.bounds.width * 0.9,
+                       height: UIScreen.main.bounds.height * 0.53, alignment: .center)
+                .padding(.vertical, Tokens.Spacing.xxs.value)
+                .background(.ultraThinMaterial)
+                .environment(\.colorScheme, .dark)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.white, lineWidth: 0.5)
                 )
         }
-        .onAppear {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-            AppDelegate.orientationLock = .portrait
-        }.onDisappear{
-            AppDelegate.orientationLock = .all
+        else {
+            ZStack {
+                Image("LoginBackground")
+                    .frame(width: UIScreen.main.bounds.width * 0.9,
+                           height: UIScreen.main.bounds.height * 0.53,
+                           alignment: .center)
+                    .blur(radius: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                        .stroke(.white, lineWidth: 0.5)
+                    )
+                    .overlay(
+                        content
+                            .padding(.vertical, Tokens.Spacing.xxs.value)
+                    )
+            }
         }
     }
 }
