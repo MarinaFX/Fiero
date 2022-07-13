@@ -10,10 +10,10 @@ import SwiftUI
 struct CheckboxComponent: View {
     @State var style: CheckboxStyles
     @State var text: String
-    @State var linkedText: String
+    @State var linkedText: String?
     @State var isChecked: Bool = false
     var tapHandler: (_ isChecked: Bool) -> Void
-    var action: () -> Void
+    var action: (() -> Void)?
     
     var body: some View {
         HStack {
@@ -27,11 +27,11 @@ struct CheckboxComponent: View {
             Text(text)
                 .foregroundColor(style.color)
                 .font(style.textFont)
-            Text(linkedText)
+            Text(linkedText ?? "")
                 .foregroundColor(style.color)
                 .font(style.textFont)
                 .underline()
-                .onTapGesture(perform: action)
+                .onTapGesture(perform: action ?? {})
         }
         .padding(.horizontal, style.padding)
     }
