@@ -11,9 +11,9 @@ struct CheckboxComponent: View {
     @State var style: CheckboxStyles
     @State var text: String
     @State var linkedText: String?
-    @State var isChecked: Bool = false
-    var tapHandler: (_ isChecked: Bool) -> Void
-    var action: (() -> Void)?
+    @Binding var isChecked: Bool
+    var checkboxHandler: (_ isChecked: Bool) -> Void
+    var linkedTextHandler: (() -> Void)?
     
     var body: some View {
         HStack {
@@ -22,7 +22,7 @@ struct CheckboxComponent: View {
                 .font(style.iconFont)
                 .onTapGesture {
                     isChecked.toggle()
-                    tapHandler(isChecked)
+                    checkboxHandler(isChecked)
                 }
             Text(text)
                 .foregroundColor(style.color)
@@ -31,7 +31,7 @@ struct CheckboxComponent: View {
                 .foregroundColor(style.color)
                 .font(style.textFont)
                 .underline()
-                .onTapGesture(perform: action ?? {})
+                .onTapGesture(perform: linkedTextHandler ?? {})
         }
         .padding(.horizontal, style.padding)
     }
@@ -39,9 +39,9 @@ struct CheckboxComponent: View {
 
 struct CheckboxComponent_Previews: PreviewProvider {
     static var previews: some View {
-        CheckboxComponent(style: .light, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
+        CheckboxComponent(style: .light, text: "Concordo com os", linkedText: "termos de uso", isChecked: .constant(true), checkboxHandler: { isChecked in
             print(isChecked)
-        }, action: {
+        }, linkedTextHandler: {
         })
     }
 }
