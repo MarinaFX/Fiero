@@ -12,10 +12,12 @@ struct RegistrationScreenView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
+    @State private var showingTermsOfUseSheet = false
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @State var moving = false
+    @State var termsOfUseAccept = false
     
     //MARK: body
     var body: some View {
@@ -43,11 +45,19 @@ struct RegistrationScreenView: View {
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
                             //MARK: - Button and CheckBox
-                            CheckboxComponent(style: .dark, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
+                            CheckboxComponent(style: .dark,
+                                              text: "Concordo com os",
+                                              linkedText: "termos de uso",
+                                              isChecked: $termsOfUseAccept,
+                                              checkboxHandler: { isChecked in
+                                //TODO: - Handle isChecked
                                 print(isChecked)
-                            }, action: {
-                                print("clicked")
+                            }, linkedTextHandler: {
+                                showingTermsOfUseSheet.toggle()
                             })
+                            .sheet(isPresented: $showingTermsOfUseSheet) {
+                                TermsOfUseSheetView(termsOfUseAccept: $termsOfUseAccept)
+                            }
                             
                             ButtonComponent(style: .secondary(isEnabled: true),
                                             text: "Criar conta!",
@@ -63,6 +73,7 @@ struct RegistrationScreenView: View {
                                     }
                                 }
                             })
+                            .padding(.all, Tokens.Spacing.xxxs.value)
                         }
                         //MARK: Last elements
                         HStack{
