@@ -10,7 +10,7 @@ import SwiftUI
 struct RegistrationScreenView: View {
     //MARK: Variables Setup
     @Environment(\.presentationMode) var presentationMode
-
+    
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
     @State private var username: String = ""
     @State private var email: String = ""
@@ -35,10 +35,10 @@ struct RegistrationScreenView: View {
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                    
+                                
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", isWrong: .constant(false), text: $email)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                    
+                                
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
@@ -79,6 +79,11 @@ struct RegistrationScreenView: View {
                 }
             }
             .ignoresSafeArea()
+        }.onAppear {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+            AppDelegate.orientationLock = .portrait // And making sure it stays that way
+        }.onDisappear {
+            AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
         }
     }
 }
@@ -97,8 +102,7 @@ struct GlassPhormism<Content>: View where Content: View {
         
         if #available(iOS 15.0, *) {
             content
-                .frame(width: UIScreen.main.bounds.width * 0.9,
-                       height: UIScreen.main.bounds.height * 0.53, alignment: .center)
+                .frame(width: UIScreen.main.bounds.width * 0.9, height: 400, alignment: .center)
                 .padding(.vertical, Tokens.Spacing.xxs.value)
                 .background(.ultraThinMaterial)
                 .environment(\.colorScheme, .dark)
@@ -111,14 +115,12 @@ struct GlassPhormism<Content>: View where Content: View {
         else {
             ZStack {
                 Image("LoginBackground")
-                    .frame(width: UIScreen.main.bounds.width * 0.9,
-                           height: UIScreen.main.bounds.height * 0.53,
-                           alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 447.320, alignment: .center)
                     .blur(radius: 10)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                        .stroke(.white, lineWidth: 0.5)
+                            .stroke(.white, lineWidth: 0.5)
                     )
                     .overlay(
                         content
