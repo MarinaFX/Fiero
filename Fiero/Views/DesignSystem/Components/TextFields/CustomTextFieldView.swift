@@ -47,12 +47,21 @@ struct CustomTextFieldView: View {
                 
                 //MARK: - TextField
                 if self.isSecure {
-                    SecureField(self.placeholder, text: self.$text)
+                    SecureField("", text: self.$text)
                         .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                        .placeholder(when: text.isEmpty) {
+                            Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                .padding(.leading, Tokens.Spacing.xxxs.value)
+                    }
                 }
                 else {
-                    TextField(self.placeholder, text: self.$text)
+                    TextField("", text: self.$text)
                         .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                        .placeholder(when: text.isEmpty) {
+                            Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                .padding(.leading, Tokens.Spacing.xxxs.value)
+                    }
+                        
                 }
                 
                 //MARK: - TextField show/hide button
