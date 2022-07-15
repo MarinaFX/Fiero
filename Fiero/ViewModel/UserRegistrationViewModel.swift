@@ -10,19 +10,23 @@ import Combine
 
 
 class UserRegistrationViewModel: ObservableObject {
-    
-    enum DatabaseResponse {
-        case userCreated
-        case badRequest
-        case error
-    }
+    //MARK: - Variables Setup
+    @Published private(set) var serverResponse: ServerResponse
         
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/register"
     
+    private(set) var client: HTTPClient
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
-    func createUserOnDatabase(for user: User, completionHandler: @escaping (DatabaseResponse) -> ()) {
+    //MARK: Init
+    init(client: HTTPClient = URLSession.shared) {
+        self.client = client
+        self.serverResponse = .unknown
+    }
+    
+    //MARK: - Create Account
+    func createUserOnDatabase(for user: User) {
         let userJSON: [String : String] = [
             "email": user.email,
             "name": user.name,
@@ -45,8 +49,8 @@ class UserRegistrationViewModel: ObservableObject {
 
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap({ $0.response })
+        self.client.perform(for: request)
+            //.tryMap({ $0.response })
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -56,18 +60,11 @@ class UserRegistrationViewModel: ObservableObject {
                     case .finished:
                         print("finished successfully")
                 }
-            }, receiveValue: { httpResponse in
-                guard let response = httpResponse as? HTTPURLResponse else { return }
+            }, receiveValue: { [weak self] data, response in
+                guard let response = response as? HTTPURLResponse else { return }
                 print("status code: \(response.statusCode)")
 
-                switch response.statusCode {
-                    case 200:
-                        return completionHandler(.userCreated)
-                    case 400:
-                        return completionHandler(.badRequest)
-                    default:
-                        return completionHandler(.error)
-                }
+                self?.serverResponse.statusCode = response.statusCode
             })
             .store(in: &cancellables)
     }

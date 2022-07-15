@@ -53,16 +53,9 @@ struct RegistrationScreenView: View {
                                             text: "Criar conta!",
                                             action: {
                                 if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
-                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password)) { response in
-                                        if response == .userCreated {
-                                            
-                                        }
-                                        else {
-                                            //TODO: present error while creating account alert
-                                        }
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
                                     }
-                                }
-                            })
+                                })
                         }
                         //MARK: Last elements
                         HStack{

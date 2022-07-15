@@ -9,79 +9,144 @@ import XCTest
 import Combine
 @testable import Fiero
 
-struct MockHTTPClient: HTTPClient {
-    func perform(for request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), Error> {
-        if request.url!.absoluteString.contains("/login") {
-            let json = "{ \"token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZDlhODc2LThjZTUtNGEzMy1hY2IwLWJjYzg5YzlmOTczNCIsImlhdCI6MTY1NzczMjA3OSwiZXhwIjoxNjU3NzMzODc5fQ.qtaj83WttXWBdtc4Bm-ByzKSSIvB9WKbh6DGC6l5S50\", \"user\" : { \"id\" : \"8dd9a876-8ce5-4a33-acb0-bcc89c9f9734\", \"name\": \"Marina De Pazzi\", \"email\": \"pazzi.dev@gmail.com\", \"createdAt\": \"2022-07-10T23:00:58.539Z\", \"updatedAt\": \"2022-07-10T23:00:58.539Z\"} }"
-            
-            let jsonData = json.data(using: .utf8)!
-            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "1.1", headerFields: nil)!
-            
-            return Just((data: jsonData, response: response))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-        
-        return Empty()
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
-    }
-}
-
 class UserLoginViewModelTests: XCTestCase {
     
     var sut: UserLoginViewModel!
-    var user: User = User(email: "", name: "")
-    var response: HTTPURLResponse!
     var disposables: Set<AnyCancellable> = []
+    var mockClient: MockHTTPClient!
     
     override func setUpWithError() throws {
-        sut = .init(client: MockHTTPClient())
+        self.mockClient = MockHTTPClient(url: "", statusCode: 200, json: "")
+        self.sut = .init(client: self.mockClient)
     }
     
     override func tearDownWithError() throws {
-        sut = nil
+        self.sut = nil
     }
     
-    func testSuccessfulUserLoginRequest() {
-        let userExpectation = expectation(description: "async user auth")
+    func testSuccessfulLoginRequest() {
+        let expectation = expectation(description: #function)
+        expectation.expectedFulfillmentCount = 2
         
-        sut.client
-            .perform(for: URLRequest(url: URL(string: "http://localhost:3333/user/login")!))
+        let json = """
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZDlhODc2LThjZTUtNGEzMy1hY2IwLWJjYzg5YzlmOTczNCIsImlhdCI6MTY1NzkwNjQ2MiwiZXhwIjoxNjU3OTA4MjYyfQ.XH3YLs4iIVcvnV3g0lnFBl5yd7AcWBBsYmK-BHqr8NY",
+            "user": {
+                "id": "8dd9a876-8ce5-4a33-acb0-bcc89c9f9734",
+                "name": "Marina De Pazzi",
+                "email": "pazzi.dev@gmail.com",
+                "createdAt": "2022-07-10T23:00:58.539Z",
+                "updatedAt": "2022-07-10T23:00:58.539Z"
+            }
+        }
+        """
+        
+        self.mockClient.mock(url: "/login", statusCode: 200, json: json)
+        
+        self.sut.$user
+            .dropFirst()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
-            //.dropFirst()
-            .sink(receiveCompletion: { result in
-                switch result {
-                    case .failure (let error):
-                        print("completion failed with: \(error.localizedDescription)")
-                    case .finished:
-                        print("completion executed successfully")
-                }
-            }, receiveValue: { [weak self] data, response in
-                guard let response = response as? HTTPURLResponse else { return }
-                
-                switch response.statusCode {
-                    case 200:
-                        let userResponse = try! JSONDecoder().decode(UserResponse.self, from: data)
-                        self?.response = response
-                        self?.user = userResponse.user
-                        self?.user.token = userResponse.token
-                        userExpectation.fulfill()
-
-                    default:
-                        print(response.statusCode)
-                }
+            .sink(receiveValue: { _ in
+                expectation.fulfill()
             })
             .store(in: &disposables)
         
-        //sut.authenticateUser(email: "pazzi.dev@gmail.com", password: "Marina115")
+        self.sut.authenticateUser(email: "pazzi.dev@gmail.com", password: "Marina115")
         
-        wait(for: [userExpectation], timeout: 5)
+        wait(for: [expectation], timeout: 5)
         
-        XCTAssertEqual(self.response.statusCode, 200)
-        XCTAssertEqual(self.user.email, "pazzi.dev@gmail.com")
-        XCTAssertEqual(self.user.name, "Marina De Pazzi")
-        XCTAssertEqual(self.user.id, "8dd9a876-8ce5-4a33-acb0-bcc89c9f9734")
+        XCTAssertEqual(self.sut.serverResponse, .success)
+        XCTAssertEqual(self.sut.user.email, "pazzi.dev@gmail.com")
+        XCTAssertEqual(self.sut.user.name, "Marina De Pazzi")
+        XCTAssertEqual(self.sut.user.id, "8dd9a876-8ce5-4a33-acb0-bcc89c9f9734")
+    }
+    
+    func testLoginWithWrongEmailRequest() {
+        let expectation = expectation(description: #function)
+
+        let json = """
+        {
+            "user not found"
+        }
+        """
+        
+        self.mockClient.mock(url: "/login", statusCode: 404, json: json)
+
+        self.sut.$serverResponse
+            .dropFirst()
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                expectation.fulfill()
+            })
+            .store(in: &disposables)
+
+        self.sut.authenticateUser(email: "someemail@someprovider.com", password: "flemis")
+        wait(for: [expectation], timeout: 5)
+
+        XCTAssertEqual(self.sut.serverResponse, .notFound)
+        XCTAssertEqual(self.sut.user.email, "")
+        XCTAssertEqual(self.sut.user.name, "")
+        XCTAssertEqual(self.sut.user.id, nil)
+    }
+    
+    func testLoginWithWrongPasswordRequest() {
+        let expectation = expectation(description: #function)
+
+        let json = """
+        {
+            "wrong email + password combination"
+        }
+        """
+        
+        self.mockClient.mock(url: "/login", statusCode: 403, json: json)
+
+        self.sut.$serverResponse
+            .dropFirst()
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                expectation.fulfill()
+            })
+            .store(in: &disposables)
+        
+        self.sut.authenticateUser(email: "pazzi.dev@gmail.com", password: "someWrongPassword")
+        wait(for: [expectation], timeout: 5)
+
+        XCTAssertEqual(self.sut.serverResponse, .forbidden)
+    }
+    
+    func testLoginWithInvalidEmail() {
+        let expectation = expectation(description: #function)
+                
+        let json = """
+        {
+            "errors": [
+                {
+                    "value": "someWrongEmailgmail",
+                    "msg": "Invalid value",
+                    "param": "email",
+                    "location": "body"
+                }
+            ]
+        }
+        """
+        
+        self.mockClient.mock(url: "/login", statusCode: 400, json: json)
+        
+        self.sut.$serverResponse
+            .dropFirst()
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                expectation.fulfill()
+            })
+            .store(in: &disposables)
+        
+        self.sut.authenticateUser(email: "someWrongEmailgmail.com", password: "somePassword")
+        wait(for: [expectation], timeout: 5)
+        
+        XCTAssertEqual(self.sut.serverResponse, .badRequest)
     }
 }

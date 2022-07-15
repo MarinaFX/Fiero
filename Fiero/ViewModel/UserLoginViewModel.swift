@@ -11,7 +11,7 @@ import Combine
 class UserLoginViewModel: ObservableObject {
     
     @Published private(set) var user: User
-    @Published private(set) var statusCode: Int
+    @Published private(set) var serverResponse: ServerResponse
 
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/login"
@@ -22,7 +22,7 @@ class UserLoginViewModel: ObservableObject {
     init(client: HTTPClient = URLSession.shared) {
         self.client = client
         self.user = User(email: "", name: "", password: "")
-        self.statusCode = 0
+        self.serverResponse = .unknown
     }
     
     func authenticateUser(email: String, password: String) {
@@ -48,8 +48,7 @@ class UserLoginViewModel: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         self.client.perform(for: request)
-            //.tryMap({ $0.data })
-            //.decode(type: UserResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: UserResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -59,44 +58,63 @@ class UserLoginViewModel: ObservableObject {
                     case .finished:
                         print("finished successfully")
                 }
-            }, receiveValue: { [weak self] data, response in
-                guard let response = response as? HTTPURLResponse else { return }
-                
-                switch response.statusCode {
-                    case 200:
-                        let userResponse = try! JSONDecoder().decode(UserResponse.self, from: data)
-                        self?.user = userResponse.user
-                        self?.user.token = userResponse.token
-                        self?.statusCode = 200
-                        
-                    case 400:
-                        self?.statusCode = 400
-                        
-                    case 403:
-                        self?.statusCode = 403
-                        
-                    case 404:
-                        self?.statusCode = 404
-                        
-                    case 500:
-                        self?.statusCode = 500
-
-                    default:
-                        print(response.statusCode)
+            }, receiveValue: { [weak self] httpResponse in
+                if let userResponse = httpResponse.item {
+                    self?.user = userResponse.user
+                    self?.user.token = userResponse.token
                 }
+                
+                self?.serverResponse.statusCode = httpResponse.statusCode
+                print(self?.user as Any)
+                print(self?.serverResponse.statusCode as Any)
             })
             .store(in: &cancellables)
     }
 }
 
-/**
-    login register - Success = 200, login feito
-    login register - BadRequest = 400, email ou senha errados
-    login - Forbidden = 403, senha errada
-    login - NotFound = 404, email valido, mas nao tem conta cadastrada = sem usuario cadastro com o email
-    register - Conflict = 409, tenta criar uma conta com email que ja existe
+enum HTTPResult<Item> {
+    case success(Item)
+    case failure(HTTPURLResponse, Data)
     
-    InternalServerError = 500 error
-    Unauthorized = 401, sem uso ate o momento
- */
+    var item: Item? {
+        if case .success(let item) = self {
+            return item
+        }
+        
+        return nil
+    }
+    
+    var statusCode: Int {
+        switch self {
+            case .success:
+                return 200
+            case .failure(let httpUrlResponse, _):
+                return httpUrlResponse.statusCode
+        }
+    }
+}
 
+extension Publisher where Output == (data: Data, response: URLResponse) {
+    func decodeHTTPResponse<Item, Coder>(
+        type: Item.Type,
+        decoder: Coder)
+    -> AnyPublisher<HTTPResult<Item>, Error>
+        where Item: Decodable, Coder: TopLevelDecoder, Coder.Input == Data
+    {
+        self
+            .tryMap({ (data: Data, response: URLResponse) -> HTTPResult<Item> in
+                guard let httpUrlResponse = response as? HTTPURLResponse else {
+                    fatalError()
+                }
+                
+                if httpUrlResponse.statusCode == 200 {
+                    let response = try decoder.decode(Item.self, from: data)
+                    return .success(response)
+                } else {
+                    return .failure(httpUrlResponse, data)
+                }
+            })
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+}

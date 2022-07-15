@@ -10,6 +10,9 @@
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
+		1B3ED07428809A3400E1538B /* UserRegistrationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */; };
+		1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07628809DAF00E1538B /* ServerResponse.swift */; };
+		1B3ED0792880A6DD00E1538B /* MockHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */; };
 		1B4135B928597E8900C7094A /* FieroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135B828597E8900C7094A /* FieroApp.swift */; };
 		1B4135BB28597E8900C7094A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135BA28597E8900C7094A /* ContentView.swift */; };
 		1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BC28597E8F00C7094A /* Assets.xcassets */; };
@@ -57,6 +60,9 @@
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
+		1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModelTests.swift; sourceTree = "<group>"; };
+		1B3ED07628809DAF00E1538B /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
+		1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPClient.swift; sourceTree = "<group>"; };
 		1B4135B528597E8900C7094A /* Fiero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135B828597E8900C7094A /* FieroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroApp.swift; sourceTree = "<group>"; };
 		1B4135BA28597E8900C7094A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3ED07528809D8100E1538B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		1B4135AC28597E8900C7094A = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +172,8 @@
 			children = (
 				1B4135C928597E8F00C7094A /* FieroTests.swift */,
 				1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */,
+				1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */,
+				1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */,
 			);
 			path = FieroTests;
 			sourceTree = "<group>";
@@ -174,6 +190,7 @@
 		1B5B7CDB2874BF4F00B4628F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1B3ED07528809D8100E1538B /* Enums */,
 				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
 				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
 				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
@@ -450,6 +467,7 @@
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
+				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,8 +475,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3ED0792880A6DD00E1538B /* MockHTTPClient.swift in Sources */,
 				1B4135CA28597E8F00C7094A /* FieroTests.swift in Sources */,
 				1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */,
+				1B3ED07428809A3400E1538B /* UserRegistrationViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
