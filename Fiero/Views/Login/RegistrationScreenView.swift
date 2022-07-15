@@ -10,6 +10,7 @@ import SwiftUI
 struct RegistrationScreenView: View {
     //MARK: Variables Setup
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.sizeCategory) var dynamicTypeCategory
     
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
     @State private var showingTermsOfUseSheet = false
@@ -23,9 +24,20 @@ struct RegistrationScreenView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("LoginBackground")
-                    .scaledToFill()
-                
+                if #available(iOS 15.0, *) {
+                    Image("LoginBackground")
+                        .resizable()
+                } else {
+                    if dynamicTypeCategory > .extraExtraLarge  {
+                        Image("LoginBackground")
+                            .resizable()
+                            .saturation(0.8)
+                            .blur(radius: 10, opaque: true)
+                    } else {
+                        Image("LoginBackground")
+                            .resizable()
+                    }
+                }
                 GlassPhormism {
                     VStack(spacing: Tokens.Spacing.xxxs.value){
                         VStack(spacing: Tokens.Spacing.xxs.value){
@@ -73,7 +85,7 @@ struct RegistrationScreenView: View {
                                     }
                                 }
                             })
-                            .padding(.all, Tokens.Spacing.xxxs.value)
+                            .padding(.horizontal, Tokens.Spacing.xxs.value)
                         }
                         //MARK: Last elements
                         HStack{
@@ -90,6 +102,7 @@ struct RegistrationScreenView: View {
                 }
             }
             .ignoresSafeArea()
+            .navigationBarHidden(true)
         }.onAppear {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait // And making sure it stays that way
@@ -103,6 +116,7 @@ struct GlassPhormism<Content>: View where Content: View {
     //MARK: Variables Setup
     
     @ViewBuilder var content: Content
+    @Environment(\.sizeCategory) var dynamicTypeCategory
     
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content()
@@ -112,31 +126,54 @@ struct GlassPhormism<Content>: View where Content: View {
     var body: some View {
         
         if #available(iOS 15.0, *) {
-            content
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 400, alignment: .center)
-                .padding(.vertical, Tokens.Spacing.xxs.value)
-                .background(.ultraThinMaterial)
-                .environment(\.colorScheme, .dark)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.white, lineWidth: 0.5)
-                )
-        }
-        else {
-            ZStack {
-                Image("LoginBackground")
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 447.320, alignment: .center)
-                    .blur(radius: 10)
+            if dynamicTypeCategory >= .accessibilityMedium  {
+                ScrollView {
+                    content
+                        .frame(width: UIScreen.main.bounds.width * 0.9, alignment: .center)
+                        .padding(.vertical, Tokens.Spacing.xxs.value)
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.white, lineWidth: 0.5)
+                        )
+                }
+            } else {
+                content
+                    .frame(width: UIScreen.main.bounds.width * 0.9, alignment: .center)
+                    .padding(.vertical, Tokens.Spacing.xxs.value)
+                    .background(.ultraThinMaterial)
+                    .environment(\.colorScheme, .dark)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(.white, lineWidth: 0.5)
                     )
-                    .overlay(
-                        content
-                            .padding(.vertical, Tokens.Spacing.xxs.value)
-                    )
+            }
+        }
+        else {
+            if dynamicTypeCategory > .extraExtraLarge  {
+                ScrollView {
+                    content
+                        .frame(width: UIScreen.main.bounds.width * 0.9)
+                        .padding(.vertical, Tokens.Spacing.xxs.value)
+                }
+            } else {
+                ZStack {
+                    Image("LoginBackground")
+                        //.resizable()
+                        .frame(width: UIScreen.main.bounds.width * 0.9, height: 437,alignment: .center)
+                        .blur(radius: 10)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.white, lineWidth: 0.5)
+                        )
+                        .overlay(
+                            content
+                        )
+                }
             }
         }
     }

@@ -24,13 +24,19 @@ struct TermsOfUseSheetView: View {
     var circleColor: Color {
         return Tokens.Colors.Brand.Primary.pure.value
     }
+    var smallSpacing: CGFloat {
+        Tokens.Spacing.quarck.value
+    }
+    var spacing: CGFloat {
+        return Tokens.Spacing.defaultMargin.value
+    }
     
     let navAppearance = UINavigationBarAppearance()
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: Tokens.Spacing.defaultMargin.value) {
+                VStack(alignment: .leading, spacing: spacing) {
                     Text("O Fiero é um aplicativo onde você pode criar desafios para interagir com seus amigos. Aqui você encontra nossos termos de uso e políticas de privacidade. Para utilizar o aplicativo é necessário que você leia e esteja de acordo com nossos termos.")
                         .font(textFont)
                         .foregroundColor(textColor)
@@ -65,12 +71,12 @@ struct TermsOfUseSheetView: View {
                                 .font(textFont)
                                 .foregroundColor(textColor)
                         }
-                    }.padding(.vertical, Tokens.Spacing.quarck.value)
+                    }.padding(.vertical, smallSpacing)
                     Text("Nossa solução é voltada para o público maior de 3 anos e caso sejam identificados usuários que não cumpram esse requisito os seus dados serão completamente apagados de nossos servidores e o acesso ao aplicativo será bloqueado.")
                         .font(textFont)
                         .foregroundColor(textColor)
                 }
-                .padding(.all, Tokens.Spacing.defaultMargin.value)
+                .padding(.all, spacing)
                 .navigationTitle("Termos de uso")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -82,7 +88,7 @@ struct TermsOfUseSheetView: View {
                     termsOfUseAccept = true
                     presentationMode.wrappedValue.dismiss()
                 })
-                .padding(.all, Tokens.Spacing.defaultMargin.value)
+                .padding(.all, spacing)
             }
         }
     }
