@@ -38,13 +38,13 @@ struct RegistrationScreenView: View {
                                                                    design: .rounded))
                             //MARK: TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
-                                CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
+                                CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isLowCase: false , isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
-                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", isWrong: .constant(false), text: $email)
+                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", isLowCase: true ,isWrong: .constant(false), text: $email)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
-                                CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
+                                CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isLowCase: true ,isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
                             //MARK: Button and CheckBox
