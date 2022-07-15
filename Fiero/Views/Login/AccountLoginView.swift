@@ -38,10 +38,10 @@ struct AccountLoginView: View {
                                                            design: .rounded))
                         .foregroundColor(.white)
                                         
-                    CustomTextFieldView(type: .none, style: .primary, placeholder: emailPlaceholder, isSecure: false, isWrong: .constant(false), text: self.$emailText)
+                    CustomTextFieldView(type: .none, style: .primary, placeholder: emailPlaceholder, isSecure: false, isLowCase: true ,isWrong: .constant(false), text: self.$emailText)
                         .padding(Tokens.Spacing.nano.value)
                     
-                    CustomTextFieldView(type: .icon, style: .primary, placeholder: passwordPlaceholder, isSecure: true, isWrong: .constant(false), text: self.$passwordText)
+                    CustomTextFieldView(type: .icon, style: .primary, placeholder: passwordPlaceholder, isSecure: true, isLowCase: true ,isWrong: .constant(false), text: self.$passwordText)
                         .padding(Tokens.Spacing.nano.value)
                     
                     Button(action: {
