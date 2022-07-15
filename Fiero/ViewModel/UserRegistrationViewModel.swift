@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-
+//MARK: UserRegistrationViewModel
 class UserRegistrationViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var serverResponse: ServerResponse
@@ -19,7 +19,7 @@ class UserRegistrationViewModel: ObservableObject {
     private(set) var client: HTTPClient
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
-    //MARK: Init
+    //MARK: - Init
     init(client: HTTPClient = URLSession.shared) {
         self.client = client
         self.serverResponse = .unknown
@@ -50,7 +50,7 @@ class UserRegistrationViewModel: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         self.client.perform(for: request)
-            //.tryMap({ $0.response })
+            .tryMap({ $0.response })
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -60,8 +60,8 @@ class UserRegistrationViewModel: ObservableObject {
                     case .finished:
                         print("finished successfully")
                 }
-            }, receiveValue: { [weak self] data, response in
-                guard let response = response as? HTTPURLResponse else { return }
+            }, receiveValue: { [weak self] urlResponse in
+                guard let response = urlResponse as? HTTPURLResponse else { return }
                 print("status code: \(response.statusCode)")
 
                 self?.serverResponse.statusCode = response.statusCode

@@ -13,6 +13,8 @@
 		1B3ED07428809A3400E1538B /* UserRegistrationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */; };
 		1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07628809DAF00E1538B /* ServerResponse.swift */; };
 		1B3ED0792880A6DD00E1538B /* MockHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */; };
+		1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07A2881E16600E1538B /* HTTPResult.swift */; };
+		1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */; };
 		1B4135B928597E8900C7094A /* FieroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135B828597E8900C7094A /* FieroApp.swift */; };
 		1B4135BB28597E8900C7094A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135BA28597E8900C7094A /* ContentView.swift */; };
 		1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BC28597E8F00C7094A /* Assets.xcassets */; };
@@ -63,6 +65,8 @@
 		1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModelTests.swift; sourceTree = "<group>"; };
 		1B3ED07628809DAF00E1538B /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPClient.swift; sourceTree = "<group>"; };
+		1B3ED07A2881E16600E1538B /* HTTPResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
+		1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
 		1B4135B528597E8900C7094A /* Fiero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135B828597E8900C7094A /* FieroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroApp.swift; sourceTree = "<group>"; };
 		1B4135BA28597E8900C7094A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				1B3ED07528809D8100E1538B /* Enums */,
 				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
 				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
+				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
 				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
 			);
 			path = Extensions;
@@ -455,6 +461,7 @@
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */,
+				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
@@ -467,6 +474,7 @@
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
+				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

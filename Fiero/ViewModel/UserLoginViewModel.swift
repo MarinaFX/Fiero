@@ -8,8 +8,9 @@
 import Foundation
 import Combine
 
+//MARK: UserLoginViewModel
 class UserLoginViewModel: ObservableObject {
-    
+    //MARK: - Variables Setup
     @Published private(set) var user: User
     @Published private(set) var serverResponse: ServerResponse
 
@@ -19,12 +20,14 @@ class UserLoginViewModel: ObservableObject {
     private(set) var client: HTTPClient
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
+    //MARK: - Init
     init(client: HTTPClient = URLSession.shared) {
         self.client = client
         self.user = User(email: "", name: "", password: "")
         self.serverResponse = .unknown
     }
     
+    //MARK: - AuthenticateUser
     func authenticateUser(email: String, password: String) {
         let userJSON: [String : String] = [
             "password": password,
@@ -69,52 +72,5 @@ class UserLoginViewModel: ObservableObject {
                 print(self?.serverResponse.statusCode as Any)
             })
             .store(in: &cancellables)
-    }
-}
-
-enum HTTPResult<Item> {
-    case success(Item)
-    case failure(HTTPURLResponse, Data)
-    
-    var item: Item? {
-        if case .success(let item) = self {
-            return item
-        }
-        
-        return nil
-    }
-    
-    var statusCode: Int {
-        switch self {
-            case .success:
-                return 200
-            case .failure(let httpUrlResponse, _):
-                return httpUrlResponse.statusCode
-        }
-    }
-}
-
-extension Publisher where Output == (data: Data, response: URLResponse) {
-    func decodeHTTPResponse<Item, Coder>(
-        type: Item.Type,
-        decoder: Coder)
-    -> AnyPublisher<HTTPResult<Item>, Error>
-        where Item: Decodable, Coder: TopLevelDecoder, Coder.Input == Data
-    {
-        self
-            .tryMap({ (data: Data, response: URLResponse) -> HTTPResult<Item> in
-                guard let httpUrlResponse = response as? HTTPURLResponse else {
-                    fatalError()
-                }
-                
-                if httpUrlResponse.statusCode == 200 {
-                    let response = try decoder.decode(Item.self, from: data)
-                    return .success(response)
-                } else {
-                    return .failure(httpUrlResponse, data)
-                }
-            })
-            .mapError({ $0 as Error })
-            .eraseToAnyPublisher()
     }
 }

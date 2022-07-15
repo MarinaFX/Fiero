@@ -7,17 +7,19 @@
 
 import SwiftUI
 
+//MARK: RegistrationScreenView
 struct RegistrationScreenView: View {
-    //MARK: Variables Setup
+    //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
+    @State var serverResponse: ServerResponse
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
     @State var moving = false
     
-    //MARK: body
+    //MARK: - body
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,7 +33,7 @@ struct RegistrationScreenView: View {
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(Tokens.FontStyle.title3.font(weigth: .bold,
                                                                    design: .rounded))
-                            //TextFilds elements
+                            //MARK: TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -42,7 +44,7 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                            //MARK: - Button and CheckBox
+                            //MARK: Button and CheckBox
                             CheckboxComponent(style: .dark, text: "Concordo com os", linkedText: "termos de uso", tapHandler: { isChecked in
                                 print(isChecked)
                             }, action: {
@@ -72,12 +74,17 @@ struct RegistrationScreenView: View {
                 }
             }
             .ignoresSafeArea()
+            .onChange(of: self.serverResponse, perform: { serverResponse in
+                self.serverResponse = serverResponse
+            })
         }
     }
 }
 
+//MARK: -
+//MARK: - GlassPhormism
 struct GlassPhormism<Content>: View where Content: View {
-    //MARK: Variables Setup
+    //MARK: - Variables Setup
     
     @ViewBuilder var content: Content
     
@@ -85,7 +92,7 @@ struct GlassPhormism<Content>: View where Content: View {
         self.content = content()
     }
     
-    //MARK: body
+    //MARK: - body
     var body: some View {
         
         if #available(iOS 15.0, *) {

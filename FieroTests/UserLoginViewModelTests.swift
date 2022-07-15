@@ -12,11 +12,12 @@ import Combine
 class UserLoginViewModelTests: XCTestCase {
     
     var sut: UserLoginViewModel!
-    var disposables: Set<AnyCancellable> = []
     var mockClient: MockHTTPClient!
+
+    var disposables: Set<AnyCancellable> = []
     
     override func setUpWithError() throws {
-        self.mockClient = MockHTTPClient(url: "", statusCode: 200, json: "")
+        self.mockClient = MockHTTPClient(url: "", statusCode: 0, json: "")
         self.sut = .init(client: self.mockClient)
     }
     
