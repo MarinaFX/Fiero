@@ -38,6 +38,7 @@ struct CustomTextFieldView: View {
     var helperText: String = ""
     
     @State private(set) var isSecure: Bool = false
+    @State private(set) var isLowCase: Bool = false
     @Binding private(set) var isWrong: Bool
     @Binding private(set) var text: String
 
@@ -47,12 +48,41 @@ struct CustomTextFieldView: View {
                 
                 //MARK: - TextField
                 if self.isSecure {
-                    SecureField(self.placeholder, text: self.$text)
-                        .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                    if isLowCase{
+                        SecureField("", text: self.$text)
+                            .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .placeholder(when: text.isEmpty) {
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                    .padding(.leading, Tokens.Spacing.xxxs.value)
+                        }
+                            .autocapitalization(.none)
+                    }else{
+                        SecureField("", text: self.$text)
+                            .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .placeholder(when: text.isEmpty) {
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                    .padding(.leading, Tokens.Spacing.xxxs.value)
+                        }
+                    }
+                    
                 }
                 else {
-                    TextField(self.placeholder, text: self.$text)
-                        .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                    if isLowCase{
+                        TextField("", text: self.$text)
+                            .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .placeholder(when: text.isEmpty) {
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                    .padding(.leading, Tokens.Spacing.xxxs.value)
+                        }
+                            .autocapitalization(.none)
+                    }else{
+                        TextField("", text: self.$text)
+                            .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .placeholder(when: text.isEmpty) {
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                    .padding(.leading, Tokens.Spacing.xxxs.value)
+                        }
+                    }
                 }
                 
                 //MARK: - TextField show/hide button
@@ -87,7 +117,7 @@ struct CustomTextFieldView: View {
 
 struct CustomTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextFieldView(type: .both, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA. QUANDO CHEGA O FINAL DE SEMANA, QUERO DEITAR NA MINHA CAMA", isSecure: false, isWrong: .constant(true), text: .constant("flemis"))
+        CustomTextFieldView(type: .both, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA.", isSecure: false, isLowCase: true ,isWrong: .constant(true), text: .constant("flemis"))
             .padding(Tokens.Spacing.xs.value)
     }
 }
