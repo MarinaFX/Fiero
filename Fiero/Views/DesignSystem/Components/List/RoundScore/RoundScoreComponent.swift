@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RoundScoreComponent: View {
-//    @ScaledMetric(relativeTo: .caption) var spacing: CGFloat = 100
     @State var style: RoundScoreStyle
     
     var body: some View {
