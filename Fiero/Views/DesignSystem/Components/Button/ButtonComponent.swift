@@ -23,7 +23,6 @@ struct ButtonComponent: View {
                 .background(style.backgroundColor)
                 .cornerRadius(style.borderRadius)
         })
-        .padding(.horizontal, style.padding)
         .disabled(!style.isEnabled)
 
     }
