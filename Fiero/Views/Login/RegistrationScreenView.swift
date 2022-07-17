@@ -162,7 +162,6 @@ struct GlassPhormism<Content>: View where Content: View {
             } else {
                 ZStack {
                     Image("LoginBackground")
-                        //.resizable()
                         .frame(width: UIScreen.main.bounds.width * 0.9, height: 437,alignment: .center)
                         .blur(radius: 10)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
