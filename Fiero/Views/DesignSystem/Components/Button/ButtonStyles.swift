@@ -48,6 +48,6 @@ enum ButtonStyles {
     }
     
     var font: Font {
-        return Tokens.FontStyle.callout.font()
+        return Tokens.FontStyle.callout.font(weigth: .bold)
     }
 }

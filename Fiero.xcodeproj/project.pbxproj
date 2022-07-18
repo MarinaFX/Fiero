@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
+		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
+		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
+		1B3ED07428809A3400E1538B /* UserRegistrationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */; };
+		1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07628809DAF00E1538B /* ServerResponse.swift */; };
+		1B3ED0792880A6DD00E1538B /* MockHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */; };
+		1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07A2881E16600E1538B /* HTTPResult.swift */; };
+		1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */; };
 		1B4135B928597E8900C7094A /* FieroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135B828597E8900C7094A /* FieroApp.swift */; };
 		1B4135BB28597E8900C7094A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135BA28597E8900C7094A /* ContentView.swift */; };
 		1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BC28597E8F00C7094A /* Assets.xcassets */; };
 		1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BF28597E8F00C7094A /* Preview Assets.xcassets */; };
-		1B4135CA28597E8F00C7094A /* FieroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135C928597E8F00C7094A /* FieroTests.swift */; };
 		1B4135D428597E8F00C7094A /* FieroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D328597E8F00C7094A /* FieroUITests.swift */; };
 		1B4135D628597E8F00C7094A /* FieroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */; };
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
@@ -28,6 +35,9 @@
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
+		CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */; };
+		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
+		F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0192881D73C00264114 /* RoundScoreComponent.swift */; };
 		F888EC01287600C300445FED /* AlertStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC00287600C300445FED /* AlertStyles.swift */; };
 		F888EC032876010200445FED /* AlertComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC022876010200445FED /* AlertComponent.swift */; };
 		F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */; };
@@ -51,13 +61,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
+		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
+		1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModelTests.swift; sourceTree = "<group>"; };
+		1B3ED07628809DAF00E1538B /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
+		1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPClient.swift; sourceTree = "<group>"; };
+		1B3ED07A2881E16600E1538B /* HTTPResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
+		1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
 		1B4135B528597E8900C7094A /* Fiero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135B828597E8900C7094A /* FieroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroApp.swift; sourceTree = "<group>"; };
 		1B4135BA28597E8900C7094A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1B4135BC28597E8F00C7094A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B4135BF28597E8F00C7094A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B4135C528597E8F00C7094A /* FieroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FieroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B4135C928597E8F00C7094A /* FieroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroTests.swift; sourceTree = "<group>"; };
 		1B4135CF28597E8F00C7094A /* FieroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FieroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135D328597E8F00C7094A /* FieroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITests.swift; sourceTree = "<group>"; };
 		1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -75,6 +92,9 @@
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
+		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
+		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
+		F85EE0192881D73C00264114 /* RoundScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreComponent.swift; sourceTree = "<group>"; };
 		F888EC00287600C300445FED /* AlertStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyles.swift; sourceTree = "<group>"; };
 		F888EC022876010200445FED /* AlertComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertComponent.swift; sourceTree = "<group>"; };
 		F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenView.swift; sourceTree = "<group>"; };
@@ -105,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3ED07528809D8100E1538B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		1B4135AC28597E8900C7094A = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +179,8 @@
 		1B4135C828597E8F00C7094A /* FieroTests */ = {
 			isa = PBXGroup;
 			children = (
-				1B4135C928597E8F00C7094A /* FieroTests.swift */,
+				1B9658202881EE3300B774CB /* Login+Registration */,
+				1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */,
 			);
 			path = FieroTests;
 			sourceTree = "<group>";
@@ -167,7 +197,11 @@
 		1B5B7CDB2874BF4F00B4628F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1B3ED07528809D8100E1538B /* Enums */,
 				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
+				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
+				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
+				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -194,6 +228,7 @@
 			children = (
 				F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */,
 				1B5B7CE52877588000B4628F /* AccountLoginView.swift */,
+				CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -211,6 +246,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F85EE0162881D2DF00264114 /* List */,
 				F888EBFF2876003B00445FED /* Alert */,
 				CCA3C2462875FFD0007F6597 /* Button */,
 				CCA3C2472875FFE6007F6597 /* Checkbox */,
@@ -263,6 +299,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		1B9658202881EE3300B774CB /* Login+Registration */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */,
+				1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */,
+			);
+			path = "Login+Registration";
+			sourceTree = "<group>";
+		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +324,23 @@
 				CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */,
 			);
 			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		F85EE0162881D2DF00264114 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				F85EE01B2881F9FD00264114 /* RoundScore */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		F85EE01B2881F9FD00264114 /* RoundScore */ = {
+			isa = PBXGroup;
+			children = (
+				F85EE0172881D30700264114 /* RoundScoreStyle.swift */,
+				F85EE0192881D73C00264114 /* RoundScoreComponent.swift */,
+			);
+			path = RoundScore;
 			sourceTree = "<group>";
 		};
 		F888EBFF2876003B00445FED /* Alert */ = {
@@ -420,15 +482,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
+				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
+				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */,
+				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
+				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
@@ -436,9 +503,12 @@
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
+				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
+				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
+				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +516,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B4135CA28597E8F00C7094A /* FieroTests.swift in Sources */,
+				1B3ED0792880A6DD00E1538B /* MockHTTPClient.swift in Sources */,
+				1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */,
+				1B3ED07428809A3400E1538B /* UserRegistrationViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,7 +669,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = S3769X94PP;
+				DEVELOPMENT_TEAM = KY3S643HND;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -627,7 +699,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = S3769X94PP;
+				DEVELOPMENT_TEAM = KY3S643HND;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
