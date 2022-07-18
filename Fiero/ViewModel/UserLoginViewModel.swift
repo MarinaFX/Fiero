@@ -8,19 +8,26 @@
 import Foundation
 import Combine
 
+//MARK: UserLoginViewModel
 class UserLoginViewModel: ObservableObject {
-    
+    //MARK: - Variables Setup
     @Published private(set) var user: User
+    @Published private(set) var serverResponse: ServerResponse
 
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/login"
     
+    private(set) var client: HTTPClient
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
-    init() {
+    //MARK: - Init
+    init(client: HTTPClient = URLSession.shared) {
+        self.client = client
         self.user = User(email: "", name: "", password: "")
+        self.serverResponse = .unknown
     }
     
+    //MARK: - AuthenticateUser
     func authenticateUser(email: String, password: String) {
         let userJSON: [String : String] = [
             "password": password,
@@ -43,9 +50,8 @@ class UserLoginViewModel: ObservableObject {
 
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap( { $0.data })
-            .decode(type: UserReponse.self, decoder: JSONDecoder())
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: UserResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -55,9 +61,15 @@ class UserLoginViewModel: ObservableObject {
                     case .finished:
                         print("finished successfully")
                 }
-            }, receiveValue: { [weak self] userResponse in
-                print(userResponse)
-                self?.user = userResponse.user
+            }, receiveValue: { [weak self] httpResponse in
+                if let userResponse = httpResponse.item {
+                    self?.user = userResponse.user
+                    self?.user.token = userResponse.token
+                }
+                
+                self?.serverResponse.statusCode = httpResponse.statusCode
+                print(self?.user as Any)
+                print(self?.serverResponse.statusCode as Any)
             })
             .store(in: &cancellables)
     }
