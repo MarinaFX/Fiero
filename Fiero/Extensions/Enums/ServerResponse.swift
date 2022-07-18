@@ -85,15 +85,15 @@ enum ServerResponse: CustomStringConvertible {
             case .success:
                 return "Operação realizada com sucesso"
             case .badRequest:
-                return "Operação não concluida. Senha e/ou email invalidos"
+                return "Parece que o email que você tentou inserir é muito desafiador para ser um email"
             case .unauthorized:
                 return "Você não possui permissão para realizar tal operação"
             case .forbidden:
-                return "Senha incorreta"
+                return "Essa combinação de senha e email foi tão desafiadora que está incorreta"
             case .notFound:
-                return "Parece que não há contas registradas com esse e-mail"
+                return "Fala fella, bora fazer um projetinho no Fiero? Porque não ha contas regitradas com esse email"
             case .conflict:
-                return "Parece que ja existe uma conta criada com esse e-mail"
+                return "Parece que o email que você inseriu foi mais desafiador e ja esta em nossos cadastros"
             case .internalError:
                 return "Aconteceu um erro com nossos servidores. Por favor, tente mais tarde"
             case .unknown:
