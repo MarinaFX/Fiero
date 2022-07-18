@@ -11,6 +11,7 @@ import SwiftUI
 struct AccountLoginView: View {
     //MARK: Variables Setup
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.sizeCategory) var dynamicTypeCategory
     
     @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
     
@@ -24,57 +25,102 @@ struct AccountLoginView: View {
     private let emailPlaceholder: String = "E-mail"
     private let passwordPlaceholder: String = "Senha"
     
+    var nanoSpacing: Double {
+        return Tokens.Spacing.nano.value
+    }
+    var smallSpacing: Double {
+        return Tokens.Spacing.xxxs.value
+    }
+    var color: Color {
+        return Tokens.Colors.Neutral.High.pure.value
+    }
+    var titleFont: Font {
+        return Tokens.FontStyle.title3.font(weigth: .bold,
+                                            design: .rounded)
+    }
+    var textFont: Font {
+        return Tokens.FontStyle.caption.font()
+    }
+    var textButtonFont: Font {
+        return Tokens.FontStyle.callout.font(weigth: .bold,
+                                             design: .rounded)
+    }
+    
     //MARK: body View
     var body: some View {
         ZStack {
-            Image("LoginBackground")
-                .scaledToFill()
+            if #available(iOS 15.0, *) {
+                Image("LoginBackground")
+                    .resizable()
+            } else {
+                if dynamicTypeCategory > .extraExtraLarge {
+                    Image("LoginBackground")
+                        .resizable()
+                        .saturation(0.8)
+                        .blur(radius: 10, opaque: true)
+                } else {
+                    Image("LoginBackground")
+                        .resizable()
+                }
+            }
             
             //MARK: Blurred View
             BlurredSquaredView(usernameText: self.$emailText) {
                 VStack {
                     Text("Boas vindas, desafiante")
-                        .font(Tokens.FontStyle.title3.font(weigth: .bold,
-                                                           design: .rounded))
+                        .font(titleFont)
                         .foregroundColor(.white)
-                                        
-                    CustomTextFieldView(type: .none, style: .primary, placeholder: emailPlaceholder, isSecure: false, isLowCase: true ,isWrong: .constant(false), text: self.$emailText)
-                        .padding(Tokens.Spacing.nano.value)
+                    //MARK: TextFields
+                    CustomTextFieldView(type: .none,
+                                        style: .primary,
+                                        placeholder: emailPlaceholder,
+                                        isSecure: false,
+                                        isLowCase: true ,
+                                        isWrong: .constant(false),
+                                        text: self.$emailText)
+                        .padding(nanoSpacing)
                     
-                    CustomTextFieldView(type: .icon, style: .primary, placeholder: passwordPlaceholder, isSecure: true, isLowCase: true ,isWrong: .constant(false), text: self.$passwordText)
-                        .padding(Tokens.Spacing.nano.value)
-                    
+                    CustomTextFieldView(type: .icon,
+                                        style: .primary,
+                                        placeholder: passwordPlaceholder,
+                                        isSecure: true,
+                                        isLowCase: true ,
+                                        isWrong: .constant(false),
+                                        text: self.$passwordText)
+                        .padding(nanoSpacing)
+                    //MARK: Buttons
                     Button(action: {
-                        //
+                        //TODO: create a link to Remember Password Screen (doesn't exist yet)
                     }, label: {
                         Text("Esqueceu sua senha?")
-                            .font(Tokens.FontStyle.caption.font())
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .underline(true, color: Tokens.Colors.Neutral.High.pure.value)
+                            .font(textFont)
+                            .foregroundColor(color)
+                            .underline()
                     })
-                    .padding(.vertical, Tokens.Spacing.xxxs.value)
+                    .padding(.vertical, smallSpacing)
                     
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Fazer login!", action: {
+                    ButtonComponent(style: .secondary(isEnabled: true),
+                                    text: "Fazer login!",
+                                    action: {
                         self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
                     })
                     
                     HStack {
                         Text("Ainda não tem uma conta?")
-                            .font(Tokens.FontStyle.callout.font())
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .font(textFont)
+                            .foregroundColor(color)
                         
                         Button(action: {
                             self.isRegistrationSheetShowing.toggle()
                         }, label: {
                             Text("Cadastre-se!")
-                                .font(Tokens.FontStyle.callout.font(weigth: .bold,
-                                                                    design: .rounded))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .font(textButtonFont)
+                                .foregroundColor(color)
                         })
                     }
-                    .padding(.top, Tokens.Spacing.xxxs.value)
+                    .padding(.top, smallSpacing)
                 }
-                .padding(Tokens.Spacing.xxxs.value)
+                .padding(smallSpacing)
             }
         }
         .ignoresSafeArea()
@@ -96,29 +142,62 @@ struct BlurredSquaredView<Content>: View where Content: View {
     //MARK: Variables Setup
     @ViewBuilder var content: Content
     @Binding private(set) var usernameText: String
+    @Environment(\.sizeCategory) var dynamicTypeCategory
         
     init(usernameText: Binding<String>, @ViewBuilder content: @escaping () -> Content) {
         self._usernameText = usernameText
         self.content = content()
     }
     
+    var spacing: Double {
+        return Tokens.Spacing.xxs.value
+    }
+    
     //MARK: body View
     var body: some View {
-            if #available(iOS 15.0, *) {
+        if #available(iOS 15.0, *) {
+            if dynamicTypeCategory >= .accessibilityMedium {
+                ScrollView {
+                    content
+                        .frame(width: UIScreen.main.bounds.width * 0.9,
+                               alignment: .center)
+                        .padding(.vertical, spacing)
+                        .background(.ultraThinMaterial)
+                        .environment(\.colorScheme, .dark)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.white,
+                                        lineWidth: 0.5)
+                        )
+                }
+            } else {
                 content
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 350, alignment: .center)
-                    .padding(.vertical, Tokens.Spacing.xxs.value)
+                    .frame(width: UIScreen.main.bounds.width * 0.9,
+                           alignment: .center)
+                    .padding(.vertical, spacing)
                     .background(.ultraThinMaterial)
                     .environment(\.colorScheme, .dark)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(.white, lineWidth: 0.5)
+                            .stroke(.white,
+                                    lineWidth: 0.5)
                     )
+            }
+        } else {
+            if dynamicTypeCategory > .extraExtraLarge {
+                ScrollView {
+                    content
+                        .frame(width: UIScreen.main.bounds.width * 0.9)
+                        .padding(.vertical, spacing)
+                }
             } else {
                 ZStack {
                     Image("LoginBackground")
-                        .frame(width: UIScreen.main.bounds.width * 0.9, height: 400, alignment: .center)
+                        .frame(width: UIScreen.main.bounds.width * 0.9,
+                               height: 437,
+                               alignment: .center)
                         .blur(radius: 10)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         .overlay(
@@ -127,10 +206,10 @@ struct BlurredSquaredView<Content>: View where Content: View {
                         )
                         .overlay(
                             content
-                                .padding(.vertical, Tokens.Spacing.xs.value)
                         )
                 }
             }
+        }
     }
 }
 
