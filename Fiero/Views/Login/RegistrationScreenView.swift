@@ -20,10 +20,8 @@ struct RegistrationScreenView: View {
     @State private var moving = false
     @State private var hasAcceptedTermsOfUse = false
     @State private var isShowingTermsOfUseSheet = false
-    @State private var isInvalidEmailAlertShowing: Bool = false
-    @State private var isDuplicateEmailAlertShowing: Bool = false
+    @State private var isShowingInvalidInputAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
-    
     
     //MARK: - body
     var body: some View {
@@ -87,7 +85,7 @@ struct RegistrationScreenView: View {
                     }
                 }
             }
-            .alert(isPresented: self.$isInvalidEmailAlertShowing, content: {
+            .alert(isPresented: self.$isShowingInvalidInputAlert, content: {
                 Alert(title: Text("Email invalido"),
                       message: Text(self.serverResponse.description),
                       dismissButton: .cancel(Text("OK")))
@@ -96,18 +94,9 @@ struct RegistrationScreenView: View {
             .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
                 
-                if self.serverResponse == .badRequest {
-                    self.isInvalidEmailAlertShowing.toggle()
-                }
-                
-                if self.serverResponse == .conflict {
-                    self.isDuplicateEmailAlertShowing.toggle()
-                }
+                self.isShowingInvalidInputAlert.toggle()
             })
         }
-        .alert(isPresented: self.$isDuplicateEmailAlertShowing, content: {
-            Alert(title: Text("Email ja existente"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
-        })
         .onAppear {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait // And making sure it stays that way

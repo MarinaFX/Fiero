@@ -89,9 +89,9 @@ enum ServerResponse: CustomStringConvertible {
             case .unauthorized:
                 return "Você não possui permissão para realizar tal operação"
             case .forbidden:
-                return "Senha incorreta"
+                return "Essa combinação de senha e email foi tão desafiadora que está incorreta"
             case .notFound:
-                return "Parece que não há contas registradas com esse e-mail"
+                return "Fala fella, bora fazer um projetinho no Fiero? Porque não ha contas regitradas com esse email"
             case .conflict:
                 return "Parece que o email que você inseriu foi mais desafiador e ja esta em nossos cadastros"
             case .internalError:
