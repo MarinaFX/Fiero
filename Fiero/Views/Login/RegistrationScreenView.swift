@@ -7,20 +7,23 @@
 
 import SwiftUI
 
+//MARK: RegistrationScreenView
 struct RegistrationScreenView: View {
-    //MARK: Variables Setup
+    //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
-    @StateObject var userRegistrationViewModel = UserRegistrationViewModel()
-    @State private var showingTermsOfUseSheet = false
-    @State private var username: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State var moving = false
-    @State var termsOfUseAccept = false
+    @StateObject private var userRegistrationViewModel = UserRegistrationViewModel()
     
-    //MARK: body
+    @State private var email: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var moving = false
+    @State private var termsOfUseAccept = false
+    @State private var showingTermsOfUseSheet = false
+    @State private var serverResponse: ServerResponse = .unknown
+    
+    //MARK: - body
     var body: some View {
         NavigationView {
             ZStack {
@@ -45,7 +48,7 @@ struct RegistrationScreenView: View {
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(Tokens.FontStyle.title3.font(weigth: .bold,
                                                                    design: .rounded))
-                            //TextFilds elements
+                            //MARK: TextFilds elements
                             VStack(spacing: Tokens.Spacing.xxxs.value){
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isLowCase: false , isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -56,13 +59,12 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isLowCase: true ,isWrong: .constant(false), text: $password)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             }
-                            //MARK: - Button and CheckBox
+                            //MARK: Button and CheckBox
                             CheckboxComponent(style: .dark,
                                               text: "Concordo com os",
                                               linkedText: "termos de uso",
                                               isChecked: $termsOfUseAccept,
                                               checkboxHandler: { isChecked in
-                                //TODO: - Handle isChecked
                                 print(isChecked)
                             }, linkedTextHandler: {
                                 showingTermsOfUseSheet.toggle()
@@ -75,15 +77,8 @@ struct RegistrationScreenView: View {
                                             text: "Criar conta!",
                                             action: {
                                 if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
-                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password)) { response in
-                                        if response == .userCreated {
-                                            
-                                        }
-                                        else {
-                                            //TODO: present error while creating account alert
-                                        }
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
                                     }
-                                }
                             })
                             .padding(.horizontal, Tokens.Spacing.xxs.value)
                         }
@@ -103,6 +98,9 @@ struct RegistrationScreenView: View {
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
+            .onChange(of: self.serverResponse, perform: { serverResponse in
+                self.serverResponse = serverResponse
+            })
         }.onAppear {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait // And making sure it stays that way
@@ -112,8 +110,10 @@ struct RegistrationScreenView: View {
     }
 }
 
+//MARK: -
+//MARK: - GlassPhormism
 struct GlassPhormism<Content>: View where Content: View {
-    //MARK: Variables Setup
+    //MARK: - Variables Setup
     
     @ViewBuilder var content: Content
     @Environment(\.sizeCategory) var dynamicTypeCategory
@@ -122,7 +122,7 @@ struct GlassPhormism<Content>: View where Content: View {
         self.content = content()
     }
     
-    //MARK: body
+    //MARK: - body
     var body: some View {
         
         if #available(iOS 15.0, *) {
