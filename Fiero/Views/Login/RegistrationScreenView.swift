@@ -104,7 +104,7 @@ struct RegistrationScreenView: View {
             })
             .ignoresSafeArea()
             .navigationBarHidden(true)
-            .onChange(of: self.serverResponse, perform: { serverResponse in
+            .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
                 
                 self.isShowingInvalidInputAlert.toggle()
