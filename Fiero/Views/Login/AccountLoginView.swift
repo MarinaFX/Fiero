@@ -16,10 +16,12 @@ struct AccountLoginView: View {
     @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
     
     @State private(set) var user: User = .init(email: "", name: "", password: "")
-    @State private var isFieldIncorrect = false
     @State private var emailText: String = ""
     @State private var passwordText: String = ""
+    @State private var isFieldIncorrect: Bool = false
     @State private var isRegistrationSheetShowing: Bool = false
+    @State private var isShowingIncorrectLoginAlert: Bool = false
+    @State private var serverResponse: ServerResponse = .unknown
     
     private let namePlaceholder: String = "Name"
     private let emailPlaceholder: String = "E-mail"
@@ -123,9 +125,17 @@ struct AccountLoginView: View {
                 .padding(smallSpacing)
             }
         }
+        .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
+            Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
+        })
         .ignoresSafeArea()
         .onChange(of: self.userLoginViewModel.user, perform: { user in
             self.user = user
+        })
+        .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
+            self.serverResponse = serverResponse
+            
+            self.isShowingIncorrectLoginAlert.toggle()
         })
         .onAppear {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
