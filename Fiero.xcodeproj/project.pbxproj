@@ -41,6 +41,7 @@
 		F888EC01287600C300445FED /* AlertStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC00287600C300445FED /* AlertStyles.swift */; };
 		F888EC032876010200445FED /* AlertComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC022876010200445FED /* AlertComponent.swift */; };
 		F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */; };
+		F8E7C76C288724750035E2CE /* UXCamSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8E7C76B288724750035E2CE /* UXCamSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E7C76C288724750035E2CE /* UXCamSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +370,9 @@
 			dependencies = (
 			);
 			name = Fiero;
+			packageProductDependencies = (
+				F8E7C76B288724750035E2CE /* UXCamSwiftUI */,
+			);
 			productName = Fiero;
 			productReference = 1B4135B528597E8900C7094A /* Fiero.app */;
 			productType = "com.apple.product-type.application";
@@ -440,6 +445,9 @@
 				Base,
 			);
 			mainGroup = 1B4135AC28597E8900C7094A;
+			packageReferences = (
+				F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */,
+			);
 			productRefGroup = 1B4135B628597E8900C7094A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -837,6 +845,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uxcam/ios-swiftui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F8E7C76B288724750035E2CE /* UXCamSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */;
+			productName = UXCamSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1B4135AD28597E8900C7094A /* Project object */;
 }
