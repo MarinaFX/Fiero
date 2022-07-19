@@ -34,9 +34,8 @@ struct CustomTextFieldView: View {
     //MARK: - Variables Setup
     var type: TextFieldType = .none
     var style: Variant = .primary
-    var placeholder: String = "Placeholder"
     var helperText: String = ""
-    
+    @State var placeholder: String
     @State private(set) var isSecure: Bool = false
     @State private(set) var isLowCase: Bool = false
     @Binding private(set) var isWrong: Bool
@@ -51,17 +50,21 @@ struct CustomTextFieldView: View {
                     if isLowCase{
                         SecureField("", text: self.$text)
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
+                                    .accessibilityLabel("Escreva \(placeholder)")
                         }
                             .autocapitalization(.none)
                     }else{
                         SecureField("", text: self.$text)
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
+                                    .accessibilityLabel("Escreva \(placeholder)")
                         }
                     }
                     
@@ -70,17 +73,21 @@ struct CustomTextFieldView: View {
                     if isLowCase{
                         TextField("", text: self.$text)
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
+                                    .accessibilityLabel("Escreva \(self.placeholder)")
                         }
                             .autocapitalization(.none)
                     }else{
                         TextField("", text: self.$text)
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
+                            .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
+                                    .accessibilityLabel("Escreva \(self.placeholder)")
                         }
                     }
                 }
@@ -93,10 +100,12 @@ struct CustomTextFieldView: View {
                         if #available(iOS 15.0, *) {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
                                 .font(Tokens.FontStyle.callout.font())
+                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
                                 .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         } else {
                             Image(systemName: self.isSecure ? "eye.slash" : "eye")
                                 .font(Tokens.FontStyle.callout.font())
+                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
                                 .accentColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                         }
                     })
@@ -108,6 +117,8 @@ struct CustomTextFieldView: View {
             if ((type == .helper) || (type == .both)) {
                 Text(self.helperText)
                     .font(Tokens.FontStyle.caption.font())
+                //TODO: Hidden helper when not call in view
+                    .accessibilityLabel("\(helperText)")
                     .foregroundColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
             }
 
@@ -117,7 +128,7 @@ struct CustomTextFieldView: View {
 
 struct CustomTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTextFieldView(type: .both, style: .secondary, placeholder: "fodase", helperText: "CANSADONA CANSADONA CAN SA DO NA.", isSecure: false, isLowCase: true ,isWrong: .constant(true), text: .constant("flemis"))
+        CustomTextFieldView(type: .both, style: .secondary, helperText: "CANSADONA CANSADONA CAN SA DO NA.", placeholder: "fodase", isSecure: false, isLowCase: true ,isWrong: .constant(true), text: .constant("flemis"))
             .padding(Tokens.Spacing.xs.value)
     }
 }

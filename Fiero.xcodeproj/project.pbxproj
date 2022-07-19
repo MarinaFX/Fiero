@@ -433,9 +433,10 @@
 			};
 			buildConfigurationList = 1B4135B028597E8900C7094A /* Build configuration list for PBXProject "Fiero" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				"pt-BR",
 				en,
 				Base,
 			);
