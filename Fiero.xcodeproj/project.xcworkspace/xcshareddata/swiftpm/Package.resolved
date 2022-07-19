@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uxcam/ios-sdk",
+      "state" : {
+        "revision" : "6e9529c07a66e0b9f1f0cdab0c4772432240ae06",
+        "version" : "3.4.2"
+      }
+    },
+    {
+      "identity" : "ios-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uxcam/ios-swiftui",
+      "state" : {
+        "revision" : "b44125672fbc02cd88eef59c5a4ca441bc9dcbc9",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
