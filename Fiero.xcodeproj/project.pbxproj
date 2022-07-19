@@ -15,6 +15,8 @@
 		1B0A0293288743C800C4A421 /* QuickChallengeParticipantAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* QuickChallengeParticipantAmountView.swift */; };
 		1B0A0295288748BD00C4A421 /* ChallengeParticipantAmountCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0294288748BD00C4A421 /* ChallengeParticipantAmountCardView.swift */; };
 		1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02972887498B00C4A421 /* CustomProgressBar.swift */; };
+		1B0A029A2887628400C4A421 /* QuickChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QuickChallengeWinRulesView.swift */; };
+		1B0A029C2887680000C4A421 /* QuickChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* QuickChallengeCreatedView.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
@@ -77,6 +79,8 @@
 		1B0A0292288743C800C4A421 /* QuickChallengeParticipantAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeParticipantAmountView.swift; sourceTree = "<group>"; };
 		1B0A0294288748BD00C4A421 /* ChallengeParticipantAmountCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeParticipantAmountCardView.swift; sourceTree = "<group>"; };
 		1B0A02972887498B00C4A421 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
+		1B0A02992887628400C4A421 /* QuickChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B0A029B2887680000C4A421 /* QuickChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeCreatedView.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				1B0A028928871B6A00C4A421 /* QuickChallengeCreationView.swift */,
 				1B0A028B28871BE700C4A421 /* QuickChallengeNamingView.swift */,
 				1B0A0292288743C800C4A421 /* QuickChallengeParticipantAmountView.swift */,
+				1B0A02992887628400C4A421 /* QuickChallengeWinRulesView.swift */,
+				1B0A029B2887680000C4A421 /* QuickChallengeCreatedView.swift */,
 			);
 			path = Quick;
 			sourceTree = "<group>";
@@ -540,6 +546,7 @@
 			files = (
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				1B0A0293288743C800C4A421 /* QuickChallengeParticipantAmountView.swift in Sources */,
+				1B0A029C2887680000C4A421 /* QuickChallengeCreatedView.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
 				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
@@ -548,6 +555,7 @@
 				1B0A02822885DEA400C4A421 /* ChallengeCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
+				1B0A029A2887628400C4A421 /* QuickChallengeWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */,

@@ -11,6 +11,8 @@ import SwiftUI
 struct PermanentKeyboard: UIViewRepresentable {
     @Binding var text: String
     
+    var keyboardType: UIKeyboardType = .default
+    
     typealias UIViewType = UITextField
     
     class Coordinator: NSObject, UITextFieldDelegate {
@@ -27,12 +29,11 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2000))
-        
-        //textField.borderStyle = UITextField.BorderStyle.roundedRect
-        
-//        textField.tintColor = .
-        textField.textColor = UIColor(cgColor: Tokens.Colors.Neutral.Low.pure.value.cgColor!)
+                
+        textField.textColor = UIColor(cgColor: Tokens.Colors.Neutral.High.pure.value.cgColor!)
         textField.layer.backgroundColor = UIColor.clear.cgColor
+        
+        textField.keyboardType = self.keyboardType
         
         textField.delegate = context.coordinator
         textField.addDoneButtonOnKeyboard()

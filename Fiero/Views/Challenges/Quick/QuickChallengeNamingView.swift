@@ -24,7 +24,7 @@ struct QuickChallengeNamingView: View {
                 .font(Tokens.FontStyle.callout.font())
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             
-            PermanentKeyboard(text: self.$challengeName)
+            PermanentKeyboard(text: self.$challengeName, keyboardType: .default)
                 .frame(height: UIScreen.main.bounds.height * 0.5)
         }
         .padding(.top, Tokens.Spacing.lg.value)
