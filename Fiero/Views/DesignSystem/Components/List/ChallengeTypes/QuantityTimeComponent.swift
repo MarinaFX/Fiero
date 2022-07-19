@@ -40,6 +40,9 @@ struct QuantityTimeComponent: View {
 
 struct QuantityTimeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        QuantityTimeComponent(style: .quantity, currentScore: "200", limitScore: "500")
+        ZStack {
+            Color.black
+            QuantityTimeComponent(style: .quantity, currentScore: "200", limitScore: "500")
+        }
     }
 }
