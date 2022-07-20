@@ -1,5 +1,5 @@
 //
-//  QuickChallengeParticipantAmountView.swift
+//  ChallengeParticipantsSelectionView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuickChallengeParticipantAmountView: View {
+struct ChallengeParticipantsSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -22,13 +22,13 @@ struct QuickChallengeParticipantAmountView: View {
             Spacer()
             
             TabView {
-                ChallengeParticipantAmountCardView(amount: "2")
+                ChallengeParticipantsSelectionCardView(amount: "2")
                     .padding(Tokens.Spacing.sm.value)
                 
-                ChallengeParticipantAmountCardView(amount: "3")
+                ChallengeParticipantsSelectionCardView(amount: "3")
                     .padding(Tokens.Spacing.sm.value)
                 
-                ChallengeParticipantAmountCardView(amount: "4")
+                ChallengeParticipantsSelectionCardView(amount: "4")
                     .padding(Tokens.Spacing.sm.value)
                 
             }
@@ -65,8 +65,8 @@ struct QuickChallengeParticipantAmountView: View {
     }
 }
 
-struct QuickChallengeParticipantAmountView_Previews: PreviewProvider {
+struct ChallengeParticipantsSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickChallengeParticipantAmountView()
+        ChallengeParticipantsSelectionView()
     }
 }

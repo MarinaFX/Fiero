@@ -1,5 +1,5 @@
 //
-//  QuickChallengeCreatedView.swift
+//  ChallengeCreatedView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuickChallengeCreatedView: View {
+struct ChallengeCreatedView: View {
     var body: some View {
         VStack {
             Spacer()
@@ -43,6 +43,6 @@ struct QuickChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickChallengeCreatedView()
+        ChallengeCreatedView()
     }
 }

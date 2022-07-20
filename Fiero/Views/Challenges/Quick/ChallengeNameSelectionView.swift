@@ -1,5 +1,5 @@
 //
-//  QuickChallengeNamingView.swift
+//  ChallengeNameSelectionView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuickChallengeNamingView: View {
+struct ChallengeNameSelectionView: View {
     @State var challengeName: String = ""
     
     var body: some View {
@@ -42,6 +42,6 @@ struct QuickChallengeNamingView: View {
 
 struct QuickChallengeNamingView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickChallengeNamingView()
+        ChallengeNameSelectionView()
     }
 }

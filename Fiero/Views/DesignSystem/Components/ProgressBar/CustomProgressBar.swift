@@ -15,17 +15,21 @@ struct CustomProgressBar: View {
         case third
     }
     
-    @State var currentProgress: CGFloat = 0.0
+    @State private var currentProgress: CGFloat = 0.0
     @State var currentPage: CurrentPage = .zero
+    
+    var primaryColor: Color = Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1)
+    var secondaryColor: Color = Color(red: 1, green: 0.722, blue: 0, opacity: 1)
+    
     var body: some View {
         VStack {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(.yellow)
+                    .foregroundColor(secondaryColor)
                     .frame(width: 300, height: 10)
                 
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(.blue)
+                    .foregroundColor(primaryColor)
                     .frame(width: 300*currentProgress, height: 10)
             }
         }

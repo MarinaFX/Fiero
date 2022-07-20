@@ -1,5 +1,5 @@
 //
-//  ChallengeParticipantAmountCardView.swift
+//  ChallengeParticipantsSelectionCardView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeParticipantAmountCardView: View {
+struct ChallengeParticipantsSelectionCardView: View {
     @State var amount: String = "0"
     
     var body: some View {
@@ -24,9 +24,9 @@ struct ChallengeParticipantAmountCardView: View {
     }
 }
 
-struct ChallengeParticipantAmountCardView_Previews: PreviewProvider {
+struct ChallengeParticipantsSelectionCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeParticipantAmountCardView()
+        ChallengeParticipantsSelectionCardView()
             .padding(Tokens.Spacing.sm.value)
     }
 }

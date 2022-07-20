@@ -1,5 +1,5 @@
 //
-//  QuickChallengeWinRulesView.swift
+//  BestOfChallengeWinRulesView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuickChallengeWinRulesView: View {
+struct BestOfChallengeWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var winThreshold: String = ""
@@ -61,8 +61,8 @@ struct QuickChallengeWinRulesView: View {
     }
 }
 
-struct QuickChallengeWinRulesView_Previews: PreviewProvider {
+struct BestOfChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickChallengeWinRulesView()
+        BestOfChallengeWinRulesView()
     }
 }

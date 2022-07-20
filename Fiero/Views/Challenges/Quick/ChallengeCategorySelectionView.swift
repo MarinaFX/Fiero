@@ -1,5 +1,5 @@
 //
-//  QuickChallengeCategoryView.swift
+//  ChallengeCategorySelectionView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 18/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuickChallengeCategoryView: View {
+struct ChallengeCategorySelectionView: View {
     
     var body: some View {
         VStack {
@@ -19,13 +19,13 @@ struct QuickChallengeCategoryView: View {
             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
             TabView {
-                ChallengeCardView(title: "Tempo", subtitle: "Vence quem fizer mais rápido.")
+                ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer mais rápido.")
                     .padding(.horizontal, Tokens.Spacing.sm.value)
                 
-                ChallengeCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes.")
+                ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes.")
                     .padding(.horizontal, Tokens.Spacing.sm.value)
                 
-                ChallengeCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
+                ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
                     .padding(.horizontal, Tokens.Spacing.sm.value)
                 
             }
@@ -48,6 +48,6 @@ struct QuickChallengeCategoryView: View {
 
 struct QuickChallengeCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        QuickChallengeCategoryView()
+        ChallengeCategorySelectionView()
     }
 }

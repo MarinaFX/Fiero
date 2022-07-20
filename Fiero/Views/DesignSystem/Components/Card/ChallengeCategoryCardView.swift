@@ -1,5 +1,5 @@
 //
-//  ChallengeCardView.swift
+//  ChallengeCategoryCardView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 18/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeCardView: View {
+struct ChallengeCategoryCardView: View {
     var title: String
     var subtitle: String
     
@@ -33,14 +33,14 @@ struct ChallengeCardView: View {
     }
 }
 
-struct ChallengeCardView_Previews: PreviewProvider {
+struct ChallengeCategoryCardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Text("Algum texto em large title")
                 .foregroundColor(.white)
                 .font(Tokens.FontStyle.largeTitle.font())
 
-            ChallengeCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes")
+            ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes")
                 .padding(.horizontal, Tokens.Spacing.sm.value)
         }
         .background(Tokens.Colors.Background.dark.value)
