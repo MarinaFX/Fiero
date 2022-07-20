@@ -22,11 +22,14 @@ struct RegistrationScreenView: View {
     @State private var hasAcceptedTermsOfUse = false
     @State private var isShowingTermsOfUseSheet = false
     @State private var isShowingInvalidInputAlert: Bool = false
+    @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
     //MARK: - body
     var body: some View {
-        NavigationView {
+        if isLoginScreenSheetShowing{
+            AccountLoginView()
+        }else{
             ZStack {
                 if #available(iOS 15.0, *) {
                     Image("LoginBackground")
@@ -80,7 +83,7 @@ struct RegistrationScreenView: View {
                                             action: {
                                 if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
                                     self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
-                                    }
+                                }
                             })
                             .padding(.horizontal, Tokens.Spacing.xxs.value)
                         }
@@ -90,6 +93,7 @@ struct RegistrationScreenView: View {
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                                 .font(Tokens.FontStyle.callout.font())
                             Button("Faça Login!") {
+                                isLoginScreenSheetShowing.toggle()
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -110,13 +114,12 @@ struct RegistrationScreenView: View {
                 
                 self.isShowingInvalidInputAlert.toggle()
             })
-        }
-        .onAppear {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-            AppDelegate.orientationLock = .portrait // And making sure it stays that way
-        }
-        .onDisappear {
-            AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+            .onAppear {
+                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+                AppDelegate.orientationLock = .portrait // And making sure it stays that way
+            }.onDisappear {
+                AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+            }
         }
     }
 }
