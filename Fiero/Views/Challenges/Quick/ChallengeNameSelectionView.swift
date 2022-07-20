@@ -13,12 +13,13 @@ struct ChallengeNameSelectionView: View {
     var body: some View {
         VStack {
             CustomProgressBar(currentPage: .first)
-                //.padding()
+                .padding()
             
             Text("Nomeie seu \ndesafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                .padding(.top)
             
             Text("de quantidade")
                 .font(Tokens.FontStyle.callout.font())
@@ -27,16 +28,7 @@ struct ChallengeNameSelectionView: View {
             PermanentKeyboard(text: self.$challengeName, keyboardType: .default)
                 .frame(height: UIScreen.main.bounds.height * 0.5)
         }
-        .padding(.top, Tokens.Spacing.lg.value)
-        .frame(
-              minWidth: 0,
-              maxWidth: .infinity,
-              minHeight: 0,
-              maxHeight: .infinity,
-              alignment: .top
-            )
-        .background(Tokens.Colors.Background.dark.value)
-        .ignoresSafeArea()
+        .makeDarkModeFullScreen()
     }
 }
 

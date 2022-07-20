@@ -14,8 +14,13 @@
 		1B0A0293288743C800C4A421 /* ChallengeParticipantsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* ChallengeParticipantsSelectionView.swift */; };
 		1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */; };
 		1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02972887498B00C4A421 /* CustomProgressBar.swift */; };
-		1B0A029A2887628400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* BestOfChallengeWinRulesView.swift */; };
+		1B0A029A2887628400C4A421 /* QuantityChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QuantityChallengeWinRulesView.swift */; };
 		1B0A029C2887680000C4A421 /* ChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* ChallengeCreatedView.swift */; };
+		1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */; };
+		1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */; };
+		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
+		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
+		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
@@ -77,8 +82,13 @@
 		1B0A0292288743C800C4A421 /* ChallengeParticipantsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeParticipantsSelectionView.swift; sourceTree = "<group>"; };
 		1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeParticipantsSelectionCardView.swift; sourceTree = "<group>"; };
 		1B0A02972887498B00C4A421 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
-		1B0A02992887628400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B0A02992887628400C4A421 /* QuantityChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityChallengeWinRulesView.swift; sourceTree = "<group>"; };
 		1B0A029B2887680000C4A421 /* ChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCreatedView.swift; sourceTree = "<group>"; };
+		1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeMetricSelectionCardView.swift; sourceTree = "<group>"; };
+		1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
+		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
+		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -170,6 +180,7 @@
 			children = (
 				1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */,
 				1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */,
+				1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -185,6 +196,7 @@
 		1B0A029D2887AC3B00C4A421 /* Quantity */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A02992887628400C4A421 /* QuantityChallengeWinRulesView.swift */,
 			);
 			path = Quantity;
 			sourceTree = "<group>";
@@ -192,6 +204,8 @@
 		1B0A029E2887AC4A00C4A421 /* Time */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */,
+				1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -199,9 +213,17 @@
 		1B0A029F2887ACD400C4A421 /* BestOf */ = {
 			isa = PBXGroup;
 			children = (
-				1B0A02992887628400C4A421 /* BestOfChallengeWinRulesView.swift */,
+				1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */,
 			);
 			path = BestOf;
+			sourceTree = "<group>";
+		};
+		1B0A02A62887CAAF00C4A421 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		1B3ED07528809D8100E1538B /* Enums */ = {
@@ -327,6 +349,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
 				1B0A02832885EAF200C4A421 /* Card */,
 				F85EE0162881D2DF00264114 /* List */,
@@ -568,6 +591,7 @@
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				1B0A0293288743C800C4A421 /* ChallengeParticipantsSelectionView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* ChallengeCreatedView.swift in Sources */,
+				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
 				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
@@ -576,24 +600,28 @@
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
-				1B0A029A2887628400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
+				1B0A029A2887628400C4A421 /* QuantityChallengeWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */,
+				1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */,
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* ChallengeNameSelectionView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
 				1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */,
+				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
 				1B0A02852885F03100C4A421 /* ChallengeCategorySelectionView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
+				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
+				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
