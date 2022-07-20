@@ -10,6 +10,7 @@ import SwiftUI
 struct TimePickerSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var currentDate = Date()
     @State private(set) var hourSelection: Int
     @State private(set) var minuteSelection: Int
     @State private(set) var secondSelection: Int
@@ -34,6 +35,13 @@ struct TimePickerSelectionView: View {
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             CustomMultiWheelPicker(hourSelection: self.$hourSelection, minuteSelection: self.$minuteSelection, secondSelection: self.$secondSelection)
+//            Spacer()
+//
+//            DatePicker("", selection: $currentDate, displayedComponents: .hourAndMinute)
+//                .datePickerStyle(.wheel)
+//                .environment(\.colorScheme, .dark)
+//
+//            Spacer()
             
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()

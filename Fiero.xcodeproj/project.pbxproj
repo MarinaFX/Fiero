@@ -41,6 +41,8 @@
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */; };
+		1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCType.swift */; };
+		1B8CD34928889F1000D2F703 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34828889F1000D2F703 /* Team.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */; };
 		1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */; };
@@ -120,6 +122,8 @@
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
 		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
+		1B8CD34628887ADE00D2F703 /* QCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCType.swift; sourceTree = "<group>"; };
+		1B8CD34828889F1000D2F703 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 			children = (
 				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
 				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
+				1B8CD34628887ADE00D2F703 /* QCType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				1B9092A82878DB7C0039EBB7 /* UserResponse.swift */,
 				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
 				1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */,
+				1B8CD34828889F1000D2F703 /* Team.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -661,6 +667,7 @@
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
+				1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
@@ -669,6 +676,7 @@
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
+				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
@@ -837,7 +845,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = KY3S643HND;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -867,7 +875,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = KY3S643HND;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

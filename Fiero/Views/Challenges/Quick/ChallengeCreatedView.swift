@@ -12,6 +12,23 @@ struct ChallengeCreatedView: View {
     @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @State var serverResponse: ServerResponse = .unknown
     
+    var primaryColor: Color
+    var secondaryColor: Color
+    var challengeType: QCType
+    var challengeName: String
+    var challengeParticipants: Int
+    var goal: String
+    var goalMeasure: String {
+        switch challengeType {
+            case .quickest:
+                return "unity"
+            case .highest(let measure):
+                return measure ?? "minutes"
+            case .bestOf:
+                return "rounds"
+        }
+    }
+
     var body: some View {
         VStack {
             Spacer()
@@ -26,7 +43,10 @@ struct ChallengeCreatedView: View {
             Spacer()
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Pronto!", action: {
-                self.quickChallengeViewModel.createQuickChallenge(name: "", challengeType: .quickest, goal: 0, goalMeasure: "", userId: "")
+                let defaults = UserDefaults.standard
+                let userID = defaults.string(forKey: "userID")!
+                
+                self.quickChallengeViewModel.createQuickChallenge(name: challengeName, challengeType: .quickest, goal: Int(self.goal) ?? 0, goalMeasure: self.goalMeasure, userId: userID)
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -45,11 +65,12 @@ struct ChallengeCreatedView: View {
             )
         .background(Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1))
         .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
 }
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeCreatedView()
+        ChallengeCreatedView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0, goal: "")
     }
 }

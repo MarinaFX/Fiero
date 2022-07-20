@@ -27,7 +27,6 @@ public func makeHTTPRequest
         authToken: String
     )
     -> URLRequest {
-    //let requestBody = try? JSONSerialization.data(withJSONObject: json)
     let requestBody = json.data(using: .utf8)!
         
     var urlComponents = URLComponents()

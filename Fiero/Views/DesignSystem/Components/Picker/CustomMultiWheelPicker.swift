@@ -20,19 +20,19 @@ struct CustomMultiWheelPicker: View {
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
-                Picker(selection: self.$hourSelection, content: {
-                    ForEach(0 ..< self.hours.count, id: \.self) { index in
-                        Text("\(self.hours[index]) h")
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .tag(index)
-                    }
-                }, label: {
-                    Text("Hours")
-                })
-                .pickerStyle(.wheel)
-                .frame(width: geometry.size.width/3, height: geometry.size.height, alignment: .center)
-                .compositingGroup()
-                .clipped()
+//                Picker(selection: self.$hourSelection, content: {
+//                    ForEach(0 ..< self.hours.count, id: \.self) { index in
+//                        Text("\(self.hours[index]) h")
+//                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+//                            .tag(index)
+//                    }
+//                }, label: {
+//                    Text("Hours")
+//                })
+//                .pickerStyle(.wheel)
+//                .frame(width: geometry.size.width/3, height: geometry.size.height, alignment: .center)
+//                .compositingGroup()
+//                .clipped()
                 
                 Picker(selection: self.$minuteSelection, content: {
                     ForEach(0 ..< self.minutes.count, id: \.self) { index in
@@ -44,8 +44,10 @@ struct CustomMultiWheelPicker: View {
                     Text("Minutes")
                 })
                 .pickerStyle(.wheel)
-                .frame(width: geometry.size.width/3, height: geometry.size.height, alignment: .center)
-                .compositingGroup()
+//                .frame(width: geometry.size.width/2)
+//                .frame(width: geometry.size.width/2, height: geometry.size.height, alignment: .center)
+//                .compositingGroup()
+//                .fixedSize()
                 .clipped()
                 
                 Picker(selection: self.$secondSelection, content: {
@@ -58,9 +60,14 @@ struct CustomMultiWheelPicker: View {
                     Text("Seconds")
                 })
                 .pickerStyle(.wheel)
-                .frame(width: geometry.size.width/3, height: geometry.size.height, alignment: .center)
-                .compositingGroup()
+                .frame(maxWidth: .infinity, alignment: .leading)
+//                .frame(width: geometry.size.width/2)
+//                .frame(width: geometry.size.width/2, height: geometry.size.height, alignment: .center)
+//                .compositingGroup()
+//                .fixedSize()
                 .clipped()
+
+                
             }
             .makeDarkModeFullScreen()
         }

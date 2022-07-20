@@ -12,6 +12,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     @Binding var text: String
     
     var keyboardType: UIKeyboardType = .default
+    var onCommit: () -> Void = {}
     
     typealias UIViewType = UITextField
     
@@ -20,6 +21,13 @@ struct PermanentKeyboard: UIViewRepresentable {
         
         init(_ parent: PermanentKeyboard) {
             self.parent = parent
+        }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            parent.didCommit()
+            
+            return true
         }
     }
     
@@ -34,6 +42,10 @@ struct PermanentKeyboard: UIViewRepresentable {
         textField.layer.backgroundColor = UIColor.clear.cgColor
         
         textField.keyboardType = self.keyboardType
+        textField.returnKeyType = .done
+        
+        textField.text = text
+        print(text)
         
         textField.delegate = context.coordinator
         textField.addDoneButtonOnKeyboard()
@@ -43,6 +55,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
+        print(text)
         
         if !uiView.isFirstResponder {
             uiView.becomeFirstResponder()
@@ -50,6 +63,10 @@ struct PermanentKeyboard: UIViewRepresentable {
         
         uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    }
+    
+    func didCommit() {
+        onCommit()
     }
 }
 
@@ -59,7 +76,7 @@ extension UITextField {
         doneToolbar.barStyle = .default
         
         let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.didTapDoneButton))
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .done, target: self, action: #selector(self.didTapDismissButton))
         
         let items = [flexSpace, done]
         doneToolbar.items = items
@@ -68,7 +85,14 @@ extension UITextField {
         self.inputAccessoryView = doneToolbar
     }
     
-    @objc func didTapDoneButton() {
+    @objc func didTapDismissButton() {
         self.resignFirstResponder()
+    }
+}
+
+extension String {
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
     }
 }

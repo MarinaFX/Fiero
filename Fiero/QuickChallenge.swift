@@ -9,12 +9,13 @@ import Foundation
 
 struct QuickChallenge: Decodable, Encodable, Equatable {
     
-    var id: String?
-    var ownerID: String?
+    var id: String
+    var ownerID: String
     var name: String
-    var invitationCode: String?
+    var invitationCode: String
     var type: String
     var goal: Int
     var goalMeasure: String
-    var finished: Bool?
+    var finished: Bool
+    var teams: [Team]
 }

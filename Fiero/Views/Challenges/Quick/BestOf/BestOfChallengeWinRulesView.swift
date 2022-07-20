@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct BestOfChallengeWinRulesView: View {
-    private var primaryColor: Color = Color(red: 0.278, green: 0.758, blue: 0.557, opacity: 1)
     
-    private var secondaryColor: Color = Color(red: 0.173, green: 0.157, blue: 0.89, opacity: 1)
+    @State var goalMeasure: Int = 3
     
+    var primaryColor: Color
+    var secondaryColor: Color
+    var challengeType: QCType
+    var challengeName: String
+
     var body: some View {
         VStack {
             CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
@@ -44,6 +48,6 @@ struct BestOfChallengeWinRulesView: View {
 
 struct BestOfChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        BestOfChallengeWinRulesView()
+        BestOfChallengeWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .bestOf, challengeName: "")
     }
 }

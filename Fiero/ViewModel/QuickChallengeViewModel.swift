@@ -13,23 +13,6 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var serverResponse: ServerResponse
     
-    enum QCType: CustomStringConvertible {
-        case quickest
-        case highest
-        case bestOf
-        
-        var description: String {
-            switch self {
-                case .quickest:
-                    return "quickest"
-                case .highest:
-                    return "highest"
-                case .bestOf:
-                    return "bestof"
-            }
-        }
-    }
-    
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/quickChallenge/create"
     
@@ -46,24 +29,27 @@ class QuickChallengeViewModel: ObservableObject {
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, userId: String) {
 //        let challengeJson = """
 //        {
-//            "name" : \(name),
-//            "type" : \(challengeType.description),
-//            "goal" : \(goal),
-//            "goalMeasure" : \(goalMeasure),
-//            "userId" : \(userId)
+//            "name" : "Third Challenge by Combine with token from user defaults",
+//            "type" : "quickest",
+//            "goal" : 115,
+//            "goalMeasure" : "unity",
+//            "userId" : "1c9be140-0504-4e88-9e06-cf167dc06718"
 //        }
 //        """
+
         let challengeJson = """
         {
-            "name" : "Second Challenge by Combine",
-            "type" : "quickest",
-            "goal" : 115,
-            "goalMeasure" : "unity",
-            "userId" : "1c9be140-0504-4e88-9e06-cf167dc06718"
+            "name" : \(name),
+            "type" : \(challengeType.description),
+            "goal" : \(goal),
+            "goalMeasure" : \(goalMeasure),
+            "userId" : \(userId)
         }
         """
+        let userDefaults = UserDefaults.standard
+        let userToken = userDefaults.string(forKey: "AuthToken")!
         
-        let request = makeHTTPRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFjOWJlMTQwLTA1MDQtNGU4OC05ZTA2LWNmMTY3ZGMwNjcxOCIsImlhdCI6MTY1ODMwOTA1OCwiZXhwIjoxNjU4MzEwODU4fQ.EHFIUdUgCB6tLA3xHy3Y5NvJ3lg0G6-h_3Q25LBoQ_o")
+        let request = makeHTTPRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
         
         self.client.perform(for: request)
             .tryMap({ $0.response })
@@ -86,3 +72,29 @@ class QuickChallengeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 }
+
+/**
+ export enum QuickChallengeTypes {
+     quickest = 'quickest',
+     highest = 'highest',
+     bestof = 'bestof'
+ }
+
+ export enum QuickChallengeQuickestMeasures {
+     unity = 'unity'
+ }
+
+ export enum QuickChallengeHighestMeasures {
+     minutes = 'minutes',
+     seconds = 'seconds'
+ }
+
+ export enum QuickChallengeBestofMeasures {
+     rounds = 'rounds'
+ }
+
+ export enum QuickChallengeBestofGoals {
+     five = 5,
+     three = 3
+ }
+ */

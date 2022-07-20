@@ -10,8 +10,15 @@ import SwiftUI
 struct QuantityChallengeWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @State var winThreshold: String = ""
+    @State var goal: String = ""
+    @State var pushNextView: Bool = false
     
+    var primaryColor: Color
+    var secondaryColor: Color
+    var challengeType: QCType
+    var challengeName: String
+    var challengeParticipants: Int
+
     var body: some View {
         VStack {
             CustomProgressBar(currentPage: .third)
@@ -29,7 +36,7 @@ struct QuantityChallengeWinRulesView: View {
             
             Spacer()
             
-            PermanentKeyboard(text: self.$winThreshold, keyboardType: .decimalPad)
+            PermanentKeyboard(text: self.$goal, keyboardType: .decimalPad)
             
             Spacer()
             
@@ -42,17 +49,22 @@ struct QuantityChallengeWinRulesView: View {
             })
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Começar!", action: {
-                
+                self.pushNextView.toggle()
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            
+            NavigationLink("", isActive: self.$pushNextView) {
+                ChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
+            }
         }
         .makeDarkModeFullScreen()
+        .navigationBarHidden(true)
     }
 }
 
 struct QuantityChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        QuantityChallengeWinRulesView()
+        QuantityChallengeWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0)
     }
 }
