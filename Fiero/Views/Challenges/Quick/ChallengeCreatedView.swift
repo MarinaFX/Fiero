@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ChallengeCreatedView: View {
+    
+    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+    @State var serverResponse: ServerResponse = .unknown
+    
     var body: some View {
         VStack {
             Spacer()
@@ -22,11 +26,14 @@ struct ChallengeCreatedView: View {
             Spacer()
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Pronto!", action: {
-                
+                self.quickChallengeViewModel.createQuickChallenge(name: "", challengeType: .quickest, goal: 0, goalMeasure: "", userId: "")
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
         }
+        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
+            self.serverResponse = serverResponse
+        })
         .padding(.top, Tokens.Spacing.lg.value)
         .padding(.bottom, Tokens.Spacing.xxs.value)
         .frame(
