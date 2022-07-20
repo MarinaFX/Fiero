@@ -29,6 +29,7 @@ struct ButtonComponent: View {
                 .frame(maxWidth: .infinity)
                 .background(style.backgroundColor)
                 .cornerRadius(style.borderRadius)
+                .accessibilityLabel(text)
         })
         .disabled(!style.isEnabled)
     }

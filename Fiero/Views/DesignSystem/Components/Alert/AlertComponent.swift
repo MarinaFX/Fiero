@@ -19,11 +19,13 @@ struct AlertComponent: View {
                 .foregroundColor(style.fontColor)
                 .padding(.vertical, style.padding)
                 .padding(.leading, style.padding)
+                .accessibilityLabel("ícone de alerta")
             Text(text)
                 .font(style.font)
                 .foregroundColor(style.fontColor)
                 .padding(.vertical, style.padding)
                 .padding(.trailing, style.padding)
+                .accessibilityLabel("Alerta: \(text)")
                 
         }
         .background(style.backgroundColor)
