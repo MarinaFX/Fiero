@@ -136,6 +136,7 @@ enum Tokens {
                 case light
                 case dark
                 
+                
                 var value: Color {
                     switch self {
                         case .pure:
@@ -143,7 +144,7 @@ enum Tokens {
                         case .light:
                             return Color(red: 0.741, green: 0.745, blue: 0.776, opacity: 1)
                         case .dark:
-                            return Color(red: 0.203, green: 0.204, blue: 0.213, opacity: 1)
+                            return Color(red: 0.141, green: 0.141, blue: 0.141, opacity: 1)
                     }
                 }
             }
@@ -175,6 +176,21 @@ enum Tokens {
                 switch self {
                     case .wrong:
                         return Color(red: 1, green: 0, blue: 0, opacity: 1)
+                }
+            }
+        }
+        
+        //MARK: - Colors | Background
+        enum Background {
+            case light
+            case dark
+            
+            var value: Color {
+                switch self {
+                    case .light:
+                        return Color(red: 1, green: 1, blue: 1, opacity: 1)
+                    case .dark:
+                        return Color(red: 0.096, green: 0.096, blue: 0.096, opacity: 1)
                 }
             }
         }
