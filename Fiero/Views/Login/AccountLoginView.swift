@@ -50,98 +50,102 @@ struct AccountLoginView: View {
     
     //MARK: body View
     var body: some View {
-        ZStack {
-            if #available(iOS 15.0, *) {
-                Image("LoginBackground")
-                    .resizable()
-            } else {
-                if dynamicTypeCategory > .extraExtraLarge {
+        if isRegistrationSheetShowing{
+            RegistrationScreenView()
+        }else{
+            ZStack {
+                if #available(iOS 15.0, *) {
                     Image("LoginBackground")
                         .resizable()
-                        .saturation(0.8)
-                        .blur(radius: 10, opaque: true)
                 } else {
-                    Image("LoginBackground")
-                        .resizable()
-                }
-            }
-            
-            //MARK: Blurred View
-            BlurredSquaredView(usernameText: self.$emailText) {
-                VStack {
-                    Text("Boas vindas, desafiante")
-                        .font(titleFont)
-                        .foregroundColor(.white)
-                    //MARK: TextFields
-                    CustomTextFieldView(type: .none,
-                                        style: .primary,
-                                        placeholder: emailPlaceholder,
-                                        isSecure: false,
-                                        isLowCase: true ,
-                                        isWrong: .constant(false),
-                                        text: self.$emailText)
-                        .padding(nanoSpacing)
-                    
-                    CustomTextFieldView(type: .icon,
-                                        style: .primary,
-                                        placeholder: passwordPlaceholder,
-                                        isSecure: true,
-                                        isLowCase: true ,
-                                        isWrong: .constant(false),
-                                        text: self.$passwordText)
-                        .padding(nanoSpacing)
-                    //MARK: Buttons
-                    Button(action: {
-                        //TODO: create a link to Remember Password Screen (doesn't exist yet)
-                    }, label: {
-                        Text("Esqueceu sua senha?")
-                            .font(textFont)
-                            .foregroundColor(color)
-                            .underline()
-                    })
-                    .padding(.vertical, smallSpacing)
-                    
-                    ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Fazer login!",
-                                    action: {
-                        self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
-                    })
-                    
-                    HStack {
-                        Text("Ainda não tem uma conta?")
-                            .font(textFont)
-                            .foregroundColor(color)
-                        
-                        Button(action: {
-                            self.isRegistrationSheetShowing.toggle()
-                        }, label: {
-                            Text("Cadastre-se!")
-                                .font(textButtonFont)
-                                .foregroundColor(color)
-                        })
+                    if dynamicTypeCategory > .extraExtraLarge {
+                        Image("LoginBackground")
+                            .resizable()
+                            .saturation(0.8)
+                            .blur(radius: 10, opaque: true)
+                    } else {
+                        Image("LoginBackground")
+                            .resizable()
                     }
-                    .padding(.top, smallSpacing)
                 }
-                .padding(smallSpacing)
+                
+                //MARK: Blurred View
+                BlurredSquaredView(usernameText: self.$emailText) {
+                    VStack {
+                        Text("Boas vindas, desafiante")
+                            .font(titleFont)
+                            .foregroundColor(.white)
+                        //MARK: TextFields
+                        CustomTextFieldView(type: .none,
+                                            style: .primary,
+                                            placeholder: emailPlaceholder,
+                                            isSecure: false,
+                                            isLowCase: true ,
+                                            isWrong: .constant(false),
+                                            text: self.$emailText)
+                            .padding(nanoSpacing)
+                        
+                        CustomTextFieldView(type: .icon,
+                                            style: .primary,
+                                            placeholder: passwordPlaceholder,
+                                            isSecure: true,
+                                            isLowCase: true ,
+                                            isWrong: .constant(false),
+                                            text: self.$passwordText)
+                            .padding(nanoSpacing)
+                        //MARK: Buttons
+                        Button(action: {
+                            //TODO: create a link to Remember Password Screen (doesn't exist yet)
+                        }, label: {
+                            Text("Esqueceu sua senha?")
+                                .font(textFont)
+                                .foregroundColor(color)
+                                .underline()
+                        })
+                        .padding(.vertical, smallSpacing)
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "Fazer login!",
+                                        action: {
+                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                        })
+                        
+                        HStack {
+                            Text("Ainda não tem uma conta?")
+                                .font(textFont)
+                                .foregroundColor(color)
+                            
+                            Button(action: {
+                                self.isRegistrationSheetShowing.toggle()
+                            }, label: {
+                                Text("Cadastre-se!")
+                                    .font(textButtonFont)
+                                    .foregroundColor(color)
+                            })
+                        }
+                        .padding(.top, smallSpacing)
+                    }
+                    .padding(smallSpacing)
+                }
             }
-        }
-        .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
-            Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
-        })
-        .ignoresSafeArea()
-        .onChange(of: self.userLoginViewModel.user, perform: { user in
-            self.user = user
-        })
-        .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            
-            self.isShowingIncorrectLoginAlert.toggle()
-        })
-        .onAppear {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-            AppDelegate.orientationLock = .portrait // And making sure it stays that way
-        }.onDisappear {
-            AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+            .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
+                Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
+            })
+            .ignoresSafeArea()
+            .onChange(of: self.userLoginViewModel.user, perform: { user in
+                self.user = user
+            })
+            .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
+                self.serverResponse = serverResponse
+                
+                self.isShowingIncorrectLoginAlert.toggle()
+            })
+            .onAppear {
+                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+                AppDelegate.orientationLock = .portrait // And making sure it stays that way
+            }.onDisappear {
+                AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+            }
         }
     }
 }
