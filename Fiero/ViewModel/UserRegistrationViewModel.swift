@@ -13,7 +13,7 @@ class UserRegistrationViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var serverResponse: ServerResponse
         
-    private let BASE_URL: String = "localhost"
+    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT: String = "/user/register"
     
     private(set) var client: HTTPClient

@@ -111,7 +111,10 @@ struct RegistrationScreenView: View {
             .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
                 
-                self.isShowingInvalidInputAlert.toggle()
+                if self.serverResponse.statusCode != 200 &&
+                    self.serverResponse.statusCode != 201 {
+                    self.isShowingInvalidInputAlert.toggle()
+                }
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait

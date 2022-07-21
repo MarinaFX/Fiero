@@ -107,7 +107,7 @@ struct AccountLoginView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Fazer login!",
                                         action: {
-                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)                            
                         })
                         
                         HStack {
@@ -137,8 +137,10 @@ struct AccountLoginView: View {
             })
             .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
-                
-                self.isShowingIncorrectLoginAlert.toggle()
+                if self.serverResponse.statusCode != 200 &&
+                    self.serverResponse.statusCode != 201 {
+                    self.isShowingIncorrectLoginAlert.toggle()
+                }
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
