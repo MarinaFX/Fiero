@@ -59,7 +59,7 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .none, style: .primary, placeholder: "Nome", helperText: "", isLowCase: false , isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
-                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", isLowCase: true ,isWrong: .constant(false), text: $email)
+                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
                                 CustomTextFieldView(type: .both, style: .primary, placeholder: "Senha", helperText: "", isLowCase: true ,isWrong: .constant(false), text: $password)
@@ -113,10 +113,12 @@ struct RegistrationScreenView: View {
             .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
                 
-                if self.serverResponse.statusCode != 200 &&
-                    self.serverResponse.statusCode != 201 {
-                    self.isShowingInvalidInputAlert.toggle()
+                if self.serverResponse.statusCode == 200 ||
+                    self.serverResponse.statusCode == 201 {
+                    self.pushHomeView.toggle()
                 }
+                
+                self.isShowingInvalidInputAlert.toggle()
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
