@@ -25,10 +25,12 @@ struct RegistrationScreenView: View {
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
+    @Binding private(set) var pushHomeView: Bool
+    
     //MARK: - body
     var body: some View {
         if isLoginScreenSheetShowing{
-            AccountLoginView()
+            AccountLoginView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
                 if #available(iOS 15.0, *) {

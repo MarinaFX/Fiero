@@ -24,6 +24,7 @@
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
 		1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE52877588000B4628F /* AccountLoginView.swift */; };
+		1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */; };
 		1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */; };
@@ -86,6 +87,7 @@
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
 		1B5B7CE52877588000B4628F /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
+		1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChallengesView.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -243,9 +245,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		1B8CD352288A7FE500D2F703 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B5B7CE8287782ED00B4628F /* Login */,
 				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
@@ -539,6 +550,7 @@
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
+				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
