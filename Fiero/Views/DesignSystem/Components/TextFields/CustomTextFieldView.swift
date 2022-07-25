@@ -36,6 +36,7 @@ struct CustomTextFieldView: View {
     var style: Variant = .primary
     var placeholder: String = "Placeholder"
     var helperText: String = ""
+    var keyboardType: UIKeyboardType = .default
     
     @State private(set) var isSecure: Bool = false
     @State private(set) var isLowCase: Bool = false
@@ -74,6 +75,7 @@ struct CustomTextFieldView: View {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                         }
+                            .keyboardType(self.keyboardType)
                             .autocapitalization(.none)
                     }else{
                         TextField("", text: self.$text)

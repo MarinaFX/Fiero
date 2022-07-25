@@ -19,4 +19,19 @@ extension View {
             self
         }
     }
+    
+    func makeDarkModeFullScreen() -> some View {
+        return self
+            .padding(.top, Tokens.Spacing.lg.value)
+            .padding(.bottom, Tokens.Spacing.xxs.value)
+            .frame(
+                  minWidth: 0,
+                  maxWidth: .infinity,
+                  minHeight: 0,
+                  maxHeight: .infinity,
+                  alignment: .top
+                )
+            .background(Tokens.Colors.Background.dark.value)
+            .ignoresSafeArea()
+    }
 }
