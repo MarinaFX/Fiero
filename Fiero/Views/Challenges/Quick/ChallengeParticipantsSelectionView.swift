@@ -21,7 +21,7 @@ struct ChallengeParticipantsSelectionView: View {
 
     var body: some View {
         VStack {
-            CustomProgressBar(currentPage: .second)
+            CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                 .padding()
             
             Text("Quantas pessoas estão \nnesse desafio?")
@@ -64,17 +64,20 @@ struct ChallengeParticipantsSelectionView: View {
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
-            if challengeType == .highest("") {
+            if challengeType == .quickest {
                 NavigationLink("", isActive: self.$pushNextView, destination: {
                     QuantityChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
                 })
             }
-            if challengeType == .quickest {
+            if challengeType == .highest("") {
                 NavigationLink("", isActive: self.$pushNextView, destination: {
-                    TimeChallengeWinRulesView()
+                    TimeChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .highest(""), challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
                 })
             }
         }
+        .onAppear(perform: {
+            print("nome do desafio vindo da tela anterior\(self.challengeName)")
+        })
         .onChange(of: self.tabViewSelection, perform: { tabViewSelection in
             self.challengeParticipants = tabViewSelection
         })
@@ -88,38 +91,3 @@ struct ChallengeParticipantsSelectionView_Previews: PreviewProvider {
         ChallengeParticipantsSelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "")
     }
 }
-
-
-/**
- if challengeType == .highest {
-     NavigationLink(destination: QuantityChallengeWinRulesView(challengeName: self._challengeName, challengeParticipants: .constant(2)), label: {
-         
-     })
-     
-     NavigationLink(destination: QuantityChallengeWinRulesView(challengeName: self._challengeName, challengeParticipants: .constant(3)), label: {
-         ChallengeParticipantsSelectionCardView(amount: "3")
-             .padding(Tokens.Spacing.sm.value)
-     })
-     
-     NavigationLink(destination: QuantityChallengeWinRulesView(challengeName: self._challengeName, challengeParticipants: .constant(4)), label: {
-         ChallengeParticipantsSelectionCardView(amount: "4")
-             .padding(Tokens.Spacing.sm.value)
-     })
- }
- else {
-     NavigationLink(destination: TimeChallengeWinRulesView(), label: {
-         ChallengeParticipantsSelectionCardView(amount: "2")
-             .padding(Tokens.Spacing.sm.value)
-     })
-     
-     NavigationLink(destination: TimeChallengeWinRulesView(), label: {
-         ChallengeParticipantsSelectionCardView(amount: "3")
-             .padding(Tokens.Spacing.sm.value)
-     })
-     
-     NavigationLink(destination: TimeChallengeWinRulesView(), label: {
-         ChallengeParticipantsSelectionCardView(amount: "4")
-             .padding(Tokens.Spacing.sm.value)
-     })
- }
- */

@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct TimeChallengeWinRulesView: View {
-    private var primaryColor: Color = Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
+    enum QCHighestParameter {
+        case stopwatch
+        case timer
+    }
     
-    private var secondaryColor: Color = Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+    @State private(set) var challengeParameter: QCHighestParameter = .stopwatch
+    @State private var navIsActive: Bool = false
+        
+    private(set) var primaryColor: Color
+    private(set) var secondaryColor: Color
+    private(set) var challengeType: QCType
+    private(set) var challengeName: String
+    private(set) var challengeParticipants: Int
     
     var body: some View {
         VStack {
@@ -33,20 +43,37 @@ struct TimeChallengeWinRulesView: View {
             Spacer()
             
             HStack {
-                ChallengeMetricSelectionCardView(primaryColor: self.primaryColor, iconName: "stopwatch.fill", description: "Cronômetro", type: .icon)
+                Button(action: {
+                    self.challengeParameter = .stopwatch
+                    self.navIsActive.toggle()
+                }, label: {
+                    ChallengeMetricSelectionCardView(primaryColor: self.primaryColor, iconName: "stopwatch.fill", description: "Cronômetro", type: .icon)
+                })
                 
-                ChallengeMetricSelectionCardView(primaryColor: self.secondaryColor, iconName: "timer", description: "Timer", type: .icon)
+                Button(action: {
+                    self.challengeParameter = .timer
+                    self.navIsActive.toggle()
+                }, label: {
+                    ChallengeMetricSelectionCardView(primaryColor: self.secondaryColor, iconName: "timer", description: "Timer", type: .icon)
+                })
             }
             .padding(Tokens.Spacing.xxxs.value)
             
             Spacer()
+            
+            NavigationLink("", isActive: self.$navIsActive) {
+                TimePickerSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+            }
+            .hidden()
+            
         }
         .makeDarkModeFullScreen()
+        .navigationBarHidden(true)
     }
 }
 
 struct TimeChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeChallengeWinRulesView()
+        TimeChallengeWinRulesView(challengeParameter: .stopwatch, primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 2)
     }
 }

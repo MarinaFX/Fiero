@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChallengeNameSelectionView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State var challengeName: String = ""
     
     var primaryColor: Color
@@ -43,25 +44,35 @@ struct ChallengeNameSelectionView: View {
                         isNavActiveBestOf.toggle()
                 }
             }
-                .frame(height: UIScreen.main.bounds.height * 0.5)
+            .frame(height: UIScreen.main.bounds.height * 0.5)
             
-            NavigationLink("", isActive: $isNavActiveHighest) {
-                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .highest(""), challengeName: self.challengeName)
+            Spacer()
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Voltar")
+                    .bold()
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            })
+            
+            NavigationLink("", isActive: $isNavActiveQuickest) {
+                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
             
-            NavigationLink("", isActive: $isNavActiveQuickest) {
-                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .quickest, challengeName: self.challengeName)
+            NavigationLink("", isActive: $isNavActiveHighest) {
+                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
             
             NavigationLink("", isActive: $isNavActiveBestOf) {
-                BestOfChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .bestOf, challengeName: self.challengeName)
+                BestOfChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
         }
-        .onChange(of: self.challengeName, perform: { newValue in
-            print(newValue)
+        .onChange(of: self.challengeName, perform: { challengeName in
+            print(challengeName)
         })
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)

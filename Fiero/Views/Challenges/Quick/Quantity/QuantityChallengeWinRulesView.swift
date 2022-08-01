@@ -58,6 +58,9 @@ struct QuantityChallengeWinRulesView: View {
                 ChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
             }
         }
+        .onChange(of: self.goal, perform: { goal in
+            print(goal)
+        })
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)
     }

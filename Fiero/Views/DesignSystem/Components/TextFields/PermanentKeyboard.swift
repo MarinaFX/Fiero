@@ -23,7 +23,12 @@ struct PermanentKeyboard: UIViewRepresentable {
             self.parent = parent
         }
         
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            self.parent.text = textField.text ?? "nao funcionou"
+        }
+        
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            self.parent.text = textField.text ?? "nao funcionou"
             textField.resignFirstResponder()
             parent.didCommit()
             
@@ -44,9 +49,6 @@ struct PermanentKeyboard: UIViewRepresentable {
         textField.keyboardType = self.keyboardType
         textField.returnKeyType = .done
         
-        textField.text = text
-        print(text)
-        
         textField.delegate = context.coordinator
         textField.addDoneButtonOnKeyboard()
         
@@ -55,7 +57,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
-        print(text)
+        print("dentro do updateUIView \(text)")
         
         if !uiView.isFirstResponder {
             uiView.becomeFirstResponder()

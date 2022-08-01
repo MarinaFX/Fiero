@@ -13,7 +13,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var serverResponse: ServerResponse
     
-    private let BASE_URL: String = "localhost"
+    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT: String = "/quickChallenge/create"
     
     private(set) var client: HTTPClient
@@ -27,29 +27,22 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, userId: String) {
-//        let challengeJson = """
-//        {
-//            "name" : "Third Challenge by Combine with token from user defaults",
-//            "type" : "quickest",
-//            "goal" : 115,
-//            "goalMeasure" : "unity",
-//            "userId" : "1c9be140-0504-4e88-9e06-cf167dc06718"
-//        }
-//        """
 
         let challengeJson = """
         {
-            "name" : \(name),
-            "type" : \(challengeType.description),
+            "name" : "\(name)",
+            "type" : "\(challengeType.description)",
             "goal" : \(goal),
-            "goalMeasure" : \(goalMeasure),
-            "userId" : \(userId)
+            "goalMeasure" : "\(goalMeasure)",
+            "userId" : "\(userId)"
         }
         """
-        let userDefaults = UserDefaults.standard
-        let userToken = userDefaults.string(forKey: "AuthToken")!
+        print(challengeJson)
         
-        let request = makeHTTPRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
+        //let userDefaults = UserDefaults.standard
+        //let userToken = userDefaults.string(forKey: "AuthToken")!
+        
+        let request = makeHTTPRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZTIzNGE0LWNjMWQtNGI0ZC1iODVlLTQwYjFkM2E3MWI4MCIsImlhdCI6MTY1OTAyNzkwNiwiZXhwIjoxNjU5MDI5NzA2fQ.lHCHTEyylf4kWL_A3Tt0JAE6oo-YlvqljIAv5-sAZVU")
         
         self.client.perform(for: request)
             .tryMap({ $0.response })

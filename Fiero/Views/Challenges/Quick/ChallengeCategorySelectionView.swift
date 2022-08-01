@@ -20,15 +20,15 @@ struct ChallengeCategorySelectionView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 TabView {
-                    //quickest
-                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.three.value, secondaryColor: Tokens.Colors.Highlight.four.value, challengeType: .quickest), label: {
-                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer mais rápido.")
+                    //highest
+                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.three.value, secondaryColor: Tokens.Colors.Highlight.four.value, challengeType: .highest("")), label: {
+                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
-                    //highest
-                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .highest("")), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes.")
+                    //quickest
+                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .quickest), label: {
+                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     

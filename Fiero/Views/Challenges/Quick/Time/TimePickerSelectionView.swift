@@ -10,14 +10,19 @@ import SwiftUI
 struct TimePickerSelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var currentDate = Date()
-    @State private(set) var hourSelection: Int
-    @State private(set) var minuteSelection: Int
-    @State private(set) var secondSelection: Int
+    @State private(set) var valueSelection: Int = 0
+    @State private(set) var measureSelection: String = ""
+    @State private(set) var pushNextView: Bool = false
     
-    private(set) var primaryColor: Color = Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
+    private let seconds: [Int] = Array(0..<61)
+    private let minutes: [Int] = Array(0..<61)
     
-    private(set) var secondaryColor: Color = Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+    private(set) var primaryColor: Color
+    private(set) var secondaryColor: Color
+    private(set) var challengeType: QCType
+    private(set) var challengeName: String
+    private(set) var challengeParticipants: Int
+    //private(set) var challengeParameter: QCHighestParameter
     
     var body: some View {
         VStack {
@@ -34,14 +39,13 @@ struct TimePickerSelectionView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
-            CustomMultiWheelPicker(hourSelection: self.$hourSelection, minuteSelection: self.$minuteSelection, secondSelection: self.$secondSelection)
-//            Spacer()
-//
-//            DatePicker("", selection: $currentDate, displayedComponents: .hourAndMinute)
-//                .datePickerStyle(.wheel)
-//                .environment(\.colorScheme, .dark)
-//
-//            Spacer()
+            Spacer()
+
+            CustomPickerView(valueSelection: self.$valueSelection, measureSelection: self.$measureSelection,numberOfComponents: 2, seconds: self.seconds, minutes: self.minutes, goalMeasure: ["Segundos", "Minutos"])
+                .datePickerStyle(.wheel)
+                .environment(\.colorScheme, .dark)
+
+            Spacer()
             
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
@@ -52,17 +56,23 @@ struct TimePickerSelectionView: View {
             })
                         
             ButtonComponent(style: .secondary(isEnabled: true), text: "Começar!", action: {
-                
+                self.pushNextView.toggle()
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            
+            NavigationLink("", isActive: self.$pushNextView) {
+                ChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
+            }
+            .hidden()
         }
         .makeDarkModeFullScreen()
+        .navigationBarHidden(true)
     }
 }
 
 struct TimePickerSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        TimePickerSelectionView(hourSelection: 0, minuteSelection: 0, secondSelection: 0)
+        TimePickerSelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 2)
     }
 }
