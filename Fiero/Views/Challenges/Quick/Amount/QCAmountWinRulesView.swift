@@ -1,5 +1,5 @@
 //
-//  QuantityChallengeWinRulesView.swift
+//  QCAmountWinRulesView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuantityChallengeWinRulesView: View {
+struct QCAmountWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var goal: String = ""
@@ -55,7 +55,7 @@ struct QuantityChallengeWinRulesView: View {
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                ChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
+                QCChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
             }
         }
         .onChange(of: self.goal, perform: { goal in
@@ -68,6 +68,6 @@ struct QuantityChallengeWinRulesView: View {
 
 struct QuantityChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        QuantityChallengeWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0)
+        QCAmountWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0)
     }
 }

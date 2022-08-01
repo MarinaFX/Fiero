@@ -1,5 +1,5 @@
 //
-//  ChallengeParticipantsSelectionView.swift
+//  QCSelectParticipantsView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeParticipantsSelectionView: View {
+struct QCSelectParticipantsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var challengeParticipants: Int = 2
@@ -66,7 +66,7 @@ struct ChallengeParticipantsSelectionView: View {
             
             if challengeType == .quickest {
                 NavigationLink("", isActive: self.$pushNextView, destination: {
-                    QuantityChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+                    QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
                 })
             }
             if challengeType == .highest("") {
@@ -88,6 +88,6 @@ struct ChallengeParticipantsSelectionView: View {
 
 struct ChallengeParticipantsSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeParticipantsSelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "")
+        QCSelectParticipantsView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "")
     }
 }

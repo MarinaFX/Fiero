@@ -1,5 +1,5 @@
 //
-//  ChallengeCreatedView.swift
+//  QCChallengeCreatedView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeCreatedView: View {
+struct QCChallengeCreatedView: View {
     
     @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @State var serverResponse: ServerResponse = .unknown
@@ -71,6 +71,6 @@ struct ChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeCreatedView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0, goal: "")
+        QCChallengeCreatedView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0, goal: "")
     }
 }

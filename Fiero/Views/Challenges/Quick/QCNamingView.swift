@@ -1,5 +1,5 @@
 //
-//  ChallengeNameSelectionView.swift
+//  QCNamingView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeNameSelectionView: View {
+struct QCNamingView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var challengeName: String = ""
     
@@ -57,12 +57,12 @@ struct ChallengeNameSelectionView: View {
             })
             
             NavigationLink("", isActive: $isNavActiveQuickest) {
-                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
             
             NavigationLink("", isActive: $isNavActiveHighest) {
-                ChallengeParticipantsSelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
             
@@ -81,6 +81,6 @@ struct ChallengeNameSelectionView: View {
 
 struct QuickChallengeNamingView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeNameSelectionView(primaryColor: .red, secondaryColor: .white, challengeType: .quickest)
+        QCNamingView(primaryColor: .red, secondaryColor: .white, challengeType: .quickest)
     }
 }

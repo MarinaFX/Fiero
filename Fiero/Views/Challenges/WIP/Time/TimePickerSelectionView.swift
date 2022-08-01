@@ -62,7 +62,7 @@ struct TimePickerSelectionView: View {
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                ChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
+//                QCChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
             }
             .hidden()
         }

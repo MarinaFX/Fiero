@@ -1,5 +1,5 @@
 //
-//  ChallengeCategorySelectionView.swift
+//  QCCategorySelectionView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 18/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChallengeCategorySelectionView: View {
+struct QCCategorySelectionView: View {
     
     var body: some View {
         NavigationView {
@@ -21,19 +21,19 @@ struct ChallengeCategorySelectionView: View {
 
                 TabView {
                     //highest
-                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.three.value, secondaryColor: Tokens.Colors.Highlight.four.value, challengeType: .highest("")), label: {
+                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.three.value, secondaryColor: Tokens.Colors.Highlight.four.value, challengeType: .highest("")), label: {
                         ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
                     //quickest
-                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .quickest), label: {
+                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .quickest), label: {
                         ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
                     //bestof
-                    NavigationLink(destination: ChallengeNameSelectionView(primaryColor: Tokens.Colors.Highlight.four.value, secondaryColor: Tokens.Colors.Highlight.five.value, challengeType: .bestOf), label: {
+                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.four.value, secondaryColor: Tokens.Colors.Highlight.five.value, challengeType: .bestOf), label: {
                         ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
@@ -50,6 +50,6 @@ struct ChallengeCategorySelectionView: View {
 
 struct QuickChallengeCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeCategorySelectionView()
+        QCCategorySelectionView()
     }
 }
