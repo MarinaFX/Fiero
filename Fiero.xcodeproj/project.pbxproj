@@ -43,6 +43,7 @@
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */; };
 		1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCType.swift */; };
 		1B8CD34928889F1000D2F703 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34828889F1000D2F703 /* Team.swift */; };
+		1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */; };
 		1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */; };
@@ -124,6 +125,7 @@
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
 		1B8CD34628887ADE00D2F703 /* QCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCType.swift; sourceTree = "<group>"; };
 		1B8CD34828889F1000D2F703 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChallengesView.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -357,9 +359,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		1B8CD352288A7FE500D2F703 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B0A027F2885DBE400C4A421 /* Challenges */,
 				1B5B7CE8287782ED00B4628F /* Login */,
@@ -689,6 +700,7 @@
 				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
+				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
@@ -870,11 +882,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.Fiero;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -901,11 +913,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.Fiero;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
