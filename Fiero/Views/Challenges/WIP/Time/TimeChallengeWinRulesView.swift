@@ -74,6 +74,6 @@ struct TimeChallengeWinRulesView: View {
 
 struct TimeChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeChallengeWinRulesView(challengeParameter: .stopwatch, primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 2)
+        TimeChallengeWinRulesView(challengeParameter: .stopwatch, primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 2)
     }
 }

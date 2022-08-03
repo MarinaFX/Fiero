@@ -8,16 +8,16 @@
 import Foundation
 
 enum QCType: CustomStringConvertible, Equatable {
-    case quickest
-    case highest(String?)
+    case amount
+    case byTime(String?)
     case bestOf
     
     var description: String {
         switch self {
-            case .quickest:
-                return "quickest"
-            case .highest(_):
-                return "highest"
+            case .amount:
+                return "amount"
+            case .byTime(_):
+                return "byTime"
             case .bestOf:
                 return "bestof"
         }

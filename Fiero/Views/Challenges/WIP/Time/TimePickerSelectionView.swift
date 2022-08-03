@@ -73,6 +73,6 @@ struct TimePickerSelectionView: View {
 
 struct TimePickerSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        TimePickerSelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 2)
+        TimePickerSelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 2)
     }
 }

@@ -20,20 +20,20 @@ struct QCCategorySelectionView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 TabView {
-                    //highest
-                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.three.value, secondaryColor: Tokens.Colors.Highlight.four.value, challengeType: .highest("")), label: {
+                    //byTime
+                    NavigationLink(destination: EmptyView(), label: {
                         ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
-                    //quickest
-                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .quickest), label: {
+                    //amount
+                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
                         ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
                     //bestof
-                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.four.value, secondaryColor: Tokens.Colors.Highlight.five.value, challengeType: .bestOf), label: {
+                    NavigationLink(destination: EmptyView(), label: {
                         ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
@@ -44,6 +44,7 @@ struct QCCategorySelectionView: View {
             }
             .makeDarkModeFullScreen()
         }
+        .navigationViewStyle(.stack)
         .navigationBarHidden(true)
     }
 }

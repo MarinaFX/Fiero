@@ -26,15 +26,14 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Create Quick Challenge
-    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, userId: String) {
+    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String) {
 
         let challengeJson = """
         {
             "name" : "\(name)",
             "type" : "\(challengeType.description)",
             "goal" : \(goal),
-            "goalMeasure" : "\(goalMeasure)",
-            "userId" : "\(userId)"
+            "goalMeasure" : "\(goalMeasure)"
         }
         """
         print(challengeJson)

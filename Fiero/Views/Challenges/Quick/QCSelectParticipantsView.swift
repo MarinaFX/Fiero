@@ -28,8 +28,8 @@ struct QCSelectParticipantsView: View {
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding(.top)
-            
+                .padding(.top, Tokens.Spacing.xxxs.value)
+
             Spacer()
             
             TabView(selection: self.$tabViewSelection) {
@@ -64,20 +64,10 @@ struct QCSelectParticipantsView: View {
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
-            if challengeType == .quickest {
-                NavigationLink("", isActive: self.$pushNextView, destination: {
-                    QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
-                })
-            }
-            if challengeType == .highest("") {
-                NavigationLink("", isActive: self.$pushNextView, destination: {
-                    TimeChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .highest(""), challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
-                })
-            }
+            NavigationLink("", isActive: self.$pushNextView, destination: {
+                QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+            })
         }
-        .onAppear(perform: {
-            print("nome do desafio vindo da tela anterior\(self.challengeName)")
-        })
         .onChange(of: self.tabViewSelection, perform: { tabViewSelection in
             self.challengeParticipants = tabViewSelection
         })
@@ -88,6 +78,6 @@ struct QCSelectParticipantsView: View {
 
 struct ChallengeParticipantsSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        QCSelectParticipantsView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "")
+        QCSelectParticipantsView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "")
     }
 }

@@ -8,7 +8,9 @@
 import UIKit
 import SwiftUI
 
+//MARK: PermanentKeyboard
 struct PermanentKeyboard: UIViewRepresentable {
+    //MARK: - Variables Setup
     @Binding var text: String
     
     var keyboardType: UIKeyboardType = .default
@@ -16,35 +18,46 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     typealias UIViewType = UITextField
     
+    //MARK: - Coordinator
     class Coordinator: NSObject, UITextFieldDelegate {
+        //MARK: - Variables Setup
         var parent: PermanentKeyboard
+        var didBecomeFirstResponder: Bool = false
         
+        //MARK: - Init
         init(_ parent: PermanentKeyboard) {
             self.parent = parent
         }
         
+        //MARK: - UITextFieldDelegate
         func textFieldDidChangeSelection(_ textField: UITextField) {
             self.parent.text = textField.text ?? "nao funcionou"
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            self.parent.text = textField.text ?? "nao funcionou"
+            self.parent.text = textField.text ?? "Error on \(#function)"
+            self.parent.didCommit()
+            textField.isEnabled = false
             textField.resignFirstResponder()
-            parent.didCommit()
-            
+
             return true
         }
     }
     
+    //MARK: - UIViewRepresentable functions
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
+    //TODO: Adjust UIFont to support Dynamic Types
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2000))
                 
         textField.textColor = UIColor(cgColor: Tokens.Colors.Neutral.High.pure.value.cgColor!)
         textField.layer.backgroundColor = UIColor.clear.cgColor
+        
+        let font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        textField.font = font
         
         textField.keyboardType = self.keyboardType
         textField.returnKeyType = .done
@@ -57,14 +70,17 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
-        print("dentro do updateUIView \(text)")
         
-        if !uiView.isFirstResponder {
-            uiView.becomeFirstResponder()
+        if !uiView.isFirstResponder && !context.coordinator.didBecomeFirstResponder {
+            DispatchQueue.main.async {
+                uiView.becomeFirstResponder()
+            }
+            context.coordinator.didBecomeFirstResponder = true
         }
         
-        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        uiView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        uiView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        uiView.textAlignment = NSTextAlignment.center
     }
     
     func didCommit() {
@@ -72,6 +88,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     }
 }
 
+//MARK: UITextField Extensions
 extension UITextField {
     func addDoneButtonOnKeyboard() {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -89,12 +106,5 @@ extension UITextField {
     
     @objc func didTapDismissButton() {
         self.resignFirstResponder()
-    }
-}
-
-extension String {
-    var digits: String {
-        return components(separatedBy: CharacterSet.decimalDigits.inverted)
-            .joined()
     }
 }

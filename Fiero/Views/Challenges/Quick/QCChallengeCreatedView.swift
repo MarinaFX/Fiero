@@ -6,54 +6,42 @@
 //
 
 import SwiftUI
-
+//MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
-    
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
-    @State var serverResponse: ServerResponse = .unknown
-    
-    var primaryColor: Color
-    var secondaryColor: Color
-    var challengeType: QCType
-    var challengeName: String
-    var challengeParticipants: Int
-    var goal: String
-    var goalMeasure: String {
-        switch challengeType {
-            case .quickest:
-                return "unity"
-            case .highest(let measure):
-                return measure ?? "minutes"
-            case .bestOf:
-                return "rounds"
-        }
-    }
+    //MARK: - Variables Setup
+    var challenge: QuickChallenge?
 
+    //MARK: - Body
     var body: some View {
         VStack {
             Spacer()
             
             Image("Olhos")
+                .padding(.top, Tokens.Spacing.sm.value * 1.5)
             
-            Text("Desafio criado!")
+            Text("Desafio criado com sucesso")
+                .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding(.top, Tokens.Spacing.md.value)
+                .padding(.top, Tokens.Spacing.sm.value)
             
             Spacer()
             
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Pronto!", action: {
-                let defaults = UserDefaults.standard
-                let userID = defaults.string(forKey: "userID")!
-                
-                self.quickChallengeViewModel.createQuickChallenge(name: challengeName, challengeType: .quickest, goal: Int(self.goal) ?? 0, goalMeasure: self.goalMeasure, userId: userID)
+            //MARK: - Bottom Buttons
+            Button(action: { }, label: {
+                Text("Ir para lista de desafios")
+                    .bold()
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
-            .padding(.bottom)
+            .padding(.bottom, Tokens.Spacing.quarck.value)
+            
+            ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+                
+            })
+            .padding(.bottom, Tokens.Spacing.xxxl.value)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            
         }
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-        })
         .padding(.top, Tokens.Spacing.lg.value)
         .padding(.bottom, Tokens.Spacing.xxs.value)
         .frame(
@@ -71,6 +59,8 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView(primaryColor: .red, secondaryColor: .red, challengeType: .quickest, challengeName: "", challengeParticipants: 0, goal: "")
+        QCChallengeCreatedView()
+            //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
     }
 }

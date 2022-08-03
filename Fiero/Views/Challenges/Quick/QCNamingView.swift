@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
-
+//MARK: QCNamingView
 struct QCNamingView: View {
+    //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
+
+    @State private var isNavActiveForAmount: Bool = false
     @State var challengeName: String = ""
     
     var primaryColor: Color
     var secondaryColor: Color
     var challengeType: QCType
-    
-    @State private var isNavActiveQuickest: Bool = false
-    @State private var isNavActiveHighest: Bool = false
-    @State private var isNavActiveBestOf: Bool = false
-    
+        
+    //MARK: - Body
     var body: some View {
         VStack {
+            //MARK: - Header
             CustomProgressBar(currentPage: .first, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                 .padding()
             
@@ -28,26 +29,23 @@ struct QCNamingView: View {
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding(.top)
+                .padding(.top, Tokens.Spacing.xxxs.value)
+                .padding(.bottom, Tokens.Spacing.quarck.value)
             
             Text("de quantidade")
                 .font(Tokens.FontStyle.callout.font())
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-            
-            PermanentKeyboard(text: self.$challengeName, keyboardType: .default) {
-                switch challengeType {
-                    case .quickest:
-                        isNavActiveQuickest.toggle()
-                    case .highest:
-                        isNavActiveHighest.toggle()
-                    case .bestOf:
-                        isNavActiveBestOf.toggle()
-                }
-            }
-            .frame(height: UIScreen.main.bounds.height * 0.5)
+
+            //MARK: Keyboard
+            PermanentKeyboard(text: self.$challengeName, keyboardType: .default, onCommit: {
+                isNavActiveForAmount.toggle()
+            })
+            .disabled(self.isNavActiveForAmount)
+            .frame(height: UIScreen.main.bounds.height * 0.4)
             
             Spacer()
             
+            //MARK: - Back Button
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
@@ -55,25 +53,13 @@ struct QCNamingView: View {
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
+            .padding(.bottom, Tokens.Spacing.xs.value)
             
-            NavigationLink("", isActive: $isNavActiveQuickest) {
+            NavigationLink("", isActive: $isNavActiveForAmount) {
                 QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
-            }
-            .hidden()
-            
-            NavigationLink("", isActive: $isNavActiveHighest) {
-                QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
-            }
-            .hidden()
-            
-            NavigationLink("", isActive: $isNavActiveBestOf) {
-                BestOfChallengeWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
             }
             .hidden()
         }
-        .onChange(of: self.challengeName, perform: { challengeName in
-            print(challengeName)
-        })
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)
     }
@@ -81,6 +67,6 @@ struct QCNamingView: View {
 
 struct QuickChallengeNamingView_Previews: PreviewProvider {
     static var previews: some View {
-        QCNamingView(primaryColor: .red, secondaryColor: .white, challengeType: .quickest)
+        QCNamingView(primaryColor: .red, secondaryColor: .white, challengeType: .amount)
     }
 }
