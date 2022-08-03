@@ -45,7 +45,7 @@ struct QCNamingView: View {
             
             Spacer()
             
-            //MARK: - Back Button
+            //MARK: - Bottom Buttons
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
@@ -53,7 +53,13 @@ struct QCNamingView: View {
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
+
+            ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+                isNavActiveForAmount.toggle()
+            })
             .padding(.bottom, Tokens.Spacing.xs.value)
+            .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: $isNavActiveForAmount) {
                 QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)

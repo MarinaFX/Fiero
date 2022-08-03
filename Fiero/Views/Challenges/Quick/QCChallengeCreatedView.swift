@@ -9,6 +9,11 @@ import SwiftUI
 //MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
+    @Environment(\.rootPresentationMode) private var rootPresentationMode
+    
+    @State var didPushToHomeScreen: Bool = false
+    @State var didPushToStartChallenge: Bool = false
+    
     var challenge: QuickChallenge?
 
     //MARK: - Body
@@ -28,12 +33,14 @@ struct QCChallengeCreatedView: View {
             Spacer()
             
             //MARK: - Bottom Buttons
-            Button(action: { }, label: {
+            Button(action: {
+                self.rootPresentationMode.wrappedValue.popToRootViewController()
+            }, label: {
                 Text("Ir para lista de desafios")
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
-            .padding(.bottom, Tokens.Spacing.quarck.value)
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
                 

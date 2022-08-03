@@ -61,6 +61,7 @@ struct QCAmountWinRulesView: View {
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
                 

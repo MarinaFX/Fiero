@@ -179,8 +179,9 @@
 		1B0A027F2885DBE400C4A421 /* Challenges */ = {
 			isa = PBXGroup;
 			children = (
-				1BC68C56289806850055135D /* WIP */,
+				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
 				1B0A02802885DBE900C4A421 /* Quick */,
+				1BC68C56289806850055135D /* WIP */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -359,18 +360,9 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		1B8CD352288A7FE500D2F703 /* Challenges */ = {
-			isa = PBXGroup;
-			children = (
-				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
-			);
-			path = Challenges;
-			sourceTree = "<group>";
-		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B0A027F2885DBE400C4A421 /* Challenges */,
 				1B5B7CE8287782ED00B4628F /* Login */,

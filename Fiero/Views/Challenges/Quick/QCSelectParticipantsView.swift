@@ -57,6 +57,7 @@ struct QCSelectParticipantsView: View {
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Esses são os desafiantes!", action: {
                 self.pushNextView.toggle()
