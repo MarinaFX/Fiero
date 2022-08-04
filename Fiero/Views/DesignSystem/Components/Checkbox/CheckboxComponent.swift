@@ -34,13 +34,16 @@ struct CheckboxComponent: View {
                     isChecked.toggle()
                     checkboxHandler(isChecked)
                 }
+                .accessibilityLabel(isChecked ? "Botão: caixa de seleção de \(text) \(linkedText ?? "") preenchida" : "Botão: caixa de seleção de \(text) \(linkedText ?? "") não preenchida")
             Text(text)
                 .foregroundColor(style.color)
                 .font(style.textFont)
+                .accessibilityLabel("\(text) \(linkedText ?? "")")
             Text(linkedText ?? "")
                 .foregroundColor(style.color)
                 .font(style.textFont)
                 .underline()
+                .accessibilityLabel("Clique para acessar \(linkedText ?? "")")
                 .onTapGesture(perform: linkedTextHandler ?? {})
         }
         .padding(.horizontal, style.padding)
