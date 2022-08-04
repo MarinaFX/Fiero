@@ -40,6 +40,10 @@
 		CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */; };
 		CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */; };
 		CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559928873BC900740663 /* BestOfComponent.swift */; };
+		CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A328887EFE00740663 /* ParticipantComponent.swift */; };
+		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
+		CCFA55A928888A7F00740663 /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
+		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
 		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
 		F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0192881D73C00264114 /* RoundScoreComponent.swift */; };
 		F888EC01287600C300445FED /* AlertStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC00287600C300445FED /* AlertStyles.swift */; };
@@ -103,6 +107,10 @@
 		CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeComponent.swift; sourceTree = "<group>"; };
 		CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeStyles.swift; sourceTree = "<group>"; };
 		CCFA559928873BC900740663 /* BestOfComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfComponent.swift; sourceTree = "<group>"; };
+		CCFA55A328887EFE00740663 /* ParticipantComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantComponent.swift; sourceTree = "<group>"; };
+		CCFA55A528887F2300740663 /* ParticipantStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantStyles.swift; sourceTree = "<group>"; };
+		CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsScreenView.swift; sourceTree = "<group>"; };
+		CCFA55AA288899F900740663 /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
 		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
 		F85EE0192881D73C00264114 /* RoundScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreComponent.swift; sourceTree = "<group>"; };
 		F888EC00287600C300445FED /* AlertStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyles.swift; sourceTree = "<group>"; };
@@ -256,6 +264,7 @@
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CCFA55A728888A6500740663 /* ChallengeDetails */,
 				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				1B5B7CE8287782ED00B4628F /* Login */,
@@ -267,6 +276,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CCFA55A228887EB400740663 /* Details */,
 				F85EE0162881D2DF00264114 /* List */,
 				F888EBFF2876003B00445FED /* Alert */,
 				CCA3C2462875FFD0007F6597 /* Button */,
@@ -355,6 +365,24 @@
 				CCFA559928873BC900740663 /* BestOfComponent.swift */,
 			);
 			path = ChallengeTypes;
+			sourceTree = "<group>";
+		};
+		CCFA55A228887EB400740663 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CCFA55A328887EFE00740663 /* ParticipantComponent.swift */,
+				CCFA55A528887F2300740663 /* ParticipantStyles.swift */,
+				CCFA55AA288899F900740663 /* GroupComponent.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CCFA55A728888A6500740663 /* ChallengeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */,
+			);
+			path = ChallengeDetails;
 			sourceTree = "<group>";
 		};
 		F85EE0162881D2DF00264114 /* List */ = {
@@ -541,6 +569,7 @@
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
+				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
@@ -548,7 +577,9 @@
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
+				CCFA55A928888A7F00740663 /* ChallengeDetailsScreenView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
+				CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
@@ -557,6 +588,7 @@
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
+				CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
