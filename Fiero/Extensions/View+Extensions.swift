@@ -21,7 +21,7 @@ extension View {
         }
     }
     
-    func makeDarkModeFullScreen() -> some View {
+    func makeDarkModeFullScreen(color: Color = Tokens.Colors.Background.dark.value) -> some View {
         return self
             .padding(.top, Tokens.Spacing.lg.value)
             .padding(.bottom, Tokens.Spacing.xxs.value)
@@ -32,7 +32,7 @@ extension View {
                   maxHeight: .infinity,
                   alignment: .top
                 )
-            .background(Tokens.Colors.Background.dark.value)
+            .background(color)
             .ignoresSafeArea()
     }
 }
