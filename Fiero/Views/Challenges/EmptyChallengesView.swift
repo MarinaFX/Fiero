@@ -45,6 +45,26 @@ struct EmptyChallengesView: View {
         .environment(\.colorScheme, .dark)
     }
 }
+//VStack(spacing: Tokens.Spacing.xs.value) {
+//    VStack(spacing: Tokens.Spacing.xs.value) {
+//        Image("EmptyBox")
+//            .resizable()
+//        Text("Você não é ruim\n nem bom, você\n só ainda não\n tem oponentes")
+//            .multilineTextAlignment(.center)
+//            .font(Tokens.FontStyle.title.font(weigth: .bold))
+//            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+//    }
+//    .padding(.horizontal, Tokens.Spacing.xxxl.value)
+//    NavigationLink(destination: EmptyChallengesView(), isActive: $showNextScreen) {
+//        ButtonComponent(style: .primary(isEnabled: true),
+//                        text: "Criar um desafio!") {
+//            showNextScreen = true
+//        }
+//    }
+//    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+//}
+//.padding(.top, Tokens.Spacing.xxl.value)
+//.padding(.bottom, Tokens.Spacing.xxl.value)
 
 struct AvailableSoonView: View {
     @Environment(\.presentationMode) var presentationMode
