@@ -117,6 +117,7 @@ struct AccountLoginView: View {
                             Text("Ainda não tem uma conta?")
                                 .font(textFont)
                                 .foregroundColor(color)
+                                .accessibilityLabel("")
                             
                             Button(action: {
                                 self.isRegistrationSheetShowing.toggle()
@@ -124,6 +125,7 @@ struct AccountLoginView: View {
                                 Text("Cadastre-se!")
                                     .font(textButtonFont)
                                     .foregroundColor(color)
+                                    .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
                             })
                         }
                         .padding(.top, smallSpacing)
