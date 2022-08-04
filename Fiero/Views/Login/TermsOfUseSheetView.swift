@@ -51,6 +51,7 @@ struct TermsOfUseSheetView: View {
                             Circle()
                                 .frame(width: circleWeight, height: circleWeight)
                                 .foregroundColor(circleColor)
+                                .accessibilityLabel("")
                             Text("Nome")
                                 .font(textFont)
                                 .foregroundColor(textColor)
@@ -59,6 +60,7 @@ struct TermsOfUseSheetView: View {
                             Circle()
                                 .frame(width: circleWeight, height: circleWeight)
                                 .foregroundColor(circleColor)
+                                .accessibilityLabel("")
                             Text("E-mail")
                                 .font(textFont)
                                 .foregroundColor(textColor)
@@ -67,6 +69,7 @@ struct TermsOfUseSheetView: View {
                             Circle()
                                 .frame(width: circleWeight, height: circleWeight)
                                 .foregroundColor(circleColor)
+                                .accessibilityLabel("")
                             Text("Localização")
                                 .font(textFont)
                                 .foregroundColor(textColor)
@@ -83,6 +86,7 @@ struct TermsOfUseSheetView: View {
                     Button("Fechar") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .accessibilityLabel("Fechar tela de termos de uso")
                 }
                 ButtonComponent(style: .primary(isEnabled: true), text: "Eu concordo!", action: {
                     termsOfUseAccept = true
