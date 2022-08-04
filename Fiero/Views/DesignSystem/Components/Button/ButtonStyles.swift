@@ -9,6 +9,7 @@ import SwiftUI
 enum ButtonStyles {
     case primary(isEnabled: Bool)
     case secondary(isEnabled: Bool)
+    case black(isEnabled: Bool)
     
     //MARK: - Button variables
     var backgroundColor: Color {
@@ -17,6 +18,8 @@ enum ButtonStyles {
             return isEnabled ? Tokens.Colors.Brand.Primary.pure.value : Tokens.Colors.Neutral.Low.light.value
         case .secondary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.light.value
+        case .black:
+            return isEnabled ? .black : Tokens.Colors.Neutral.Low.light.value
         }
     }
     
@@ -34,6 +37,8 @@ enum ButtonStyles {
             return isEnabled
         case .secondary(let isEnabled):
             return isEnabled
+        case .black(let isEnabled):
+            return isEnabled
         }
     }
     
@@ -44,6 +49,8 @@ enum ButtonStyles {
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
         case .secondary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.Low.pure.value : Tokens.Colors.Neutral.High.dark.value
+        case .black(isEnabled: let isEnabled):
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
         }
     }
     

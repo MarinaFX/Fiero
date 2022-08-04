@@ -25,10 +25,12 @@ struct RegistrationScreenView: View {
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
+    @Binding private(set) var pushHomeView: Bool
+    
     //MARK: - body
     var body: some View {
         if isLoginScreenSheetShowing{
-            AccountLoginView()
+            AccountLoginView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
                 if #available(iOS 15.0, *) {
@@ -57,7 +59,7 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
-                                CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", isLowCase: true ,isWrong: .constant(false), text: $email)
+                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
                                 CustomTextFieldView(type: .both, style: .primary, helperText: "", placeholder: "Senha", isLowCase: true ,isWrong: .constant(false), text: $password)
@@ -111,6 +113,11 @@ struct RegistrationScreenView: View {
             .navigationBarHidden(true)
             .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
+                
+                if self.serverResponse.statusCode == 200 ||
+                    self.serverResponse.statusCode == 201 {
+                    self.pushHomeView.toggle()
+                }
                 
                 self.isShowingInvalidInputAlert.toggle()
             })

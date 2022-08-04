@@ -35,7 +35,9 @@ struct CustomTextFieldView: View {
     var type: TextFieldType = .none
     var style: Variant = .primary
     var helperText: String = ""
-    @State var placeholder: String
+    var placeholder: String
+    var keyboardType: UIKeyboardType = .default
+    
     @State private(set) var isSecure: Bool = false
     @State private(set) var isLowCase: Bool = false
     @Binding private(set) var isWrong: Bool
@@ -79,6 +81,7 @@ struct CustomTextFieldView: View {
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(self.placeholder)")
                         }
+                            .keyboardType(self.keyboardType)
                             .autocapitalization(.none)
                     }else{
                         TextField("", text: self.$text)

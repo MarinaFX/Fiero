@@ -22,7 +22,9 @@ struct AccountLoginView: View {
     @State private var isRegistrationSheetShowing: Bool = false
     @State private var isShowingIncorrectLoginAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
-    
+
+    @Binding private(set) var pushHomeView: Bool
+
     private let namePlaceholder: String = "Name"
     private let emailPlaceholder: String = "E-mail"
     private let passwordPlaceholder: String = "Senha"
@@ -51,7 +53,7 @@ struct AccountLoginView: View {
     //MARK: body View
     var body: some View {
         if isRegistrationSheetShowing{
-            RegistrationScreenView()
+            RegistrationScreenView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
                 if #available(iOS 15.0, *) {
@@ -79,6 +81,7 @@ struct AccountLoginView: View {
                         CustomTextFieldView(type: .none,
                                             style: .primary,
                                             placeholder: emailPlaceholder,
+                                            keyboardType: .emailAddress,
                                             isSecure: false,
                                             isLowCase: true ,
                                             isWrong: .constant(false),
@@ -107,7 +110,7 @@ struct AccountLoginView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Fazer login!",
                                         action: {
-                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)                            
                         })
                         
                         HStack {
@@ -139,6 +142,11 @@ struct AccountLoginView: View {
             })
             .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse
+                
+                if self.serverResponse.statusCode == 200 ||
+                    self.serverResponse.statusCode == 201 {
+                    self.pushHomeView.toggle()
+                }
                 
                 self.isShowingIncorrectLoginAlert.toggle()
             })
@@ -231,6 +239,6 @@ struct BlurredSquaredView<Content>: View where Content: View {
 
 struct AccountLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLoginView()
+        AccountLoginView(pushHomeView: .constant(false))
     }
 }

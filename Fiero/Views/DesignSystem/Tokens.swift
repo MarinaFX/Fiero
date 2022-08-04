@@ -178,6 +178,21 @@ enum Tokens {
                 }
             }
         }
+        
+        //MARK: - Colors | Background
+        enum Background {
+            case light
+            case dark
+            
+            var value: Color {
+                switch self {
+                    case .light:
+                        return Color(red: 1, green: 1, blue: 1, opacity: 1)
+                    case .dark:
+                        return Color(red: 0.096, green: 0.096, blue: 0.096, opacity: 1)
+                }
+            }
+        }
     }
     
     //MARK: - Fonts
