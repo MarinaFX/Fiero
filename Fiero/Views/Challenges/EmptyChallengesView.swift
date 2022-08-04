@@ -8,25 +8,38 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
-    @State var isPresentingAvailableSoonSheet: Bool = false
+    @State var isPresented: Bool = false
     
     var body: some View {
         NavigationView{
             VStack {
+                NavigationLink("", isActive: self.$isPresented) {
+                    AvailableSoonView()
+                }
+                .hidden()
+                
                 Spacer()
                 
-                Text("Parece que você não possui nenhum desafio, que tal criar um? \nBasta apertar no + no canto superior direito da tela")
+                Image("EmptyState")
+                
+                Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
+                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                     .padding(Tokens.Spacing.xxs.value)
+                
+                
+                ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                    self.isPresented.toggle()
+                })
+                .padding()
                 
                 Spacer()
                 
                     .toolbar(content: {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             Button(action: {
-                                self.isPresentingAvailableSoonSheet.toggle()
+                                self.isPresented.toggle()
                             }, label: {
                                 Image(systemName: "plus")
                                     .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
@@ -36,10 +49,8 @@ struct EmptyChallengesView: View {
                         })
                     })
             }
-            .sheet(isPresented: self.$isPresentingAvailableSoonSheet, content: {
-                AvailableSoonView()
-            })
             .navigationTitle("Desafios")
+            .navigationViewStyle(.stack)
             .makeDarkModeFullScreen()
         }
         .environment(\.colorScheme, .dark)
