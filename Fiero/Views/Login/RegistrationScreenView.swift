@@ -59,7 +59,7 @@ struct RegistrationScreenView: View {
                                 CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
-                                CustomTextFieldView(type: .none, style: .primary, placeholder: "E-mail", helperText: "", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
+                                CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
                                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
                                 
                                 CustomTextFieldView(type: .both, style: .primary, helperText: "", placeholder: "Senha", isLowCase: true ,isWrong: .constant(false), text: $password)
