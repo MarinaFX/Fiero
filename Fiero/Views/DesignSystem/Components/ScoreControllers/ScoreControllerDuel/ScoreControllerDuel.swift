@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct teste: View {
+struct DuelScoreComponent: View {
     
     @State var style: ScoreControllerStyle
     @State var maxValue: Int
@@ -68,6 +68,6 @@ struct teste: View {
 }
 struct teste_Previews: PreviewProvider {
     static var previews: some View {
-        teste(style: .first, maxValue: 10, playerName: "Alpaca Enfurecida")
+        DuelScoreComponent(style: .first, maxValue: 10, playerName: "Alpaca Enfurecida")
     }
 }
