@@ -18,10 +18,7 @@ struct ChallengesListScreenView: View {
     var body: some View {
         NavigationView {
             ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                ChallengeCellComponent(style: .md3([.lose, .lose, .win]),
-                                       challengeName: quickChallenges[index].name,
-                                       player1: quickChallenges[index].player1,
-                                       player2: quickChallenges[index].player2)
+                CustomTitleImageListRow(teste: quickChallenges[index].name)
             }
             .padding(.top, Tokens.Spacing.xl.value)
             .makeDarkModeFullScreen()
@@ -47,12 +44,6 @@ struct ChallengesListScreenView: View {
         .onChange(of: self.challengesListViewModel.quickChallengesList, perform: { quickChallenges in
                 self.quickChallenges = quickChallenges
             })
-        .onAppear {
-            quickChallenges = [QuickChallenge(name: "Perder calorias", player1: "Bianca", player2: "Clara"),
-                               QuickChallenge(name: "Malabarismo", player1: "Pedro", player2: "Bruno"),
-                               QuickChallenge(name: "Chute a gol", player1: "Nicole", player2: "Laís"),
-                               QuickChallenge(name: "Correr 10km", player1: "Arthur", player2: "Eliana")]
-        }
     }
 }
 

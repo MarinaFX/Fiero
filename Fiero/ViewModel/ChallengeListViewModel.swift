@@ -57,7 +57,7 @@ class ChallengeListViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] httpResponse in
                 if let response = httpResponse.item {
-                    self?.quickChallengesList = response.quickChallenges
+                    self?.quickChallengesList = response.quickChallenge
                 }
                 self?.serverResponse.statusCode = httpResponse.statusCode
                 print(self?.quickChallengesList as Any)
