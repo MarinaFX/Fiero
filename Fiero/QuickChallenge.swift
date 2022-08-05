@@ -2,13 +2,20 @@
 //  QuickChallenge.swift
 //  Fiero
 //
-//  Created by Natália Brocca dos Santos on 04/08/22.
+//  Created by Marina De Pazzi on 20/07/22.
 //
 
 import Foundation
 
-struct QuickChallenge: Codable, Equatable {
+struct QuickChallenge: Decodable, Encodable, Equatable {
+    
+    var id: String
+    var ownerID: String
     var name: String
-    var player1: String
-    var player2: String
+    var invitationCode: String
+    var type: String
+    var goal: Int
+    var goalMeasure: String
+    var finished: Bool
+    var teams: [Team]
 }

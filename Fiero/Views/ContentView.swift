@@ -17,7 +17,7 @@ struct ContentView: View {
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
         }
-        
+
         if !self.pushHomeView {
             AccountLoginView(pushHomeView: self.$pushHomeView)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))

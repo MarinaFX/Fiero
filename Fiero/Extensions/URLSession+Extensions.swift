@@ -15,3 +15,34 @@ extension URLSession: HTTPClient {
             .eraseToAnyPublisher()
     }
 }
+
+public func makeHTTPRequest
+    (
+        json: String,
+        scheme: String,
+        httpMethod: String,
+        port: Int,
+        baseURL: String,
+        endPoint: String,
+        authToken: String
+    )
+    -> URLRequest {
+    let requestBody = json.data(using: .utf8)!
+        
+    var urlComponents = URLComponents()
+    urlComponents.scheme = scheme
+    urlComponents.port = port
+    urlComponents.host = baseURL
+    urlComponents.path = endPoint
+    
+    let url = urlComponents.url!
+    var request = URLRequest(url: url)
+    
+    request.httpMethod = httpMethod
+    request.httpBody = requestBody
+
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue(authToken, forHTTPHeaderField: "authToken")
+    
+    return request
+}

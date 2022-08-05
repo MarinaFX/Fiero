@@ -2,13 +2,12 @@
 //  QuickChallengeResponse.swift
 //  Fiero
 //
-//  Created by Natália Brocca dos Santos on 04/08/22.
+//  Created by Marina De Pazzi on 20/07/22.
 //
 
 import Foundation
 
-struct QuickChallengeResponse: Decodable, Equatable {
+struct QuickChallengeResponse: Decodable, Encodable {
     
-    var token: String
-    var quickChallenges: [QuickChallenge]
+    var quickChallenge: QuickChallenge
 }
