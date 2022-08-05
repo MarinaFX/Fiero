@@ -16,11 +16,10 @@ extension URLSession: HTTPClient {
     }
 }
 
-public func makeHTTPRequest
+public func makePOSTRequest
     (
         json: String,
         scheme: String,
-        httpMethod: String,
         port: Int,
         baseURL: String,
         endPoint: String,
@@ -38,7 +37,7 @@ public func makeHTTPRequest
     let url = urlComponents.url!
     var request = URLRequest(url: url)
     
-    request.httpMethod = httpMethod
+    request.httpMethod = "POST"
     request.httpBody = requestBody
 
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
