@@ -11,7 +11,8 @@ import Foundation
     Fiero's API error mapping. These are the current possible error outcomes from our servers
     **Login and Registration**
  
-    - Success    (200) = Operation done successfully.
+    - Success    (200) = POST Request done successfully.
+    - Created    (201) = POST Request done successfuly
     - BadRequest (400) = email and/or password incorrect.
     
     **Login**
@@ -25,10 +26,11 @@ import Foundation
     
     **Any operation**
     - InternalServerError (500) = Generic Error.
-    - Unauthorized        (401) = Currently not in use.
+    - Unauthorized        (401) = Invalid Auth Token
  */
 enum ServerResponse: CustomStringConvertible {
     case success
+    case created
     case badRequest
     case forbidden
     case notFound
@@ -42,6 +44,8 @@ enum ServerResponse: CustomStringConvertible {
             switch self {
                 case .success:
                     return 200
+                case .created:
+                    return 201
                 case .badRequest:
                     return 400
                 case .unauthorized:
@@ -62,6 +66,8 @@ enum ServerResponse: CustomStringConvertible {
             switch newStatusCode {
                 case 200:
                     self = .success
+                case 201:
+                    self = .created
                 case 400:
                     self = .badRequest
                 case 401:
@@ -83,7 +89,9 @@ enum ServerResponse: CustomStringConvertible {
     var description: String {
         switch self {
             case .success:
-                return "Operação realizada com sucesso"
+                return "Operação de leitura realizada com sucesso"
+            case .created:
+                return "Operação de escrita realizada com sucesso"
             case .badRequest:
                 return "Parece que o email que você tentou inserir é muito desafiador para ser um email"
             case .unauthorized:

@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */; };
+		1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */; };
+		1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A028B28871BE700C4A421 /* QCNamingView.swift */; };
+		1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */; };
+		1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */; };
+		1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */; };
+		1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02972887498B00C4A421 /* CustomProgressBar.swift */; };
+		1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */; };
+		1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */; };
+		1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */; };
+		1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */; };
+		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
+		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
+		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
@@ -24,6 +38,11 @@
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
 		1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE52877588000B4628F /* AccountLoginView.swift */; };
+		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
+		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
+		1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */; };
+		1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCType.swift */; };
+		1B8CD34928889F1000D2F703 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34828889F1000D2F703 /* Team.swift */; };
 		1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */; };
 		1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
@@ -72,6 +91,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCategoryCardView.swift; sourceTree = "<group>"; };
+		1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCCategorySelectionView.swift; sourceTree = "<group>"; };
+		1B0A028B28871BE700C4A421 /* QCNamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCNamingView.swift; sourceTree = "<group>"; };
+		1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentKeyboard.swift; sourceTree = "<group>"; };
+		1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCSelectParticipantsView.swift; sourceTree = "<group>"; };
+		1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeParticipantsSelectionCardView.swift; sourceTree = "<group>"; };
+		1B0A02972887498B00C4A421 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
+		1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCAmountWinRulesView.swift; sourceTree = "<group>"; };
+		1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCChallengeCreatedView.swift; sourceTree = "<group>"; };
+		1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeMetricSelectionCardView.swift; sourceTree = "<group>"; };
+		1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
+		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
+		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -92,6 +125,11 @@
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
 		1B5B7CE52877588000B4628F /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
+		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
+		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
+		1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
+		1B8CD34628887ADE00D2F703 /* QCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCType.swift; sourceTree = "<group>"; };
+		1B8CD34828889F1000D2F703 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleImageListRow.swift; sourceTree = "<group>"; };
 		1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChallengesView.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
@@ -103,6 +141,7 @@
 		1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModel.swift; sourceTree = "<group>"; };
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
@@ -147,11 +186,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B0A027F2885DBE400C4A421 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
+				1B0A02802885DBE900C4A421 /* Quick */,
+				1BC68C56289806850055135D /* WIP */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		1B0A02802885DBE900C4A421 /* Quick */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
+				1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */,
+				1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */,
+				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
+				1B0A029D2887AC3B00C4A421 /* Amount */,
+			);
+			path = Quick;
+			sourceTree = "<group>";
+		};
+		1B0A02832885EAF200C4A421 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */,
+				1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */,
+				1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		1B0A02962887497400C4A421 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02972887498B00C4A421 /* CustomProgressBar.swift */,
+			);
+			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		1B0A029D2887AC3B00C4A421 /* Amount */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */,
+			);
+			path = Amount;
+			sourceTree = "<group>";
+		};
+		1B0A029E2887AC4A00C4A421 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */,
+				1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		1B0A029F2887ACD400C4A421 /* BestOf */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */,
+			);
+			path = BestOf;
+			sourceTree = "<group>";
+		};
+		1B0A02A62887CAAF00C4A421 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
 		1B3ED07528809D8100E1538B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
 				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
+				1B8CD34628887ADE00D2F703 /* QCType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -179,6 +292,7 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				1BC68C55288F32130055135D /* Info.plist */,
 				1B90929F2878ACE50039EBB7 /* App */,
 				1B8FB399286F6E7600B9F868 /* Views */,
 				1B9092A02878ACF10039EBB7 /* ViewModel */,
@@ -241,6 +355,7 @@
 			children = (
 				1B9092972878A58B0039EBB7 /* PrimaryTextFieldStyle.swift */,
 				1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */,
+				1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -255,20 +370,13 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		1B8CD352288A7FE500D2F703 /* Challenges */ = {
-			isa = PBXGroup;
-			children = (
-				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
-			);
-			path = Challenges;
-			sourceTree = "<group>";
-		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CCFA55A728888A6500740663 /* ChallengeDetails */,
 				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
+				1B0A027F2885DBE400C4A421 /* Challenges */,
 				1B5B7CE8287782ED00B4628F /* Login */,
 				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
 			);
@@ -278,6 +386,9 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A02A62887CAAF00C4A421 /* Picker */,
+				1B0A02962887497400C4A421 /* ProgressBar */,
+				1B0A02832885EAF200C4A421 /* Card */,
 				CCFA55A228887EB400740663 /* Details */,
 				F85EE0162881D2DF00264114 /* List */,
 				F888EBFF2876003B00445FED /* Alert */,
@@ -317,6 +428,7 @@
 		1B9092A02878ACF10039EBB7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */,
 				1B9092A12878AD0A0039EBB7 /* UserLoginViewModel.swift */,
 				1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */,
 			);
@@ -328,6 +440,9 @@
 			children = (
 				1B9092A62878AD740039EBB7 /* User.swift */,
 				1B9092A82878DB7C0039EBB7 /* UserResponse.swift */,
+				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
+				1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */,
+				1B8CD34828889F1000D2F703 /* Team.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -339,6 +454,15 @@
 				1B3ED07328809A3400E1538B /* UserRegistrationViewModelTests.swift */,
 			);
 			path = "Login+Registration";
+			sourceTree = "<group>";
+		};
+		1BC68C56289806850055135D /* WIP */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A029E2887AC4A00C4A421 /* Time */,
+				1B0A029F2887ACD400C4A421 /* BestOf */,
+			);
+			path = WIP;
 			sourceTree = "<group>";
 		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
@@ -557,33 +681,52 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
+				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
+				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
+				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
 				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
 				CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
+				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
+				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */,
 				CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */,
+				1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */,
 				1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */,
+				1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */,
 				F8E7C7712887B4CD0035E2CE /* ChallengeCellComponent.swift in Sources */,
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
+				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
+				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
+				1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */,
+				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
+				1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */,
+				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
+				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
+				1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
+				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
+				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
+				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
+				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */,
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
