@@ -69,7 +69,9 @@ struct QCAmountWinRulesView: View {
                     self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
                     self.pushNextView.toggle()
                 }
-                self.isPresentingAlert.toggle()
+                else {
+                    self.isPresentingAlert.toggle()
+                }
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
