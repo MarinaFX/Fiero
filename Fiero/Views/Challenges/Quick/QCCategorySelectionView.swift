@@ -10,41 +10,38 @@ import SwiftUI
 struct QCCategorySelectionView: View {
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Escolha um novo desafio rápido")
-                .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .rounded))
-                .padding(.horizontal, Tokens.Spacing.xs.value)
-                .padding(.vertical, Tokens.Spacing.sm.value)
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+        VStack {
+            Text("Escolha um novo desafio rápido")
+            .multilineTextAlignment(.center)
+            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .rounded))
+            .padding(.horizontal, Tokens.Spacing.xs.value)
+            .padding(.vertical, Tokens.Spacing.sm.value)
+            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
-                TabView {
-                    //byTime
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
-                            .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
-                    
-                    //amount
-                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
-                            .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
-                    
-                    //bestof
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
-                            .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
-                    
-                }
-                .padding(.bottom)
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            TabView {
+                //byTime
+                NavigationLink(destination: EmptyView(), label: {
+                    ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
+                        .padding(.horizontal, Tokens.Spacing.sm.value)
+                })
+                
+                //amount
+                NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
+                    ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
+                        .padding(.horizontal, Tokens.Spacing.sm.value)
+                })
+                
+                //bestof
+                NavigationLink(destination: EmptyView(), label: {
+                    ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
+                        .padding(.horizontal, Tokens.Spacing.sm.value)
+                })
+                
             }
-            .makeDarkModeFullScreen()
+            .padding(.bottom)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         }
-        .navigationViewStyle(.stack)
+        .makeDarkModeFullScreen()
         .navigationBarHidden(true)
     }
 }

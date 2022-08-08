@@ -94,7 +94,7 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
-                print("fetch user challenges status code: \(self?.serverResponse.statusCode)")
+                print("fetch user challenges status code: \(String(describing: self?.serverResponse.statusCode))")
             })
             .store(in: &cancellables)
         
