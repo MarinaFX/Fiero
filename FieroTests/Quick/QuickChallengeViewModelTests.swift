@@ -14,13 +14,15 @@ class QuickChallengeViewModelTests: XCTestCase {
     //MARK: - Variables Setup
     var sut: QuickChallengeViewModel!
     var mockClient: MockHTTPClient!
+    var mockKeyValueStorage: MockKeyValueStorage!
     
     var cancellables: Set<AnyCancellable> = []
     
     //MARK: - Test Environment Setup
     override func setUpWithError() throws {
         self.mockClient = MockHTTPClient(url: "", statusCode: 0, json: "")
-        self.sut = .init(client: self.mockClient)
+        self.mockKeyValueStorage = MockKeyValueStorage(dictionary: ["AuthToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQxNWNkYTdmLWU2MTktNDI4MS1hMDdjLWE4NDhlZGMwMjEzYiIsImlhdCI6MTY1OTk4ODE3MywiZXhwIjoxNjU5OTg5OTczfQ.DfcbguU-ncL0Xe7MzaMlS5cGCC7ilxFkqudMzOcA67I"])
+        self.sut = .init(client: self.mockClient, keyValueStorage: self.mockKeyValueStorage)
     }
     
     override func tearDownWithError() throws {

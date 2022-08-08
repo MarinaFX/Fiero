@@ -16,6 +16,8 @@ extension URLSession: HTTPClient {
     }
 }
 
+extension UserDefaults: KeyValueStorage { }
+
 public func makePOSTRequest
     (
         json: String,

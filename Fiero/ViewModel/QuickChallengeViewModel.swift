@@ -18,12 +18,14 @@ class QuickChallengeViewModel: ObservableObject {
     private let ENDPOINT: String = "/quickChallenge/create"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init (client: HTTPClient = URLSession.shared) {
+    init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - Create Quick Challenge
@@ -41,8 +43,7 @@ class QuickChallengeViewModel: ObservableObject {
         """
         print(challengeJson)
         
-        let userDefaults = UserDefaults.standard
-        let userToken = userDefaults.string(forKey: "AuthToken")!
+        let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
         
