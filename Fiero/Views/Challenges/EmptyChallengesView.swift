@@ -11,7 +11,7 @@ struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
                 NavigationLink("", isActive: self.$isPresented) {
                     AvailableSoonView()
@@ -36,6 +36,11 @@ struct EmptyChallengesView: View {
                 
                 Spacer()
                 
+                NavigationLink("", isActive: self.$isPresented) {
+                    QCCategorySelectionView()
+                }
+                .hidden()
+                
                     .toolbar(content: {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             Button(action: {
@@ -54,6 +59,7 @@ struct EmptyChallengesView: View {
             .makeDarkModeFullScreen()
         }
         .environment(\.colorScheme, .dark)
+        .environment(\.rootPresentationMode, self.$isPresented)
     }
 }
 
