@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         if self.pushHomeView {
             withAnimation {
-                EmptyChallengesView()
+                ChallengesListScreenView()
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
         }

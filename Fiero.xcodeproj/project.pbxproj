@@ -38,12 +38,12 @@
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
 		1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE52877588000B4628F /* AccountLoginView.swift */; };
+		1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */; };
 		1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCType.swift */; };
 		1B8CD34928889F1000D2F703 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34828889F1000D2F703 /* Team.swift */; };
-		1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */; };
 		1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
 		1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */; };
@@ -54,6 +54,9 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */; };
+		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
+		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
@@ -125,12 +128,12 @@
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
 		1B5B7CE52877588000B4628F /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
+		1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleImageListRow.swift; sourceTree = "<group>"; };
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
 		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
 		1B8CD34628887ADE00D2F703 /* QCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCType.swift; sourceTree = "<group>"; };
 		1B8CD34828889F1000D2F703 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleImageListRow.swift; sourceTree = "<group>"; };
 		1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChallengesView.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		1B9092962878A58B0039EBB7 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
@@ -142,6 +145,11 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
+		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
+		CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
+		CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListViewModel.swift; sourceTree = "<group>"; };
+		CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
@@ -276,6 +284,7 @@
 				1B4135C828597E8F00C7094A /* FieroTests */,
 				1B4135D228597E8F00C7094A /* FieroUITests */,
 				1B4135B628597E8900C7094A /* Products */,
+				CCA22156289D863B006AA03F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,6 +379,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		1B8CD352288A7FE500D2F703 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */,
+				CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +449,7 @@
 				1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */,
 				1B9092A12878AD0A0039EBB7 /* UserLoginViewModel.swift */,
 				1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */,
+				CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -463,6 +482,15 @@
 				1B0A029F2887ACD400C4A421 /* BestOf */,
 			);
 			path = WIP;
+			sourceTree = "<group>";
+		};
+		CCA22156289D863B006AA03F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CCA2214C289C107B006AA03F /* QuickChallenge.swift */,
+				CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
@@ -724,6 +752,7 @@
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
+				CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
 				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
@@ -732,7 +761,9 @@
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
+				CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
+				CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
