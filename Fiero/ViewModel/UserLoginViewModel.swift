@@ -65,6 +65,11 @@ class UserLoginViewModel: ObservableObject {
                 if let userResponse = httpResponse.item {
                     self?.user = userResponse.user
                     self?.user.token = userResponse.token
+                    
+                    let defaults = UserDefaults.standard
+                    
+                    defaults.set(self?.user.id, forKey: "userID")
+                    defaults.set(self?.user.token, forKey: "AuthToken")
                 }
                 
                 self?.serverResponse.statusCode = httpResponse.statusCode
