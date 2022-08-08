@@ -9,5 +9,5 @@ import Foundation
 
 struct QuickChallengeResponse: Decodable, Encodable {
     
-    var quickChallenge: QuickChallenge
+    var quickChallenge: [QuickChallenge]
 }
