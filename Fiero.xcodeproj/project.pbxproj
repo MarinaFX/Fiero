@@ -41,6 +41,8 @@
 		1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */; };
 		1B6020C628A0B03D00AEF47B /* QuickChallengeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020C528A0B03D00AEF47B /* QuickChallengeViewModelTests.swift */; };
 		1B6020CA28A1AD8300AEF47B /* MockKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */; };
+		1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */; };
+		1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */; };
@@ -56,9 +58,7 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
-		CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */; };
 		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
-		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
@@ -133,6 +133,8 @@
 		1B6020BF289C3B4000AEF47B /* CustomTitleImageListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleImageListRow.swift; sourceTree = "<group>"; };
 		1B6020C528A0B03D00AEF47B /* QuickChallengeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModelTests.swift; sourceTree = "<group>"; };
 		1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeyValueStorage.swift; sourceTree = "<group>"; };
+		1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
+		1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
 		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		1B0A027F2885DBE400C4A421 /* Challenges */ = {
 			isa = PBXGroup;
 			children = (
+				1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */,
 				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
 				1B0A02802885DBE900C4A421 /* Quick */,
 				1BC68C56289806850055135D /* WIP */,
@@ -328,7 +331,7 @@
 		1B4135C828597E8F00C7094A /* FieroTests */ = {
 			isa = PBXGroup;
 			children = (
-				1B6020C428A0B01800AEF47B /* Quick */,
+				1B6020CC28A1B19300AEF47B /* Challenges */,
 				1B9658202881EE3300B774CB /* Login+Registration */,
 				1B3ED0782880A6DD00E1538B /* MockHTTPClient.swift */,
 			);
@@ -384,18 +387,10 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		1B6020C428A0B01800AEF47B /* Quick */ = {
+		1B6020CC28A1B19300AEF47B /* Challenges */ = {
 			isa = PBXGroup;
 			children = (
 				1B6020C528A0B03D00AEF47B /* QuickChallengeViewModelTests.swift */,
-			);
-			path = Quick;
-		};
-		1B8CD352288A7FE500D2F703 /* Challenges */ = {
-			isa = PBXGroup;
-			children = (
-				CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */,
-				CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -501,6 +496,8 @@
 			children = (
 				CCA2214C289C107B006AA03F /* QuickChallenge.swift */,
 				CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */,
+				CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */,
+				CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -554,6 +551,7 @@
 		F85EE0162881D2DF00264114 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */,
 				F8E7C76D2887B10C0035E2CE /* ChallengeCell */,
 				CCFA559228872CDF00740663 /* ChallengeTypes */,
 				F85EE01B2881F9FD00264114 /* RoundScore */,
@@ -720,6 +718,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */,
+				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
@@ -773,9 +773,7 @@
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
-				CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
-				CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
