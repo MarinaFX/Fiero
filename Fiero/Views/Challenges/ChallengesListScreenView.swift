@@ -8,42 +8,69 @@
 import SwiftUI
 
 struct ChallengesListScreenView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.rootPresentationMode) var rootPresentationMode
     
-    @StateObject var challengesListViewModel: ChallengeListViewModel = ChallengeListViewModel()
+    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @State var quickChallenges: [QuickChallenge] = []
-    @State var showNextScreen: Bool = false
-    
+    @State var isPresented: Bool = false
     
     var body: some View {
         NavigationView {
-            ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                CustomTitleImageListRow(teste: quickChallenges[index].name)
-            }
-            .padding(.top, Tokens.Spacing.xl.value)
-            .makeDarkModeFullScreen()
-            
-            .navigationTitle("Seus desafios")
-            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: EmptyChallengesView(), isActive: $showNextScreen, label: {
-                        Button(action: {
-                            showNextScreen = true
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            if self.quickChallenges.count > 0 {
+                ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
+                    CustomTitleImageListRow(teste: quickChallenges[index].name)
+                }
+                .padding(.top, Tokens.Spacing.xl.value)
+                .makeDarkModeFullScreen()
+                
+                .navigationTitle("Seus desafios")
+                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: QCCategorySelectionView(), isActive: $isPresented, label: {
+                            Button(action: {
+                                isPresented = true
+                            }, label: {
+                                Image(systemName: "plus")
+                                    .font(Tokens.FontStyle.title2.font(weigth: .bold))
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            })
                         })
-                    })
+                    }
+                }
+            }
+            else {
+                EmptyChallengesView()
+                
+                .navigationTitle("Seus desafios")
+                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: QCCategorySelectionView(), isActive: $isPresented, label: {
+                            Button(action: {
+                                isPresented = true
+                            }, label: {
+                                Image(systemName: "plus")
+                                    .font(Tokens.FontStyle.title2.font(weigth: .bold))
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            })
+                        })
+                    }
                 }
             }
         }
+        .onAppear(perform: {
+            self.quickChallengeViewModel.getUserChallenges()
+        })
         .environment(\.colorScheme, .dark)
-        .onChange(of: self.challengesListViewModel.quickChallengesList, perform: { quickChallenges in
-                self.quickChallenges = quickChallenges
-            })
+        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
+            self.quickChallenges = quickChallenges
+        })
+        .navigationViewStyle(.stack)
+        .environment(\.rootPresentationMode, self.$isPresented)
+
     }
 }
 

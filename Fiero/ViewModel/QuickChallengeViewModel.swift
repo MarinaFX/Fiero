@@ -11,7 +11,7 @@ import Combine
 //MARK: QuickChallengeViewModel
 class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
-    @Published var challengeList: [QuickChallenge] = []
+    @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
     
     private let BASE_URL: String = "localhost"
@@ -36,7 +36,10 @@ class QuickChallengeViewModel: ObservableObject {
             "name" : "\(name)",
             "type" : "\(challengeType.description)",
             "goal" : \(goal),
-            "goalMeasure" : "\(goalMeasure)"
+            "goalMeasure" : "\(goalMeasure)",
+            "online" : false,
+            "numberOfTeams" : 2,
+            "maxTeams" : 2
         }
         """
         print(challengeJson)
@@ -69,7 +72,6 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Get User Challenges
     func getUserChallenges() {
-        
         let userDefaults = UserDefaults.standard
         let userToken = userDefaults.string(forKey: "AuthToken")!
         
@@ -82,46 +84,19 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("completion failed with: \(error.localizedDescription)")
+                    print("completion failed with: \(error)")
                 case .finished:
                     print("finished successfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
                 if let response = urlResponse.item {
-                    self?.challengeList = response.quickChallenge
+                    self?.challengesList = response.quickChallenges
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
+                print("fetch user challenges status code: \(self?.serverResponse.statusCode)")
             })
             .store(in: &cancellables)
         
     }
 }
-
-
-
-/**
- export enum QuickChallengeTypes {
- quickest = 'quickest',
- highest = 'highest',
- bestof = 'bestof'
- }
- 
- export enum QuickChallengeQuickestMeasures {
- unity = 'unity'
- }
- 
- export enum QuickChallengeHighestMeasures {
- minutes = 'minutes',
- seconds = 'seconds'
- }
- 
- export enum QuickChallengeBestofMeasures {
- rounds = 'rounds'
- }
- 
- export enum QuickChallengeBestofGoals {
- five = 5,
- three = 3
- }
- */

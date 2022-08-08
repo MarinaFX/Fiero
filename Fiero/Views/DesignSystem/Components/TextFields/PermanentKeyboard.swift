@@ -31,7 +31,9 @@ struct PermanentKeyboard: UIViewRepresentable {
         
         //MARK: - UITextFieldDelegate
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            self.parent.text = textField.text ?? "nao funcionou"
+            DispatchQueue.main.async {
+                self.parent.text = textField.text ?? "nao funcionou"
+            }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {

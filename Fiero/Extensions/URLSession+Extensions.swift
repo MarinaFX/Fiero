@@ -35,7 +35,6 @@ public func makeGETRequest
     
     request.httpMethod = "GET"
 
-//    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue(authToken, forHTTPHeaderField: "authToken")
     
     return request

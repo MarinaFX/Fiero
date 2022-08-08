@@ -21,7 +21,8 @@ extension Publisher where Output == (data: Data, response: URLResponse) {
                     fatalError()
                 }
                 
-                if httpUrlResponse.statusCode == 200 {
+                if httpUrlResponse.statusCode == 200 ||
+                    httpUrlResponse.statusCode == 201 {
                     let response = try decoder.decode(Item.self, from: data)
                     return .success(response)
                 } else {

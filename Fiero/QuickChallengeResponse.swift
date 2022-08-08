@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuickChallengeResponse: Decodable, Encodable {
+struct QuickChallengeResponse: Decodable {
     
-    var quickChallenge: [QuickChallenge]
+    var quickChallenges: [QuickChallenge]
 }
