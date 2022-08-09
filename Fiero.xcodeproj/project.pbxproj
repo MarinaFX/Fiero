@@ -54,6 +54,7 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
 		CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */; };
 		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
 		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
@@ -145,6 +146,7 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
 		CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
 		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
@@ -407,7 +409,7 @@
 				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
 				1B0A02832885EAF200C4A421 /* Card */,
-				CCFA55A228887EB400740663 /* Details */,
+				CCFA55A228887EB400740663 /* Scoreboard */,
 				F85EE0162881D2DF00264114 /* List */,
 				F888EBFF2876003B00445FED /* Alert */,
 				CCA3C2462875FFD0007F6597 /* Button */,
@@ -484,6 +486,24 @@
 			path = WIP;
 			sourceTree = "<group>";
 		};
+		CC91C91428A2FABD00044EA7 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */,
+				CCFA55A528887F2300740663 /* ParticipantStyles.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		CC91C91528A2FAC700044EA7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CCFA55AA288899F900740663 /* GroupComponent.swift */,
+				CCFA55A328887EFE00740663 /* ParticipantComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		CCA22156289D863B006AA03F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,14 +541,13 @@
 			path = ChallengeTypes;
 			sourceTree = "<group>";
 		};
-		CCFA55A228887EB400740663 /* Details */ = {
+		CCFA55A228887EB400740663 /* Scoreboard */ = {
 			isa = PBXGroup;
 			children = (
-				CCFA55A328887EFE00740663 /* ParticipantComponent.swift */,
-				CCFA55A528887F2300740663 /* ParticipantStyles.swift */,
-				CCFA55AA288899F900740663 /* GroupComponent.swift */,
+				CC91C91528A2FAC700044EA7 /* Components */,
+				CC91C91428A2FABD00044EA7 /* Styles */,
 			);
-			path = Details;
+			path = Scoreboard;
 			sourceTree = "<group>";
 		};
 		CCFA55A728888A6500740663 /* ChallengeDetails */ = {
@@ -763,6 +782,7 @@
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
+				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,
 				CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,

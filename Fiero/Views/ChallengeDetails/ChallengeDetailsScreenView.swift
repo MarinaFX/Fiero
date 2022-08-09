@@ -58,7 +58,7 @@ struct ChallengeDetailsScreenView: View {
                         Text("Participantes")
                             .font(titleFont)
                             .foregroundColor(color)
-                        GroupComponent(style: [.participantDefault, .participantLooser], name: ["Clarice", "Marina"])
+                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false), .participantLooser(isSmall: false)], element: [.one, .two], name: ["Clarice", "Marina"])
                         
                     }
                 }.padding()
