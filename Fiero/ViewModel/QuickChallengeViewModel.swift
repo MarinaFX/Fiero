@@ -20,37 +20,37 @@ class QuickChallengeViewModel: ObservableObject {
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init (client: HTTPClient = URLSession.shared) {
+    init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - Create Quick Challenge
-    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String) {
-        
+    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
         let challengeJson = """
         {
             "name" : "\(name)",
             "type" : "\(challengeType.description)",
             "goal" : \(goal),
             "goalMeasure" : "\(goalMeasure)",
-            "online" : false,
-            "numberOfTeams" : 2,
-            "maxTeams" : 2
+            "online" : \(online),
+            "numberOfTeams" : \(numberOfTeams),
+            "maxTeams" : \(maxTeams)
         }
         """
         print(challengeJson)
         
-        let userDefaults = UserDefaults.standard
-        let userToken = userDefaults.string(forKey: "AuthToken")!
+        let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
+        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
         
         self.client.perform(for: request)
-            .tryMap({ $0.response })
+            .decodeHTTPResponse(type: QuickChallengeResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -61,11 +61,12 @@ class QuickChallengeViewModel: ObservableObject {
                     print("finished successfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
-                guard let response = urlResponse as? HTTPURLResponse else { return }
-                
-                print("status code \(response.statusCode)")
-                
-                self?.serverResponse.statusCode = response.statusCode
+                guard let response = urlResponse.item else {
+                    self?.serverResponse.statusCode = urlResponse.statusCode
+                    print(urlResponse.statusCode)
+                    return
+                }
+                print(response)
             })
             .store(in: &cancellables)
     }
