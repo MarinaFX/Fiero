@@ -54,6 +54,7 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		CCA22149289C100C006AA03F /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */; };
 		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
 		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
@@ -145,6 +146,7 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
 		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				48D6EDC728A18F2F0069FCE9 /* Ongoing */,
 				CCFA55A728888A6500740663 /* ChallengeDetails */,
 				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
@@ -404,6 +407,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
 				1B0A02832885EAF200C4A421 /* Card */,
@@ -482,6 +486,21 @@
 				1B0A029F2887ACD400C4A421 /* BestOf */,
 			);
 			path = WIP;
+			sourceTree = "<group>";
+		};
+		48D6EDC728A18F2F0069FCE9 /* Ongoing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ongoing;
+			sourceTree = "<group>";
+		};
+		48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */ = {
+			isa = PBXGroup;
+			children = (
+				48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */,
+			);
+			path = "ScoreController3-4";
 			sourceTree = "<group>";
 		};
 		CCA22156289D863B006AA03F /* Recovered References */ = {
@@ -723,6 +742,7 @@
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
 				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
+				48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */,
 				CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */,
