@@ -67,7 +67,6 @@ struct QCAmountWinRulesView: View {
             ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
                 if (Int(self.goal) != nil) {
                     self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
-                    self.pushNextView.toggle()
                 }
                 else {
                     self.isPresentingAlert.toggle()
@@ -88,6 +87,9 @@ struct QCAmountWinRulesView: View {
         })
         .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
             self.serverResponse = serverResponse
+            print(self.serverResponse.statusCode)
+            
+            self.pushNextView.toggle()
         })
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)

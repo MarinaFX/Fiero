@@ -21,13 +21,17 @@ extension Publisher where Output == (data: Data, response: URLResponse) {
                     fatalError()
                 }
                 
-                if httpUrlResponse.statusCode == 200 ||
-                    httpUrlResponse.statusCode == 201 {
+                if httpUrlResponse.statusCode == 200 {
                     let response = try decoder.decode(Item.self, from: data)
                     return .success(response)
-                } else {
-                    return .failure(httpUrlResponse, data)
                 }
+                
+                if httpUrlResponse.statusCode == 201 {
+                    let response = try decoder.decode(Item.self, from: data)
+                    return .created(response)
+                }
+                
+                return .failure(httpUrlResponse, data)
             })
             .mapError({ $0 as Error })
             .eraseToAnyPublisher()

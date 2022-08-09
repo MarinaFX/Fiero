@@ -47,47 +47,50 @@ class QuickChallengeViewModel: ObservableObject {
         
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
+        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
         
         self.client.perform(for: request)
-            .decodeHTTPResponse(type: QuickChallengeResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("completion failed with: \(error.localizedDescription)")
+                    print("Publisher failed with: \(error)")
                 case .finished:
-                    print("finished successfully")
+                    print("Publisher received sucessfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
                 guard let response = urlResponse.item else {
                     self?.serverResponse.statusCode = urlResponse.statusCode
-                    print(urlResponse.statusCode)
+                    print("error response status code: \(urlResponse.statusCode)")
                     return
                 }
-                print(response)
+                
+                self?.serverResponse.statusCode = urlResponse.statusCode
+                print("successful response: \(response)")
+                print("successful response: \(urlResponse.statusCode)")
+
             })
             .store(in: &cancellables)
     }
     
     //MARK: - Get User Challenges
     func getUserChallenges() {
-        let userDefaults = UserDefaults.standard
-        let userToken = userDefaults.string(forKey: "AuthToken")!
+        let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
         
         self.client.perform(for: request)
-            .decodeHTTPResponse(type: QuickChallengeResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("completion failed with: \(error)")
+                    print("Publisher failed with: \(error)")
                 case .finished:
-                    print("finished successfully")
+                    print("Publisher received sucessfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
                 if let response = urlResponse.item {
@@ -95,9 +98,8 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
-                print("fetch user challenges status code: \(String(describing: self?.serverResponse.statusCode))")
+                print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
             })
             .store(in: &cancellables)
-        
     }
 }
