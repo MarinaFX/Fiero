@@ -13,38 +13,42 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var serverResponse: ServerResponse
     
-    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
+    //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/quickChallenge/create"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init (client: HTTPClient = URLSession.shared) {
+    init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - Create Quick Challenge
-    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String) {
-
+    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
         let challengeJson = """
         {
             "name" : "\(name)",
             "type" : "\(challengeType.description)",
             "goal" : \(goal),
-            "goalMeasure" : "\(goalMeasure)"
+            "goalMeasure" : "\(goalMeasure)",
+            "online" : \(online),
+            "numberOfTeams" : \(numberOfTeams),
+            "maxTeams" : \(maxTeams)
         }
         """
         print(challengeJson)
         
-        //let userDefaults = UserDefaults.standard
-        //let userToken = userDefaults.string(forKey: "AuthToken")!
+        let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
-        let request = makeHTTPRequest(json: challengeJson, scheme: "http", httpMethod: "POST", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZTIzNGE0LWNjMWQtNGI0ZC1iODVlLTQwYjFkM2E3MWI4MCIsImlhdCI6MTY1OTAyNzkwNiwiZXhwIjoxNjU5MDI5NzA2fQ.lHCHTEyylf4kWL_A3Tt0JAE6oo-YlvqljIAv5-sAZVU")
+        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
         
         self.client.perform(for: request)
-            .tryMap({ $0.response })
+            .decodeHTTPResponse(type: QuickChallengeResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -55,38 +59,13 @@ class QuickChallengeViewModel: ObservableObject {
                         print("finished successfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
-                guard let response = urlResponse as? HTTPURLResponse else { return }
-                
-                print("status code \(response.statusCode)")
-                
-                self?.serverResponse.statusCode = response.statusCode
+                guard let response = urlResponse.item else {
+                    self?.serverResponse.statusCode = urlResponse.statusCode
+                    print(urlResponse.statusCode)
+                    return
+                }
+                print(response)
             })
             .store(in: &cancellables)
     }
 }
-
-/**
- export enum QuickChallengeTypes {
-     quickest = 'quickest',
-     highest = 'highest',
-     bestof = 'bestof'
- }
-
- export enum QuickChallengeQuickestMeasures {
-     unity = 'unity'
- }
-
- export enum QuickChallengeHighestMeasures {
-     minutes = 'minutes',
-     seconds = 'seconds'
- }
-
- export enum QuickChallengeBestofMeasures {
-     rounds = 'rounds'
- }
-
- export enum QuickChallengeBestofGoals {
-     five = 5,
-     three = 3
- }
- */
