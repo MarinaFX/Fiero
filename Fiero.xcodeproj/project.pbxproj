@@ -59,7 +59,12 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
+		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
+		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
+		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
+		CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
 		CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */; };
@@ -152,10 +157,12 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
+		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
+		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
 		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
 		CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
+		CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingDuelScreenView.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
@@ -398,6 +405,9 @@
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CCA2215728A18E09006AA03F /* OngoingQuickChallenge */,
+				CCFA55A728888A6500740663 /* ChallengeDetails */,
+				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
 				CCFA55A728888A6500740663 /* ChallengeDetails */,
 				1B0A027F2885DBE400C4A421 /* Challenges */,
@@ -410,6 +420,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
 				1B0A02832885EAF200C4A421 /* Card */,
@@ -491,6 +502,23 @@
 			path = WIP;
 			sourceTree = "<group>";
 		};
+		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC4FEDE728A191F700E53C39 /* Duel */,
+			);
+			path = ScoreControllers;
+			sourceTree = "<group>";
+		};
+		CC4FEDE728A191F700E53C39 /* Duel */ = {
+			isa = PBXGroup;
+			children = (
+				CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */,
+				CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */,
+			);
+			path = Duel;
+			sourceTree = "<group>";
+		};
 		CCA22156289D863B006AA03F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +528,14 @@
 				CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		CCA2215728A18E09006AA03F /* OngoingQuickChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
+			);
+			path = OngoingQuickChallenge;
 			sourceTree = "<group>";
 		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
@@ -724,6 +760,7 @@
 				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
 				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
+				CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */,
 				1B6020C828A1940200AEF47B /* Member.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
@@ -758,10 +795,12 @@
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
 				1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */,
+				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
+				CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
