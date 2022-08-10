@@ -33,7 +33,8 @@ struct QCChallengeCreatedView: View {
     }
     
     var title: String {
-        if serverResponse.statusCode != 201 {
+        if serverResponse.statusCode != 201 &&
+            serverResponse.statusCode != 200 {
             return "Não conseguimos \ncriar seu desafio"
         }
         
@@ -57,9 +58,10 @@ struct QCChallengeCreatedView: View {
             Spacer()
             
             //MARK: - Bottom Buttons
-            if self.serverResponse.statusCode != 201 {
+            if self.serverResponse.statusCode != 201 &&
+                self.serverResponse.statusCode != 200 {
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
-                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: 0, maxTeams: 0)
+                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
                 })
                 .padding(.bottom, Tokens.Spacing.xxxs.value)
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
@@ -99,7 +101,8 @@ struct QCChallengeCreatedView: View {
         .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
             self.serverResponse = serverResponse
             
-            if self.serverResponse.statusCode != 201 {
+            if self.serverResponse.statusCode != 201 &&
+                self.serverResponse.statusCode != 200 {
                 self.isPresentingAlert.toggle()
             }
         })

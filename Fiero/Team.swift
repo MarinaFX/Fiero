@@ -10,8 +10,10 @@ import Foundation
 struct Team: Encodable, Decodable, Equatable {
     
     var id: String
-    var quickChallengeId: String
     var name: String
-    var owner: User
-    var members: [User]?
+    var quickChallengeId: String
+    var ownerId: String?
+    var createdAt: String
+    var updatedAt: String
+    var members: [Member]?
 }
