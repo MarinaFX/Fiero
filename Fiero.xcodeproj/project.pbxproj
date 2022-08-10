@@ -59,10 +59,10 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
-		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
+		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
 		CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
@@ -157,12 +157,10 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
-		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
-		CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponse.swift; sourceTree = "<group>"; };
+		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
 		CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingDuelScreenView.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 				1B4135C828597E8F00C7094A /* FieroTests */,
 				1B4135D228597E8F00C7094A /* FieroUITests */,
 				1B4135B628597E8900C7094A /* Products */,
-				CCA22156289D863B006AA03F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -419,7 +416,6 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */,
 				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
@@ -502,6 +498,32 @@
 			path = WIP;
 			sourceTree = "<group>";
 		};
+		48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */ = {
+			isa = PBXGroup;
+			children = (
+				48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */,
+			);
+			path = "ScoreController3-4";
+			sourceTree = "<group>";
+		};
+		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
+			isa = PBXGroup;
+			children = (
+				48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */,
+				CC4FEDE728A191F700E53C39 /* Duel */,
+			);
+			path = ScoreControllers;
+			sourceTree = "<group>";
+		};
+		CC4FEDE728A191F700E53C39 /* Duel */ = {
+			isa = PBXGroup;
+			children = (
+				CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */,
+				CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */,
+			);
+			path = Duel;
+			sourceTree = "<group>";
+		};
 		CC91C91428A2FABD00044EA7 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,40 +540,6 @@
 				CCFA55A328887EFE00740663 /* ParticipantComponent.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */ = {
-			isa = PBXGroup;
-			children = (
-				48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */,
-			);
-			path = "ScoreController3-4";
-			sourceTree = "<group>";
-		};
-		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
-			isa = PBXGroup;
-			children = (
-				CC4FEDE728A191F700E53C39 /* Duel */,
-			);
-			path = ScoreControllers;
-			sourceTree = "<group>";
-		};
-		CC4FEDE728A191F700E53C39 /* Duel */ = {
-			isa = PBXGroup;
-			children = (
-				CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */,
-				CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */,
-			);
-			path = Duel;
-			sourceTree = "<group>";
-		};
-		CCA22156289D863B006AA03F /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				CCA2214C289C107B006AA03F /* QuickChallenge.swift */,
-				CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		CCA2215728A18E09006AA03F /* Ongoing */ = {
