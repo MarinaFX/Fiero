@@ -59,10 +59,9 @@
 		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
-		CCA22151289C1173006AA03F /* ChallengeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22150289C1173006AA03F /* ChallengeListViewModel.swift */; };
-		CCA22153289C33E6006AA03F /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */; };
 		CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
@@ -157,6 +156,7 @@
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
 		CCA2214C289C107B006AA03F /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
@@ -221,10 +221,12 @@
 		1B0A02802885DBE900C4A421 /* Quick */ = {
 			isa = PBXGroup;
 			children = (
+				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
 				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
 				1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */,
 				1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */,
-				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
+				CCFA55A728888A6500740663 /* Details */,
+				CCA2215728A18E09006AA03F /* Ongoing */,
 				1B0A029D2887AC3B00C4A421 /* Amount */,
 			);
 			path = Quick;
@@ -405,11 +407,7 @@
 		1B8FB399286F6E7600B9F868 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CCA2215728A18E09006AA03F /* OngoingQuickChallenge */,
-				CCFA55A728888A6500740663 /* ChallengeDetails */,
-				1B8CD352288A7FE500D2F703 /* Challenges */,
 				1B4135BA28597E8900C7094A /* ContentView.swift */,
-				CCFA55A728888A6500740663 /* ChallengeDetails */,
 				1B0A027F2885DBE400C4A421 /* Challenges */,
 				1B5B7CE8287782ED00B4628F /* Login */,
 				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
@@ -420,6 +418,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */,
 				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
 				1B0A02962887497400C4A421 /* ProgressBar */,
@@ -502,6 +501,14 @@
 			path = WIP;
 			sourceTree = "<group>";
 		};
+		48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */ = {
+			isa = PBXGroup;
+			children = (
+				48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */,
+			);
+			path = "ScoreController3-4";
+			sourceTree = "<group>";
+		};
 		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,17 +532,16 @@
 				CCA2214C289C107B006AA03F /* QuickChallenge.swift */,
 				CCA2214E289C113D006AA03F /* QuickChallengeResponse.swift */,
 				CCA22152289C33E6006AA03F /* ListWithoutSeparator.swift */,
-				CCA22148289C100C006AA03F /* ChallengesListScreenView.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		CCA2215728A18E09006AA03F /* OngoingQuickChallenge */ = {
+		CCA2215728A18E09006AA03F /* Ongoing */ = {
 			isa = PBXGroup;
 			children = (
 				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
 			);
-			path = OngoingQuickChallenge;
+			path = Ongoing;
 			sourceTree = "<group>";
 		};
 		CCA3C2462875FFD0007F6597 /* Button */ = {
@@ -576,12 +582,12 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
-		CCFA55A728888A6500740663 /* ChallengeDetails */ = {
+		CCFA55A728888A6500740663 /* Details */ = {
 			isa = PBXGroup;
 			children = (
 				CCFA55A828888A7F00740663 /* ChallengeDetailsScreenView.swift */,
 			);
-			path = ChallengeDetails;
+			path = Details;
 			sourceTree = "<group>";
 		};
 		F85EE0162881D2DF00264114 /* List */ = {
@@ -773,6 +779,7 @@
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
 				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
+				48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
 				1B6020C0289C3B4000AEF47B /* CustomTitleImageListRow.swift in Sources */,
 				CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */,
