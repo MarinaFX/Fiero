@@ -10,8 +10,7 @@ import SwiftUI
 struct ScoreController3_4Component: View {
     var foreGroundColor: Color
     var playerName: String
-    var scoreIncrementDecrementValue: Double
-    @Binding var playerScore: Double
+    @Binding var playerScore: Int
     
     var body: some View {
         ZStack {
@@ -19,7 +18,7 @@ struct ScoreController3_4Component: View {
                 .foregroundColor(foreGroundColor)
             HStack {
                 Button {
-                    playerScore -= scoreIncrementDecrementValue
+                    playerScore -= 1
                 } label: {
                     Image(systemName: "minus.circle.fill")
                         .resizable()
@@ -28,14 +27,14 @@ struct ScoreController3_4Component: View {
                 }
                 Spacer()
                 VStack {
-                    Text("\(playerScore, specifier: "%.2f")")
+                    Text("\(playerScore)")
                         .font(Tokens.FontStyle.largeTitle.font())
                     Text(playerName)
                         .font(Tokens.FontStyle.callout.font())
                 }
                 Spacer()
                 Button {
-                    playerScore += scoreIncrementDecrementValue
+                    playerScore += 1
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -52,6 +51,6 @@ struct ScoreController3_4Component: View {
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(foreGroundColor: .yellow, playerName: "Name", scoreIncrementDecrementValue: 1.0, playerScore: .constant(0.0))
+        ScoreController3_4Component(foreGroundColor: .yellow, playerName: "Name", playerScore: .constant(0))
     }
 }
