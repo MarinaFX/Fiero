@@ -14,17 +14,20 @@ class UserLoginViewModel: ObservableObject {
     @Published private(set) var user: User
     @Published private(set) var serverResponse: ServerResponse
 
-    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
+    //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/login"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init(client: HTTPClient = URLSession.shared) {
+    init(client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.user = User(email: "", name: "", password: "")
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - AuthenticateUser
@@ -66,10 +69,8 @@ class UserLoginViewModel: ObservableObject {
                     self?.user = userResponse.user
                     self?.user.token = userResponse.token
                     
-                    let defaults = UserDefaults.standard
-                    
-                    defaults.set(self?.user.id, forKey: "userID")
-                    defaults.set(self?.user.token, forKey: "AuthToken")
+                    self?.keyValueStorage.set(self?.user.id, forKey: "userID")
+                    self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")
                 }
                 
                 self?.serverResponse.statusCode = httpResponse.statusCode

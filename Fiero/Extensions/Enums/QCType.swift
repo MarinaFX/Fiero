@@ -9,7 +9,7 @@ import Foundation
 
 enum QCType: CustomStringConvertible, Equatable {
     case amount
-    case byTime(String?)
+    case byTime(String = "seconds")
     case bestOf
     
     var description: String {

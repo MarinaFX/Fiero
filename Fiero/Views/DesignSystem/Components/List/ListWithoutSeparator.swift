@@ -27,7 +27,7 @@ struct ListWithoutSeparator<Data, ID, Content>: View where Data: RandomAccessCol
           .listRowSeparator(.hidden)
       }
     } else if #available(iOS 14.0, *) {
-      ScrollView {
+        ScrollView(showsIndicators: false) {
         LazyVStack {
           ForEach(data, id: id, content: content)
         }
@@ -36,6 +36,7 @@ struct ListWithoutSeparator<Data, ID, Content>: View where Data: RandomAccessCol
       List(data, id: id, rowContent: content)
         .onAppear {
           UITableView.appearance().separatorStyle = .none
+          UITableView.appearance().showsVerticalScrollIndicator = false
         }.onDisappear {
           UITableView.appearance().separatorStyle = .singleLine
         }

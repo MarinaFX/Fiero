@@ -11,10 +11,11 @@ struct QCAmountWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
-    @State var serverResponse: ServerResponse = .unknown
     
     @State var goal: String = ""
     @State var pushNextView: Bool = false
+    @State var isPresentingAlert: Bool = false
+    @State var serverResponse: ServerResponse = .unknown
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -26,7 +27,7 @@ struct QCAmountWinRulesView: View {
             case .amount:
                 return "unity"
             case .byTime(let measure):
-                return measure ?? "No time measure defined"
+                return measure
             case .bestOf:
                 return "rounds"
         }
@@ -64,17 +65,32 @@ struct QCAmountWinRulesView: View {
             .padding(.bottom, Tokens.Spacing.xxxs.value)
             
             ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
-                
-                self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal) ?? 0, goalMeasure: self.goalMeasure)
-                self.pushNextView.toggle()
+                if (Int(self.goal) != nil) {
+                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                }
+                else {
+                    self.isPresentingAlert.toggle()
+                }
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                QCChallengeCreatedView()
+                QCChallengeCreatedView(quickChallengeViewModel: self.quickChallengeViewModel, serverResponse: self.$serverResponse, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
             }
         }
+        .alert(isPresented: self.$isPresentingAlert, content: {
+            Alert(title: Text("Entrada inválida"),
+                  message: Text("Apenas números são aceitos"),
+                  dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
+            )
+        })
+        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
+            self.serverResponse = serverResponse
+            print(self.serverResponse.statusCode)
+            
+            self.pushNextView.toggle()
+        })
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)
     }
