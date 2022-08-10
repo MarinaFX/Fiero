@@ -16,6 +16,29 @@ extension URLSession: HTTPClient {
     }
 }
 
+public func makeGETRequest
+(
+    scheme: String,
+    port: Int,
+    baseURL: String,
+    endPoint: String,
+    authToken: String
+) -> URLRequest {
+    var urlComponents = URLComponents()
+    urlComponents.scheme = scheme
+    urlComponents.port = port
+    urlComponents.host = baseURL
+    urlComponents.path = endPoint
+    
+    let url = urlComponents.url!
+    var request = URLRequest(url: url)
+    
+    request.httpMethod = "GET"
+
+    request.addValue(authToken, forHTTPHeaderField: "authToken")
+    
+    return request
+}
 extension UserDefaults: KeyValueStorage { }
 
 public func makePOSTRequest

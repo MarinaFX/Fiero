@@ -11,11 +11,13 @@ import Combine
 //MARK: QuickChallengeViewModel
 class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
+    @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
     
-    //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let BASE_URL: String = "localhost"
-    private let ENDPOINT: String = "/quickChallenge/create"
+    //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
+    private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
+    private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
     
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -45,26 +47,58 @@ class QuickChallengeViewModel: ObservableObject {
         
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT, authToken: userToken)
+        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
         
         self.client.perform(for: request)
-            .decodeHTTPResponse(type: QuickChallengeResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
-                    case .failure(let error):
-                        print("completion failed with: \(error.localizedDescription)")
-                    case .finished:
-                        print("finished successfully")
+                case .failure(let error):
+                    print("Publisher failed with: \(error)")
+                case .finished:
+                    print("Publisher received sucessfully")
                 }
             }, receiveValue: { [weak self] urlResponse in
                 guard let response = urlResponse.item else {
                     self?.serverResponse.statusCode = urlResponse.statusCode
-                    print(urlResponse.statusCode)
+                    print("error response status code: \(urlResponse.statusCode)")
                     return
                 }
-                print(response)
+                
+                self?.serverResponse.statusCode = urlResponse.statusCode
+                print("successful response: \(response)")
+                print("successful response: \(urlResponse.statusCode)")
+
+            })
+            .store(in: &cancellables)
+    }
+    
+    //MARK: - Get User Challenges
+    func getUserChallenges() {
+        let userToken = keyValueStorage.string(forKey: "AuthToken")!
+        
+        let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
+        
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Publisher failed with: \(error)")
+                case .finished:
+                    print("Publisher received sucessfully")
+                }
+            }, receiveValue: { [weak self] urlResponse in
+                if let response = urlResponse.item {
+                    self?.challengesList = response.quickChallenges
+                }
+                
+                self?.serverResponse.statusCode = urlResponse.statusCode
+                print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
             })
             .store(in: &cancellables)
     }
