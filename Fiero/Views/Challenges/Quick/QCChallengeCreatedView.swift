@@ -11,10 +11,35 @@ struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
     @Environment(\.rootPresentationMode) private var rootPresentationMode
     
+    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var didPushToHomeScreen: Bool = false
     @State var didPushToStartChallenge: Bool = false
+    @State var isPresentingAlert: Bool = false
+    @Binding var serverResponse: ServerResponse
     
-    var challenge: QuickChallenge?
+    var challengeType: QCType
+    var challengeName: String
+    var challengeParticipants: Int
+    var goal: Int
+    var goalMeasure: String {
+        switch challengeType {
+            case .amount:
+                return "unity"
+            case .byTime(let measure):
+                return measure
+            case .bestOf:
+                return "rounds"
+        }
+    }
+    
+    var title: String {
+        if serverResponse.statusCode != 201 &&
+            serverResponse.statusCode != 200 {
+            return "Não conseguimos \ncriar seu desafio"
+        }
+        
+        return "Desafio criado com sucesso"
+    }
 
     //MARK: - Body
     var body: some View {
@@ -24,7 +49,7 @@ struct QCChallengeCreatedView: View {
             Image("Olhos")
                 .padding(.top, Tokens.Spacing.sm.value * 1.5)
             
-            Text("Desafio criado com sucesso")
+            Text(self.title)
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -33,32 +58,55 @@ struct QCChallengeCreatedView: View {
             Spacer()
             
             //MARK: - Bottom Buttons
-            Button(action: {
-                self.rootPresentationMode.wrappedValue.popToRootViewController()
-            }, label: {
-                Text("Ir para lista de desafios")
-                    .bold()
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-            })
-            .padding(.bottom, Tokens.Spacing.xxxs.value)
-            
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+            if self.serverResponse.statusCode != 201 &&
+                self.serverResponse.statusCode != 200 {
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
+                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                })
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
                 
-            })
-            .padding(.bottom, Tokens.Spacing.xxxl.value)
-            .padding(.horizontal, Tokens.Spacing.xxxs.value)
-            
+                Button(action: {
+                    self.rootPresentationMode.wrappedValue.popToRootViewController()
+                }, label: {
+                    Text("Voltar para o início")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                })
+                .padding(.bottom, Tokens.Spacing.xxxl.value)
+            }
+            else {
+                Button(action: {
+                    self.rootPresentationMode.wrappedValue.popToRootViewController()
+                }, label: {
+                    Text("Ir para lista de desafios")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                })
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+                    
+                })
+                .padding(.bottom, Tokens.Spacing.xxxl.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            }
         }
-        .padding(.top, Tokens.Spacing.lg.value)
-        .padding(.bottom, Tokens.Spacing.xxs.value)
-        .frame(
-              minWidth: 0,
-              maxWidth: .infinity,
-              minHeight: 0,
-              maxHeight: .infinity,
-              alignment: .top
+        .alert(isPresented: self.$isPresentingAlert, content: {
+            Alert(title: Text("Erro"),
+                  message: Text(self.serverResponse.description),
+                  dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
             )
-        .background(Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1))
+        })
+        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
+            self.serverResponse = serverResponse
+            
+            if self.serverResponse.statusCode != 201 &&
+                self.serverResponse.statusCode != 200 {
+                self.isPresentingAlert.toggle()
+            }
+        })
+        .makeDarkModeFullScreen(color: Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1))
         .ignoresSafeArea()
         .navigationBarHidden(true)
     }
@@ -66,7 +114,7 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView()
+        QCChallengeCreatedView(quickChallengeViewModel: QuickChallengeViewModel(), serverResponse: .constant(.badRequest), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
     }

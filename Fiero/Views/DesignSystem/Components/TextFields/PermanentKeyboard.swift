@@ -31,11 +31,15 @@ struct PermanentKeyboard: UIViewRepresentable {
         
         //MARK: - UITextFieldDelegate
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            self.parent.text = textField.text ?? "nao funcionou"
+            DispatchQueue.main.async {
+                self.parent.text = textField.text ?? "nao funcionou"
+            }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            self.parent.text = textField.text ?? "Error on \(#function)"
+            DispatchQueue.main.async {
+                self.parent.text = textField.text ?? "Error on \(#function)"
+            }
             self.parent.didCommit()
             textField.isEnabled = false
             textField.resignFirstResponder()

@@ -11,77 +11,47 @@ struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                NavigationLink("", isActive: self.$isPresented) {
-                    AvailableSoonView()
-                }
-                .hidden()
-                
-                Spacer()
-                
-                Image("EmptyState")
-                
-                Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                    .padding(Tokens.Spacing.xxs.value)
-                
-                
-                ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
-                    self.isPresented.toggle()
-                })
-                .padding()
-                
-                Spacer()
-                
-                NavigationLink("", isActive: self.$isPresented) {
-                    QCCategorySelectionView()
-                }
-                .hidden()
-                
-                    .toolbar(content: {
-                        ToolbarItem(placement: .navigationBarTrailing, content: {
-                            Button(action: {
-                                self.isPresented.toggle()
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                                    .foregroundColor(.white)
-                            })
-                            .buttonStyle(.plain)
-                        })
-                    })
+        VStack {
+            NavigationLink("", isActive: self.$isPresented) {
+                QCCategorySelectionView()
             }
-            .navigationTitle("Desafios")
-            .navigationViewStyle(.stack)
-            .makeDarkModeFullScreen()
+            .hidden()
+            
+            Spacer()
+            
+            Image("EmptyState")
+            
+            Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
+                .multilineTextAlignment(.center)
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                .padding(Tokens.Spacing.xxs.value)
+            
+            ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                self.isPresented.toggle()
+            })
+            .padding()
+            
+            Spacer()
+            
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing, content: {
+                        Button(action: {
+                            self.isPresented.toggle()
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                        })
+                        .buttonStyle(.plain)
+                    })
+                })
         }
+        .navigationTitle("Desafios")
+        .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
-        .environment(\.rootPresentationMode, self.$isPresented)
     }
 }
-//VStack(spacing: Tokens.Spacing.xs.value) {
-//    VStack(spacing: Tokens.Spacing.xs.value) {
-//        Image("EmptyBox")
-//            .resizable()
-//        Text("Você não é ruim\n nem bom, você\n só ainda não\n tem oponentes")
-//            .multilineTextAlignment(.center)
-//            .font(Tokens.FontStyle.title.font(weigth: .bold))
-//            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-//    }
-//    .padding(.horizontal, Tokens.Spacing.xxxl.value)
-//    NavigationLink(destination: EmptyChallengesView(), isActive: $showNextScreen) {
-//        ButtonComponent(style: .primary(isEnabled: true),
-//                        text: "Criar um desafio!") {
-//            showNextScreen = true
-//        }
-//    }
-//    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-//}
-//.padding(.top, Tokens.Spacing.xxl.value)
-//.padding(.bottom, Tokens.Spacing.xxl.value)
 
 struct AvailableSoonView: View {
     @Environment(\.presentationMode) var presentationMode
