@@ -24,19 +24,13 @@ struct ChallengesListScreenView: View {
                     if #available(iOS 15.0, *) {
                         ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
                             ZStack {
-                                NavigationLink(isActive: self.$isPresentingChallengeDetails, destination: { ChallengeDetailsView(challenge: self.quickChallenges[index]) }, label: {
+                                NavigationLink(destination: ChallengeDetailsView(challenge: self.quickChallenges[index]), label: {
                                     EmptyView()
                                 })
-//                                NavigationLink(destination: ChallengeDetailsView(challenge: self.quickChallenges[index]), label: {
-//                                    EmptyView()
-//                                })
-//                                .opacity(0.0)
+                                .opacity(0.0)
                                 
                                 CustomTitleImageListRow(title: quickChallenges[index].name)
                             }
-                            .simultaneousGesture(TapGesture().onEnded({
-                                self.isPresentingChallengeDetails.toggle()
-                            }))
                             
                             .listRowBackground(Color.clear)
                         }

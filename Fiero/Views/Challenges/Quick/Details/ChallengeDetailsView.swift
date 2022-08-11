@@ -18,19 +18,21 @@ struct ChallengeDetailsView: View {
                 VStack(spacing: largeSpacing) {
                     VStack (alignment: .center, spacing: nanoSpacing) {
                         HStack(spacing: nanoSpacing) {
-                            Image(systemName: "stopwatch.fill")
+                            Text("⚡️")
                                 .font(titleFont)
                                 .foregroundColor(color)
+                            
                             Text(challenge.name)
                                 .font(titleFont)
                                 .foregroundColor(color)
                         }
                         .padding(.top, largeSpacing)
                         
-                        Text("Quem fizer mais\nrepetições dentro de")
+                        Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
                             .multilineTextAlignment(.center)
                             .font(descriptionFont)
                             .foregroundColor(color)
+                        
                         Text("\(challenge.goal)")
                             .font(titleFont)
                             .foregroundColor(color)

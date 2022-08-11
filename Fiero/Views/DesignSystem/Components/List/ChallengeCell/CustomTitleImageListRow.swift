@@ -29,22 +29,9 @@ struct CustomTitleImageListRow: View {
                     .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
                     .padding()
             }
-            .onAnimationCompleted(for: self.opacity, completion: {
-                withAnimation(.easeIn(duration: 0.25)) {
-                    self.didTapRow.toggle()
-                    self.opacity = 1.0
-                }
-            })
         }
         .opacity(self.opacity)
         .cornerRadius(Tokens.Border.BorderRadius.small.value)
-        .animation(.spring (response: 0.4, dampingFraction: 0.6))
-        .simultaneousGesture(LongPressGesture().onChanged({ _ in
-            withAnimation(.easeIn(duration: 0.25)) {
-                self.didTapRow.toggle()
-                self.opacity = 0.2
-            }
-        }))
     }
 }
 
