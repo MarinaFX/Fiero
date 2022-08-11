@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct ChallengesListScreenView: View {
     @Environment(\.rootPresentationMode) var rootPresentationMode
