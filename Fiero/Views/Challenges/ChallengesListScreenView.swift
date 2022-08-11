@@ -12,7 +12,9 @@ struct ChallengesListScreenView: View {
     
     @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @State var quickChallenges: [QuickChallenge] = []
-    @State var isPresented: Bool = false
+    @State var isPresentingQuickChallengeCreation: Bool = false
+    @State var isPresentingChallengeDetails: Bool = false
+    @State var serverResponse: ServerResponse = .unknown
     
     var body: some View {
         NavigationView {
@@ -20,7 +22,16 @@ struct ChallengesListScreenView: View {
                 if self.quickChallenges.count > 0 {
                     if #available(iOS 15.0, *) {
                         ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                            CustomTitleImageListRow(teste: quickChallenges[index].name)
+                            ZStack {
+                                NavigationLink(destination: ChallengeDetailsView(challenge: self.quickChallenges[index]), label: {
+                                    EmptyView()
+                                })
+                                .opacity(0.0)
+                                
+                                CustomTitleImageListRow(title: quickChallenges[index].name)
+                            }
+                            
+                            .listRowBackground(Color.clear)
                         }
                         .refreshable {
                             self.quickChallengeViewModel.getUserChallenges()
@@ -30,7 +41,10 @@ struct ChallengesListScreenView: View {
                     } else {
                         //TODO: Refreshable list for iOS 14
                         ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                            CustomTitleImageListRow(teste: quickChallenges[index].name)
+                            NavigationLink(destination: ChallengeDetailsView(challenge: self.quickChallenges[index]), label: {
+                                CustomTitleImageListRow(title: quickChallenges[index].name)
+                            })
+                            .buttonStyle(PlainButtonStyle())
                         }
                         .ignoresSafeArea(.all, edges: .bottom)
                         .listStyle(.plain)
@@ -44,10 +58,10 @@ struct ChallengesListScreenView: View {
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                         NavigationLink(destination: QCCategorySelectionView(),
-                                       isActive: $isPresented,
+                                       isActive: $isPresentingQuickChallengeCreation,
                                        label: {
                             Button(action: {
-                                isPresented = true
+                                isPresentingQuickChallengeCreation = true
                             }, label: {
                                 Image(systemName: "plus")
                                     .font(Tokens.FontStyle.title2.font(weigth: .bold))
@@ -67,8 +81,16 @@ struct ChallengesListScreenView: View {
         .onReceive(self.quickChallengeViewModel.$challengesList, perform: { quickChallenges in
             self.quickChallenges = quickChallenges
         })
+        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
+            self.serverResponse = serverResponse
+            
+            if self.serverResponse.statusCode != 200 &&
+                self.serverResponse.statusCode != 201 {
+                //toggle alert
+            }
+        })
         .navigationViewStyle(StackNavigationViewStyle())
-        .environment(\.rootPresentationMode, self.$isPresented)
+        .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
         .environment(\.colorScheme, .dark)
     }
 }
