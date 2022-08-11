@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Team: Encodable, Decodable, Equatable {
+struct Team: Encodable, Decodable, Equatable, Identifiable {
     
     var id: String
     var name: String
