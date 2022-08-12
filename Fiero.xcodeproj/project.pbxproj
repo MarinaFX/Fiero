@@ -67,6 +67,8 @@
 		CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */; };
 		CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24828760002007F6597 /* CheckboxComponent.swift */; };
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
+		CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */; };
+		CCBAEBDE28A6C9D0005D0FFC /* DuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */; };
 		CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */; };
 		CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */; };
 		CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */; };
@@ -164,6 +166,8 @@
 		CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingDuelScreenView.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
+		CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
+		CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScreenView.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
 		CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeComponent.swift; sourceTree = "<group>"; };
 		CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeStyles.swift; sourceTree = "<group>"; };
@@ -506,6 +510,16 @@
 			path = "ScoreController3-4";
 			sourceTree = "<group>";
 		};
+		CC358AEF28A44ADC0057548D /* Duel */ = {
+			isa = PBXGroup;
+			children = (
+				CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */,
+				CCBAEBE128A6CA60005D0FFC /* Ongoing */,
+				CCBAEBE228A6CA6A005D0FFC /* Pause */,
+			);
+			path = Duel;
+			sourceTree = "<group>";
+		};
 		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,7 +559,7 @@
 		CCA2215728A18E09006AA03F /* Ongoing */ = {
 			isa = PBXGroup;
 			children = (
-				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
+				CC358AEF28A44ADC0057548D /* Duel */,
 			);
 			path = Ongoing;
 			sourceTree = "<group>";
@@ -566,6 +580,22 @@
 				CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */,
 			);
 			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		CCBAEBE128A6CA60005D0FFC /* Ongoing */ = {
+			isa = PBXGroup;
+			children = (
+				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
+			);
+			path = Ongoing;
+			sourceTree = "<group>";
+		};
+		CCBAEBE228A6CA6A005D0FFC /* Pause */ = {
+			isa = PBXGroup;
+			children = (
+				CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */,
+			);
+			path = Pause;
 			sourceTree = "<group>";
 		};
 		CCFA559228872CDF00740663 /* ChallengeTypes */ = {
@@ -767,6 +797,7 @@
 			files = (
 				1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */,
 				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
+				CCBAEBDE28A6C9D0005D0FFC /* DuelScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
@@ -829,6 +860,7 @@
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
+				CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */,
 				CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
