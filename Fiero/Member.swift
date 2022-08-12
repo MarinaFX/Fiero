@@ -11,7 +11,7 @@ import SwiftUI
 struct Member: Decodable, Encodable, Equatable {
     
     var id: String
-    var score: Int
+    var score: Double
     var userId: String?
     var teamId: String
     var beginDate: String?
