@@ -18,7 +18,6 @@ struct ParticipantComponent: View {
             ZStack {
                 Circle()
                     .foregroundColor(Member.getColor(playerName: name))
-                    //.foregroundColor(Color(color))
                     .frame(width: style.width, height: style.width)
                     .saturation(style.saturation)
                 Text(Member.getImage(playerName: name))
