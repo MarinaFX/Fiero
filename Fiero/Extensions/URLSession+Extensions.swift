@@ -70,3 +70,29 @@ public func makePOSTRequest
     
     return request
 }
+
+public func makeDELETERequest
+(
+    param: String,
+    scheme: String,
+    port: Int,
+    baseURL: String,
+    endPoint: String,
+    authToken: String
+) -> URLRequest {
+    var urlComponents = URLComponents()
+    urlComponents.scheme = scheme
+    urlComponents.port = port
+    urlComponents.host = baseURL
+    urlComponents.path = endPoint + "/\(param)"
+    
+    let url = urlComponents.url!
+    var request = URLRequest(url: url)
+    print(request.url?.absoluteString)
+    request.httpMethod = "DELETE"
+
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue(authToken, forHTTPHeaderField: "authToken")
+    
+    return request
+}

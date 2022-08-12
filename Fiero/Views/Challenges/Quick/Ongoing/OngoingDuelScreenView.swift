@@ -9,47 +9,58 @@ import SwiftUI
 
 struct OngoingDuelScreenView: View {
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                ZStack {
-                    Tokens.Colors.Highlight.one.value
-                    VStack(spacing: Tokens.Spacing.xxs.value) {
-                        HStack {
-                            Spacer()
-                            
-                            Button {
-                                print("pause")
-                            } label: {
-                                Image(systemName: "pause.circle.fill")
-                                    .resizable()
-                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                    .frame(width: 40, height: 40)
-                            }
+        VStack(spacing: 0) {
+            ZStack {
+                Tokens.Colors.Highlight.one.value
+                VStack(spacing: Tokens.Spacing.xxs.value) {
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            print("pause")
+                        } label: {
+                            Image(systemName: "pause.circle.fill")
+                                .resizable()
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .frame(width: 40, height: 40)
                         }
-                        .padding()
-
-                        Image("Olhos")
-                        DuelScoreComponent(style: .first, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
+                        .padding(.top, Tokens.Spacing.xxl.value)
                     }
-                    .padding(.top, Tokens.Spacing.xxs.value)
+                    .padding()
+                    
+                    Image("Olhos")
+                    
+                    DuelScoreComponent(style: .first, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
                 }
+                .padding(.top, Tokens.Spacing.lg.value)
+            }
+            
+            ZStack {
+                Tokens.Colors.Highlight.two.value
+                    .ignoresSafeArea(.all, edges: .bottom)
                 
-                ZStack {
-                    Tokens.Colors.Highlight.two.value
-                    VStack(spacing: Tokens.Spacing.xxs.value) {
-                        DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
-                        Image("Olhos")
-                    }
-                    .padding(.bottom, Tokens.Spacing.xxl.value)
+                VStack(spacing: Tokens.Spacing.xxs.value) {
+                    DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
+                    
+                    Image("Olhos")
+                        .padding(.bottom, Tokens.Spacing.xl.value)
                 }
+                .padding(.bottom, Tokens.Spacing.xxxl.value)
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .all)
+        .navigationBarHidden(true)
     }
 }
 
 struct OngoingDuelScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        OngoingDuelScreenView()
+        Group {
+            OngoingDuelScreenView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+            
+            OngoingDuelScreenView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+        }
     }
 }

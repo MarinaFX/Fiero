@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
-
+//MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
-    var challenge: QuickChallenge
+    //MARK: - Variables Setup
+    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
+    @State var presentDuelOngoingChallenge: Bool = false
+    @State var present3or4OngoingChallenge: Bool = false
     
+    var challenge: QuickChallenge
+
+    //MARK: - Body
     var body: some View {
         ZStack {
             Color.black
-            
+            //MARK: - Top Components
             VStack {
                 VStack(spacing: largeSpacing) {
                     VStack (alignment: .center, spacing: nanoSpacing) {
@@ -38,6 +44,7 @@ struct ChallengeDetailsView: View {
                             .foregroundColor(color)
                     }
                     
+                    //MARK: - Mid Components
                     VStack(spacing: extraExtraExtraSmallSpacing) {
                         Text("Participantes")
                             .font(titleFont)
@@ -51,15 +58,31 @@ struct ChallengeDetailsView: View {
                 
                 Spacer()
                 
+                //MARK: - Bottom Components
                 VStack(spacing: quarkSpacing) {
+                    NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
+                        OngoingDuelScreenView()
+                    }
+                    .hidden()
+                    
+                    NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
+                        EmptyView()
+                    }
+                    .hidden()
+                    
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Começar desafio!") {
-                        print("Começar desafio!")
+                        if self.challenge.maxTeams == 2 {
+                            self.presentDuelOngoingChallenge.toggle()
+                        }
+                        else {
+                            self.present3or4OngoingChallenge.toggle()
+                        }
                     }
                     
                     ButtonComponent(style: .black(isEnabled: true),
-                                    text: "Editar desafio") {
-                        print("Editar desafio")
+                                    text: "Deletar desafio") {
+                        self.quickChallengeViewModel.deleteChallenge(by: challenge.id)
                     }
                 }
                 .padding(.bottom, largeSpacing)
@@ -70,6 +93,7 @@ struct ChallengeDetailsView: View {
         .ignoresSafeArea()
     }
     
+    //MARK: - DS Tokens
     var color: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
@@ -93,8 +117,9 @@ struct ChallengeDetailsView: View {
     }
 }
 
+//MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: "")))
+        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: "")))
     }
 }

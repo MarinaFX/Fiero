@@ -18,7 +18,8 @@ class QuickChallengeViewModel: ObservableObject {
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
-    
+    private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge/delete"
+
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -99,6 +100,35 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
                 print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
+            })
+            .store(in: &cancellables)
+    }
+    
+    //MARK: - Get User Challenges
+    func deleteChallenge(by id: String) {
+        let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
+        
+        let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
+        
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: [String:String].self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                switch result {
+                    case .failure(let error):
+                        print("Failed to create publisher: \(error)")
+                    case .finished:
+                        print("Successfully created publisher")
+                }
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print(self?.serverResponse.statusCode)
+                    return
+                }
+                print(response)
+                
             })
             .store(in: &cancellables)
     }
