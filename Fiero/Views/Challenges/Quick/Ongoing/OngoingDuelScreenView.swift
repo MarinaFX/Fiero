@@ -8,29 +8,55 @@
 import SwiftUI
 
 struct OngoingDuelScreenView: View {
+    
+    @Binding var didTapPauseButton: Bool
+    //MARK: Colors
+    var firstBackgroundColor: Color {
+        return Tokens.Colors.Highlight.one.value
+    }
+    var secondBackgroundColor: Color {
+        return Tokens.Colors.Highlight.two.value
+    }
+    var buttonColor: Color {
+        return Tokens.Colors.Neutral.High.pure.value
+    }
+    //MARK: Spacings
+    var spacingNano: Double {
+        return Tokens.Spacing.nano.value
+    }
+    var spacingXXXS: Double {
+        return Tokens.Spacing.xxxs.value
+    }
+    var spacingXS: Double {
+        return Tokens.Spacing.xs.value
+    }
+    
+
+    
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                Tokens.Colors.Highlight.one.value
-                VStack(spacing: Tokens.Spacing.xxs.value) {
-                    HStack {
-                        Spacer()
-                        
-                        Button {
-                            print("pause")
-                        } label: {
-                            Image(systemName: "pause.circle.fill")
-                                .resizable()
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .frame(width: 40, height: 40)
+        ZStack {
+            VStack(spacing: 0) {
+                ZStack {
+                    firstBackgroundColor
+                    VStack(spacing: spacingXS) {
+                        HStack {
+                            Spacer()
+                            
+                            Button {
+                                self.didTapPauseButton.toggle()
+                            } label: {
+                                Image(systemName: "pause.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(buttonColor)
+                                    .frame(width: 40, height: 40)
+                            }
                         }
-                        .padding(.top, Tokens.Spacing.xxl.value)
+                        .padding(.horizontal, spacingXXXS)
+
+                        Image("Olhos")
+                        DuelScoreComponent(style: .first, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
                     }
-                    .padding()
-                    
-                    Image("Olhos")
-                    
-                    DuelScoreComponent(style: .first, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
+                    .padding(.top, spacingNano)
                 }
                 .padding(.top, Tokens.Spacing.lg.value)
             }
@@ -39,11 +65,13 @@ struct OngoingDuelScreenView: View {
                 Tokens.Colors.Highlight.two.value
                     .ignoresSafeArea(.all, edges: .bottom)
                 
-                VStack(spacing: Tokens.Spacing.xxs.value) {
-                    DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
-                    
-                    Image("Olhos")
-                        .padding(.bottom, Tokens.Spacing.xl.value)
+                ZStack {
+                    secondBackgroundColor
+                    VStack(spacing: spacingXS) {
+                        Image("Olhos")
+                        DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
+                    }
+                    .padding(.bottom, spacingNano)
                 }
                 .padding(.bottom, Tokens.Spacing.xxxl.value)
             }
@@ -55,12 +83,6 @@ struct OngoingDuelScreenView: View {
 
 struct OngoingDuelScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            OngoingDuelScreenView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-            
-            OngoingDuelScreenView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
-        }
+        DuelScreenView()
     }
 }

@@ -10,9 +10,7 @@ import SwiftUI
 struct GroupComponent: View {
     @State var scoreboard: Bool
     @State var style: [ParticipantStyles]
-    @State var element: [ElementsStyles]
-    @State var name: [String]
-    @State var pointsOrTime: [String]?
+    @Binding var quickChallenge: QuickChallenge
     
     var body: some View {
         ZStack {
@@ -23,8 +21,8 @@ struct GroupComponent: View {
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     
                     HStack(spacing: Tokens.Spacing.nano.value) {
-                        ForEach(0..<name.count, id: \.self) { index in
-                            ParticipantComponent(style: style[index], element: element[index], name: name[index], pointsOrTime: pointsOrTime?[index])
+                        ForEach($quickChallenge.teams) { team in
+                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
                         }
                     }
                     
@@ -32,8 +30,8 @@ struct GroupComponent: View {
             }
             else {
                 HStack(spacing: Tokens.Spacing.xxxs.value) {
-                    ForEach(0..<name.count, id: \.self) { index in
-                        ParticipantComponent(style: style[index], element: element[index], name: name[index], pointsOrTime: pointsOrTime?[index])
+                    ForEach($quickChallenge.teams) { team in
+                        ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
                     }
                 }
                 .padding(.all)
@@ -45,6 +43,13 @@ struct GroupComponent: View {
 
 struct GroupComponent_Previews: PreviewProvider {
     static var previews: some View {
-        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true), .participantDefault(isSmall: true), .participantDefault(isSmall: true)], element: [.one, .two, .three], name: ["Bru", "Klaus", "Sol"], pointsOrTime: ["22", "12", "43"])
+        GroupComponent(scoreboard: true, style: [ ParticipantStyles.participantDefault(isSmall: true),  ParticipantStyles.participantDefault(isSmall: true),  ParticipantStyles.participantDefault(isSmall: true),  ParticipantStyles.participantDefault(isSmall: true)], quickChallenge: .constant(QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams:
+                                                                            [
+                                                                                Team(id: "teste1", name: "player1", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 22, userId: "", teamId: "", beginDate: "", botPicture: "player1", createdAt: "", updatedAt: "")]),
+                                                                                Team(id: "teste2", name: "player2", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 12, userId: "", teamId: "", beginDate: "", botPicture: "player2", createdAt: "", updatedAt: "")]),
+                                                                                Team(id: "teste3", name: "player3", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 43, userId: "", teamId: "", beginDate: "", botPicture: "player3", createdAt: "", updatedAt: "")]),
+                                                                                Team(id: "teste4", name: "player4", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 200, userId: "", teamId: "", beginDate: "", botPicture: "player4", createdAt: "", updatedAt: "")])
+                                                                            ],
+                                                                            owner: User(email: "teste", name: "teste"))))
     }
 }
