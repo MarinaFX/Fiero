@@ -10,7 +10,7 @@ import SwiftUI
 struct ScoreController3_4Component: View {
     var foreGroundColor: Color
     var playerName: String
-    @Binding var playerScore: Int
+    @Binding var playerScore: Double
     
     var body: some View {
         ZStack {
@@ -27,7 +27,7 @@ struct ScoreController3_4Component: View {
                 }
                 Spacer()
                 VStack {
-                    Text("\(playerScore)")
+                    Text("\(playerScore, specifier: "%.0f")")
                         .font(Tokens.FontStyle.largeTitle.font())
                     Text(playerName)
                         .font(Tokens.FontStyle.callout.font())

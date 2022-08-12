@@ -16,7 +16,6 @@ struct GroupComponent: View {
     
     var body: some View {
         ZStack {
-            Color.black
             
             if scoreboard {
                 ZStack {
