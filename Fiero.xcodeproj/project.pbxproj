@@ -510,16 +510,6 @@
 			path = "ScoreController3-4";
 			sourceTree = "<group>";
 		};
-		CC358AEF28A44ADC0057548D /* Duel */ = {
-			isa = PBXGroup;
-			children = (
-				CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */,
-				CCBAEBE128A6CA60005D0FFC /* Ongoing */,
-				CCBAEBE228A6CA6A005D0FFC /* Pause */,
-			);
-			path = Duel;
-			sourceTree = "<group>";
-		};
 		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,7 +549,9 @@
 		CCA2215728A18E09006AA03F /* Ongoing */ = {
 			isa = PBXGroup;
 			children = (
-				CC358AEF28A44ADC0057548D /* Duel */,
+				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
+				CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */,
+				CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */,
 			);
 			path = Ongoing;
 			sourceTree = "<group>";
@@ -580,22 +572,6 @@
 				CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */,
 			);
 			path = Checkbox;
-			sourceTree = "<group>";
-		};
-		CCBAEBE128A6CA60005D0FFC /* Ongoing */ = {
-			isa = PBXGroup;
-			children = (
-				CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */,
-			);
-			path = Ongoing;
-			sourceTree = "<group>";
-		};
-		CCBAEBE228A6CA6A005D0FFC /* Pause */ = {
-			isa = PBXGroup;
-			children = (
-				CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */,
-			);
-			path = Pause;
 			sourceTree = "<group>";
 		};
 		CCFA559228872CDF00740663 /* ChallengeTypes */ = {
