@@ -23,7 +23,7 @@ struct ChallengesListScreenView: View {
                     if #available(iOS 15.0, *) {
                         ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
                             ZStack {
-                                NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), challenge: self.quickChallenges[index]), label: {
+                                NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
                                     EmptyView()
                                 })
                                 .opacity(0.0)
@@ -41,7 +41,7 @@ struct ChallengesListScreenView: View {
                     } else {
                         //TODO: Refreshable list for iOS 14
                         ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                            NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), challenge: self.quickChallenges[index]), label: {
+                            NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
                                 CustomTitleImageListRow(title: quickChallenges[index].name)
                             })
                             .buttonStyle(PlainButtonStyle())
@@ -78,7 +78,8 @@ struct ChallengesListScreenView: View {
             UITableView.appearance().refreshControl = UIRefreshControl()
             self.quickChallengeViewModel.getUserChallenges()
         })
-        .onReceive(self.quickChallengeViewModel.$challengesList, perform: { quickChallenges in
+        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
+            self.quickChallenges = []
             self.quickChallenges = quickChallenges
         })
         .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in

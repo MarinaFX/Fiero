@@ -14,7 +14,7 @@ struct ChallengeDetailsView: View {
     @State var present3or4OngoingChallenge: Bool = false
     @State var challenge: QuickChallenge
     
-    var challenge: QuickChallenge
+    var quickChallenge: QuickChallenge
 
     //MARK: - Body
     var body: some View {
@@ -29,7 +29,7 @@ struct ChallengeDetailsView: View {
                                 .font(titleFont)
                                 .foregroundColor(color)
                             
-                            Text(challenge.name)
+                            Text(quickChallenge.name)
                                 .font(titleFont)
                                 .foregroundColor(color)
                         }
@@ -40,7 +40,7 @@ struct ChallengeDetailsView: View {
                             .font(descriptionFont)
                             .foregroundColor(color)
                         
-                        Text("\(challenge.goal)")
+                        Text("\(quickChallenge.goal)")
                             .font(titleFont)
                             .foregroundColor(color)
                     }
@@ -67,13 +67,13 @@ struct ChallengeDetailsView: View {
                     .hidden()
                     
                     NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                        EmptyView()
+                        Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
                     }
                     .hidden()
                     
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Começar desafio!") {
-                        if self.challenge.maxTeams == 2 {
+                        if self.quickChallenge.maxTeams == 2 {
                             self.presentDuelOngoingChallenge.toggle()
                         }
                         else {
@@ -83,7 +83,7 @@ struct ChallengeDetailsView: View {
                     
                     ButtonComponent(style: .black(isEnabled: true),
                                     text: "Deletar desafio") {
-                        self.quickChallengeViewModel.deleteChallenge(by: challenge.id)
+                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                     }
                 }
                 .padding(.bottom, largeSpacing)

@@ -13,6 +13,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
+    @Published var didUpdateChallenges: Bool = false
     
     private let BASE_URL: String = "localhost"
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
@@ -33,6 +34,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
+        self.didUpdateChallenges = false
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -69,6 +71,7 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
+                self?.didUpdateChallenges = true
                 print("successful response: \(response)")
                 print("successful response: \(urlResponse.statusCode)")
 
@@ -78,6 +81,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Get User Challenges
     func getUserChallenges() {
+        self.didUpdateChallenges = false
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
@@ -96,6 +100,7 @@ class QuickChallengeViewModel: ObservableObject {
             }, receiveValue: { [weak self] urlResponse in
                 if let response = urlResponse.item {
                     self?.challengesList = response.quickChallenges
+                    self?.didUpdateChallenges = true
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
@@ -106,6 +111,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Get User Challenges
     func deleteChallenge(by id: String) {
+        self.didUpdateChallenges = false
         let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
@@ -127,6 +133,7 @@ class QuickChallengeViewModel: ObservableObject {
                     print(self?.serverResponse.statusCode)
                     return
                 }
+                self?.didUpdateChallenges = true
                 print(response)
                 
             })

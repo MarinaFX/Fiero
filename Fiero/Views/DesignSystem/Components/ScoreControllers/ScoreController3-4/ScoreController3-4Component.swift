@@ -23,14 +23,17 @@ struct ScoreController3_4Component: View {
                     Image(systemName: "minus.circle.fill")
                         .resizable()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(.black)
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                 }
                 Spacer()
                 VStack {
                     Text("\(playerScore, specifier: "%.0f")")
                         .font(Tokens.FontStyle.largeTitle.font())
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                    
                     Text(playerName)
                         .font(Tokens.FontStyle.callout.font())
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                 }
                 Spacer()
                 Button {

@@ -14,6 +14,27 @@ struct Ongoing3_4ScreenView: View {
         ZStack {
             Tokens.Colors.Highlight.one.value
             VStack {
+                HStack {
+                    Button {
+                        print("pause")
+                    } label: {
+                        Image(systemName: "pause.circle.fill")
+                            .resizable()
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .frame(width: 40, height: 40)
+                    }
+                    .frame(
+                          minWidth: 0,
+                          maxWidth: .infinity,
+                          minHeight: 0,
+                          maxHeight: .infinity,
+                          alignment: .topTrailing
+                        )
+                    .padding(.top, Tokens.Spacing.md.value)
+                    .padding(.trailing, Tokens.Spacing.defaultMargin.value)
+                }
+            }
+            VStack {
                 Text(quickChallenge.type)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
@@ -28,7 +49,9 @@ struct Ongoing3_4ScreenView: View {
                 GroupComponent(scoreboard: true, style: quickChallenge.teams.map({ team in
                         ParticipantStyles.participantDefault(isSmall: true)
                 }), quickChallenge: $quickChallenge)
-                .padding([.horizontal], Tokens.Spacing.xxxs.value)
+                .frame(height: UIScreen.main.bounds.height * 0.2)
+                .padding([.horizontal], Tokens.Spacing.defaultMargin.value)
+                //.padding([.horizontal], Tokens.Spacing.xxxs.value)
                 
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     ForEach($quickChallenge.teams) { team in
@@ -36,7 +59,7 @@ struct Ongoing3_4ScreenView: View {
                             foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
                             playerName: team.wrappedValue.name,
                             playerScore: Binding(team.members)?.first?.score ?? .constant(0))
-                        .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     }
                 }
                 
@@ -47,11 +70,12 @@ struct Ongoing3_4ScreenView: View {
                 }
                 .padding(.bottom, Tokens.Spacing.md.value)
                 .padding(.top, Tokens.Spacing.xxs.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             }
             
         }
-        .ignoresSafeArea()
+        .navigationBarHidden(true)
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 
