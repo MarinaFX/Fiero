@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChallengeDetailsView: View {
-    var challenge: QuickChallenge
+    @State var challenge: QuickChallenge
     
     var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ struct ChallengeDetailsView: View {
                             .font(titleFont)
                             .foregroundColor(color)
                         
-                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false), .participantLooser(isSmall: false)], element: [.one, .two], name: ["Clarice", "Marina"])
+                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $challenge)
                         
                     }
                 }
@@ -95,6 +95,6 @@ struct ChallengeDetailsView: View {
 
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: "")))
+        ChallengeDetailsView(challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
     }
 }

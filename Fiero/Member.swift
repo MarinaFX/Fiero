@@ -31,4 +31,17 @@ struct Member: Decodable, Encodable, Equatable {
                 return Color("ParticipantColor1")
         }
     }
+    
+    static func getImage(playerName: String) -> String {
+        switch playerName {
+            case "player2":
+                return "🦊"
+            case "player3":
+                return "🐼"
+            case "player4":
+                return "🦁"
+            default:
+                return "🐹"
+        }
+    }
 }

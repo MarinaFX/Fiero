@@ -10,21 +10,18 @@ import SwiftUI
 struct ParticipantComponent: View {
     
     @State var style: ParticipantStyles
-    @State var element: ElementsStyles
-    @State var name: String
-    @State var pointsOrTime: String?
-//    @State var image: String
-//    @State var color: String
+    @Binding var name: String
+    @Binding var score: Double
     
     var body: some View {
         VStack(spacing: style.spacing) {
             ZStack {
                 Circle()
-                    .foregroundColor(Color(element.color))
+                    .foregroundColor(Member.getColor(playerName: name))
                     //.foregroundColor(Color(color))
                     .frame(width: style.width, height: style.width)
                     .saturation(style.saturation)
-                Text(element.image)
+                Text(Member.getImage(playerName: name))
                     .font(style.iconFont)
                     .saturation(style.saturation)
             }
@@ -32,7 +29,7 @@ struct ParticipantComponent: View {
                 .font(style.textFont)
                 .foregroundColor(style.textAndPointsColor)
             
-            Text(pointsOrTime ?? "")
+            Text("\(score, specifier: "%.0f")")
                 .font(style.pointsFont)
                 .foregroundColor(style.textAndPointsColor)
         }
@@ -41,6 +38,6 @@ struct ParticipantComponent: View {
 
 struct ParticipantComponent_Previews: PreviewProvider {
     static var previews: some View {
-        ParticipantComponent(style: .participantDefault(isSmall: true), element: .one, name: "Naty", pointsOrTime: "100")
+        ParticipantComponent(style: ParticipantStyles.participantDefault(isSmall: true), name: .constant("naty"), score: .constant(0))
     }
 }

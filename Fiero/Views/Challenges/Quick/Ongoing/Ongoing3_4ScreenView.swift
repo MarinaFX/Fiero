@@ -27,12 +27,7 @@ struct Ongoing3_4ScreenView: View {
                 
                 GroupComponent(scoreboard: true, style: quickChallenge.teams.map({ team in
                         ParticipantStyles.participantDefault(isSmall: true)
-                }), element: [.one, .two, .three, .four], name: quickChallenge.teams.map({ team in
-                    team.name
-                }), pointsOrTime: quickChallenge.teams.map({ team in
-                    let value = Int(team.members?[0].score ?? 0)
-                    return "\(value)"
-                }))
+                }), quickChallenge: $quickChallenge)
                 .padding([.horizontal], Tokens.Spacing.xxxs.value)
                 
                 VStack(spacing: Tokens.Spacing.quarck.value) {
