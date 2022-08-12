@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QCCategorySelectionView: View {
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -40,6 +41,15 @@ struct QCCategorySelectionView: View {
             }
             .padding(.bottom)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Voltar")
+                    .bold()
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            })
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
         }
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)
