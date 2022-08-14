@@ -12,9 +12,7 @@ struct ChallengeDetailsView: View {
     @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
-    @State var challenge: QuickChallenge
-    
-    var quickChallenge: QuickChallenge
+    @State var quickChallenge: QuickChallenge
 
     //MARK: - Body
     var body: some View {
@@ -51,7 +49,7 @@ struct ChallengeDetailsView: View {
                             .font(titleFont)
                             .foregroundColor(color)
                         
-                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $challenge)
+                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
                         
                     }
                 }
@@ -62,7 +60,7 @@ struct ChallengeDetailsView: View {
                 //MARK: - Bottom Components
                 VStack(spacing: quarkSpacing) {
                     NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                        OngoingDuelScreenView()
+                        DuelScreenView()
                     }
                     .hidden()
                     
@@ -121,6 +119,6 @@ struct ChallengeDetailsView: View {
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
     }
 }

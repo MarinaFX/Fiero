@@ -19,7 +19,7 @@ class QuickChallengeViewModel: ObservableObject {
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
-    private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge/delete"
+    private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge"
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage

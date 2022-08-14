@@ -88,7 +88,6 @@ public func makeDELETERequest
     
     let url = urlComponents.url!
     var request = URLRequest(url: url)
-    print(request.url?.absoluteString)
     request.httpMethod = "DELETE"
 
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
