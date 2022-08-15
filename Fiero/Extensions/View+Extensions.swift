@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+//MARK: - View Extentions
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -20,7 +21,7 @@ extension View {
         }
     }
     
-    func makeDarkModeFullScreen() -> some View {
+    func makeDarkModeFullScreen(color: Color = Tokens.Colors.Background.dark.value) -> some View {
         return self
             .padding(.top, Tokens.Spacing.lg.value)
             .padding(.bottom, Tokens.Spacing.xxs.value)
@@ -31,7 +32,27 @@ extension View {
                   maxHeight: .infinity,
                   alignment: .top
                 )
-            .background(Tokens.Colors.Background.dark.value)
+            .background(color)
             .ignoresSafeArea()
+    }
+}
+
+//MARK: - ViewController Wrapper Extensions 
+struct RootPresentationModeKey: EnvironmentKey {
+    static let defaultValue: Binding<RootPresentationMode> = .constant(RootPresentationMode())
+}
+
+extension EnvironmentValues {
+    var rootPresentationMode: Binding<RootPresentationMode> {
+        get { return self[RootPresentationModeKey.self] }
+        set { self[RootPresentationModeKey.self] = newValue }
+    }
+}
+
+typealias RootPresentationMode = Bool
+
+extension RootPresentationMode {
+    public mutating func popToRootViewController() {
+        self.toggle()
     }
 }

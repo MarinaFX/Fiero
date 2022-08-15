@@ -8,40 +8,47 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
-    @State var isPresentingAvailableSoonSheet: Bool = false
+    @State var isPresented: Bool = false
     
     var body: some View {
-        NavigationView{
-            VStack {
-                Spacer()
-                
-                Text("Parece que você não possui nenhum desafio, que tal criar um? \nBasta apertar no + no canto superior direito da tela")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
-                    .padding(Tokens.Spacing.xxs.value)
-                
-                Spacer()
-                
-                    .toolbar(content: {
-                        ToolbarItem(placement: .navigationBarTrailing, content: {
-                            Button(action: {
-                                self.isPresentingAvailableSoonSheet.toggle()
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                                    .foregroundColor(.white)
-                            })
-                            .buttonStyle(.plain)
-                        })
-                    })
+        VStack {
+            NavigationLink("", isActive: self.$isPresented) {
+                QCCategorySelectionView()
             }
-            .sheet(isPresented: self.$isPresentingAvailableSoonSheet, content: {
-                AvailableSoonView()
+            .hidden()
+            
+            Spacer()
+            
+            Image("EmptyState")
+            
+            Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
+                .multilineTextAlignment(.center)
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                .padding(Tokens.Spacing.xxs.value)
+            
+            ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                self.isPresented.toggle()
             })
-            .navigationTitle("Desafios")
-            .makeDarkModeFullScreen()
+            .padding()
+            
+            Spacer()
+            
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing, content: {
+                        Button(action: {
+                            self.isPresented.toggle()
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                        })
+                        .buttonStyle(.plain)
+                    })
+                })
         }
+        .navigationTitle("Desafios")
+        .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
     }
 }
