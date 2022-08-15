@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
-
+//MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
-    @State var challenge: QuickChallenge
-    
+    //MARK: - Variables Setup
+    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
+    @State var presentDuelOngoingChallenge: Bool = false
+    @State var present3or4OngoingChallenge: Bool = false
+    @State var quickChallenge: QuickChallenge
+
+    //MARK: - Body
     var body: some View {
         ZStack {
             Color.black
-            
+            //MARK: - Top Components
             VStack {
                 VStack(spacing: largeSpacing) {
                     VStack (alignment: .center, spacing: nanoSpacing) {
@@ -22,7 +27,7 @@ struct ChallengeDetailsView: View {
                                 .font(titleFont)
                                 .foregroundColor(color)
                             
-                            Text(challenge.name)
+                            Text(quickChallenge.name)
                                 .font(titleFont)
                                 .foregroundColor(color)
                         }
@@ -33,17 +38,18 @@ struct ChallengeDetailsView: View {
                             .font(descriptionFont)
                             .foregroundColor(color)
                         
-                        Text("\(challenge.goal)")
+                        Text("\(quickChallenge.goal)")
                             .font(titleFont)
                             .foregroundColor(color)
                     }
                     
+                    //MARK: - Mid Components
                     VStack(spacing: extraExtraExtraSmallSpacing) {
                         Text("Participantes")
                             .font(titleFont)
                             .foregroundColor(color)
                         
-                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $challenge)
+                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
                         
                     }
                 }
@@ -51,15 +57,31 @@ struct ChallengeDetailsView: View {
                 
                 Spacer()
                 
+                //MARK: - Bottom Components
                 VStack(spacing: quarkSpacing) {
+                    NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
+                        DuelScreenView()
+                    }
+                    .hidden()
+                    
+                    NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
+                        Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
+                    }
+                    .hidden()
+                    
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Começar desafio!") {
-                        print("Começar desafio!")
+                        if self.quickChallenge.maxTeams == 2 {
+                            self.presentDuelOngoingChallenge.toggle()
+                        }
+                        else {
+                            self.present3or4OngoingChallenge.toggle()
+                        }
                     }
                     
                     ButtonComponent(style: .black(isEnabled: true),
-                                    text: "Editar desafio") {
-                        print("Editar desafio")
+                                    text: "Deletar desafio") {
+                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                     }
                 }
                 .padding(.bottom, largeSpacing)
@@ -70,6 +92,7 @@ struct ChallengeDetailsView: View {
         .ignoresSafeArea()
     }
     
+    //MARK: - DS Tokens
     var color: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
@@ -93,8 +116,9 @@ struct ChallengeDetailsView: View {
     }
 }
 
+//MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(challenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
     }
 }

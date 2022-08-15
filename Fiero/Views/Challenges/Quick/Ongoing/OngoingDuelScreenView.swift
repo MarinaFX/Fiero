@@ -58,6 +58,12 @@ struct OngoingDuelScreenView: View {
                     }
                     .padding(.top, spacingNano)
                 }
+                .padding(.top, Tokens.Spacing.lg.value)
+            }
+            
+            ZStack {
+                Tokens.Colors.Highlight.two.value
+                    .ignoresSafeArea(.all, edges: .bottom)
                 
                 ZStack {
                     secondBackgroundColor
@@ -67,9 +73,11 @@ struct OngoingDuelScreenView: View {
                     }
                     .padding(.bottom, spacingNano)
                 }
+                .padding(.bottom, Tokens.Spacing.xxxl.value)
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .all)
+        .navigationBarHidden(true)
     }
 }
 
