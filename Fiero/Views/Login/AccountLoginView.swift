@@ -56,87 +56,76 @@ struct AccountLoginView: View {
             RegistrationScreenView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
-                if #available(iOS 15.0, *) {
-                    Image("LoginBackground")
-                        .resizable()
-                } else {
-                    if dynamicTypeCategory > .extraExtraLarge {
-                        Image("LoginBackground")
-                            .resizable()
-                            .saturation(0.8)
-                            .blur(radius: 10, opaque: true)
-                    } else {
-                        Image("LoginBackground")
-                            .resizable()
-                    }
-                }
-                
-                //MARK: Blurred View
-                BlurredSquaredView(usernameText: self.$emailText) {
-                    VStack {
-                        Text("Boas vindas, desafiante")
-                            .font(titleFont)
-                            .foregroundColor(.white)
-                        //MARK: TextFields
-                        CustomTextFieldView(type: .none,
-                                            style: .primary,
-                                            placeholder: emailPlaceholder,
-                                            keyboardType: .emailAddress,
-                                            isSecure: false,
-                                            isLowCase: true ,
-                                            isWrong: .constant(false),
-                                            text: self.$emailText)
-                            .padding(nanoSpacing)
+                //MARK: Login Form
+                VStack {
+                    Spacer()
+                    Text("Boas vindas, desafiante")
+                        .font(titleFont)
+                        .foregroundColor(.white)
+                    //MARK: TextFields
+                    CustomTextFieldView(type: .none,
+                                        style: .primary,
+                                        placeholder: emailPlaceholder,
+                                        keyboardType: .emailAddress,
+                                        isSecure: false,
+                                        isLowCase: true ,
+                                        isWrong: .constant(false),
+                                        text: self.$emailText)
+                        .padding(nanoSpacing)
+                    
+                    CustomTextFieldView(type: .icon,
+                                        style: .primary,
+                                        placeholder: passwordPlaceholder,
+                                        isSecure: true,
+                                        isLowCase: true ,
+                                        isWrong: .constant(false),
+                                        text: self.$passwordText)
+                        .padding(nanoSpacing)
+                    //MARK: Buttons
+                    Button(action: {
+                        //TODO: create a link to Remember Password Screen (doesn't exist yet)
+                    }, label: {
+                        Text("Esqueceu sua senha?")
+                            .font(textFont)
+                            .foregroundColor(color)
+                            .underline()
+                    })
+                    .padding(.vertical, smallSpacing)
+                    
+                    ButtonComponent(style: .secondary(isEnabled: true),
+                                    text: "Fazer login!",
+                                    action: {
+                        self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                    })
+                    
+                    HStack {
+                        Text("Ainda não tem uma conta?")
+                            .font(textFont)
+                            .foregroundColor(color)
+                            .accessibilityLabel("")
                         
-                        CustomTextFieldView(type: .icon,
-                                            style: .primary,
-                                            placeholder: passwordPlaceholder,
-                                            isSecure: true,
-                                            isLowCase: true ,
-                                            isWrong: .constant(false),
-                                            text: self.$passwordText)
-                            .padding(nanoSpacing)
-                        //MARK: Buttons
                         Button(action: {
-                            //TODO: create a link to Remember Password Screen (doesn't exist yet)
+                            self.isRegistrationSheetShowing.toggle()
                         }, label: {
-                            Text("Esqueceu sua senha?")
-                                .font(textFont)
+                            Text("Cadastre-se!")
+                                .font(textButtonFont)
                                 .foregroundColor(color)
-                                .underline()
+                                .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
                         })
-                        .padding(.vertical, smallSpacing)
-                        
-                        ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: "Fazer login!",
-                                        action: {
-                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)                            
-                        })
-                        
-                        HStack {
-                            Text("Ainda não tem uma conta?")
-                                .font(textFont)
-                                .foregroundColor(color)
-                                .accessibilityLabel("")
-                            
-                            Button(action: {
-                                self.isRegistrationSheetShowing.toggle()
-                            }, label: {
-                                Text("Cadastre-se!")
-                                    .font(textButtonFont)
-                                    .foregroundColor(color)
-                                    .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
-                            })
-                        }
-                        .padding(.top, smallSpacing)
                     }
-                    .padding(smallSpacing)
+                    .padding(.top, smallSpacing)
                 }
+                .padding(smallSpacing)
             }
+            .background(
+                Image("LoginBackground")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .scaledToFill()
+                    )
             .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
                 Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
             })
-            .ignoresSafeArea()
             .onChange(of: self.userLoginViewModel.user, perform: { user in
                 self.user = user
             })
@@ -145,6 +134,8 @@ struct AccountLoginView: View {
                 
                 if self.serverResponse.statusCode == 200 ||
                     self.serverResponse.statusCode == 201 {
+                    UserDefaults.standard.set(self.passwordText, forKey: "password")
+                    UserDefaults.standard.set(self.emailText, forKey: "email")
                     self.pushHomeView.toggle()
                 }
                 
@@ -155,83 +146,6 @@ struct AccountLoginView: View {
                 AppDelegate.orientationLock = .portrait // And making sure it stays that way
             }.onDisappear {
                 AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
-            }
-        }
-    }
-}
-
-//MARK: - Blurred Squared View
-struct BlurredSquaredView<Content>: View where Content: View {
-    
-    //MARK: Variables Setup
-    @ViewBuilder var content: Content
-    @Binding private(set) var usernameText: String
-    @Environment(\.sizeCategory) var dynamicTypeCategory
-        
-    init(usernameText: Binding<String>, @ViewBuilder content: @escaping () -> Content) {
-        self._usernameText = usernameText
-        self.content = content()
-    }
-    
-    var spacing: Double {
-        return Tokens.Spacing.xxs.value
-    }
-    
-    //MARK: body View
-    var body: some View {
-        if #available(iOS 15.0, *) {
-            if dynamicTypeCategory >= .accessibilityMedium {
-                ScrollView {
-                    content
-                        .frame(width: UIScreen.main.bounds.width * 0.9,
-                               alignment: .center)
-                        .padding(.vertical, spacing)
-                        .background(.ultraThinMaterial)
-                        .environment(\.colorScheme, .dark)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.white,
-                                        lineWidth: 0.5)
-                        )
-                }
-            } else {
-                content
-                    .frame(width: UIScreen.main.bounds.width * 0.9,
-                           alignment: .center)
-                    .padding(.vertical, spacing)
-                    .background(.ultraThinMaterial)
-                    .environment(\.colorScheme, .dark)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.white,
-                                    lineWidth: 0.5)
-                    )
-            }
-        } else {
-            if dynamicTypeCategory > .extraExtraLarge {
-                ScrollView {
-                    content
-                        .frame(width: UIScreen.main.bounds.width * 0.9)
-                        .padding(.vertical, spacing)
-                }
-            } else {
-                ZStack {
-                    Image("LoginBackground")
-                        .frame(width: UIScreen.main.bounds.width * 0.9,
-                               height: 437,
-                               alignment: .center)
-                        .blur(radius: 10)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.white, lineWidth: 0.5)
-                        )
-                        .overlay(
-                            content
-                        )
-                }
             }
         }
     }
