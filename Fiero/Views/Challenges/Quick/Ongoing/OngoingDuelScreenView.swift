@@ -35,10 +35,11 @@ struct OngoingDuelScreenView: View {
     
     var body: some View {
         ZStack {
+            firstBackgroundColor
             VStack(spacing: 0) {
                 ZStack {
                     firstBackgroundColor
-                    VStack(spacing: spacingXS) {
+                    VStack(spacing: Tokens.Spacing.lg.value) {
                         HStack {
                             Spacer()
                             
@@ -52,28 +53,21 @@ struct OngoingDuelScreenView: View {
                             }
                         }
                         .padding(.horizontal, spacingXXXS)
-
-                        Image("Olhos")
+                        
                         DuelScoreComponent(style: .first, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
+                            .padding(.horizontal, Tokens.Spacing.lg.value)
+                        Image("Olhos")
                     }
-                    .padding(.top, spacingNano)
                 }
-                .padding(.top, Tokens.Spacing.lg.value)
-            }
-            
-            ZStack {
-                Tokens.Colors.Highlight.two.value
-                    .ignoresSafeArea(.all, edges: .bottom)
-                
+                    
                 ZStack {
                     secondBackgroundColor
-                    VStack(spacing: spacingXS) {
+                    VStack(spacing: Tokens.Spacing.lg.value) {
+                        DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Eu")
+                            .padding(.horizontal, Tokens.Spacing.lg.value)
                         Image("Olhos")
-                        DuelScoreComponent(style: .second, maxValue: 10, count: 2, playerName: "Alpaca Enfurecida")
                     }
-                    .padding(.bottom, spacingNano)
                 }
-                .padding(.bottom, Tokens.Spacing.xxxl.value)
             }
         }
         .ignoresSafeArea(.all, edges: .all)
