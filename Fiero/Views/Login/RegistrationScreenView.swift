@@ -33,8 +33,12 @@ struct RegistrationScreenView: View {
             AccountLoginView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
-                    Spacer()
+                    if !userRegistrationViewModel.keyboardShown  {
+                        Image("Olhos")
+                            .padding(.vertical, Tokens.Spacing.sm.value)
+                    }
                     VStack(spacing: Tokens.Spacing.xxs.value){
                         Text("Boas vindas, desafiante")
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -43,13 +47,10 @@ struct RegistrationScreenView: View {
                         //MARK: TextFilds elements
                         VStack(spacing: Tokens.Spacing.xxxs.value){
                             CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
-                                .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             
                             CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
-                                .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             
                             CustomTextFieldView(type: .both, style: .primary, helperText: "", placeholder: "Senha", isLowCase: true ,isWrong: .constant(false), text: $password)
-                                .padding(.horizontal, Tokens.Spacing.xxxs.value)
                         }
                         //MARK: Button and CheckBox
                         CheckboxComponent(style: .dark,
@@ -73,7 +74,6 @@ struct RegistrationScreenView: View {
                                 self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
                             }
                         })
-                        .padding(.horizontal, Tokens.Spacing.xxs.value)
                     }
                     //MARK: Last elements
                     HStack{
@@ -88,19 +88,20 @@ struct RegistrationScreenView: View {
                         .font(Tokens.FontStyle.callout.font(weigth: .bold))
                     }
                 }
+                    .padding(.horizontal, Tokens.Spacing.xxxs.value)
             }
-            .padding(.bottom)
-            .background(
-                Image("LoginBackground")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
-                    .scaledToFill()
-                    )
             .alert(isPresented: self.$isShowingInvalidInputAlert, content: {
                 Alert(title: Text("Email invalido"),
                       message: Text(self.serverResponse.description),
                       dismissButton: .cancel(Text("OK")))
+                
             })
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+                userRegistrationViewModel.onKeyboardDidSHow()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+                userRegistrationViewModel.onKeyboardDidHide()
+            }
             .navigationBarHidden(true)
             .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
                 self.serverResponse = serverResponse

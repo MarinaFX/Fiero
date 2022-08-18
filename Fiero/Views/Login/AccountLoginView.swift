@@ -35,6 +35,10 @@ struct AccountLoginView: View {
     var smallSpacing: Double {
         return Tokens.Spacing.xxxs.value
     }
+    var SmSpacing: Double {
+        return Tokens.Spacing.sm.value
+    }
+    
     var color: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
@@ -56,12 +60,17 @@ struct AccountLoginView: View {
             RegistrationScreenView(pushHomeView: self.$pushHomeView)
         }else{
             ZStack {
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 //MARK: Login Form
                 VStack {
-                    Spacer()
+                    if !userLoginViewModel.keyboardShown  {
+                        Image("Olhos")
+                            .padding(.vertical, Tokens.Spacing.sm.value)
+                    }
                     Text("Boas vindas, desafiante")
                         .font(titleFont)
                         .foregroundColor(.white)
+                        .padding(.vertical, smallSpacing)
                     //MARK: TextFields
                     CustomTextFieldView(type: .none,
                                         style: .primary,
@@ -71,7 +80,7 @@ struct AccountLoginView: View {
                                         isLowCase: true ,
                                         isWrong: .constant(false),
                                         text: self.$emailText)
-                        .padding(nanoSpacing)
+                        
                     
                     CustomTextFieldView(type: .icon,
                                         style: .primary,
@@ -80,7 +89,7 @@ struct AccountLoginView: View {
                                         isLowCase: true ,
                                         isWrong: .constant(false),
                                         text: self.$passwordText)
-                        .padding(nanoSpacing)
+                        .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
                     Button(action: {
                         //TODO: create a link to Remember Password Screen (doesn't exist yet)
@@ -115,17 +124,17 @@ struct AccountLoginView: View {
                     }
                     .padding(.top, smallSpacing)
                 }
-                .padding(smallSpacing)
+                .padding(.horizontal, smallSpacing)
             }
-            .background(
-                Image("LoginBackground")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
-                    .scaledToFill()
-                    )
             .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
                 Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
             })
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+                userLoginViewModel.onKeyboardDidSHow()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+                userLoginViewModel.onKeyboardDidHide()
+            }
             .onChange(of: self.userLoginViewModel.user, perform: { user in
                 self.user = user
             })
@@ -134,8 +143,7 @@ struct AccountLoginView: View {
                 
                 if self.serverResponse.statusCode == 200 ||
                     self.serverResponse.statusCode == 201 {
-                    UserDefaults.standard.set(self.passwordText, forKey: "password")
-                    UserDefaults.standard.set(self.emailText, forKey: "email")
+                    self.userLoginViewModel.setUserOnDefaults(email: self.emailText, password: self.passwordText)
                     self.pushHomeView.toggle()
                 }
                 
@@ -144,6 +152,15 @@ struct AccountLoginView: View {
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .portrait // And making sure it stays that way
+                
+                typealias UserFromDefaults = (email: String, pasasword: String)
+                
+                let user = self.userLoginViewModel.getUserFromDefaults()
+                
+                if user.email != nil && user.password != nil {
+                    self.userLoginViewModel.authenticateUser(email: user.email!, password: user.password!)
+                }
+                
             }.onDisappear {
                 AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
             }
