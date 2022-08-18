@@ -36,6 +36,7 @@ class QuickChallengeViewModel: ObservableObject {
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
         self.didUpdateChallenges = false
         self.serverResponse = .unknown
+        
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -74,7 +75,7 @@ class QuickChallengeViewModel: ObservableObject {
                 self?.serverResponse.statusCode = urlResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
                 print("successful response: \(response)")
-                print("successful response: \(urlResponse.statusCode)")
+                print("response status code: \(urlResponse.statusCode)")
 
             })
             .store(in: &cancellables)
