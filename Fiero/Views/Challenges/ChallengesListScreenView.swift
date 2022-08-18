@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ChallengesListScreenView: View {
     @Environment(\.rootPresentationMode) var rootPresentationMode
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @State var quickChallenges: [QuickChallenge] = []
     @State var isPresentingQuickChallengeCreation: Bool = false
     @State var isPresentingChallengeDetails: Bool = false
-    @State var serverResponse: ServerResponse = .unknown
     
     var body: some View {
         NavigationView {
@@ -79,16 +78,7 @@ struct ChallengesListScreenView: View {
             self.quickChallengeViewModel.getUserChallenges()
         })
         .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
-            self.quickChallenges = []
             self.quickChallenges = quickChallenges
-        })
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            
-            if self.serverResponse.statusCode != 200 &&
-                self.serverResponse.statusCode != 201 {
-                //toggle alert
-            }
         })
         .navigationViewStyle(StackNavigationViewStyle())
         .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)

@@ -35,6 +35,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
         self.didUpdateChallenges = false
+        self.serverResponse = .unknown
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -71,7 +72,7 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
-                self?.didUpdateChallenges = true
+                self?.challengesList.append(contentsOf: response.quickChallenge)
                 print("successful response: \(response)")
                 print("successful response: \(urlResponse.statusCode)")
 
@@ -82,6 +83,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Get User Challenges
     func getUserChallenges() {
         self.didUpdateChallenges = false
+        self.serverResponse = .unknown
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
@@ -112,6 +114,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Get User Challenges
     func deleteChallenge(by id: String) {
         self.didUpdateChallenges = false
+        self.serverResponse = .unknown
         let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
@@ -133,9 +136,8 @@ class QuickChallengeViewModel: ObservableObject {
                     print(self?.serverResponse.statusCode)
                     return
                 }
-                self?.didUpdateChallenges = true
+                self?.challengesList.removeAll(where: { $0.id == id} )
                 print(response)
-                
             })
             .store(in: &cancellables)
     }
