@@ -13,6 +13,9 @@ struct DuelScoreComponent: View {
      @State var maxValue: Int
      @State var count: Int = 0
      @State var playerName: String
+    
+     @State private var timer: Timer?
+     @State var isLongPressing = false
 
      var body: some View {
          ZStack{
@@ -22,16 +25,34 @@ struct DuelScoreComponent: View {
              VStack(alignment:.center ) {
                  HStack() {
                      Button(action: {
-                         if count > 0{
-                             count -= 1
+                         if(self.isLongPressing){
+                             //End of a longpress gesture, so stop our fastforwarding
+                             self.isLongPressing.toggle()
+                             self.timer?.invalidate()
+                             
+                         } else {
+                             //Regular tap
+                             if count > 0 {
+                             self.count -= 1
+                             }
+                             
                          }
-                     }) {
+                     }, label: {
                          Image(systemName: style.minusIcon)
                              .resizable()
                              .frame(width: 40, height: 40)
                              .foregroundColor(style.buttonColor)
-
-                     }
+                         
+                     })
+                     .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
+                         self.isLongPressing = true
+                         //Fastforward has started
+                         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                             if count > 0 {
+                             self.count -= 1
+                             }
+                         })
+                     })
                      .padding(.leading, style.spacing)
 
                      Spacer()
@@ -42,17 +63,34 @@ struct DuelScoreComponent: View {
                          .bold()
 
                      Spacer()
-
                      Button(action: {
-                         if count < maxValue{
-                             count += 1
+                         if(self.isLongPressing){
+                             //End of a longpress gesture, so stop our fastforwarding
+                             self.isLongPressing.toggle()
+                             self.timer?.invalidate()
+                             
+                         } else {
+                             //Regular tap
+                             if count < maxValue{
+                             self.count += 1
+                             }
                          }
-                     }) {
+                     }, label: {
                          Image(systemName: style.plusIcon)
                              .resizable()
                              .frame(width: 40, height: 40)
                              .foregroundColor(style.buttonColor)
-                     }
+                         
+                     })
+                     .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
+                         self.isLongPressing = true
+                         //Fastforward has started
+                         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                             if count < maxValue{
+                             self.count += 1
+                             }
+                         })
+                     })
                      .padding(.trailing, style.spacing)
                  }
                  .padding(.vertical, style.spacingVertical)
