@@ -16,3 +16,8 @@ struct QuickChallengePOSTResponse: Codable {
     
     var quickChallenge: [QuickChallenge]
 }
+
+struct QuickChallengeDELETEResponse: Decodable {
+    
+    var message: String?
+}
