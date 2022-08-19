@@ -15,6 +15,7 @@ class QuickChallengeViewModelTests: XCTestCase {
     var sut: QuickChallengeViewModel!
     var mockClient: MockHTTPClient!
     var mockKeyValueStorage: MockKeyValueStorage!
+    var expTimeout: Double = 2
     
     var cancellables: Set<AnyCancellable> = []
     
@@ -324,11 +325,11 @@ class QuickChallengeViewModelTests: XCTestCase {
         """
     }
     
-    private func getJSONResponseForDELETERequest() -> String {
+    private func getJSONResponseForFailDELETERequest() -> String {
         return """
         {
             "error": {
-                "query": "SELECT DISTINCT \"distinctAlias\".\"QuickChallenge_id\" as \"ids_QuickChallenge_id\" FROM (SELECT \"QuickChallenge\".\"id\" AS \"QuickChallenge_id\", \"QuickChallenge\".\"name\" AS \"QuickChallenge_name\", \"QuickChallenge\".\"invitationCode\" AS \"QuickChallenge_invitationCode\", \"QuickChallenge\".\"owner_id\" AS \"QuickChallenge_owner_id\", \"QuickChallenge\".\"type\" AS \"QuickChallenge_type\", \"QuickChallenge\".\"goal\" AS \"QuickChallenge_goal\", \"QuickChallenge\".\"goalMeasure\" AS \"QuickChallenge_goalMeasure\", \"QuickChallenge\".\"finished\" AS \"QuickChallenge_finished\", \"QuickChallenge\".\"online\" AS \"QuickChallenge_online\", \"QuickChallenge\".\"alreadyBegin\" AS \"QuickChallenge_alreadyBegin\", \"QuickChallenge\".\"maxTeams\" AS \"QuickChallenge_maxTeams\", \"QuickChallenge\".\"created_At\" AS \"QuickChallenge_created_At\", \"QuickChallenge\".\"updated_At\" AS \"QuickChallenge_updated_At\", \"QuickChallenge_owner\".\"id\" AS \"QuickChallenge_owner_id\", \"QuickChallenge_owner\".\"name\" AS \"QuickChallenge_owner_name\", \"QuickChallenge_owner\".\"email\" AS \"QuickChallenge_owner_email\", \"QuickChallenge_owner\".\"created_At\" AS \"QuickChallenge_owner_created_At\", \"QuickChallenge_owner\".\"updated_At\" AS \"QuickChallenge_owner_updated_At\", \"QuickChallenge_teams\".\"id\" AS \"QuickChallenge_teams_id\", \"QuickChallenge_teams\".\"name\" AS \"QuickChallenge_teams_name\", \"QuickChallenge_teams\".\"quickChallenge_id\" AS \"QuickChallenge_teams_quickChallenge_id\", \"QuickChallenge_teams\".\"owner_id\" AS \"QuickChallenge_teams_owner_id\", \"QuickChallenge_teams\".\"created_At\" AS \"QuickChallenge_teams_created_At\", \"QuickChallenge_teams\".\"updated_At\" AS \"QuickChallenge_teams_updated_At\", \"QuickChallenge_teams_members\".\"id\" AS \"QuickChallenge_teams_members_id\", \"QuickChallenge_teams_members\".\"user_id\" AS \"QuickChallenge_teams_members_user_id\", \"QuickChallenge_teams_members\".\"team_id\" AS \"QuickChallenge_teams_members_team_id\", \"QuickChallenge_teams_members\".\"score\" AS \"QuickChallenge_teams_members_score\", \"QuickChallenge_teams_members\".\"beginDate\" AS \"QuickChallenge_teams_members_beginDate\", \"QuickChallenge_teams_members\".\"botPicture\" AS \"QuickChallenge_teams_members_botPicture\", \"QuickChallenge_teams_members\".\"created_At\" AS \"QuickChallenge_teams_members_created_At\", \"QuickChallenge_teams_members\".\"updated_At\" AS \"QuickChallenge_teams_members_updated_At\" FROM \"quick_challenge\" \"QuickChallenge\" LEFT JOIN \"user\" \"QuickChallenge_owner\" ON \"QuickChallenge_owner\".\"id\"=\"QuickChallenge\".\"owner_id\"  LEFT JOIN \"team\" \"QuickChallenge_teams\" ON \"QuickChallenge_teams\".\"quickChallenge_id\"=\"QuickChallenge\".\"id\"  LEFT JOIN \"team_user\" \"QuickChallenge_teams_members\" ON \"QuickChallenge_teams_members\".\"team_id\"=\"QuickChallenge_teams\".\"id\" WHERE \"QuickChallenge\".\"id\" = $1) \"distinctAlias\" ORDER BY \"QuickChallenge_id\" ASC LIMIT 1",
+                "query": "SELECT DISTINCT \\"distinctAlias\\".\\"QuickChallenge_id\\" as \\"ids_QuickChallenge_id\\" FROM (SELECT \\"QuickChallenge\\".\\"id\\" AS \\"QuickChallenge_id\\", \\"QuickChallenge\\".\\"name\\" AS \\"QuickChallenge_name\\", \\"QuickChallenge\\".\\"invitationCode\\" AS \\"QuickChallenge_invitationCode\\", \\"QuickChallenge\\".\\"owner_id\\" AS \\"QuickChallenge_owner_id\\", \\"QuickChallenge\\".\\"type\\" AS \\"QuickChallenge_type\\", \\"QuickChallenge\\".\\"goal\\" AS \\"QuickChallenge_goal\\", \\"QuickChallenge\\".\\"goalMeasure\\" AS \\"QuickChallenge_goalMeasure\\", \\"QuickChallenge\\".\\"finished\\" AS \\"QuickChallenge_finished\\", \\"QuickChallenge\\".\\"online\\" AS \\"QuickChallenge_online\\", \\"QuickChallenge\\".\\"alreadyBegin\\" AS \\"QuickChallenge_alreadyBegin\\", \\"QuickChallenge\\".\\"maxTeams\\" AS \\"QuickChallenge_maxTeams\\", \\"QuickChallenge\\".\\"created_At\\" AS \\"QuickChallenge_created_At\\", \\"QuickChallenge\\".\\"updated_At\\" AS \\"QuickChallenge_updated_At\\", \\"QuickChallenge_owner\\".\\"id\\" AS \\"QuickChallenge_owner_id\\", \\"QuickChallenge_owner\\".\\"name\\" AS \\"QuickChallenge_owner_name\\", \\"QuickChallenge_owner\\".\\"email\\" AS \\"QuickChallenge_owner_email\\", \\"QuickChallenge_owner\\".\\"created_At\\" AS \\"QuickChallenge_owner_created_At\\", \\"QuickChallenge_owner\\".\\"updated_At\\" AS \\"QuickChallenge_owner_updated_At\\", \\"QuickChallenge_teams\\".\\"id\\" AS \\"QuickChallenge_teams_id\\", \\"QuickChallenge_teams\\".\\"name\\" AS \\"QuickChallenge_teams_name\\", \\"QuickChallenge_teams\\".\\"quickChallenge_id\\" AS \\"QuickChallenge_teams_quickChallenge_id\\", \\"QuickChallenge_teams\\".\\"owner_id\\" AS \\"QuickChallenge_teams_owner_id\\", \\"QuickChallenge_teams\\".\\"created_At\\" AS \\"QuickChallenge_teams_created_At\\", \\"QuickChallenge_teams\\".\\"updated_At\\" AS \\"QuickChallenge_teams_updated_At\\", \\"QuickChallenge_teams_members\\".\\"id\\" AS \\"QuickChallenge_teams_members_id\\", \\"QuickChallenge_teams_members\\".\\"user_id\\" AS \\"QuickChallenge_teams_members_user_id\\", \\"QuickChallenge_teams_members\\".\\"team_id\\" AS \\"QuickChallenge_teams_members_team_id\\", \\"QuickChallenge_teams_members\\".\\"score\\" AS \\"QuickChallenge_teams_members_score\\", \\"QuickChallenge_teams_members\\".\\"beginDate\\" AS \\"QuickChallenge_teams_members_beginDate\\", \\"QuickChallenge_teams_members\\".\\"botPicture\\" AS \\"QuickChallenge_teams_members_botPicture\\", \\"QuickChallenge_teams_members\\".\\"created_At\\" AS \\"QuickChallenge_teams_members_created_At\\", \\"QuickChallenge_teams_members\\".\\"updated_At\\" AS \\"QuickChallenge_teams_members_updated_At\\" FROM \\"quick_challenge\\" \\"QuickChallenge\\" LEFT JOIN \\"user\\" \\"QuickChallenge_owner\\" ON \\"QuickChallenge_owner\\".\\"id\\"=\\"QuickChallenge\\".\\"owner_id\\"  LEFT JOIN \\"team\\" \\"QuickChallenge_teams\\" ON \\"QuickChallenge_teams\\".\\"quickChallenge_id\\"=\\"QuickChallenge\\".\\"id\\"  LEFT JOIN \\"team_user\\" \\"QuickChallenge_teams_members\\" ON \\"QuickChallenge_teams_members\\".\\"team_id\\"=\\"QuickChallenge_teams\\".\\"id\\" WHERE \\"QuickChallenge\\".\\"id\\" = $1) \\"distinctAlias\\" ORDER BY \\"QuickChallenge_id\\" ASC LIMIT 1",
                 "parameters": [
                     "ad036213-c5d0-40b6-a304-6ad0dcbcd1372"
                 ],
@@ -354,49 +355,59 @@ class QuickChallengeViewModelTests: XCTestCase {
         """
     }
     
+    private func getJSONResponseForSuccessfulDELETERequest() -> String {
+        return """
+        {
+            "message": "successfully deleted."
+        }
+        """
+    }
+    
     //MARK: - Test Cases
     //MARK: Successful QC creation - Amount
     func testSuccessfulQuickChallengeAmountCreation() {
         //given
-        let expectation = expectation(description: #function)
-        expectation.expectedFulfillmentCount = 2
+        let serverResponseExpectation = expectation(description: #function + " serverResponseExpectation")
+        let challengesListExpectation = expectation(description: #function + " challengesListExpectation")
         
         let json = getJSONResponseForPOSTRequest()
         
         self.mockClient.mock(url: "/quickChallenge/create", statusCode: 201, json: json)
         //when
         self.sut.$serverResponse
-            .dropFirst()
+            .dropFirst(2)
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
-                //XCTAssertEqual(self?.sut.serverResponse, .created)
+                serverResponseExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         //when
         self.sut.$challengesList
+            .dropFirst()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                challengesListExpectation.fulfill()
             })
             .store(in: &cancellables)
 
         self.sut.createQuickChallenge(name: "TRUCO 2", challengeType: .amount, goal: 115, goalMeasure: "unity", numberOfTeams: 2, maxTeams: 2)
-        wait(for: [expectation], timeout: 5)
+        wait(for: [serverResponseExpectation, challengesListExpectation], timeout: self.expTimeout)
         
         //then
-        //XCTAssertEqual(self.sut.serverResponse, .created)
+        XCTAssertEqual(self.sut.serverResponse, .created)
         XCTAssertEqual(self.sut.challengesList.isEmpty, false)
     }
     
     //MARK: Wrong Goal Measure QC creation - Amount
     func testWrongGoalMeasureForQCByAmountCreation() {
         //given
-        let expectation = expectation(description: #function)
-        
+        let serverResponseExpectation = expectation(description: #function + " serverResponseExpectation")
+        let challengesListExpectation = expectation(description: #function + " challengesListExpectation")
+        challengesListExpectation.isInverted = true
+
         let json = """
         {
             "message": "invalid goalMeasure for Amount type",
@@ -410,25 +421,26 @@ class QuickChallengeViewModelTests: XCTestCase {
         
         //when
         self.sut.$serverResponse
-            .dropFirst()
+            .dropFirst(2)
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                serverResponseExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         //when
         self.sut.$challengesList
+            .dropFirst()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                challengesListExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         self.sut.createQuickChallenge(name: "Shape dos fellas", challengeType: .amount, goal: 115, goalMeasure: "seconds", numberOfTeams: 3, maxTeams: 3)
-        wait(for: [expectation], timeout: 5)
+        wait(for: [serverResponseExpectation, challengesListExpectation], timeout: self.expTimeout)
         
         //then
         XCTAssertEqual(self.sut.serverResponse, .badRequest)
@@ -438,70 +450,122 @@ class QuickChallengeViewModelTests: XCTestCase {
     //MARK: GET challenges
     func testSuccessfulGetChallenges() {
         //given
-        let expectation = expectation(description: #function)
-        expectation.expectedFulfillmentCount = 2
+        let serverResponseExpectation = expectation(description: #function + " serverResponseExpectation")
+        let challengesListExpectation = expectation(description: #function + " challengesListExpectation")
         
         let json = getJSONResponseForGETRequest()
         
-        self.mockClient.mock(url: "/quickChallenges/createdByMe", statusCode: 201, json: json)
+        self.mockClient.mock(url: "/quickChallenge/createdByMe", statusCode: 201, json: json)
         
         //when
         self.sut.$serverResponse
-            .dropFirst()
+            .print("server response")
+            .dropFirst(2)
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                serverResponseExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         self.sut.$challengesList
+            .print("challenge List")
+            .dropFirst()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                challengesListExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         self.sut.getUserChallenges()
-        wait(for: [expectation], timeout: 5)
+        wait(for: [serverResponseExpectation, challengesListExpectation], timeout: self.expTimeout)
         
         //then
         XCTAssertEqual(self.sut.serverResponse, .created)
         XCTAssertEqual(self.sut.challengesList.isEmpty, false)
     }
     
-    //MARK: Delete a challenge by ID
+    //MARK: Successful Delete a challenge by ID
     func testSuccessfulDeleteChallengeByID() {
         //given
-        let expectation = expectation(description: #function)
-        expectation.expectedFulfillmentCount = 2
+        let serverResponseExpectation = expectation(description: #function + " serverResponseExpectation")
+        let challengesListExpectation = expectation(description: #function + " challengesListExpectation")
         
-        let json = getJSONResponseForDELETERequest()
+        let json = getJSONResponseForSuccessfulDELETERequest()
         
         self.mockClient.mock(url: "/quickChallenge", statusCode: 201, json: json)
         
+        self.sut.challengesList.append(QuickChallenge(id: "842d8deb-9d9f-4b60-b43e-7efdb70ac175", name: "flemis", invitationCode: "", type: "", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "tester@tester.com", name: "tester")))
+        
         //when
         self.sut.$serverResponse
-            .dropFirst()
+            .dropFirst(2)
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                serverResponseExpectation.fulfill()
             })
             .store(in: &cancellables)
         
         //when
         self.sut.$challengesList
+            .dropFirst()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
             .sink(receiveValue: { _ in
-                expectation.fulfill()
+                challengesListExpectation.fulfill()
             })
             .store(in: &cancellables)
+        
+        self.sut.deleteChallenge(by: "842d8deb-9d9f-4b60-b43e-7efdb70ac175")
+        wait(for: [challengesListExpectation, serverResponseExpectation], timeout: self.expTimeout)
         
         //then
         XCTAssertEqual(self.sut.serverResponse, .created)
         XCTAssertEqual(self.sut.challengesList.isEmpty, true)
+    }
+    
+    //MARK: Unsuccessful Delete a challenge by ID
+    func testDeleteChallengeByNonExistantID() {
+        //given
+        let serverResponseExpectation = expectation(description: #function + " serverResponseExpectation")
+        let challengesListExpectation = expectation(description: #function + " challengesListExpectation")
+        challengesListExpectation.isInverted = true
+        
+        let json = getJSONResponseForFailDELETERequest()
+        
+        self.mockClient.mock(url: "/quickChallenge", statusCode: 500, json: json)
+        
+        self.sut.challengesList.append(QuickChallenge(id: "842d8deb-9d9f-4b60-b43e-7efdb70ac175", name: "flemis", invitationCode: "", type: "", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "tester@tester.com", name: "tester")))
+        
+        //when
+        self.sut.$serverResponse
+            .print("server response")
+            .dropFirst(2)
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
+            .sink(receiveValue: { _ in
+                serverResponseExpectation.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        //when
+        self.sut.$challengesList
+            .print("challenge list")
+            .dropFirst()
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
+            .sink(receiveValue: { _ in
+                challengesListExpectation.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        self.sut.deleteChallenge(by: "someWrongID")
+        wait(for: [challengesListExpectation, serverResponseExpectation], timeout: self.expTimeout)
+        
+        //then
+        XCTAssertEqual(self.sut.serverResponse, .internalError)
+        XCTAssertEqual(self.sut.challengesList.isEmpty, false)
     }
 }
