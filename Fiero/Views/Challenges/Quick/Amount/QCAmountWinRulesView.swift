@@ -9,13 +9,11 @@ import SwiftUI
 
 struct QCAmountWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
-    
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
-    @State var serverResponse: ServerResponse = .unknown
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -76,7 +74,7 @@ struct QCAmountWinRulesView: View {
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                QCChallengeCreatedView(quickChallengeViewModel: self.quickChallengeViewModel, serverResponse: self.$serverResponse, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
+                QCChallengeCreatedView(challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
             }
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
@@ -85,10 +83,7 @@ struct QCAmountWinRulesView: View {
                   dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
             )
         })
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            print(self.serverResponse.statusCode)
-            
+        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { _ in
             self.pushNextView.toggle()
         })
         .makeDarkModeFullScreen()

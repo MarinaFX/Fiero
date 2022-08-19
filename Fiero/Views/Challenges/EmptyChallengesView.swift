@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
+    @Environment(\.rootPresentationMode) var rootPresentationMode
+
     @State var isPresented: Bool = false
     
     var body: some View {
@@ -50,6 +52,8 @@ struct EmptyChallengesView: View {
         .navigationTitle("Desafios")
         .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
+        .environment(\.rootPresentationMode, self.$isPresented)
+
     }
 }
 
