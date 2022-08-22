@@ -7,11 +7,13 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 //MARK: UserRegistrationViewModel
 class UserRegistrationViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var serverResponse: ServerResponse
+    @Published var keyboardShown: Bool = false
         
     private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT: String = "/user/register"
@@ -23,6 +25,15 @@ class UserRegistrationViewModel: ObservableObject {
     init(client: HTTPClient = URLSession.shared) {
         self.client = client
         self.serverResponse = .unknown
+    }
+    
+    //MARK: - Keyboard Detection
+    func onKeyboardDidSHow() {
+        withAnimation() { keyboardShown = true }
+    }
+    
+    func onKeyboardDidHide() {
+        withAnimation() { keyboardShown = false }
     }
     
     //MARK: - Create Account

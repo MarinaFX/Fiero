@@ -34,7 +34,7 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
         self.serverResponse = .unknown
-
+        
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -71,8 +71,9 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
+                self?.challengesList.append(contentsOf: response.quickChallenge)
                 print("successful response: \(response)")
-                print("successful response: \(rawURLResponse.statusCode)")
+                print("response status code: \(rawURLResponse.statusCode)")
 
             })
             .store(in: &cancellables)
@@ -81,7 +82,6 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Get User Challenges
     func getUserChallenges() {
         self.serverResponse = .unknown
-
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
@@ -103,25 +103,21 @@ class QuickChallengeViewModel: ObservableObject {
                     print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
                     return
                 }
-                
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList = response.quickChallenges
-                print("successful response: \(response)")
-                print("successful response: \(rawURLResponse.statusCode)")
+                self?.serverResponse.statusCode = rawURLResponse.statusCode
             })
             .store(in: &cancellables)
     }
     
-    //MARK: - Get User Challenges
+    //MARK: - Delete User Challenges
     func deleteChallenge(by id: String) {
         self.serverResponse = .unknown
-        
         let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
         
         self.client.perform(for: request)
-            .decodeHTTPResponse(type: [String:String].self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
@@ -137,11 +133,9 @@ class QuickChallengeViewModel: ObservableObject {
                     print(self?.serverResponse.statusCode as Any)
                     return
                 }
-                
+                self?.challengesList.removeAll(where: { $0.id == id} )
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
-                self?.challengesList.removeAll(where: { $0.id == id })
-                print("successful response: \(response)")
-                print("successful response: \(rawURLResponse.statusCode)")
+                print(response)
             })
             .store(in: &cancellables)
     }
