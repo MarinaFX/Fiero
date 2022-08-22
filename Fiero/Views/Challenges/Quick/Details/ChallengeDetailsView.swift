@@ -13,11 +13,28 @@ struct ChallengeDetailsView: View {
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
 
     //MARK: - Body
     var body: some View {
         ZStack {
-            Color.black
+            Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+            //MARK: - Back Button
+            VStack (alignment: .leading) {
+                HStack {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    }.onTapGesture {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    Spacer()
+                }
+                Spacer()
+            }.padding(Tokens.Spacing.defaultMargin.value)
             //MARK: - Top Components
             VStack {
                 VStack(spacing: largeSpacing) {
@@ -89,7 +106,6 @@ struct ChallengeDetailsView: View {
             .padding()
         }
         .accentColor(Color.white)
-        .ignoresSafeArea()
     }
     
     //MARK: - DS Tokens

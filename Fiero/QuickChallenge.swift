@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuickChallenge: Decodable, Encodable, Equatable {
+struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable {
     
     var id: String
     var name: String
