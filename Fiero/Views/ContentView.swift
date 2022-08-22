@@ -9,14 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var pushHomeView: Bool = false
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     
     var body: some View {
         if self.pushHomeView {
             withAnimation {
-                ChallengesListScreenView()
-                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
-                    .environmentObject(self.quickChallengeViewModel)
+                TabBarView()
             }
         }
         
