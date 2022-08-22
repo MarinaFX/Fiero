@@ -115,24 +115,6 @@ struct ChallengeDetailsView: View {
                     self.isPresentingDeletionAlert = false
                 }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                     self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-//                        .sink { completion in
-//                            switch completion {
-//                                case .finished:
-//                                    self.presentationMode.wrappedValue.dismiss()
-//                                case .failure(let error):
-//                                    print(error)
-//                                    // TODO: show alert
-//                            }
-//                        } receiveValue: { _ in }
-//                        .store(in: &subscriptions)
-
-//                    print("deletou")
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-//                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
-//
-//                            print("dismiss")
-//                        }
-//                    })
                 }))
             })
         }
