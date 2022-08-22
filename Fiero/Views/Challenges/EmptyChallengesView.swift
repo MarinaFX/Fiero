@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
+    @Environment(\.rootPresentationMode) var rootPresentationMode
+
     @State var isPresented: Bool = false
     
     var body: some View {

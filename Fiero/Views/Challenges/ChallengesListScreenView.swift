@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct ChallengesListScreenView: View {
-    
     @Environment(\.rootPresentationMode) var rootPresentationMode
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var quickChallenges: [QuickChallenge] = []
     @State var isPresentingQuickChallengeCreation: Bool = false
     @State var isPresentingChallengeDetails: Bool = false
-    @State var serverResponse: ServerResponse = .unknown
     @State var presentModalIndex: QuickChallenge? = nil
     
     var body: some View {
