@@ -92,9 +92,9 @@ struct ChallengeDetailsView: View {
             .padding()
             .alert(isPresented: self.$isPresentingDeletionAlert, content: {
                 //TODO: Fix alert content
-                Alert(title: Text("EI ARROMBADINHO"), message: Text("VAI DELETAR MESMO"), primaryButton: .cancel(Text("AIN N QUERO 🥺"), action: {
+                Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
                     self.isPresentingDeletionAlert = false
-                }), secondaryButton: .destructive(Text("DELETA ESSA MERDA 🤬"), action: {
+                }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                     self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                     
                     if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
