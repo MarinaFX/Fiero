@@ -10,8 +10,8 @@ import SwiftUI
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
@@ -111,9 +111,10 @@ struct ChallengeDetailsView: View {
                     self.isPresentingDeletionAlert = false
                 }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                     self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                    
+                    print("deletou")
                     if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
                         self.presentationMode.wrappedValue.dismiss()
+                        print("dismiss")
                     }
                 }))
             })
@@ -148,6 +149,7 @@ struct ChallengeDetailsView: View {
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+            .environmentObject(QuickChallengeViewModel())
     }
 }

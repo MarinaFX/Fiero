@@ -16,6 +16,10 @@ struct ChallengesListScreenView: View {
     @State var isPresentingChallengeDetails: Bool = false
     @State var presentModalIndex: QuickChallenge? = nil
     
+    private var sortedList: [QuickChallenge] {
+        return quickChallenges.sorted(by: { $0.updatedAt > $1.updatedAt })
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -23,17 +27,18 @@ struct ChallengesListScreenView: View {
                 VStack {
                     if self.quickChallenges.count > 0 {
                         if #available(iOS 15.0, *) {
-                            ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
+                            ListWithoutSeparator(self.sortedList, id: \.self) { challenge in
                                 ZStack {
-                                    CustomTitleImageListRow(title: quickChallenges[index].name)
+                                    CustomTitleImageListRow(title: challenge.name)
                                 }
                                 .listRowBackground(Color.clear)
                                 .onTapGesture {
-                                    self.presentModalIndex = quickChallenges[index]
+                                    self.presentModalIndex = challenge
                                 }
                             }
                             .fullScreenCover(item: $presentModalIndex) { item in
-                                ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: item)
+                                ChallengeDetailsView(quickChallenge: item)
+                                    .environmentObject(self.quickChallengeViewModel)
                             }
                             .navigationBarHidden(false)
                             .navigationTitle("Seus desafios")
@@ -44,9 +49,12 @@ struct ChallengesListScreenView: View {
                             .listStyle(.plain)
                         } else {
                             //TODO: Refreshable list for iOS 14
-                            ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                                NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
-                                    CustomTitleImageListRow(title: quickChallenges[index].name)
+                            ListWithoutSeparator(0..<self.sortedList.count, id: \.self) { index in
+                                NavigationLink(
+                                    destination: ChallengeDetailsView(quickChallenge: self.sortedList[index])
+                                    .environmentObject(self.quickChallengeViewModel),
+                                    label: {
+                                    CustomTitleImageListRow(title: sortedList[index].name)
                                 })
                                 .buttonStyle(PlainButtonStyle())
                             }
@@ -78,7 +86,6 @@ struct ChallengesListScreenView: View {
                     self.quickChallengeViewModel.getUserChallenges()
                 })
                 .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
-                    self.quickChallenges = []
                     self.quickChallenges = quickChallenges
                 })
                 .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
