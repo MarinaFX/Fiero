@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+
 //MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
@@ -16,6 +18,8 @@ struct ChallengeDetailsView: View {
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
     @State var isPresentingDeletionAlert: Bool = false
+    
+    @State private var subscriptions: Set<AnyCancellable> = []
 
     //MARK: - Body
     var body: some View {
@@ -111,11 +115,24 @@ struct ChallengeDetailsView: View {
                     self.isPresentingDeletionAlert = false
                 }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                     self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                    print("deletou")
-                    if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
-                        self.presentationMode.wrappedValue.dismiss()
-                        print("dismiss")
-                    }
+//                        .sink { completion in
+//                            switch completion {
+//                                case .finished:
+//                                    self.presentationMode.wrappedValue.dismiss()
+//                                case .failure(let error):
+//                                    print(error)
+//                                    // TODO: show alert
+//                            }
+//                        } receiveValue: { _ in }
+//                        .store(in: &subscriptions)
+
+//                    print("deletou")
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+//                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
+//
+//                            print("dismiss")
+//                        }
+//                    })
                 }))
             })
         }
