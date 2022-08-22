@@ -14,6 +14,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
     @Published var didUpdateChallenges: Bool = false
+    @Published var newlyCreatedChallenge: QuickChallenge
     
     private let BASE_URL: String = "localhost"
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
@@ -30,6 +31,7 @@ class QuickChallengeViewModel: ObservableObject {
         self.client = client
         self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+        self.newlyCreatedChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     }
     
     //MARK: - Create Quick Challenge
@@ -71,7 +73,7 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = urlResponse.statusCode
-                self?.didUpdateChallenges = true
+                self?.newlyCreatedChallenge = response.quickChallenge[0]
                 print("successful response: \(response)")
                 print("successful response: \(urlResponse.statusCode)")
 

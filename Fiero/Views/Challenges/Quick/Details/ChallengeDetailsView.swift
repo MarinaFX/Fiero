@@ -12,7 +12,7 @@ struct ChallengeDetailsView: View {
     @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
-    @State var quickChallenge: QuickChallenge
+    @Binding var quickChallenge: QuickChallenge
 
     //MARK: - Body
     var body: some View {
@@ -65,7 +65,7 @@ struct ChallengeDetailsView: View {
                     .hidden()
                     
                     NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                        Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
+                        Ongoing3Or4WithPauseScreenView(quickChallenge: quickChallenge, didTapPauseButton: false)
                     }
                     .hidden()
                     
@@ -119,6 +119,6 @@ struct ChallengeDetailsView: View {
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty"))))
     }
 }

@@ -7,8 +7,27 @@
 
 import SwiftUI
 
+struct Ongoing3Or4WithPauseScreenView: View {
+    @State var quickChallenge: QuickChallenge
+    @State var didTapPauseButton: Bool = false
+    @State var didFinishChallenge: Bool = false
+    
+    var body: some View {
+        ZStack {
+            Ongoing3_4ScreenView(quickChallenge: quickChallenge, didTapPauseButton: $didTapPauseButton)
+            if self.didTapPauseButton {
+                PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge)
+                if self.didFinishChallenge {
+                    ChallengesListScreenView()
+                }
+            }
+        }
+    }
+}
+
 struct Ongoing3_4ScreenView: View {
     @State var quickChallenge: QuickChallenge
+    @Binding var didTapPauseButton: Bool
     
     var body: some View {
         ZStack {
@@ -16,7 +35,7 @@ struct Ongoing3_4ScreenView: View {
             VStack {
                 HStack {
                     Button {
-                        print("pause")
+                        self.didTapPauseButton.toggle()
                     } label: {
                         Image(systemName: "pause.circle.fill")
                             .resizable()
@@ -51,7 +70,6 @@ struct Ongoing3_4ScreenView: View {
                 }), quickChallenge: $quickChallenge)
                 .frame(height: UIScreen.main.bounds.height * 0.2)
                 .padding([.horizontal], Tokens.Spacing.defaultMargin.value)
-                //.padding([.horizontal], Tokens.Spacing.xxxs.value)
                 
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     ForEach($quickChallenge.teams) { team in
@@ -63,9 +81,8 @@ struct Ongoing3_4ScreenView: View {
                     }
                 }
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar desafio") {
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
                     //call func from ViewModel to update players scores
-                    
                     //call func from ViewModel to finish the challenge
                 }
                 .padding(.bottom, Tokens.Spacing.md.value)
@@ -80,14 +97,15 @@ struct Ongoing3_4ScreenView: View {
 }
 
 struct Ongoing3_4ScreenView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        Ongoing3_4ScreenView(quickChallenge: QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams:
+        Ongoing3Or4WithPauseScreenView(quickChallenge: QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams:
                 [
                     Team(id: "teste1", name: "player1", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 22, userId: "", teamId: "", beginDate: "", botPicture: "player1", createdAt: "", updatedAt: "")]),
                     Team(id: "teste2", name: "player2", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 12, userId: "", teamId: "", beginDate: "", botPicture: "player2", createdAt: "", updatedAt: "")]),
                     Team(id: "teste3", name: "player3", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 43, userId: "", teamId: "", beginDate: "", botPicture: "player3", createdAt: "", updatedAt: "")]),
                     Team(id: "teste4", name: "player4", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 200, userId: "", teamId: "", beginDate: "", botPicture: "player4", createdAt: "", updatedAt: "")])
                 ],
-                owner: User(email: "teste", name: "teste")))
+                                                            owner: User(email: "teste", name: "teste")))
     }
 }
