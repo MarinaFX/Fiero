@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var pushHomeView: Bool = false
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     
     var body: some View {
         if self.pushHomeView {

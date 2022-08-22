@@ -15,8 +15,6 @@ struct ChallengeDetailsView: View {
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     @State var isPresentingDeletionAlert: Bool = false
 
     //MARK: - Body

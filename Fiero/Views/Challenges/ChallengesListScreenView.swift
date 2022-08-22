@@ -10,6 +10,7 @@ import SwiftUI
 struct ChallengesListScreenView: View {
     @Environment(\.rootPresentationMode) var rootPresentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    
     @State var quickChallenges: [QuickChallenge] = []
     @State var isPresentingQuickChallengeCreation: Bool = false
     @State var isPresentingChallengeDetails: Bool = false
@@ -79,14 +80,6 @@ struct ChallengesListScreenView: View {
                 .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
                     self.quickChallenges = []
                     self.quickChallenges = quickChallenges
-                })
-                .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-                    self.serverResponse = serverResponse
-                    
-                    if self.serverResponse.statusCode != 200 &&
-                        self.serverResponse.statusCode != 201 {
-                        //toggle alert
-                    }
                 })
                 .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
             }

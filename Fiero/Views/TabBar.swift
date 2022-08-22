@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TabBarView: View {
-    
+    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+
     init() {
         UITabBar.appearance().backgroundColor = UIColor(Tokens.Colors.Neutral.Low.dark.value)
         UITabBar.appearance().unselectedItemTintColor = UIColor(Tokens.Colors.Neutral.Low.light.value)
@@ -18,14 +19,17 @@ struct TabBarView: View {
         
         TabView {
             ChallengesListScreenView()
-                .tabItem {
-                    Label("Desafios", systemImage: "list.triangle")
-                }
+            .environmentObject(self.quickChallengeViewModel)
+            .tabItem {
+                Label("Desafios", systemImage: "list.triangle")
+            }
+            
             ProfileView()
-                .tabItem {
-                    Label("Perfil", systemImage: "person")
-                }
-        }.accentColor(Tokens.Colors.Brand.Primary.pure.value)
+            .tabItem {
+                Label("Perfil", systemImage: "person")
+            }
+        }
+        .accentColor(Tokens.Colors.Brand.Primary.pure.value)
     }
 }
 
