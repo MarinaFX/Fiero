@@ -81,6 +81,15 @@ struct ChallengesListScreenView: View {
                     self.quickChallenges = []
                     self.quickChallenges = quickChallenges
                 })
+                .alert(isPresented: $quickChallengeViewModel.showingAlert) {
+                    Alert(
+                        title: Text("Oops, muito desafiador!"),
+                        message: Text("Não conseguimos buscar seus desafios agora, tente novamente"),
+                        dismissButton: .default(Text("OK")){
+                            self.quickChallengeViewModel.showingAlertToFalse()
+                        }
+                    )
+                }
                 .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
             }
         }.environment(\.colorScheme, .dark)
