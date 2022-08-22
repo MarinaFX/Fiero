@@ -18,7 +18,6 @@ struct DuelScreenView: View {
             if self.didTapPauseButton {
                 PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge)
                 if self.didFinishChallenge {
-                    
                     ChallengesListScreenView()
                 }
             }
