@@ -19,7 +19,7 @@ struct ContentView: View {
                     .environmentObject(self.quickChallengeViewModel)
             }
         }
-
+        
         if !self.pushHomeView {
             AccountLoginView(pushHomeView: self.$pushHomeView)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))

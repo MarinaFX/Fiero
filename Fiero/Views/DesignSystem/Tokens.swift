@@ -43,6 +43,7 @@ enum Tokens {
         enum BorderRadius {
             case none
             case small
+            case normal
             case circular
             
             var value: CGFloat {
@@ -51,6 +52,8 @@ enum Tokens {
                         return CGFloat(0.0)
                     case .small:
                         return CGFloat(8.0)
+                    case .normal:
+                        return CGFloat(20.0)
                     case .circular:
                         return CGFloat(500.0)
                 }
@@ -98,7 +101,7 @@ enum Tokens {
                 var value: Color {
                     switch self {
                         case .pure:
-                            return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
+                            return Color(red: 0.349, green: 0.11, blue: 1, opacity: 1)
                         case .light:
                             return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
                         case .dark:
