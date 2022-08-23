@@ -115,16 +115,21 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Delete User Challenges
-    func deleteChallenge(by id: String) {
+    @discardableResult
+    func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
+            .print("operation")
             .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
@@ -143,5 +148,10 @@ class QuickChallengeViewModel: ObservableObject {
                 print(response)
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map { _ in () }
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
     }
 }
