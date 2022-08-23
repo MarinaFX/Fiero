@@ -22,7 +22,7 @@ struct GroupComponent: View {
                     
                     HStack(spacing: Tokens.Spacing.nano.value) {
                         ForEach($quickChallenge.teams) { team in
-                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                            ParticipantComponent(style: style[0], name: team.name, score: .constant(team.members.wrappedValue?.first?.score ?? 0.0))
                         }
                     }
                     
@@ -30,8 +30,8 @@ struct GroupComponent: View {
             }
             else {
                 HStack(spacing: Tokens.Spacing.xxxs.value) {
-                    ForEach($quickChallenge.teams) { team in
-                        ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                    ForEach($quickChallenge.teams, id: \.id) { team in
+                        ParticipantComponent(style: style[0], name: team.name, score: .constant(team.members.wrappedValue?.first?.score ?? 0.0))
                     }
                 }
                 .padding(.all)

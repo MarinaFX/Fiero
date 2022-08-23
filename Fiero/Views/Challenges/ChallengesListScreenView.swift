@@ -45,11 +45,19 @@ struct ChallengesListScreenView: View {
                         } else {
                             //TODO: Refreshable list for iOS 14
                             ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                                NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
+                                ZStack {
                                     CustomTitleImageListRow(title: quickChallenges[index].name)
-                                })
-                                .buttonStyle(PlainButtonStyle())
+                                }
+                                .listRowBackground(Color.clear)
+                                .onTapGesture {
+                                    self.presentModalIndex = quickChallenges[index]
+                                }
                             }
+                            .fullScreenCover(item: $presentModalIndex) { item in
+                                ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: item)
+                            }
+                            .navigationBarHidden(false)
+                            .navigationTitle("Seus desafios")
                             .ignoresSafeArea(.all, edges: .bottom)
                             .listStyle(.plain)
                         }
