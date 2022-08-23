@@ -13,6 +13,8 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
+    @Published var didUpdateChallenges: Bool = false
+    @Published var newlyCreatedChallenge: QuickChallenge
     
     private let BASE_URL: String = "localhost"
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
@@ -29,6 +31,7 @@ class QuickChallengeViewModel: ObservableObject {
         self.client = client
         self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+        self.newlyCreatedChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     }
     
     //MARK: - Create Quick Challenge
@@ -71,6 +74,8 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
+                self?.newlyCreatedChallenge = response.quickChallenge[0]
+                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
                 print("successful response: \(response)")
                 print("response status code: \(rawURLResponse.statusCode)")
@@ -110,16 +115,21 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Delete User Challenges
-    func deleteChallenge(by id: String) {
+    @discardableResult
+    func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
+            .print("operation")
             .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
@@ -138,5 +148,10 @@ class QuickChallengeViewModel: ObservableObject {
                 print(response)
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map { _ in () }
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
     }
 }

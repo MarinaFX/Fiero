@@ -56,3 +56,34 @@ extension RootPresentationMode {
         self.toggle()
     }
 }
+
+struct RootViewController {
+    static func popToRootViewController() {
+        let rootController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController
+        rootController?.dismiss(animated: true)
+        findNavigationController(viewController: rootController)?.popToRootViewController(animated: true)
+    }
+    
+    static func dismissSheetFlow() {
+        let rootController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController
+        rootController?.dismiss(animated: true)
+    }
+    
+    static func findNavigationController(viewController: UIViewController?) -> UINavigationController? {
+        if viewController is UINavigationController {
+            return viewController as? UINavigationController
+        }
+        
+        if let tabBarController = viewController as? UITabBarController {
+            return findNavigationController(viewController: tabBarController.selectedViewController)
+        }
+        
+        for childController in viewController?.children ?? [] {
+            if let navController = findNavigationController(viewController: childController) {
+                return navController
+            }
+        }
+        
+        return nil
+    }
+}
