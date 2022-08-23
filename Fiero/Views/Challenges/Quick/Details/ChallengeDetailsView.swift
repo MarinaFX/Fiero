@@ -9,15 +9,33 @@ import SwiftUI
 //MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @Binding var quickChallenge: QuickChallenge
+    @State var isPresentingDeletionAlert: Bool = false
 
     //MARK: - Body
     var body: some View {
         ZStack {
-            Color.black
+            Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+            //MARK: - Back Button
+            VStack (alignment: .leading) {
+                HStack {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    }.onTapGesture {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    Spacer()
+                }
+                Spacer()
+            }.padding(Tokens.Spacing.defaultMargin.value)
             //MARK: - Top Components
             VStack {
                 VStack(spacing: largeSpacing) {
@@ -81,15 +99,26 @@ struct ChallengeDetailsView: View {
                     
                     ButtonComponent(style: .black(isEnabled: true),
                                     text: "Deletar desafio") {
-                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                        self.isPresentingDeletionAlert.toggle()
                     }
                 }
                 .padding(.bottom, largeSpacing)
             }
             .padding()
+            .alert(isPresented: self.$isPresentingDeletionAlert, content: {
+                //TODO: Fix alert content
+                Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
+                    self.isPresentingDeletionAlert = false
+                }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                    self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                    
+                    if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }))
+            })
         }
         .accentColor(Color.white)
-        .ignoresSafeArea()
     }
     
     //MARK: - DS Tokens

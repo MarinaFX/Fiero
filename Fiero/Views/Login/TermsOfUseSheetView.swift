@@ -40,7 +40,7 @@ struct TermsOfUseSheetView: View {
                     Text("O Fiero é um aplicativo onde você pode criar desafios para interagir com seus amigos. Aqui você encontra nossos termos de uso e políticas de privacidade. Para utilizar o aplicativo é necessário que você leia e esteja de acordo com nossos termos.")
                         .font(textFont)
                         .foregroundColor(textColor)
-                    Text("Dados\nNós pedimos alguns dados para você para que as funcionalidade do aplicativo funcionem, mas prezamos a segurança desses dados utilizando servidores na AWS e garantimos que seus dados não serão compartilhados.")
+                    Text("Dados:Nós pedimos alguns dados para você para que as funcionalidade do aplicativo funcionem, mas prezamos a segurança desses dados utilizando servidores na AWS e garantimos que seus dados não serão compartilhados.")
                         .font(textFont)
                         .foregroundColor(textColor)
                     Text("Os dados que solicitamos são:")
@@ -75,7 +75,10 @@ struct TermsOfUseSheetView: View {
                                 .foregroundColor(textColor)
                         }
                     }.padding(.vertical, smallSpacing)
-                    Text("Nossa solução é voltada para o público maior de 3 anos e caso sejam identificados usuários que não cumpram esse requisito os seus dados serão completamente apagados de nossos servidores e o acesso ao aplicativo será bloqueado.")
+                    Text("Melhorias: Faremos análises do seu padrão de uso no aplicativo para identificar bugs e melhorias de usabilidade, mas todas as informações são anonimizadas pelo sistema automáticamente e não é possível correlacioná-las com você ou qualquer outro usuário do aplicativo. Para saber mais sobre, acesse nossa politica de privacidade na AppStore.")
+                        .font(textFont)
+                        .foregroundColor(textColor)
+                    Text("Restrição de idade: Nossa solução é voltada para o público maior de 3 anos e caso sejam identificados usuários que não cumpram esse requisito os seus dados serão completamente apagados de nossos servidores e o acesso ao aplicativo será bloqueado.")
                         .font(textFont)
                         .foregroundColor(textColor)
                 }

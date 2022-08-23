@@ -18,13 +18,12 @@ struct DuelScoreComponent: View {
          ZStack{
              RoundedRectangle(cornerRadius: style.borderRadius)
                  .foregroundColor(style.backgroundColor)
+                 .opacity(0.2)
 
-             VStack(alignment:.center ) {
+             VStack(alignment:.center, spacing: Tokens.Spacing.nano.value ) {
                  HStack() {
                      Button(action: {
-                         if count > 0{
-                             count -= 1
-                         }
+                        count -= 1
                      }) {
                          Image(systemName: style.minusIcon)
                              .resizable()
@@ -38,15 +37,12 @@ struct DuelScoreComponent: View {
 
                      Text("\(count)")
                          .foregroundColor(style.buttonColor)
-                         .font(.system(size: 34))
-                         .bold()
+                         .font(style.numberFont)
 
                      Spacer()
 
                      Button(action: {
-                         if count < maxValue{
-                             count += 1
-                         }
+                        count += 1
                      }) {
                          Image(systemName: style.plusIcon)
                              .resizable()
@@ -59,11 +55,12 @@ struct DuelScoreComponent: View {
 
                  Text("\(playerName)")
                      .foregroundColor(style.buttonColor)
-                     .font(.system(size: 24))
+                     .font(style.nameFont)
                      .padding(.horizontal, style.spacingVertical)
              }
+             .padding(.vertical, style.spacingAll)
          }
-         .frame(width: 285, height: 120)
+         .frame(height: 120)
      }
  }
 

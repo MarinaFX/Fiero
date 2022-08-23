@@ -9,8 +9,7 @@ import SwiftUI
 
 struct QCAmountWinRulesView: View {
     @Environment(\.presentationMode) var presentationMode
-    
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var goal: String = ""
     @State var pushNextView: Bool = false

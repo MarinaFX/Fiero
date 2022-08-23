@@ -11,7 +11,7 @@ struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
     @Environment(\.rootPresentationMode) private var rootPresentationMode
     
-    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var didPushToHomeScreen: Bool = false
     //@State var didPushToStartChallenge: Bool = false
     @State var presentDuelChallenge: Bool = false
@@ -36,8 +36,8 @@ struct QCChallengeCreatedView: View {
     }
     
     var title: String {
-        if serverResponse.statusCode != 201 &&
-            serverResponse.statusCode != 200 {
+        if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
+            self.quickChallengeViewModel.serverResponse.statusCode != 200 {
             return "Não conseguimos \ncriar seu desafio"
         }
         
@@ -111,15 +111,13 @@ struct QCChallengeCreatedView: View {
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
             Alert(title: Text("Erro"),
-                  message: Text(self.serverResponse.description),
+                  message: Text(self.quickChallengeViewModel.serverResponse.description),
                   dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
             )
         })
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            
-            if self.serverResponse.statusCode != 201 &&
-                self.serverResponse.statusCode != 200 {
+        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { _ in
+            if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
+                self.quickChallengeViewModel.serverResponse.statusCode != 200 {
                 self.isPresentingAlert.toggle()
             }
         })
@@ -134,5 +132,6 @@ struct QuickChallengeCreatedView_Previews: PreviewProvider {
         QCChallengeCreatedView(quickChallengeViewModel: QuickChallengeViewModel(), serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
+            .environmentObject(QuickChallengeViewModel())
     }
 }

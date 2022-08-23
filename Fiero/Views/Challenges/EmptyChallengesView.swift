@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
+    @Environment(\.rootPresentationMode) var rootPresentationMode
+
     @State var isPresented: Bool = false
     
     var body: some View {
         VStack {
-            NavigationLink("", isActive: self.$isPresented) {
-                QCCategorySelectionView()
-            }
-            .hidden()
-            
             Spacer()
-            
             Image("EmptyState")
-            
             Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -31,9 +26,7 @@ struct EmptyChallengesView: View {
                 self.isPresented.toggle()
             })
             .padding()
-            
             Spacer()
-            
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarTrailing, content: {
                         Button(action: {
@@ -48,8 +41,11 @@ struct EmptyChallengesView: View {
                 })
         }
         .navigationTitle("Desafios")
-        .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
+        .makeDarkModeFullScreen()
+        .fullScreenCover(isPresented: $isPresented) {
+            QCCategorySelectionView()
+        }
     }
 }
 
