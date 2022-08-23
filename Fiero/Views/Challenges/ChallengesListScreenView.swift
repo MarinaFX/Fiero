@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct ChallengesListScreenView: View {
-    @Environment(\.rootPresentationMode) var rootPresentationMode
+struct HomeView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @State var quickChallenges: [QuickChallenge] = []
     @State var isPresentingQuickChallengeCreation: Bool = false
     @State var isPresentingChallengeDetails: Bool = false
+    @State var isPresented: Bool = false
     @State var presentModalIndex: QuickChallenge? = nil
+
+    var quickChallenges: [QuickChallenge] {
+        self.quickChallengeViewModel.challengesList
+    }
     
     private var sortedList: [QuickChallenge] {
         return quickChallenges.sorted(by: { $0.updatedAt > $1.updatedAt })
@@ -24,43 +27,10 @@ struct ChallengesListScreenView: View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                
                 VStack {
                     if self.quickChallenges.count > 0 {
-                        if #available(iOS 15.0, *) {
-                            ListWithoutSeparator(self.sortedList, id: \.self) { challenge in
-                                ZStack {
-                                    CustomTitleImageListRow(title: challenge.name)
-                                }
-                                .listRowBackground(Color.clear)
-                                .onTapGesture {
-                                    self.presentModalIndex = challenge
-                                }
-                            }
-                            .fullScreenCover(item: $presentModalIndex) { item in
-                                ChallengeDetailsView(quickChallenge: item)
-                                    .environmentObject(self.quickChallengeViewModel)
-                            }
-                            .navigationBarHidden(false)
-                            .navigationTitle("Seus desafios")
-                            .refreshable {
-                                self.quickChallengeViewModel.getUserChallenges()
-                            }
-                            .ignoresSafeArea(.all, edges: .bottom)
-                            .listStyle(.plain)
-                        } else {
-                            //TODO: Refreshable list for iOS 14
-                            ListWithoutSeparator(0..<self.sortedList.count, id: \.self) { index in
-                                NavigationLink(
-                                    destination: ChallengeDetailsView(quickChallenge: self.sortedList[index])
-                                    .environmentObject(self.quickChallengeViewModel),
-                                    label: {
-                                    CustomTitleImageListRow(title: sortedList[index].name)
-                                })
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                            .ignoresSafeArea(.all, edges: .bottom)
-                            .listStyle(.plain)
-                        }
+                        ChallengesListScreenView(quickChallenges: self.sortedList)
                     }
                     else {
                         EmptyChallengesView()
@@ -69,6 +39,7 @@ struct ChallengesListScreenView: View {
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
                     QCCategorySelectionView()
                 }
+                
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -85,17 +56,61 @@ struct ChallengesListScreenView: View {
                     UITableView.appearance().refreshControl = UIRefreshControl()
                     self.quickChallengeViewModel.getUserChallenges()
                 })
-                .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
-                    self.quickChallenges = quickChallenges
-                })
-                .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
             }
-        }.environment(\.colorScheme, .dark)
+            
+            .navigationBarHidden(false)
+            .navigationTitle("Seus desafios")
+        }
+        .environment(\.colorScheme, .dark)
+
+    }
+}
+
+struct ChallengesListScreenView: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    
+    @State var presentModalIndex: QuickChallenge? = nil
+    
+    var quickChallenges: [QuickChallenge]
+    
+    var body: some View {
+        VStack {
+            if #available(iOS 15.0, *) {
+                ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
+                    ZStack {
+                        CustomTitleImageListRow(title: quickChallenges[index].name)
+                    }
+                    .listRowBackground(Color.clear)
+                    .onTapGesture {
+                        self.presentModalIndex = quickChallenges[index]
+                    }
+                }
+                .fullScreenCover(item: $presentModalIndex) { item in
+                    ChallengeDetailsView(quickChallenge: item)
+                        .environmentObject(self.quickChallengeViewModel)
+                }
+                .refreshable {
+                    self.quickChallengeViewModel.getUserChallenges()
+                }
+                .ignoresSafeArea(.all, edges: .bottom)
+                .listStyle(.plain)
+            } else {
+                //TODO: Refreshable list for iOS 14
+                ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
+                    NavigationLink(destination: ChallengeDetailsView(quickChallenge: self.quickChallenges[index]), label: {
+                        CustomTitleImageListRow(title: quickChallenges[index].name)
+                    })
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .ignoresSafeArea(.all, edges: .bottom)
+                .listStyle(.plain)
+            }
+        }
     }
 }
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengesListScreenView()
+        ChallengesListScreenView(quickChallenges: [])
     }
 }

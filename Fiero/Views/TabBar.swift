@@ -16,9 +16,8 @@ struct TabBarView: View {
     }
     
     var body: some View {
-        
         TabView {
-            ChallengesListScreenView()
+            HomeView()
             .environmentObject(self.quickChallengeViewModel)
             .tabItem {
                 Label("Desafios", systemImage: "list.triangle")
@@ -29,6 +28,7 @@ struct TabBarView: View {
                 Label("Perfil", systemImage: "person")
             }
         }
+        .environment(\.colorScheme, .dark)
         .accentColor(Tokens.Colors.Brand.Primary.pure.value)
     }
 }

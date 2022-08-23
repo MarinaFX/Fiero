@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct DuelScreenView: View {
-
     @State var didTapPauseButton: Bool = false
+    @State var didFinishChallenge: Bool = false
+    @State var isPresentingAlert: Bool = false
 
     var body: some View {
         ZStack {
             OngoingDuelScreenView(didTapPauseButton: $didTapPauseButton)
             if self.didTapPauseButton {
-                PauseScreen(didTapPauseButton: $didTapPauseButton)
+                PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge)
+                if self.didFinishChallenge {
+                    HomeView()
+                }
             }
         }
     }

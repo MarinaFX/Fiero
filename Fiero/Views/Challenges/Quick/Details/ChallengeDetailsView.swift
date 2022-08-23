@@ -13,7 +13,7 @@ struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
-    
+
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
@@ -21,92 +21,111 @@ struct ChallengeDetailsView: View {
     
     @State private var subscriptions: Set<AnyCancellable> = []
 
+    
     //MARK: - Body
     var body: some View {
-        ZStack {
-            Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-            //MARK: - Back Button
-            VStack (alignment: .leading) {
-                HStack {
+        NavigationView {
+            ZStack {
+                Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                //MARK: - Back Button
+                VStack (alignment: .leading) {
                     HStack {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    }.onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        }.onTapGesture {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        Spacer()
                     }
                     Spacer()
-                }
-                Spacer()
-            }.padding(Tokens.Spacing.defaultMargin.value)
-            //MARK: - Top Components
-            VStack {
-                VStack(spacing: largeSpacing) {
-                    VStack (alignment: .center, spacing: nanoSpacing) {
-                        HStack(spacing: nanoSpacing) {
-                            Text("⚡️")
+                }.padding(Tokens.Spacing.defaultMargin.value)
+                //MARK: - Top Components
+                VStack {
+                    VStack(spacing: largeSpacing) {
+                        VStack (alignment: .center, spacing: nanoSpacing) {
+                            HStack(spacing: nanoSpacing) {
+                                Text("⚡️")
+                                    .font(titleFont)
+                                    .foregroundColor(color)
+                                
+                                Text(quickChallenge.name)
+                                    .font(titleFont)
+                                    .foregroundColor(color)
+                            }
+                            .padding(.top, largeSpacing)
+                            
+                            Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
+                                .multilineTextAlignment(.center)
+                                .font(descriptionFont)
+                                .foregroundColor(color)
+                            
+                            Text("\(quickChallenge.goal)")
+                                .font(titleFont)
+                                .foregroundColor(color)
+                        }
+                        
+                        //MARK: - Mid Components
+                        VStack(spacing: extraExtraExtraSmallSpacing) {
+                            Text("Participantes")
                                 .font(titleFont)
                                 .foregroundColor(color)
                             
-                            Text(quickChallenge.name)
-                                .font(titleFont)
-                                .foregroundColor(color)
+                            GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
+                            
                         }
-                        .padding(.top, largeSpacing)
-                        
-                        Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
-                            .multilineTextAlignment(.center)
-                            .font(descriptionFont)
-                            .foregroundColor(color)
-                        
-                        Text("\(quickChallenge.goal)")
-                            .font(titleFont)
-                            .foregroundColor(color)
                     }
+                    .padding()
                     
-                    //MARK: - Mid Components
-                    VStack(spacing: extraExtraExtraSmallSpacing) {
-                        Text("Participantes")
-                            .font(titleFont)
-                            .foregroundColor(color)
-                        
-                        GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
-                        
-                    }
-                }
-                .padding()
-                
-                Spacer()
-                
-                //MARK: - Bottom Components
-                VStack(spacing: quarkSpacing) {
-                    NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                        DuelScreenView()
-                    }
-                    .hidden()
+                    Spacer()
                     
-                    NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                        Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
-                    }
-                    .hidden()
-                    
-                    ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Começar desafio!") {
+                    //MARK: - Bottom Components
+                    VStack(spacing: quarkSpacing) {
                         if self.quickChallenge.maxTeams == 2 {
-                            self.presentDuelOngoingChallenge.toggle()
+                            NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
+                                DuelScreenView()
+                            }
+                            .hidden()
                         }
                         else {
-                            self.present3or4OngoingChallenge.toggle()
+                            NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
+                                Ongoing3Or4WithPauseScreenView(quickChallenge: quickChallenge, didTapPauseButton: false)
+                            }
+                            .hidden()
+                        }
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "Começar desafio!") {
+                            if self.quickChallenge.maxTeams == 2 {
+                                self.presentDuelOngoingChallenge.toggle()
+                            }
+                            else {
+                                self.present3or4OngoingChallenge.toggle()
+                            }
+                        }
+                        
+                        ButtonComponent(style: .black(isEnabled: true),
+                                        text: "Deletar desafio") {
+                            self.isPresentingDeletionAlert.toggle()
                         }
                     }
-                    
-                    ButtonComponent(style: .black(isEnabled: true),
-                                    text: "Deletar desafio") {
-                        self.isPresentingDeletionAlert.toggle()
-                    }
+                    .padding(.bottom, largeSpacing)
                 }
-                .padding(.bottom, largeSpacing)
+                .padding()
+                .alert(isPresented: self.$isPresentingDeletionAlert, content: {
+                    //TODO: Fix alert content
+                    Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
+                        self.isPresentingDeletionAlert = false
+                    }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                        
+                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }))
+                })
             }
             .padding()
             .alert(isPresented: self.$isPresentingDeletionAlert, content: {
@@ -125,18 +144,14 @@ struct ChallengeDetailsView: View {
                             }
                         } receiveValue: { _ in }
                         .store(in: &subscriptions)
-
-//                    print("deletou")
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-//                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
-//
-//                            print("dismiss")
-//                        }
-//                    })
                 }))
             })
+            .accentColor(Color.white)
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationViewStyle(StackNavigationViewStyle())
         }
-        .accentColor(Color.white)
     }
     
     //MARK: - DS Tokens
