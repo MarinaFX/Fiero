@@ -120,38 +120,22 @@ struct ChallengeDetailsView: View {
                         self.isPresentingDeletionAlert = false
                     }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                         self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                        
-                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
+                            .sink { completion in
+                                switch completion {
+                                    case .finished:
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    case .failure(let error):
+                                        print(error)
+                                        // TODO: show alert
+                                }
+                            } receiveValue: { _ in }
+                            .store(in: &subscriptions)
                     }))
                 })
             }
-            .padding()
-            .alert(isPresented: self.$isPresentingDeletionAlert, content: {
-                //TODO: Fix alert content
-                Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
-                    self.isPresentingDeletionAlert = false
-                }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                    self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                        .sink { completion in
-                            switch completion {
-                                case .finished:
-                                    self.presentationMode.wrappedValue.dismiss()
-                                case .failure(let error):
-                                    print(error)
-                                    // TODO: show alert
-                            }
-                        } receiveValue: { _ in }
-                        .store(in: &subscriptions)
-                }))
-            })
-            .accentColor(Color.white)
             .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationViewStyle(StackNavigationViewStyle())
         }
+
     }
     
     //MARK: - DS Tokens
