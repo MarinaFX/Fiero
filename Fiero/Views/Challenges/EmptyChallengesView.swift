@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
-    @Environment(\.rootPresentationMode) var rootPresentationMode
-
     @State var isPresented: Bool = false
     
     var body: some View {
         VStack {
             Spacer()
+            
             Image("EmptyState")
+            
             Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -25,20 +25,23 @@ struct EmptyChallengesView: View {
             ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
                 self.isPresented.toggle()
             })
+            
             .padding()
+            
             Spacer()
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Button(action: {
-                            self.isPresented.toggle()
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        })
-                        .buttonStyle(.plain)
+            
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        self.isPresented.toggle()
+                    }, label: {
+                        Image(systemName: "plus")
+                            .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
+                            .foregroundColor(.white)
                     })
+                    .buttonStyle(.plain)
                 })
+            })
         }
         .navigationTitle("Desafios")
         .environment(\.colorScheme, .dark)

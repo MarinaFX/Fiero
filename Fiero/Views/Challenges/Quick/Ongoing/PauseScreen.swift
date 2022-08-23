@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PauseScreen: View {
     @Binding var didTapPauseButton: Bool
+    @Binding var didFinishChallenge: Bool
     
     //MARK: Colors
     var backgroundColor: Color {
@@ -41,7 +42,12 @@ struct PauseScreen: View {
                 ButtonComponent(style: .primary(isEnabled: true), text: "Retornar ao desafio") {
                     self.didTapPauseButton.toggle()
                 }
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar desafio") {
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
+                    self.didFinishChallenge.toggle()
+                    RootViewController.popToRootViewController()
+                    //call func from ViewModel to update players scores
+                    
+                    //call func from ViewModel to finish the challenge
                 }
             }
             .padding(.horizontal, spacingDefaultMargin)
@@ -54,6 +60,6 @@ struct PauseScreen: View {
 
 struct PauseScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PauseScreen(didTapPauseButton: .constant(false))
+        PauseScreen(didTapPauseButton: .constant(false), didFinishChallenge: .constant(false))
     }
 }
