@@ -9,7 +9,6 @@ import SwiftUI
 //MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
-    @Environment(\.rootPresentationMode) private var rootPresentationMode
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
@@ -65,10 +64,7 @@ struct QCChallengeCreatedView: View {
             if self.serverResponse.statusCode == 201 ||
                 self.serverResponse.statusCode == 200 {
                 Button(action: {
-                    //self.rootPresentationMode.wrappedValue.popToRootViewController()
-                    //RootViewController.dismissSheetFlow()
                     RootViewController.popToRootViewController()
-                    //self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Ir para lista de desafios")
                         .bold()
@@ -104,7 +100,7 @@ struct QCChallengeCreatedView: View {
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
                 
                 Button(action: {
-                    self.rootPresentationMode.wrappedValue.popToRootViewController()
+                    RootViewController.popToRootViewController()
                 }, label: {
                     Text("Voltar para o início")
                         .bold()

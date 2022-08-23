@@ -82,6 +82,7 @@ struct Ongoing3_4ScreenView: View {
                 }
                 
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
+                    RootViewController.popToRootViewController()
                     //call func from ViewModel to update players scores
                     //call func from ViewModel to finish the challenge
                 }
