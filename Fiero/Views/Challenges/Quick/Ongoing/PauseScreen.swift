@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PauseScreen: View {
+    @Environment(\.rootPresentationMode) var rootPresentationMode
+
     @Binding var didTapPauseButton: Bool
     @Binding var didFinishChallenge: Bool
     
@@ -44,6 +46,8 @@ struct PauseScreen: View {
                 }
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
                     self.didFinishChallenge.toggle()
+                    //self.rootPresentationMode.wrappedValue.popToRootViewController()
+                    RootViewController.dismissSheetFlow()
                     //call func from ViewModel to update players scores
                     
                     //call func from ViewModel to finish the challenge

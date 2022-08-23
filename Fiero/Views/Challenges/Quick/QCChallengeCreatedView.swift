@@ -10,6 +10,7 @@ import SwiftUI
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
     @Environment(\.rootPresentationMode) private var rootPresentationMode
+    @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var didPushToHomeScreen: Bool = false
@@ -64,7 +65,10 @@ struct QCChallengeCreatedView: View {
             if self.serverResponse.statusCode == 201 ||
                 self.serverResponse.statusCode == 200 {
                 Button(action: {
-                    self.rootPresentationMode.wrappedValue.popToRootViewController()
+                    //self.rootPresentationMode.wrappedValue.popToRootViewController()
+                    //RootViewController.dismissSheetFlow()
+                    RootViewController.popToRootViewController()
+                    //self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Ir para lista de desafios")
                         .bold()
@@ -129,7 +133,7 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView(quickChallengeViewModel: QuickChallengeViewModel(), serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
+        QCChallengeCreatedView(serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
             .environmentObject(QuickChallengeViewModel())

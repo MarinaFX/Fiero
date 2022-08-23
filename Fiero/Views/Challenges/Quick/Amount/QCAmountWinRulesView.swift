@@ -76,7 +76,7 @@ struct QCAmountWinRulesView: View {
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                QCChallengeCreatedView(quickChallengeViewModel: self.quickChallengeViewModel, serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
+                QCChallengeCreatedView(serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
             }
         }
         .alert(isPresented: self.$isPresentingAlert, content: {

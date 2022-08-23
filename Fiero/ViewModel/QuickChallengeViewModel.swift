@@ -73,7 +73,7 @@ class QuickChallengeViewModel: ObservableObject {
                     return
                 }
                 
-                self?.serverResponse.statusCode = urlResponse.statusCode
+                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.newlyCreatedChallenge = response.quickChallenge[0]
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
