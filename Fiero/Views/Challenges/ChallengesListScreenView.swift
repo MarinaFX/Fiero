@@ -32,7 +32,7 @@ struct ChallengesListScreenView: View {
                                     self.presentModalIndex = quickChallenges[index]
                                 }
                             }
-                            .fullScreenCover(item: $presentModalIndex) { item in
+                            .sheet(item: $presentModalIndex) { item in
                                 ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: item)
                             }
                             .navigationBarHidden(false)
