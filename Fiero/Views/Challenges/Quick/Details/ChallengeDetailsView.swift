@@ -16,7 +16,7 @@ struct ChallengeDetailsView: View {
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
     @State var isPresentingDeletionAlert: Bool = false
-
+ 
     //MARK: - Body
     var body: some View {
         NavigationView{
@@ -24,8 +24,8 @@ struct ChallengeDetailsView: View {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
                 //MARK: - Top Components
                 VStack {
-                    VStack(spacing: largeSpacing) {
-                        VStack (alignment: .center, spacing: nanoSpacing) {
+                    VStack(spacing: 20) {
+                        VStack (alignment: .center, spacing: quarkSpacing) {
                             HStack(spacing: nanoSpacing) {
                                 Text("⚡️")
                                     .font(titleFont)
@@ -40,6 +40,9 @@ struct ChallengeDetailsView: View {
                                 .multilineTextAlignment(.center)
                                 .font(descriptionFont)
                                 .foregroundColor(color)
+                                .fixedSize(horizontal: false, vertical: true)
+
+
                             
                             Text("\(quickChallenge.goal)")
                                 .font(titleFont)
@@ -55,38 +58,43 @@ struct ChallengeDetailsView: View {
                             GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
                             
                         }
-                        //MARK: - Bottom Components
-                        VStack(spacing: quarkSpacing) {
-                            NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                                DuelScreenView()
+                    }
+                    Spacer()
+                    //MARK: - Bottom Components
+                    VStack(spacing: quarkSpacing) {
+                        NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
+                            DuelScreenView()
+                        }.hidden()
+                        
+                        NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
+                            Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
+                        }.hidden()
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "Começar desafio!") {
+                            if self.quickChallenge.maxTeams == 2 {
+                                self.presentDuelOngoingChallenge.toggle()
                             }
-                            .hidden()
-                            
-                            NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
-                            }
-                            .hidden()
-                            
-                            ButtonComponent(style: .secondary(isEnabled: true),
-                                            text: "Começar desafio!") {
-                                if self.quickChallenge.maxTeams == 2 {
-                                    self.presentDuelOngoingChallenge.toggle()
-                                }
-                                else {
-                                    self.present3or4OngoingChallenge.toggle()
-                                }
-                            }
-                            
-                            ButtonComponent(style: .black(isEnabled: true),
-                                            text: "Deletar desafio") {
-                                self.isPresentingDeletionAlert.toggle()
+                            else {
+                                self.present3or4OngoingChallenge.toggle()
                             }
                         }
-                        .padding(.bottom, largeSpacing)
+                        
+                        ButtonComponent(style: .black(isEnabled: true),
+                                        text: "Deletar desafio") {
+                            self.isPresentingDeletionAlert.toggle()
+                        }
                     }
-                    .padding()
+                    .padding(.bottom, largeSpacing)
                 }
-                .padding()
+                .toolbar {
+                    ToolbarItem(id: "") {
+                        Button("Voltar"){
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                }
+                .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingDeletionAlert, content: {
                     //TODO: Fix alert content
                     Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
@@ -99,13 +107,6 @@ struct ChallengeDetailsView: View {
                         }
                     }))
                 })
-                .toolbar {
-                    ToolbarItem(id: "") {
-                        Button("Voltar"){
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
             }
             .accentColor(Color.white)
         }
@@ -134,10 +135,11 @@ struct ChallengeDetailsView: View {
         return Tokens.FontStyle.caption.font()
     }
 }
-
+ 
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
         ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
     }
 }
+
