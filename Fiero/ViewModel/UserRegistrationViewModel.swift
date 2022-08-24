@@ -19,15 +19,12 @@ class UserRegistrationViewModel: ObservableObject {
     private let ENDPOINT: String = "/user/register"
     
     private(set) var client: HTTPClient
-    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init(client: HTTPClient = URLSession.shared,
-         keyValueStorage: KeyValueStorage = UserDefaults.standard) {
+    init(client: HTTPClient = URLSession.shared) {
         self.client = client
         self.serverResponse = .unknown
-        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - Keyboard Detection
