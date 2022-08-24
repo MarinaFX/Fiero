@@ -6,26 +6,46 @@
 //
 
 import SwiftUI
+import Combine
+
 //MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
-    
-    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
     @State var quickChallenge: QuickChallenge
     @State var isPresentingDeletionAlert: Bool = false
- 
+    
+    @State private var subscriptions: Set<AnyCancellable> = []
+
+    
     //MARK: - Body
     var body: some View {
-        NavigationView{
+        NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                //MARK: - Back Button
+                VStack (alignment: .leading) {
+                    HStack {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        }.onTapGesture {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        Spacer()
+                    }
+                    Spacer()
+                }.padding(Tokens.Spacing.defaultMargin.value)
                 //MARK: - Top Components
                 VStack {
-                    VStack(spacing: 20) {
-                        VStack (alignment: .center, spacing: quarkSpacing) {
+                    VStack(spacing: largeSpacing) {
+                        VStack (alignment: .center, spacing: nanoSpacing) {
                             HStack(spacing: nanoSpacing) {
                                 Text("⚡️")
                                     .font(titleFont)
@@ -35,6 +55,7 @@ struct ChallengeDetailsView: View {
                                     .font(titleFont)
                                     .foregroundColor(color)
                             }
+                            .padding(.top, largeSpacing)
                             
                             Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
                                 .multilineTextAlignment(.center)
@@ -59,16 +80,24 @@ struct ChallengeDetailsView: View {
                             
                         }
                     }
+                    .padding()
+                    
                     Spacer()
+                    
                     //MARK: - Bottom Components
                     VStack(spacing: quarkSpacing) {
-                        NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                            DuelScreenView()
-                        }.hidden()
-                        
-                        NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                            Ongoing3_4ScreenView(quickChallenge: self.quickChallenge)
-                        }.hidden()
+                        if self.quickChallenge.maxTeams == 2 {
+                            NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
+                                DuelScreenView()
+                            }
+                            .hidden()
+                        }
+                        else {
+                            NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
+                                Ongoing3Or4WithPauseScreenView(quickChallenge: quickChallenge, didTapPauseButton: false)
+                            }
+                            .hidden()
+                        }
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Começar desafio!") {
@@ -87,29 +116,29 @@ struct ChallengeDetailsView: View {
                     }
                     .padding(.bottom, largeSpacing)
                 }
-                .toolbar {
-                    ToolbarItem(id: "") {
-                        Button("Voltar"){
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-                .padding(.horizontal)
+                .padding()
                 .alert(isPresented: self.$isPresentingDeletionAlert, content: {
                     //TODO: Fix alert content
                     Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
                         self.isPresentingDeletionAlert = false
                     }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                         self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                        
-                        if !self.quickChallengeViewModel.challengesList.contains(where: { $0.id == self.quickChallenge.id }) {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
+                            .sink { completion in
+                                switch completion {
+                                    case .finished:
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    case .failure(let error):
+                                        print(error)
+                                        // TODO: show alert
+                                }
+                            } receiveValue: { _ in }
+                            .store(in: &subscriptions)
                     }))
                 })
             }
-            .accentColor(Color.white)
+            .navigationBarHidden(true)
         }
+
     }
     
     //MARK: - DS Tokens
@@ -139,7 +168,8 @@ struct ChallengeDetailsView: View {
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+            .environmentObject(QuickChallengeViewModel())
     }
 }
 
