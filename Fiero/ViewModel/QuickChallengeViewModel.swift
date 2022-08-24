@@ -21,6 +21,9 @@ class QuickChallengeViewModel: ObservableObject {
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
     private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge"
+    private let ENDPOINT_PATCH_CHALLENGES_BEGIN: String = "/quickChallenge"
+    private let ENDPOINT_PATCH_CHALLENGES_FINISHED: String = "/quickChallenge"
+    private let ENDPOINT_PATCH_CHALLENGES_SCORE: String = "/quickChallenge"
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -154,4 +157,160 @@ class QuickChallengeViewModel: ObservableObject {
             .mapError { $0 as Error }
             .eraseToAnyPublisher()
     }
+    
+    //MARK: - Begin Challenge Update
+    func beginChallenge(challengeId: String, alreadyBegin: Bool) {
+        self.serverResponse = .unknown
+        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
+        else {
+            print("nao achou token")
+            return
+        }
+        
+        let json = """
+        {
+            "alreadyBegin" : \(alreadyBegin)
+        }
+        """
+        print(json)
+        let request = makePATCHRequest(json: json, param: challengeId, variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_BEGIN, authToken: userToken)
+        
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                switch result {
+                    case .failure(let error):
+                        print("Failed to create publisher: \(error)")
+                    case .finished:
+                        print("Successfully created publisher")
+                }
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item
+                else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    return
+                }
+                if var challengesList = self?.challengesList {
+                    for i in 0...challengesList.count-1 {
+                        if(challengesList[i].id == challengeId) {
+                            challengesList[i] = response.quickChallenge
+                        }
+                    }
+                    self?.challengesList = challengesList
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    //MARK: - Fisnih Challenge Update
+    func finishChallenge(challengeId: String, finished: Bool) {
+        self.serverResponse = .unknown
+        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
+        else {
+            print("nao achou token")
+            return
+        }
+        
+        let json = """
+        {
+            "finished" : \(finished)
+        }
+        """
+        print(json)
+        let request = makePATCHRequest(json: json, param: challengeId, variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_FINISHED, authToken: userToken)
+        
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                switch result {
+                    case .failure(let error):
+                        print("Failed to create publisher: \(error)")
+                    case .finished:
+                        print("Successfully created publisher")
+                }
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item
+                else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    return
+                }
+                if var challengesList = self?.challengesList {
+                    for i in 0...challengesList.count-1 {
+                        if(challengesList[i].id == challengeId) {
+                            challengesList[i] = response.quickChallenge
+                        }
+                    }
+                    self?.challengesList = challengesList
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    //MARK: - Patch Score
+    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) {
+        self.serverResponse = .unknown
+        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
+        else {
+            print("nao achou token")
+            return
+        }
+        
+        let json = """
+        {
+            "score" : \(score)
+        }
+        """
+        print(json)
+        let request = makePATCHRequestScore(json: json, challengeId: challengeId, teamId: teamId, memberId: memberId, variableToBePatched: VariablesToBePatchedQuickChallenge.score.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_SCORE, authToken: userToken)
+        
+        self.client.perform(for: request)
+            .print("after perform")
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .print("after decode")
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                switch result {
+                    case .failure(let error):
+                        print("Failed to create publisher: \(error)")
+                    case .finished:
+                        print("Successfully created publisher")
+                }
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item
+                else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    return
+                }
+                if var challengesList = self?.challengesList {
+                    for i in 0...challengesList.count-1 {
+                        if(challengesList[i].id == challengeId) {
+                            challengesList[i] = response.quickChallenge
+                        }
+                    }
+                    self?.challengesList = challengesList
+                }
+            })
+            .store(in: &cancellables)
+    }
+}
+
+enum VariablesToBePatchedQuickChallenge: CustomStringConvertible {
+    case alreadyBegin, finished, score
+    
+    var description: String {
+        switch self {
+            case .alreadyBegin:
+                return "alreadyBegin"
+            case .finished:
+                return "finished"
+            case .score:
+                return "score"
+        }
+    }
+    
 }

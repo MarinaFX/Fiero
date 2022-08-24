@@ -16,7 +16,7 @@ struct Ongoing3Or4WithPauseScreenView: View {
         ZStack {
             Ongoing3_4ScreenView(quickChallenge: quickChallenge, didTapPauseButton: $didTapPauseButton)
             if self.didTapPauseButton {
-                PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge)
+                PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge, quickChallenge: $quickChallenge)
                 if self.didFinishChallenge {
                     HomeView()
                 }
@@ -76,7 +76,10 @@ struct Ongoing3_4ScreenView: View {
                         ScoreController3_4Component(
                             foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
                             playerName: team.wrappedValue.name,
-                            playerScore: Binding(team.members)?.first?.score ?? .constant(0))
+                            playerScore: Binding(team.members)?.first?.score ?? .constant(0),
+                            challengeId: quickChallenge.id,
+                            teamId: team.wrappedValue.id,
+                            memberId: team.wrappedValue.members?[0].id ?? "")
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     }
                 }

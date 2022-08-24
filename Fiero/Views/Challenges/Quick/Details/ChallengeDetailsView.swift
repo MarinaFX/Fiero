@@ -85,7 +85,7 @@ struct ChallengeDetailsView: View {
                     VStack(spacing: quarkSpacing) {
                         if self.quickChallenge.maxTeams == 2 {
                             NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                                DuelScreenView()
+                                DuelScreenView(quickChallenge: $quickChallenge)
                             }
                             .hidden()
                         }
@@ -98,6 +98,7 @@ struct ChallengeDetailsView: View {
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Começar desafio!") {
+                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                             if self.quickChallenge.maxTeams == 2 {
                                 self.presentDuelOngoingChallenge.toggle()
                             }

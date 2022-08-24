@@ -73,7 +73,7 @@ struct QCChallengeCreatedView: View {
                 .padding(.bottom, Tokens.Spacing.xxxs.value)
                 
                 NavigationLink("", isActive: self.$presentDuelChallenge) {
-                    DuelScreenView()
+                    DuelScreenView(quickChallenge: $quickChallenge)
                 }
                 .hidden()
                 
