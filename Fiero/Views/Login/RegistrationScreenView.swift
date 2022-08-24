@@ -110,6 +110,7 @@ struct RegistrationScreenView: View {
                     self.serverResponse.statusCode == 201 {
                     UserDefaults.standard.set(self.password, forKey: "password")
                     UserDefaults.standard.set(self.email, forKey: "email")
+                    self.userRegistrationViewModel.saveUserOnUserDefaults(name: username)
                     self.pushHomeView.toggle()
                 }
                 

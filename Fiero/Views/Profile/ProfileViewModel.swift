@@ -19,9 +19,11 @@ class ProfileViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var activeAlert: ActiveAlert = .confirmAccountDelete
     
+    private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
+    
+    
     init() {
-        //TODO: - put the name of the logged in user
-        userName = "Marcelo"
+        userName = userRegistrationViewModel.getUserOnUserDefaults()
         serverResponse = ServerResponse.unknown
     }
     
