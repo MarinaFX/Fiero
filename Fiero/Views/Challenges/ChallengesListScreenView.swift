@@ -34,6 +34,7 @@ struct HomeView: View {
                 }
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
                     QCCategorySelectionView()
+                        .environmentObject(self.quickChallengeViewModel)
                 }
                 
                 .toolbar {
@@ -64,7 +65,8 @@ struct HomeView: View {
 struct ChallengesListScreenView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @State var presentModalIndex: QuickChallenge? = nil
+    @State var currentDetailedChallenge: QuickChallenge? = nil 
+    @State var isPresented: Bool = false
     
     var quickChallenges: [QuickChallenge]
     
@@ -74,13 +76,14 @@ struct ChallengesListScreenView: View {
                 ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
                     ZStack {
                         CustomTitleImageListRow(title: challenge.name)
+                            .onTapGesture {
+                                self.currentDetailedChallenge = challenge
+                            }
                     }
                     .listRowBackground(Color.clear)
-                    .onTapGesture {
-                        self.presentModalIndex = challenge
-                    }
+                    
                 }
-                .fullScreenCover(item: $presentModalIndex) { item in
+                .fullScreenCover(item: $currentDetailedChallenge) { item in
                     ChallengeDetailsView(quickChallenge: item)
                         .environmentObject(self.quickChallengeViewModel)
                 }
@@ -91,24 +94,28 @@ struct ChallengesListScreenView: View {
                 .listStyle(.plain)
             } else {
                 //TODO: Refreshable list for iOS 14
-                ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
+                ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
                     ZStack {
-                        CustomTitleImageListRow(title: quickChallenges[index].name)
+                        CustomTitleImageListRow(title: challenge.name)
+                            .padding(.horizontal)
                     }
                     .listRowBackground(Color.clear)
                     .onTapGesture {
-                        self.presentModalIndex = quickChallenges[index]
+                        print("funciona merda")
+                        self.currentDetailedChallenge = challenge
+                        self.isPresented = true
                     }
                 }
-                .fullScreenCover(item: $presentModalIndex) { item in
-                    ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: item)
+                .fullScreenCover(item: $currentDetailedChallenge) { item in
+                    ChallengeDetailsView(quickChallenge: item)
+                        .environmentObject(self.quickChallengeViewModel)
                 }
-                .navigationBarHidden(false)
-                .navigationTitle("Seus desafios")
                 .ignoresSafeArea(.all, edges: .bottom)
                 .listStyle(.plain)
             }
         }
+        .navigationBarHidden(false)
+        .navigationTitle("Seus desafios")
     }
 }
 
