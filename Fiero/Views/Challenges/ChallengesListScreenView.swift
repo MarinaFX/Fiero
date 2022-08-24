@@ -81,7 +81,8 @@ struct ChallengesListScreenView: View {
                     }
                 }
                 .sheet(item: $presentModalIndex) { item in
-                    ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: item)
+                    ChallengeDetailsView(quickChallenge: item)
+                        .environmentObject(self.quickChallengeViewModel)
                 }
                 .refreshable {
                     self.quickChallengeViewModel.getUserChallenges()
