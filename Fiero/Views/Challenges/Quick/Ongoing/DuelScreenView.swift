@@ -15,7 +15,7 @@ struct DuelScreenView: View {
 
     var body: some View {
         ZStack {
-            OngoingDuelScreenView(didTapPauseButton: $didTapPauseButton)
+            OngoingDuelScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: $didTapPauseButton)
             if self.didTapPauseButton {
                 PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge, quickChallenge: $quickChallenge)
                 if self.didFinishChallenge {
