@@ -61,7 +61,6 @@ struct HomeView: View {
             .navigationTitle("Seus desafios")
         }
         .environment(\.colorScheme, .dark)
-
     }
 }
 

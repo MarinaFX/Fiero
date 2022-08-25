@@ -13,15 +13,16 @@ struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
-
-    @State var presentDuelOngoingChallenge: Bool = false
-    @State var present3or4OngoingChallenge: Bool = false
-    @State var isPresentingDeletionAlert: Bool = false
-    @Binding var quickChallenge: QuickChallenge
-
+    
     @State private var subscriptions: Set<AnyCancellable> = []
 
-    
+    @State var isPresentingDeletionAlert: Bool = false
+    @State var presentDuelOngoingChallenge: Bool = false
+    @State var present3or4OngoingChallenge: Bool = false
+
+    @Binding var quickChallenge: QuickChallenge
+
+
     //MARK: - Body
     var body: some View {
         NavigationView {
@@ -41,15 +42,12 @@ struct ChallengeDetailsView: View {
                                     .font(titleFont)
                                     .foregroundColor(color)
                             }
-                            //.padding(.top, largeSpacing)
                             
                             Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
                                 .multilineTextAlignment(.center)
                                 .font(descriptionFont)
                                 .foregroundColor(color)
                                 .fixedSize(horizontal: false, vertical: true)
-
-
                             
                             Text("\(quickChallenge.goal)")
                                 .font(titleFont)
@@ -63,10 +61,8 @@ struct ChallengeDetailsView: View {
                                 .foregroundColor(color)
                             
                             GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
-                            
                         }
                     }
-                    //.padding()
                     
                     Spacer()
                     
@@ -101,11 +97,8 @@ struct ChallengeDetailsView: View {
                                         text: "Deletar desafio") {
                             self.isPresentingDeletionAlert.toggle()
                         }
-                        
                     }
                     .padding(.bottom, largeSpacing)
-                    
-                    
                 }
                 .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingDeletionAlert, content: {
