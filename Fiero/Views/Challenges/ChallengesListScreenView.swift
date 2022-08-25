@@ -87,7 +87,6 @@ struct ChallengesListScreenView: View {
                 .refreshable {
                     self.quickChallengeViewModel.getUserChallenges()
                 }
-                .ignoresSafeArea(.all, edges: .bottom)
                 .listStyle(.plain)
             } else {
                 //TODO: Refreshable list for iOS 14
@@ -96,8 +95,7 @@ struct ChallengesListScreenView: View {
                         CustomTitleImageListRow(title: challenge.name)
                     })
                     .buttonStyle(PlainButtonStyle())
-                }
-                .ignoresSafeArea(.all, edges: .bottom)
+                }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .listStyle(.plain)
             }
         }
