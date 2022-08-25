@@ -78,7 +78,7 @@ struct QCChallengeCreatedView: View {
                 .hidden()
                 
                 NavigationLink("", isActive: self.$present3Or4Challenge) {
-                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
+                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
                 }
                 .hidden()
                 

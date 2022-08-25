@@ -10,15 +10,17 @@ import SwiftUI
 struct ScoreController3_4Component: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    var foreGroundColor: Color
-    var playerName: String
-    @Binding var playerScore: Double
-    @State var timeWithoutClick: Int = 0
-    @State var waitingForSync: Bool = false
-    var challengeId: String
-    var teamId: String
-    var memberId: String
+    @State private(set) var timeWithoutClick: Int = 0
+    @State private(set) var waitingForSync: Bool = false
+
+    private(set) var foreGroundColor: Color
+    private(set) var playerName: String
+    private(set) var challengeId: String
+    private(set) var teamId: String
+    private(set) var memberId: String
     
+    @Binding var playerScore: Double
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
@@ -59,9 +61,9 @@ struct ScoreController3_4Component: View {
             .padding(.horizontal, Tokens.Spacing.xs.value)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .center)
-        .onAppear {
-            syncScore()
-        }
+        .onDisappear(perform: {
+            self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
+        })
     }
     
     func syncScore() {
@@ -80,6 +82,6 @@ struct ScoreController3_4Component: View {
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(foreGroundColor: .yellow, playerName: "Name", playerScore: .constant(0), challengeId: "", teamId: "", memberId: "")
+        ScoreController3_4Component(foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "", playerScore: .constant(2.0))
     }
 }

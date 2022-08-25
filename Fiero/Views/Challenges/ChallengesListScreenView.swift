@@ -15,8 +15,12 @@ struct HomeView: View {
     @State var isPresented: Bool = false
     @State var presentModalIndex: QuickChallenge? = nil
 
-    private var quickChallenges: [QuickChallenge] {
-        self.quickChallengeViewModel.challengesList
+    private var quickChallenges: Binding<[QuickChallenge]> {
+        Binding(get: {
+            return self.quickChallengeViewModel.sortedList
+        }, set: {
+            self.quickChallengeViewModel.challengesList = $0
+        })
     }
     
     var body: some View {
@@ -26,7 +30,7 @@ struct HomeView: View {
                 
                 VStack {
                     if self.quickChallenges.count > 0 {
-                        ChallengesListScreenView(quickChallenges: self.quickChallenges.sorted(by: { $0.updatedAt > $1.updatedAt }))
+                        ChallengesListScreenView(quickChallenges: self.quickChallenges)
                     }
                     else {
                         EmptyChallengesView()
@@ -66,7 +70,27 @@ struct ChallengesListScreenView: View {
     
     @State var presentModalIndex: QuickChallenge? = nil
     
-    var quickChallenges: [QuickChallenge]
+    @Binding var quickChallenges: [QuickChallenge]
+    
+    func getBindingWith(id: String) -> Binding<QuickChallenge> {
+        guard let index = self.quickChallenges.firstIndex(where: { $0.id == id }) else {
+            return .constant(QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams: [], owner: User(email: "teste", name: "teste")))
+        }
+        
+        let binding = Binding<QuickChallenge>.init(get: {
+            return self.quickChallenges[index]
+        }, set: {
+            self.quickChallenges[index] = $0
+        })
+        
+        
+        if #available(iOS 15, *) {
+            return self.$quickChallenges.first(where: { $0.wrappedValue.id == id }) ?? binding
+        }
+        else {
+            return binding
+        }
+    }
     
     var body: some View {
         VStack {
@@ -81,7 +105,7 @@ struct ChallengesListScreenView: View {
                     }
                 }
                 .fullScreenCover(item: $presentModalIndex) { item in
-                    ChallengeDetailsView(quickChallenge: item)
+                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                         .environmentObject(self.quickChallengeViewModel)
                 }
                 .refreshable {
@@ -92,7 +116,7 @@ struct ChallengesListScreenView: View {
             } else {
                 //TODO: Refreshable list for iOS 14
                 ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
-                    NavigationLink(destination: ChallengeDetailsView(quickChallenge: challenge), label: {
+                    NavigationLink(destination: ChallengeDetailsView(quickChallenge: getBindingWith(id: challenge.id)), label: {
                         CustomTitleImageListRow(title: challenge.name)
                     })
                     .buttonStyle(PlainButtonStyle())
@@ -106,6 +130,6 @@ struct ChallengesListScreenView: View {
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengesListScreenView(quickChallenges: [])
+        ChallengesListScreenView(quickChallenges: .constant([]))
     }
 }

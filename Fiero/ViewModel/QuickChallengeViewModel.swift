@@ -29,6 +29,10 @@ class QuickChallengeViewModel: ObservableObject {
     private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
+    var sortedList: [QuickChallenge] {
+        self.challengesList.sorted(by: { $0.updatedAt > $1.updatedAt })
+    }
+    
     //MARK: - Init
     init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
@@ -88,16 +92,20 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Get User Challenges
-    func getUserChallenges() {
+    @discardableResult
+    func getUserChallenges() -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         let userToken = keyValueStorage.string(forKey: "AuthToken")!
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -115,6 +123,11 @@ class QuickChallengeViewModel: ObservableObject {
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map { _ in () }
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
     }
     
     //MARK: - Delete User Challenges
@@ -269,32 +282,21 @@ class QuickChallengeViewModel: ObservableObject {
         
         self.client.perform(for: request)
             .print("after perform")
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .print("after decode")
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { result in
-                switch result {
-                    case .failure(let error):
-                        print("Failed to create publisher: \(error)")
-                    case .finished:
-                        print("Successfully created publisher")
+            .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
+                if case .failure = rawURLResponse {
+                    return self.getUserChallenges()
+                        .eraseToAnyPublisher()
                 }
-            }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item
                 else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    return
+                    return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
+                        .eraseToAnyPublisher()
                 }
-                if var challengesList = self?.challengesList {
-                    for i in 0...challengesList.count-1 {
-                        if(challengesList[i].id == challengeId) {
-                            challengesList[i] = response.quickChallenge
-                        }
-                    }
-                    self?.challengesList = challengesList
-                }
-            })
+            }
+            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
 }
