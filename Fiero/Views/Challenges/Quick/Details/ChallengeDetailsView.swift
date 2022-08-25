@@ -13,35 +13,22 @@ struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
-
-    @State var presentDuelOngoingChallenge: Bool = false
-    @State var present3or4OngoingChallenge: Bool = false
-    @State var isPresentingDeletionAlert: Bool = false
-    @Binding var quickChallenge: QuickChallenge
-
+    
     @State private var subscriptions: Set<AnyCancellable> = []
 
-    
+    @State var isPresentingDeletionAlert: Bool = false
+    @State var presentDuelOngoingChallenge: Bool = false
+    @State var present3or4OngoingChallenge: Bool = false
+
+    @Binding var quickChallenge: QuickChallenge
+
+
     //MARK: - Body
     var body: some View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                //MARK: - Back Button
-                VStack (alignment: .leading) {
-                    HStack {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.title2)
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        }.onTapGesture {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        Spacer()
-                    }
-                    Spacer()
-                }.padding(Tokens.Spacing.defaultMargin.value)
+                
                 //MARK: - Top Components
                 VStack {
                     VStack(spacing: largeSpacing) {
@@ -55,12 +42,12 @@ struct ChallengeDetailsView: View {
                                     .font(titleFont)
                                     .foregroundColor(color)
                             }
-                            .padding(.top, largeSpacing)
                             
                             Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
                                 .multilineTextAlignment(.center)
                                 .font(descriptionFont)
                                 .foregroundColor(color)
+                                .fixedSize(horizontal: false, vertical: true)
                             
                             Text("\(quickChallenge.goal)")
                                 .font(titleFont)
@@ -74,10 +61,8 @@ struct ChallengeDetailsView: View {
                                 .foregroundColor(color)
                             
                             GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
-                            
                         }
                     }
-                    .padding()
                     
                     Spacer()
                     
@@ -115,7 +100,7 @@ struct ChallengeDetailsView: View {
                     }
                     .padding(.bottom, largeSpacing)
                 }
-                .padding()
+                .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingDeletionAlert, content: {
                     //TODO: Fix alert content
                     Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
@@ -134,8 +119,17 @@ struct ChallengeDetailsView: View {
                             .store(in: &subscriptions)
                     }))
                 })
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        Button("Voltar", action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
+                    })
+                }
+                
             }
-            .navigationBarHidden(true)
+            .accentColor(Color.white)
         }
 
     }
@@ -163,7 +157,7 @@ struct ChallengeDetailsView: View {
         return Tokens.FontStyle.caption.font()
     }
 }
-
+ 
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
@@ -171,3 +165,4 @@ struct ChallengeDetailsScreenView_Previews: PreviewProvider {
             .environmentObject(QuickChallengeViewModel())
     }
 }
+

@@ -61,7 +61,6 @@ struct HomeView: View {
             .navigationTitle("Seus desafios")
         }
         .environment(\.colorScheme, .dark)
-
     }
 }
 
@@ -104,7 +103,7 @@ struct ChallengesListScreenView: View {
                         self.presentModalIndex = challenge
                     }
                 }
-                .fullScreenCover(item: $presentModalIndex) { item in
+                .sheet(item: $presentModalIndex) { item in
                     ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                         .environmentObject(self.quickChallengeViewModel)
                 }
