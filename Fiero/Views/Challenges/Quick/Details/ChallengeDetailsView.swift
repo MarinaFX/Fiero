@@ -27,21 +27,7 @@ struct ChallengeDetailsView: View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                //MARK: - Back Button
-                VStack (alignment: .leading) {
-                    HStack {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.title2)
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            Text("Back").foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        }.onTapGesture {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        Spacer()
-                    }
-                    Spacer()
-                }.padding(Tokens.Spacing.defaultMargin.value)
+                
                 //MARK: - Top Components
                 VStack {
                     VStack(spacing: largeSpacing) {
@@ -55,7 +41,7 @@ struct ChallengeDetailsView: View {
                                     .font(titleFont)
                                     .foregroundColor(color)
                             }
-                            .padding(.top, largeSpacing)
+                            //.padding(.top, largeSpacing)
                             
                             Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
                                 .multilineTextAlignment(.center)
@@ -80,7 +66,7 @@ struct ChallengeDetailsView: View {
                             
                         }
                     }
-                    .padding()
+                    //.padding()
                     
                     Spacer()
                     
@@ -113,10 +99,13 @@ struct ChallengeDetailsView: View {
                                         text: "Deletar desafio") {
                             self.isPresentingDeletionAlert.toggle()
                         }
+                        
                     }
                     .padding(.bottom, largeSpacing)
+                    
+                    
                 }
-                .padding()
+                .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingDeletionAlert, content: {
                     //TODO: Fix alert content
                     Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
@@ -135,8 +124,17 @@ struct ChallengeDetailsView: View {
                             .store(in: &subscriptions)
                     }))
                 })
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        Button("Voltar", action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
+                    })
+                }
+                
             }
-            .navigationBarHidden(true)
+            .accentColor(Color.white)
         }
 
     }
@@ -168,7 +166,7 @@ struct ChallengeDetailsView: View {
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(quickChallenge: QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
+        ChallengeDetailsView(quickChallenge: QuickChallenge(id: "", name: "Flemis", invitationCode: "", type: "", goal: 115, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty")))
             .environmentObject(QuickChallengeViewModel())
     }
 }
