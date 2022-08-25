@@ -14,6 +14,8 @@ struct QCAmountWinRulesView: View {
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
+    @State var serverResponse: ServerResponse = .unknown
+    @State var quickChallenge: QuickChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -74,7 +76,7 @@ struct QCAmountWinRulesView: View {
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView) {
-                QCChallengeCreatedView(challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
+                QCChallengeCreatedView(serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
             }
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
@@ -83,7 +85,9 @@ struct QCAmountWinRulesView: View {
                   dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
             )
         })
-        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { _ in
+        .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
+            self.quickChallenge = quickChallenge
+            
             self.pushNextView.toggle()
         })
         .makeDarkModeFullScreen()
