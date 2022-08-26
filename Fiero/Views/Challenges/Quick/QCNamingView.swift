@@ -13,6 +13,7 @@ struct QCNamingView: View {
 
     @State private var isNavActiveForAmount: Bool = false
     @State var challengeName: String = ""
+    @State var isPresentingAlert: Bool = false
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -47,7 +48,11 @@ struct QCNamingView: View {
                 
                 //MARK: - Bottom Buttons
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
-                    isNavActiveForAmount.toggle()
+                    if challengeName == "" {
+                        isPresentingAlert = true
+                    } else {
+                        isNavActiveForAmount.toggle()
+                    }
                 })
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 
@@ -64,6 +69,14 @@ struct QCNamingView: View {
                     QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
                 }.hidden()
             }
+            .alert(isPresented: $isPresentingAlert, content: {
+                Alert(title: Text("Nome vazio"),
+                      message: Text("Preencha o nome do seu desafio para continuar"),
+                      dismissButton: .cancel(Text("Ok"), action: {
+                    
+                })
+                )
+            })
             .navigationBarHidden(true)
         }
     }

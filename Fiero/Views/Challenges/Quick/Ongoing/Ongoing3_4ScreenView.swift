@@ -31,7 +31,7 @@ struct Ongoing3_4ScreenView: View {
     
     var body: some View {
         ZStack {
-            Tokens.Colors.Highlight.one.value
+            Tokens.Colors.Background.dark.value
             VStack {
                 HStack {
                     Button {
@@ -54,6 +54,7 @@ struct Ongoing3_4ScreenView: View {
                 }
             }
             VStack {
+                //TODO: - here we need to use the name of type challenge instead of variable name
                 Text(self.quickChallenge.type)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
@@ -65,17 +66,11 @@ struct Ongoing3_4ScreenView: View {
                     .padding(.top, Tokens.Spacing.nano.value)
                     .padding(.bottom, Tokens.Spacing.xxxs.value)
                 
-                GroupComponent(scoreboard: true, style: self.quickChallenge.teams.map({ team in
-                        ParticipantStyles.participantDefault(isSmall: true)
-                }), quickChallenge: self.$quickChallenge)
-                .frame(height: UIScreen.main.bounds.height * 0.2)
-                .padding([.horizontal], Tokens.Spacing.defaultMargin.value)
-                
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     ForEach(self.$quickChallenge.teams) { team in
                         ScoreController3_4Component(
                             foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
-                            playerName: team.wrappedValue.name,
+                            playerName: Member.getName(playerName: team.wrappedValue.name),
                             challengeId: self.quickChallenge.id,
                             teamId: team.wrappedValue.id,
                             memberId: team.wrappedValue.members?[0].id ?? "",
