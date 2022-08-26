@@ -178,12 +178,12 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Begin Challenge Update
-    func beginChallenge(challengeId: String, alreadyBegin: Bool) {
+    func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
         else {
             print("nao achou token")
-            return
+            return Empty().eraseToAnyPublisher()
         }
         
         let json = """
@@ -194,10 +194,13 @@ class QuickChallengeViewModel: ObservableObject {
         print(json)
         let request = makePATCHRequest(json: json, param: challengeId, variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_BEGIN, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
@@ -221,6 +224,11 @@ class QuickChallengeViewModel: ObservableObject {
                 }
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
     }
     
     //MARK: - Fisnih Challenge Update

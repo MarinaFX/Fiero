@@ -84,6 +84,17 @@ struct ChallengeDetailsView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Começar desafio!") {
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .finished:
+                                            print("success")
+                                        case .failure(let error):
+                                            print("deu erro, apresentar alerta")
+                                            //print(error)
+                                            // TODO: show alert
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
                             
                             if self.quickChallenge.maxTeams == 2 {
                                 self.presentDuelOngoingChallenge.toggle()
