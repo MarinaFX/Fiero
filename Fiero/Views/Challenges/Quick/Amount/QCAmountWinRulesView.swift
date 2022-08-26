@@ -34,64 +34,66 @@ struct QCAmountWinRulesView: View {
     }
 
     var body: some View {
-        VStack {
-            CustomProgressBar(currentPage: .third)
-                .padding()
-            
-            Text("Vitória")
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .rounded))
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding(.top, Tokens.Spacing.xxxs.value)
-                .padding(.bottom, Tokens.Spacing.quarck.value)
-
-            Text("Número de pontos necessários pra que \nalguém seja vencedor.")
-                .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.callout.font(weigth: .regular, design: .default))
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-            
-            Spacer()
-            
-            PermanentKeyboard(text: self.$goal, keyboardType: .decimalPad)
-            
-            Spacer()
-            
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Voltar")
-                    .bold()
+        ZStack{
+            Tokens.Colors.Background.dark.value.ignoresSafeArea()
+            VStack {
+                CustomProgressBar(currentPage: .third)
+                    .padding()
+                
+                Text("Vitória")
+                    .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-            })
-            .padding(.bottom, Tokens.Spacing.xxxs.value)
-            
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
-                if (Int(self.goal) != nil) {
-                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                    .padding(.top, Tokens.Spacing.xxxs.value)
+                    .padding(.bottom, Tokens.Spacing.quarck.value)
+
+                Text("Número de pontos necessários pra que \nalguém seja vencedor.")
+                    .multilineTextAlignment(.center)
+                    .font(Tokens.FontStyle.callout.font(weigth: .regular, design: .default))
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                
+                Spacer()
+                
+                PermanentKeyboard(text: self.$goal, keyboardType: .decimalPad)
+                
+                Spacer()
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Voltar")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                })
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
+                    if (Int(self.goal) != nil) {
+                        self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                    }
+                    else {
+                        self.isPresentingAlert.toggle()
+                    }
+                })
+                .padding(.bottom)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+                NavigationLink("", isActive: self.$pushNextView) {
+                    QCChallengeCreatedView(serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
                 }
-                else {
-                    self.isPresentingAlert.toggle()
-                }
-            })
-            .padding(.bottom)
-            .padding(.horizontal, Tokens.Spacing.xxxs.value)
-            
-            NavigationLink("", isActive: self.$pushNextView) {
-                QCChallengeCreatedView(serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
             }
+            .alert(isPresented: self.$isPresentingAlert, content: {
+                Alert(title: Text("Entrada inválida"),
+                      message: Text("Apenas números são aceitos"),
+                      dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
+                )
+            })
+            .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
+                self.quickChallenge = quickChallenge
+                
+                self.pushNextView.toggle()
+            })
+            .navigationBarHidden(true)
         }
-        .alert(isPresented: self.$isPresentingAlert, content: {
-            Alert(title: Text("Entrada inválida"),
-                  message: Text("Apenas números são aceitos"),
-                  dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
-            )
-        })
-        .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
-            self.quickChallenge = quickChallenge
-            
-            self.pushNextView.toggle()
-        })
-        .makeDarkModeFullScreen()
-        .navigationBarHidden(true)
     }
 }
 

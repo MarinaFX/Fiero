@@ -15,22 +15,14 @@ struct ChallengeCategoryCardView: View {
     var body: some View {
         ZStack {
             Tokens.Colors.Neutral.Low.dark.value
-            if !isAvailable {
-                VStack{
+            VStack(spacing: Tokens.Spacing.xxxs.value) {
+                
+                if !isAvailable {
                     Spacer()
-                    Text("Em breve")
-                        .padding(.horizontal, Tokens.Spacing.xxs.value)
-                        .padding(.vertical, Tokens.Spacing.nano.value)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .background(Tokens.Colors.Highlight.three.value)
-                        .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-                        .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
-                }.padding(.bottom, Tokens.Spacing.lg.value + Tokens.Spacing.md.value)
-            }
-            VStack(spacing: Tokens.Spacing.nano.value) {
+                }
                 if isAvailable {
                     GifImage("quantity")
-                        .frame(width: 250, height: 350)
+                        .frame(width: 200, height: 270)
                 }
                 Text(self.title)
                     .font(Tokens.FontStyle.title.font())
@@ -40,13 +32,31 @@ struct ChallengeCategoryCardView: View {
                     .multilineTextAlignment(.center)
                     .font(Tokens.FontStyle.callout.font())
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .padding(.bottom, 40)
+
+                if !isAvailable {
+                    VStack{
+                        Text("Em breve")
+                            .padding(.horizontal, Tokens.Spacing.xxs.value)
+                            .padding(.vertical, Tokens.Spacing.nano.value)
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .background(Tokens.Colors.Highlight.three.value)
+                            .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                            .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
+                    }.padding(.bottom, Tokens.Spacing.lg.value + Tokens.Spacing.md.value)
+                } else {
+                    Text("Escolher esse")
+                        .padding(.horizontal, Tokens.Spacing.xxs.value)
+                        .padding(.vertical, Tokens.Spacing.nano.value)
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .background(Tokens.Colors.Highlight.three.value)
+                        .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
+                        .padding(.top, Tokens.Spacing.xxxs.value)
+                }
+                Spacer()
             }
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: UIScreen.main.bounds.height * 0.69)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
     }
 }
 

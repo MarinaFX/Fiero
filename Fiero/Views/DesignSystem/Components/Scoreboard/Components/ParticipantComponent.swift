@@ -24,7 +24,7 @@ struct ParticipantComponent: View {
                     .font(style.iconFont)
                     .saturation(style.saturation)
             }
-            Text(name)
+            Text(Member.getName(playerName: name))
                 .font(style.textFont)
                 .foregroundColor(style.textAndPointsColor)
             
