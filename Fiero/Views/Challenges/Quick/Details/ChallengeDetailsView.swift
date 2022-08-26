@@ -15,14 +15,14 @@ struct ChallengeDetailsView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
-
-    @State var isPresentingDeletionAlert: Bool = false
+    
+    @State var isPresentingAlert: Bool = false
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
-
+    
     @Binding var quickChallenge: QuickChallenge
-
-
+    
+    
     //MARK: - Body
     var body: some View {
         NavigationView {
@@ -86,12 +86,14 @@ struct ChallengeDetailsView: View {
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
-                                        case .finished:
-                                            print("success")
-                                        case .failure(let error):
-                                            print("deu erro, apresentar alerta")
-                                            //print(error)
-                                            // TODO: show alert
+                                    case .finished:
+                                        print("success")
+                                    case .failure:
+                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                        self.isPresentingAlert.toggle()
+                                        
+                                        
+                                        
                                     }
                                 }, receiveValue: { _ in })
                                 .store(in: &subscriptions)
@@ -106,29 +108,41 @@ struct ChallengeDetailsView: View {
                         
                         ButtonComponent(style: .black(isEnabled: true),
                                         text: "Deletar desafio") {
-                            self.isPresentingDeletionAlert.toggle()
+                            quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                            self.isPresentingAlert.toggle()
                         }
                     }
                     .padding(.bottom, largeSpacing)
                 }
                 .padding(.horizontal)
-                .alert(isPresented: self.$isPresentingDeletionAlert, content: {
-                    //TODO: Fix alert content
-                    Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
-                        self.isPresentingDeletionAlert = false
-                    }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                            .sink { completion in
-                                switch completion {
+                .alert(isPresented: self.$isPresentingAlert, content: {
+                    switch quickChallengeViewModel.detailsAlertCases {
+                    case .deleteChallenge:
+                        return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
+                                     message: Text(DetailsAlertCases.deleteChallenge.message),
+                                     primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                        }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                            self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                                .sink { completion in
+                                    switch completion {
                                     case .finished:
                                         self.presentationMode.wrappedValue.dismiss()
                                     case .failure(let error):
                                         print(error)
                                         // TODO: show alert
-                                }
-                            } receiveValue: { _ in }
-                            .store(in: &subscriptions)
-                    }))
+                                    }
+                                } receiveValue: { _ in }
+                                .store(in: &subscriptions)
+                        }))
+                    case .failureStartChallenge:
+                        return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
+                                     message: Text(DetailsAlertCases.failureStartChallenge.message),
+                                     dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                            self.presentationMode.wrappedValue.dismiss()
+                        }))
+                    }
                 })
                 
                 .toolbar {
@@ -142,7 +156,7 @@ struct ChallengeDetailsView: View {
             }
             .accentColor(Color.white)
         }
-
+        
     }
     
     //MARK: - DS Tokens
@@ -168,7 +182,7 @@ struct ChallengeDetailsView: View {
         return Tokens.FontStyle.caption.font()
     }
 }
- 
+
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {

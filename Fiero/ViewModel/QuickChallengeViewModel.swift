@@ -16,6 +16,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var didUpdateChallenges: Bool = false
     @Published var newlyCreatedChallenge: QuickChallenge
+    @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
