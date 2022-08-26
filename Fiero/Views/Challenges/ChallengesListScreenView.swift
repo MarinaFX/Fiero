@@ -103,7 +103,7 @@ struct ChallengesListScreenView: View {
                         self.presentModalIndex = challenge
                     }
                 }
-                .sheet(item: $presentModalIndex) { item in
+                .fullScreenCover(item: $presentModalIndex) { item in
                     ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                         .environmentObject(self.quickChallengeViewModel)
                 }
@@ -122,7 +122,7 @@ struct ChallengesListScreenView: View {
                         self.presentModalIndex = challenge
                     }
                 }
-                .sheet(item: $presentModalIndex) { item in
+                .fullScreenCover(item: $presentModalIndex) { item in
                     ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                         .environmentObject(self.quickChallengeViewModel)
                 }
