@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var pushHomeView: Bool = false
-
+    
     var body: some View {
         if self.pushHomeView {
             withAnimation {
-                ChallengesListScreenView()
-                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                TabBarView()
             }
         }
-
+        
         if !self.pushHomeView {
             AccountLoginView(pushHomeView: self.$pushHomeView)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))

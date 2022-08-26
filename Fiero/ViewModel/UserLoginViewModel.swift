@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 //MARK: UserLoginViewModel
 class UserLoginViewModel: ObservableObject {
@@ -21,6 +22,7 @@ class UserLoginViewModel: ObservableObject {
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
+    @Published var keyboardShown: Bool = false
     
     //MARK: - Init
     init(client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
@@ -28,6 +30,15 @@ class UserLoginViewModel: ObservableObject {
         self.user = User(email: "", name: "", password: "")
         self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+    }
+    
+    //MARK: - Keyboard Detection
+    func onKeyboardDidSHow() {
+        withAnimation() { keyboardShown = true }
+    }
+    
+    func onKeyboardDidHide() {
+        withAnimation() { keyboardShown = false }
     }
     
     //MARK: - AuthenticateUser
@@ -71,6 +82,11 @@ class UserLoginViewModel: ObservableObject {
                     
                     self?.keyValueStorage.set(self?.user.id, forKey: "userID")
                     self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")
+                    
+                    if self?.serverResponse.statusCode == 200 || self?.serverResponse.statusCode == 201 {
+                        self?.keyValueStorage.set(password, forKey: "password")
+                        self?.keyValueStorage.set(email, forKey: "email")
+                    }
                 }
                 
                 self?.serverResponse.statusCode = httpResponse.statusCode
@@ -78,5 +94,14 @@ class UserLoginViewModel: ObservableObject {
                 print(self?.serverResponse.statusCode as Any)
             })
             .store(in: &cancellables)
+    }
+    
+    func setUserOnDefaults(email: String, password: String) {
+        self.keyValueStorage.set(email, forKey: "email")
+        self.keyValueStorage.set(password, forKey: "password")
+    }
+    
+    func getUserFromDefaults() -> (email: String?, password: String?) {
+        return (self.keyValueStorage.string(forKey: "email"), self.keyValueStorage.string(forKey: "password"))
     }
 }

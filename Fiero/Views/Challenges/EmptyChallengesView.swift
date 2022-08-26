@@ -12,11 +12,6 @@ struct EmptyChallengesView: View {
     
     var body: some View {
         VStack {
-            NavigationLink("", isActive: self.$isPresented) {
-                QCCategorySelectionView()
-            }
-            .hidden()
-            
             Spacer()
             
             Image("EmptyState")
@@ -30,26 +25,30 @@ struct EmptyChallengesView: View {
             ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
                 self.isPresented.toggle()
             })
+            
             .padding()
             
             Spacer()
             
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Button(action: {
-                            self.isPresented.toggle()
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        })
-                        .buttonStyle(.plain)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        self.isPresented.toggle()
+                    }, label: {
+                        Image(systemName: "plus")
+                            .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
+                            .foregroundColor(.white)
                     })
+                    .buttonStyle(.plain)
                 })
+            })
         }
         .navigationTitle("Desafios")
-        .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
+        .makeDarkModeFullScreen()
+        .fullScreenCover(isPresented: $isPresented) {
+            QCCategorySelectionView()
+        }
     }
 }
 

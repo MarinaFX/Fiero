@@ -19,7 +19,7 @@ enum ButtonStyles {
         case .secondary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.light.value
         case .black:
-            return isEnabled ? .black : Tokens.Colors.Neutral.Low.light.value
+            return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
         }
     }
     

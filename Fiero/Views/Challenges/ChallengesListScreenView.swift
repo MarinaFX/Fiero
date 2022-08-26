@@ -7,97 +7,128 @@
 
 import SwiftUI
 
-struct ChallengesListScreenView: View {
-    @Environment(\.rootPresentationMode) var rootPresentationMode
+struct HomeView: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
-    @State var quickChallenges: [QuickChallenge] = []
     @State var isPresentingQuickChallengeCreation: Bool = false
     @State var isPresentingChallengeDetails: Bool = false
-    @State var serverResponse: ServerResponse = .unknown
+    @State var isPresented: Bool = false
+    @State var presentModalIndex: QuickChallenge? = nil
+
+    private var quickChallenges: Binding<[QuickChallenge]> {
+        Binding(get: {
+            return self.quickChallengeViewModel.sortedList
+        }, set: {
+            self.quickChallengeViewModel.challengesList = $0
+        })
+    }
     
     var body: some View {
         NavigationView {
-            VStack {
-                if self.quickChallenges.count > 0 {
-                    if #available(iOS 15.0, *) {
-                        ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                            ZStack {
-                                NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
-                                    EmptyView()
-                                })
-                                .opacity(0.0)
-                                
-                                CustomTitleImageListRow(title: quickChallenges[index].name)
-                            }
-                            
-                            .listRowBackground(Color.clear)
-                        }
-                        .refreshable {
-                            self.quickChallengeViewModel.getUserChallenges()
-                        }
-                        .ignoresSafeArea(.all, edges: .bottom)
-                        .listStyle(.plain)
-                    } else {
-                        //TODO: Refreshable list for iOS 14
-                        ListWithoutSeparator(0..<self.quickChallenges.count, id: \.self) { index in
-                            NavigationLink(destination: ChallengeDetailsView(quickChallengeViewModel: QuickChallengeViewModel(), quickChallenge: self.quickChallenges[index]), label: {
-                                CustomTitleImageListRow(title: quickChallenges[index].name)
-                            })
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .ignoresSafeArea(.all, edges: .bottom)
-                        .listStyle(.plain)
+            ZStack {
+                Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    if self.quickChallenges.count > 0 {
+                        ChallengesListScreenView(quickChallenges: self.quickChallenges)
+                    }
+                    else {
+                        EmptyChallengesView()
                     }
                 }
-                else {
-                    EmptyChallengesView()
+                .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
+                    QCCategorySelectionView()
                 }
-            }
-            
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                        NavigationLink(destination: QCCategorySelectionView(),
-                                       isActive: $isPresentingQuickChallengeCreation,
-                                       label: {
-                            Button(action: {
-                                isPresentingQuickChallengeCreation = true
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .font(Tokens.FontStyle.title2.font(weigth: .bold))
-                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            })
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            isPresentingQuickChallengeCreation = true
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(Tokens.FontStyle.title2.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
-                    })
-            })
-            .navigationTitle("Seus desafios")
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-        }
-        .onAppear(perform: {
-            UITableView.appearance().refreshControl = UIRefreshControl()
-            self.quickChallengeViewModel.getUserChallenges()
-        })
-        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { quickChallenges in
-            self.quickChallenges = []
-            self.quickChallenges = quickChallenges
-        })
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            
-            if self.serverResponse.statusCode != 200 &&
-                self.serverResponse.statusCode != 201 {
-                //toggle alert
+                    }
+                }
+                .navigationViewStyle(StackNavigationViewStyle())
+                .onAppear(perform: {
+                    UITableView.appearance().refreshControl = UIRefreshControl()
+                    self.quickChallengeViewModel.getUserChallenges()
+                })
             }
-        })
-        .navigationViewStyle(StackNavigationViewStyle())
-        .environment(\.rootPresentationMode, self.$isPresentingQuickChallengeCreation)
+            .navigationBarHidden(false)
+            .navigationTitle("Seus desafios")
+        }
         .environment(\.colorScheme, .dark)
+    }
+}
+
+struct ChallengesListScreenView: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    
+    @State var presentModalIndex: QuickChallenge? = nil
+    
+    @Binding var quickChallenges: [QuickChallenge]
+    
+    func getBindingWith(id: String) -> Binding<QuickChallenge> {
+        guard let index = self.quickChallenges.firstIndex(where: { $0.id == id }) else {
+            return .constant(QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams: [], owner: User(email: "teste", name: "teste")))
+        }
+        
+        let binding = Binding<QuickChallenge>.init(get: {
+            return self.quickChallenges[index]
+        }, set: {
+            self.quickChallenges[index] = $0
+        })
+        
+        
+        if #available(iOS 15, *) {
+            return self.$quickChallenges.first(where: { $0.wrappedValue.id == id }) ?? binding
+        }
+        else {
+            return binding
+        }
+    }
+    
+    var body: some View {
+        VStack {
+            if #available(iOS 15.0, *) {
+                ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
+                    ZStack {
+                        CustomTitleImageListRow(title: challenge.name)
+                    }
+                    .listRowBackground(Color.clear)
+                    .onTapGesture {
+                        self.presentModalIndex = challenge
+                    }
+                }
+                .sheet(item: $presentModalIndex) { item in
+                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
+                .refreshable {
+                    self.quickChallengeViewModel.getUserChallenges()
+                }
+                .ignoresSafeArea(.all, edges: .bottom)
+                .listStyle(.plain)
+            } else {
+                //TODO: Refreshable list for iOS 14
+                ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
+                    NavigationLink(destination: ChallengeDetailsView(quickChallenge: getBindingWith(id: challenge.id)), label: {
+                        CustomTitleImageListRow(title: challenge.name)
+                    })
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .ignoresSafeArea(.all, edges: .bottom)
+                .listStyle(.plain)
+            }
+        }
     }
 }
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengesListScreenView()
+        ChallengesListScreenView(quickChallenges: .constant([]))
     }
 }
