@@ -15,8 +15,8 @@ class UserRegistrationViewModel: ObservableObject {
     @Published private(set) var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
         
-    //private let BASE_URL: String = "localhost"
-    private let BASE_URL: String = "10.41.48.220"
+    private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "10.41.48.196"
     //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT: String = "/user/register"
     
