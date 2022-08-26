@@ -54,7 +54,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(placeholder)")
                         }
@@ -64,7 +64,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(placeholder)")
                         }
@@ -77,7 +77,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(self.placeholder)")
                         }
@@ -88,7 +88,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(self.placeholder)")
                         }

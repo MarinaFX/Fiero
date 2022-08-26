@@ -8,23 +8,28 @@
 import SwiftUI
 
 struct DuelScoreComponent: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
 
-     @State var style: ScoreControllerStyle
-     @State var maxValue: Int
-     @State var count: Int = 0
-     @State var playerName: String
+    @State var style: ScoreControllerStyle
+    
+    @Binding var playerScore: Double
+
+    private(set) var challengeId: String
+    private(set) var teamId: String
+    private(set) var memberId: String
+    
+    var playerName: String
 
      var body: some View {
          ZStack{
              RoundedRectangle(cornerRadius: style.borderRadius)
                  .foregroundColor(style.backgroundColor)
+                 .opacity(0.2)
 
-             VStack(alignment:.center ) {
+             VStack(alignment:.center, spacing: Tokens.Spacing.nano.value ) {
                  HStack() {
                      Button(action: {
-                         if count > 0{
-                             count -= 1
-                         }
+                         self.playerScore -= 1
                      }) {
                          Image(systemName: style.minusIcon)
                              .resizable()
@@ -36,17 +41,14 @@ struct DuelScoreComponent: View {
 
                      Spacer()
 
-                     Text("\(count)")
+                     Text("\(self.playerScore, specifier: "%.0f")")
                          .foregroundColor(style.buttonColor)
-                         .font(.system(size: 34))
-                         .bold()
+                         .font(style.numberFont)
 
                      Spacer()
 
                      Button(action: {
-                         if count < maxValue{
-                             count += 1
-                         }
+                         self.playerScore += 1
                      }) {
                          Image(systemName: style.plusIcon)
                              .resizable()
@@ -59,16 +61,20 @@ struct DuelScoreComponent: View {
 
                  Text("\(playerName)")
                      .foregroundColor(style.buttonColor)
-                     .font(.system(size: 24))
+                     .font(style.nameFont)
                      .padding(.horizontal, style.spacingVertical)
              }
+             .padding(.vertical, style.spacingAll)
          }
-         .frame(width: 285, height: 120)
+         .onDisappear(perform: {
+             self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
+         })
+         .frame(height: 120)
      }
  }
 
 struct DuelScoreComponent_Previews: PreviewProvider {
     static var previews: some View {
-        DuelScoreComponent(style: .first, maxValue: 10, playerName: "Alpaca Enfurecida")
+        DuelScoreComponent(style: .first, playerScore: .constant(0.0), challengeId: "", teamId: "", memberId: "", playerName: "")
     }
 }
