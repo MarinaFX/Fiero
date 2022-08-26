@@ -103,24 +103,29 @@ struct ChallengesListScreenView: View {
                         self.presentModalIndex = challenge
                     }
                 }
-                .sheet(item: $presentModalIndex) { item in
+                .fullScreenCover(item: $presentModalIndex) { item in
                     ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                         .environmentObject(self.quickChallengeViewModel)
                 }
                 .refreshable {
                     self.quickChallengeViewModel.getUserChallenges()
                 }
-                .ignoresSafeArea(.all, edges: .bottom)
                 .listStyle(.plain)
             } else {
                 //TODO: Refreshable list for iOS 14
                 ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
-                    NavigationLink(destination: ChallengeDetailsView(quickChallenge: getBindingWith(id: challenge.id)), label: {
+                    ZStack {
                         CustomTitleImageListRow(title: challenge.name)
-                    })
-                    .buttonStyle(PlainButtonStyle())
+                    }
+                    .listRowBackground(Color.clear)
+                    .onTapGesture {
+                        self.presentModalIndex = challenge
+                    }
                 }
-                .ignoresSafeArea(.all, edges: .bottom)
+                .fullScreenCover(item: $presentModalIndex) { item in
+                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
                 .listStyle(.plain)
             }
         }

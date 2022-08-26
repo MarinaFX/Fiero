@@ -17,6 +17,7 @@ class UserLoginViewModel: ObservableObject {
 
     //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "10.41.48.196"
     private let ENDPOINT: String = "/user/login"
     
     private(set) var client: HTTPClient
