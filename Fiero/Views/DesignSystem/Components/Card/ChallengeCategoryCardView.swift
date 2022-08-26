@@ -39,10 +39,9 @@ struct ChallengeCategoryCardView: View {
                             .padding(.horizontal, Tokens.Spacing.xxs.value)
                             .padding(.vertical, Tokens.Spacing.nano.value)
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .background(Tokens.Colors.Highlight.three.value)
                             .cornerRadius(Tokens.Border.BorderRadius.normal.value)
                             .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
-                    }.padding(.bottom, Tokens.Spacing.lg.value + Tokens.Spacing.md.value)
+                    }
                 } else {
                     Text("Escolher esse")
                         .padding(.horizontal, Tokens.Spacing.xxs.value)
