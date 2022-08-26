@@ -21,7 +21,7 @@ class ProfileViewModel: ObservableObject {
     
     init() {
         //TODO: - put the name of the logged in user
-        userName = "Marcelo"
+        userName = "Marina"
         serverResponse = ServerResponse.unknown
     }
     
