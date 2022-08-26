@@ -24,15 +24,15 @@ struct QCAmountWinRulesView: View {
     var challengeParticipants: Int
     var goalMeasure: String {
         switch challengeType {
-            case .amount:
-                return "unity"
-            case .byTime(let measure):
-                return measure
-            case .bestOf:
-                return "rounds"
+        case .amount:
+            return "unity"
+        case .byTime(let measure):
+            return measure
+        case .bestOf:
+            return "rounds"
         }
     }
-
+    
     var body: some View {
         ZStack{
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
@@ -45,7 +45,7 @@ struct QCAmountWinRulesView: View {
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .padding(.top, Tokens.Spacing.xxxs.value)
                     .padding(.bottom, Tokens.Spacing.quarck.value)
-
+                
                 Text("Número de pontos necessários pra que \nalguém seja vencedor.")
                     .multilineTextAlignment(.center)
                     .font(Tokens.FontStyle.callout.font(weigth: .regular, design: .default))
@@ -66,9 +66,13 @@ struct QCAmountWinRulesView: View {
                 })
                 .padding(.bottom, Tokens.Spacing.xxxs.value)
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar criação do desafio", action: {
-                    if (Int(self.goal) != nil) {
-                        self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: Int(self.goal)!, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
+                    if let goal = Int(self.goal) {
+                        if goal > 0 {
+                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                        } else {
+                            self.isPresentingAlert.toggle()
+                        }
                     }
                     else {
                         self.isPresentingAlert.toggle()
