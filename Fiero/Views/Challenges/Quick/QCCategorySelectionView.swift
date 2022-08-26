@@ -21,23 +21,24 @@ struct QCCategorySelectionView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 TabView {
-                    //byTime
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
-                            .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
                     
                     //amount
                     NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
+                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.", isAvailable: true)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
-                    //bestof
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
+                    //byTime
+//                    NavigationLink(destination: EmptyView(), label: {
+                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.", isAvailable: false)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
+//                    })
+                    
+                    //bestof
+//                    NavigationLink(destination: EmptyView(), label: {
+                        ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.", isAvailable: false)
+                            .padding(.horizontal, Tokens.Spacing.sm.value)
+//                    })
                     
                 }
                 .padding(.bottom)
