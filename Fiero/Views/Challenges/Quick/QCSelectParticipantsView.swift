@@ -48,7 +48,7 @@ struct QCSelectParticipantsView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Esses são os desafiantes!", action: {
+            ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
                 self.pushNextView.toggle()
             }).padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             
