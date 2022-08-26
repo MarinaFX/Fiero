@@ -13,10 +13,12 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
+    @Published var showingAlert = false
     @Published var didUpdateChallenges: Bool = false
     @Published var newlyCreatedChallenge: QuickChallenge
     
     private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "10.41.48.196"
     //    private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
@@ -109,6 +111,7 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
+                    self.showingAlertToTrue()
                     print("Publisher failed with: \(error)")
                 case .finished:
                     print("Publisher received sucessfully")
@@ -121,6 +124,9 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 self?.challengesList = response.quickChallenges
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
+                if self?.serverResponse.statusCode == 401 {
+                    self?.showingAlertToTrue()
+                }
             })
             .store(in: &cancellables)
         
@@ -263,6 +269,13 @@ class QuickChallengeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func showingAlertToFalse() {
+        showingAlert = false
+    }
+    
+    func showingAlertToTrue() {
+        showingAlert = true
+    }
     //MARK: - Patch Score
     func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) {
         self.serverResponse = .unknown

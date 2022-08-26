@@ -37,11 +37,12 @@ struct PauseScreen: View {
         ZStack {
             backgroundColor
                 .opacity(0.8)
-            VStack(spacing: spacingXXS) {
+            VStack(spacing: Tokens.Spacing.nano.value) {
                 Spacer()
                 Text("Truco")
                     .foregroundColor(textColor)
                     .font(textFont)
+                    .padding(.bottom, Tokens.Spacing.xxxs.value)
                 ButtonComponent(style: .primary(isEnabled: true), text: "Retornar ao desafio") {
                     self.didTapPauseButton.toggle()
                 }

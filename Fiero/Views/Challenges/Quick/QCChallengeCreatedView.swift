@@ -13,7 +13,6 @@ struct QCChallengeCreatedView: View {
     
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var didPushToHomeScreen: Bool = false
-    //@State var didPushToStartChallenge: Bool = false
     @State var presentDuelChallenge: Bool = false
     @State var present3Or4Challenge: Bool = false
     @State var isPresentingAlert: Bool = false
@@ -82,16 +81,18 @@ struct QCChallengeCreatedView: View {
                 }
                 .hidden()
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
-                    if quickChallenge.maxTeams == 2 {
-                        presentDuelChallenge.toggle()
-                    }
-                    else {
-                        present3Or4Challenge.toggle()
-                    }
-                })
-                .padding(.bottom, Tokens.Spacing.xxxl.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                //TODO: temporarily removing, fix flow after SR
+//                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+//                    if quickChallenge.maxTeams == 2 {
+//                        presentDuelChallenge.toggle()
+//                    }
+//                    else {
+//                        present3Or4Challenge.toggle()
+//                    }
+//                })
+//                .padding(.bottom, Tokens.Spacing.xxxl.value)
+//                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
             } else {
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
                     self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
