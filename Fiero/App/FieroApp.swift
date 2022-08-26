@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
         
@@ -18,8 +19,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct FieroApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    
+    init() {
+        UINavigationBar.appearance().tintColor = .white
+    }
     
     var body: some Scene {
         WindowGroup {

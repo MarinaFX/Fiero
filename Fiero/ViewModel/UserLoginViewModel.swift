@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 //MARK: UserLoginViewModel
 class UserLoginViewModel: ObservableObject {
@@ -14,17 +15,30 @@ class UserLoginViewModel: ObservableObject {
     @Published private(set) var user: User
     @Published private(set) var serverResponse: ServerResponse
 
+    //private let BASE_URL: String = "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com"
     private let BASE_URL: String = "localhost"
     private let ENDPOINT: String = "/user/login"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
+    @Published var keyboardShown: Bool = false
     
     //MARK: - Init
-    init(client: HTTPClient = URLSession.shared) {
+    init(client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.user = User(email: "", name: "", password: "")
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
+    }
+    
+    //MARK: - Keyboard Detection
+    func onKeyboardDidSHow() {
+        withAnimation() { keyboardShown = true }
+    }
+    
+    func onKeyboardDidHide() {
+        withAnimation() { keyboardShown = false }
     }
     
     //MARK: - AuthenticateUser
@@ -65,6 +79,14 @@ class UserLoginViewModel: ObservableObject {
                 if let userResponse = httpResponse.item {
                     self?.user = userResponse.user
                     self?.user.token = userResponse.token
+                    
+                    self?.keyValueStorage.set(self?.user.id, forKey: "userID")
+                    self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")
+                    
+                    if self?.serverResponse.statusCode == 200 || self?.serverResponse.statusCode == 201 {
+                        self?.keyValueStorage.set(password, forKey: "password")
+                        self?.keyValueStorage.set(email, forKey: "email")
+                    }
                 }
                 
                 self?.serverResponse.statusCode = httpResponse.statusCode
@@ -72,5 +94,14 @@ class UserLoginViewModel: ObservableObject {
                 print(self?.serverResponse.statusCode as Any)
             })
             .store(in: &cancellables)
+    }
+    
+    func setUserOnDefaults(email: String, password: String) {
+        self.keyValueStorage.set(email, forKey: "email")
+        self.keyValueStorage.set(password, forKey: "password")
+    }
+    
+    func getUserFromDefaults() -> (email: String?, password: String?) {
+        return (self.keyValueStorage.string(forKey: "email"), self.keyValueStorage.string(forKey: "password"))
     }
 }
