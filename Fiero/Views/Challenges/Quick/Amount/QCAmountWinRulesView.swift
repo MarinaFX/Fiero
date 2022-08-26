@@ -82,8 +82,8 @@ struct QCAmountWinRulesView: View {
                 }
             }
             .alert(isPresented: self.$isPresentingAlert, content: {
-                Alert(title: Text("Entrada inválida"),
-                      message: Text("Apenas números são aceitos"),
+                Alert(title: Text("Valor inválido"),
+                      message: Text("Você precisa informar o número de pontos para a vitória"),
                       dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
                 )
             })
