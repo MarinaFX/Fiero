@@ -21,3 +21,15 @@ struct QuickChallengeDELETEResponse: Decodable {
     
     var message: String?
 }
+
+struct QuickChallengePATCHResponse: Codable {
+    
+    var quickChallenge: QuickChallenge
+    
+}
+
+struct QuickChallengePATCHScoreResponse: Codable {
+    
+    var member: Member
+
+}
