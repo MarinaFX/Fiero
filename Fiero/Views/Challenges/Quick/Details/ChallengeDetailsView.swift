@@ -60,7 +60,7 @@ struct ChallengeDetailsView: View {
                                 .font(titleFont)
                                 .foregroundColor(color)
                             
-                            GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
+                            GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
                         }
                     }
                     
