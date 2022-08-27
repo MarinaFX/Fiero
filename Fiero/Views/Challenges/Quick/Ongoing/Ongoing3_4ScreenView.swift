@@ -26,12 +26,15 @@ struct Ongoing3Or4WithPauseScreenView: View {
 }
 
 struct Ongoing3_4ScreenView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     
     var body: some View {
         ZStack {
-            Tokens.Colors.Background.dark.value
+            Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
                 HStack {
                     Button {
@@ -49,16 +52,15 @@ struct Ongoing3_4ScreenView: View {
                           maxHeight: .infinity,
                           alignment: .topTrailing
                         )
-                    .padding(.top, Tokens.Spacing.md.value)
+//                    .padding(.top, Tokens.Spacing.md.value)
                     .padding(.trailing, Tokens.Spacing.defaultMargin.value)
                 }
             }
             VStack {
                 //TODO: - here we need to use the name of type challenge instead of variable name
-                Text(self.quickChallenge.type)
+                Text(" ")
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
-                    .padding(.top, 57.5)
                 
                 Text(self.quickChallenge.name)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -79,17 +81,15 @@ struct Ongoing3_4ScreenView: View {
                     }
                 }
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
-                    RootViewController.popToRootViewController()
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Voltar para detalhes") {
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                 .padding(.bottom, Tokens.Spacing.md.value)
                 .padding(.top, Tokens.Spacing.xxs.value)
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             }
             
-        }
-        .navigationBarHidden(true)
-        .ignoresSafeArea(.all, edges: .all)
+        }.accentColor(Tokens.Colors.Neutral.High.pure.value)
     }
 }
 
