@@ -52,7 +52,6 @@ struct Ongoing3_4ScreenView: View {
                           maxHeight: .infinity,
                           alignment: .topTrailing
                         )
-//                    .padding(.top, Tokens.Spacing.md.value)
                     .padding(.trailing, Tokens.Spacing.defaultMargin.value)
                 }
             }
