@@ -61,6 +61,7 @@
 		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
 		489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
+		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
 		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
@@ -170,6 +171,7 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
+		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
 		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */,
+				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -864,6 +867,7 @@
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
+				CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */,
 				DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */,
 				CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,

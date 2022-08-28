@@ -16,13 +16,14 @@ struct EmptyChallengesView: View {
 
         VStack {
             Spacer()
+            
             GifImage("tonto")
                 .frame(width: 250, height: 320)
+            
             Text("Você não é ruim,\nsó ainda não ganhou")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-//                .padding(Tokens.Spacing.xxs.value)
             
             ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
                 self.isPresented.toggle()
