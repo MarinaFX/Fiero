@@ -22,7 +22,6 @@ struct TimePickerSelectionView: View {
     private(set) var challengeType: QCType
     private(set) var challengeName: String
     private(set) var challengeParticipants: Int
-    //private(set) var challengeParameter: QCHighestParameter
     
     var body: some View {
         VStack {
@@ -60,11 +59,6 @@ struct TimePickerSelectionView: View {
             })
             .padding(.bottom)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
-            
-            NavigationLink("", isActive: self.$pushNextView) {
-//                QCChallengeCreatedView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: self.goal)
-            }
-            .hidden()
         }
         .makeDarkModeFullScreen()
         .navigationBarHidden(true)

@@ -26,12 +26,15 @@ struct Ongoing3Or4WithPauseScreenView: View {
 }
 
 struct Ongoing3_4ScreenView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     
     var body: some View {
         ZStack {
-            Tokens.Colors.Highlight.one.value
+            Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
                 HStack {
                     Button {
@@ -49,15 +52,14 @@ struct Ongoing3_4ScreenView: View {
                           maxHeight: .infinity,
                           alignment: .topTrailing
                         )
-                    .padding(.top, Tokens.Spacing.md.value)
                     .padding(.trailing, Tokens.Spacing.defaultMargin.value)
                 }
             }
             VStack {
-                Text(self.quickChallenge.type)
+                //TODO: - here we need to use the name of type challenge instead of variable name
+                Text(" ")
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
-                    .padding(.top, 57.5)
                 
                 Text(self.quickChallenge.name)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -65,17 +67,11 @@ struct Ongoing3_4ScreenView: View {
                     .padding(.top, Tokens.Spacing.nano.value)
                     .padding(.bottom, Tokens.Spacing.xxxs.value)
                 
-                GroupComponent(scoreboard: true, style: self.quickChallenge.teams.map({ team in
-                        ParticipantStyles.participantDefault(isSmall: true)
-                }), quickChallenge: self.$quickChallenge)
-                .frame(height: UIScreen.main.bounds.height * 0.2)
-                .padding([.horizontal], Tokens.Spacing.defaultMargin.value)
-                
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     ForEach(self.$quickChallenge.teams) { team in
                         ScoreController3_4Component(
                             foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
-                            playerName: team.wrappedValue.name,
+                            playerName: Member.getName(playerName: team.wrappedValue.name),
                             challengeId: self.quickChallenge.id,
                             teamId: team.wrappedValue.id,
                             memberId: team.wrappedValue.members?[0].id ?? "",
@@ -84,17 +80,15 @@ struct Ongoing3_4ScreenView: View {
                     }
                 }
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
-                    RootViewController.popToRootViewController()
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Voltar para detalhes") {
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                 .padding(.bottom, Tokens.Spacing.md.value)
                 .padding(.top, Tokens.Spacing.xxs.value)
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             }
             
-        }
-        .navigationBarHidden(true)
-        .ignoresSafeArea(.all, edges: .all)
+        }.accentColor(Tokens.Colors.Neutral.High.pure.value)
     }
 }
 

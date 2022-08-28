@@ -15,20 +15,18 @@ struct ChallengeDetailsView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
-
-    @State var isPresentingDeletionAlert: Bool = false
+    
+    @State var isPresentingAlert: Bool = false
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
-
+    
     @Binding var quickChallenge: QuickChallenge
-
-
+    
     //MARK: - Body
     var body: some View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                
                 //MARK: - Top Components
                 VStack {
                     VStack(spacing: largeSpacing) {
@@ -89,54 +87,76 @@ struct ChallengeDetailsView: View {
                                         text: "Começar desafio!") {
                             print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                            
-                            if self.quickChallenge.maxTeams == 2 {
-                                self.presentDuelOngoingChallenge.toggle()
-                            }
-                            else {
-                                self.present3or4OngoingChallenge.toggle()
-                            }
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                    case .finished:
+                                        if self.quickChallenge.maxTeams == 2 {
+                                            self.presentDuelOngoingChallenge.toggle()
+                                        }
+                                        else {
+                                            self.present3or4OngoingChallenge.toggle()
+                                        }
+                                    case .failure:
+                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                        self.isPresentingAlert.toggle()
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
-                                        text: "Deletar desafio") {
-                            self.isPresentingDeletionAlert.toggle()
+                                        text: "Voltar para lista") {
+                            self.presentationMode.wrappedValue.dismiss()
                         }
                     }
                     .padding(.bottom, largeSpacing)
                 }
                 .padding(.horizontal)
-                .alert(isPresented: self.$isPresentingDeletionAlert, content: {
-                    //TODO: Fix alert content
-                    Alert(title: Text("Deletar desafio"), message: Text("Essa ação não poderá ser desfeita"), primaryButton: .cancel(Text("Cancelar"), action: {
-                        self.isPresentingDeletionAlert = false
-                    }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                        self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                            .sink { completion in
-                                switch completion {
+                .alert(isPresented: self.$isPresentingAlert, content: {
+                    switch quickChallengeViewModel.detailsAlertCases {
+                    case .deleteChallenge:
+                        return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
+                                     message: Text(DetailsAlertCases.deleteChallenge.message),
+                                     primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                        }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                            self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                                .sink { completion in
+                                    switch completion {
                                     case .finished:
                                         self.presentationMode.wrappedValue.dismiss()
                                     case .failure(let error):
                                         print(error)
-                                        // TODO: show alert
-                                }
-                            } receiveValue: { _ in }
-                            .store(in: &subscriptions)
-                    }))
-                })
-                
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        Button("Voltar", action: {
+                                        self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                                        self.isPresentingAlert.toggle()
+                                    }
+                                } receiveValue: { _ in }
+                                .store(in: &subscriptions)
+                        }))
+                    case .failureStartChallenge:
+                        return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
+                                     message: Text(DetailsAlertCases.failureStartChallenge.message),
+                                     dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
                             self.presentationMode.wrappedValue.dismiss()
+                        }))
+                    }
+                })
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                            self.isPresentingAlert.toggle()
+                        }, label: {
+                            Image(systemName: "trash")
+                                .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
-                    })
+                    }
                 }
-                
-            }
-            .accentColor(Color.white)
+            }.accentColor(Color.white)
         }
-
+        
     }
     
     //MARK: - DS Tokens
@@ -162,7 +182,7 @@ struct ChallengeDetailsView: View {
         return Tokens.FontStyle.caption.font()
     }
 }
- 
+
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {

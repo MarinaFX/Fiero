@@ -196,7 +196,7 @@ enum Tokens {
                     case .five:
                         return Color(red: 0.173, green: 0.157, blue: 0.89, opacity: 1)
                     case .six:
-                        return Color(red: 0.278, green: 0.758, blue: 0.557, opacity: 1)
+                        return Color(red: 0.941, green: 0.345, blue: 0.357, opacity: 1)
                 }
             }
         }

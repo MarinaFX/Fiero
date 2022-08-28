@@ -50,6 +50,7 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
         if let first = playerName.components(separatedBy: " ").first {
             teamName = first
         }
+        
         switch playerName {
             case "player2":
                 return "Raposa"
