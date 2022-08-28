@@ -26,7 +26,7 @@ struct QCSelectParticipantsView: View {
             
             Text("Quantas pessoas estão \nnesse desafio?")
                 .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
+                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.top, Tokens.Spacing.xxxs.value)
 
@@ -48,7 +48,9 @@ struct QCSelectParticipantsView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             
-            Spacer()
+            ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
+                self.pushNextView.toggle()
+            }).padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
@@ -57,13 +59,7 @@ struct QCSelectParticipantsView: View {
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })
-            .padding(.bottom, Tokens.Spacing.xxxs.value)
-            
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Esses são os desafiantes!", action: {
-                self.pushNextView.toggle()
-            })
-            .padding(.bottom)
-            .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            .padding(.vertical, Tokens.Spacing.xxxs.value)
             
             NavigationLink("", isActive: self.$pushNextView, destination: {
                 QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
