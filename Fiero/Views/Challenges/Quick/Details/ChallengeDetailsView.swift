@@ -22,13 +22,11 @@ struct ChallengeDetailsView: View {
     
     @Binding var quickChallenge: QuickChallenge
     
-    
     //MARK: - Body
     var body: some View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                
                 //MARK: - Top Components
                 VStack {
                     VStack(spacing: largeSpacing) {
@@ -107,9 +105,8 @@ struct ChallengeDetailsView: View {
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
-                                        text: "Deletar desafio") {
-                            quickChallengeViewModel.detailsAlertCases = .deleteChallenge
-                            self.isPresentingAlert.toggle()
+                                        text: "Voltar para lista") {
+                            self.presentationMode.wrappedValue.dismiss()
                         }
                     }
                     .padding(.bottom, largeSpacing)
@@ -144,17 +141,19 @@ struct ChallengeDetailsView: View {
                         }))
                     }
                 })
-                
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        Button("Voltar", action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                            self.isPresentingAlert.toggle()
+                        }, label: {
+                            Image(systemName: "trash")
+                                .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
-                    })
+                    }
                 }
-                
-            }
-            .accentColor(Color.white)
+            }.accentColor(Color.white)
         }
         
     }
