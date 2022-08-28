@@ -56,6 +56,15 @@ struct HomeView: View {
                     UITableView.appearance().refreshControl = UIRefreshControl()
                     self.quickChallengeViewModel.getUserChallenges()
                 })
+                .alert(isPresented: $quickChallengeViewModel.showingAlert) {
+                    Alert(
+                        title: Text("Oops, muito desafiador!"),
+                        message: Text("Não conseguimos buscar seus desafios agora, tente novamente"),
+                        dismissButton: .default(Text("OK")){
+                            self.quickChallengeViewModel.showingAlertToFalse()
+                        }
+                    )
+                }
             }
             .navigationBarHidden(false)
             .navigationTitle("Seus desafios")
