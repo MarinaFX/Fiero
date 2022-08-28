@@ -28,7 +28,6 @@ struct ChallengeDetailsView: View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                
                 //MARK: - Top Components
                 VStack {
                     VStack(spacing: largeSpacing) {
@@ -94,8 +93,8 @@ struct ChallengeDetailsView: View {
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
-                                        text: "Deletar desafio") {
-                            self.isPresentingDeletionAlert.toggle()
+                                        text: "Voltar para lista") {
+                            self.presentationMode.wrappedValue.dismiss()
                         }
                     }
                     .padding(.bottom, largeSpacing)
@@ -119,17 +118,18 @@ struct ChallengeDetailsView: View {
                             .store(in: &subscriptions)
                     }))
                 })
-                
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        Button("Voltar", action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.isPresentingDeletionAlert.toggle()
+                        }, label: {
+                            Image(systemName: "trash")
+                                .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
-                    })
+                    }
                 }
-                
-            }
-            .accentColor(Color.white)
+            }.accentColor(Color.white)
         }
 
     }
