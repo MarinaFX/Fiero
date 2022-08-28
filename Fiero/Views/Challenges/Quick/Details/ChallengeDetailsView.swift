@@ -58,7 +58,11 @@ struct ChallengeDetailsView: View {
                                 .font(titleFont)
                                 .foregroundColor(color)
                             
-                            GroupComponent(scoreboard: false, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
+                            if quickChallenge.teams.count >= 3 {
+                                GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
+                            } else {
+                                GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
+                            }
                         }
                     }
                     
@@ -81,6 +85,7 @@ struct ChallengeDetailsView: View {
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Começar desafio!") {
+                            print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {

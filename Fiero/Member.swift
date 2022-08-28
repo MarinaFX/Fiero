@@ -46,6 +46,11 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
     }
     
     static func getName(playerName: String) -> String {
+        var teamName: String = ""
+        if let first = playerName.components(separatedBy: " ").first {
+            teamName = first
+        }
+        
         switch playerName {
             case "player2":
                 return "Raposa"
@@ -54,7 +59,7 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
             case "player4":
                 return "Leão"
             default:
-                return playerName
+                return teamName
         }
     }
 }
