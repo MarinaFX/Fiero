@@ -85,23 +85,18 @@ struct ChallengeDetailsView: View {
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
                                     case .finished:
-                                        print("success")
+                                        if self.quickChallenge.maxTeams == 2 {
+                                            self.presentDuelOngoingChallenge.toggle()
+                                        }
+                                        else {
+                                            self.present3or4OngoingChallenge.toggle()
+                                        }
                                     case .failure:
                                         quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
                                         self.isPresentingAlert.toggle()
-                                        
-                                        
-                                        
                                     }
                                 }, receiveValue: { _ in })
                                 .store(in: &subscriptions)
-                            
-                            if self.quickChallenge.maxTeams == 2 {
-                                self.presentDuelOngoingChallenge.toggle()
-                            }
-                            else {
-                                self.present3or4OngoingChallenge.toggle()
-                            }
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
@@ -127,7 +122,8 @@ struct ChallengeDetailsView: View {
                                         self.presentationMode.wrappedValue.dismiss()
                                     case .failure(let error):
                                         print(error)
-                                        // TODO: show alert
+                                        self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                                        self.isPresentingAlert.toggle()
                                     }
                                 } receiveValue: { _ in }
                                 .store(in: &subscriptions)

@@ -24,7 +24,6 @@ struct RegistrationScreenView: View {
     @State private var isShowingInvalidInputAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
-    
     @Binding private(set) var pushHomeView: Bool
     
     //MARK: - body
@@ -112,8 +111,9 @@ struct RegistrationScreenView: View {
                     UserDefaults.standard.set(self.email, forKey: "email")
                     self.pushHomeView.toggle()
                 }
-                
-                self.isShowingInvalidInputAlert.toggle()
+                else {
+                    self.isShowingInvalidInputAlert.toggle()
+                }
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait

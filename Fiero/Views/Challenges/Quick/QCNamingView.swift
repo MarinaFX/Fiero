@@ -44,7 +44,6 @@ struct QCNamingView: View {
                     isNavActiveForAmount.toggle()
                 })
                 .disabled(self.isNavActiveForAmount)
-    //            .frame(height: UIScreen.main.bounds.height * 0.4)
                 
                 //MARK: - Bottom Buttons
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {

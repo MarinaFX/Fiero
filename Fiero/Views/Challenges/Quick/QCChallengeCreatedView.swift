@@ -131,7 +131,6 @@ struct QCChallengeCreatedView: View {
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
         QCChallengeCreatedView(serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
-            //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
             .environmentObject(QuickChallengeViewModel())
     }
