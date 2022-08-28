@@ -19,12 +19,14 @@ class UserRegistrationViewModel: ObservableObject {
     private let ENDPOINT: String = "/user/register"
     
     private(set) var client: HTTPClient
+    private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init(client: HTTPClient = URLSession.shared) {
+    init(client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
         self.client = client
         self.serverResponse = .unknown
+        self.keyValueStorage = keyValueStorage
     }
     
     //MARK: - Keyboard Detection
@@ -80,10 +82,10 @@ class UserRegistrationViewModel: ObservableObject {
     }
     
     func saveUserOnUserDefaults(name: String) {
-        UserDefaults.standard.set(name, forKey: "name")
+        self.keyValueStorage.set(name, forKey: "name")
     }
     
     func getUserOnUserDefaults() -> String {
-        UserDefaults.standard.object(forKey: "name") as? String ?? "Alpaca Enfurecida"
+        self.keyValueStorage.string(forKey: "name") ?? "Alpaca Enfurecida"
     }
 }
