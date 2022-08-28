@@ -22,13 +22,13 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
     static func getColor(playerName: String) -> Color {
         switch(playerName) {
             case "player2":
-                return Color("ParticipantColor2")
+                return Tokens.Colors.Highlight.one.value
             case "player3":
-                return Color("ParticipantColor3")
+                return Tokens.Colors.Highlight.two.value
             case "player4":
-                return Color("ParticipantColor4")
+                return Tokens.Colors.Highlight.six.value
             default:
-                return Color("ParticipantColor1")
+                return Tokens.Colors.Highlight.three.value
         }
     }
     
@@ -42,6 +42,24 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
                 return "🦁"
             default:
                 return "🐹"
+        }
+    }
+    
+    static func getName(playerName: String) -> String {
+        var teamName: String = ""
+        if let first = playerName.components(separatedBy: " ").first {
+            teamName = first
+        }
+        
+        switch playerName {
+            case "player2":
+                return "Raposa"
+            case "player3":
+                return "Panda"
+            case "player4":
+                return "Leão"
+            default:
+                return teamName
         }
     }
 }

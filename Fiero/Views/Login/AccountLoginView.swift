@@ -14,10 +14,11 @@ struct AccountLoginView: View {
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
     @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
+    @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
     
     @State private(set) var user: User = .init(email: "", name: "", password: "")
-    @State private var emailText: String = ""
-    @State private var passwordText: String = ""
+    @State private var emailText: String = "lelod15@gmail.com"
+    @State private var passwordText: String = "lelo"
     @State private var isFieldIncorrect: Bool = false
     @State private var isRegistrationSheetShowing: Bool = false
     @State private var isShowingIncorrectLoginAlert: Bool = false
@@ -144,6 +145,7 @@ struct AccountLoginView: View {
                 if self.serverResponse.statusCode == 200 ||
                     self.serverResponse.statusCode == 201 {
                     self.userLoginViewModel.setUserOnDefaults(email: self.emailText, password: self.passwordText)
+                    self.userRegistrationViewModel.saveUserOnUserDefaults(name: user.name)
                     self.pushHomeView.toggle()
                 }
                 

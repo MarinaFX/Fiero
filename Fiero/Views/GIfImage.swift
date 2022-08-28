@@ -28,6 +28,7 @@ struct GifImage: UIViewRepresentable {
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.backgroundColor = UIColor(.clear)
         webView.isOpaque = false
+        webView.isUserInteractionEnabled = false
 
         return webView
     }
