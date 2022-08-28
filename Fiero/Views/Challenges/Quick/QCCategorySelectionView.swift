@@ -15,29 +15,30 @@ struct QCCategorySelectionView: View {
             VStack {
                 Text("Escolha um novo desafio rápido")
                 .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .rounded))
+                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)
                 .padding(.vertical, Tokens.Spacing.sm.value)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 TabView {
-                    //byTime
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior pontuação no tempo definido.")
-                            .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
                     
                     //amount
                     NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rapido a quantidade definida.")
+                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rápido a quantidade definida.", isAvailable: true)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
-                    //bestof
-                    NavigationLink(destination: EmptyView(), label: {
-                        ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular mais rodadas vitoriosas.")
+                    //byTime
+//                    NavigationLink(destination: EmptyView(), label: {
+                        ChallengeCategoryCardView(title: "Tempo", subtitle: "Vence quem fizer a maior \npontuação no tempo definido.", isAvailable: false)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
-                    })
+//                    })
+                    
+                    //bestof
+//                    NavigationLink(destination: EmptyView(), label: {
+                        ChallengeCategoryCardView(title: "Rounds", subtitle: "Vence quem acumular \nmais rodadas vitoriosas.", isAvailable: false)
+                            .padding(.horizontal, Tokens.Spacing.sm.value)
+//                    })
                     
                 }
                 .padding(.bottom)

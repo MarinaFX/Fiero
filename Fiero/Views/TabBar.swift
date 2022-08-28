@@ -11,14 +11,16 @@ struct TabBarView: View {
     @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
 
     init() {
+        UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor(Tokens.Colors.Neutral.Low.dark.value)
         UITabBar.appearance().unselectedItemTintColor = UIColor(Tokens.Colors.Neutral.Low.light.value)
     }
     
     var body: some View {
-        
         TabView {
-            ChallengesListScreenView()
+            HomeView()
             .environmentObject(self.quickChallengeViewModel)
             .tabItem {
                 Label("Desafios", systemImage: "list.triangle")
@@ -29,7 +31,8 @@ struct TabBarView: View {
                 Label("Perfil", systemImage: "person")
             }
         }
-        .accentColor(Tokens.Colors.Brand.Primary.pure.value)
+        .environment(\.colorScheme, .dark)
+        .accentColor(Tokens.Colors.Brand.Primary.light.value)
     }
 }
 

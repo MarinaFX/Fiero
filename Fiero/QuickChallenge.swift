@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable {
+struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
     
     var id: String
     var name: String
@@ -24,4 +24,14 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable {
     var updatedAt: String
     var teams: [Team]
     var owner: User
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(ownerId)
+    }
+    
+    static func == (lhs: QuickChallenge, rhs: QuickChallenge) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.ownerId == rhs.ownerId
+    }
 }
