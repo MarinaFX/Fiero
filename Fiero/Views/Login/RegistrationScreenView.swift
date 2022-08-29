@@ -13,8 +13,8 @@ struct RegistrationScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
-    @StateObject private var userRegistrationViewModel = UserRegistrationViewModel()
-    
+    @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
+
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
