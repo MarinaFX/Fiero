@@ -12,29 +12,47 @@ struct ScoreController3_4Component: View {
     
     @State private(set) var timeWithoutClick: Int = 0
     @State private(set) var waitingForSync: Bool = false
+    @State private(set) var isLongPressing = false
+    @State private(set) var timer: Timer?
+
+    @Binding var playerScore: Double
 
     private(set) var foreGroundColor: Color
     private(set) var playerName: String
     private(set) var challengeId: String
     private(set) var teamId: String
     private(set) var memberId: String
-    
-    @Binding var playerScore: Double
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
                 .foregroundColor(foreGroundColor)
             HStack {
-                Button {
-                    self.playerScore -= 1
-                    self.waitingForSync = true
-                } label: {
+                Button(action: {
+                    print("tap")
+                    if(self.isLongPressing){
+                        //End of a longpress gesture, so stop our fastforwarding
+                        self.isLongPressing.toggle()
+                        self.timer?.invalidate()
+                    } else {
+                        //Regular tap
+                        self.playerScore -= 1
+                    }
+                }, label: {
                     Image(systemName: "minus.circle.fill")
                         .resizable()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                }
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                    
+                })
+                .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
+                    print("long press")
+                    self.isLongPressing = true
+                    //Fastforward has started
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                        self.playerScore -= 1
+                    })
+                })
                 Spacer()
                 VStack {
                     Text("\(playerScore, specifier: "%.0f")")
@@ -46,17 +64,28 @@ struct ScoreController3_4Component: View {
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 }
                 Spacer()
-                Button {
-                    print("öi")
-                    self.playerScore += 1
-                    self.waitingForSync = true
-                } label: {
+                Button(action: {
+                    if(self.isLongPressing){
+                        //End of a longpress gesture, so stop our fastforwarding
+                        self.isLongPressing.toggle()
+                        self.timer?.invalidate()
+                    } else {
+                        //Regular tap
+                        self.playerScore += 1
+                    }
+                }, label: {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                }
-                
+                        .foregroundColor(.black)
+                })
+                .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
+                    self.isLongPressing = true
+                    //Fastforward has started
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                        self.playerScore += 1
+                    })
+                })
             }
             .padding(.horizontal, Tokens.Spacing.xs.value)
         }
@@ -65,23 +94,10 @@ struct ScoreController3_4Component: View {
             self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
         })
     }
-    
-    func syncScore() {
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-            print("waitingForSyn: \(self.waitingForSync)")
-            if self.waitingForSync {
-                print("salvaai")
-                self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
-                self.waitingForSync = false
-            }
-            print("saved score: \(self.playerScore)")
-            
-        }
-    }
 }
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "", playerScore: .constant(2.0))
+        ScoreController3_4Component(playerScore: .constant(2.0), foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "")
     }
 }
