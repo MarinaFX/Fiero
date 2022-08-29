@@ -31,6 +31,7 @@ struct TabBarView: View {
                 Label("Perfil", systemImage: "person")
             }
         }
+        .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
         .accentColor(Tokens.Colors.Brand.Primary.light.value)
     }
