@@ -91,52 +91,28 @@ struct ChallengesListScreenView: View {
             self.quickChallenges[index] = $0
         })
         
-        
-        if #available(iOS 15, *) {
-            return self.$quickChallenges.first(where: { $0.wrappedValue.id == id }) ?? binding
-        }
-        else {
-            return binding
-        }
+        return self.$quickChallenges.first(where: { $0.wrappedValue.id == id }) ?? binding
     }
     
     var body: some View {
         VStack {
-            if #available(iOS 15.0, *) {
-                ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
-                    ZStack {
-                        CustomTitleImageListRow(title: challenge.name)
-                    }
-                    .listRowBackground(Color.clear)
-                    .onTapGesture {
-                        self.presentModalIndex = challenge
-                    }
+            ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
+                ZStack {
+                    CustomTitleImageListRow(title: challenge.name)
                 }
-                .fullScreenCover(item: $presentModalIndex) { item in
-                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
-                        .environmentObject(self.quickChallengeViewModel)
+                .listRowBackground(Color.clear)
+                .onTapGesture {
+                    self.presentModalIndex = challenge
                 }
-                .refreshable {
-                    self.quickChallengeViewModel.getUserChallenges()
-                }
-                .listStyle(.plain)
-            } else {
-                //TODO: Refreshable list for iOS 14
-                ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
-                    ZStack {
-                        CustomTitleImageListRow(title: challenge.name)
-                    }
-                    .listRowBackground(Color.clear)
-                    .onTapGesture {
-                        self.presentModalIndex = challenge
-                    }
-                }
-                .fullScreenCover(item: $presentModalIndex) { item in
-                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
-                        .environmentObject(self.quickChallengeViewModel)
-                }
-                .listStyle(.plain)
             }
+            .fullScreenCover(item: $presentModalIndex) { item in
+                ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                    .environmentObject(self.quickChallengeViewModel)
+            }
+            .refreshable {
+                self.quickChallengeViewModel.getUserChallenges()
+            }
+            .listStyle(.plain)
         }
     }
 }
