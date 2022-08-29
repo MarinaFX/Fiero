@@ -44,6 +44,7 @@
 		1B6020CA28A1AD8300AEF47B /* MockKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */; };
 		1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */; };
 		1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */; };
+		1B7BF1A528BD61630017EF9C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7BF1A428BD61630017EF9C /* Lottie */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */; };
@@ -210,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8E7C76C288724750035E2CE /* UXCamSwiftUI in Frameworks */,
+				1B7BF1A528BD61630017EF9C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,6 +705,7 @@
 			name = Fiero;
 			packageProductDependencies = (
 				F8E7C76B288724750035E2CE /* UXCamSwiftUI */,
+				1B7BF1A428BD61630017EF9C /* Lottie */,
 			);
 			productName = Fiero;
 			productReference = 1B4135B528597E8900C7094A /* Fiero.app */;
@@ -779,6 +782,7 @@
 			mainGroup = 1B4135AC28597E8900C7094A;
 			packageReferences = (
 				F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */,
+				1B7BF1A328BD61630017EF9C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 1B4135B628597E8900C7094A /* Products */;
 			projectDirPath = "";
@@ -988,7 +992,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1042,7 +1046,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1070,7 +1074,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1102,7 +1106,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1125,13 +1129,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GYMDP69744;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fiero.app/Fiero";
 			};
 			name = Debug;
@@ -1145,13 +1149,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GYMDP69744;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fiero.app/Fiero";
 			};
 			name = Release;
@@ -1169,7 +1173,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = Fiero;
 			};
 			name = Debug;
@@ -1187,7 +1191,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = Fiero;
 			};
 			name = Release;
@@ -1234,6 +1238,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1B7BF1A328BD61630017EF9C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.2;
+			};
+		};
 		F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uxcam/ios-swiftui";
@@ -1245,6 +1257,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1B7BF1A428BD61630017EF9C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B7BF1A328BD61630017EF9C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		F8E7C76B288724750035E2CE /* UXCamSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F8E7C76A288724750035E2CE /* XCRemoteSwiftPackageReference "ios-swiftui" */;

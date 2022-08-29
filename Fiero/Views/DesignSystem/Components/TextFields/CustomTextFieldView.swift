@@ -100,17 +100,10 @@ struct CustomTextFieldView: View {
                     Button(action: {
                         isSecure.toggle()
                     }, label: {
-                        if #available(iOS 15.0, *) {
-                            Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(Tokens.FontStyle.callout.font())
-                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
-                                .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
-                        } else {
-                            Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(Tokens.FontStyle.callout.font())
-                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
-                                .accentColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
-                        }
+                        Image(systemName: self.isSecure ? "eye.slash" : "eye")
+                            .font(Tokens.FontStyle.callout.font())
+                            .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
+                            .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                     })
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
                 }
