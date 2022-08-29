@@ -27,7 +27,6 @@ struct Ongoing3Or4WithPauseScreenView: View {
 
 struct Ongoing3_4ScreenView: View {
     @Environment(\.presentationMode) var presentationMode
-
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
@@ -70,12 +69,12 @@ struct Ongoing3_4ScreenView: View {
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     ForEach(self.$quickChallenge.teams) { team in
                         ScoreController3_4Component(
+                            playerScore: Binding(team.members)?.first?.score ?? .constant(10),
                             foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
                             playerName: Member.getName(playerName: team.wrappedValue.name),
                             challengeId: self.quickChallenge.id,
                             teamId: team.wrappedValue.id,
-                            memberId: team.wrappedValue.members?[0].id ?? "",
-                            playerScore: Binding(team.members)?.first?.score ?? .constant(10))
+                            memberId: team.wrappedValue.members?[0].id ?? "")
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     }
                 }

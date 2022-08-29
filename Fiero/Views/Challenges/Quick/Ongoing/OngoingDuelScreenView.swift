@@ -54,7 +54,7 @@ struct OngoingDuelScreenView: View {
                     firstBackgroundColor.ignoresSafeArea()
                     VStack(spacing: Tokens.Spacing.lg.value) {
                         
-                        DuelScoreComponent(style: .first, playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[0].id, memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND", playerName: self.quickChallenge.teams[0].name)
+                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[0].id, memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND", playerName: self.quickChallenge.teams[0].name)
                             .padding(.horizontal, Tokens.Spacing.lg.value)
                         Image("Olhos")
                     }
@@ -63,7 +63,7 @@ struct OngoingDuelScreenView: View {
                 ZStack {
                     secondBackgroundColor.ignoresSafeArea()
                     VStack(spacing: Tokens.Spacing.lg.value) {
-                        DuelScoreComponent(style: .first, playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[1].id, memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND", playerName: self.quickChallenge.teams[1].name)
+                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[1].id, memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND", playerName: self.quickChallenge.teams[1].name)
                             .padding(.horizontal, Tokens.Spacing.lg.value)
                         Image("Olhos")
                     }
