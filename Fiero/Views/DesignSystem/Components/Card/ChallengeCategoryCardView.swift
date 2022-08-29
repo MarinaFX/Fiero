@@ -15,6 +15,8 @@ struct ChallengeCategoryCardView: View {
     var body: some View {
         ZStack {
             Tokens.Colors.Neutral.Low.dark.value
+                .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+            
             VStack(spacing: Tokens.Spacing.xxxs.value) {
                 
                 if !isAvailable {
