@@ -10,13 +10,10 @@ import SwiftUI
 struct DuelScoreComponent: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
 
-    @State private var timer: Timer?
-
-    @State var style: ScoreControllerStyle
-    @State var maxValue: Int
-    @State var count: Int = 0
-    
-    @State var isLongPressing = false
+    @State private(set) var style: ScoreControllerStyle
+    @State private(set) var maxValue: Int?
+    @State private(set) var isLongPressing = false
+    @State private(set) var timer: Timer?
 
     @Binding var playerScore: Double
 
@@ -39,12 +36,9 @@ struct DuelScoreComponent: View {
                              //End of a longpress gesture, so stop our fastforwarding
                              self.isLongPressing.toggle()
                              self.timer?.invalidate()
-                             
                          } else {
                             //Regular tap
-                            if count > 0 {
-                                self.count -= 1
-                            }
+                             self.playerScore -= 1
                          }
                      }, label: {
                          Image(systemName: style.minusIcon)
@@ -57,9 +51,7 @@ struct DuelScoreComponent: View {
                          self.isLongPressing = true
                          //Fastforward has started
                          self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                             if count > 0 {
-                                self.count -= 1
-                             }
+                             self.playerScore -= 1
                          })
                      })
                      .padding(.leading, style.spacing)
@@ -79,9 +71,7 @@ struct DuelScoreComponent: View {
                              
                          } else {
                              //Regular tap
-                             if count < maxValue{
-                                self.count += 1
-                             }
+                             self.playerScore += 1
                          }
                      }, label: {
                          Image(systemName: style.plusIcon)
@@ -94,9 +84,7 @@ struct DuelScoreComponent: View {
                          self.isLongPressing = true
                          //Fastforward has started
                          self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                             if count < maxValue{
-                                self.count += 1
-                             }
+                             self.playerScore += 1
                          })
                      })
                      .padding(.trailing, style.spacing)
@@ -119,6 +107,6 @@ struct DuelScoreComponent: View {
 
 struct DuelScoreComponent_Previews: PreviewProvider {
     static var previews: some View {
-        DuelScoreComponent(style: .first, playerScore: .constant(0.0), challengeId: "", teamId: "", memberId: "", playerName: "")
+        DuelScoreComponent(style: .first, maxValue: 0, playerScore: .constant(0.0), challengeId: "", teamId: "", memberId: "", playerName: "")
     }
 }

@@ -12,9 +12,9 @@ struct ScoreController3_4Component: View {
     
     @State private(set) var timeWithoutClick: Int = 0
     @State private(set) var waitingForSync: Bool = false
-    @State private var timer: Timer?
+    @State private(set) var isLongPressing = false
+    @State private(set) var timer: Timer?
 
-    @State var isLongPressing = false
     @Binding var playerScore: Double
 
     private(set) var foreGroundColor: Color
@@ -98,6 +98,6 @@ struct ScoreController3_4Component: View {
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "", playerScore: .constant(2.0))
+        ScoreController3_4Component(playerScore: .constant(2.0), foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "")
     }
 }
