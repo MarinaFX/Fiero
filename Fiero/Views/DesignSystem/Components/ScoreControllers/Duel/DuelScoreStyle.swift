@@ -29,8 +29,8 @@
          }
      }
      //MARK: - Fonts
-     var textFont: Font {
-         return Tokens.FontStyle.largeTitle.font(weigth: .regular)
+     var nameFont: Font {
+         return Tokens.FontStyle.title2.font(weigth: .regular)
      }
      var numberFont: Font {
          return Tokens.FontStyle.largeTitle.font(weigth: .bold)
@@ -38,7 +38,7 @@
 
      //MARK: - Radius
      var borderRadius: CGFloat {
-         return Tokens.Border.BorderRadius.small.value
+         return Tokens.Border.BorderRadius.normal.value
      }
 
      //MARK: - Icons
@@ -54,5 +54,8 @@
      }
      var spacingVertical: Double{
          return Tokens.Spacing.nano.value
+     }
+     var spacingAll: Double {
+         return Tokens.Spacing.xs.value
      }
  }

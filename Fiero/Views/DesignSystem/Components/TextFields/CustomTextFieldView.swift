@@ -54,7 +54,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(placeholder)")
                         }
@@ -64,7 +64,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(placeholder)")
                         }
@@ -77,7 +77,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(self.placeholder)")
                         }
@@ -88,7 +88,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .placeholder(when: text.isEmpty) {
-                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.Low.light.value)
+                                Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
                                     .accessibilityLabel("Escreva \(self.placeholder)")
                         }
@@ -100,17 +100,10 @@ struct CustomTextFieldView: View {
                     Button(action: {
                         isSecure.toggle()
                     }, label: {
-                        if #available(iOS 15.0, *) {
-                            Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(Tokens.FontStyle.callout.font())
-                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
-                                .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
-                        } else {
-                            Image(systemName: self.isSecure ? "eye.slash" : "eye")
-                                .font(Tokens.FontStyle.callout.font())
-                                .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
-                                .accentColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
-                        }
+                        Image(systemName: self.isSecure ? "eye.slash" : "eye")
+                            .font(Tokens.FontStyle.callout.font())
+                            .accessibilityLabel(isSecure ? "Campo de texto oculto" : "Campo de texto visível")
+                            .tint(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
                     })
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
                 }

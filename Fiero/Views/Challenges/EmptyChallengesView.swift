@@ -9,47 +9,49 @@ import SwiftUI
 
 struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
+    @ObservedObject var target = RefreshControlTarget()
+
     
     var body: some View {
+
         VStack {
-            NavigationLink("", isActive: self.$isPresented) {
-                QCCategorySelectionView()
-            }
-            .hidden()
-            
             Spacer()
             
-            Image("EmptyState")
+            GifImage("tonto")
+                .frame(width: 250, height: 320)
             
-            Text("Você não é ruim \nnem bom, você \nsó não tem oponentes ainda")
+            Text("Você não é ruim,\nsó ainda não ganhou")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                .padding(Tokens.Spacing.xxs.value)
             
             ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
                 self.isPresented.toggle()
             })
+            
             .padding()
             
             Spacer()
             
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Button(action: {
-                            self.isPresented.toggle()
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        })
-                        .buttonStyle(.plain)
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        self.isPresented.toggle()
+                    }, label: {
+                        Image(systemName: "plus")
+                            .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
+                            .foregroundColor(.white)
                     })
+                    .buttonStyle(.plain)
                 })
+            }
         }
         .navigationTitle("Desafios")
-        .makeDarkModeFullScreen()
         .environment(\.colorScheme, .dark)
+        .makeDarkModeFullScreen()
+        .fullScreenCover(isPresented: $isPresented) {
+            QCCategorySelectionView()
+        }
     }
 }
 
@@ -83,5 +85,25 @@ struct AvailableSoonView: View {
 struct EmptyChallenges_Previews: PreviewProvider {
     static var previews: some View {
         EmptyChallengesView()
+    }
+}
+
+class RefreshControlTarget: ObservableObject {
+    
+    private var onValueChanged: ((_ refreshControl: UIRefreshControl) -> Void)?
+    
+    func use(for scrollView: UIScrollView, onValueChanged: @escaping ((UIRefreshControl) -> Void)) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(
+               self,
+               action: #selector(self.onValueChangedAction),
+               for: .valueChanged
+           )
+        scrollView.refreshControl = refreshControl
+        self.onValueChanged = onValueChanged
+    }
+    
+    @objc private func onValueChangedAction(sender: UIRefreshControl) {
+        self.onValueChanged?(sender)
     }
 }

@@ -43,6 +43,7 @@ enum Tokens {
         enum BorderRadius {
             case none
             case small
+            case normal
             case circular
             
             var value: CGFloat {
@@ -51,6 +52,8 @@ enum Tokens {
                         return CGFloat(0.0)
                     case .small:
                         return CGFloat(8.0)
+                    case .normal:
+                        return CGFloat(20.0)
                     case .circular:
                         return CGFloat(500.0)
                 }
@@ -98,11 +101,11 @@ enum Tokens {
                 var value: Color {
                     switch self {
                         case .pure:
-                            return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
+                            return Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
                         case .light:
-                            return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
+                            return Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
                         case .dark:
-                            return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
+                            return Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
                     }
                 }
             }
@@ -117,7 +120,7 @@ enum Tokens {
                 var value: Color {
                     switch self {
                         case .pure:
-                        return Color(red: 0.2, green: 0.423, blue: 1, opacity: 1)
+                            return Color(red: 0.2, green: 0.423, blue: 1, opacity: 1)
                         case .light:
                             return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
                         case .dark:
@@ -193,7 +196,7 @@ enum Tokens {
                     case .five:
                         return Color(red: 0.173, green: 0.157, blue: 0.89, opacity: 1)
                     case .six:
-                        return Color(red: 0.278, green: 0.758, blue: 0.557, opacity: 1)
+                        return Color(red: 0.941, green: 0.345, blue: 0.357, opacity: 1)
                 }
             }
         }

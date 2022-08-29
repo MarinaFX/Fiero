@@ -21,25 +21,9 @@ struct ListWithoutSeparator<Data, ID, Content>: View where Data: RandomAccessCol
   }
 
   var body: some View {
-    if #available(iOS 15.0, *) {
       List(data, id: id) { item in
         content(item)
           .listRowSeparator(.hidden)
       }
-    } else if #available(iOS 14.0, *) {
-        ScrollView(showsIndicators: false) {
-        LazyVStack {
-          ForEach(data, id: id, content: content)
-        }
-      }
-    } else {
-      List(data, id: id, rowContent: content)
-        .onAppear {
-          UITableView.appearance().separatorStyle = .none
-          UITableView.appearance().showsVerticalScrollIndicator = false
-        }.onDisappear {
-          UITableView.appearance().separatorStyle = .singleLine
-        }
-    }
   }
 }

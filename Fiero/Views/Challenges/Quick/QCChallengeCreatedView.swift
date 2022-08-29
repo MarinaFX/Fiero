@@ -9,13 +9,15 @@ import SwiftUI
 //MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
-    @Environment(\.rootPresentationMode) private var rootPresentationMode
+    @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var quickChallengeViewModel: QuickChallengeViewModel
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @State var didPushToHomeScreen: Bool = false
-    @State var didPushToStartChallenge: Bool = false
+    @State var presentDuelChallenge: Bool = false
+    @State var present3Or4Challenge: Bool = false
     @State var isPresentingAlert: Bool = false
     @Binding var serverResponse: ServerResponse
+    @Binding var quickChallenge: QuickChallenge
     
     var challengeType: QCType
     var challengeName: String
@@ -33,8 +35,8 @@ struct QCChallengeCreatedView: View {
     }
     
     var title: String {
-        if serverResponse.statusCode != 201 &&
-            serverResponse.statusCode != 200 {
+        if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
+            self.quickChallengeViewModel.serverResponse.statusCode != 200 {
             return "Não conseguimos \ncriar seu desafio"
         }
         
@@ -58,26 +60,10 @@ struct QCChallengeCreatedView: View {
             Spacer()
             
             //MARK: - Bottom Buttons
-            if self.serverResponse.statusCode != 201 &&
-                self.serverResponse.statusCode != 200 {
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
-                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxs.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                
+            if self.serverResponse.statusCode == 201 ||
+                self.serverResponse.statusCode == 200 {
                 Button(action: {
-                    self.rootPresentationMode.wrappedValue.popToRootViewController()
-                }, label: {
-                    Text("Voltar para o início")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxl.value)
-            }
-            else {
-                Button(action: {
-                    self.rootPresentationMode.wrappedValue.popToRootViewController()
+                    RootViewController.popToRootViewController()
                 }, label: {
                     Text("Ir para lista de desafios")
                         .bold()
@@ -85,24 +71,54 @@ struct QCChallengeCreatedView: View {
                 })
                 .padding(.bottom, Tokens.Spacing.xxxs.value)
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
-                    
+                NavigationLink("", isActive: self.$presentDuelChallenge) {
+                    DuelScreenView(quickChallenge: $quickChallenge)
+                }
+                .hidden()
+                
+                NavigationLink("", isActive: self.$present3Or4Challenge) {
+                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
+                }
+                .hidden()
+                
+                //TODO: temporarily removing, fix flow after SR
+//                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+//                    if quickChallenge.maxTeams == 2 {
+//                        presentDuelChallenge.toggle()
+//                    }
+//                    else {
+//                        present3Or4Challenge.toggle()
+//                    }
+//                })
+//                .padding(.bottom, Tokens.Spacing.xxxl.value)
+//                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+            } else {
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
+                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                })
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+                Button(action: {
+                    RootViewController.popToRootViewController()
+                }, label: {
+                    Text("Voltar para o início")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 })
                 .padding(.bottom, Tokens.Spacing.xxxl.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
             }
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
             Alert(title: Text("Erro"),
-                  message: Text(self.serverResponse.description),
+                  message: Text(self.quickChallengeViewModel.serverResponse.description),
                   dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
             )
         })
-        .onChange(of: self.quickChallengeViewModel.serverResponse, perform: { serverResponse in
-            self.serverResponse = serverResponse
-            
-            if self.serverResponse.statusCode != 201 &&
-                self.serverResponse.statusCode != 200 {
+        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { _ in
+            if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
+                self.quickChallengeViewModel.serverResponse.statusCode != 200 {
                 self.isPresentingAlert.toggle()
             }
         })
@@ -114,8 +130,8 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView(quickChallengeViewModel: QuickChallengeViewModel(), serverResponse: .constant(.badRequest), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
-            //.previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+        QCChallengeCreatedView(serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
+            .environmentObject(QuickChallengeViewModel())
     }
 }
