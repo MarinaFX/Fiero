@@ -21,7 +21,7 @@ struct RegistrationScreenView: View {
     @State private var moving = false
     @State private var hasAcceptedTermsOfUse = false
     @State private var isShowingTermsOfUseSheet = false
-    @State private var isShowingInvalidInputAlert: Bool = false
+    @State private var isShowingAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
@@ -70,7 +70,11 @@ struct RegistrationScreenView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Criar conta!",
                                         action: {
-                            if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                            if email.isEmpty || username.isEmpty || password.isEmpty {
+                                userRegistrationViewModel.registrationAlertCases = .emptyFields
+                                isShowingAlert.toggle()
+                            }
+                            else {
                                 self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
                             }
                         })
@@ -90,11 +94,33 @@ struct RegistrationScreenView: View {
                 }
                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
             }
-            .alert(isPresented: self.$isShowingInvalidInputAlert, content: {
-                Alert(title: Text("Email invalido"),
-                      message: Text(self.serverResponse.description),
-                      dismissButton: .cancel(Text("OK")))
-                
+            .alert(isPresented: self.$isShowingAlert, content: {
+                switch userRegistrationViewModel.registrationAlertCases {
+                case .emptyFields:
+                    return Alert(title: Text(RegistrationAlertCases.emptyFields.title),
+                                 message: Text(RegistrationAlertCases.emptyFields.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userRegistrationViewModel.serverResponse = .unknown
+                    })
+                case .invalidEmail:
+                    return Alert(title: Text(RegistrationAlertCases.invalidEmail.title),
+                                 message: Text(RegistrationAlertCases.invalidEmail.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userRegistrationViewModel.serverResponse = .unknown
+                    })
+                case .accountAlreadyExists:
+                    return Alert(title: Text(RegistrationAlertCases.accountAlreadyExists.title),
+                                 message: Text(RegistrationAlertCases.accountAlreadyExists.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userRegistrationViewModel.serverResponse = .unknown
+                    })
+                case .connectionError:
+                    return Alert(title: Text(RegistrationAlertCases.connectionError.title),
+                                 message: Text(RegistrationAlertCases.connectionError.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userRegistrationViewModel.serverResponse = .unknown
+                    })
+                }
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
                 userRegistrationViewModel.onKeyboardDidSHow()
@@ -113,8 +139,20 @@ struct RegistrationScreenView: View {
                     self.userRegistrationViewModel.saveUserOnUserDefaults(name: username)
                     self.pushHomeView.toggle()
                 }
-                else {
-                    self.isShowingInvalidInputAlert.toggle()
+                
+                if self.serverResponse.statusCode == 400 {
+                    userRegistrationViewModel.registrationAlertCases = .invalidEmail
+                    isShowingAlert.toggle()
+                }
+                
+                if self.serverResponse.statusCode == 409 {
+                    userRegistrationViewModel.registrationAlertCases = .accountAlreadyExists
+                    isShowingAlert.toggle()
+                }
+                
+                if self.serverResponse.statusCode == 500 {
+                    userRegistrationViewModel.registrationAlertCases = .connectionError
+                    isShowingAlert.toggle()
                 }
             })
             .onAppear {

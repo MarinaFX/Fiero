@@ -13,7 +13,8 @@ import SwiftUI
 class UserLoginViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var user: User
-    @Published private(set) var serverResponse: ServerResponse
+    @Published var serverResponse: ServerResponse
+    @Published var loginAlertCases: LoginAlertCases = .emptyFields
 
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
