@@ -22,6 +22,7 @@ struct Ongoing3Or4WithPauseScreenView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
@@ -78,13 +79,6 @@ struct Ongoing3_4ScreenView: View {
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     }
                 }
-                
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Voltar para detalhes") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-                .padding(.bottom, Tokens.Spacing.md.value)
-                .padding(.top, Tokens.Spacing.xxs.value)
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             }
             
         }.accentColor(Tokens.Colors.Neutral.High.pure.value)
