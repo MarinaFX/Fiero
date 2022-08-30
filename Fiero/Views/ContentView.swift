@@ -10,6 +10,10 @@ import UXCamSwiftUI
 import UXCam
 
 struct ContentView: View {
+    @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
+    @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
+    @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
+    
     @State private var pushHomeView: Bool = false
 
     init(){
@@ -22,11 +26,14 @@ struct ContentView: View {
         if self.pushHomeView {
             withAnimation {
                 TabBarView()
+                .environmentObject(self.quickChallengeViewModel)
             }
         }
         
         if !self.pushHomeView {
             AccountLoginView(pushHomeView: self.$pushHomeView)
+                .environmentObject(self.userLoginViewModel)
+                .environmentObject(self.userRegistrationViewModel)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
         }
     }

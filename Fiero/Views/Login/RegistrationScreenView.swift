@@ -13,8 +13,8 @@ struct RegistrationScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
-    @StateObject private var userRegistrationViewModel = UserRegistrationViewModel()
-    
+    @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
+
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
@@ -24,13 +24,14 @@ struct RegistrationScreenView: View {
     @State private var isShowingInvalidInputAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
+    
     @Binding private(set) var pushHomeView: Bool
     
     //MARK: - body
     var body: some View {
         if isLoginScreenSheetShowing{
             AccountLoginView(pushHomeView: self.$pushHomeView)
-        }else{
+        } else {
             ZStack {
                 Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
@@ -122,6 +123,7 @@ struct RegistrationScreenView: View {
             }.onDisappear {
                 AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
             }
+            .preferredColorScheme(.dark)
         }
     }
 }
