@@ -48,7 +48,7 @@ struct AccountLoginView: View {
                                             design: .rounded)
     }
     var textFont: Font {
-        return Tokens.FontStyle.caption.font()
+        return Tokens.FontStyle.callout.font()
     }
     var textButtonFont: Font {
         return Tokens.FontStyle.callout.font(weigth: .bold,
