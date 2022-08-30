@@ -23,6 +23,7 @@ struct RegistrationScreenView: View {
     @State private var isShowingTermsOfUseSheet = false
     @State private var isShowingInvalidInputAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
+    @State private var isShowingTermsOfUseAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
     @Binding private(set) var pushHomeView: Bool
@@ -70,8 +71,14 @@ struct RegistrationScreenView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Criar conta!",
                                         action: {
-                            if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
-                                self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
+                            if hasAcceptedTermsOfUse == true {
+                                isShowingTermsOfUseAlert = false
+                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
+                                }
+                            } else {
+                                print("Aqui")
+                                isShowingTermsOfUseAlert = true
                             }
                         })
                     }
@@ -93,6 +100,12 @@ struct RegistrationScreenView: View {
             .alert(isPresented: self.$isShowingInvalidInputAlert, content: {
                 Alert(title: Text("Email invalido"),
                       message: Text(self.serverResponse.description),
+                      dismissButton: .cancel(Text("OK")))
+                
+            })
+            .alert(isPresented: $isShowingTermsOfUseAlert, content: {
+                Alert(title: Text("Termos de Uso"),
+                      message: Text("Você deve ler e aceitar os termos de uso para poder criar uma conta."),
                       dismissButton: .cancel(Text("OK")))
                 
             })
