@@ -20,7 +20,7 @@ struct ChallengeParticipantsSelectionCardView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: UIScreen.main.bounds.height * 0.3)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .clipShape(RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value))
     }
 }
 
