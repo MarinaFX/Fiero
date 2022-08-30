@@ -57,15 +57,6 @@ struct QCAmountWinRulesView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Text("Voltar")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxs.value)
-                
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
                     if let goal = Int(self.goal) {
                         if goal > 0 {
@@ -77,6 +68,16 @@ struct QCAmountWinRulesView: View {
                     else {
                         self.isPresentingAlert.toggle()
                     }
+                })
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Voltar")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 })
                 .padding(.bottom)
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
