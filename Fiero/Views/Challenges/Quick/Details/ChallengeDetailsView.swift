@@ -32,10 +32,6 @@ struct ChallengeDetailsView: View {
                     VStack(spacing: largeSpacing) {
                         VStack (alignment: .center, spacing: nanoSpacing) {
                             HStack(spacing: nanoSpacing) {
-                                Text("⚡️")
-                                    .font(titleFont)
-                                    .foregroundColor(color)
-                                
                                 Text(quickChallenge.name)
                                     .font(titleFont)
                                     .foregroundColor(color)
