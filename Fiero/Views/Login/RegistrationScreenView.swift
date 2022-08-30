@@ -77,7 +77,6 @@ struct RegistrationScreenView: View {
                                     self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
                                 }
                             } else {
-                                print("Aqui")
                                 isShowingTermsOfUseAlert = true
                             }
                         })
