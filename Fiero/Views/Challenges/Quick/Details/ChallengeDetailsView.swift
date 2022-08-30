@@ -27,60 +27,63 @@ struct ChallengeDetailsView: View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                //MARK: - Top Components
                 VStack {
-                    VStack(spacing: largeSpacing) {
-                        VStack (alignment: .center, spacing: nanoSpacing) {
-                            HStack(spacing: nanoSpacing) {
-                                Text("⚡️")
-                                    .font(titleFont)
-                                    .foregroundColor(color)
-                                
-                                Text(quickChallenge.name)
-                                    .font(titleFont)
-                                    .foregroundColor(color)
-                            }
+                    //MARK: - Top Components
+                    ZStack {
+                        VStack {
+                            Text(quickChallenge.name)
+                                .font(Tokens.FontStyle.title3.font(weigth: .bold))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                                .padding(.top, Tokens.Spacing.sm.value)
                             
-                            Text("Vence quem fizer algo mais vezes \naté bater a pontuação de: ")
+                            Text("Objetivo")
                                 .multilineTextAlignment(.center)
                                 .font(descriptionFont)
                                 .foregroundColor(color)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text("\(quickChallenge.goal)")
-                                .font(titleFont)
-                                .foregroundColor(color)
-                        }
-                        
-                        //MARK: - Mid Components
-                        VStack(spacing: extraExtraExtraSmallSpacing) {
-                            Text("Participantes")
-                                .font(titleFont)
-                                .foregroundColor(color)
-                            
-                            if quickChallenge.teams.count >= 3 {
-                                GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
-                            } else {
-                                GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
-                            }
+                            Text("\(quickChallenge.goal) pontos")
+                                .font(.system(size: 40))
+                                .fontWeight(.heavy)
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.bottom, Tokens.Spacing.sm.value)
                         }
                     }
+                    .frame(maxWidth: .infinity)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: 2)
+                    )
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    .padding(.bottom, Tokens.Spacing.sm.value)
+
+                    //MARK: - Mid Components
+                    Text("Participantes")
+                        .font(titleFont2)
+                        .foregroundColor(color)
                     
-                    Spacer()
+                    if quickChallenge.teams.count >= 3 {
+                        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
+                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    } else {
+                        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
+                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    }
                     
                     //MARK: - Bottom Components
+                    Spacer()
                     VStack(spacing: quarkSpacing) {
                         if self.quickChallenge.maxTeams == 2 {
                             NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
                                 DuelScreenView(quickChallenge: $quickChallenge)
-                            }
-                            .hidden()
+                            }.hidden()
                         }
                         else {
                             NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
                                 Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false)
-                            }
-                            .hidden()
+                            }.hidden()
                         }
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
@@ -109,7 +112,6 @@ struct ChallengeDetailsView: View {
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     }
-                    .padding(.bottom, largeSpacing)
                 }
                 .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingAlert, content: {
@@ -156,7 +158,6 @@ struct ChallengeDetailsView: View {
                 }
             }.accentColor(Color.white)
         }
-        
     }
     
     //MARK: - DS Tokens
@@ -169,17 +170,26 @@ struct ChallengeDetailsView: View {
     var nanoSpacing: CGFloat {
         return Tokens.Spacing.nano.value
     }
+    var smallSpacing: CGFloat {
+        return Tokens.Spacing.xxxs.value
+    }
     var extraExtraExtraSmallSpacing: CGFloat {
         return Tokens.Spacing.xxxs.value
     }
     var largeSpacing: CGFloat {
         return Tokens.Spacing.lg.value
     }
-    var titleFont: Font {
+    var titleFont2: Font {
         return Tokens.FontStyle.title2.font(weigth: .bold)
     }
+    var titleFont: Font {
+        return Tokens.FontStyle.title.font(weigth: .bold)
+    }
+    var largeTitleFont: Font {
+        return Tokens.FontStyle.largeTitle.font(weigth: .bold)
+    }
     var descriptionFont: Font {
-        return Tokens.FontStyle.caption.font()
+        return Tokens.FontStyle.callout.font()
     }
 }
 

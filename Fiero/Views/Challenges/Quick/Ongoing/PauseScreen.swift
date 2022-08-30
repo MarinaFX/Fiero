@@ -39,7 +39,7 @@ struct PauseScreen: View {
                 .opacity(0.8)
             VStack(spacing: Tokens.Spacing.nano.value) {
                 Spacer()
-                Text("Truco")
+                Text(self.quickChallenge.name)
                     .foregroundColor(textColor)
                     .font(textFont)
                     .padding(.bottom, Tokens.Spacing.xxxs.value)
