@@ -48,7 +48,7 @@ struct AccountLoginView: View {
                                             design: .rounded)
     }
     var textFont: Font {
-        return Tokens.FontStyle.caption.font()
+        return Tokens.FontStyle.callout.font()
     }
     var textButtonFont: Font {
         return Tokens.FontStyle.callout.font(weigth: .bold,
@@ -93,16 +93,6 @@ struct AccountLoginView: View {
                                         text: self.$passwordText)
                         .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
-                    Button(action: {
-                        //TODO: create a link to Remember Password Screen (doesn't exist yet)
-                    }, label: {
-                        Text("Esqueceu sua senha?")
-                            .font(textFont)
-                            .foregroundColor(color)
-                            .underline()
-                    })
-                    .padding(.vertical, smallSpacing)
-                    
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Fazer login!",
                                     action: {

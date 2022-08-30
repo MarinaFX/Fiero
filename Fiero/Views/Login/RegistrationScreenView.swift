@@ -23,6 +23,7 @@ struct RegistrationScreenView: View {
     @State private var isShowingTermsOfUseSheet = false
     @State private var isShowingAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
+    @State private var isShowingTermsOfUseAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     
     @Binding private(set) var pushHomeView: Bool
@@ -55,7 +56,7 @@ struct RegistrationScreenView: View {
                         //MARK: Button and CheckBox
                         CheckboxComponent(style: .dark,
                                           text: "Concordo com os",
-                                          linkedText: "termos de uso",
+                                          linkedText: "Termos de Uso",
                                           isChecked: $hasAcceptedTermsOfUse,
                                           checkboxHandler: { isChecked in
                             print(isChecked)
@@ -70,12 +71,17 @@ struct RegistrationScreenView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Criar conta!",
                                         action: {
-                            if email.isEmpty || username.isEmpty || password.isEmpty {
-                                userRegistrationViewModel.registrationAlertCases = .emptyFields
-                                isShowingAlert.toggle()
-                            }
-                            else {
-                                self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
+                            if hasAcceptedTermsOfUse == true {
+                                isShowingTermsOfUseAlert = false
+                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
+                                }
+                                else {
+                                    self.userRegistrationViewModel.registrationAlertCases = .emptyFields
+                                    self.isShowingAlert.toggle()
+                                }
+                            } else {
+                                self.isShowingTermsOfUseAlert = true
                             }
                         })
                     }
@@ -121,6 +127,12 @@ struct RegistrationScreenView: View {
                         self.userRegistrationViewModel.serverResponse = .unknown
                     })
                 }
+            })
+            .alert(isPresented: $isShowingTermsOfUseAlert, content: {
+                Alert(title: Text("Termos de Uso"),
+                      message: Text("Você deve ler e aceitar os termos de uso para poder criar uma conta."),
+                      dismissButton: .cancel(Text("OK")))
+                
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
                 userRegistrationViewModel.onKeyboardDidSHow()
