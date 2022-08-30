@@ -19,6 +19,9 @@ enum CheckboxStyles {
     var textFont: Font {
         return Tokens.FontStyle.callout.font()
     }
+    var linkedTextFont: Font {
+        return Tokens.FontStyle.callout.font(weigth: .bold)
+    }
     
     //MARK: - Colors
     var color: Color {
