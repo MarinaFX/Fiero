@@ -93,16 +93,6 @@ struct AccountLoginView: View {
                                         text: self.$passwordText)
                         .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
-                    Button(action: {
-                        //TODO: create a link to Remember Password Screen (doesn't exist yet)
-                    }, label: {
-                        Text("Esqueceu sua senha?")
-                            .font(textFont)
-                            .foregroundColor(color)
-                            .underline()
-                    })
-                    .padding(.vertical, smallSpacing)
-                    
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Fazer login!",
                                     action: {
