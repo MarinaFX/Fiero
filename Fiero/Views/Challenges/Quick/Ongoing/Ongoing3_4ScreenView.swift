@@ -22,6 +22,7 @@ struct Ongoing3Or4WithPauseScreenView: View {
                 }
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
