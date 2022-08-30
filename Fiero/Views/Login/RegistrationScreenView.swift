@@ -56,7 +56,7 @@ struct RegistrationScreenView: View {
                         //MARK: Button and CheckBox
                         CheckboxComponent(style: .dark,
                                           text: "Concordo com os",
-                                          linkedText: "termos de uso",
+                                          linkedText: "Termos de Uso",
                                           isChecked: $hasAcceptedTermsOfUse,
                                           checkboxHandler: { isChecked in
                             print(isChecked)
