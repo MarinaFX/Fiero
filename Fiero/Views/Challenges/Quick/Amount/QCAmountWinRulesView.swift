@@ -37,7 +37,7 @@ struct QCAmountWinRulesView: View {
         ZStack{
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
-                CustomProgressBar(currentPage: .third)
+                CustomProgressBar(currentPage: .third, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                     .padding()
                 
                 Text("Vitória")
