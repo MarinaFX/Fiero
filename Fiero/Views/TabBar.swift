@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @StateObject var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
 
     init() {
         UITabBar.appearance().shadowImage = UIImage()
@@ -21,7 +20,6 @@ struct TabBarView: View {
     var body: some View {
         TabView {
             HomeView()
-            .environmentObject(self.quickChallengeViewModel)
             .tabItem {
                 Label("Desafios", systemImage: "list.triangle")
             }
@@ -31,6 +29,7 @@ struct TabBarView: View {
                 Label("Perfil", systemImage: "person")
             }
         }
+        .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
         .accentColor(Tokens.Colors.Brand.Primary.light.value)
     }
