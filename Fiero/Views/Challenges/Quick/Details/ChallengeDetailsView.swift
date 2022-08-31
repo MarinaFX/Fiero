@@ -169,7 +169,7 @@ struct ChallengeDetailsView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading").frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }

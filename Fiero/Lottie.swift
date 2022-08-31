@@ -13,6 +13,7 @@ struct LottieView: UIViewRepresentable {
     
     typealias UIViewType = UIView
     var fileName: String
+    var reverse: Bool
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -21,6 +22,13 @@ struct LottieView: UIViewRepresentable {
         let animation = Animation.named(fileName)
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
+        if reverse {
+            animationView.loopMode = .autoReverse
+        } else {
+            animationView.loopMode = .loop
+        }
+        animationView.backgroundBehavior = .pauseAndRestore
+
         animationView.play()
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
