@@ -37,6 +37,7 @@ struct ScoreController3_4Component: View {
                     } else {
                         //Regular tap
                         self.playerScore -= 1
+                        Haptics.shared.play(.light)
                     }
                 }, label: {
                     Image(systemName: "minus.circle.fill")
@@ -51,6 +52,7 @@ struct ScoreController3_4Component: View {
                     //Fastforward has started
                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                         self.playerScore -= 1
+                        Haptics.shared.play(.light)
                     })
                 })
                 Spacer()
@@ -72,6 +74,7 @@ struct ScoreController3_4Component: View {
                     } else {
                         //Regular tap
                         self.playerScore += 1
+                        Haptics.shared.play(.light)
                     }
                 }, label: {
                     Image(systemName: "plus.circle.fill")
@@ -84,6 +87,7 @@ struct ScoreController3_4Component: View {
                     //Fastforward has started
                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                         self.playerScore += 1
+                        Haptics.shared.play(.light)
                     })
                 })
             }
