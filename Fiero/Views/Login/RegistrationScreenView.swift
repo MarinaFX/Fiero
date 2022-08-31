@@ -34,7 +34,7 @@ struct RegistrationScreenView: View {
             AccountLoginView(pushHomeView: self.$pushHomeView)
         } else {
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
                     if !userRegistrationViewModel.keyboardShown  {
                         Image("Olhos")
@@ -42,9 +42,10 @@ struct RegistrationScreenView: View {
                     }
                     VStack(spacing: Tokens.Spacing.xxs.value){
                         Text("Boas vindas, desafiante")
+                            .multilineTextAlignment(.center)
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(Tokens.FontStyle.title3.font(weigth: .bold,
-                                                               design: .rounded))
+                            .font(Tokens.FontStyle.title.font(weigth: .bold,
+                                                               design: .default))
                         //MARK: TextFilds elements
                         VStack(spacing: Tokens.Spacing.xxxs.value){
                             CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)

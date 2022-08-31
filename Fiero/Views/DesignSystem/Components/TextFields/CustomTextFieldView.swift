@@ -111,11 +111,14 @@ struct CustomTextFieldView: View {
             
             //MARK: - Helper Text
             if ((type == .helper) || (type == .both)) {
-                Text(self.helperText)
-                    .font(Tokens.FontStyle.caption.font())
-                //TODO: Hidden helper when not call in view
-                    .accessibilityLabel("\(helperText)")
-                    .foregroundColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
+                if helperText == "" {
+                    //MARK: - is empty because don't have helper text
+                } else {
+                    Text(self.helperText)
+                        .font(Tokens.FontStyle.caption.font())
+                        .accessibilityLabel("\(helperText)")
+                        .foregroundColor(self.style == .primary ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value)
+                }
             }
 
         }
