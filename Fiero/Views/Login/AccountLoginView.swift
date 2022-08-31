@@ -45,14 +45,18 @@ struct AccountLoginView: View {
     }
     var titleFont: Font {
         return Tokens.FontStyle.title3.font(weigth: .bold,
-                                            design: .rounded)
+                                            design: .default)
+    }
+    var largeTitleFont: Font {
+        return Tokens.FontStyle.title.font(weigth: .bold,
+                                            design: .default)
     }
     var textFont: Font {
         return Tokens.FontStyle.callout.font()
     }
     var textButtonFont: Font {
         return Tokens.FontStyle.callout.font(weigth: .bold,
-                                             design: .rounded)
+                                             design: .default)
     }
     
     //MARK: body View
@@ -62,7 +66,7 @@ struct AccountLoginView: View {
                 .environmentObject(self.userRegistrationViewModel)
         }else{
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
                 //MARK: Login Form
                 VStack {
                     if !userLoginViewModel.keyboardShown  {
@@ -70,7 +74,8 @@ struct AccountLoginView: View {
                             .padding(.vertical, Tokens.Spacing.sm.value)
                     }
                     Text("Boas vindas, desafiante")
-                        .font(titleFont)
+                        .font(largeTitleFont)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding(.vertical, smallSpacing)
                     //MARK: TextFields
