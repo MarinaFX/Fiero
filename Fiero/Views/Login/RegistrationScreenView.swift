@@ -99,6 +99,17 @@ struct RegistrationScreenView: View {
                     }
                 }
                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                if userRegistrationViewModel.isShowingLoading {
+                    ZStack {
+                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                        VStack {
+                            Spacer()
+                            //TODO: - change name of animation loading
+                            LottieView(fileName: "loading").frame(width: 200, height: 200)
+                            Spacer()
+                        }
+                    }
+                }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
                 switch userRegistrationViewModel.registrationAlertCases {
@@ -107,24 +118,28 @@ struct RegistrationScreenView: View {
                                  message: Text(RegistrationAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userRegistrationViewModel.serverResponse = .unknown
+                        userRegistrationViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
                     return Alert(title: Text(RegistrationAlertCases.invalidEmail.title),
                                  message: Text(RegistrationAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userRegistrationViewModel.serverResponse = .unknown
+                        userRegistrationViewModel.removeLoadingAnimation()
                     })
                 case .accountAlreadyExists:
                     return Alert(title: Text(RegistrationAlertCases.accountAlreadyExists.title),
                                  message: Text(RegistrationAlertCases.accountAlreadyExists.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userRegistrationViewModel.serverResponse = .unknown
+                        userRegistrationViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
                     return Alert(title: Text(RegistrationAlertCases.connectionError.title),
                                  message: Text(RegistrationAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userRegistrationViewModel.serverResponse = .unknown
+                        userRegistrationViewModel.removeLoadingAnimation()
                     })
                 }
             })

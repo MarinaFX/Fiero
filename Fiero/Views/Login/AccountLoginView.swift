@@ -142,35 +142,35 @@ struct AccountLoginView: View {
                                  message: Text(LoginAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.isShowingLoading = false
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
                     return Alert(title: Text(LoginAlertCases.invalidEmail.title),
                                  message: Text(LoginAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.isShowingLoading = false
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .loginError:
                     return Alert(title: Text(LoginAlertCases.loginError.title),
                                         message: Text(LoginAlertCases.loginError.message),
                                         dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.isShowingLoading = false
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
                     return Alert(title: Text(LoginAlertCases.connectionError.title),
                                  message: Text(LoginAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.isShowingLoading = false
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .emailNotRegistrated:
                     return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
                                  message: Text(LoginAlertCases.emailNotRegistrated.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.isShowingLoading = false
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 }
             })

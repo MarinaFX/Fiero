@@ -15,6 +15,7 @@ class UserLoginViewModel: ObservableObject {
     @Published private(set) var user: User
     @Published var serverResponse: ServerResponse
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
+    @Published var isShowingLoading: Bool = false
 
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
@@ -45,6 +46,7 @@ class UserLoginViewModel: ObservableObject {
     
     //MARK: - AuthenticateUser
     func authenticateUser(email: String, password: String) {
+        isShowingLoading = true
         let userJSON: [String : String] = [
             "password": password,
             "email": email
@@ -88,6 +90,7 @@ class UserLoginViewModel: ObservableObject {
                     if self?.serverResponse.statusCode == 200 || self?.serverResponse.statusCode == 201 {
                         self?.keyValueStorage.set(password, forKey: "password")
                         self?.keyValueStorage.set(email, forKey: "email")
+                        self?.removeLoadingAnimation()
                     }
                 }
                 
@@ -105,5 +108,9 @@ class UserLoginViewModel: ObservableObject {
     
     func getUserFromDefaults() -> (email: String?, password: String?) {
         return (self.keyValueStorage.string(forKey: "email"), self.keyValueStorage.string(forKey: "password"))
+    }
+    
+    func removeLoadingAnimation() {
+        isShowingLoading = false
     }
 }
