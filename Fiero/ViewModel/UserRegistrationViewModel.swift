@@ -12,8 +12,9 @@ import SwiftUI
 //MARK: UserRegistrationViewModel
 class UserRegistrationViewModel: ObservableObject {
     //MARK: - Variables Setup
-    @Published private(set) var serverResponse: ServerResponse
+    @Published var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
+    @Published var registrationAlertCases: RegistrationAlertCases = .emptyFields
         
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"

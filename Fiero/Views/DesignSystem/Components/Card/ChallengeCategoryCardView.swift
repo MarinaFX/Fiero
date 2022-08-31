@@ -26,14 +26,18 @@ struct ChallengeCategoryCardView: View {
                     GifImage("quantity")
                         .frame(width: 200, height: 270)
                 }
-                Text(self.title)
-                    .font(Tokens.FontStyle.title.font())
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 
-                Text(self.subtitle)
-                    .multilineTextAlignment(.center)
-                    .font(Tokens.FontStyle.callout.font())
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                VStack(spacing: Tokens.Spacing.quarck.value) {
+                    Text(self.title)
+                        .font(Tokens.FontStyle.title.font())
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    
+                    Text(self.subtitle)
+                        .multilineTextAlignment(.center)
+                        .font(Tokens.FontStyle.callout.font())
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                }
+          
 
                 if !isAvailable {
                     VStack{
