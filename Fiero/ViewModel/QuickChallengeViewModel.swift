@@ -14,7 +14,6 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var challengesList: [QuickChallenge] = []
     @Published var serverResponse: ServerResponse
     @Published var showingAlert = false
-    @Published var didUpdateChallenges: Bool = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     
@@ -45,7 +44,7 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Create Quick Challenge
-    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) {
+    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         
         let challengeJson = """
@@ -61,14 +60,20 @@ class QuickChallengeViewModel: ObservableObject {
         """
         print(challengeJson)
         
-        let userToken = keyValueStorage.string(forKey: "AuthToken")!
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("NO USER TOKEN FOUND!")
+            return Empty().eraseToAnyPublisher()
+        }
         
         let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -92,6 +97,11 @@ class QuickChallengeViewModel: ObservableObject {
 
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
     }
     
     //MARK: - Get User Challenges
