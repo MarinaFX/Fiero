@@ -15,6 +15,7 @@ class UserRegistrationViewModel: ObservableObject {
     @Published var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
     @Published var registrationAlertCases: RegistrationAlertCases = .emptyFields
+    @Published var isShowingLoading: Bool = false
         
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
@@ -43,6 +44,7 @@ class UserRegistrationViewModel: ObservableObject {
     
     //MARK: - Create Account
     func createUserOnDatabase(for user: User) {
+        isShowingLoading = true
         let userJSON: [String : String] = [
             "email": user.email,
             "name": user.name,
@@ -90,5 +92,9 @@ class UserRegistrationViewModel: ObservableObject {
     
     func getUserOnUserDefaults() -> String {
         self.keyValueStorage.string(forKey: "name") ?? "Alpaca Enfurecida"
+    }
+    
+    func removeLoadingAnimation() {
+        isShowingLoading = false
     }
 }

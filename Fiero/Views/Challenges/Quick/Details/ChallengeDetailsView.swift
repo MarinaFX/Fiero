@@ -19,6 +19,7 @@ struct ChallengeDetailsView: View {
     @State var isPresentingAlert: Bool = false
     @State var presentDuelOngoingChallenge: Bool = false
     @State var present3or4OngoingChallenge: Bool = false
+    @State var isPresentingLoading: Bool = false
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -89,20 +90,25 @@ struct ChallengeDetailsView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: self.quickChallenge.alreadyBegin ?
                                         "Continuar Desafio" : "Começar desafio!") {
+                            self.isPresentingLoading.toggle()
                             print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
                                     case .finished:
                                         if self.quickChallenge.maxTeams == 2 {
+                                            self.isPresentingLoading.toggle()
                                             self.presentDuelOngoingChallenge.toggle()
                                         }
                                         else {
+                                            self.isPresentingLoading.toggle()
                                             self.present3or4OngoingChallenge.toggle()
                                         }
                                     case .failure:
                                         quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
                                         self.isPresentingAlert.toggle()
+                                        self.isPresentingLoading.toggle()
+                                        print(self.isPresentingLoading)
                                     }
                                 }, receiveValue: { _ in })
                                 .store(in: &subscriptions)
@@ -155,6 +161,17 @@ struct ChallengeDetailsView: View {
                                 .font(Tokens.FontStyle.callout.font(weigth: .bold))
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         })
+                    }
+                }
+                if isPresentingLoading {
+                    ZStack {
+                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                        VStack {
+                            Spacer()
+                            //TODO: - change name of animation loading
+                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            Spacer()
+                        }
                     }
                 }
             }.accentColor(Color.white)
