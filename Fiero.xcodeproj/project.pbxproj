@@ -82,6 +82,7 @@
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
+		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
 		DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */; };
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };
@@ -194,6 +195,7 @@
 		CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsView.swift; sourceTree = "<group>"; };
 		CCFA55AA288899F900740663 /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
 		DF49516828B902650046A2CD /* GIfImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfImage.swift; sourceTree = "<group>"; };
+		DF73C75728BF85B60079DBB0 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Picture Component.swift"; sourceTree = "<group>"; };
 		DF7DCDB228AEB9F400B387BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DF7DCDB428AEC17B00B387BA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
 				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
+				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -445,7 +448,6 @@
 				1B5B7CE8287782ED00B4628F /* Login */,
 				DF91AD1928AFA81E00854686 /* Profile */,
 				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
-				DF49516828B902650046A2CD /* GIfImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +483,7 @@
 		1B90929E2878ACDA0039EBB7 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				DF49516828B902650046A2CD /* GIfImage.swift */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -869,6 +872,7 @@
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				DF91AD1B28AFA84400854686 /* ProfileViewModel.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
+				DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */,
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
