@@ -149,6 +149,7 @@ struct ChallengeDetailsView: View {
                         Button(action: {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             self.isPresentingAlert.toggle()
+                            Haptics.shared.play(.heavy)
                         }, label: {
                             Image(systemName: "trash")
                                 .font(Tokens.FontStyle.callout.font(weigth: .bold))
