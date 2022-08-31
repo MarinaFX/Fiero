@@ -88,9 +88,9 @@ struct ChallengeDetailsView: View {
                         }
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: "Começar desafio!") {
+                                        text: self.quickChallenge.alreadyBegin ?
+                                        "Continuar Desafio" : "Começar desafio!") {
                             self.isPresentingLoading.toggle()
-                            print(self.isPresentingLoading)
                             print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                 .sink(receiveCompletion: { completion in
@@ -118,9 +118,8 @@ struct ChallengeDetailsView: View {
                                         text: "Voltar para lista") {
                             self.presentationMode.wrappedValue.dismiss()
                         }
-                    }
+                    }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 }
-                .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
                     case .deleteChallenge:
@@ -156,6 +155,7 @@ struct ChallengeDetailsView: View {
                         Button(action: {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             self.isPresentingAlert.toggle()
+                            Haptics.shared.play(.heavy)
                         }, label: {
                             Image(systemName: "trash")
                                 .font(Tokens.FontStyle.callout.font(weigth: .bold))

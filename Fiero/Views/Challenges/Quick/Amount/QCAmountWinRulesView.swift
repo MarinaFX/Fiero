@@ -6,10 +6,33 @@
 //
 
 import SwiftUI
+import Combine
 
+//MARK: QCAmountWinRulesView
 struct QCAmountWinRulesView: View {
+    enum ErrorState: CustomStringConvertible {
+        case failedToCreateChallenge
+        case negativeAmount
+        case invalidInput
+        
+        
+        var description: String {
+            switch self {
+                case .failedToCreateChallenge:
+                    return "Oops, muito desafiador"
+                case .negativeAmount:
+                    return "Valor Inválido"
+                case .invalidInput:
+                    return "Valor Inválido"
+            }
+        }
+    }
+    //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+   
+    @State private var subscriptions: Set<AnyCancellable> = []
+    @State private var errorState: ErrorState?
     
     @State var goal: String = ""
     @State var pushNextView: Bool = false
@@ -61,11 +84,22 @@ struct QCAmountWinRulesView: View {
                     if let goal = Int(self.goal) {
                         if goal > 0 {
                             self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure:
+                                            self.errorState = .failedToCreateChallenge
+                                            self.isPresentingAlert.toggle()
+                                        case .finished:
+                                            print("Request completed successfully")
+                                    }
+                                }, receiveValue: { _ in }).store(in: &subscriptions)
                         } else {
+                            self.errorState = .negativeAmount
                             self.isPresentingAlert.toggle()
                         }
                     }
                     else {
+                        self.errorState = .invalidInput
                         self.isPresentingAlert.toggle()
                     }
                 })
@@ -86,15 +120,24 @@ struct QCAmountWinRulesView: View {
                     QCChallengeCreatedView(serverResponse: Binding.constant(self.quickChallengeViewModel.serverResponse), quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
                 }
             }
-            .alert(isPresented: self.$isPresentingAlert, content: {
-                Alert(title: Text("Valor inválido"),
-                      message: Text("Você precisa informar o número de pontos para a vitória"),
-                      dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
-                )
+            .alert(self.errorState?.description ?? "" , isPresented: self.$isPresentingAlert, presenting: self.errorState, actions: { error in
+                Button(role: .cancel, action: {
+                    self.isPresentingAlert = false
+                }, label: {
+                    Text("OK")
+                })
+            }, message: { error in
+                switch error {
+                    case .failedToCreateChallenge:
+                        Text("Não conseguimos criar o seu desafio, tente mais tarde.")
+                    case .negativeAmount:
+                        Text("Você precisa informar um número maior que 0")
+                    case .invalidInput:
+                        Text("Você precisa informar o número de pontos para a vitória")
+                }
             })
             .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
                 self.quickChallenge = quickChallenge
-                
                 self.pushNextView.toggle()
             })
             .navigationBarHidden(true)

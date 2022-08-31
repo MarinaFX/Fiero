@@ -44,6 +44,7 @@ struct HomeView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             isPresentingQuickChallengeCreation = true
+                            Haptics.shared.play(.heavy)
                         }, label: {
                             Image(systemName: "plus")
                                 .font(Tokens.FontStyle.title2.font(weigth: .bold))
