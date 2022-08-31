@@ -39,6 +39,7 @@ struct Ongoing3_4ScreenView: View {
                 HStack {
                     Button {
                         self.didTapPauseButton.toggle()
+                        Haptics.shared.play(.light)
                     } label: {
                         Image(systemName: "pause.circle.fill")
                             .resizable()

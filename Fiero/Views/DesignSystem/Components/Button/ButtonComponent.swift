@@ -21,7 +21,10 @@ struct ButtonComponent: View {
     var action: () -> Void
     
     var body: some View {
-        Button(action: action, label: {
+        Button(action: {
+            action()
+            Haptics.shared.play(.light)
+        }, label: {
             Text(text)
                 .foregroundColor(style.fontColor)
                 .font(style.font)
