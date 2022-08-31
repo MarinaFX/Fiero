@@ -46,6 +46,7 @@ struct QCCategorySelectionView: View {
                 
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
+                    Haptics.shared.play(.light)
                 }, label: {
                     Text("Voltar")
                         .bold()

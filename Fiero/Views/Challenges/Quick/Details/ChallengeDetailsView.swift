@@ -112,9 +112,8 @@ struct ChallengeDetailsView: View {
                                         text: "Voltar para lista") {
                             self.presentationMode.wrappedValue.dismiss()
                         }
-                    }
+                    }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 }
-                .padding(.horizontal)
                 .alert(isPresented: self.$isPresentingAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
                     case .deleteChallenge:
@@ -150,6 +149,7 @@ struct ChallengeDetailsView: View {
                         Button(action: {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             self.isPresentingAlert.toggle()
+                            Haptics.shared.play(.heavy)
                         }, label: {
                             Image(systemName: "trash")
                                 .font(Tokens.FontStyle.callout.font(weigth: .bold))
