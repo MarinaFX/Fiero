@@ -63,6 +63,8 @@
 		489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
+		CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */; };
+		CC3AB9DC28BE8FFF006C0507 /* RegistrationAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DB28BE8FFF006C0507 /* RegistrationAlertCases.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
 		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
@@ -173,6 +175,8 @@
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
+		CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertCases.swift; sourceTree = "<group>"; };
+		CC3AB9DB28BE8FFF006C0507 /* RegistrationAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAlertCases.swift; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
 		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
@@ -418,6 +422,8 @@
 				F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */,
 				1B5B7CE52877588000B4628F /* AccountLoginView.swift */,
 				CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */,
+				CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */,
+				CC3AB9DB28BE8FFF006C0507 /* RegistrationAlertCases.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -837,6 +843,7 @@
 				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
 				CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */,
 				1B6020C828A1940200AEF47B /* Member.swift in Sources */,
+				CC3AB9DC28BE8FFF006C0507 /* RegistrationAlertCases.swift in Sources */,
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
 				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
@@ -846,6 +853,7 @@
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
+				CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
 				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,

@@ -62,6 +62,20 @@ struct QCChallengeCreatedView: View {
             //MARK: - Bottom Buttons
             if self.serverResponse.statusCode == 201 ||
                 self.serverResponse.statusCode == 200 {
+                
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
+                    if quickChallenge.maxTeams == 2 {
+                        //TODO: - Do logic
+//                        presentDuelChallenge.toggle()
+                    }
+                    else {
+                        //TODO: - Do logic
+//                        present3Or4Challenge.toggle()
+                    }
+                })
+                .padding(.bottom, Tokens.Spacing.nano.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
                 Button(action: {
                     RootViewController.popToRootViewController()
                 }, label: {
@@ -80,18 +94,6 @@ struct QCChallengeCreatedView: View {
                     Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
                 }
                 .hidden()
-                
-                //TODO: temporarily removing, fix flow after SR
-//                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
-//                    if quickChallenge.maxTeams == 2 {
-//                        presentDuelChallenge.toggle()
-//                    }
-//                    else {
-//                        present3Or4Challenge.toggle()
-//                    }
-//                })
-//                .padding(.bottom, Tokens.Spacing.xxxl.value)
-//                .padding(.horizontal, Tokens.Spacing.xxxs.value)
                 
             } else {
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
