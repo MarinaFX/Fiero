@@ -123,6 +123,17 @@ struct AccountLoginView: View {
                     .padding(.top, smallSpacing)
                 }
                 .padding(.horizontal, smallSpacing)
+                if userLoginViewModel.isShowingLoading {
+                    ZStack {
+                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                        VStack {
+                            Spacer()
+                            //TODO: - change name of animation loading
+                            LottieView(fileName: "loading").frame(width: 200, height: 200)
+                            Spacer()
+                        }
+                    }
+                }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
                 switch userLoginViewModel.loginAlertCases {
@@ -131,30 +142,35 @@ struct AccountLoginView: View {
                                  message: Text(LoginAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.isShowingLoading = false
                     })
                 case .invalidEmail:
                     return Alert(title: Text(LoginAlertCases.invalidEmail.title),
                                  message: Text(LoginAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.isShowingLoading = false
                     })
                 case .loginError:
                     return Alert(title: Text(LoginAlertCases.loginError.title),
                                         message: Text(LoginAlertCases.loginError.message),
                                         dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.isShowingLoading = false
                     })
                 case .connectionError:
                     return Alert(title: Text(LoginAlertCases.connectionError.title),
                                  message: Text(LoginAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.isShowingLoading = false
                     })
                 case .emailNotRegistrated:
                     return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
                                  message: Text(LoginAlertCases.emailNotRegistrated.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.isShowingLoading = false
                     })
                 }
             })
