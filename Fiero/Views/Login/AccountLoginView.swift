@@ -21,7 +21,7 @@ struct AccountLoginView: View {
     @State private var passwordText: String = ""
     @State private var isFieldIncorrect: Bool = false
     @State private var isRegistrationSheetShowing: Bool = false
-    @State private var isShowingIncorrectLoginAlert: Bool = false
+    @State private var isShowingAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
 
     @Binding private(set) var pushHomeView: Bool
@@ -96,7 +96,13 @@ struct AccountLoginView: View {
                     ButtonComponent(style: .secondary(isEnabled: true),
                                     text: "Fazer login!",
                                     action: {
-                        self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                        if emailText.isEmpty || passwordText.isEmpty {
+                            userLoginViewModel.loginAlertCases = .emptyFields
+                            isShowingAlert.toggle()
+                        }
+                        else {
+                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                        }
                     })
                     
                     HStack {
@@ -118,8 +124,39 @@ struct AccountLoginView: View {
                 }
                 .padding(.horizontal, smallSpacing)
             }
-            .alert(isPresented: self.$isShowingIncorrectLoginAlert, content: {
-                Alert(title: Text("Email invalido"), message: Text(self.serverResponse.description), dismissButton: .cancel(Text("OK")))
+            .alert(isPresented: self.$isShowingAlert, content: {
+                switch userLoginViewModel.loginAlertCases {
+                case .emptyFields:
+                    return Alert(title: Text(LoginAlertCases.emptyFields.title),
+                                 message: Text(LoginAlertCases.emptyFields.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userLoginViewModel.serverResponse = .unknown
+                    })
+                case .invalidEmail:
+                    return Alert(title: Text(LoginAlertCases.invalidEmail.title),
+                                 message: Text(LoginAlertCases.invalidEmail.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userLoginViewModel.serverResponse = .unknown
+                    })
+                case .loginError:
+                    return Alert(title: Text(LoginAlertCases.loginError.title),
+                                        message: Text(LoginAlertCases.loginError.message),
+                                        dismissButton: .cancel(Text("OK")) {
+                        self.userLoginViewModel.serverResponse = .unknown
+                    })
+                case .connectionError:
+                    return Alert(title: Text(LoginAlertCases.connectionError.title),
+                                 message: Text(LoginAlertCases.connectionError.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userLoginViewModel.serverResponse = .unknown
+                    })
+                case .emailNotRegistrated:
+                    return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
+                                 message: Text(LoginAlertCases.emailNotRegistrated.message),
+                                 dismissButton: .cancel(Text("OK")) {
+                        self.userLoginViewModel.serverResponse = .unknown
+                    })
+                }
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
                 userLoginViewModel.onKeyboardDidSHow()
@@ -140,7 +177,25 @@ struct AccountLoginView: View {
                     self.pushHomeView.toggle()
                 }
                 
-                self.isShowingIncorrectLoginAlert.toggle()
+                if self.serverResponse.statusCode == 400 {
+                    userLoginViewModel.loginAlertCases = .invalidEmail
+                    isShowingAlert.toggle()
+                }
+                
+                if self.serverResponse.statusCode == 403 {
+                    userLoginViewModel.loginAlertCases = .loginError
+                    isShowingAlert.toggle()
+                }
+                
+                if self.serverResponse.statusCode == 404 {
+                    userLoginViewModel.loginAlertCases = .emailNotRegistrated
+                    isShowingAlert.toggle()
+                }
+                
+                if self.serverResponse.statusCode == 500 {
+                    userLoginViewModel.loginAlertCases = .connectionError
+                    isShowingAlert.toggle()
+                }
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
