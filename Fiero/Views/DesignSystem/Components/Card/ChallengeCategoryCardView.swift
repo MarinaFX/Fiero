@@ -16,14 +16,12 @@ struct ChallengeCategoryCardView: View {
         ZStack {
             Tokens.Colors.Neutral.Low.dark.value
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-            
             VStack {
-                
                 if !isAvailable {
                     Spacer()
                 }
                 if isAvailable {
-                    LottieView(fileName: "animation", reverse: false, loop: false)
+                    LottieView(fileName: "quantity", reverse: false, loop: true)
                         .frame(width: 300, height: 300, alignment: .center)
                 }
                 VStack(spacing: Tokens.Spacing.quarck.value) {
@@ -36,8 +34,6 @@ struct ChallengeCategoryCardView: View {
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 }
-          
-
                 if !isAvailable {
                     VStack{
                         Text("Em breve")

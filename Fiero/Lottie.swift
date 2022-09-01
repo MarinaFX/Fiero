@@ -23,12 +23,9 @@ struct LottieView: UIViewRepresentable {
         let animation = Animation.named(fileName)
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
-        if reverse {
-            animationView.loopMode = .autoReverse
-        } else {
-            animationView.loopMode = .loop
-        }
         if loop {
+            animationView.loopMode = .loop
+        } else {
             animationView.loopMode = .playOnce
         }
         animationView.backgroundBehavior = .pauseAndRestore
