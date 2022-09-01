@@ -48,9 +48,28 @@ struct QCSelectParticipantsView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             
-            ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
-                self.pushNextView.toggle()
-            }).padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            switch tabViewSelection {
+            case 2:
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                    self.pushNextView.toggle()
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            case 3:
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                    self.pushNextView.toggle()
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            case 4:
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                    self.pushNextView.toggle()
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            default:
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                    self.pushNextView.toggle()
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            }
             
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()

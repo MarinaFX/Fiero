@@ -39,6 +39,7 @@ struct DuelScoreComponent: View {
                          } else {
                             //Regular tap
                              self.playerScore -= 1
+                             Haptics.shared.play(.light)
                          }
                      }, label: {
                          Image(systemName: style.minusIcon)
@@ -52,6 +53,7 @@ struct DuelScoreComponent: View {
                          //Fastforward has started
                          self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                              self.playerScore -= 1
+                             Haptics.shared.play(.light)
                          })
                      })
                      .padding(.leading, style.spacing)
@@ -72,6 +74,7 @@ struct DuelScoreComponent: View {
                          } else {
                              //Regular tap
                              self.playerScore += 1
+                             Haptics.shared.play(.light)
                          }
                      }, label: {
                          Image(systemName: style.plusIcon)
@@ -85,6 +88,7 @@ struct DuelScoreComponent: View {
                          //Fastforward has started
                          self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                              self.playerScore += 1
+                             Haptics.shared.play(.light)
                          })
                      })
                      .padding(.trailing, style.spacing)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PauseScreen: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
 
     @Binding var didTapPauseButton: Bool
@@ -46,8 +47,8 @@ struct PauseScreen: View {
                 ButtonComponent(style: .primary(isEnabled: true), text: "Retornar ao desafio") {
                     self.didTapPauseButton.toggle()
                 }
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Ir para a lista de desafios") {
-                    RootViewController.popToRootViewController()
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Voltar para detalhes do desafio") {
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             }
             .padding(.horizontal, spacingDefaultMargin)

@@ -37,6 +37,7 @@ struct ScoreController3_4Component: View {
                     } else {
                         //Regular tap
                         self.playerScore -= 1
+                        Haptics.shared.play(.light)
                     }
                 }, label: {
                     Image(systemName: "minus.circle.fill")
@@ -51,17 +52,18 @@ struct ScoreController3_4Component: View {
                     //Fastforward has started
                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                         self.playerScore -= 1
+                        Haptics.shared.play(.light)
                     })
                 })
                 Spacer()
                 VStack {
                     Text("\(playerScore, specifier: "%.0f")")
                         .font(Tokens.FontStyle.largeTitle.font())
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                     
                     Text(playerName)
                         .font(Tokens.FontStyle.callout.font())
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                 }
                 Spacer()
                 Button(action: {
@@ -72,6 +74,7 @@ struct ScoreController3_4Component: View {
                     } else {
                         //Regular tap
                         self.playerScore += 1
+                        Haptics.shared.play(.light)
                     }
                 }, label: {
                     Image(systemName: "plus.circle.fill")
@@ -84,6 +87,7 @@ struct ScoreController3_4Component: View {
                     //Fastforward has started
                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                         self.playerScore += 1
+                        Haptics.shared.play(.light)
                     })
                 })
             }

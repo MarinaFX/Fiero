@@ -17,16 +17,15 @@ struct ChallengeCategoryCardView: View {
             Tokens.Colors.Neutral.Low.dark.value
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
             
-            VStack(spacing: Tokens.Spacing.xxxs.value) {
+            VStack {
                 
                 if !isAvailable {
                     Spacer()
                 }
                 if isAvailable {
-                    GifImage("quantity")
-                        .frame(width: 200, height: 270)
+                    LottieView(fileName: "animation", reverse: true)
+                        .frame(width: 300, height: 300, alignment: .center)
                 }
-                
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     Text(self.title)
                         .font(Tokens.FontStyle.title.font())
@@ -72,7 +71,7 @@ struct ChallengeCategoryCardView_Previews: PreviewProvider {
                 .foregroundColor(.white)
                 .font(Tokens.FontStyle.largeTitle.font())
 
-            ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes", isAvailable: false)
+            ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes", isAvailable: true)
                 .padding(.horizontal, Tokens.Spacing.sm.value)
         }
         .background(Tokens.Colors.Background.dark.value)
