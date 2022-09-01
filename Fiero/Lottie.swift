@@ -28,6 +28,9 @@ struct LottieView: UIViewRepresentable {
         } else {
             animationView.loopMode = .playOnce
         }
+        if reverse {
+            animationView.loopMode = .autoReverse
+        }
         animationView.backgroundBehavior = .pauseAndRestore
         animationView.play()
         

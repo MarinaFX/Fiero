@@ -21,7 +21,7 @@ struct ChallengeCategoryCardView: View {
                     Spacer()
                 }
                 if isAvailable {
-                    LottieView(fileName: "quantity", reverse: false, loop: true)
+                    LottieView(fileName: "quantity", reverse: true, loop: true)
                         .frame(width: 300, height: 300, alignment: .center)
                 }
                 VStack(spacing: Tokens.Spacing.quarck.value) {
