@@ -66,7 +66,7 @@ struct AccountLoginView: View {
                 .environmentObject(self.userRegistrationViewModel)
         }else{
             ZStack {
-                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 //MARK: Login Form
                 VStack {
                     if !userLoginViewModel.keyboardShown  {

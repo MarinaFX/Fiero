@@ -26,7 +26,7 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
             case "player3":
                 return Tokens.Colors.Highlight.two.value
             case "player4":
-                return Tokens.Colors.Highlight.six.value
+                return Tokens.Colors.Highlight.three.value
             default:
                 return Tokens.Colors.Highlight.four.value
         }

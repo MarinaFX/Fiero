@@ -34,7 +34,7 @@ struct RegistrationScreenView: View {
             AccountLoginView(pushHomeView: self.$pushHomeView)
         } else {
             ZStack {
-                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
                     if !userRegistrationViewModel.keyboardShown  {
                         Image("Olhos")
