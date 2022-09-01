@@ -16,13 +16,13 @@ struct ChallengeCategoryCardView: View {
         ZStack {
             Tokens.Colors.Neutral.Low.dark.value
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-            VStack {                
+            VStack {
                 if isAvailable {
                     LottieView(fileName: "quantity", reverse: true, loop: true)
                         .frame(width: 300, height: 300, alignment: .center)
                 } else {
-                    LottieView(fileName: "blockCategory", reverse: true, loop: true)
-                        .frame(width: 300, height: 300, alignment: .center)
+                    LottieView(fileName: "blockCategory", reverse: false, loop: false)
+                        .frame(width: 250, height: 250, alignment: .center)
                 }
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     Text(self.title)
