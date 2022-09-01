@@ -82,11 +82,11 @@
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
+		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
 		DF73C75A28BF97F80079DBB0 /* Lottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75928BF97F80079DBB0 /* Lottie.swift */; };
 		DF73C75D28BF9C760079DBB0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C75C28BF9C760079DBB0 /* loading.json */; };
 		DF73C76528BFC84F0079DBB0 /* animation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76428BFC84F0079DBB0 /* animation.json */; };
 		DF73C76928BFD7780079DBB0 /* tonto.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76828BFD7780079DBB0 /* tonto.json */; };
-		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
 		DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */; };
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };

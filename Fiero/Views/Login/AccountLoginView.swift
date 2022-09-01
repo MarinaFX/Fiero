@@ -17,8 +17,8 @@ struct AccountLoginView: View {
     @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
 
     @State private(set) var user: User = .init(email: "", name: "", password: "")
-    @State private var emailText: String = ""
-    @State private var passwordText: String = ""
+    @State private var emailText: String = "lelod15@gmail.com"
+    @State private var passwordText: String = "lelo"
     @State private var isFieldIncorrect: Bool = false
     @State private var isRegistrationSheetShowing: Bool = false
     @State private var isShowingAlert: Bool = false
@@ -134,7 +134,7 @@ struct AccountLoginView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }

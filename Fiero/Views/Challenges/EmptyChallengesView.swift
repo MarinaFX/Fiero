@@ -16,7 +16,7 @@ struct EmptyChallengesView: View {
         VStack {
             Spacer()
             
-            LottieView(fileName: "tonto", reverse: false).frame(width: 250 , height: 320)
+            LottieView(fileName: "tonto", reverse: false, loop: false).frame(width: 250 , height: 320)
             
             Text("Você não é ruim,\nsó ainda não ganhou")
                 .multilineTextAlignment(.center)
