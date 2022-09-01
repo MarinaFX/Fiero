@@ -23,7 +23,7 @@ struct QCCategorySelectionView: View {
                 TabView {
                     
                     //amount
-                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
+                    NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.one.value, secondaryColor: Tokens.Colors.Neutral.Low.dark.value, challengeType: .amount), label: {
                         ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rápido a quantidade definida.", isAvailable: true)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
