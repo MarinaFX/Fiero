@@ -14,10 +14,10 @@ struct OngoingDuelScreenView: View {
     
     //MARK: Colors
     var firstBackgroundColor: Color {
-        return Tokens.Colors.Highlight.one.value
+        return Tokens.Colors.Highlight.four.value
     }
     var secondBackgroundColor: Color {
-        return Tokens.Colors.Highlight.two.value
+        return Tokens.Colors.Highlight.one.value
     }
     var buttonColor: Color {
         return Tokens.Colors.Neutral.High.pure.value
