@@ -17,9 +17,9 @@ class UserLoginViewModel: ObservableObject {
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
     @Published var isShowingLoading: Bool = false
 
-    //private let BASE_URL: String = "localhost"
+    private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
-    private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
+    //private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT: String = "/user/login"
     
     private(set) var client: HTTPClient
