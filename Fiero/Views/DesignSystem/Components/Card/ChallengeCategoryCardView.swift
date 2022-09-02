@@ -16,15 +16,12 @@ struct ChallengeCategoryCardView: View {
         ZStack {
             Tokens.Colors.Neutral.Low.dark.value
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-            
             VStack {
-                
-                if !isAvailable {
-                    Spacer()
-                }
                 if isAvailable {
-                    LottieView(fileName: "animation", reverse: true)
+                    LottieView(fileName: "quantity", reverse: true, loop: true)
                         .frame(width: 300, height: 300, alignment: .center)
+                } else {
+                    Spacer()
                 }
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     Text(self.title)
@@ -36,18 +33,7 @@ struct ChallengeCategoryCardView: View {
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 }
-          
-
-                if !isAvailable {
-                    VStack{
-                        Text("Em breve")
-                            .padding(.horizontal, Tokens.Spacing.xxs.value)
-                            .padding(.vertical, Tokens.Spacing.nano.value)
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-                            .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
-                    }
-                } else {
+                if isAvailable {
                     Text("Escolher esse")
                         .padding(.horizontal, Tokens.Spacing.xxs.value)
                         .padding(.vertical, Tokens.Spacing.nano.value)
@@ -60,6 +46,13 @@ struct ChallengeCategoryCardView: View {
                 Spacer()
             }
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            if !isAvailable {
+                ZStack{
+                    Tokens.Colors.Neutral.Low.pure.value.opacity(0.6).cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                    LottieView(fileName: "blockCategory", reverse: false, loop: false)
+                        .frame(width: 300, height: 300, alignment: .center)
+                }
+            }
         }
     }
 }

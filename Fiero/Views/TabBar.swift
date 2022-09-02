@@ -31,7 +31,7 @@ struct TabBarView: View {
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
-        .accentColor(Tokens.Colors.Brand.Primary.light.value)
+        .accentColor(Tokens.Colors.Highlight.two.value)
     }
 }
 
