@@ -91,6 +91,8 @@
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };
 		DF91AD1B28AFA84400854686 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */; };
+		DF94518528C2851F00744BAC /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = DF94518428C2851F00744BAC /* success.gif */; };
+		DF94518B28C28F7000744BAC /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94518A28C28F7000744BAC /* success.json */; };
 		DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94A38D28C2236F003B47B8 /* WinScreen.swift */; };
 		DF94A39028C22381003B47B8 /* winAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94A38F28C22381003B47B8 /* winAnimation.json */; };
 		DFD4FED128B9113000169C20 /* tonto.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED028B9113000169C20 /* tonto.gif */; };
@@ -210,6 +212,8 @@
 		DF7DCDB228AEB9F400B387BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DF7DCDB428AEC17B00B387BA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DF94518428C2851F00744BAC /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
+		DF94518A28C28F7000744BAC /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 		DF94A38D28C2236F003B47B8 /* WinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
 		DF94A38F28C22381003B47B8 /* winAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winAnimation.json; sourceTree = "<group>"; };
 		DFD4FED028B9113000169C20 /* tonto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tonto.gif; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				DF49516828B902650046A2CD /* GIfImage.swift */,
+				DF94518428C2851F00744BAC /* success.gif */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -658,6 +663,7 @@
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				DF94518A28C28F7000744BAC /* success.json */,
 				DF94A38F28C22381003B47B8 /* winAnimation.json */,
 				DF541CD328C163AF00A1511F /* blockCategory.json */,
 				DF7226F628C13EE400237621 /* quantity2.json */,
@@ -840,6 +846,7 @@
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
 				1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */,
 				DFD4FED128B9113000169C20 /* tonto.gif in Resources */,
+				DF94518528C2851F00744BAC /* success.gif in Resources */,
 				1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */,
 				DF73C76928BFD7780079DBB0 /* tonto.json in Resources */,
 				DF73C76528BFC84F0079DBB0 /* animation.json in Resources */,
@@ -847,6 +854,7 @@
 				DF94A39028C22381003B47B8 /* winAnimation.json in Resources */,
 				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
 				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
+				DF94518B28C28F7000744BAC /* success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
