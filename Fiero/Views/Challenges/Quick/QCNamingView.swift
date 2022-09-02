@@ -28,7 +28,7 @@ struct QCNamingView: View {
                 CustomProgressBar(currentPage: .first, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                     .padding()
                 
-                Text("Defina o nome do seu desafio")
+                Text("Defina o nome\ndo seu desafio")
                     .multilineTextAlignment(.center)
                     .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
