@@ -11,6 +11,7 @@ struct QCCategorySelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var scrollOffset: CGFloat = 0.0
+    @State var presentNextScreen: Bool = false
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -36,26 +37,29 @@ struct QCCategorySelectionView: View {
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)
-                .padding(.vertical, Tokens.Spacing.sm.value)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 HStack(alignment: .center,spacing: cardSpacing) {
                     ForEach(0 ..< items.count) { index in
-                        ZStack {
-                            if index == 0 {
-                                NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
-                                    items[index]
-                                        .frame(width: scrollOffset > 0 ? widthFocussedCard : widthUnfocussedCard,
-                                               height: scrollOffset > 100 ? heightFocussedCard : heightUnfocussedCard)
-                                })
-                                
+                        if index == 0 {
+                            items[index]
+                                .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
+                                       height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
+                                .opacity(isFocused(index: index) ? 1.0 : 0.4)
+                                .onTapGesture {
+                                    presentNextScreen.toggle()
+                                }
+                            
+                            NavigationLink("", isActive: self.$presentNextScreen) {
+                                QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                             }
-                            else {
-                                items[index]
-                                    .frame(width: index == 1 ? (scrollOffset == 0 ? widthFocussedCard : widthUnfocussedCard) : (scrollOffset < -100 ? widthFocussedCard : widthUnfocussedCard),
-                                           height: index == 1 ? (scrollOffset == 0 ? heightFocussedCard : heightUnfocussedCard) : (scrollOffset < -100 ? heightFocussedCard : heightUnfocussedCard))
-                                    
-                            }
+                            .hidden()
+                        }
+                        else {
+                            items[index]
+                                .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
+                                       height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
+                                .opacity(isFocused(index: index) ? 1.0 : 0.4)
                         }
                     }
                 }
@@ -76,6 +80,16 @@ struct QCCategorySelectionView: View {
             .makeDarkModeFullScreen()
             .navigationBarHidden(true)
 
+        }
+    }
+    
+    func isFocused(index: Int) -> Bool {
+        if index == items.count/2 {
+            return (scrollOffset >= -0.01 && scrollOffset <= 0)
+        } else if index < items.count/2 {
+            return scrollOffset > 100
+        } else {
+            return scrollOffset < -100
         }
     }
 }
