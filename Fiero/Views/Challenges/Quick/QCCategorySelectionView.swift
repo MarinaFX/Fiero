@@ -13,7 +13,7 @@ struct QCCategorySelectionView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Text("Escolha um novo desafio rápido")
+                Text("Escolha um tipo de desafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)
@@ -24,7 +24,7 @@ struct QCCategorySelectionView: View {
                     
                     //amount
                     NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.one.value, secondaryColor: Tokens.Colors.Neutral.Low.dark.value, challengeType: .amount), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer mais rápido a quantidade definida.", isAvailable: true)
+                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem alcançar\no objetivo mais rápido", isAvailable: true)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
