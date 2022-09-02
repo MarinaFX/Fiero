@@ -45,14 +45,18 @@ struct AccountLoginView: View {
     }
     var titleFont: Font {
         return Tokens.FontStyle.title3.font(weigth: .bold,
-                                            design: .rounded)
+                                            design: .default)
+    }
+    var largeTitleFont: Font {
+        return Tokens.FontStyle.title.font(weigth: .bold,
+                                            design: .default)
     }
     var textFont: Font {
         return Tokens.FontStyle.callout.font()
     }
     var textButtonFont: Font {
         return Tokens.FontStyle.callout.font(weigth: .bold,
-                                             design: .rounded)
+                                             design: .default)
     }
     
     //MARK: body View
@@ -62,7 +66,7 @@ struct AccountLoginView: View {
                 .environmentObject(self.userRegistrationViewModel)
         }else{
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
                 //MARK: Login Form
                 VStack {
                     if !userLoginViewModel.keyboardShown  {
@@ -70,7 +74,8 @@ struct AccountLoginView: View {
                             .padding(.vertical, Tokens.Spacing.sm.value)
                     }
                     Text("Boas vindas, desafiante")
-                        .font(titleFont)
+                        .font(largeTitleFont)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding(.vertical, smallSpacing)
                     //MARK: TextFields
@@ -123,6 +128,17 @@ struct AccountLoginView: View {
                     .padding(.top, smallSpacing)
                 }
                 .padding(.horizontal, smallSpacing)
+                if userLoginViewModel.isShowingLoading {
+                    ZStack {
+                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                        VStack {
+                            Spacer()
+                            //TODO: - change name of animation loading
+                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            Spacer()
+                        }
+                    }
+                }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
                 switch userLoginViewModel.loginAlertCases {
@@ -131,30 +147,35 @@ struct AccountLoginView: View {
                                  message: Text(LoginAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
                     return Alert(title: Text(LoginAlertCases.invalidEmail.title),
                                  message: Text(LoginAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .loginError:
                     return Alert(title: Text(LoginAlertCases.loginError.title),
                                         message: Text(LoginAlertCases.loginError.message),
                                         dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
                     return Alert(title: Text(LoginAlertCases.connectionError.title),
                                  message: Text(LoginAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 case .emailNotRegistrated:
                     return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
                                  message: Text(LoginAlertCases.emailNotRegistrated.message),
                                  dismissButton: .cancel(Text("OK")) {
                         self.userLoginViewModel.serverResponse = .unknown
+                        userLoginViewModel.removeLoadingAnimation()
                     })
                 }
             })

@@ -11,14 +11,12 @@ struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
     @ObservedObject var target = RefreshControlTarget()
 
-    
     var body: some View {
 
         VStack {
             Spacer()
             
-            GifImage("tonto")
-                .frame(width: 250, height: 320)
+            LottieView(fileName: "tonto", reverse: false).frame(width: 250 , height: 320)
             
             Text("Você não é ruim,\nsó ainda não ganhou")
                 .multilineTextAlignment(.center)
