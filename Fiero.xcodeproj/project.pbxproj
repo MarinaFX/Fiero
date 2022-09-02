@@ -91,6 +91,8 @@
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };
 		DF91AD1B28AFA84400854686 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */; };
+		DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94A38D28C2236F003B47B8 /* WinScreen.swift */; };
+		DF94A39028C22381003B47B8 /* winAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94A38F28C22381003B47B8 /* winAnimation.json */; };
 		DFD4FED128B9113000169C20 /* tonto.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED028B9113000169C20 /* tonto.gif */; };
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
@@ -208,6 +210,8 @@
 		DF7DCDB228AEB9F400B387BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DF7DCDB428AEC17B00B387BA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DF94A38D28C2236F003B47B8 /* WinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
+		DF94A38F28C22381003B47B8 /* winAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winAnimation.json; sourceTree = "<group>"; };
 		DFD4FED028B9113000169C20 /* tonto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tonto.gif; sourceTree = "<group>"; };
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
 				1B0A02802885DBE900C4A421 /* Quick */,
 				1BC68C56289806850055135D /* WIP */,
+				DF94A38D28C2236F003B47B8 /* WinScreen.swift */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -653,6 +658,9 @@
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				DF94A38F28C22381003B47B8 /* winAnimation.json */,
+				DF541CD328C163AF00A1511F /* blockCategory.json */,
+				DF7226F628C13EE400237621 /* quantity2.json */,
 				DF73C76828BFD7780079DBB0 /* tonto.json */,
 				DF73C76428BFC84F0079DBB0 /* animation.json */,
 				DF73C75C28BF9C760079DBB0 /* loading.json */,
@@ -836,6 +844,9 @@
 				DF73C76928BFD7780079DBB0 /* tonto.json in Resources */,
 				DF73C76528BFC84F0079DBB0 /* animation.json in Resources */,
 				DFD4FED328B92DD700169C20 /* quantity.gif in Resources */,
+				DF94A39028C22381003B47B8 /* winAnimation.json in Resources */,
+				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
+				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,6 +940,7 @@
 				1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */,
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */,
+				DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
@@ -1100,7 +1112,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = 6525BU9D84;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
@@ -1116,7 +1128,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1132,7 +1144,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = 6525BU9D84;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
@@ -1148,7 +1160,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

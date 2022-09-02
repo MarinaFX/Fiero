@@ -25,8 +25,8 @@ struct ContentView: View {
     var body: some View {
         if self.pushHomeView {
             withAnimation {
-                TabBarView()
-                .environmentObject(self.quickChallengeViewModel)
+//                WinScreen()
+                TabBarView().environmentObject(self.quickChallengeViewModel)
             }
         }
         
