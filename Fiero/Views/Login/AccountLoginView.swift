@@ -17,8 +17,8 @@ struct AccountLoginView: View {
     @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
 
     @State private(set) var user: User = .init(email: "", name: "", password: "")
-    @State private var emailText: String = "lelod15@gmail.com"
-    @State private var passwordText: String = "lelo"
+    @State private var emailText: String = ""
+    @State private var passwordText: String = ""
     @State private var isFieldIncorrect: Bool = false
     @State private var isRegistrationSheetShowing: Bool = false
     @State private var isShowingAlert: Bool = false
