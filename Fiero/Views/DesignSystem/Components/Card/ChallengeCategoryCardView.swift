@@ -24,7 +24,6 @@ struct ChallengeCategoryCardView: View {
                 }
                 if isAvailable {
                     LottieView(fileName: "animation", reverse: true)
-                        .frame(width: 300, height: 300, alignment: .center)
                 }
                 VStack(spacing: Tokens.Spacing.quarck.value) {
                     Text(self.title)
@@ -36,8 +35,7 @@ struct ChallengeCategoryCardView: View {
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 }
-          
-
+                
                 if !isAvailable {
                     VStack{
                         Text("Em breve")
@@ -56,7 +54,9 @@ struct ChallengeCategoryCardView: View {
                         .cornerRadius(Tokens.Border.BorderRadius.normal.value)
                         .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
                         .padding(.top, Tokens.Spacing.xxxs.value)
+                        .padding(.bottom)
                 }
+                
                 Spacer()
             }
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
