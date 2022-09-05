@@ -34,7 +34,7 @@ struct RegistrationScreenView: View {
             AccountLoginView(pushHomeView: self.$pushHomeView)
         } else {
             ZStack {
-                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
                     if !userRegistrationViewModel.keyboardShown  {
                         Image("Olhos")
@@ -106,7 +106,7 @@ struct RegistrationScreenView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }
