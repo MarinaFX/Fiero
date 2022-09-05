@@ -24,7 +24,7 @@ struct QCCategorySelectionView: View {
                     
                     //amount
                     NavigationLink(destination: QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount), label: {
-                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem alcançar o objetivo mais rápido.", isAvailable: true)
+                        ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer atingir a\npontuação primeiro", isAvailable: true)
                             .padding(.horizontal, Tokens.Spacing.sm.value)
                     })
                     
