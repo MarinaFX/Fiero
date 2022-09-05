@@ -91,7 +91,7 @@ struct ChallengeDetailsView: View {
                         
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: self.quickChallenge.alreadyBegin ?
-                                        "Continuar Desafio" : "Começar desafio!") {
+                                        "Continuar desafio" : "Começar desafio!") {
                             self.isPresentingLoading.toggle()
                             print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)

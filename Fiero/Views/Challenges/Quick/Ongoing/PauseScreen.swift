@@ -44,7 +44,7 @@ struct PauseScreen: View {
                     .foregroundColor(textColor)
                     .font(textFont)
                     .padding(.bottom, Tokens.Spacing.xxxs.value)
-                ButtonComponent(style: .primary(isEnabled: true), text: "Retornar ao desafio") {
+                ButtonComponent(style: .primary(isEnabled: true), text: "Continuar desafio") {
                     self.didTapPauseButton.toggle()
                 }
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Visão geral do desafio") {
