@@ -115,7 +115,7 @@ struct ChallengeDetailsView: View {
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
-                                        text: "Voltar para lista") {
+                                        text: "Voltar para meus desafios") {
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
