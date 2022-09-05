@@ -33,7 +33,7 @@ struct QCCategorySelectionView: View {
         
         NavigationView{
             VStack {
-                Text("Escolha um novo desafio rápido")
+                Text("Escolha um tipo de desafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)

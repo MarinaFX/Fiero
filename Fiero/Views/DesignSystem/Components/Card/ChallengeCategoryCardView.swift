@@ -19,7 +19,7 @@ struct ChallengeCategoryCardView: View {
             
             VStack(spacing: Tokens.Spacing.quarck.value) {
                 if isAvailable {
-                    LottieView(fileName: "animation", reverse: true)
+                    LottieView(fileName: "quantity", reverse: true, loop: true)
                     
                     Text(title)
                         .font(Tokens.FontStyle.title.font())

@@ -101,11 +101,11 @@ enum Tokens {
                 var value: Color {
                     switch self {
                         case .pure:
-                            return Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+                            return Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1)
                         case .light:
-                            return Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+                            return Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1)
                         case .dark:
-                            return Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+                            return Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1)
                     }
                 }
             }
@@ -186,13 +186,13 @@ enum Tokens {
                     case .wrong:
                         return Color(red: 1, green: 0, blue: 0, opacity: 1)
                     case .one:
-                        return Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1)
-                    case .two:
                         return Color(red: 1, green: 0.722, blue: 0, opacity: 1)
+                    case .two:
+                        return Color(red: 0.481, green: 0.462, blue: 0.908, opacity: 1)
                     case .three:
-                        return Color(red: 1, green: 0.349, blue: 0.408, opacity: 1)
+                        return Color(red: 0.941, green: 0.345, blue: 0.357, opacity: 1)
                     case .four:
-                        return Color(red: 0.251, green: 0.612, blue: 0.522, opacity: 1)
+                        return Color(red: 0.18, green: 0.596, blue: 0.655, opacity: 1)
                     case .five:
                         return Color(red: 0.173, green: 0.157, blue: 0.89, opacity: 1)
                     case .six:
