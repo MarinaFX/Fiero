@@ -25,6 +25,7 @@ struct ChallengeCategoryCardView: View {
                     Text(title)
                         .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
                         .padding(.bottom, Tokens.Spacing.nano.value)
                     
                     Text(subtitle)
@@ -49,6 +50,7 @@ struct ChallengeCategoryCardView: View {
                     Text(title)
                         .font(Tokens.FontStyle.title.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
                         .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
                     Text(subtitle)
@@ -66,7 +68,8 @@ struct ChallengeCategoryCardView: View {
                 }
                 
                 Spacer ()
-            }.padding(.bottom, Tokens.Spacing.quarck.value)
+            }
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
         }
     }
 }
