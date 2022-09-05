@@ -15,7 +15,7 @@ struct QCCategorySelectionView: View {
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
-    var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.7
+    var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.8
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
     var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Quantidade",
