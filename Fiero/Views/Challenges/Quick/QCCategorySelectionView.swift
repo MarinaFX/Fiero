@@ -19,13 +19,13 @@ struct QCCategorySelectionView: View {
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
     var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Quantidade",
-                                                                        subtitle: "Vence quem fizer mais rápido a quantidade definida.",
+                                                                        subtitle: "Vence quem fizer atingir\na pontuação primeiro.",
                                                                         isAvailable: true),
                                               ChallengeCategoryCardView(title: "Tempo",
-                                                                        subtitle: "Vence quem fizer a maior \npontuação no tempo definido.",
+                                                                        subtitle: "Vence quem fizer\na maior pontuação\nno tempo definido.",
                                                                         isAvailable: false),
                                               ChallengeCategoryCardView(title: "Rounds",
-                                                                        subtitle: "Vence quem acumular \nmais rodadas vitoriosas.",
+                                                                        subtitle: "Competição de 3\nou 5 rounds.",
                                                                         isAvailable: false)]
     
     var body: some View {
