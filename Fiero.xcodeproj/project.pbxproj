@@ -65,6 +65,7 @@
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
 		CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */; };
 		CC3AB9DC28BE8FFF006C0507 /* RegistrationAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DB28BE8FFF006C0507 /* RegistrationAlertCases.swift */; };
+		CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
 		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
@@ -184,6 +185,7 @@
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9DB28BE8FFF006C0507 /* RegistrationAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAlertCases.swift; sourceTree = "<group>"; };
+		CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingModifier.swift; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
 		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		1B0A02802885DBE900C4A421 /* Quick */ = {
 			isa = PBXGroup;
 			children = (
+				CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */,
 				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
 				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
 				1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */,
@@ -914,6 +917,7 @@
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
+				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */,
 				DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */,
