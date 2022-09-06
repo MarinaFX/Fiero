@@ -12,7 +12,7 @@ import UXCam
 struct ContentView: View {
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
-    @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
+    @StateObject private var userRegistrationViewModel: UserSignupViewModel = UserSignupViewModel()
     
     @State private var pushHomeView: Bool = false
 

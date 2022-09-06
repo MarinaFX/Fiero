@@ -1,5 +1,5 @@
 //
-//  UserRegistrationViewModel.swift
+//  UserSignupViewModel.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 08/07/22.
@@ -9,8 +9,8 @@ import Foundation
 import Combine
 import SwiftUI
 
-//MARK: UserRegistrationViewModel
-class UserRegistrationViewModel: ObservableObject {
+//MARK: UserSignupViewModel
+class UserSignupViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
@@ -68,7 +68,7 @@ class UserRegistrationViewModel: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         self.client.perform(for: request)
-            .tryMap({ $0.response })
+            .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
@@ -78,23 +78,36 @@ class UserRegistrationViewModel: ObservableObject {
                     case .finished:
                         print("finished successfully")
                 }
-            }, receiveValue: { [weak self] urlResponse in
-                guard let response = urlResponse as? HTTPURLResponse else { return }
-                print("status code: \(response.statusCode)")
-                self?.serverResponse.statusCode = response.statusCode
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    return
+                }
+                print("Signup status code: \(rawURLResponse.statusCode)")
+                self?.keyValueStorage.set(response.user.id, forKey: "userId")
+                self?.keyValueStorage.set(response.user.name, forKey: "name")
+                self?.keyValueStorage.set(response.user.email, forKey: "email")
+
+                self?.serverResponse.statusCode = rawURLResponse.statusCode
             })
             .store(in: &cancellables)
-    }
-    
-    func saveUserOnUserDefaults(name: String) {
-        self.keyValueStorage.set(name, forKey: "name")
-    }
-    
-    func getUserOnUserDefaults() -> String {
-        self.keyValueStorage.string(forKey: "name") ?? "Alpaca Enfurecida"
     }
     
     func removeLoadingAnimation() {
         isShowingLoading = false
     }
+    
+    //MARK: STATIC FUNCTIONS
+    func getUserName() -> String {
+        return keyValueStorage.string(forKey: "name") ?? "Alpaca Enfurecida"
+    }
+    
+    func getUserId() -> String {
+        return keyValueStorage.string(forKey: "userId") ?? "no user id found"
+    }
+    
+    func saveUserOnUserDefaults(name: String) {
+        return keyValueStorage.set(name, forKey: "name")
+    }
+    
 }

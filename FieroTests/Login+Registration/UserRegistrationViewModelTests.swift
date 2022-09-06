@@ -12,7 +12,7 @@ import XCTest
 
 class UserRegistrationViewModelTests: XCTestCase {
     
-    var sut: UserRegistrationViewModel!
+    var sut: UserSignupViewModel!
     var mockClient: MockHTTPClient!
 
     var disposables: Set<AnyCancellable> = []

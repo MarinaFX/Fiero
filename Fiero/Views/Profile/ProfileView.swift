@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileView: View {
-    
+
     @StateObject private var profileViewModel = ProfileViewModel()
+    
+    @State private var subscriptions: Set<AnyCancellable> = []
     
     var body: some View {
         ZStack {
             Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
             VStack {
-                ProfilePictureComponent(nameUser: profileViewModel.userName)
+                ProfilePictureComponent(nameUser: profileViewModel.getUserName())
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Apagar conta", action: {
                     profileViewModel.activeAlert = .confirmAccountDelete
@@ -40,14 +43,30 @@ struct ProfileView: View {
                             message: Text("Essa ação não poderá ser desfeita."),
                             primaryButton: .destructive(Text("Apagar meus dados")) {
                                 profileViewModel.deleteAccount()
-                                profileViewModel.showingAlertToFalse()
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .finished:
+                                                self.profileViewModel.showingAlertToFalse()
+                                            case .failure(_):
+                                                self.profileViewModel.showingAlertToTrue()
+                                        }
+                                    }, receiveValue: { _ in })
+                                    .store(in: &subscriptions)
                             },
                             secondaryButton: .cancel(Text("Cancelar")){
                                 profileViewModel.showingAlertToFalse()
                             }
                         )
-                    }
-                }
+                case .none:
+                    return Alert(
+                        title: Text("Oops, muito desafiador!"),
+                        message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
+                        dismissButton: .default(Text("OK")){
+                            profileViewModel.showingAlertToFalse()
+                        }
+                    )
+            }
+        }
     }
 }
 

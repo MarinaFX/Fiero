@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-//MARK: RegistrationScreenView
-struct RegistrationScreenView: View {
+//MARK: UserSignupView
+struct UserSignupView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
-    @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
+    @EnvironmentObject var userRegistrationViewModel: UserSignupViewModel
 
     @State private var email: String = ""
     @State private var username: String = ""
@@ -163,8 +163,6 @@ struct RegistrationScreenView: View {
                 if self.serverResponse.statusCode == 200 ||
                     self.serverResponse.statusCode == 201 {
                     UserDefaults.standard.set(self.password, forKey: "password")
-                    UserDefaults.standard.set(self.email, forKey: "email")
-                    self.userRegistrationViewModel.saveUserOnUserDefaults(name: username)
                     self.pushHomeView.toggle()
                 }
                 

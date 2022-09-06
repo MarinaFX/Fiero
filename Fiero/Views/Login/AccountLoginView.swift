@@ -14,7 +14,7 @@ struct AccountLoginView: View {
     @Environment(\.sizeCategory) var dynamicTypeCategory
 
     @EnvironmentObject var userLoginViewModel: UserLoginViewModel
-    @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
+    @EnvironmentObject var userRegistrationViewModel: UserSignupViewModel
 
     @State private(set) var user: User = .init(email: "", name: "", password: "")
     @State private var emailText: String = ""
@@ -62,7 +62,7 @@ struct AccountLoginView: View {
     //MARK: body View
     var body: some View {
         if isRegistrationSheetShowing{
-            RegistrationScreenView(pushHomeView: self.$pushHomeView)
+            UserSignupView(pushHomeView: self.$pushHomeView)
                 .environmentObject(self.userRegistrationViewModel)
         }else{
             ZStack {
@@ -134,7 +134,7 @@ struct AccountLoginView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: true).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }
@@ -194,7 +194,7 @@ struct AccountLoginView: View {
                 if self.serverResponse.statusCode == 200 ||
                     self.serverResponse.statusCode == 201 {
                     self.userLoginViewModel.setUserOnDefaults(email: self.emailText, password: self.passwordText)
-                    self.userRegistrationViewModel.saveUserOnUserDefaults(name: user.name)
+                    //UserRegistrationViewModel.saveUserOnUserDefaults(name: user.name)
                     self.pushHomeView.toggle()
                 }
                 
