@@ -24,6 +24,7 @@ class UserViewModel: ObservableObject {
     @Published var isShowingLoading: Bool = false
     @Published var activeAlert: ActiveAlert?
     @Published var showingAlert = false
+    @Published var isLogged = false
 
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
@@ -140,6 +141,7 @@ class UserViewModel: ObservableObject {
                 
                 self?.user = response.user
                 self?.user.token = response.token
+                self?.isLogged = true
                 
                 self?.keyValueStorage.set(self?.user.id, forKey: "userID")
                 self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")

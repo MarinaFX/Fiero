@@ -22,7 +22,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        if self.pushHomeView {
+        if userViewModel.isLogged {
             withAnimation {
                 TabBarView()
                 .environmentObject(self.quickChallengeViewModel)
@@ -30,7 +30,7 @@ struct ContentView: View {
             }
         }
         
-        if !self.pushHomeView {
+        if !userViewModel.isLogged {
             AccountLoginView(pushHomeView: self.$pushHomeView)
                 .environmentObject(self.userViewModel)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))

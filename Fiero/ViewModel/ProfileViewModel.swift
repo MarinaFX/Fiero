@@ -11,6 +11,7 @@ import SwiftUI
 
 class ProfileViewModel: ObservableObject {
     @EnvironmentObject var userRegistrationViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @Published var username: String = ""
     @Published var serverResponse: ServerResponse = .unknown
