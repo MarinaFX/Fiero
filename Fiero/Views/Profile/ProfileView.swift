@@ -10,7 +10,7 @@ import Combine
 
 struct ProfileView: View {
 
-    @StateObject private var profileViewModel = ProfileViewModel()
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
     
@@ -18,23 +18,23 @@ struct ProfileView: View {
         ZStack {
             Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
             VStack {
-                ProfilePictureComponent(nameUser: profileViewModel.getUserName())
+                ProfilePictureComponent(nameUser: UserViewModel.getUserNameFromDefaults())
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Apagar conta", action: {
-                    profileViewModel.activeAlert = .confirmAccountDelete
-                    profileViewModel.showingAlertToTrue()
+                    self.userViewModel.activeAlert = .confirmAccountDelete
+                    self.userViewModel.showingAlertToTrue()
                 })
             }
             .padding(Tokens.Spacing.defaultMargin.value)
         }
-        .alert(isPresented: $profileViewModel.showingAlert) {
-            switch profileViewModel.activeAlert {
+        .alert(isPresented: $userViewModel.showingAlert) {
+            switch self.userViewModel.activeAlert {
                     case .error:
                         return Alert(
                             title: Text("Oops, muito desafiador!"),
                             message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
                             dismissButton: .default(Text("OK")){
-                                profileViewModel.showingAlertToFalse()
+                                self.userViewModel.showingAlertToFalse()
                             }
                         )
                     case .confirmAccountDelete:
@@ -42,19 +42,19 @@ struct ProfileView: View {
                             title: Text("Deletar conta"),
                             message: Text("Essa ação não poderá ser desfeita."),
                             primaryButton: .destructive(Text("Apagar meus dados")) {
-                                profileViewModel.deleteAccount()
+                                self.userViewModel.deleteAccount()
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .finished:
-                                                self.profileViewModel.showingAlertToFalse()
+                                                self.userViewModel.showingAlertToFalse()
                                             case .failure(_):
-                                                self.profileViewModel.showingAlertToTrue()
+                                                self.userViewModel.showingAlertToTrue()
                                         }
                                     }, receiveValue: { _ in })
                                     .store(in: &subscriptions)
                             },
                             secondaryButton: .cancel(Text("Cancelar")){
-                                profileViewModel.showingAlertToFalse()
+                                self.userViewModel.showingAlertToFalse()
                             }
                         )
                 case .none:
@@ -62,7 +62,7 @@ struct ProfileView: View {
                         title: Text("Oops, muito desafiador!"),
                         message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
                         dismissButton: .default(Text("OK")){
-                            profileViewModel.showingAlertToFalse()
+                            self.userViewModel.showingAlertToFalse()
                         }
                     )
             }

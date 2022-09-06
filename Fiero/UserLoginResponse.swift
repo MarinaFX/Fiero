@@ -13,6 +13,11 @@ struct UserLoginResponse: Decodable {
     var user: User
 }
 
+struct UserSignupResponse: Decodable {
+    
+    var user: User
+}
+
 struct UserDELETEResponse: Decodable {
     
     var message: String?

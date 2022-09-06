@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 //MARK: - Account Login View
 struct AccountLoginView: View {
@@ -13,8 +14,7 @@ struct AccountLoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
 
-    @EnvironmentObject var userLoginViewModel: UserLoginViewModel
-    @EnvironmentObject var userRegistrationViewModel: UserSignupViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
 
     @State private(set) var user: User = .init(email: "", name: "", password: "")
     @State private var emailText: String = ""
@@ -23,7 +23,7 @@ struct AccountLoginView: View {
     @State private var isRegistrationSheetShowing: Bool = false
     @State private var isShowingAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
-
+    @State private var subscriptions: Set<AnyCancellable> = []
     @Binding private(set) var pushHomeView: Bool
 
     private let namePlaceholder: String = "Name"
@@ -63,13 +63,13 @@ struct AccountLoginView: View {
     var body: some View {
         if isRegistrationSheetShowing{
             UserSignupView(pushHomeView: self.$pushHomeView)
-                .environmentObject(self.userRegistrationViewModel)
+                .environmentObject(self.userViewModel)
         }else{
             ZStack {
                 Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 //MARK: Login Form
                 VStack {
-                    if !userLoginViewModel.keyboardShown  {
+                    if !userViewModel.keyboardShown  {
                         Image("Olhos")
                             .padding(.vertical, Tokens.Spacing.sm.value)
                     }
@@ -102,11 +102,22 @@ struct AccountLoginView: View {
                                     text: "Fazer login!",
                                     action: {
                         if emailText.isEmpty || passwordText.isEmpty {
-                            userLoginViewModel.loginAlertCases = .emptyFields
+                            self.userViewModel.loginAlertCases = .emptyFields
                             isShowingAlert.toggle()
                         }
                         else {
-                            self.userLoginViewModel.authenticateUser(email: self.emailText, password: self.passwordText)
+                            self.userViewModel.login(email: self.emailText, password: self.passwordText)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .finished:
+                                            UserViewModel.saveUserCredentialsOnDefaults(for: self.emailText, and: self.passwordText)
+                                            UserViewModel.saveUserNameOnDefaults(name: user.name)
+                                            self.pushHomeView.toggle()
+                                        case .failure(_):
+                                            self.userViewModel.loginAlertCases = .loginError
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
                         }
                     })
                     
@@ -128,7 +139,7 @@ struct AccountLoginView: View {
                     .padding(.top, smallSpacing)
                 }
                 .padding(.horizontal, smallSpacing)
-                if userLoginViewModel.isShowingLoading {
+                if userViewModel.isShowingLoading {
                     ZStack {
                         Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
                         VStack {
@@ -141,95 +152,92 @@ struct AccountLoginView: View {
                 }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
-                switch userLoginViewModel.loginAlertCases {
+                switch self.userViewModel.loginAlertCases {
                 case .emptyFields:
                     return Alert(title: Text(LoginAlertCases.emptyFields.title),
                                  message: Text(LoginAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.removeLoadingAnimation()
+                        self.userViewModel.serverResponse = .unknown
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
                     return Alert(title: Text(LoginAlertCases.invalidEmail.title),
                                  message: Text(LoginAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.removeLoadingAnimation()
+                        self.userViewModel.serverResponse = .unknown
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .loginError:
                     return Alert(title: Text(LoginAlertCases.loginError.title),
                                         message: Text(LoginAlertCases.loginError.message),
                                         dismissButton: .cancel(Text("OK")) {
-                        self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.removeLoadingAnimation()
+                        self.userViewModel.serverResponse = .unknown
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
                     return Alert(title: Text(LoginAlertCases.connectionError.title),
                                  message: Text(LoginAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.removeLoadingAnimation()
+                        self.userViewModel.serverResponse = .unknown
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .emailNotRegistrated:
                     return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
                                  message: Text(LoginAlertCases.emailNotRegistrated.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userLoginViewModel.serverResponse = .unknown
-                        userLoginViewModel.removeLoadingAnimation()
+                        self.userViewModel.serverResponse = .unknown
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 }
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-                userLoginViewModel.onKeyboardDidSHow()
+                self.userViewModel.onKeyboardDidSHow()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                userLoginViewModel.onKeyboardDidHide()
+                self.userViewModel.onKeyboardDidHide()
             }
-            .onChange(of: self.userLoginViewModel.user, perform: { user in
+            .onChange(of: self.userViewModel.user, perform: { user in
                 self.user = user
             })
-            .onChange(of: self.userLoginViewModel.serverResponse, perform: { serverResponse in
-                self.serverResponse = serverResponse
-                
-                if self.serverResponse.statusCode == 200 ||
-                    self.serverResponse.statusCode == 201 {
-                    self.userLoginViewModel.setUserOnDefaults(email: self.emailText, password: self.passwordText)
-                    //UserRegistrationViewModel.saveUserOnUserDefaults(name: user.name)
-                    self.pushHomeView.toggle()
-                }
-                
-                if self.serverResponse.statusCode == 400 {
-                    userLoginViewModel.loginAlertCases = .invalidEmail
-                    isShowingAlert.toggle()
-                }
-                
-                if self.serverResponse.statusCode == 403 {
-                    userLoginViewModel.loginAlertCases = .loginError
-                    isShowingAlert.toggle()
-                }
-                
-                if self.serverResponse.statusCode == 404 {
-                    userLoginViewModel.loginAlertCases = .emailNotRegistrated
-                    isShowingAlert.toggle()
-                }
-                
-                if self.serverResponse.statusCode == 500 {
-                    userLoginViewModel.loginAlertCases = .connectionError
-                    isShowingAlert.toggle()
-                }
-            })
+//            .onChange(of: self.userViewModel.serverResponse, perform: { serverResponse in
+//                self.serverResponse = serverResponse
+//
+//                if self.serverResponse.statusCode == 200 ||
+//                    self.serverResponse.statusCode == 201 {
+//
+//                }
+//
+//                if self.serverResponse.statusCode == 400 {
+//                    self.userViewModel.loginAlertCases = .invalidEmail
+//                    isShowingAlert.toggle()
+//                }
+//
+//                if self.serverResponse.statusCode == 403 {
+//                    self.userViewModel.loginAlertCases = .loginError
+//                    isShowingAlert.toggle()
+//                }
+//
+//                if self.serverResponse.statusCode == 404 {
+//                    self.userViewModel.loginAlertCases = .emailNotRegistrated
+//                    isShowingAlert.toggle()
+//                }
+//
+//                if self.serverResponse.statusCode == 500 {
+//                    self.userViewModel.loginAlertCases = .connectionError
+//                    isShowingAlert.toggle()
+//                }
+//            })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .portrait // And making sure it stays that way
                 
                 typealias UserFromDefaults = (email: String, pasasword: String)
                 
-                let user = self.userLoginViewModel.getUserFromDefaults()
+                let user = UserViewModel.getUserFromDefaults()
                 
-                if user.email != nil && user.password != nil {
-                    self.userLoginViewModel.authenticateUser(email: user.email!, password: user.password!)
+                if (!(user.email.isEmpty) && (user.password != nil)) {
+                    self.userViewModel.login(email: user.email, password: user.password!)
                 }
-                
             }.onDisappear {
                 AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
             }

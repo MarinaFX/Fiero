@@ -9,17 +9,12 @@ import Foundation
 import Combine
 import SwiftUI
 
-enum ActiveAlert {
-    case confirmAccountDelete, error
-}
-
 class ProfileViewModel: ObservableObject {
-    @EnvironmentObject var userRegistrationViewModel: UserSignupViewModel
+    @EnvironmentObject var userRegistrationViewModel: UserViewModel
     
     @Published var username: String = ""
     @Published var serverResponse: ServerResponse = .unknown
     @Published var showingAlert = false
-    @Published var activeAlert: ActiveAlert?
     
     private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
@@ -69,12 +64,12 @@ class ProfileViewModel: ObservableObject {
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let _ = rawURLResponse.item else {
                     self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    self?.activeAlert = .error
+                    //self?.activeAlert = .error
                     return
                 }
                 
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
-                self?.activeAlert = .confirmAccountDelete
+                //self?.activeAlert = .confirmAccountDelete
             })
             .store(in: &cancellables)
         
