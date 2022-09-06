@@ -47,12 +47,14 @@ class UserLoginViewModel: ObservableObject {
     //MARK: - AuthenticateUser
     func authenticateUser(email: String, password: String) {
         isShowingLoading = true
-        let userJSON: [String : String] = [
-            "password": password,
-            "email": email
-        ]
+        let userJSON = """
+        {
+            "password" : "\(password)",
+            "email" : "\(email)"
+        }
+        """
         
-        let requestBody = try? JSONSerialization.data(withJSONObject: userJSON)
+        let requestBody = userJSON.data(using: .utf8)!
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
@@ -69,13 +71,13 @@ class UserLoginViewModel: ObservableObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         self.client.perform(for: request)
-            .decodeHTTPResponse(type: UserResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                     case .failure(let error):
-                        print("completion failed with: \(error.localizedDescription)")
+                        print("completion failed with: \(error)")
                     case .finished:
                         print("finished successfully")
                 }

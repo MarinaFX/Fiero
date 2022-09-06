@@ -11,8 +11,7 @@ import UXCam
 
 struct ContentView: View {
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
-    @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
-    @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
+    @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
     @State private var pushHomeView: Bool = false
 
@@ -27,13 +26,13 @@ struct ContentView: View {
             withAnimation {
                 TabBarView()
                 .environmentObject(self.quickChallengeViewModel)
+                .environmentObject(self.userViewModel)
             }
         }
         
         if !self.pushHomeView {
             AccountLoginView(pushHomeView: self.$pushHomeView)
-                .environmentObject(self.userLoginViewModel)
-                .environmentObject(self.userRegistrationViewModel)
+                .environmentObject(self.userViewModel)
                 .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
         }
     }

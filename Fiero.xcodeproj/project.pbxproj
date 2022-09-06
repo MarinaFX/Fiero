@@ -35,6 +35,7 @@
 		1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BF28597E8F00C7094A /* Preview Assets.xcassets */; };
 		1B4135D428597E8F00C7094A /* FieroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D328597E8F00C7094A /* FieroUITests.swift */; };
 		1B4135D628597E8F00C7094A /* FieroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */; };
+		1B46849728C786BF0041BFED /* UDKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46849628C786BF0041BFED /* UDKeys.swift */; };
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
 		1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE52877588000B4628F /* AccountLoginView.swift */; };
@@ -57,9 +58,9 @@
 		1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B90929A2878A5A40039EBB7 /* ButtonStyles.swift */; };
 		1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B90929B2878A5A40039EBB7 /* ButtonComponent.swift */; };
 		1B9092A22878AD0A0039EBB7 /* UserLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A12878AD0A0039EBB7 /* UserLoginViewModel.swift */; };
-		1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */; };
+		1B9092A42878AD320039EBB7 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
-		1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserResponse.swift */; };
+		1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */; };
 		489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
@@ -100,7 +101,7 @@
 		F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0192881D73C00264114 /* RoundScoreComponent.swift */; };
 		F888EC01287600C300445FED /* AlertStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC00287600C300445FED /* AlertStyles.swift */; };
 		F888EC032876010200445FED /* AlertComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F888EC022876010200445FED /* AlertComponent.swift */; };
-		F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */; };
+		F8E3854A287759FF00A5C69A /* UserSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E38549287759FF00A5C69A /* UserSignupView.swift */; };
 		F8E7C76C288724750035E2CE /* UXCamSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8E7C76B288724750035E2CE /* UXCamSwiftUI */; };
 		F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E7C76E2887B12E0035E2CE /* ChallengeCellStyle.swift */; };
 		F8E7C7712887B4CD0035E2CE /* ChallengeCellComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E7C7702887B4CD0035E2CE /* ChallengeCellComponent.swift */; };
@@ -155,6 +156,7 @@
 		1B4135CF28597E8F00C7094A /* FieroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FieroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135D328597E8F00C7094A /* FieroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITests.swift; sourceTree = "<group>"; };
 		1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B46849628C786BF0041BFED /* UDKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDKeys.swift; sourceTree = "<group>"; };
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
 		1B5B7CE52877588000B4628F /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
@@ -176,9 +178,9 @@
 		1B90929A2878A5A40039EBB7 /* ButtonStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		1B90929B2878A5A40039EBB7 /* ButtonComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		1B9092A12878AD0A0039EBB7 /* UserLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModel.swift; sourceTree = "<group>"; };
-		1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModel.swift; sourceTree = "<group>"; };
+		1B9092A32878AD320039EBB7 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		1B9092A82878DB7C0039EBB7 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginResponse.swift; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
@@ -220,7 +222,7 @@
 		F85EE0192881D73C00264114 /* RoundScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreComponent.swift; sourceTree = "<group>"; };
 		F888EC00287600C300445FED /* AlertStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyles.swift; sourceTree = "<group>"; };
 		F888EC022876010200445FED /* AlertComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertComponent.swift; sourceTree = "<group>"; };
-		F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreenView.swift; sourceTree = "<group>"; };
+		F8E38549287759FF00A5C69A /* UserSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignupView.swift; sourceTree = "<group>"; };
 		F8E7C76E2887B12E0035E2CE /* ChallengeCellStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCellStyle.swift; sourceTree = "<group>"; };
 		F8E7C7702887B4CD0035E2CE /* ChallengeCellComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCellComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -335,6 +337,7 @@
 				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
 				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
 				1B8CD34628887ADE00D2F703 /* QCType.swift */,
+				1B46849628C786BF0041BFED /* UDKeys.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -439,7 +442,7 @@
 		1B5B7CE8287782ED00B4628F /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F8E38549287759FF00A5C69A /* RegistrationScreenView.swift */,
+				F8E38549287759FF00A5C69A /* UserSignupView.swift */,
 				1B5B7CE52877588000B4628F /* AccountLoginView.swift */,
 				CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */,
 				CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */,
@@ -517,9 +520,10 @@
 		1B9092A02878ACF10039EBB7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */,
 				1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */,
 				1B9092A12878AD0A0039EBB7 /* UserLoginViewModel.swift */,
-				1B9092A32878AD320039EBB7 /* UserRegistrationViewModel.swift */,
+				1B9092A32878AD320039EBB7 /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -528,7 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				1B9092A62878AD740039EBB7 /* User.swift */,
-				1B9092A82878DB7C0039EBB7 /* UserResponse.swift */,
+				1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */,
 				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
 				1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */,
 				1B8CD34828889F1000D2F703 /* Team.swift */,
@@ -681,7 +685,6 @@
 			isa = PBXGroup;
 			children = (
 				DF7DCDB228AEB9F400B387BA /* ProfileView.swift */,
-				DF91AD1A28AFA84400854686 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -905,7 +908,7 @@
 				F8E7C7712887B4CD0035E2CE /* ChallengeCellComponent.swift in Sources */,
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				DF91AD1B28AFA84400854686 /* ProfileViewModel.swift in Sources */,
-				1B9092A42878AD320039EBB7 /* UserRegistrationViewModel.swift in Sources */,
+				1B9092A42878AD320039EBB7 /* UserViewModel.swift in Sources */,
 				DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */,
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
@@ -931,7 +934,8 @@
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */,
-				1B9092A92878DB7C0039EBB7 /* UserResponse.swift in Sources */,
+				1B46849728C786BF0041BFED /* UDKeys.swift in Sources */,
+				1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
@@ -943,7 +947,7 @@
 				489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
-				F8E3854A287759FF00A5C69A /* RegistrationScreenView.swift in Sources */,
+				F8E3854A287759FF00A5C69A /* UserSignupView.swift in Sources */,
 				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,

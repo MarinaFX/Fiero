@@ -45,6 +45,11 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("NO USER TOKEN FOUND!")
+            return Empty()
+                .eraseToAnyPublisher()
+        }
         self.serverResponse = .unknown
         
         let challengeJson = """
@@ -59,11 +64,6 @@ class QuickChallengeViewModel: ObservableObject {
         }
         """
         print(challengeJson)
-        
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty().eraseToAnyPublisher()
-        }
         
         let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
         
@@ -108,7 +108,12 @@ class QuickChallengeViewModel: ObservableObject {
     @discardableResult
     func getUserChallenges() -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
-        let userToken = keyValueStorage.string(forKey: "AuthToken")!
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("Nao foi possivel achar o token do usuario")
+            
+            return Empty()
+                .eraseToAnyPublisher()
+        }
         
         let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
         
@@ -150,9 +155,13 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Delete User Challenges
     @discardableResult
     func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("NO USER TOKEN FOUND!")
+            return Empty()
+                .eraseToAnyPublisher()
+        }
         self.serverResponse = .unknown
-        let userToken = self.keyValueStorage.string(forKey: "AuthToken")!
-        
+
         let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
         
         let operation = self.client.perform(for: request)
@@ -191,10 +200,10 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Begin Challenge Update
     func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
-        else {
-            print("nao achou token")
-            return Empty().eraseToAnyPublisher()
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("NO USER TOKEN FOUND!")
+            return Empty()
+                .eraseToAnyPublisher()
         }
         
         let json = """
@@ -245,9 +254,8 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Fisnih Challenge Update
     func finishChallenge(challengeId: String, finished: Bool) {
         self.serverResponse = .unknown
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
-        else {
-            print("nao achou token")
+        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
+            print("NO USER TOKEN FOUND!")
             return
         }
         
@@ -288,18 +296,10 @@ class QuickChallengeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func showingAlertToFalse() {
-        showingAlert = false
-    }
-    
-    func showingAlertToTrue() {
-        showingAlert = true
-    }
     //MARK: - Patch Score
     func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) {
         self.serverResponse = .unknown
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken")
-        else {
+        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken") else {
             print("nao achou token")
             return
         }
@@ -313,9 +313,7 @@ class QuickChallengeViewModel: ObservableObject {
         let request = makePATCHRequestScore(json: json, challengeId: challengeId, teamId: teamId, memberId: memberId, variableToBePatched: VariablesToBePatchedQuickChallenge.score.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_SCORE, authToken: userToken)
         
         self.client.perform(for: request)
-            .print("after perform")
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
-            .print("after decode")
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
@@ -330,6 +328,14 @@ class QuickChallengeViewModel: ObservableObject {
             }
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancellables)
+    }
+    
+    func showingAlertToFalse() {
+        showingAlert = false
+    }
+    
+    func showingAlertToTrue() {
+        showingAlert = true
     }
 }
 
