@@ -48,6 +48,7 @@ struct ProfileView: View {
                                             case .finished:
                                                 self.userViewModel.showingAlertToFalse()
                                             case .failure(_):
+                                                self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()
                                         }
                                     }, receiveValue: { _ in })
