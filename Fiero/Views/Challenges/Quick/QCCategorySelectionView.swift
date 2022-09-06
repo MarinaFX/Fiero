@@ -15,17 +15,17 @@ struct QCCategorySelectionView: View {
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
-    var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.7
+    var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.8
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
-    var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Quantidade",
-                                                                        subtitle: "Vence quem fizer mais rápido a quantidade definida.",
+    var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Desafio de\nquantidade",
+                                                                        subtitle: "Vence quem fizer atingir\na pontuação primeiro.",
                                                                         isAvailable: true),
-                                              ChallengeCategoryCardView(title: "Tempo",
-                                                                        subtitle: "Vence quem fizer a maior \npontuação no tempo definido.",
+                                              ChallengeCategoryCardView(title: "Desafio de\ntempo",
+                                                                        subtitle: "Vence quem fizer\na maior pontuação\nno tempo definido.",
                                                                         isAvailable: false),
-                                              ChallengeCategoryCardView(title: "Rounds",
-                                                                        subtitle: "Vence quem acumular \nmais rodadas vitoriosas.",
+                                              ChallengeCategoryCardView(title: "Desafio de\nrounds",
+                                                                        subtitle: "Competição de 3\nou 5 rounds.",
                                                                         isAvailable: false)]
     
     var body: some View {
@@ -33,7 +33,7 @@ struct QCCategorySelectionView: View {
         
         NavigationView{
             VStack {
-                Text("Escolha um tipo de desafio")
+                Text("Escolha um\ntipo de desafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)

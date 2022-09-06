@@ -20,25 +20,28 @@ struct ChallengeCategoryCardView: View {
             VStack(spacing: Tokens.Spacing.quarck.value) {
                 if isAvailable {
                     LottieView(fileName: "quantity", reverse: true, loop: true)
+                        .padding(.bottom, Tokens.Spacing.xxs.value)
                     
                     Text(title)
-                        .font(Tokens.FontStyle.title.font())
+                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, Tokens.Spacing.nano.value)
                     
                     Text(subtitle)
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
                         .lineLimit(3)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.normal.value)
-                            .foregroundColor(Tokens.Colors.Highlight.three.value)
-                            .frame(width: 150, height: 30)
-                        Text("Escolher esse")
-                            .font(Tokens.FontStyle.title3.font(weigth: .bold))
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    }
+                    Text("Escolher esse")
+                        .padding(.horizontal, Tokens.Spacing.xxs.value)
+                        .padding(.vertical, Tokens.Spacing.nano.value)
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .background(Tokens.Colors.Highlight.three.value)
+                        .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
                     Spacer ()
                 }
                 else {
@@ -47,21 +50,26 @@ struct ChallengeCategoryCardView: View {
                     Text(title)
                         .font(Tokens.FontStyle.title.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
                     Text(subtitle)
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
                         .lineLimit(3)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
                     Text("Em breve")
-                        .font(Tokens.FontStyle.title3.font(weigth: .bold))
+                        .padding(.horizontal, Tokens.Spacing.xxs.value)
+                        .padding(.vertical, Tokens.Spacing.nano.value)
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
                 }
                 
                 Spacer ()
             }
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
         }
     }
 }

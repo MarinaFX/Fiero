@@ -63,16 +63,13 @@ struct QCAmountWinRulesView: View {
                 CustomProgressBar(currentPage: .third, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                     .padding()
                 
-                Text("Vitória")
-                    .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
+                Text("Defina os pontos necessários para a vitória")
+                    .font(Tokens.FontStyle.title.font(weigth: .semibold, design: .default))
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .multilineTextAlignment(.center)
                     .padding(.top, Tokens.Spacing.xxxs.value)
                     .padding(.bottom, Tokens.Spacing.quarck.value)
-                
-                Text("Número de pontos necessários pra que \nalguém seja vencedor.")
-                    .multilineTextAlignment(.center)
-                    .font(Tokens.FontStyle.callout.font(weigth: .regular, design: .default))
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 
                 Spacer()
                 
