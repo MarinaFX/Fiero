@@ -98,6 +98,7 @@
 		DF94518B28C28F7000744BAC /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94518A28C28F7000744BAC /* success.json */; };
 		DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94A38D28C2236F003B47B8 /* WinScreen.swift */; };
 		DF94A39028C22381003B47B8 /* winAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94A38F28C22381003B47B8 /* winAnimation.json */; };
+		DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */; };
 		DFD4FED128B9113000169C20 /* tonto.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED028B9113000169C20 /* tonto.gif */; };
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
@@ -222,6 +223,7 @@
 		DF94518A28C28F7000744BAC /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
 		DF94A38D28C2236F003B47B8 /* WinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
 		DF94A38F28C22381003B47B8 /* winAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winAnimation.json; sourceTree = "<group>"; };
+		DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Superline-Italic.ttf"; sourceTree = "<group>"; };
 		DFD4FED028B9113000169C20 /* tonto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tonto.gif; sourceTree = "<group>"; };
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				DF96CC6A28C7CAA300D17B37 /* Fonts */,
 				1BC68C55288F32130055135D /* Info.plist */,
 				1B90929F2878ACE50039EBB7 /* App */,
 				1B8FB399286F6E7600B9F868 /* Views */,
@@ -698,6 +701,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		DF96CC6A28C7CAA300D17B37 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		F85EE0162881D2DF00264114 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -854,6 +865,7 @@
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
 				1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */,
 				DFD4FED128B9113000169C20 /* tonto.gif in Resources */,
+				DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */,
 				DF94518528C2851F00744BAC /* success.gif in Resources */,
 				1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */,
 				DF73C76928BFD7780079DBB0 /* tonto.json in Resources */,

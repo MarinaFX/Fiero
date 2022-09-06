@@ -14,6 +14,8 @@ struct PauseScreen: View {
     @Binding var didTapPauseButton: Bool
     @Binding var didFinishChallenge: Bool
     @Binding var quickChallenge: QuickChallenge
+    @State var isPresentingWinScreen: Bool = false
+
     
     //MARK: Colors
     var backgroundColor: Color {
@@ -49,6 +51,11 @@ struct PauseScreen: View {
                 }
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Visão geral do desafio") {
                     self.presentationMode.wrappedValue.dismiss()
+                }
+                ButtonComponent(style: .black(isEnabled: true), text: "Finalizar desafio") {
+                    isPresentingWinScreen = true
+                }.fullScreenCover(isPresented: $isPresentingWinScreen) {
+                    WinScreen()
                 }
             }
             .padding(.horizontal, spacingDefaultMargin)
