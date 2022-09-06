@@ -68,7 +68,7 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(false)
-            .navigationTitle("Seus desafios")
+            .navigationTitle("Meus desafios")
         }
         .environment(\.colorScheme, .dark)
     }

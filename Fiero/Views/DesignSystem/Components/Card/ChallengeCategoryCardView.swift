@@ -17,49 +17,59 @@ struct ChallengeCategoryCardView: View {
             Tokens.Colors.Neutral.Low.dark.value
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
             
-            VStack {
-                
-                if !isAvailable {
-                    Spacer()
-                }
+            VStack(spacing: Tokens.Spacing.quarck.value) {
                 if isAvailable {
-                    LottieView(fileName: "animation", reverse: true)
-                        .frame(width: 300, height: 300, alignment: .center)
-                }
-                VStack(spacing: Tokens.Spacing.quarck.value) {
-                    Text(self.title)
-                        .font(Tokens.FontStyle.title.font())
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    LottieView(fileName: "quantity", reverse: true, loop: true)
+                        .padding(.bottom, Tokens.Spacing.xxs.value)
                     
-                    Text(self.subtitle)
+                    Text(title)
+                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
+                        .padding(.bottom, Tokens.Spacing.nano.value)
+                    
+                    Text(subtitle)
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                }
-          
-
-                if !isAvailable {
-                    VStack{
-                        Text("Em breve")
-                            .padding(.horizontal, Tokens.Spacing.xxs.value)
-                            .padding(.vertical, Tokens.Spacing.nano.value)
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-                            .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
-                    }
-                } else {
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
+                    
                     Text("Escolher esse")
                         .padding(.horizontal, Tokens.Spacing.xxs.value)
                         .padding(.vertical, Tokens.Spacing.nano.value)
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .background(Tokens.Colors.Highlight.three.value)
                         .cornerRadius(Tokens.Border.BorderRadius.normal.value)
-                        .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .default))
-                        .padding(.top, Tokens.Spacing.xxxs.value)
+                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
+                    Spacer ()
                 }
-                Spacer()
+                else {
+                    Spacer ()
+                    
+                    Text(title)
+                        .font(Tokens.FontStyle.title.font())
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
+                    
+                    Text(subtitle)
+                        .font(Tokens.FontStyle.callout.font())
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .padding(.bottom, Tokens.Spacing.xxxs.value)
+                    
+                    Text("Em breve")
+                        .padding(.horizontal, Tokens.Spacing.xxs.value)
+                        .padding(.vertical, Tokens.Spacing.nano.value)
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
+                }
+                
+                Spacer ()
             }
-            .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
         }
     }
 }

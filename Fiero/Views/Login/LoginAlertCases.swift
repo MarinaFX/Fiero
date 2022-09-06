@@ -12,13 +12,13 @@ enum LoginAlertCases {
         case .emptyFields:
             return "Campos vazios"
         case .invalidEmail:
-            return "E-mail inválido"
+            return "Oops, e-mail inválido"
         case .loginError:
-            return "Erro no login"
+            return "Oops, erro no login"
         case .connectionError:
-            return "Erro de conexão"
+            return "Oops, muito desafiador"
         case .emailNotRegistrated:
-            return "E-mail não cadastrado"
+            return "Oops, não achamos esse perfil aqui"
         }
     }
     
@@ -31,9 +31,9 @@ enum LoginAlertCases {
         case .loginError:
             return "Seu e-mail e/ou senha estão incorretos."
         case .connectionError:
-            return "Não foi possível acessar sua conta, tente novamente mais tarde."
+            return "Tivemos um erro de conexão, tente mais tarde."
         case .emailNotRegistrated:
-            return "O e-mail informado é válido, mas não está vinculado a nenhuma conta."
+            return "Não encontramos uma conta vinculada ao seu e-mail."
         }
     }
 }
