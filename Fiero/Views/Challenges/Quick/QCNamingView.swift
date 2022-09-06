@@ -28,16 +28,12 @@ struct QCNamingView: View {
                 CustomProgressBar(currentPage: .first, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
                     .padding()
                 
-                Text("Nomeie seu \ndesafio")
+                Text("Defina o nome\ndo seu desafio")
                     .multilineTextAlignment(.center)
                     .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .padding(.top, Tokens.Spacing.xxxs.value)
                     .padding(.bottom, Tokens.Spacing.quarck.value)
-                
-                Text("de quantidade")
-                    .font(Tokens.FontStyle.callout.font())
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
 
                 //MARK: Keyboard
                 PermanentKeyboard(text: self.$challengeName, keyboardType: .default, onCommit: {

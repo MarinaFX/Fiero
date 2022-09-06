@@ -20,75 +20,76 @@ struct QCSelectParticipantsView: View {
     var challengeName: String
 
     var body: some View {
-        VStack {
-            CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
-                .padding()
-            
-            Text("Quantas pessoas estão \nnesse desafio?")
-                .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding(.top, Tokens.Spacing.xxxs.value)
-
-            Spacer()
-            
-            TabView(selection: self.$tabViewSelection) {
-                ChallengeParticipantsSelectionCardView(amount: "2")
-                    .padding(Tokens.Spacing.sm.value)
-                    .tag(2)
+        ZStack {
+            Tokens.Colors.Background.dark.value.ignoresSafeArea()
+            VStack {
+                CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+                    .padding()
                 
-                ChallengeParticipantsSelectionCardView(amount: "3")
-                    .padding(Tokens.Spacing.sm.value)
-                    .tag(3)
-                
-                ChallengeParticipantsSelectionCardView(amount: "4")
-                    .padding(Tokens.Spacing.sm.value)
-                    .tag(4)
-                
-            }
-            .tabViewStyle(PageTabViewStyle())
-            
-            switch tabViewSelection {
-            case 2:
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                    self.pushNextView.toggle()
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-            case 3:
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                    self.pushNextView.toggle()
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-            case 4:
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                    self.pushNextView.toggle()
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-            default:
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                    self.pushNextView.toggle()
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-            }
-            
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Voltar")
-                    .bold()
+                Text("Escolha a quantidade\nde participantes")
+                    .multilineTextAlignment(.center)
+                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .padding(.top, Tokens.Spacing.xxxs.value)
+
+                Spacer()
+                
+                TabView(selection: self.$tabViewSelection) {
+                    ChallengeParticipantsSelectionCardView(amount: "2")
+                        .padding(Tokens.Spacing.sm.value)
+                        .tag(2)
+                    
+                    ChallengeParticipantsSelectionCardView(amount: "3")
+                        .padding(Tokens.Spacing.sm.value)
+                        .tag(3)
+                    
+                    ChallengeParticipantsSelectionCardView(amount: "4")
+                        .padding(Tokens.Spacing.sm.value)
+                        .tag(4)
+                    
+                }
+                .tabViewStyle(PageTabViewStyle())
+                
+                switch tabViewSelection {
+                case 2:
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                        self.pushNextView.toggle()
+                    })
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                case 3:
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                        self.pushNextView.toggle()
+                    })
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                case 4:
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                        self.pushNextView.toggle()
+                    })
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                default:
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
+                        self.pushNextView.toggle()
+                    })
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                }
+                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Voltar")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                })
+                .padding(.vertical, Tokens.Spacing.xxxs.value)
+                
+                NavigationLink("", isActive: self.$pushNextView, destination: {
+                    QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+                })
+            }
+            .onChange(of: self.tabViewSelection, perform: { tabViewSelection in
+                self.challengeParticipants = tabViewSelection
             })
-            .padding(.vertical, Tokens.Spacing.xxxs.value)
-            
-            NavigationLink("", isActive: self.$pushNextView, destination: {
-                QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
-            })
-        }
-        .onChange(of: self.tabViewSelection, perform: { tabViewSelection in
-            self.challengeParticipants = tabViewSelection
-        })
-        .makeDarkModeFullScreen()
-        .navigationBarHidden(true)
+        }.navigationBarHidden(true)
     }
 }
 

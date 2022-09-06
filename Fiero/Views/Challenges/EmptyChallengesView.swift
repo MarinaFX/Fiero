@@ -18,7 +18,7 @@ struct EmptyChallengesView: View {
             
             LottieView(fileName: "tonto", reverse: false, loop: true).frame(width: 350 , height: 200)
             
-            Text("Você não é ruim,\nsó ainda não ganhou")
+            Text("Você não é ruim,\nsó ainda não ganhou.")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
@@ -44,7 +44,7 @@ struct EmptyChallengesView: View {
                 })
             }
         }
-        .navigationTitle("Desafios")
+        .navigationTitle("Meus desafios")
         .environment(\.colorScheme, .dark)
         .makeDarkModeFullScreen()
         .fullScreenCover(isPresented: $isPresented) {
