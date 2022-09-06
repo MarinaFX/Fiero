@@ -15,26 +15,38 @@ struct ContentView: View {
     @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
     
     @State private var pushHomeView: Bool = false
+    @State private var isFirstLogin: Bool
+    let defaults = UserDefaults.standard
 
-    init(){
+    init() {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
+        if defaults.string(forKey: "isFirstOpen") ?? "" == "alreadyOpens" {
+            isFirstLogin = true
+        } else {
+            isFirstLogin = false
+        }
     }
     
     var body: some View {
-        if self.pushHomeView {
-            withAnimation {
-//                WinScreen()
-                TabBarView().environmentObject(self.quickChallengeViewModel)
-            }
-        }
         
-        if !self.pushHomeView {
-            AccountLoginView(pushHomeView: self.$pushHomeView)
+        if self.isFirstLogin {
+            if self.pushHomeView {
+                withAnimation {
+                    TabBarView()
+                .environmentObject(self.quickChallengeViewModel)
+                }
+            }
+            
+            if !self.pushHomeView {
+                AccountLoginView(pushHomeView: self.$pushHomeView)
                 .environmentObject(self.userLoginViewModel)
                 .environmentObject(self.userRegistrationViewModel)
-                .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+            }
+        } else {
+            OnboardingScreen(isFirstLogin: self.$isFirstLogin)
         }
     }
 }

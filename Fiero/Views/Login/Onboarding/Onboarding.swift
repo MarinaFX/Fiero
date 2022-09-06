@@ -20,10 +20,7 @@ struct OnboardingScreen: View {
                 HStack {
                     VStack {
                         Spacer()
-                        GifImage("furioso")
-                            .frame(width: .infinity, height: 200)
-                            .padding(.top, Tokens.Spacing.lg.value)
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                        LottieView(fileName: "quantity", reverse: false, loop: true).frame(height: 300)
                         TabView{
                             OnboardingCard(title: "Crie desafios!", subtitle: "E convide os seus\namigos para participar\nda competição")
                             OnboardingCard(title: "Defina a meta\ndo desafio", subtitle: "Tenha controle \nsobre os pontos de todos\nos participantes")
@@ -36,7 +33,6 @@ struct OnboardingScreen: View {
                 }
                 HStack{
                     ZStack {
-                        Tokens.Colors.Background.dark.value.ignoresSafeArea()
                         VStack {
                             ButtonComponent(style: .secondary(isEnabled: true),
                                             text: "Ir para o login",
