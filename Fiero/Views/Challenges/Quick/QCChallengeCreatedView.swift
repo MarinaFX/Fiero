@@ -48,8 +48,7 @@ struct QCChallengeCreatedView: View {
         VStack {
             Spacer()
             
-            Image("Olhos")
-                .padding(.top, Tokens.Spacing.sm.value * 1.5)
+            LottieView(fileName: "success", reverse: true, loop: true).frame(width: 350 , height: 200)
             
             Text(self.title)
                 .multilineTextAlignment(.center)
