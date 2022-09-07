@@ -104,20 +104,11 @@ struct AccountLoginView: View {
                         if emailText.isEmpty || passwordText.isEmpty {
                             self.userViewModel.loginAlertCases = .emptyFields
                             isShowingAlert.toggle()
-                        }
-                        else {
+                        } else if !emailText.contains("@") || !emailText.contains("."){
+                            self.userViewModel.loginAlertCases = .invalidEmail
+                            isShowingAlert.toggle()
+                        } else {
                             self.userViewModel.login(email: self.emailText, password: self.passwordText)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                        case .finished:
-                                            UserViewModel.saveUserCredentialsOnDefaults(for: self.emailText, and: self.passwordText)
-                                            UserViewModel.saveUserNameOnDefaults(name: user.name)
-                                            self.pushHomeView.toggle()
-                                        case .failure(_):
-                                            self.userViewModel.loginAlertCases = .loginError
-                                    }
-                                }, receiveValue: { _ in })
-                                .store(in: &subscriptions)
                         }
                     })
                     
