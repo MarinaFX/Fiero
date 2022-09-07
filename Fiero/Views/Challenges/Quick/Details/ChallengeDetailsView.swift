@@ -89,31 +89,36 @@ struct ChallengeDetailsView: View {
                             }.hidden()
                         }
                         
-                        ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: self.quickChallenge.alreadyBegin ?
-                                        "Continuar desafio" : "Começar desafio!") {
-                            self.isPresentingLoading.toggle()
-                            print(quickChallenge.teams.count)
-                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                    case .finished:
-                                        if self.quickChallenge.maxTeams == 2 {
+                        if self.quickChallenge.finished {
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: self.quickChallenge.alreadyBegin ?
+                                            "Continuar desafio" : "Começar desafio!") {
+                                self.isPresentingLoading.toggle()
+                                print(quickChallenge.teams.count)
+                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                        case .finished:
+                                            if self.quickChallenge.maxTeams == 2 {
+                                                self.isPresentingLoading.toggle()
+                                                self.presentDuelOngoingChallenge.toggle()
+                                            }
+                                            else {
+                                                self.isPresentingLoading.toggle()
+                                                self.present3or4OngoingChallenge.toggle()
+                                            }
+                                        case .failure:
+                                            quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                            self.isPresentingAlert.toggle()
                                             self.isPresentingLoading.toggle()
-                                            self.presentDuelOngoingChallenge.toggle()
+                                            print(self.isPresentingLoading)
                                         }
-                                        else {
-                                            self.isPresentingLoading.toggle()
-                                            self.present3or4OngoingChallenge.toggle()
-                                        }
-                                    case .failure:
-                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                        self.isPresentingAlert.toggle()
-                                        self.isPresentingLoading.toggle()
-                                        print(self.isPresentingLoading)
-                                    }
-                                }, receiveValue: { _ in })
-                                .store(in: &subscriptions)
+                                    }, receiveValue: { _ in })
+                                    .store(in: &subscriptions)
+                            }
+                        } else {
+                            ButtonComponent(style: .secondary(isEnabled: false),
+                                            text: "Desafio finalizado", action: {})
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
