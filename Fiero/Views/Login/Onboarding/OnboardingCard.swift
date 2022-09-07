@@ -10,23 +10,37 @@ import SwiftUI
 
 struct OnboardingCard: View {
     
-    @State var title: String
-    @State var subtitle: String
+    @State var image: String
+    @Binding private(set) var isFirstLogin: Bool
+    @State var final: Bool = false
+    @State private var animationAmount = 0.0
     
     var body: some View {
-        ZStack {
-//            Tokens.Colors.Highlight.one.value.ignoresSafeArea()
-            VStack {
-                Text(title)
-                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .padding(.bottom, Tokens.Spacing.quarck.value)
-                Text(subtitle)
-                    .font(Tokens.FontStyle.callout.font(weigth: .regular))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-        
+        if final {
+            ZStack {
+                VStack {
+                    Image(image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: .infinity, alignment: .center)
+                        .padding(.horizontal, Tokens.Spacing.md.value)
+                        .padding(.bottom, Tokens.Spacing.lg.value)
+                    ButtonComponent(style: .secondary(isEnabled: true),
+                                    text: "Fazer login",
+                                    action: {
+                        self.isFirstLogin.toggle()
+                    }).padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                }
+            }
+        } else {
+            ZStack {
+                VStack {
+                    Image(image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: .infinity, alignment: .center)
+                        .padding(.horizontal, Tokens.Spacing.md.value)
+                }
             }
         }
     }
@@ -34,7 +48,7 @@ struct OnboardingCard: View {
 
 struct OnboardingCard_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingCard(title: "Crie desafios", subtitle: "E tenha controle sobre os pontos \nde todos os participantes")
+        OnboardingCard(image: "crie", isFirstLogin: .constant(true))
     }
 }
 
