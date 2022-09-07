@@ -41,7 +41,7 @@ struct ProfileView: View {
                         return Alert(
                             title: Text("Deletar conta"),
                             message: Text("Essa ação não poderá ser desfeita."),
-                            primaryButton: .destructive(Text("Apagar meus dados")) {
+                            primaryButton: .destructive(Text("Apagar minha conta")) {
                                 self.userViewModel.deleteAccount()
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
