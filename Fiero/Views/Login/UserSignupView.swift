@@ -27,13 +27,12 @@ struct UserSignupView: View {
     @State private var isShowingTermsOfUseAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     @State private var subscriptions: Set<AnyCancellable> = []
-    
-    @Binding private(set) var pushHomeView: Bool
+
     
     //MARK: - body
     var body: some View {
         if isLoginScreenSheetShowing{
-            AccountLoginView(pushHomeView: self.$pushHomeView)
+            AccountLoginView()
         } else {
             ZStack {
                 Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
@@ -82,9 +81,9 @@ struct UserSignupView: View {
                                             switch completion {
                                                 case .failure(_):
                                                     self.userViewModel.registrationAlertCases = .connectionError
-                                                    self.isShowingAlert.toggle()
+                                                    self.userViewModel.isLogged.toggle()
                                                 case .finished:
-                                                    self.pushHomeView.toggle()
+                                                    self.userViewModel.isLogged.toggle()
                                             }
                                         }, receiveValue: { _ in })
                                         .store(in: &subscriptions)

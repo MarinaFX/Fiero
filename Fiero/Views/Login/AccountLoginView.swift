@@ -61,7 +61,7 @@ struct AccountLoginView: View {
     //MARK: body View
     var body: some View {
         if isRegistrationSheetShowing{
-            UserSignupView(pushHomeView: self.$pushHomeView)
+            UserSignupView()
                 .environmentObject(self.userViewModel)
         }else{
             ZStack {
@@ -221,12 +221,20 @@ struct AccountLoginView: View {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .portrait // And making sure it stays that way
                 
-                typealias UserFromDefaults = (email: String, pasasword: String)
+                typealias UserFromDefaults = (email: String, password: String)
                 
                 let user = UserViewModel.getUserFromDefaults()
                 
-                if (!(user.email.isEmpty) && (user.password != nil)) {
-                    self.userViewModel.login(email: user.email, password: user.password!)
+                let defaults = UserDefaults.standard
+                
+                let email = defaults.string(forKey: "email") ?? ""
+                let password = defaults.string(forKey: "password") ?? ""
+                
+                if email == "" || password == ""  {
+                    //MARK: - nothing to do
+                    print("entrou")
+                } else {
+                    self.userViewModel.login(email: email, password: password)
                 }
             }.onDisappear {
                 AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view

@@ -21,16 +21,19 @@ struct ContentView: View {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
-        if defaults.string(forKey: "isFirstOpen") ?? "" == "alreadyOpens" {
-            isFirstLogin = true
-        } else {
+        if defaults.string(forKey: "isFirstOpen") ?? "" == "alreadyOpen" {
             isFirstLogin = false
+        } else {
+            isFirstLogin = true
         }
+        
     }
     
     var body: some View {
         
         if self.isFirstLogin {
+            OnboardingScreen(isFirstLogin: self.$isFirstLogin)
+        } else {
             if userViewModel.isLogged {
                 withAnimation {
                     TabBarView()
@@ -44,8 +47,6 @@ struct ContentView: View {
                 .environmentObject(self.userViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
-        } else {
-            OnboardingScreen(isFirstLogin: self.$isFirstLogin)
         }
     }
 }

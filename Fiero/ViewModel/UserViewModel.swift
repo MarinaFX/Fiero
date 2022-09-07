@@ -141,7 +141,6 @@ class UserViewModel: ObservableObject {
                 
                 self?.user = response.user
                 self?.user.token = response.token
-                self?.isLogged = true
                 
                 self?.keyValueStorage.set(self?.user.id, forKey: "userID")
                 self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")
@@ -149,6 +148,8 @@ class UserViewModel: ObservableObject {
                 self?.keyValueStorage.set(password, forKey: "password")
                 self?.keyValueStorage.set(email, forKey: "email")
                 self?.removeLoadingAnimation()
+                self?.isLogged = true
+                
             })
             .store(in: &cancellables)
         

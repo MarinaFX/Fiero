@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TabBarView: View {
+    
+    let defaults = UserDefaults.standard
+
 
     init() {
         UITabBar.appearance().shadowImage = UIImage()
@@ -15,6 +18,7 @@ struct TabBarView: View {
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor(Tokens.Colors.Neutral.Low.dark.value)
         UITabBar.appearance().unselectedItemTintColor = UIColor(Tokens.Colors.Neutral.Low.light.value)
+        defaults.set("alreadyOpen", forKey: "isFirstOpen")
     }
     
     var body: some View {
