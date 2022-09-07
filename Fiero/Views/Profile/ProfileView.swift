@@ -47,6 +47,8 @@ struct ProfileView: View {
                                         switch completion {
                                             case .finished:
                                                 self.userViewModel.showingAlertToFalse()
+                                                self.userViewModel.cleanDefaults()
+                                                self.userViewModel.isLogged = false
                                             case .failure(_):
                                                 self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()

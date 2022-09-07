@@ -250,4 +250,11 @@ class UserViewModel: ObservableObject {
         UserDefaults.standard.set(password, forKey: "password")
     }
     
+    func cleanDefaults() {
+        UserDefaults.standard.set("", forKey: "email")
+        UserDefaults.standard.set("", forKey: "password")
+        UserDefaults.standard.set("", forKey: "AuthToken")
+        UserDefaults.standard.set("", forKey: "userID")
+    }
+    
 }
