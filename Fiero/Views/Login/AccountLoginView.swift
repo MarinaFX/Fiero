@@ -24,7 +24,6 @@ struct AccountLoginView: View {
     @State private var isShowingAlert: Bool = false
     @State private var serverResponse: ServerResponse = .unknown
     @State private var subscriptions: Set<AnyCancellable> = []
-    @Binding private(set) var pushHomeView: Bool
 
     private let namePlaceholder: String = "Name"
     private let emailPlaceholder: String = "E-mail"
@@ -239,6 +238,6 @@ struct AccountLoginView: View {
 
 struct AccountLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLoginView(pushHomeView: .constant(false))
+        AccountLoginView()
     }
 }

@@ -36,11 +36,11 @@ struct ContentView: View {
                     TabBarView()
                 .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
-            }
+                }
             }
             
             if !userViewModel.isLogged {
-                AccountLoginView(pushHomeView: self.$pushHomeView)
+                AccountLoginView()
                 .environmentObject(self.userViewModel)
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
