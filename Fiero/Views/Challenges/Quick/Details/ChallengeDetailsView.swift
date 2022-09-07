@@ -89,7 +89,7 @@ struct ChallengeDetailsView: View {
                             }.hidden()
                         }
                         
-                        if self.quickChallenge.finished {
+                        if !self.quickChallenge.finished {
                             ButtonComponent(style: .secondary(isEnabled: true),
                                             text: self.quickChallenge.alreadyBegin ?
                                             "Continuar desafio" : "Começar desafio!") {
