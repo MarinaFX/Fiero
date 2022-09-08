@@ -22,7 +22,7 @@ struct OnboardingCard: View {
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: .infinity, alignment: .center)
+                        .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .center)
                         .padding(.horizontal, Tokens.Spacing.md.value)
                         .padding(.bottom, Tokens.Spacing.lg.value)
                     ButtonComponent(style: .secondary(isEnabled: true),
@@ -38,7 +38,7 @@ struct OnboardingCard: View {
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: .infinity, alignment: .center)
+                        .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .center)
                         .padding(.horizontal, Tokens.Spacing.md.value)
                 }
             }

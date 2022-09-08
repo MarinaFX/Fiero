@@ -20,7 +20,7 @@ struct ContentView: View {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
-        if UserDefaults.standard.string(forKey: UDKeys.isFirstOpen.description) ?? "" == "alreadyOpens" {
+        if UserDefaults.standard.string(forKey: UDKeys.isFirstOpen.description) ?? "" == "alreadyOpen" {
             isFirstLogin = false
         } else {
             isFirstLogin = true

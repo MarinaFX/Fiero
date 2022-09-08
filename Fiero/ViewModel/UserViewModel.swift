@@ -32,7 +32,8 @@ class UserViewModel: ObservableObject {
     private let ENDPOINT_SIGNUP: String = "/user/register"
     private let ENDPOINT_LOGIN: String = "/user/login"
     private let ENDPOINT_DELETE_USER: String = "/user"
-    
+    private let ENDPOINT_TOKEN: String = "/user/token"
+
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -157,6 +158,56 @@ class UserViewModel: ObservableObject {
             .map({ _ in ()})
             .mapError({ $0 as Error})
             .eraseToAnyPublisher()
+    }
+    
+    //MARK: - Get AuthToken
+    
+    func getAuthToken() {
+        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
+            print("Não ha nenhum email de usuario salvo")
+            
+            return
+        }
+        
+        guard let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
+            print("Não ha nenhuma senha de usuario salva")
+            
+            return
+        }
+        
+        let json = """
+        {
+            "email" : "\(email)",
+            "password" : "\(password)"
+        }
+        """
+        
+        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_TOKEN, authToken: "")
+        
+        
+        self.client.perform(for: request)
+            .decodeHTTPResponse(type: UserTokenResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                    case .failure(let error):
+                        print("request failed with: \(error)")
+                    case .finished:
+                        print("request successful")
+                }
+            }, receiveValue: { [weak self] rawURLResponse in
+                guard let response = rawURLResponse.item else {
+                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print(self?.serverResponse.statusCode as Any)
+                    return
+                }
+                
+                print("getToken successful: \(rawURLResponse.statusCode)")
+                
+                self?.keyValueStorage.set(response.token, forKey: UDKeys.authToken.description)
+            })
+            .store(in: &cancellables)
     }
     
     //MARK: - Delete Account

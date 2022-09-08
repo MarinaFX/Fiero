@@ -83,6 +83,7 @@ struct UserSignupView: View {
                                                     self.userViewModel.registrationAlertCases = .connectionError
                                                     self.userViewModel.isLogged.toggle()
                                                 case .finished:
+                                                    self.userViewModel.getAuthToken()
                                                     self.userViewModel.isLogged.toggle()
                                             }
                                         }, receiveValue: { _ in })

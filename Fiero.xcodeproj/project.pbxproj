@@ -1161,7 +1161,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = 6525BU9D84;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
@@ -1177,7 +1177,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1193,7 +1193,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = 6525BU9D84;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
@@ -1209,7 +1209,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
