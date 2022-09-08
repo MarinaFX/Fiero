@@ -275,7 +275,6 @@
 				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
 				1B0A02802885DBE900C4A421 /* Quick */,
 				1BC68C56289806850055135D /* WIP */,
-				DF94A38D28C2236F003B47B8 /* WinScreen.swift */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -629,6 +628,7 @@
 				CCBAEBDD28A6C9D0005D0FFC /* DuelScreenView.swift */,
 				CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */,
 				489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */,
+				DF94A38D28C2236F003B47B8 /* WinScreen.swift */,
 			);
 			path = Ongoing;
 			sourceTree = "<group>";

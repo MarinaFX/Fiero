@@ -15,18 +15,16 @@ struct ContentView: View {
     
     @State private var pushHomeView: Bool = false
     @State private var isFirstLogin: Bool
-    let defaults = UserDefaults.standard
 
     init() {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
-        if defaults.string(forKey: "isFirstOpen") ?? "" == "alreadyOpen" {
+        if UserDefaults.standard.string(forKey: UDKeys.isFirstOpen.description) ?? "" == "alreadyOpens" {
             isFirstLogin = false
         } else {
             isFirstLogin = true
         }
-        
     }
     
     var body: some View {
