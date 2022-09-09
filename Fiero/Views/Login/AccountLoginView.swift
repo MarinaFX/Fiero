@@ -108,6 +108,7 @@ struct AccountLoginView: View {
                             isShowingAlert.toggle()
                         } else {
                             self.userViewModel.login(email: self.emailText, password: self.passwordText)
+                                
                         }
                     })
                     

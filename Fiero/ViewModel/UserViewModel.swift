@@ -76,10 +76,11 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
+                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
@@ -95,6 +96,7 @@ class UserViewModel: ObservableObject {
                 self?.keyValueStorage.set(user.password!, forKey: UDKeys.password.description)
 
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
+                self?.isShowingLoading = false
             })
             .store(in: &cancellables)
         
@@ -134,20 +136,34 @@ class UserViewModel: ObservableObject {
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
                     self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    
+                    switch rawURLResponse.statusCode {
+                        case 400:
+                            self?.loginAlertCases = .connectionError
+                        case 403:
+                            self?.loginAlertCases = .wrongCredentials
+                        case 404:
+                            self?.loginAlertCases = .emailNotRegistrated
+                        case 500:
+                            self?.loginAlertCases = .connectionError
+                        default:
+                            self?.loginAlertCases = .connectionError
+                    }
                     print(self?.user as Any)
                     print(self?.serverResponse.statusCode as Any)
                     
                     return
                 }
-                
+                print("Login status code: \(rawURLResponse.statusCode)")
+
                 self?.user = response.user
                 self?.user.token = response.token
                 
-                self?.keyValueStorage.set(self?.user.id, forKey: "userID")
-                self?.keyValueStorage.set(self?.user.token, forKey: "AuthToken")
+                self?.keyValueStorage.set(self?.user.id, forKey: UDKeys.userID.description)
+                self?.keyValueStorage.set(self?.user.token, forKey: UDKeys.authToken.description)
                 
-                self?.keyValueStorage.set(password, forKey: "password")
-                self?.keyValueStorage.set(email, forKey: "email")
+                self?.keyValueStorage.set(password, forKey: UDKeys.password.description)
+                self?.keyValueStorage.set(email, forKey: UDKeys.email.description)
                 self?.removeLoadingAnimation()
                 self?.isLogged = true
                 
@@ -281,6 +297,10 @@ class UserViewModel: ObservableObject {
     
     static func getUserNameFromDefaults() -> String {
         return UserDefaults.standard.string(forKey: UDKeys.username.description) ?? "Alpaca Enfurecida"
+    }
+    
+    func teste() -> String {
+        return self.keyValueStorage.string(forKey: UDKeys.username.description) ?? "Alpaca Enfurecida"
     }
     
     static func getUserEmailFromDefaults() -> String {

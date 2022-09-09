@@ -27,6 +27,9 @@ struct ProfileView: View {
             }
             .padding(Tokens.Spacing.defaultMargin.value)
         }
+        .onAppear(perform: {
+            print("defaults: \(self.userViewModel.teste())")
+        })
         .alert(isPresented: $userViewModel.showingAlert) {
             switch self.userViewModel.activeAlert {
                     case .error:
