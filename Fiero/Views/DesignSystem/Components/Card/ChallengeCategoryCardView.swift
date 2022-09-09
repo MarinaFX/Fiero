@@ -46,9 +46,10 @@ struct ChallengeCategoryCardView: View {
                 }
                 else {
                     Spacer ()
-                    
+                    LottieView(fileName: "blockCategory", reverse: false, loop: false)
+                        .padding(.bottom, Tokens.Spacing.xxs.value)
                     Text(title)
-                        .font(Tokens.FontStyle.title.font())
+                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
                         .padding(.bottom, Tokens.Spacing.xxxs.value)

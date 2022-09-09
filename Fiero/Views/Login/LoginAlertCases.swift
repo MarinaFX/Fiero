@@ -3,7 +3,7 @@ import Foundation
 enum LoginAlertCases {
     case emptyFields
     case invalidEmail
-    case loginError
+    case wrongCredentials
     case connectionError
     case emailNotRegistrated
     
@@ -13,7 +13,7 @@ enum LoginAlertCases {
             return "Campos vazios"
         case .invalidEmail:
             return "Oops, e-mail inválido"
-        case .loginError:
+        case .wrongCredentials:
             return "Oops, erro no login"
         case .connectionError:
             return "Oops, muito desafiador"
@@ -28,8 +28,8 @@ enum LoginAlertCases {
             return "Você precisa preencher todos os campos."
         case .invalidEmail:
             return "O e-mail informado não é válido."
-        case .loginError:
-            return "Seu e-mail e/ou senha estão incorretos."
+        case .wrongCredentials:
+            return "Seu e-mail ou senha estão incorretos."
         case .connectionError:
             return "Tivemos um erro de conexão, tente mais tarde."
         case .emailNotRegistrated:

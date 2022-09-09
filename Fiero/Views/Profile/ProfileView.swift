@@ -27,6 +27,9 @@ struct ProfileView: View {
             }
             .padding(Tokens.Spacing.defaultMargin.value)
         }
+        .onAppear(perform: {
+            print("defaults: \(self.userViewModel.teste())")
+        })
         .alert(isPresented: $userViewModel.showingAlert) {
             switch self.userViewModel.activeAlert {
                     case .error:
@@ -41,17 +44,21 @@ struct ProfileView: View {
                         return Alert(
                             title: Text("Deletar conta"),
                             message: Text("Essa ação não poderá ser desfeita."),
-                            primaryButton: .destructive(Text("Apagar meus dados")) {
+                            primaryButton: .destructive(Text("Apagar minha conta")) {
                                 self.userViewModel.deleteAccount()
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .finished:
-                                                self.userViewModel.showingAlertToFalse()
+                                                print("Successfully deleted account")
                                             case .failure(_):
                                                 self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()
                                         }
-                                    }, receiveValue: { _ in })
+                                    }, receiveValue: {
+                                        self.userViewModel.showingAlertToFalse()
+                                        self.userViewModel.cleanDefaults()
+                                        self.userViewModel.isLogged = false
+                                    })
                                     .store(in: &subscriptions)
                             },
                             secondaryButton: .cancel(Text("Cancelar")){
