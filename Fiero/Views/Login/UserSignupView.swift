@@ -157,7 +157,7 @@ struct UserSignupView: View {
                 userViewModel.onKeyboardDidHide()
             }
             .navigationBarHidden(true)
-            .onReceive(self.userViewModel.$signupAlertCases, perform: { error in
+            .onReceive(self.userViewModel.$signupAlertCases.dropFirst(), perform: { error in
                 let error = error
                 
                 if error == .invalidEmail {
@@ -172,7 +172,7 @@ struct UserSignupView: View {
                     self.isShowingAlert = true
                 }
                 
-                //self.userViewModel.isLogged = true
+                self.userViewModel.isLogged = true
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
