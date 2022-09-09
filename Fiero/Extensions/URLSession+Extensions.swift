@@ -10,7 +10,6 @@ import Combine
 
 extension URLSession: HTTPClient {
     func perform(for request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), Error> {
-        print(#function, request.url as Any)
         return dataTaskPublisher(for: request)
             .mapError({ $0 as Error })
             .eraseToAnyPublisher()

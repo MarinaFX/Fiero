@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import Combine
 
-//MARK: RegistrationScreenView
-struct RegistrationScreenView: View {
+//MARK: UserSignupView
+struct UserSignupView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
-    @EnvironmentObject var userRegistrationViewModel: UserRegistrationViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
 
     @State private var email: String = ""
     @State private var username: String = ""
@@ -24,19 +25,18 @@ struct RegistrationScreenView: View {
     @State private var isShowingAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var isShowingTermsOfUseAlert: Bool = false
-    @State private var serverResponse: ServerResponse = .unknown
-    
-    @Binding private(set) var pushHomeView: Bool
+    @State private var subscriptions: Set<AnyCancellable> = []
+
     
     //MARK: - body
     var body: some View {
         if isLoginScreenSheetShowing{
-            AccountLoginView(pushHomeView: self.$pushHomeView)
+            AccountLoginView()
         } else {
             ZStack {
-                Tokens.Colors.Highlight.four.value.ignoresSafeArea()
+                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
                 VStack(spacing: Tokens.Spacing.xxxs.value){
-                    if !userRegistrationViewModel.keyboardShown  {
+                    if !self.userViewModel.keyboardShown  {
                         Image("Olhos")
                             .padding(.vertical, Tokens.Spacing.sm.value)
                     }
@@ -75,10 +75,10 @@ struct RegistrationScreenView: View {
                             if hasAcceptedTermsOfUse == true {
                                 isShowingTermsOfUseAlert = false
                                 if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
-                                    self.userRegistrationViewModel.createUserOnDatabase(for: User(email: self.email, name: self.username, password: self.password))
+                                    self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
                                 }
                                 else {
-                                    self.userRegistrationViewModel.registrationAlertCases = .emptyFields
+                                    self.userViewModel.signupAlertCases = .emptyFields
                                     self.isShowingAlert.toggle()
                                 }
                             } else {
@@ -100,47 +100,47 @@ struct RegistrationScreenView: View {
                     }
                 }
                     .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                if userRegistrationViewModel.isShowingLoading {
+                if self.userViewModel.isShowingLoading {
                     ZStack {
                         Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: true).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }
                 }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
-                switch userRegistrationViewModel.registrationAlertCases {
+                switch self.userViewModel.signupAlertCases {
                 case .emptyFields:
-                    return Alert(title: Text(RegistrationAlertCases.emptyFields.title),
-                                 message: Text(RegistrationAlertCases.emptyFields.message),
+                    return Alert(title: Text(SignupAlertCases.emptyFields.title),
+                                 message: Text(SignupAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userRegistrationViewModel.serverResponse = .unknown
-                        userRegistrationViewModel.removeLoadingAnimation()
+                        self.isShowingAlert = false
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
-                    return Alert(title: Text(RegistrationAlertCases.invalidEmail.title),
-                                 message: Text(RegistrationAlertCases.invalidEmail.message),
+                    return Alert(title: Text(SignupAlertCases.invalidEmail.title),
+                                 message: Text(SignupAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userRegistrationViewModel.serverResponse = .unknown
-                        userRegistrationViewModel.removeLoadingAnimation()
+                        self.isShowingAlert = false
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .accountAlreadyExists:
-                    return Alert(title: Text(RegistrationAlertCases.accountAlreadyExists.title),
-                                 message: Text(RegistrationAlertCases.accountAlreadyExists.message),
+                    return Alert(title: Text(SignupAlertCases.accountAlreadyExists.title),
+                                 message: Text(SignupAlertCases.accountAlreadyExists.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userRegistrationViewModel.serverResponse = .unknown
-                        userRegistrationViewModel.removeLoadingAnimation()
+                        self.isShowingAlert = false
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
-                    return Alert(title: Text(RegistrationAlertCases.connectionError.title),
-                                 message: Text(RegistrationAlertCases.connectionError.message),
+                    return Alert(title: Text(SignupAlertCases.connectionError.title),
+                                 message: Text(SignupAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userRegistrationViewModel.serverResponse = .unknown
-                        userRegistrationViewModel.removeLoadingAnimation()
+                        self.isShowingAlert = false
+                        self.userViewModel.removeLoadingAnimation()
                     })
                 }
             })
@@ -151,37 +151,28 @@ struct RegistrationScreenView: View {
                 
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-                userRegistrationViewModel.onKeyboardDidSHow()
+                userViewModel.onKeyboardDidSHow()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                userRegistrationViewModel.onKeyboardDidHide()
+                userViewModel.onKeyboardDidHide()
             }
             .navigationBarHidden(true)
-            .onChange(of: self.userRegistrationViewModel.serverResponse, perform: { serverResponse in
-                self.serverResponse = serverResponse
+            .onReceive(self.userViewModel.$signupAlertCases.dropFirst(), perform: { error in
+                let error = error
                 
-                if self.serverResponse.statusCode == 200 ||
-                    self.serverResponse.statusCode == 201 {
-                    UserDefaults.standard.set(self.password, forKey: "password")
-                    UserDefaults.standard.set(self.email, forKey: "email")
-                    self.userRegistrationViewModel.saveUserOnUserDefaults(name: username)
-                    self.pushHomeView.toggle()
+                if error == .invalidEmail {
+                    self.isShowingAlert = true
                 }
                 
-                if self.serverResponse.statusCode == 400 {
-                    userRegistrationViewModel.registrationAlertCases = .invalidEmail
-                    isShowingAlert.toggle()
+                if error == .accountAlreadyExists {
+                    self.isShowingAlert = true
                 }
                 
-                if self.serverResponse.statusCode == 409 {
-                    userRegistrationViewModel.registrationAlertCases = .accountAlreadyExists
-                    isShowingAlert.toggle()
+                if error == .connectionError {
+                    self.isShowingAlert = true
                 }
                 
-                if self.serverResponse.statusCode == 500 {
-                    userRegistrationViewModel.registrationAlertCases = .connectionError
-                    isShowingAlert.toggle()
-                }
+                self.userViewModel.isLogged = true
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait

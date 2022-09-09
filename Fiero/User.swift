@@ -15,7 +15,7 @@ struct User: Decodable, Encodable, Equatable {
     var password: String?
     var token: String?
     
-    var dateOfCreation: Date?
-    var lastEdited: Date?
+    var createdAt: String?
+    var updatedAt: String?
     
 }

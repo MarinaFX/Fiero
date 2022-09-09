@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TabBarView: View {
-
+    
     init() {
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().backgroundImage = UIImage()
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor(Tokens.Colors.Neutral.Low.dark.value)
         UITabBar.appearance().unselectedItemTintColor = UIColor(Tokens.Colors.Neutral.Low.light.value)
+        UserDefaults.standard.set("alreadyOpen", forKey: UDKeys.isFirstOpen.description)
     }
     
     var body: some View {
@@ -31,7 +32,7 @@ struct TabBarView: View {
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
-        .accentColor(Tokens.Colors.Brand.Primary.light.value)
+        .accentColor(Tokens.Colors.Highlight.one.value)
     }
 }
 

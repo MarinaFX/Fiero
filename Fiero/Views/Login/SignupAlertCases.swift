@@ -1,6 +1,6 @@
 import Foundation
 
-enum RegistrationAlertCases {
+enum SignupAlertCases {
     case emptyFields
     case invalidEmail
     case accountAlreadyExists
@@ -15,7 +15,7 @@ enum RegistrationAlertCases {
         case .accountAlreadyExists:
             return "Conta existente"
         case .connectionError:
-            return "Erro de conexão"
+            return "Oops, muito desafiador"
         }
     }
     
@@ -28,7 +28,7 @@ enum RegistrationAlertCases {
         case .accountAlreadyExists:
             return "Já existe uma conta com o e-mail informado."
         case .connectionError:
-            return "Não foi possível criar sua conta, tente novamente mais tarde."
+            return "Tivemos um erro de conexão, tente mais tarde."
         }
     }
 }

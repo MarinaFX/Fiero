@@ -31,25 +31,32 @@ struct ChallengeDetailsView: View {
                 VStack {
                     //MARK: - Top Components
                     ZStack {
-                        VStack {
-                            Text(quickChallenge.name)
-                                .font(Tokens.FontStyle.title3.font(weigth: .bold))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .padding(.bottom, Tokens.Spacing.xxxs.value)
-                                .padding(.top, Tokens.Spacing.sm.value)
+                        VStack(spacing: Tokens.Spacing.xxs.value) {
+                            VStack {
+                                Text("Desafio de quantidade")
+                                    .multilineTextAlignment(.center)
+                                    .font(descriptionFont)
+                                    .foregroundColor(color)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text(quickChallenge.name)
+                                    .font(.system(size: 40))
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            }.padding(.top, Tokens.Spacing.sm.value)
                             
-                            Text("Objetivo")
-                                .multilineTextAlignment(.center)
-                                .font(descriptionFont)
-                                .foregroundColor(color)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text("\(quickChallenge.goal) pontos")
-                                .font(.system(size: 40))
-                                .fontWeight(.heavy)
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .padding(.bottom, Tokens.Spacing.sm.value)
+                            VStack {
+                                Text("Objetivo")
+                                    .multilineTextAlignment(.center)
+                                    .font(descriptionFont)
+                                    .foregroundColor(color)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text("\(quickChallenge.goal) pontos")
+                                    .font(.system(size: 40))
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            }.padding(.bottom, Tokens.Spacing.sm.value)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -65,13 +72,8 @@ struct ChallengeDetailsView: View {
                         .font(titleFont2)
                         .foregroundColor(color)
                     
-                    if quickChallenge.teams.count >= 3 {
-                        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    } else {
-                        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: false)], quickChallenge: $quickChallenge)
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    }
+                    GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     
                     //MARK: - Bottom Components
                     Spacer()
@@ -87,35 +89,40 @@ struct ChallengeDetailsView: View {
                             }.hidden()
                         }
                         
-                        ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: self.quickChallenge.alreadyBegin ?
-                                        "Continuar Desafio" : "Começar desafio!") {
-                            self.isPresentingLoading.toggle()
-                            print(quickChallenge.teams.count)
-                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                    case .finished:
-                                        if self.quickChallenge.maxTeams == 2 {
+                        if !self.quickChallenge.finished {
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: self.quickChallenge.alreadyBegin ?
+                                            "Continuar desafio" : "Começar desafio!") {
+                                self.isPresentingLoading.toggle()
+                                print(quickChallenge.teams.count)
+                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                        case .finished:
+                                            if self.quickChallenge.maxTeams == 2 {
+                                                self.isPresentingLoading.toggle()
+                                                self.presentDuelOngoingChallenge.toggle()
+                                            }
+                                            else {
+                                                self.isPresentingLoading.toggle()
+                                                self.present3or4OngoingChallenge.toggle()
+                                            }
+                                        case .failure:
+                                            quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                            self.isPresentingAlert.toggle()
                                             self.isPresentingLoading.toggle()
-                                            self.presentDuelOngoingChallenge.toggle()
+                                            print(self.isPresentingLoading)
                                         }
-                                        else {
-                                            self.isPresentingLoading.toggle()
-                                            self.present3or4OngoingChallenge.toggle()
-                                        }
-                                    case .failure:
-                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                        self.isPresentingAlert.toggle()
-                                        self.isPresentingLoading.toggle()
-                                        print(self.isPresentingLoading)
-                                    }
-                                }, receiveValue: { _ in })
-                                .store(in: &subscriptions)
+                                    }, receiveValue: { _ in })
+                                    .store(in: &subscriptions)
+                            }
+                        } else {
+                            ButtonComponent(style: .secondary(isEnabled: false),
+                                            text: "Desafio finalizado", action: {})
                         }
                         
                         ButtonComponent(style: .black(isEnabled: true),
-                                        text: "Voltar para lista") {
+                                        text: "Voltar para meus desafios") {
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
@@ -169,7 +176,7 @@ struct ChallengeDetailsView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }

@@ -25,7 +25,7 @@ struct CustomProgressBar: View {
         VStack {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(secondaryColor)
+                    .foregroundColor(Tokens.Colors.Neutral.Low.dark.value)
                     .frame(width: 300, height: 10)
                 
                 RoundedRectangle(cornerRadius: 20)
