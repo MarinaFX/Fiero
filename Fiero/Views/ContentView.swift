@@ -11,30 +11,40 @@ import UXCam
 
 struct ContentView: View {
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
-    @StateObject private var userLoginViewModel: UserLoginViewModel = UserLoginViewModel()
-    @StateObject private var userRegistrationViewModel: UserRegistrationViewModel = UserRegistrationViewModel()
+    @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
     @State private var pushHomeView: Bool = false
+    @State private var isFirstLogin: Bool
 
-    init(){
+    init() {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
+        if UserDefaults.standard.string(forKey: UDKeys.isFirstOpen.description) ?? "" == "alreadyOpen" {
+            isFirstLogin = false
+        } else {
+            isFirstLogin = true
+        }
     }
     
     var body: some View {
-        if self.pushHomeView {
-            withAnimation {
-                TabBarView()
-                .environmentObject(self.quickChallengeViewModel)
-            }
-        }
         
-        if !self.pushHomeView {
-            AccountLoginView(pushHomeView: self.$pushHomeView)
-                .environmentObject(self.userLoginViewModel)
-                .environmentObject(self.userRegistrationViewModel)
-                .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+        if self.isFirstLogin {
+            OnboardingScreen(isFirstLogin: self.$isFirstLogin)
+        } else {
+            if userViewModel.isLogged {
+                withAnimation {
+                    TabBarView()
+                .environmentObject(self.quickChallengeViewModel)
+                    .environmentObject(self.userViewModel)
+                }
+            }
+            
+            if !userViewModel.isLogged {
+                AccountLoginView()
+                .environmentObject(self.userViewModel)
+                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+            }
         }
     }
 }

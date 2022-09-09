@@ -14,6 +14,8 @@ struct LottieView: UIViewRepresentable {
     typealias UIViewType = UIView
     var fileName: String
     var reverse: Bool
+    var loop: Bool
+    var aspectFill: Bool = false
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -21,14 +23,21 @@ struct LottieView: UIViewRepresentable {
         let animationView = AnimationView()
         let animation = Animation.named(fileName)
         animationView.animation = animation
-        animationView.contentMode = .scaleAspectFit
+        if aspectFill {
+            animationView.contentMode = .scaleAspectFill
+        } else {
+            animationView.contentMode = .scaleAspectFit
+        }
+        
+        if loop {
+            animationView.loopMode = .loop
+        } else {
+            animationView.loopMode = .playOnce
+        }
         if reverse {
             animationView.loopMode = .autoReverse
-        } else {
-            animationView.loopMode = .loop
         }
         animationView.backgroundBehavior = .pauseAndRestore
-
         animationView.play()
         
         animationView.translatesAutoresizingMaskIntoConstraints = false

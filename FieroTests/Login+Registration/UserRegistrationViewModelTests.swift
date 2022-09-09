@@ -12,7 +12,7 @@ import XCTest
 
 class UserRegistrationViewModelTests: XCTestCase {
     
-    var sut: UserRegistrationViewModel!
+    var sut: UserViewModel!
     var mockClient: MockHTTPClient!
 
     var disposables: Set<AnyCancellable> = []
@@ -53,7 +53,7 @@ class UserRegistrationViewModelTests: XCTestCase {
             })
             .store(in: &disposables)
         
-        self.sut.createUserOnDatabase(for: User(email: "namikaze@kohona.com", name: "Minato", password: "Hiraishin"))
+        self.sut.signup(for: User(email: "namikaze@kohona.com", name: "Minato", password: "Hiraishin"))
         
         wait(for: [expectation], timeout: 5)
         
@@ -87,7 +87,7 @@ class UserRegistrationViewModelTests: XCTestCase {
             })
             .store(in: &disposables)
         
-        self.sut.createUserOnDatabase(for: User(email: "namikaze@kohona", name: "Minato", password: "Hiraishin"))
+        self.sut.signup(for: User(email: "namikaze@kohona", name: "Minato", password: "Hiraishin"))
         
         wait(for: [expectation], timeout: 5)
         
@@ -114,7 +114,7 @@ class UserRegistrationViewModelTests: XCTestCase {
             })
             .store(in: &disposables)
         
-        self.sut.createUserOnDatabase(for: User(email: "someEmailThatIsAlreadyRegistered@flemis.com", name: "Minato", password: "Hiraishin"))
+        self.sut.signup(for: User(email: "someEmailThatIsAlreadyRegistered@flemis.com", name: "Minato", password: "Hiraishin"))
         
         wait(for: [expectation], timeout: 5)
         
