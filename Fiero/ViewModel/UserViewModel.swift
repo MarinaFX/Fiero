@@ -20,7 +20,7 @@ class UserViewModel: ObservableObject {
     @Published var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
-    @Published var registrationAlertCases: RegistrationAlertCases = .emptyFields
+    @Published var signupAlertCases: SignupAlertCases = .emptyFields
     @Published var isShowingLoading: Bool = false
     @Published var activeAlert: ActiveAlert?
     @Published var showingAlert = false
@@ -76,17 +76,28 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { [weak self] completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
-                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
                     self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    
+                    switch rawURLResponse.statusCode {
+                        case 400:
+                            self?.signupAlertCases = .invalidEmail
+                        case 409:
+                            self?.signupAlertCases = .accountAlreadyExists
+                        case 500:
+                            self?.signupAlertCases = .connectionError
+                        default:
+                            self?.signupAlertCases = .connectionError
+                    }
+                    self?.isShowingLoading = false
                     return
                 }
                 print("Signup status code: \(rawURLResponse.statusCode)")
@@ -139,7 +150,7 @@ class UserViewModel: ObservableObject {
                     
                     switch rawURLResponse.statusCode {
                         case 400:
-                            self?.loginAlertCases = .connectionError
+                            self?.loginAlertCases = .invalidEmail
                         case 403:
                             self?.loginAlertCases = .wrongCredentials
                         case 404:
@@ -151,6 +162,7 @@ class UserViewModel: ObservableObject {
                     }
                     print(self?.user as Any)
                     print(self?.serverResponse.statusCode as Any)
+                    self?.isShowingLoading = false
                     
                     return
                 }
@@ -228,14 +240,14 @@ class UserViewModel: ObservableObject {
     
     //MARK: - Delete Account
     func deleteAccount() -> AnyPublisher<Void, Error> {
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken") else {
+        guard let userToken = self.keyValueStorage.string(forKey: UDKeys.authToken.description) else {
             print("Nao foi possivel achar o token do usuario")
             
             return Empty()
                 .eraseToAnyPublisher()
         }
         
-        guard let userId = self.keyValueStorage.string(forKey: "userID") else {
+        guard let userId = self.keyValueStorage.string(forKey: UDKeys.userID.description) else {
             print("Nao foi possivel achar o ID do usuario")
             
             return Empty()
@@ -317,15 +329,15 @@ class UserViewModel: ObservableObject {
     }
     
     static func saveUserCredentialsOnDefaults(for email: String, and password: String) {
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(password, forKey: "password")
+        UserDefaults.standard.set(email, forKey: UDKeys.email.description)
+        UserDefaults.standard.set(password, forKey: UDKeys.password.description)
     }
     
     func cleanDefaults() {
-        UserDefaults.standard.set("", forKey: "email")
-        UserDefaults.standard.set("", forKey: "password")
-        UserDefaults.standard.set("", forKey: "AuthToken")
-        UserDefaults.standard.set("", forKey: "userID")
+        UserDefaults.standard.set("", forKey: UDKeys.email.description)
+        UserDefaults.standard.set("", forKey: UDKeys.password.description)
+        UserDefaults.standard.set("", forKey: UDKeys.authToken.description)
+        UserDefaults.standard.set("", forKey: UDKeys.userID.description)
     }
     
 }

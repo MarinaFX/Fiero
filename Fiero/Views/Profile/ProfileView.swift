@@ -49,14 +49,16 @@ struct ProfileView: View {
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .finished:
-                                                self.userViewModel.showingAlertToFalse()
-                                                self.userViewModel.cleanDefaults()
-                                                self.userViewModel.isLogged = false
+                                                print("Successfully deleted account")
                                             case .failure(_):
                                                 self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()
                                         }
-                                    }, receiveValue: { _ in })
+                                    }, receiveValue: {
+                                        self.userViewModel.showingAlertToFalse()
+                                        self.userViewModel.cleanDefaults()
+                                        self.userViewModel.isLogged = false
+                                    })
                                     .store(in: &subscriptions)
                             },
                             secondaryButton: .cancel(Text("Cancelar")){

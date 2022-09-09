@@ -1,6 +1,6 @@
 import Foundation
 
-enum RegistrationAlertCases {
+enum SignupAlertCases {
     case emptyFields
     case invalidEmail
     case accountAlreadyExists

@@ -25,7 +25,6 @@ struct UserSignupView: View {
     @State private var isShowingAlert: Bool = false
     @State private var isLoginScreenSheetShowing: Bool = false
     @State private var isShowingTermsOfUseAlert: Bool = false
-    @State private var serverResponse: ServerResponse = .unknown
     @State private var subscriptions: Set<AnyCancellable> = []
 
     
@@ -77,20 +76,9 @@ struct UserSignupView: View {
                                 isShowingTermsOfUseAlert = false
                                 if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
                                     self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
-                                        .sink(receiveCompletion: { completion in
-                                            switch completion {
-                                                case .failure(_):
-                                                    self.userViewModel.registrationAlertCases = .connectionError
-                                                    self.userViewModel.isLogged.toggle()
-                                                case .finished:
-                                                    self.userViewModel.getAuthToken()
-                                                    self.userViewModel.isLogged.toggle()
-                                            }
-                                        }, receiveValue: { _ in })
-                                        .store(in: &subscriptions)
                                 }
                                 else {
-                                    self.userViewModel.registrationAlertCases = .emptyFields
+                                    self.userViewModel.signupAlertCases = .emptyFields
                                     self.isShowingAlert.toggle()
                                 }
                             } else {
@@ -125,33 +113,33 @@ struct UserSignupView: View {
                 }
             }
             .alert(isPresented: self.$isShowingAlert, content: {
-                switch self.userViewModel.registrationAlertCases {
+                switch self.userViewModel.signupAlertCases {
                 case .emptyFields:
-                    return Alert(title: Text(RegistrationAlertCases.emptyFields.title),
-                                 message: Text(RegistrationAlertCases.emptyFields.message),
+                    return Alert(title: Text(SignupAlertCases.emptyFields.title),
+                                 message: Text(SignupAlertCases.emptyFields.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userViewModel.serverResponse = .unknown
+                        self.isShowingAlert = false
                         self.userViewModel.removeLoadingAnimation()
                     })
                 case .invalidEmail:
-                    return Alert(title: Text(RegistrationAlertCases.invalidEmail.title),
-                                 message: Text(RegistrationAlertCases.invalidEmail.message),
+                    return Alert(title: Text(SignupAlertCases.invalidEmail.title),
+                                 message: Text(SignupAlertCases.invalidEmail.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userViewModel.serverResponse = .unknown
+                        self.isShowingAlert = false
                         self.userViewModel.removeLoadingAnimation()
                     })
                 case .accountAlreadyExists:
-                    return Alert(title: Text(RegistrationAlertCases.accountAlreadyExists.title),
-                                 message: Text(RegistrationAlertCases.accountAlreadyExists.message),
+                    return Alert(title: Text(SignupAlertCases.accountAlreadyExists.title),
+                                 message: Text(SignupAlertCases.accountAlreadyExists.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userViewModel.serverResponse = .unknown
+                        self.isShowingAlert = false
                         self.userViewModel.removeLoadingAnimation()
                     })
                 case .connectionError:
-                    return Alert(title: Text(RegistrationAlertCases.connectionError.title),
-                                 message: Text(RegistrationAlertCases.connectionError.message),
+                    return Alert(title: Text(SignupAlertCases.connectionError.title),
+                                 message: Text(SignupAlertCases.connectionError.message),
                                  dismissButton: .cancel(Text("OK")) {
-                        self.userViewModel.serverResponse = .unknown
+                        self.isShowingAlert = false
                         self.userViewModel.removeLoadingAnimation()
                     })
                 }
@@ -169,29 +157,23 @@ struct UserSignupView: View {
                 userViewModel.onKeyboardDidHide()
             }
             .navigationBarHidden(true)
-//            .onChange(of: self.userViewModel.serverResponse, perform: { serverResponse in
-//                self.serverResponse = serverResponse
-//                
-//                if self.serverResponse.statusCode == 200 ||
-//                    self.serverResponse.statusCode == 201 {
-//                    self.pushHomeView.toggle()
-//                }
-//                
-//                if self.serverResponse.statusCode == 400 {
-//                    self.userViewModel.registrationAlertCases = .invalidEmail
-//                    isShowingAlert.toggle()
-//                }
-//                
-//                if self.serverResponse.statusCode == 409 {
-//                    self.userViewModel.registrationAlertCases = .accountAlreadyExists
-//                    isShowingAlert.toggle()
-//                }
-//                
-//                if self.serverResponse.statusCode == 500 {
-//                    self.userViewModel.registrationAlertCases = .connectionError
-//                    isShowingAlert.toggle()
-//                }
-//            })
+            .onReceive(self.userViewModel.$signupAlertCases, perform: { error in
+                let error = error
+                
+                if error == .invalidEmail {
+                    self.isShowingAlert = true
+                }
+                
+                if error == .accountAlreadyExists {
+                    self.isShowingAlert = true
+                }
+                
+                if error == .connectionError {
+                    self.isShowingAlert = true
+                }
+                
+                //self.userViewModel.isLogged = true
+            })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .portrait // And making sure it stays that way
