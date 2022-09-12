@@ -19,7 +19,7 @@ struct ChallengeCategoryCardView: View {
             
             VStack(spacing: Tokens.Spacing.quarck.value) {
                 if isAvailable {
-                    LottieView(fileName: "quantity", reverse: true, loop: true)
+                    LottieView(fileName: "quantity2", reverse: false, loop: true)
                         .padding(.bottom, Tokens.Spacing.xxs.value)
                     
                     Text(title)
@@ -48,6 +48,7 @@ struct ChallengeCategoryCardView: View {
                     Spacer ()
                     LottieView(fileName: "blockCategory", reverse: false, loop: false)
                         .padding(.bottom, Tokens.Spacing.xxs.value)
+                        .frame(width: UIScreen.main.bounds.width*0.5)
                     Text(title)
                         .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -61,11 +62,12 @@ struct ChallengeCategoryCardView: View {
                         .lineLimit(3)
                         .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
-                    Text("Em breve")
-                        .padding(.horizontal, Tokens.Spacing.xxs.value)
-                        .padding(.vertical, Tokens.Spacing.nano.value)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
+//                    Text("Em breve")
+//                        .padding(.horizontal, Tokens.Spacing.xxs.value)
+//                        .padding(.vertical, Tokens.Spacing.nano.value)
+//                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+//                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
+                    Spacer ()
                 }
                 
                 Spacer ()
@@ -82,7 +84,7 @@ struct ChallengeCategoryCardView_Previews: PreviewProvider {
                 .foregroundColor(.white)
                 .font(Tokens.FontStyle.largeTitle.font())
 
-            ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes", isAvailable: true)
+            ChallengeCategoryCardView(title: "Quantidade", subtitle: "Vence quem fizer algo mais vezes", isAvailable: false)
                 .padding(.horizontal, Tokens.Spacing.sm.value)
         }
         .background(Tokens.Colors.Background.dark.value)
