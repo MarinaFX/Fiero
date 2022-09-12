@@ -14,7 +14,7 @@ struct PauseScreen: View {
     @Binding var didTapPauseButton: Bool
     @Binding var didFinishChallenge: Bool
     @Binding var quickChallenge: QuickChallenge
-    @State var isPresentingWinScreen: Bool = false
+    @State var isShowingAlert: Bool = false
 
     
     //MARK: Colors
@@ -53,10 +53,19 @@ struct PauseScreen: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }
                 ButtonComponent(style: .black(isEnabled: true), text: "Finalizar desafio") {
-                    isPresentingWinScreen = true
-                }.fullScreenCover(isPresented: $isPresentingWinScreen) {
-                    WinScreen()
+                    isShowingAlert.toggle()
                 }
+                .alert(isPresented: self.$isShowingAlert, content: {
+                    Alert(title: Text("Finalizar desafio"),
+                          message: Text("Você tem certeza que deseja finalizar este desafio?"), primaryButton: .destructive(Text("Finalizar desafio"), action: {
+                        quickChallengeViewModel.finishChallenge(challengeId: quickChallenge.id, finished: true)
+                        presentationMode.wrappedValue.dismiss()
+                    }), secondaryButton: .cancel(Text("Cancelar")))
+                })
+//                    isPresentingWinScreen = true
+//                }.fullScreenCover(isPresented: $isPresentingWinScreen) {
+//                    WinScreen()
+//                }
             }
             .padding(.horizontal, spacingDefaultMargin)
             .padding(.bottom, 150)
