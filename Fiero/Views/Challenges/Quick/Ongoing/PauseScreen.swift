@@ -62,10 +62,6 @@ struct PauseScreen: View {
                         presentationMode.wrappedValue.dismiss()
                     }), secondaryButton: .cancel(Text("Cancelar")))
                 })
-//                    isPresentingWinScreen = true
-//                }.fullScreenCover(isPresented: $isPresentingWinScreen) {
-//                    WinScreen()
-//                }
             }
             .padding(.horizontal, spacingDefaultMargin)
             .padding(.bottom, 150)

@@ -62,11 +62,6 @@ struct ChallengeCategoryCardView: View {
                         .lineLimit(3)
                         .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
-//                    Text("Em breve")
-//                        .padding(.horizontal, Tokens.Spacing.xxs.value)
-//                        .padding(.vertical, Tokens.Spacing.nano.value)
-//                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-//                        .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
                     Spacer ()
                 }
                 
