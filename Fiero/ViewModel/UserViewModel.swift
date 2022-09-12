@@ -26,9 +26,9 @@ class UserViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isLogged = false
 
-    private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
-    //private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_SIGNUP: String = "/user/register"
     private let ENDPOINT_LOGIN: String = "/user/login"
     private let ENDPOINT_DELETE_USER: String = "/user"
@@ -70,7 +70,7 @@ class UserViewModel: ObservableObject {
         let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_SIGNUP, authToken: "")
         
         let operation = self.client.perform(for: request)
-            .decodeHTTPResponse(type: UserSignupResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -101,6 +101,7 @@ class UserViewModel: ObservableObject {
                     return
                 }
                 print("Signup status code: \(rawURLResponse.statusCode)")
+                self?.keyValueStorage.set(response.token, forKey: UDKeys.authToken.description)
                 self?.keyValueStorage.set(response.user.id, forKey: UDKeys.userID.description)
                 self?.keyValueStorage.set(response.user.name, forKey: UDKeys.username.description)
                 self?.keyValueStorage.set(response.user.email, forKey: UDKeys.email.description)
@@ -108,6 +109,7 @@ class UserViewModel: ObservableObject {
 
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.isShowingLoading = false
+                self?.isLogged = true
             })
             .store(in: &cancellables)
         
