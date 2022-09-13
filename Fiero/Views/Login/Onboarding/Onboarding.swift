@@ -42,6 +42,7 @@ struct OnboardingScreen: View {
                 Spacer()
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
