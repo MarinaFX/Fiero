@@ -80,7 +80,7 @@ struct ChallengeDetailsView: View {
                     VStack(spacing: quarkSpacing) {
                         if self.quickChallenge.maxTeams == 2 {
                             NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                                DuelScreenView(quickChallenge: $quickChallenge)
+                                DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                             }.hidden()
                         }
                         else {
@@ -129,32 +129,39 @@ struct ChallengeDetailsView: View {
                 }
                 .alert(isPresented: self.$isPresentingAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
-                    case .deleteChallenge:
-                        return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
-                                     message: Text(DetailsAlertCases.deleteChallenge.message),
-                                     primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
-                            self.isPresentingAlert = false
-                        }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                            self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                                .sink { completion in
-                                    switch completion {
-                                    case .finished:
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    case .failure(let error):
-                                        print(error)
-                                        self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
-                                        self.isPresentingAlert.toggle()
-                                    }
-                                } receiveValue: { _ in }
-                                .store(in: &subscriptions)
-                        }))
-                    case .failureStartChallenge:
-                        return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
-                                     message: Text(DetailsAlertCases.failureStartChallenge.message),
-                                     dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
-                            self.isPresentingAlert = false
-                            self.presentationMode.wrappedValue.dismiss()
-                        }))
+                        case .deleteChallenge:
+                            return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
+                                         message: Text(DetailsAlertCases.deleteChallenge.message),
+                                         primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
+                                self.isPresentingAlert = false
+                            }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                                self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                                    .sink { completion in
+                                        switch completion {
+                                        case .finished:
+                                            self.presentationMode.wrappedValue.dismiss()
+                                        case .failure(let error):
+                                            print(error)
+                                            self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                                            self.isPresentingAlert.toggle()
+                                        }
+                                    } receiveValue: { _ in }
+                                    .store(in: &subscriptions)
+                            }))
+                        case .failureStartChallenge:
+                            return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
+                                         message: Text(DetailsAlertCases.failureStartChallenge.message),
+                                         dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
+                                self.isPresentingAlert = false
+                                self.presentationMode.wrappedValue.dismiss()
+                            }))
+                        case .failureWhileSavingPoints:
+                            return Alert(title: Text(DetailsAlertCases.failureWhileSavingPoints.title),
+                                         message: Text(DetailsAlertCases.failureWhileSavingPoints.message),
+                                         dismissButton: .cancel(Text(DetailsAlertCases.failureWhileSavingPoints.primaryButtonText), action: {
+                                self.isPresentingAlert = false
+                                self.presentationMode.wrappedValue.dismiss()
+                            }))
                     }
                 })
                 .toolbar {
