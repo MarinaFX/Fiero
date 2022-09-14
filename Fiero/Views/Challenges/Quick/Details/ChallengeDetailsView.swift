@@ -61,7 +61,7 @@ struct ChallengeDetailsView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
                             .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: 2)
                     )
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
