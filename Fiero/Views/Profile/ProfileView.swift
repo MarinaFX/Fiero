@@ -20,7 +20,7 @@ struct ProfileView: View {
             VStack {
                 ProfilePictureComponent(nameUser: UserViewModel.getUserNameFromDefaults())
                 Spacer()
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Apagar conta", action: {
+                ButtonComponent(style: .destructive(isEnabled: true), text: "Apagar conta", action: {
                     self.userViewModel.activeAlert = .confirmAccountDelete
                     self.userViewModel.showingAlertToTrue()
                 })

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import Lottie
 
 struct DuelScoreComponent: View {
@@ -16,8 +17,11 @@ struct DuelScoreComponent: View {
     @State private(set) var isLongPressing = false
     @State private(set) var timer: Timer?
     
+    @State private var subscriptions: Set<AnyCancellable> = []
+
     @Binding var playerScore: Double
-    
+    @Binding var isShowingAlertOnDetailsScreen: Bool
+
     private(set) var challengeId: String
     private(set) var teamId: String
     private(set) var memberId: String
@@ -98,6 +102,18 @@ struct DuelScoreComponent: View {
         }
         .onDisappear(perform: {
             self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
+                 .sink(receiveCompletion: { completion in
+                     switch completion {
+                         case .failure(let error):
+                             self.quickChallengeViewModel.detailsAlertCases = .failureWhileSavingPoints
+                             self.isShowingAlertOnDetailsScreen = true
+                             print(error)
+                         case .finished:
+                             print("finished successfully")
+                     }
+                 }, receiveValue: { _ in })
+                 .store(in: &subscriptions)
+             
         })
         .frame(height: 120)
     }
@@ -105,6 +121,6 @@ struct DuelScoreComponent: View {
 
 struct DuelScoreComponent_Previews: PreviewProvider {
     static var previews: some View {
-        DuelScoreComponent(style: .first, maxValue: 0, playerScore: .constant(0.0), challengeId: "", teamId: "", memberId: "", playerName: "")
+        DuelScoreComponent(style: .first, maxValue: 0, playerScore: .constant(0.0), isShowingAlertOnDetailsScreen: .constant(false), challengeId: "", teamId: "", memberId: "", playerName: "")
     }
 }

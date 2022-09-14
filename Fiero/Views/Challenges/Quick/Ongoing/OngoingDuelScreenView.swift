@@ -11,6 +11,7 @@ struct OngoingDuelScreenView: View {
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
+    @Binding var isShowingAlertOnDetailsScreen: Bool
     
     //MARK: Colors
     var firstBackgroundColor: Color {
@@ -55,7 +56,13 @@ struct OngoingDuelScreenView: View {
                     firstBackgroundColor.ignoresSafeArea()
                     VStack(spacing: Tokens.Spacing.lg.value) {
                         
-                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[0].id, memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND", playerName: Member.getName(playerName: self.quickChallenge.teams[0].name))
+                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal,
+                            playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10),
+                            isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
+                            challengeId: self.quickChallenge.id,
+                            teamId: self.quickChallenge.teams[0].id,
+                            memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND",
+                            playerName: Member.getName(playerName: self.quickChallenge.teams[0].name))
                             .padding(.horizontal, Tokens.Spacing.lg.value)
                         Image("Olhos")
                     }
@@ -64,7 +71,13 @@ struct OngoingDuelScreenView: View {
                 ZStack {
                     secondBackgroundColor.ignoresSafeArea()
                     VStack(spacing: Tokens.Spacing.lg.value) {
-                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[1].id, memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND", playerName: Member.getName(playerName: self.quickChallenge.teams[1].name))
+                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal,
+                            playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10),
+                            isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
+                            challengeId: self.quickChallenge.id,
+                            teamId: self.quickChallenge.teams[1].id,
+                            memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND",
+                            playerName: Member.getName(playerName: self.quickChallenge.teams[1].name))
                             .padding(.horizontal, Tokens.Spacing.lg.value)
                         Image("Olhos")
                     }
@@ -84,6 +97,6 @@ struct OngoingDuelScreenView_Previews: PreviewProvider {
                                                                         Team(id: "teste3", name: "player3", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 43, userId: "", teamId: "", beginDate: "", botPicture: "player3", createdAt: "", updatedAt: "")]),
                                                                         Team(id: "teste4", name: "player4", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 200, userId: "", teamId: "", beginDate: "", botPicture: "player4", createdAt: "", updatedAt: "")])
                                                                     ],
-                                                                owner: User(email: "teste", name: "teste"))))
+                                                                owner: User(email: "teste", name: "teste"))), isShowingAlertOnDetailsScreen: .constant(true))
     }
 }

@@ -17,27 +17,33 @@ struct WinScreen: View {
         // nao ta respeitando a largura da tela
         ZStack {
             Tokens.Colors.Background.dark.value
-            ZStack {
-                LottieView(fileName: "winAnimation", reverse: false, loop: true, aspectFill: true)
-                Image("youwin-en")
-                    .scaleEffect(animationAmount)
-                    .animation(
-                        .interpolatingSpring(stiffness: 50, damping: 0.8)
-                        .delay(0.2),
-                        value: animationAmount
-                    )
-                    .onAppear{
-                        animationAmount = 0.5
-                    }
-            }
+            
+            LottieView(fileName: "winAnimation", reverse: false, loop: true, aspectFill: true)
+            
+            Image("youwin-en")
+                .scaleEffect(animationAmount)
+                .animation(
+                    .interpolatingSpring(stiffness: 50, damping: 0.8)
+                    .delay(0.2),
+                    value: animationAmount
+                )
+                .onAppear{
+                    animationAmount = 0.5
+                }
+                .frame(maxWidth: UIScreen.main.bounds.width)
+            
+            
             VStack {
+                Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar desafio", action: {
                     //TODO: - logic to finish challenge
                 })
                 ButtonComponent(style: .black(isEnabled: true), text: "Continuar marcando pontos", action: {
                     self.presentationMode.wrappedValue.dismiss()
                 })
-            }.padding(.horizontal)
+                .padding(.bottom, Tokens.Spacing.sm.value)
+            }.frame(maxHeight: UIScreen.main.bounds.height)
+                .padding(.horizontal)
         }
     }
 }

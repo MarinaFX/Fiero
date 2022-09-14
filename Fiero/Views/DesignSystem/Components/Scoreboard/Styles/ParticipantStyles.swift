@@ -13,7 +13,7 @@ enum ParticipantStyles: Equatable {
     
     //MARK: Color
     var textAndPointsColor: Color {
-        return Tokens.Colors.Neutral.Low.pure.value
+        return Tokens.Colors.Neutral.High.pure.value
     }
     //MARK: Fonts
     var iconFont: Font {
