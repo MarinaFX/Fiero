@@ -97,11 +97,19 @@ struct ChallengesListScreenView: View {
     
     var body: some View {
         VStack {
-            ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
+            List(self.quickChallenges, id: \.self) { challenge in
                 ZStack {
                     ChallengeListCell(quickChallenge: challenge)
                 }
+                .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                    Button(role: .destructive, action: {
+                        
+                    }, label: {
+                        Label("Delete", systemImage: "trash")
+                    })
+                })
                 .onTapGesture {
                     self.presentModalIndex = challenge
                 }
@@ -120,6 +128,6 @@ struct ChallengesListScreenView: View {
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengesListScreenView(quickChallenges: .constant([]))
+        ChallengesListScreenView(quickChallenges: .constant([QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))]))
     }
 }
