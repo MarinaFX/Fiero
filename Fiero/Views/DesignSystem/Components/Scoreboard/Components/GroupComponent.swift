@@ -31,7 +31,8 @@ struct GroupComponent: View {
                 .padding(.all)
             }
         }.frame(maxWidth: .infinity)
-            .background(RoundedRectangle(cornerRadius: 11).fill(Color.white))
+            .background(RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
+                .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: 2))
     }
 }
 
