@@ -30,7 +30,7 @@ struct UserSignupView: View {
     
     //MARK: - body
     var body: some View {
-        if isLoginScreenSheetShowing{
+        if isLoginScreenSheetShowing {
             AccountLoginView()
         } else {
             ZStack {
