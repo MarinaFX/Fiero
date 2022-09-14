@@ -19,7 +19,7 @@ struct TermsOfUseSheetView: View {
         return 5
     }
     var textColor: Color {
-        return Tokens.Colors.Neutral.Low.pure.value
+        return Tokens.Colors.Neutral.High.pure.value
     }
     var circleColor: Color {
         return Tokens.Colors.Brand.Primary.pure.value
