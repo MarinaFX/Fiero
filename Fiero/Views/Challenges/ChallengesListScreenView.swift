@@ -99,7 +99,7 @@ struct ChallengesListScreenView: View {
         VStack {
             ListWithoutSeparator(self.quickChallenges, id: \.self) { challenge in
                 ZStack {
-                    CustomTitleImageListRow(title: challenge.name)
+                    ChallengeListCell(quickChallenge: challenge)
                 }
                 .listRowBackground(Color.clear)
                 .onTapGesture {

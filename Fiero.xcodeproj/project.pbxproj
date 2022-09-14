@@ -98,6 +98,7 @@
 		DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94A38D28C2236F003B47B8 /* WinScreen.swift */; };
 		DF94A39028C22381003B47B8 /* winAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94A38F28C22381003B47B8 /* winAnimation.json */; };
 		DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */; };
+		DFAF4EDF28D243150022A731 /* ChallengeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */; };
 		DFD4FED128B9113000169C20 /* tonto.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED028B9113000169C20 /* tonto.gif */; };
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		DFF31A0828C7D7EC002EFD9D /* OnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */; };
@@ -224,6 +225,7 @@
 		DF94A38D28C2236F003B47B8 /* WinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
 		DF94A38F28C22381003B47B8 /* winAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winAnimation.json; sourceTree = "<group>"; };
 		DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Superline-Italic.ttf"; sourceTree = "<group>"; };
+		DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListCell.swift; sourceTree = "<group>"; };
 		DFD4FED028B9113000169C20 /* tonto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tonto.gif; sourceTree = "<group>"; };
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCard.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 			children = (
 				CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */,
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
+				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */,
+				DFAF4EDF28D243150022A731 /* ChallengeListCell.swift in Sources */,
 				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
 				CCBAEBDE28A6C9D0005D0FFC /* DuelScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
