@@ -17,9 +17,9 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     
-    //private let BASE_URL: String = "localhost"
+    private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
-    private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
+    //private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
     private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge"
@@ -47,7 +47,7 @@ class QuickChallengeViewModel: ObservableObject {
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
         guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
             print("NO USER TOKEN FOUND!")
-            return Empty()
+            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
                 .eraseToAnyPublisher()
         }
         self.serverResponse = .unknown
@@ -297,11 +297,13 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Patch Score
-    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) {
+    @discardableResult
+    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
         guard let userToken = self.keyValueStorage.string(forKey: "AuthToken") else {
             print("nao achou token")
-            return
+            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
+                .eraseToAnyPublisher()
         }
         
         let json = """
@@ -310,12 +312,16 @@ class QuickChallengeViewModel: ObservableObject {
         }
         """
         print(json)
+        
         let request = makePATCHRequestScore(json: json, challengeId: challengeId, teamId: teamId, memberId: memberId, variableToBePatched: VariablesToBePatchedQuickChallenge.score.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_SCORE, authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
                 if case .failure = rawURLResponse {
                     return self.getUserChallenges()
@@ -328,6 +334,11 @@ class QuickChallengeViewModel: ObservableObject {
             }
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in ()})
+            .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
     }
     
     func showingAlertToFalse() {

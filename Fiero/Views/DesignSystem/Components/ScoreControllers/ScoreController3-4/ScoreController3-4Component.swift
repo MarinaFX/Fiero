@@ -23,38 +23,35 @@ struct ScoreController3_4Component: View {
     private(set) var teamId: String
     private(set) var memberId: String
 
+    var buttonFrame: CGFloat {
+        return 40
+    }
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
                 .foregroundColor(foreGroundColor)
             HStack {
-                Button(action: {
-                    print("tap")
-                    if(self.isLongPressing){
-                        //End of a longpress gesture, so stop our fastforwarding
-                        self.isLongPressing.toggle()
-                        self.timer?.invalidate()
-                    } else {
-                        //Regular tap
-                        self.playerScore -= 1
-                        Haptics.shared.play(.light)
-                    }
-                }, label: {
-                    Image(systemName: "minus.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
-                    
-                })
-                .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
-                    print("long press")
-                    self.isLongPressing = true
-                    //Fastforward has started
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                        self.playerScore -= 1
-                        Haptics.shared.play(.light)
-                    })
-                })
+                Image(systemName: "minus.circle.fill")
+                    .resizable()
+                    .foregroundColor(.black)
+                    .frame(width: buttonFrame, height: buttonFrame)
+                    .gesture(
+                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                            .onEnded({ value in
+                                self.timer?.invalidate()
+                                isLongPressing = false
+                            })
+                            .onChanged({ value in
+                                if !isLongPressing {
+                                    isLongPressing = true
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                        self.playerScore -= 1
+                                        Haptics.shared.play(.light)
+                                    })
+                                }
+                            })
+                    )
                 Spacer()
                 VStack {
                     Text("\(playerScore, specifier: "%.0f")")
@@ -66,30 +63,26 @@ struct ScoreController3_4Component: View {
                         .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                 }
                 Spacer()
-                Button(action: {
-                    if(self.isLongPressing){
-                        //End of a longpress gesture, so stop our fastforwarding
-                        self.isLongPressing.toggle()
-                        self.timer?.invalidate()
-                    } else {
-                        //Regular tap
-                        self.playerScore += 1
-                        Haptics.shared.play(.light)
-                    }
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.black)
-                })
-                .simultaneousGesture(LongPressGesture(minimumDuration: 0.2).onEnded { _ in
-                    self.isLongPressing = true
-                    //Fastforward has started
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                        self.playerScore += 1
-                        Haptics.shared.play(.light)
-                    })
-                })
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .foregroundColor(.black)
+                    .frame(width: buttonFrame, height: buttonFrame)
+                    .gesture(
+                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                            .onEnded({ value in
+                                self.timer?.invalidate()
+                                isLongPressing = false
+                            })
+                            .onChanged({ value in
+                                if !isLongPressing {
+                                    isLongPressing = true
+                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                        self.playerScore += 1
+                                        Haptics.shared.play(.light)
+                                    })
+                                }
+                            })
+                    )
             }
             .padding(.horizontal, Tokens.Spacing.xs.value)
         }
