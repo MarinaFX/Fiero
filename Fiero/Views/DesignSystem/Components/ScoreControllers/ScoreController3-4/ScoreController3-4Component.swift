@@ -17,7 +17,6 @@ struct ScoreController3_4Component: View {
 
     @Binding var playerScore: Double
 
-    private(set) var foreGroundColor: Color
     private(set) var playerName: String
     private(set) var challengeId: String
     private(set) var teamId: String
@@ -26,15 +25,19 @@ struct ScoreController3_4Component: View {
     var buttonFrame: CGFloat {
         return 40
     }
+    var color: Color {
+        return Tokens.Colors.Neutral.High.pure.value
+    }
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
-                .foregroundColor(foreGroundColor)
+            RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.normal.value)
+                .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                .opacity(0.2)
             HStack {
                 Image(systemName: "minus.circle.fill")
                     .resizable()
-                    .foregroundColor(.black)
+                    .foregroundColor(color)
                     .frame(width: buttonFrame, height: buttonFrame)
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -55,17 +58,17 @@ struct ScoreController3_4Component: View {
                 Spacer()
                 VStack {
                     Text("\(playerScore, specifier: "%.0f")")
-                        .font(Tokens.FontStyle.largeTitle.font())
-                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                        .foregroundColor(color)
                     
                     Text(playerName)
                         .font(Tokens.FontStyle.callout.font())
-                        .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                        .foregroundColor(color)
                 }
                 Spacer()
                 Image(systemName: "plus.circle.fill")
                     .resizable()
-                    .foregroundColor(.black)
+                    .foregroundColor(color)
                     .frame(width: buttonFrame, height: buttonFrame)
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -95,6 +98,6 @@ struct ScoreController3_4Component: View {
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(playerScore: .constant(2.0), foreGroundColor: .red, playerName: "", challengeId: "", teamId: "", memberId: "")
+        ScoreController3_4Component(playerScore: .constant(2.0), playerName: "", challengeId: "", teamId: "", memberId: "")
     }
 }
