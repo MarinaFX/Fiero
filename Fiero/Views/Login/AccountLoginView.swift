@@ -97,7 +97,7 @@ struct AccountLoginView: View {
                         .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
                     ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Fazer login!",
+                                    text: "Fazer Login!",
                                     action: {
                         if emailText.isEmpty || passwordText.isEmpty {
                             self.userViewModel.loginAlertCases = .emptyFields
