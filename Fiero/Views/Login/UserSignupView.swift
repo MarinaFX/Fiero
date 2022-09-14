@@ -34,11 +34,11 @@ struct UserSignupView: View {
             AccountLoginView()
         } else {
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Background.dark.value.ignoresSafeArea()
+                
                 VStack(spacing: Tokens.Spacing.xxxs.value){
                     if !self.userViewModel.keyboardShown  {
-                        Image("Olhos")
-                            .padding(.vertical, Tokens.Spacing.sm.value)
+                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: true, aspectFill: false, secondAnimation: "LoginAnimationEnd", loopSecond: true)
                     }
                     VStack(spacing: Tokens.Spacing.xxs.value){
                         Text("Boas vindas, desafiante")
