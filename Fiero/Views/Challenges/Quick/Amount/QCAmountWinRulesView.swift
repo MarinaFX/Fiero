@@ -73,7 +73,7 @@ struct QCAmountWinRulesView: View {
                 
                 Spacer()
                 
-                PermanentKeyboard(text: self.$goal, keyboardType: .decimalPad)
+                PermanentKeyboard(text: self.$goal, keyboardType: .numberPad)
                 
                 Spacer()
                 

@@ -17,6 +17,9 @@ struct LottieView: UIViewRepresentable {
     var loop: Bool
     var aspectFill: Bool = false
     
+    var secondAnimation: String?
+    var loopSecond: Bool?
+    
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         
@@ -38,7 +41,26 @@ struct LottieView: UIViewRepresentable {
             animationView.loopMode = .autoReverse
         }
         animationView.backgroundBehavior = .pauseAndRestore
-        animationView.play()
+        
+        if let secondAnimation = secondAnimation {
+            let secondAnimation = Animation.named(secondAnimation)
+            animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.playOnce, completion: { finished in
+                if finished {
+                    animationView.animation = secondAnimation
+                    guard let loopSecond = loopSecond else {
+                        animationView.loopMode = .playOnce
+                        return
+                    }
+                    
+                    if loopSecond { animationView.loopMode = .loop }
+
+                    animationView.play()
+                }
+            })
+        }
+        else {
+            animationView.play()
+        }
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
