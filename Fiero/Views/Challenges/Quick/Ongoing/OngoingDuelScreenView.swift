@@ -48,7 +48,7 @@ struct OngoingDuelScreenView: View {
                         Image(systemName: "pause.circle.fill")
                             .resizable()
                             .foregroundColor(buttonColor)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 50, height: 50)
                     }
                 }.padding(.horizontal, Tokens.Spacing.defaultMargin.value
                 )

@@ -266,6 +266,8 @@ struct ChallengeDetailsView: View {
                                 self.isPresentingAlert = false
                                 self.presentationMode.wrappedValue.dismiss()
                             }))
+                        case .failureDeletingChallenge:
+                            return Alert(title: Text("not expected"))
                     }
                 })
                 .toolbar {
