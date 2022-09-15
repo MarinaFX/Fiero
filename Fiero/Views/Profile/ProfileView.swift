@@ -27,7 +27,7 @@ struct ProfileView: View {
                 LottieView(fileName: "tonto2", reverse: false, loop: true)
         
               
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Apagar conta", action: {
+                ButtonComponent(style: .destructive(isEnabled: true), text: "Apagar conta", action: {
                     self.userViewModel.activeAlert = .confirmAccountDelete
                     self.userViewModel.showingAlertToTrue()
                 })

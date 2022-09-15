@@ -64,12 +64,12 @@ struct AccountLoginView: View {
                 .environmentObject(self.userViewModel)
         } else {
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Background.dark.value.ignoresSafeArea()
+                
                 //MARK: Login Form
                 VStack {
                     if !userViewModel.keyboardShown  {
-                        Image("Olhos")
-                            .padding(.vertical, Tokens.Spacing.sm.value)
+                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: true, aspectFill: false, secondAnimation: "LoginAnimationEnd", loopSecond: true)
                     }
                     Text("Boas vindas, desafiante")
                         .font(largeTitleFont)
@@ -97,7 +97,7 @@ struct AccountLoginView: View {
                         .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
                     ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Fazer login!",
+                                    text: "Fazer Login!",
                                     action: {
                         if emailText.isEmpty || passwordText.isEmpty {
                             self.userViewModel.loginAlertCases = .emptyFields

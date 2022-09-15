@@ -46,6 +46,8 @@
 		1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */; };
 		1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */; };
 		1B7BF1A528BD61630017EF9C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7BF1A428BD61630017EF9C /* Lottie */; };
+		1B89B3C828D250F10071A339 /* LoginAnimationStart.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C728D250F10071A339 /* LoginAnimationStart.json */; };
+		1B89B3CA28D250FE0071A339 /* LoginAnimationEnd.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */; };
@@ -101,6 +103,7 @@
 		DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF94A38D28C2236F003B47B8 /* WinScreen.swift */; };
 		DF94A39028C22381003B47B8 /* winAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DF94A38F28C22381003B47B8 /* winAnimation.json */; };
 		DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */; };
+		DFAF4EDF28D243150022A731 /* ChallengeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */; };
 		DFD4FED128B9113000169C20 /* tonto.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED028B9113000169C20 /* tonto.gif */; };
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		DFF31A0828C7D7EC002EFD9D /* OnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */; };
@@ -174,6 +177,8 @@
 		1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeyValueStorage.swift; sourceTree = "<group>"; };
 		1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
 		1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
+		1B89B3C728D250F10071A339 /* LoginAnimationStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationStart.json; sourceTree = "<group>"; };
+		1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationEnd.json; sourceTree = "<group>"; };
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
 		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponses.swift; sourceTree = "<group>"; };
@@ -230,6 +235,7 @@
 		DF94A38D28C2236F003B47B8 /* WinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
 		DF94A38F28C22381003B47B8 /* winAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winAnimation.json; sourceTree = "<group>"; };
 		DF96CC6B28C7CABE00D17B37 /* Superline-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Superline-Italic.ttf"; sourceTree = "<group>"; };
+		DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListCell.swift; sourceTree = "<group>"; };
 		DFD4FED028B9113000169C20 /* tonto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tonto.gif; sourceTree = "<group>"; };
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCard.swift; sourceTree = "<group>"; };
@@ -675,6 +681,7 @@
 			children = (
 				CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */,
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
+				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -685,6 +692,8 @@
 				62A9849E28D2216600AE77B5 /* tonto2.json */,
 				62A9849C28D2150D00AE77B5 /* sad.json */,
 				62A9849A28D210C200AE77B5 /* success-loop.json */,
+				1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */,
+				1B89B3C728D250F10071A339 /* LoginAnimationStart.json */,
 				DF94518A28C28F7000744BAC /* success.json */,
 				DF94A38F28C22381003B47B8 /* winAnimation.json */,
 				DF541CD328C163AF00A1511F /* blockCategory.json */,
@@ -885,6 +894,7 @@
 				DF7226F728C13EE400237621 /* quantity2.json in Resources */,
 				62A9849F28D2216700AE77B5 /* tonto2.json in Resources */,
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
+				1B89B3C828D250F10071A339 /* LoginAnimationStart.json in Resources */,
 				1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */,
 				DFD4FED128B9113000169C20 /* tonto.gif in Resources */,
 				DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */,
@@ -897,6 +907,7 @@
 				DF94A39028C22381003B47B8 /* winAnimation.json in Resources */,
 				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
 				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
+				1B89B3CA28D250FE0071A339 /* LoginAnimationEnd.json in Resources */,
 				DF94518B28C28F7000744BAC /* success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,6 +934,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */,
+				DFAF4EDF28D243150022A731 /* ChallengeListCell.swift in Sources */,
 				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
 				CCBAEBDE28A6C9D0005D0FFC /* DuelScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
