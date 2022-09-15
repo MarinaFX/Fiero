@@ -31,7 +31,7 @@ struct ChallengeDetailsView: View {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
                 VStack {
                     if self.sizeCategory.isAccessibilityCategory {
-                        ScrollView {
+                        ScrollView(showsIndicators: false) {
                             //MARK: - Top Components
                             ZStack {
                                 VStack(spacing: Tokens.Spacing.xxs.value) {
