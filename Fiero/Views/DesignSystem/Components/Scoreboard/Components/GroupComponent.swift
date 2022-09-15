@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GroupComponent: View {
+    @Environment(\.sizeCategory) var sizeCategory
+    
     @State var scoreboard: Bool
     @State var style: [ParticipantStyles]
     @Binding var quickChallenge: QuickChallenge
@@ -15,20 +17,40 @@ struct GroupComponent: View {
     var body: some View {
         ZStack {
             if scoreboard {
-                HStack(spacing: Tokens.Spacing.nano.value) {
-                    ForEach($quickChallenge.teams) { team in
-                        ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                if self.sizeCategory.isAccessibilityCategory {
+                    VStack(spacing: Tokens.Spacing.nano.value) {
+                        ForEach($quickChallenge.teams) { team in
+                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                        }
                     }
+                    .padding(.all)
                 }
-                .padding(.all)
+                else {
+                    HStack(spacing: Tokens.Spacing.nano.value) {
+                        ForEach($quickChallenge.teams) { team in
+                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                        }
+                    }
+                    .padding(.all)
+                }
             }
             else {
-                HStack(spacing: Tokens.Spacing.xxxs.value) {
-                    ForEach($quickChallenge.teams) { team in
-                        ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                if self.sizeCategory.isAccessibilityCategory {
+                    VStack(spacing: Tokens.Spacing.xxxs.value) {
+                        ForEach($quickChallenge.teams) { team in
+                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                        }
                     }
+                    .padding(.all)
                 }
-                .padding(.all)
+                else {
+                    HStack(spacing: Tokens.Spacing.xxxs.value) {
+                        ForEach($quickChallenge.teams) { team in
+                            ParticipantComponent(style: style[0], name: team.name, score: Binding(team.members)?.first?.score ?? .constant(0))
+                        }
+                    }
+                    .padding(.all)
+                }
             }
         }.frame(maxWidth: .infinity)
             .background(RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
