@@ -32,57 +32,44 @@ struct Ongoing3_4ScreenView: View {
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     
+    var foregroundColor: Color {
+        return Tokens.Colors.Neutral.High.pure.value
+    }
     var body: some View {
         ZStack {
-            Tokens.Colors.Background.dark.value.ignoresSafeArea()
-            VStack {
-                HStack {
-                    Button {
-                        self.didTapPauseButton.toggle()
-                        Haptics.shared.play(.light)
-                    } label: {
-                        Image(systemName: "pause.circle.fill")
-                            .resizable()
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .frame(width: 40, height: 40)
-                    }
-                    .frame(
-                          minWidth: 0,
-                          maxWidth: .infinity,
-                          minHeight: 0,
-                          maxHeight: .infinity,
-                          alignment: .topTrailing
-                        )
-                    .padding(.trailing, Tokens.Spacing.defaultMargin.value)
-                }
-            }
-            VStack {
-                //TODO: - here we need to use the name of type challenge instead of variable name
-                Text(" ")
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .font(Tokens.FontStyle.callout.font(weigth: .regular))
-                
-                Text(self.quickChallenge.name)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                    .padding(.top, Tokens.Spacing.nano.value)
-                    .padding(.bottom, Tokens.Spacing.xxxs.value)
-                
-                VStack(spacing: Tokens.Spacing.quarck.value) {
-                    ForEach(self.$quickChallenge.teams) { team in
-                        ScoreController3_4Component(
-                            playerScore: Binding(team.members)?.first?.score ?? .constant(10),
-                            foreGroundColor: Member.getColor(playerName: team.wrappedValue.name),
-                            playerName: Member.getName(playerName: team.wrappedValue.name),
-                            challengeId: self.quickChallenge.id,
-                            teamId: team.wrappedValue.id,
-                            memberId: team.wrappedValue.members?[0].id ?? "")
-                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            VStack(spacing: 0) {
+                ForEach(self.$quickChallenge.teams) { team in
+                    ZStack {
+                        Member.getColor(playerName: team.wrappedValue.name)
+                            .ignoresSafeArea()
+                        VStack(spacing: Tokens.Spacing.xxxs.value) {
+                            Image("Olhos")
+                                .resizable()
+                                .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.1)
+                            
+                            ScoreController3_4Component(playerScore: Binding(team.members)?.first?.score ?? .constant(0), playerName: Member.getName(playerName: team.wrappedValue.name), challengeId: quickChallenge.id, teamId: team.wrappedValue.id, memberId: team.wrappedValue.members?[0].id ?? "")
+                        }
+                        .padding(.horizontal, Tokens.Spacing.xl.value)
+                        .padding(.vertical, Tokens.Spacing.xxxs.value)
                     }
                 }
             }
-            
-        }.accentColor(Tokens.Colors.Neutral.High.pure.value)
+            HStack {
+                Spacer ()
+                Button {
+                    didTapPauseButton.toggle()
+                    Haptics.shared.play(.light)
+                } label: {
+                    Image(systemName: "pause.circle.fill")
+                        .resizable()
+                        .foregroundColor(foregroundColor)
+                        .frame(width: 50, height: 50)
+                }
+                .padding(.trailing, Tokens.Spacing.defaultMargin.value)
+
+            }
+            .padding(.top, -(UIScreen.main.bounds.height/2 - Tokens.Spacing.xs.value))
+        }
     }
 }
 
