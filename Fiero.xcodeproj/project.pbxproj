@@ -62,6 +62,9 @@
 		1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */; };
 		489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
+		62A9849B28D210C200AE77B5 /* success-loop.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849A28D210C200AE77B5 /* success-loop.json */; };
+		62A9849D28D2150D00AE77B5 /* sad.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849C28D2150D00AE77B5 /* sad.json */; };
+		62A9849F28D2216700AE77B5 /* tonto2.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849E28D2216600AE77B5 /* tonto2.json */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
 		CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */; };
 		CC3AB9DC28BE8FFF006C0507 /* SignupAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DB28BE8FFF006C0507 /* SignupAlertCases.swift */; };
@@ -188,6 +191,9 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
+		62A9849A28D210C200AE77B5 /* success-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-loop.json"; sourceTree = "<group>"; };
+		62A9849C28D2150D00AE77B5 /* sad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sad.json; sourceTree = "<group>"; };
+		62A9849E28D2216600AE77B5 /* tonto2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tonto2.json; sourceTree = "<group>"; };
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9DB28BE8FFF006C0507 /* SignupAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupAlertCases.swift; sourceTree = "<group>"; };
@@ -676,6 +682,9 @@
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				62A9849E28D2216600AE77B5 /* tonto2.json */,
+				62A9849C28D2150D00AE77B5 /* sad.json */,
+				62A9849A28D210C200AE77B5 /* success-loop.json */,
 				DF94518A28C28F7000744BAC /* success.json */,
 				DF94A38F28C22381003B47B8 /* winAnimation.json */,
 				DF541CD328C163AF00A1511F /* blockCategory.json */,
@@ -872,13 +881,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62A9849B28D210C200AE77B5 /* success-loop.json in Resources */,
 				DF7226F728C13EE400237621 /* quantity2.json in Resources */,
+				62A9849F28D2216700AE77B5 /* tonto2.json in Resources */,
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
 				1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */,
 				DFD4FED128B9113000169C20 /* tonto.gif in Resources */,
 				DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */,
 				DF94518528C2851F00744BAC /* success.gif in Resources */,
 				1B4135BD28597E8F00C7094A /* Assets.xcassets in Resources */,
+				62A9849D28D2150D00AE77B5 /* sad.json in Resources */,
 				DF73C76928BFD7780079DBB0 /* tonto.json in Resources */,
 				DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */,
 				DFD4FED328B92DD700169C20 /* quantity.gif in Resources */,

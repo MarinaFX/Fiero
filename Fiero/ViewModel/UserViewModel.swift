@@ -26,9 +26,9 @@ class UserViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isLogged = false
 
-    private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
-    //private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_SIGNUP: String = "/user/register"
     private let ENDPOINT_LOGIN: String = "/user/login"
     private let ENDPOINT_DELETE_USER: String = "/user"

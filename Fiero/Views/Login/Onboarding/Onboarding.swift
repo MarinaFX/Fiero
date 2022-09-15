@@ -19,9 +19,9 @@ struct OnboardingScreen: View {
                 HStack {
                     VStack {
                         TabView{
-                            OnboardingCard(image: "crie", isFirstLogin: self.$isFirstLogin)
-                            OnboardingCard(image: "mecanica", isFirstLogin: self.$isFirstLogin)
-                            OnboardingCard(image: "defina", isFirstLogin: self.$isFirstLogin, final: true)
+                            OnboardingCard(image: "Desafie", isFirstLogin: self.$isFirstLogin, onboardingId: 1)
+                            OnboardingCard(image: "Pontuacao", isFirstLogin: self.$isFirstLogin, onboardingId: 2)
+                            OnboardingCard(image: "Multiplos", isFirstLogin: self.$isFirstLogin, final: true, onboardingId: 3)
                         }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                         .padding(.bottom, Tokens.Spacing.defaultMargin.value)
                     }

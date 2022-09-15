@@ -20,6 +20,13 @@ struct ProfileView: View {
             VStack {
                 ProfilePictureComponent(nameUser: UserViewModel.getUserNameFromDefaults())
                 Spacer()
+                Text("Você é uma máquina de vencer")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
+                LottieView(fileName: "tonto2", reverse: false, loop: true)
+        
+              
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Apagar conta", action: {
                     self.userViewModel.activeAlert = .confirmAccountDelete
                     self.userViewModel.showingAlertToTrue()

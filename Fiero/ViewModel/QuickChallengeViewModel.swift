@@ -17,9 +17,9 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     
-    private let BASE_URL: String = "localhost"
+//    private let BASE_URL: String = "localhost"
     //private let BASE_URL: String = "10.41.48.196"
-    //private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "ec2-54-233-77-56.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
     private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
     private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge"
