@@ -16,14 +16,15 @@ struct LottieView: UIViewRepresentable {
     var reverse: Bool
     var loop: Bool
     var aspectFill: Bool = false
+    let animationView = AnimationView()
     
     var secondAnimation: String?
     var loopSecond: Bool?
+    var isPaused: Bool = false
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         
-        let animationView = AnimationView()
         let animation = Animation.named(fileName)
         animationView.animation = animation
         if aspectFill {
@@ -42,26 +43,6 @@ struct LottieView: UIViewRepresentable {
         }
         animationView.backgroundBehavior = .pauseAndRestore
         
-        if let secondAnimation = secondAnimation {
-            let secondAnimation = Animation.named(secondAnimation)
-            animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.playOnce, completion: { finished in
-                if finished {
-                    animationView.animation = secondAnimation
-                    guard let loopSecond = loopSecond else {
-                        animationView.loopMode = .playOnce
-                        return
-                    }
-                    
-                    if loopSecond { animationView.loopMode = .loop }
-
-                    animationView.play()
-                }
-            })
-        }
-        else {
-            animationView.play()
-        }
-        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
         
@@ -74,6 +55,41 @@ struct LottieView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
+        if isPaused {
+            context.coordinator.parent.animationView.stop()
+        }
+        else {
+            if let secondAnimation = secondAnimation {
+                let secondAnimation = Animation.named(secondAnimation)
+                context.coordinator.parent.animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.playOnce, completion: { finished in
+                    if finished {
+                        context.coordinator.parent.animationView.animation = secondAnimation
+                        guard let loopSecond = loopSecond else {
+                            context.coordinator.parent.animationView.loopMode = .playOnce
+                            return
+                        }
+                        
+                        if loopSecond { context.coordinator.parent.animationView.loopMode = .loop }
+
+                        context.coordinator.parent.animationView.play()
+                    }
+                })
+            }
+            else {
+                context.coordinator.parent.animationView.play()
+            }
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject {
+        var parent: LottieView
         
+        init(_ parent: LottieView) {
+            self.parent = parent
+        }
     }
 }
