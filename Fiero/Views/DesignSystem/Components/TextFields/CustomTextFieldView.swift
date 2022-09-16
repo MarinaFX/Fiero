@@ -54,6 +54,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .disableAutocorrection(true)
+                            .textContentType(.password)
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
@@ -65,6 +66,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo oculto")
                             .disableAutocorrection(true)
+                            .textContentType(.password)
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
@@ -79,6 +81,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .disableAutocorrection(true)
+                            .textContentType(.emailAddress)
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
@@ -91,6 +94,7 @@ struct CustomTextFieldView: View {
                             .textFieldStyle(PrimaryTextFieldStyle(variant: style, wrong: self.isWrong))
                             .accessibilityLabel("Conteúdo visível")
                             .disableAutocorrection(true)
+                            .textContentType(.emailAddress)
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
