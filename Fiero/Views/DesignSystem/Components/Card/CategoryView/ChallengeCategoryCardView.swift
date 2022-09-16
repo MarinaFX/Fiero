@@ -21,8 +21,14 @@ struct ChallengeCategoryCardView: View {
                 .cornerRadius(style.cardCornerRadius)
             
             VStack(spacing: style.vStackSpacing) {
-                LottieView(fileName: style.lottieName, reverse: false, loop: style.lottieLoop, isPaused: !isPlaying)
-                    .padding(.bottom, style.lottieSpacing)
+                if style == .amount {
+                    LottieView(fileName: "quantity", reverse: false, loop: false, secondAnimation: "quantity2", loopSecond: true, isPaused: !isPlaying)
+                        .padding(.bottom, style.lottieSpacing)
+                }
+                else {
+                    LottieView(fileName: style.lottieName, reverse: false, loop: style.lottieLoop, isPaused: !isPlaying)
+                        .padding(.bottom, style.lottieSpacing)
+                }
                 
                 Text(title)
                     .font(style.titleFont)
