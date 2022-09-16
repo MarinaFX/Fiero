@@ -74,13 +74,16 @@ struct UserSignupView: View {
                                         action: {
                             if hasAcceptedTermsOfUse == true {
                                 isShowingTermsOfUseAlert = false
-                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
-                                    self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
-                                }
-                                else {
+                                if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
                                     self.userViewModel.signupAlertCases = .emptyFields
                                     self.isShowingAlert.toggle()
+                                } else if !self.email.contains("@") || !self.email.contains("."){
+                                    self.userViewModel.loginAlertCases = .invalidEmail
+                                    self.isShowingAlert.toggle()
+                                } else {
+                                    self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
                                 }
+                                
                             } else {
                                 self.isShowingTermsOfUseAlert = true
                             }
