@@ -21,11 +21,11 @@ struct QCCategorySelectionView: View {
     var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Desafio de\nquantidade",
                                                                         subtitle: "Vence quem fizer atingir\na pontuação primeiro.",
                                                                         isAvailable: true),
-                                              ChallengeCategoryCardView(title: "Desafio de\ntempo",
-                                                                        subtitle: "Vence quem fizer\na maior pontuação\nno tempo definido.",
+                                              ChallengeCategoryCardView(title: "Desafio de \ntempo",
+                                                                        subtitle: "Vence quem fizer a maior \npontuação no tempo definido.",
                                                                         isAvailable: false),
                                               ChallengeCategoryCardView(title: "Desafio de\nrounds",
-                                                                        subtitle: "Competição de 3\nou 5 rounds.",
+                                                                        subtitle: "Competições de três ou\ncinco rounds.",
                                                                         isAvailable: false)]
     
     var body: some View {
@@ -33,6 +33,9 @@ struct QCCategorySelectionView: View {
         
         NavigationView{
             VStack {
+                
+                Spacer()
+                
                 Text("Escolha um\ntipo de desafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
