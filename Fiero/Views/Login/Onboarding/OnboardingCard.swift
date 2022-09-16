@@ -24,8 +24,7 @@ struct OnboardingCard: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: UIScreen.main.bounds.width, alignment: .center)
-//                        .padding(.horizontal, Tokens.Spacing.md.value)
-                        //.padding(.bottom, Tokens.Spacing.lg.value)
+
                     ButtonComponent(style: .tertiary(isEnabled: true),
                                     text: "Quero começar!",
                                     action: {
@@ -43,7 +42,7 @@ struct OnboardingCard: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: UIScreen.main.bounds.height * 0.8, alignment: .center)
                         .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .center)
-//                        .padding(.horizontal, Tokens.Spacing.md.value)
+
                 }
             }
         } else if onboardingId == 1 {
@@ -55,7 +54,7 @@ struct OnboardingCard: View {
                         .frame(height: UIScreen.main.bounds.height, alignment: .center)
                         .frame(width: UIScreen.main.bounds.width, alignment: .center)
                         .padding(.bottom, Tokens.Spacing.sm.value)
-//                        .padding(.horizontal, Tokens.Spacing.md.value)
+
                 }
             }
         }
