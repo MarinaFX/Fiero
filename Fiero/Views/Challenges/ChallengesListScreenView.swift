@@ -82,7 +82,7 @@ struct HomeView: View {
                 .navigationViewStyle(StackNavigationViewStyle())
                 .onAppear(perform: {
                     UITableView.appearance().refreshControl = UIRefreshControl()
-                    self.quickChallengeViewModel.getUserChallenges()
+                    self.quickChallengeViewModel.getUserChallenges()    
                 })
                 .alert(isPresented: self.isShowingAlert, content: {
                     if isShowingDeleteAlert {

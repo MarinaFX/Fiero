@@ -10,7 +10,6 @@ import Combine
 
 /**
  Remaining fixes:
- - Add alert error when saving data is not possible for challenges w 3/4 - alerts
  - Fix dismiss to challenge details instead of created view when going back to challenge details or finishing challenge - view hierarchy
  - Fix 401 authtoken bug when server dies - Ask for help for the best way to implement (Rafa - Combine)
  */

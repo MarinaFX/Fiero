@@ -35,7 +35,7 @@ struct ProfileView: View {
             .padding(Tokens.Spacing.defaultMargin.value)
         }
         .onAppear(perform: {
-            print("defaults: \(self.userViewModel.teste())")
+            self.userViewModel.refreshableToken()
         })
         .alert(isPresented: $userViewModel.showingAlert) {
             switch self.userViewModel.activeAlert {
