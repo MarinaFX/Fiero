@@ -6,16 +6,21 @@
 //
 
 import SwiftUI
+import Combine
+
 //MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    
     @State var didPushToHomeScreen: Bool = false
     @State var presentDuelChallenge: Bool = false
     @State var present3Or4Challenge: Bool = false
     @State var isPresentingAlert: Bool = false
+    @State var subscriptions: Set<AnyCancellable> = []
+    
     @Binding var serverResponse: ServerResponse
     @Binding var quickChallenge: QuickChallenge
     
@@ -33,15 +38,6 @@ struct QCChallengeCreatedView: View {
                 return "rounds"
         }
     }
-    
-    var title: String {
-        if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
-            self.quickChallengeViewModel.serverResponse.statusCode != 200 {
-            return "Não conseguimos \ncriar seu desafio"
-        }
-        
-        return "Desafio criado com sucesso"
-    }
 
     //MARK: - Body
     var body: some View {
@@ -50,7 +46,7 @@ struct QCChallengeCreatedView: View {
             
             LottieView(fileName: "success-loop", reverse: false, loop: true).frame(width: 350 , height: 200)
             
-            Text(self.title)
+            Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -59,69 +55,52 @@ struct QCChallengeCreatedView: View {
             Spacer()
             
             //MARK: - Bottom Buttons
-            if self.serverResponse.statusCode == 201 ||
-                self.serverResponse.statusCode == 200 {
+            ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Começar desafio!", action: {
-                    if quickChallenge.maxTeams == 2 {
-                        //TODO: - Do logic
-//                        presentDuelChallenge.toggle()
-                    }
-                    else {
-                        //TODO: - Do logic
-//                        present3Or4Challenge.toggle()
-                    }
-                })
-                .padding(.bottom, Tokens.Spacing.nano.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                
-                Button(action: {
-                    RootViewController.popToRootViewController()
-                }, label: {
-                    Text("Ir para lista de desafios")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxs.value)
-                
-                NavigationLink("", isActive: self.$presentDuelChallenge) {
-                    DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                }
-                .hidden()
-                
-                NavigationLink("", isActive: self.$present3Or4Challenge) {
-                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
-                }
-                .hidden()
-                
-            } else {
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Tentar novamente", action: {
-                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: self.goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxs.value)
-                .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                
-                Button(action: {
-                    RootViewController.popToRootViewController()
-                }, label: {
-                    Text("Voltar para o início")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                })
-                .padding(.bottom, Tokens.Spacing.xxxl.value)
+                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                            case .failure(_):
+                                self.isPresentingAlert.toggle()
+                            case .finished:
+                                if self.quickChallenge.maxTeams == 2 {
+                                    self.presentDuelChallenge.toggle()
+                                }
+                                else {
+                                    self.present3Or4Challenge.toggle()
+                                }
+                        }
+                    }, receiveValue: { _ in ()})
+                    .store(in: &subscriptions)
+            })
+            .padding(.bottom, Tokens.Spacing.nano.value)
+            .padding(.horizontal, Tokens.Spacing.xxxs.value)
+            
+            Button(action: {
+                RootViewController.popToRootViewController()
+            }, label: {
+                Text("Ir para lista de desafios")
+                    .bold()
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            })
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
+            
+            NavigationLink("", isActive: self.$presentDuelChallenge) {
+                DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
             }
+            .hidden()
+            
+            NavigationLink("", isActive: self.$present3Or4Challenge) {
+                Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false, didFinishChallenge: false)
+            }
+            .hidden()
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
-            Alert(title: Text("Erro"),
-                  message: Text(self.quickChallengeViewModel.serverResponse.description),
-                  dismissButton: .cancel(Text("OK"), action: { self.isPresentingAlert = false })
-            )
-        })
-        .onChange(of: self.quickChallengeViewModel.challengesList, perform: { _ in
-            if self.quickChallengeViewModel.serverResponse.statusCode != 201 &&
-                self.quickChallengeViewModel.serverResponse.statusCode != 200 {
-                self.isPresentingAlert.toggle()
-            }
+            return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
+                         message: Text(DetailsAlertCases.failureStartChallenge.message),
+                         dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
+                self.isPresentingAlert = false
+            }))
         })
         .makeDarkModeFullScreen(color: Color(red: 0.345, green: 0.322, blue: 0.855, opacity: 1))
         .ignoresSafeArea()
