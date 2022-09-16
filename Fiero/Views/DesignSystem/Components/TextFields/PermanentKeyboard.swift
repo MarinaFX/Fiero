@@ -20,6 +20,11 @@ struct PermanentKeyboard: UIViewRepresentable {
     
     //MARK: - Coordinator
     class Coordinator: NSObject, UITextFieldDelegate {
+        
+        public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            return range.location < 20
+        }
+        
         //MARK: - Variables Setup
         var parent: PermanentKeyboard
         var didBecomeFirstResponder: Bool = false
