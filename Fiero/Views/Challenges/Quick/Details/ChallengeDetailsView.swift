@@ -89,7 +89,7 @@ struct ChallengeDetailsView: View {
                                 }
                                 else {
                                     NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false)
+                                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                                     }.hidden()
                                 }
                                 
@@ -190,7 +190,7 @@ struct ChallengeDetailsView: View {
                             }
                             else {
                                 NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false)
+                                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                                 }.hidden()
                             }
                             

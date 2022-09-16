@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ScoreController3_4Component: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
@@ -14,8 +15,11 @@ struct ScoreController3_4Component: View {
     @State private(set) var waitingForSync: Bool = false
     @State private(set) var isLongPressing = false
     @State private(set) var timer: Timer?
+    
+    @State private var subscriptions: Set<AnyCancellable> = []
 
     @Binding var playerScore: Double
+    @Binding var isShowingAlertOnDetailsScreen: Bool
 
     private(set) var playerName: String
     private(set) var challengeId: String
@@ -92,12 +96,22 @@ struct ScoreController3_4Component: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .center)
         .onDisappear(perform: {
             self.quickChallengeViewModel.patchScore(challengeId: self.challengeId, teamId: self.teamId, memberId: self.memberId, score: self.playerScore)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                        case .finished:
+                            print("finished successfully")
+                        case .failure(_):
+                            self.quickChallengeViewModel.detailsAlertCases = .failureWhileSavingPoints
+                            self.isShowingAlertOnDetailsScreen = true
+                    }
+                }, receiveValue: { _ in })
+                .store(in: &subscriptions)
         })
     }
 }
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(playerScore: .constant(2.0), playerName: "", challengeId: "", teamId: "", memberId: "")
+        ScoreController3_4Component(playerScore: .constant(2.0), isShowingAlertOnDetailsScreen: .constant(false), playerName: "", challengeId: "", teamId: "", memberId: "")
     }
 }
