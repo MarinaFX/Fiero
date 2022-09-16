@@ -48,7 +48,7 @@ struct QCChallengeCreatedView: View {
         VStack {
             Spacer()
             
-            LottieView(fileName: "success", reverse: true, loop: true).frame(width: 350 , height: 200)
+            LottieView(fileName: "success-loop", reverse: false, loop: true).frame(width: 350 , height: 200)
             
             Text(self.title)
                 .multilineTextAlignment(.center)

@@ -10,6 +10,7 @@ enum ButtonStyles {
     case primary(isEnabled: Bool)
     case secondary(isEnabled: Bool)
     case black(isEnabled: Bool)
+    case tertiary(isEnabled: Bool)
     case destructive(isEnabled: Bool)
     
     //MARK: - Button variables
@@ -20,6 +21,10 @@ enum ButtonStyles {
         case .secondary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.light.value
         case .black:
+            return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value;
+        case .tertiary:
+            return Tokens.Colors.Highlight.seven.value
+            
             return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
         case .destructive:
             return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
@@ -42,6 +47,8 @@ enum ButtonStyles {
             return isEnabled
         case .black(let isEnabled):
             return isEnabled
+        case .tertiary(let isEnabled):
+            return isEnabled
         case .destructive(let isEnabled):
             return isEnabled
         }
@@ -56,6 +63,8 @@ enum ButtonStyles {
             return isEnabled ? Tokens.Colors.Neutral.Low.pure.value : Tokens.Colors.Neutral.High.dark.value
         case .black(isEnabled: let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
+        case .tertiary(let isEnabled):
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .destructive(isEnabled: let isEnabled):
             return isEnabled ? Tokens.Colors.Highlight.wrong.value : Tokens.Colors.Highlight.wrong.value
         }

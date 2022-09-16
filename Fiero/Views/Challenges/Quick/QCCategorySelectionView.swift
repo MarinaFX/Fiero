@@ -39,6 +39,9 @@ struct QCCategorySelectionView: View {
         
         NavigationView{
             VStack {
+                
+                Spacer()
+                
                 Text("Escolha um\ntipo de desafio")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
