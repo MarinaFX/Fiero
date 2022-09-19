@@ -162,7 +162,7 @@ struct ChallengesListScreenView: View {
     var body: some View {
         List(self.quickChallenges, id: \.self) { challenge in
             ZStack {
-                ChallengeListCell(quickChallenge: challenge)
+                ChallengeListCell(quickChallenge: .constant(challenge))
             }
             .onTapGesture {
                 self.focusedChallenge = challenge
@@ -192,7 +192,7 @@ struct ChallengesListScreenView: View {
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyView()
-//        ChallengesListScreenView(quickChallenges: .constant([QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))]))
+        ChallengesListScreenView(quickChallenges: .constant([QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))]), focusedChallenge: .constant(QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), isShowingDeleteAlert: .constant(false))
+            .environmentObject(QuickChallengeViewModel())
     }
 }

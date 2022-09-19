@@ -11,7 +11,6 @@ import Combine
 /**
  Remaining fixes:
  - Fix dismiss to challenge details instead of created view when going back to challenge details or finishing challenge - view hierarchy
- - Fix 401 authtoken bug when server dies - Ask for help for the best way to implement (Rafa - Combine)
  */
 
 //MARK: QCChallengeCreatedView
