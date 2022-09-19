@@ -78,6 +78,7 @@ struct QCChallengeCreatedView: View {
                     }, receiveValue: { _ in ()})
                     .store(in: &subscriptions)
             })
+            .hidden()
             .padding(.bottom, Tokens.Spacing.nano.value)
             .padding(.horizontal, Tokens.Spacing.xxxs.value)
             
