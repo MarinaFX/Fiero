@@ -11,7 +11,18 @@ struct WinScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var animationAmount = 0.0
+    @State private var animationBG = 0.0
+    @State private var animationText = 0.0
+    
+    @State var angle: Double = 0.0
+    @State var isAnimating = true
+    
+    @State var winnerName: String
+    
+    var foreverAnimation: Animation {
+        Animation.linear(duration: 4.0)
+            .repeatForever(autoreverses: false)
+    }
     
     var body: some View {
         // nao ta respeitando a largura da tela
@@ -20,18 +31,46 @@ struct WinScreen: View {
             
             LottieView(fileName: "winAnimation", reverse: false, loop: true, aspectFill: true)
             
-            Image("youwin-en")
-                .scaleEffect(animationAmount)
-                .animation(
-                    .interpolatingSpring(stiffness: 50, damping: 0.8)
-                    .delay(0.2),
-                    value: animationAmount
-                )
-                .onAppear{
-                    animationAmount = 0.5
+            Image("bg_winner")
+                .rotationEffect(Angle(degrees: self.isAnimating ? self.angle : 360.0))
+                .onAppear {
+                    withAnimation(self.foreverAnimation) {
+                        self.angle += 360.0
+                    }
+                    animationBG = 0.3
                 }
+                .scaleEffect(animationBG)
+                .animation(
+                    .interpolatingSpring(stiffness: 20, damping: 1)
+                    .delay(0.2),
+                    value: animationBG
+                )
                 .frame(maxWidth: UIScreen.main.bounds.width)
             
+            Image("win")
+                .scaleEffect(animationText)
+                .animation(
+                    .interpolatingSpring(stiffness: 20, damping: 1)
+                    .delay(0.2),
+                    value: animationText
+                )
+                .onAppear{
+                    animationText = 0.5
+                }
+                .frame(maxWidth: UIScreen.main.bounds.width)
+                .rotationEffect(.degrees(-8))
+            
+            VStack {
+                Text("1ª colocação")
+                    .font(Tokens.FontStyle.callout.font(weigth: .regular))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                Text(winnerName ?? "Alguém")
+                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                Spacer()
+            }.padding(.top, UIScreen.main.bounds.height*0.3)
             
             VStack {
                 Spacer()
@@ -50,6 +89,6 @@ struct WinScreen: View {
 
 struct WinScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WinScreen()
+        WinScreen(winnerName: "Marcelo")
     }
 }
