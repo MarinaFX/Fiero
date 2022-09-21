@@ -68,6 +68,7 @@
 		62A9849B28D210C200AE77B5 /* success-loop.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849A28D210C200AE77B5 /* success-loop.json */; };
 		62A9849D28D2150D00AE77B5 /* sad.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849C28D2150D00AE77B5 /* sad.json */; };
 		62A9849F28D2216700AE77B5 /* tonto2.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849E28D2216600AE77B5 /* tonto2.json */; };
+		62B2943A28D4EF5100E69F69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62B2943C28D4EF5100E69F69 /* Localizable.strings */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
 		CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */; };
 		CC3AB9DC28BE8FFF006C0507 /* SignupAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DB28BE8FFF006C0507 /* SignupAlertCases.swift */; };
@@ -201,6 +202,8 @@
 		62A9849A28D210C200AE77B5 /* success-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-loop.json"; sourceTree = "<group>"; };
 		62A9849C28D2150D00AE77B5 /* sad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sad.json; sourceTree = "<group>"; };
 		62A9849E28D2216600AE77B5 /* tonto2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tonto2.json; sourceTree = "<group>"; };
+		62B2943B28D4EF5100E69F69 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		62B2943D28D4EF5300E69F69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9DB28BE8FFF006C0507 /* SignupAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupAlertCases.swift; sourceTree = "<group>"; };
@@ -370,6 +373,7 @@
 		1B4135AC28597E8900C7094A = {
 			isa = PBXGroup;
 			children = (
+				62B2943C28D4EF5100E69F69 /* Localizable.strings */,
 				DFD4FED028B9113000169C20 /* tonto.gif */,
 				DFD4FED228B92DD700169C20 /* quantity.gif */,
 				1B4135B728597E8900C7094A /* Fiero */,
@@ -908,6 +912,7 @@
 				62A9849F28D2216700AE77B5 /* tonto2.json in Resources */,
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
 				1B89B3C828D250F10071A339 /* LoginAnimationStart.json in Resources */,
+				62B2943A28D4EF5100E69F69 /* Localizable.strings in Resources */,
 				1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */,
 				DFD4FED128B9113000169C20 /* tonto.gif in Resources */,
 				DF96CC6C28C7CABE00D17B37 /* Superline-Italic.ttf in Resources */,
@@ -1066,6 +1071,18 @@
 			targetProxy = 1B4135D028597E8F00C7094A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		62B2943C28D4EF5100E69F69 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62B2943B28D4EF5100E69F69 /* pt-BR */,
+				62B2943D28D4EF5300E69F69 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1B4135D728597E8F00C7094A /* Debug */ = {
