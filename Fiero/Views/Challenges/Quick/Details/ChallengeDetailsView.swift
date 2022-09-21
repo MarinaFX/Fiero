@@ -30,6 +30,7 @@ struct ChallengeDetailsView: View {
             ZStack {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
                 VStack {
+                    //MARK: - Accessibility Layout
                     if self.sizeCategory.isAccessibilityCategory {
                         ScrollView(showsIndicators: false) {
                             //MARK: - Top Components
@@ -96,7 +97,7 @@ struct ChallengeDetailsView: View {
                                 }
                                 else {
                                     NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false)
+                                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                                     }.hidden()
                                 }
                                 
@@ -109,20 +110,20 @@ struct ChallengeDetailsView: View {
                                         self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                             .sink(receiveCompletion: { completion in
                                                 switch completion {
-                                                case .finished:
-                                                    if self.quickChallenge.maxTeams == 2 {
+                                                    case .finished:
+                                                        if self.quickChallenge.maxTeams == 2 {
+                                                            self.isPresentingLoading.toggle()
+                                                            self.presentDuelOngoingChallenge.toggle()
+                                                        }
+                                                        else {
+                                                            self.isPresentingLoading.toggle()
+                                                            self.present3or4OngoingChallenge.toggle()
+                                                        }
+                                                    case .failure:
+                                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                                        self.isPresentingAlert.toggle()
                                                         self.isPresentingLoading.toggle()
-                                                        self.presentDuelOngoingChallenge.toggle()
-                                                    }
-                                                    else {
-                                                        self.isPresentingLoading.toggle()
-                                                        self.present3or4OngoingChallenge.toggle()
-                                                    }
-                                                case .failure:
-                                                    quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                                    self.isPresentingAlert.toggle()
-                                                    self.isPresentingLoading.toggle()
-                                                    print(self.isPresentingLoading)
+                                                        print(self.isPresentingLoading)
                                                 }
                                             }, receiveValue: { _ in })
                                             .store(in: &subscriptions)
@@ -139,6 +140,7 @@ struct ChallengeDetailsView: View {
                             }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                         }
                     }
+                    //MARK: - Standard Layout
                     else {
                         //MARK: - Top Components
                         ZStack {
@@ -204,7 +206,7 @@ struct ChallengeDetailsView: View {
                             }
                             else {
                                 NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: false)
+                                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                                 }.hidden()
                             }
                             
@@ -217,20 +219,20 @@ struct ChallengeDetailsView: View {
                                     self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                         .sink(receiveCompletion: { completion in
                                             switch completion {
-                                            case .finished:
-                                                if self.quickChallenge.maxTeams == 2 {
+                                                case .finished:
+                                                    if self.quickChallenge.maxTeams == 2 {
+                                                        self.isPresentingLoading.toggle()
+                                                        self.presentDuelOngoingChallenge.toggle()
+                                                    }
+                                                    else {
+                                                        self.isPresentingLoading.toggle()
+                                                        self.present3or4OngoingChallenge.toggle()
+                                                    }
+                                                case .failure:
+                                                    quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                                    self.isPresentingAlert.toggle()
                                                     self.isPresentingLoading.toggle()
-                                                    self.presentDuelOngoingChallenge.toggle()
-                                                }
-                                                else {
-                                                    self.isPresentingLoading.toggle()
-                                                    self.present3or4OngoingChallenge.toggle()
-                                                }
-                                            case .failure:
-                                                quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                                self.isPresentingAlert.toggle()
-                                                self.isPresentingLoading.toggle()
-                                                print(self.isPresentingLoading)
+                                                    print(self.isPresentingLoading)
                                             }
                                         }, receiveValue: { _ in })
                                         .store(in: &subscriptions)
@@ -258,12 +260,12 @@ struct ChallengeDetailsView: View {
                                 self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                                     .sink { completion in
                                         switch completion {
-                                        case .finished:
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        case .failure(let error):
-                                            print(error)
-                                            self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
-                                            self.isPresentingAlert.toggle()
+                                            case .finished:
+                                                self.presentationMode.wrappedValue.dismiss()
+                                            case .failure(let error):
+                                                print(error)
+                                                self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                                                self.isPresentingAlert.toggle()
                                         }
                                     } receiveValue: { _ in }
                                     .store(in: &subscriptions)

@@ -24,8 +24,6 @@ enum ButtonStyles {
             return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value;
         case .tertiary:
             return Tokens.Colors.Highlight.seven.value
-            
-            return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
         case .destructive:
             return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
         }
