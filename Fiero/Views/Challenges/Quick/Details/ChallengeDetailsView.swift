@@ -41,11 +41,15 @@ struct ChallengeDetailsView: View {
                                             .font(descriptionFont)
                                             .foregroundColor(color)
                                             .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.horizontal, 10)
                                         
                                         Text(quickChallenge.name)
                                             .font(.system(size: 40))
                                             .fontWeight(.heavy)
                                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                            .multilineTextAlignment(.center)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.horizontal, 10)
                                     }.padding(.top, Tokens.Spacing.sm.value)
                                     
                                     VStack {
@@ -54,11 +58,15 @@ struct ChallengeDetailsView: View {
                                             .font(descriptionFont)
                                             .foregroundColor(color)
                                             .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.horizontal, 10)
                                         
                                         Text("\(quickChallenge.goal) pontos")
                                             .font(.system(size: 40))
                                             .fontWeight(.heavy)
                                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                            .multilineTextAlignment(.center)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.horizontal, 10)
                                     }.padding(.bottom, Tokens.Spacing.sm.value)
                                 }
                             }
@@ -141,12 +149,17 @@ struct ChallengeDetailsView: View {
                                         .font(descriptionFont)
                                         .foregroundColor(color)
                                         .fixedSize(horizontal: false, vertical: true)
+                                        .padding(.top, Tokens.Spacing.nano.value)
+                                        .padding(.horizontal, 5)
                                     
                                     Text(quickChallenge.name)
                                         .font(.system(size: 40))
                                         .fontWeight(.heavy)
                                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                }.padding(.top, Tokens.Spacing.sm.value)
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .padding(.horizontal, 5)
+                                }.padding(.top, Tokens.Spacing.nano.value)
                                 
                                 VStack {
                                     Text("Objetivo")
@@ -159,6 +172,9 @@ struct ChallengeDetailsView: View {
                                         .font(.system(size: 40))
                                         .fontWeight(.heavy)
                                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .padding(.horizontal, 5)
                                 }.padding(.bottom, Tokens.Spacing.sm.value)
                             }
                         }

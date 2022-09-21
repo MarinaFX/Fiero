@@ -52,7 +52,7 @@ struct UserSignupView: View {
                             
                             CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
                             
-                            CustomTextFieldView(type: .both, style: .primary, helperText: "", placeholder: "Senha", isLowCase: true ,isWrong: .constant(false), text: $password)
+                            CustomTextFieldView(type: .both,style: .primary, helperText: "", placeholder: "Senha", isSecure: true, isLowCase: true ,isWrong: .constant(false), text: $password)
                         }
                         //MARK: Button and CheckBox
                         CheckboxComponent(style: .dark,
@@ -72,18 +72,18 @@ struct UserSignupView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Criar conta!",
                                         action: {
-                            if hasAcceptedTermsOfUse == true {
-                                isShowingTermsOfUseAlert = false
-                                if !self.username.isEmpty && !self.email.isEmpty && !self.password.isEmpty {
+                                if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
+                                    self.userViewModel.signupAlertCases = .emptyFields
+                                    isShowingAlert.toggle()
+                                } else if !self.email.contains("@") || !self.email.contains("."){
+                                    self.userViewModel.signupAlertCases = .invalidEmail
+                                    isShowingAlert.toggle()
+                                } else if !hasAcceptedTermsOfUse {
+                                    self.userViewModel.signupAlertCases = .termsOfUse
+                                    isShowingAlert.toggle()
+                                } else {
                                     self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
                                 }
-                                else {
-                                    self.userViewModel.signupAlertCases = .emptyFields
-                                    self.isShowingAlert.toggle()
-                                }
-                            } else {
-                                self.isShowingTermsOfUseAlert = true
-                            }
                         })
                     }
                     //MARK: Last elements
@@ -98,8 +98,7 @@ struct UserSignupView: View {
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .font(Tokens.FontStyle.callout.font(weigth: .bold))
                     }
-                }
-                    .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                }.padding(.horizontal, Tokens.Spacing.xxxs.value)
                 if self.userViewModel.isShowingLoading {
                     ZStack {
                         Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
@@ -114,41 +113,42 @@ struct UserSignupView: View {
             }
             .alert(isPresented: self.$isShowingAlert, content: {
                 switch self.userViewModel.signupAlertCases {
-                case .emptyFields:
-                    return Alert(title: Text(SignupAlertCases.emptyFields.title),
-                                 message: Text(SignupAlertCases.emptyFields.message),
-                                 dismissButton: .cancel(Text("OK")) {
-                        self.isShowingAlert = false
-                        self.userViewModel.removeLoadingAnimation()
-                    })
-                case .invalidEmail:
-                    return Alert(title: Text(SignupAlertCases.invalidEmail.title),
-                                 message: Text(SignupAlertCases.invalidEmail.message),
-                                 dismissButton: .cancel(Text("OK")) {
-                        self.isShowingAlert = false
-                        self.userViewModel.removeLoadingAnimation()
-                    })
-                case .accountAlreadyExists:
-                    return Alert(title: Text(SignupAlertCases.accountAlreadyExists.title),
-                                 message: Text(SignupAlertCases.accountAlreadyExists.message),
-                                 dismissButton: .cancel(Text("OK")) {
-                        self.isShowingAlert = false
-                        self.userViewModel.removeLoadingAnimation()
-                    })
-                case .connectionError:
-                    return Alert(title: Text(SignupAlertCases.connectionError.title),
-                                 message: Text(SignupAlertCases.connectionError.message),
-                                 dismissButton: .cancel(Text("OK")) {
-                        self.isShowingAlert = false
-                        self.userViewModel.removeLoadingAnimation()
-                    })
+                    case .emptyFields:
+                        return Alert(title: Text(SignupAlertCases.emptyFields.title),
+                                     message: Text(SignupAlertCases.emptyFields.message),
+                                     dismissButton: .cancel(Text("OK")) {
+                            self.isShowingAlert = false
+                            self.userViewModel.removeLoadingAnimation()
+                        })
+                    case .invalidEmail:
+                        return Alert(title: Text(SignupAlertCases.invalidEmail.title),
+                                     message: Text(SignupAlertCases.invalidEmail.message),
+                                     dismissButton: .cancel(Text("OK")) {
+                            self.isShowingAlert = false
+                            self.userViewModel.removeLoadingAnimation()
+                        })
+                    case .accountAlreadyExists:
+                        return Alert(title: Text(SignupAlertCases.accountAlreadyExists.title),
+                                     message: Text(SignupAlertCases.accountAlreadyExists.message),
+                                     dismissButton: .cancel(Text("OK")) {
+                            self.isShowingAlert = false
+                            self.userViewModel.removeLoadingAnimation()
+                        })
+                    case .connectionError:
+                        return Alert(title: Text(SignupAlertCases.connectionError.title),
+                                     message: Text(SignupAlertCases.connectionError.message),
+                                     dismissButton: .cancel(Text("OK")) {
+                            self.isShowingAlert = false
+                            self.userViewModel.removeLoadingAnimation()
+                        })
+                    case .termsOfUse:
+                        return Alert(title: Text(SignupAlertCases.termsOfUse.title),
+                                     message: Text(SignupAlertCases.termsOfUse.message),
+                                     dismissButton: .cancel(Text("OK")) {
+                            self.isShowingAlert = false
+                            self.userViewModel.removeLoadingAnimation()
+                        })
                 }
-            })
-            .alert(isPresented: $isShowingTermsOfUseAlert, content: {
-                Alert(title: Text("Termos de Uso"),
-                      message: Text("Você deve ler e aceitar os termos de uso para poder criar uma conta."),
-                      dismissButton: .cancel(Text("OK")))
-                
             })
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
                 userViewModel.onKeyboardDidSHow()
@@ -170,9 +170,7 @@ struct UserSignupView: View {
                 
                 if error == .connectionError {
                     self.isShowingAlert = true
-                }
-                
-                self.userViewModel.isLogged = true
+                }                
             })
             .onAppear {
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait

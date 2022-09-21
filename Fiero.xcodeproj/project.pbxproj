@@ -74,6 +74,7 @@
 		CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */; };
 		CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */; };
 		CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */; };
+		CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5E0B3328D4A3F2001FE6FB /* CardCategoryStyles.swift */; };
 		CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */; };
 		CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */; };
 		CCA2215928A18E3E006AA03F /* OngoingDuelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */; };
@@ -92,7 +93,7 @@
 		DF541CD428C163AF00A1511F /* blockCategory.json in Resources */ = {isa = PBXBuildFile; fileRef = DF541CD328C163AF00A1511F /* blockCategory.json */; };
 		DF7226F728C13EE400237621 /* quantity2.json in Resources */ = {isa = PBXBuildFile; fileRef = DF7226F628C13EE400237621 /* quantity2.json */; };
 		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
-		DF73C75A28BF97F80079DBB0 /* Lottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75928BF97F80079DBB0 /* Lottie.swift */; };
+		DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75928BF97F80079DBB0 /* LottieView.swift */; };
 		DF73C75D28BF9C760079DBB0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C75C28BF9C760079DBB0 /* loading.json */; };
 		DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76428BFC84F0079DBB0 /* quantity.json */; };
 		DF73C76928BFD7780079DBB0 /* tonto.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76828BFD7780079DBB0 /* tonto.json */; };
@@ -208,6 +209,7 @@
 		CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingModifier.swift; sourceTree = "<group>"; };
 		CC4FEDE828A1922900E53C39 /* DuelScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreStyle.swift; sourceTree = "<group>"; };
 		CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelScoreComponent.swift; sourceTree = "<group>"; };
+		CC5E0B3328D4A3F2001FE6FB /* CardCategoryStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCategoryStyles.swift; sourceTree = "<group>"; };
 		CC91C91228A2F99D00044EA7 /* ElementsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsStyles.swift; sourceTree = "<group>"; };
 		CCA2215828A18E3E006AA03F /* OngoingDuelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingDuelScreenView.swift; sourceTree = "<group>"; };
 		CCA3C24828760002007F6597 /* CheckboxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxComponent.swift; sourceTree = "<group>"; };
@@ -226,7 +228,7 @@
 		DF541CD328C163AF00A1511F /* blockCategory.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockCategory.json; sourceTree = "<group>"; };
 		DF7226F628C13EE400237621 /* quantity2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quantity2.json; sourceTree = "<group>"; };
 		DF73C75728BF85B60079DBB0 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
-		DF73C75928BF97F80079DBB0 /* Lottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie.swift; sourceTree = "<group>"; };
+		DF73C75928BF97F80079DBB0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DF73C75C28BF9C760079DBB0 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		DF73C76428BFC84F0079DBB0 /* quantity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quantity.json; sourceTree = "<group>"; };
 		DF73C76828BFD7780079DBB0 /* tonto.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tonto.json; sourceTree = "<group>"; };
@@ -308,7 +310,7 @@
 		1B0A02832885EAF200C4A421 /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */,
+				CC5E0B3528D4B96E001FE6FB /* CategoryView */,
 				1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */,
 				1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */,
 			);
@@ -402,7 +404,7 @@
 				1B90929E2878ACDA0039EBB7 /* Assets */,
 				1B5B7CDB2874BF4F00B4628F /* Extensions */,
 				1B4135BE28597E8F00C7094A /* Preview Content */,
-				DF73C75928BF97F80079DBB0 /* Lottie.swift */,
+				DF73C75928BF97F80079DBB0 /* LottieView.swift */,
 				DF73C75B28BF9B4A0079DBB0 /* Lottie */,
 			);
 			path = Fiero;
@@ -611,6 +613,15 @@
 				CC4FEDEC28A1925800E53C39 /* DuelScoreComponent.swift */,
 			);
 			path = Duel;
+			sourceTree = "<group>";
+		};
+		CC5E0B3528D4B96E001FE6FB /* CategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				CC5E0B3328D4A3F2001FE6FB /* CardCategoryStyles.swift */,
+				1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */,
+			);
+			path = CategoryView;
 			sourceTree = "<group>";
 		};
 		CC91C91428A2FABD00044EA7 /* Styles */ = {
@@ -978,7 +989,7 @@
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
 				1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */,
 				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
-				DF73C75A28BF97F80079DBB0 /* Lottie.swift in Sources */,
+				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
@@ -993,6 +1004,7 @@
 				1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
+				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
