@@ -22,7 +22,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     class Coordinator: NSObject, UITextFieldDelegate {
         
         public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            return range.location < 20
+            return range.location < 18
         }
         
         //MARK: - Variables Setup
