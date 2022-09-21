@@ -311,7 +311,7 @@ class UserViewModel: ObservableObject {
         self.refreshTokenSubscription = Timer.publish(every: 1200, on: .main, in: .default)
             .autoconnect()
             .receive(on: DispatchQueue.global(qos: .userInitiated))
-            .flatMap({ _ -> _ in
+            .flatMap({ _ in
                 return self.login(email: email, password: password)
                     .eraseToAnyPublisher()
             })
