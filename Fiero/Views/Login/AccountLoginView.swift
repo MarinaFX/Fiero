@@ -106,8 +106,7 @@ struct AccountLoginView: View {
                             self.userViewModel.loginAlertCases = .invalidEmail
                             isShowingAlert.toggle()
                         } else {
-                            self.userViewModel.login(email: self.emailText, password: self.passwordText)
-                                
+                            self.userViewModel.login(email: self.emailText, password: self.passwordText)    
                         }
                     })
                     
