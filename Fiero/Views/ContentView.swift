@@ -36,6 +36,9 @@ struct ContentView: View {
                     TabBarView()
                     .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
+                    .onAppear(perform: {
+                        self.userViewModel.refreshableToken()
+                    })
                 }
             }
             

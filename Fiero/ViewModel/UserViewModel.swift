@@ -36,6 +36,7 @@ class UserViewModel: ObservableObject {
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
+    private var refreshTokenSubscription: AnyCancellable?
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
@@ -302,7 +303,12 @@ class UserViewModel: ObservableObject {
             return
         }
         
-        Timer.publish(every: 1800, on: .main, in: .default)
+        guard refreshTokenSubscription == nil else {
+            print("Has token subscription")
+            return
+        }
+        
+        self.refreshTokenSubscription = Timer.publish(every: 1200, on: .main, in: .default)
             .autoconnect()
             .receive(on: DispatchQueue.global(qos: .userInitiated))
             .flatMap({ _ -> _ in
@@ -310,7 +316,6 @@ class UserViewModel: ObservableObject {
                     .eraseToAnyPublisher()
             })
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
-            .store(in: &cancellables)
     }
     
     func removeLoadingAnimation() {
