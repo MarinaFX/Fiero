@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 enum ActiveAlert {
-    case confirmAccountDelete, error
+    case confirmAccountDelete, error, logOut
 }
 
 //MARK: UserViewModel

@@ -26,7 +26,10 @@ struct ProfileView: View {
                     .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
                 LottieView(fileName: "tonto2", reverse: false, loop: true)
         
-              
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
+                    self.userViewModel.activeAlert = .logOut
+                    self.userViewModel.showingAlertToTrue()
+                })
                 ButtonComponent(style: .destructive(isEnabled: true), text: "Apagar conta", action: {
                     self.userViewModel.activeAlert = .confirmAccountDelete
                     self.userViewModel.showingAlertToTrue()
@@ -69,14 +72,26 @@ struct ProfileView: View {
                                 self.userViewModel.showingAlertToFalse()
                             }
                         )
-                case .none:
-                    return Alert(
-                        title: Text("Oops, muito desafiador!"),
-                        message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
-                        dismissButton: .default(Text("OK")){
-                            self.userViewModel.showingAlertToFalse()
-                        }
-                    )
+                    case .logOut:
+                        return Alert(
+                            title: Text("Sair da conta"),
+                            message: Text(""),
+                            primaryButton: .destructive(Text("Sair da conta")) {
+                                self.userViewModel.logOut()
+                                self.userViewModel.isLogged = false
+                            },
+                            secondaryButton: .cancel(Text("Cancelar")){
+                                self.userViewModel.showingAlertToFalse()
+                            }
+                        )
+                    case .none:
+                        return Alert(
+                            title: Text("Oops, muito desafiador!"),
+                            message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
+                            dismissButton: .default(Text("OK")){
+                                self.userViewModel.showingAlertToFalse()
+                            }
+                        )
             }
         }
     }

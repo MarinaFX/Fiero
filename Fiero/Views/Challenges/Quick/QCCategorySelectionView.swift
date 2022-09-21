@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct ChallengesCategoryInfo {
+    let style: CardCategoryStyles
+    let title: String
+    let subtitle: String
+}
+
 struct QCCategorySelectionView: View {
     @Environment(\.presentationMode) var presentationMode
     
@@ -18,15 +24,15 @@ struct QCCategorySelectionView: View {
     var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.8
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
-    var items: [ChallengeCategoryCardView] = [ChallengeCategoryCardView(title: "Desafio de\nquantidade",
-                                                                        subtitle: "Vence quem fizer atingir\na pontuação primeiro.",
-                                                                        isAvailable: true),
-                                              ChallengeCategoryCardView(title: "Desafio de \ntempo",
-                                                                        subtitle: "Vence quem fizer a maior \npontuação no tempo definido.",
-                                                                        isAvailable: false),
-                                              ChallengeCategoryCardView(title: "Desafio de\nrounds",
-                                                                        subtitle: "Competições de três ou\ncinco rounds.",
-                                                                        isAvailable: false)]
+    var items: [ChallengesCategoryInfo] = [ChallengesCategoryInfo(style: .amount,
+                                                                  title: "Desafio de\nquantidade",
+                                                                  subtitle: "Vence quem fizer atingir\na pontuação primeiro."),
+                                              ChallengesCategoryInfo(style: .blocked,
+                                                                     title: "Desafio de\ntempo",
+                                                                     subtitle: "Vence quem fizer\na maior pontuação\nno tempo definido."),
+                                              ChallengesCategoryInfo(style: .blocked,
+                                                                     title: "Desafio de\nrounds",
+                                                                     subtitle: "Competição de 3\nou 5 rounds.")]
     
     var body: some View {
         let widthHStack: CGFloat = widthFocussedCard + ((widthUnfocussedCard + cardSpacing) * CGFloat((items.count - 1)))
@@ -44,26 +50,21 @@ struct QCCategorySelectionView: View {
 
                 HStack(alignment: .center,spacing: cardSpacing) {
                     ForEach(0 ..< items.count) { index in
-                        if index == 0 {
-                            items[index]
-                                .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
-                                       height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
-                                .opacity(isFocused(index: index) ? 1.0 : 0.4)
-                                .onTapGesture {
+                        
+                        ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
+                            .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
+                                   height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
+                            .opacity(isFocused(index: index) ? 1.0 : 0.4)
+                            .onTapGesture {
+                                if index == 0 {
                                     presentNextScreen.toggle()
                                 }
-                            
-                            NavigationLink("", isActive: self.$presentNextScreen) {
-                                QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                             }
-                            .hidden()
+                        
+                        NavigationLink("", isActive: self.$presentNextScreen) {
+                            QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                         }
-                        else {
-                            items[index]
-                                .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
-                                       height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
-                                .opacity(isFocused(index: index) ? 1.0 : 0.4)
-                        }
+                        .hidden()
                     }
                 }
                 .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCard + 50), alignment: .center)
