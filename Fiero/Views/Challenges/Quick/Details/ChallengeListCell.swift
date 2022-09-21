@@ -14,10 +14,9 @@ struct ChallengeListCell: View {
     var body: some View {
         HStack {
             if quickChallenge.type == QCType.amount.description{
-                LottieView(fileName: "quantity2", reverse: false, loop: true)
+                LottieView(fileName: "quantity-list-cell", reverse: false, loop: true)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30)
-                    .padding(.bottom, 8)
                     .padding(.horizontal, Tokens.Spacing.nano.value)
             }
             VStack (spacing: Tokens.Spacing.nano.value) {

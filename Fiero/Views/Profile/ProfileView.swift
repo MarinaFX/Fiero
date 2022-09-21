@@ -77,7 +77,7 @@ struct ProfileView: View {
                             title: Text("Sair da conta"),
                             message: Text(""),
                             primaryButton: .destructive(Text("Sair da conta")) {
-                                self.userViewModel.logOut()
+                                self.userViewModel.cleanDefaults()
                                 self.userViewModel.isLogged = false
                             },
                             secondaryButton: .cancel(Text("Cancelar")){
