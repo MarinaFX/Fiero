@@ -90,7 +90,6 @@
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
-		DF541CD428C163AF00A1511F /* blockCategory.json in Resources */ = {isa = PBXBuildFile; fileRef = DF541CD328C163AF00A1511F /* blockCategory.json */; };
 		DF7226F728C13EE400237621 /* quantity2.json in Resources */ = {isa = PBXBuildFile; fileRef = DF7226F628C13EE400237621 /* quantity2.json */; };
 		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
 		DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75928BF97F80079DBB0 /* LottieView.swift */; };
@@ -920,8 +919,6 @@
 				DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */,
 				DFD4FED328B92DD700169C20 /* quantity.gif in Resources */,
 				DF94A39028C22381003B47B8 /* winAnimation.json in Resources */,
-				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
-				DF541CD428C163AF00A1511F /* blockCategory.json in Resources */,
 				1B89B3CA28D250FE0071A339 /* LoginAnimationEnd.json in Resources */,
 				DF94518B28C28F7000744BAC /* success.json in Resources */,
 			);
