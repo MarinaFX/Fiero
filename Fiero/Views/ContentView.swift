@@ -28,15 +28,17 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
         if self.isFirstLogin {
             OnboardingScreen(isFirstLogin: self.$isFirstLogin)
         } else {
             if userViewModel.isLogged {
                 withAnimation {
                     TabBarView()
-                .environmentObject(self.quickChallengeViewModel)
+                    .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
+                    .onAppear(perform: {
+                        self.userViewModel.refreshableToken()
+                    })
                 }
             }
             

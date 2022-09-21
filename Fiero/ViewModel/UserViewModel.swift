@@ -26,9 +26,9 @@ class UserViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isLogged = false
 
-    //private let BASE_URL: String = "localhost"
-    //private let BASE_URL: String = "192.168.25.93"
-    private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
+    private let BASE_URL: String = "localhost"
+    //private let BASE_URL: String = "10.41.48.196"
+    //private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
     private let ENDPOINT_SIGNUP: String = "/user/register"
     private let ENDPOINT_LOGIN: String = "/user/login"
     private let ENDPOINT_DELETE_USER: String = "/user"
@@ -36,6 +36,7 @@ class UserViewModel: ObservableObject {
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
+    private var refreshTokenSubscription: AnyCancellable?
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
@@ -58,7 +59,10 @@ class UserViewModel: ObservableObject {
     //MARK: - User Signup
     @discardableResult
     func signup(for user: User) -> AnyPublisher<Void, Error> {
-        isShowingLoading = true
+        DispatchQueue.main.async {
+            self.isShowingLoading = true
+        }
+        
         let json = """
         {
             "email" : "\(user.email)",
@@ -122,7 +126,9 @@ class UserViewModel: ObservableObject {
     //MARK: - User Login
     @discardableResult
     func login(email: String, password: String) -> AnyPublisher<Void, Error> {
-        isShowingLoading = true
+        DispatchQueue.main.async {
+            self.isShowingLoading = true
+        }
         let userJSON = """
         {
             "password" : "\(password)",
@@ -162,14 +168,13 @@ class UserViewModel: ObservableObject {
                         default:
                             self?.loginAlertCases = .connectionError
                     }
-                    print(self?.user as Any)
-                    print(self?.serverResponse.statusCode as Any)
+                    print("Login status code: \(rawURLResponse.statusCode)")
                     self?.isShowingLoading = false
                     
                     return
                 }
                 print("Login status code: \(rawURLResponse.statusCode)")
-
+                print("Login token: \(response.token)")
                 self?.user = response.user
                 self?.user.token = response.token
                 
@@ -191,7 +196,6 @@ class UserViewModel: ObservableObject {
     }
     
     //MARK: - Get AuthToken
-    
     func getAuthToken() {
         guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
             print("Não ha nenhum email de usuario salvo")
@@ -291,8 +295,27 @@ class UserViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func logOut() {
-        cleanDefaults()
+    //MARK: - Refresh Token
+    func refreshableToken() {
+        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description),
+              let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
+            print("NO USER SAVED IN DEFAULTS")
+            return
+        }
+        
+        guard refreshTokenSubscription == nil else {
+            print("Has token subscription")
+            return
+        }
+        
+        self.refreshTokenSubscription = Timer.publish(every: 1200, on: .main, in: .default)
+            .autoconnect()
+            .receive(on: DispatchQueue.global(qos: .userInitiated))
+            .flatMap({ _ in
+                return self.login(email: email, password: password)
+                    .eraseToAnyPublisher()
+            })
+            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
     }
     
     func removeLoadingAnimation() {
@@ -315,10 +338,6 @@ class UserViewModel: ObservableObject {
     
     static func getUserNameFromDefaults() -> String {
         return UserDefaults.standard.string(forKey: UDKeys.username.description) ?? "Alpaca Enfurecida"
-    }
-    
-    func teste() -> String {
-        return self.keyValueStorage.string(forKey: UDKeys.username.description) ?? "Alpaca Enfurecida"
     }
     
     static func getUserEmailFromDefaults() -> String {

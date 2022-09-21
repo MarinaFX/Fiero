@@ -37,9 +37,6 @@ struct ProfileView: View {
             }
             .padding(Tokens.Spacing.defaultMargin.value)
         }
-        .onAppear(perform: {
-            print("defaults: \(self.userViewModel.teste())")
-        })
         .alert(isPresented: $userViewModel.showingAlert) {
             switch self.userViewModel.activeAlert {
                     case .error:
@@ -80,7 +77,7 @@ struct ProfileView: View {
                             title: Text("Sair da conta"),
                             message: Text(""),
                             primaryButton: .destructive(Text("Sair da conta")) {
-                                self.userViewModel.logOut()
+                                self.userViewModel.cleanDefaults()
                                 self.userViewModel.isLogged = false
                             },
                             secondaryButton: .cancel(Text("Cancelar")){
