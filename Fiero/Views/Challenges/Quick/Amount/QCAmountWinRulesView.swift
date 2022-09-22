@@ -37,7 +37,6 @@ struct QCAmountWinRulesView: View {
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
-    @State var serverResponse: ServerResponse = .unknown
     @State var quickChallenge: QuickChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     
     var primaryColor: Color
@@ -47,12 +46,12 @@ struct QCAmountWinRulesView: View {
     var challengeParticipants: Int
     var goalMeasure: String {
         switch challengeType {
-        case .amount:
-            return "unity"
-        case .byTime(let measure):
-            return measure
-        case .bestOf:
-            return "rounds"
+            case .amount:
+                return "unity"
+            case .byTime(let measure):
+                return measure
+            case .bestOf:
+                return "rounds"
         }
     }
     
@@ -89,7 +88,8 @@ struct QCAmountWinRulesView: View {
                                         case .finished:
                                             print("Request completed successfully")
                                     }
-                                }, receiveValue: { _ in }).store(in: &subscriptions)
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
                         } else {
                             self.errorState = .negativeAmount
                             self.isPresentingAlert.toggle()

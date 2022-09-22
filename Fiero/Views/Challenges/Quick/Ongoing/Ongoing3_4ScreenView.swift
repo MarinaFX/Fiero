@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct Ongoing3Or4WithPauseScreenView: View {
-    @Binding var quickChallenge: QuickChallenge
     @State var didTapPauseButton: Bool = false
     @State var didFinishChallenge: Bool = false
     
+    @Binding var quickChallenge: QuickChallenge
+    @Binding var isShowingAlertOnDetailsScreen: Bool
+    
     var body: some View {
         ZStack {
-            Ongoing3_4ScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: self.$didTapPauseButton)
+            Ongoing3_4ScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: self.$didTapPauseButton, isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen)
             if self.didTapPauseButton {
                 PauseScreen(didTapPauseButton: self.$didTapPauseButton, didFinishChallenge: self.$didFinishChallenge, quickChallenge: self.$quickChallenge)
                 if self.didFinishChallenge {
@@ -32,6 +34,8 @@ struct Ongoing3_4ScreenView: View {
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
+    @Binding var isShowingAlertOnDetailsScreen: Bool
+
     
     @State var isFinished: Bool = false
     
@@ -77,6 +81,7 @@ struct Ongoing3_4ScreenView: View {
                             ScoreController3_4Component(playerScore: Binding(team.members)?.first?.score ?? .constant(0),
                                                         quickChallenge: $quickChallenge,
                                                         isFinished: $isFinished,
+                                                        isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
                                                         playerName: Member.getName(playerName: team.wrappedValue.name),
                                                         challengeId: quickChallenge.id,
                                                         teamId: team.wrappedValue.id,
@@ -121,6 +126,6 @@ struct Ongoing3_4ScreenView_Previews: PreviewProvider {
                     Team(id: "teste3", name: "player3", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 43, userId: "", teamId: "", beginDate: "", botPicture: "player3", createdAt: "", updatedAt: "")]),
                     Team(id: "teste4", name: "player4", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 200, userId: "", teamId: "", beginDate: "", botPicture: "player4", createdAt: "", updatedAt: "")])
                 ],
-                owner: User(email: "teste", name: "teste"))))
+                                                                                owner: User(email: "teste", name: "teste"))), isShowingAlertOnDetailsScreen: .constant(false))
     }
 }

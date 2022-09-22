@@ -9,27 +9,26 @@ import SwiftUI
 
 struct ChallengeListCell: View {
     
-    var quickChallenge: QuickChallenge?
+    @Binding var quickChallenge: QuickChallenge
     
     var body: some View {
         HStack {
-            if quickChallenge?.type == QCType.amount.description{
-                LottieView(fileName: "quantity2", reverse: false, loop: true)
+            if quickChallenge.type == QCType.amount.description{
+                LottieView(fileName: "quantity-list-cell", reverse: false, loop: true)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30)
-                    .padding(.bottom, 8)
                     .padding(.horizontal, Tokens.Spacing.nano.value)
             }
             VStack (spacing: Tokens.Spacing.nano.value) {
                 HStack {
-                    Text(quickChallenge?.name ?? "")
+                    Text(quickChallenge.name)
                         .font(Tokens.FontStyle.title.font(weigth: .bold))
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     Spacer()
                 }
                 HStack {
-                    if quickChallenge?.finished == false {
+                    if quickChallenge.finished == false {
                     Text("Em andamento")
                         .font(Tokens.FontStyle.caption.font(weigth: .regular))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -61,6 +60,6 @@ struct ChallengeListCell: View {
 
 struct ChallengeListCell_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeListCell()
+        ChallengeListCell(quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))))
     }
 }
