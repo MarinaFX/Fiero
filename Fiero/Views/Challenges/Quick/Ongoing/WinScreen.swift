@@ -11,6 +11,8 @@ struct WinScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @Binding var isFinished: Bool
+    
     @State private var animationAmount = 0.0
     
     var body: some View {
@@ -39,17 +41,19 @@ struct WinScreen: View {
                     //TODO: - logic to finish challenge
                 })
                 ButtonComponent(style: .black(isEnabled: true), text: "Continuar marcando pontos", action: {
+                    isFinished = false
                     self.presentationMode.wrappedValue.dismiss()
                 })
                 .padding(.bottom, Tokens.Spacing.sm.value)
             }.frame(maxHeight: UIScreen.main.bounds.height)
                 .padding(.horizontal)
         }
+        .navigationBarHidden(true)
     }
 }
 
 struct WinScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WinScreen()
+        WinScreen(isFinished: .constant(true))
     }
 }

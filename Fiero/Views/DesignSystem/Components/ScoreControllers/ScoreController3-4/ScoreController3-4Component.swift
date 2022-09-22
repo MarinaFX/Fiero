@@ -16,6 +16,8 @@ struct ScoreController3_4Component: View {
     @State private(set) var timer: Timer?
 
     @Binding var playerScore: Double
+    @Binding var quickChallenge: QuickChallenge
+    @Binding var isFinished: Bool
 
     private(set) var playerName: String
     private(set) var challengeId: String
@@ -50,6 +52,11 @@ struct ScoreController3_4Component: View {
                                     isLongPressing = true
                                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                                         self.playerScore -= 1
+                                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                            self.timer?.invalidate()
+                                            isLongPressing = false
+                                            isFinished = true
+                                        }
                                         Haptics.shared.play(.light)
                                     })
                                 }
@@ -81,6 +88,11 @@ struct ScoreController3_4Component: View {
                                     isLongPressing = true
                                     self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                                         self.playerScore += 1
+                                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                            self.timer?.invalidate()
+                                            isLongPressing = false
+                                            isFinished = true
+                                        }
                                         Haptics.shared.play(.light)
                                     })
                                 }
@@ -98,6 +110,27 @@ struct ScoreController3_4Component: View {
 
 struct ScoreController3_4Component_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(playerScore: .constant(2.0), playerName: "", challengeId: "", teamId: "", memberId: "")
+        ScoreController3_4Component(playerScore: .constant(2.0),
+                                    quickChallenge: .constant(QuickChallenge(id: "",
+                                                                             name: "",
+                                                                             invitationCode: "",
+                                                                             type: "",
+                                                                             goal: 0,
+                                                                             goalMeasure: "",
+                                                                             finished: false,
+                                                                             ownerId: "",
+                                                                             online: false,
+                                                                             alreadyBegin: false,
+                                                                             maxTeams: 0,
+                                                                             createdAt: "",
+                                                                             updatedAt: "",
+                                                                             teams: [],
+                                                                             owner: User(email: "",
+                                                                                         name: ""))),
+                                    isFinished: .constant(false),
+                                    playerName: "",
+                                    challengeId: "",
+                                    teamId: "",
+                                    memberId: "")
     }
 }

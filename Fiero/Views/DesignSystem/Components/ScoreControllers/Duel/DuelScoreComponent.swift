@@ -19,6 +19,8 @@ struct DuelScoreComponent: View {
     
     @State private var subscriptions: Set<AnyCancellable> = []
 
+    @Binding var isFinished: Bool
+    @Binding var quickChallenge: QuickChallenge
     @Binding var playerScore: Double
     @Binding var isShowingAlertOnDetailsScreen: Bool
 
@@ -55,6 +57,11 @@ struct DuelScoreComponent: View {
                                         isLongPressing = true
                                         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                                             self.playerScore -= 1
+                                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                                self.timer?.invalidate()
+                                                isLongPressing = false
+                                                isFinished = true
+                                            }
                                             Haptics.shared.play(.light)
                                         })
                                     }
@@ -84,6 +91,11 @@ struct DuelScoreComponent: View {
                                         isLongPressing = true
                                         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
                                             self.playerScore += 1
+                                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                                self.timer?.invalidate()
+                                                isLongPressing = false
+                                                isFinished = true
+                                            }
                                             Haptics.shared.play(.light)
                                         })
                                     }
@@ -121,6 +133,30 @@ struct DuelScoreComponent: View {
 
 struct DuelScoreComponent_Previews: PreviewProvider {
     static var previews: some View {
-        DuelScoreComponent(style: .first, maxValue: 0, playerScore: .constant(0.0), isShowingAlertOnDetailsScreen: .constant(false), challengeId: "", teamId: "", memberId: "", playerName: "")
+        DuelScoreComponent(style: .first,
+                           maxValue: 0,
+                           isFinished: .constant(false),
+                           quickChallenge: .constant(QuickChallenge(id: "",
+                                                                    name: "",
+                                                                    invitationCode: "",
+                                                                    type: "",
+                                                                    goal: 0,
+                                                                    goalMeasure: "",
+                                                                    finished: false,
+                                                                    ownerId: "",
+                                                                    online: false,
+                                                                    alreadyBegin: false,
+                                                                    maxTeams: 0,
+                                                                    createdAt: "",
+                                                                    updatedAt: "",
+                                                                    teams: [],
+                                                                    owner: User(email: "",
+                                                                                name: ""))),
+                           playerScore: .constant(0.0),
+                           isShowingAlertOnDetailsScreen: .constant(false),
+                           challengeId: "",
+                           teamId: "",
+                           memberId: "",
+                           playerName: "")
     }
 }

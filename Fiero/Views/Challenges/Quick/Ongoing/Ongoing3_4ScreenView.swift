@@ -26,15 +26,42 @@ struct Ongoing3Or4WithPauseScreenView: View {
     }
 }
 
+//MARK: -
 struct Ongoing3_4ScreenView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     
+    @State var isFinished: Bool = false
+    
+    //MARK: Tokens
     var foregroundColor: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
+    var vStackSpacing: CGFloat {
+        return Tokens.Spacing.xxxs.value
+    }
+    var horizontalSpacing: CGFloat {
+        return Tokens.Spacing.xl.value
+    }
+    var verticalSpacing: CGFloat {
+        return Tokens.Spacing.xxxs.value
+    }
+    var buttonSpacing: CGFloat {
+        return Tokens.Spacing.defaultMargin.value
+    }
+    var hStackPadding: CGFloat {
+        return Tokens.Spacing.xs.value
+    }
+    var pauseButtonName: String {
+        return "pause.circle.fill"
+    }
+    var eyesName: String {
+        return "Olhos"
+    }
+    
+    //MARK: - Body
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -47,12 +74,22 @@ struct Ongoing3_4ScreenView: View {
                                 .resizable()
                                 .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.1)
                             
-                            ScoreController3_4Component(playerScore: Binding(team.members)?.first?.score ?? .constant(0), playerName: Member.getName(playerName: team.wrappedValue.name), challengeId: quickChallenge.id, teamId: team.wrappedValue.id, memberId: team.wrappedValue.members?[0].id ?? "")
+                            ScoreController3_4Component(playerScore: Binding(team.members)?.first?.score ?? .constant(0),
+                                                        quickChallenge: $quickChallenge,
+                                                        isFinished: $isFinished,
+                                                        playerName: Member.getName(playerName: team.wrappedValue.name),
+                                                        challengeId: quickChallenge.id,
+                                                        teamId: team.wrappedValue.id,
+                                                        memberId: team.wrappedValue.members?[0].id ?? "")
                         }
                         .padding(.horizontal, Tokens.Spacing.xl.value)
                         .padding(.vertical, Tokens.Spacing.xxxs.value)
                     }
                 }
+                NavigationLink("", isActive: $isFinished) {
+                    WinScreen(isFinished: $isFinished)
+                }
+                .hidden()
             }
             HStack {
                 Spacer ()
@@ -66,9 +103,10 @@ struct Ongoing3_4ScreenView: View {
                         .frame(width: 50, height: 50)
                 }
                 .padding(.trailing, Tokens.Spacing.defaultMargin.value)
-
+                
             }
             .padding(.top, -(UIScreen.main.bounds.height/2 - Tokens.Spacing.xs.value))
+            
         }
     }
 }
