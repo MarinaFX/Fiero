@@ -59,6 +59,7 @@ struct WinScreen: View {
                 .frame(maxWidth: UIScreen.main.bounds.width)
                 .rotationEffect(.degrees(-8))
             
+            //TODO: get winner name of score controller component
             VStack {
                 Text("1ª colocação")
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
@@ -69,7 +70,9 @@ struct WinScreen: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 Spacer()
-            }.padding(.top, UIScreen.main.bounds.height*0.4)
+            }
+            .padding(.top, UIScreen.main.bounds.height*0.4)
+            .hidden()
             
             VStack {
                 Spacer()
@@ -81,8 +84,9 @@ struct WinScreen: View {
                     self.presentationMode.wrappedValue.dismiss()
                 })
                 .padding(.bottom, Tokens.Spacing.sm.value)
-            }.frame(maxHeight: UIScreen.main.bounds.height)
-                .padding(.horizontal)
+            }
+            .frame(maxHeight: UIScreen.main.bounds.height)
+            .padding(.horizontal)
         }
         .navigationBarHidden(true)
     }
