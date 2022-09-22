@@ -25,7 +25,6 @@ struct WinScreen: View {
     }
     
     var body: some View {
-        // nao ta respeitando a largura da tela
         ZStack {
             Tokens.Colors.Background.dark.value
             
@@ -65,7 +64,7 @@ struct WinScreen: View {
                     .font(Tokens.FontStyle.callout.font(weigth: .regular))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                Text(winnerName ?? "Alguém")
+                Text(winnerName)
                     .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
