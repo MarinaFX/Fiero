@@ -14,7 +14,6 @@ struct OngoingDuelScreenView: View {
     @Binding var isShowingAlertOnDetailsScreen: Bool
     
     @State var isFinished: Bool = false
-    @State var isPresentingLoading: Bool = false
     
     //MARK: - Tokens
     var firstBackgroundColor: Color {
@@ -107,17 +106,6 @@ struct OngoingDuelScreenView: View {
                                            playerName: Member.getName(playerName: self.quickChallenge.teams[1].name))
                         .padding(.horizontal, vStackSpacing)
                         Image(eyesName)
-                    }
-                }
-            }
-            if isPresentingLoading {
-                ZStack {
-                    Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
-                    VStack {
-                        Spacer()
-                        //TODO: - change name of animation loading
-                        LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
-                        Spacer()
                     }
                 }
             }
