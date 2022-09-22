@@ -92,7 +92,7 @@ struct Ongoing3_4ScreenView: View {
                     }
                 }
                 NavigationLink("", isActive: $isFinished) {
-                    WinScreen(isFinished: $isFinished)
+                    WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
                 }
                 .hidden()
             }

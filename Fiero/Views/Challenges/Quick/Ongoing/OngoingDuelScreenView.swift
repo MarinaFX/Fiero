@@ -81,7 +81,7 @@ struct OngoingDuelScreenView: View {
                         Image(eyesName)
                     }
                     NavigationLink("", isActive: $isFinished) {
-                        WinScreen(isFinished: $isFinished)
+                        WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
                     }
                     .hidden()
                 }
