@@ -12,8 +12,8 @@ struct ChallengeCategoryCardView: View {
     @State var style: CardCategoryStyles
     @Binding var isPlaying: Bool
     
-    var title: String
-    var subtitle: String
+    var title: LocalizedStringKey
+    var subtitle: LocalizedStringKey
     
     var body: some View {
         ZStack {

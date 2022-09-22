@@ -26,7 +26,7 @@ struct DuelScoreComponent: View {
     private(set) var teamId: String
     private(set) var memberId: String
     
-    var playerName: String
+    var playerName: LocalizedStringKey
     
     var buttonFrame: CGFloat {
         return 40
@@ -93,7 +93,7 @@ struct DuelScoreComponent: View {
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .padding(.vertical, style.spacingVertical)
                 
-                Text("\(playerName)")
+                Text(playerName)
                     .foregroundColor(style.buttonColor)
                     .font(style.nameFont)
                     .padding(.horizontal, style.spacingVertical)

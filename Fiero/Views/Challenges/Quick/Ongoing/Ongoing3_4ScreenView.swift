@@ -53,7 +53,7 @@ struct Ongoing3_4ScreenView: View {
                             
                             ScoreController3_4Component(playerScore: Binding(team.members)?.first?.score ?? .constant(0),
                                 isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
-                                playerName: Member.getName(playerName: team.wrappedValue.name), challengeId: quickChallenge.id,
+                                                        playerName: Member.getName(playerName: team.wrappedValue.name), challengeId: quickChallenge.id,
                                 teamId: team.wrappedValue.id,
                                 memberId: team.wrappedValue.members?[0].id ?? "")
                         }

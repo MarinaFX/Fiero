@@ -49,7 +49,7 @@ struct ProfileView: View {
                         )
                     case .confirmAccountDelete:
                         return Alert(
-                            title: Text("Deletar conta"),
+                            title: Text("Apagar conta"),
                             message: Text("Essa ação não poderá ser desfeita."),
                             primaryButton: .destructive(Text("Apagar minha conta")) {
                                 self.userViewModel.deleteAccount()

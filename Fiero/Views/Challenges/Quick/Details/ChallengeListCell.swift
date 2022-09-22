@@ -28,25 +28,36 @@ struct ChallengeListCell: View {
                     Spacer()
                 }
                 HStack {
-                    if quickChallenge.finished == false {
-                    Text("Em andamento")
-                        .font(Tokens.FontStyle.caption.font(weigth: .regular))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .padding(.vertical, Tokens.Spacing.quarck.value)
-                        .padding(.horizontal, Tokens.Spacing.nano.value)
-                        .background(Tokens.Colors.Highlight.four.value)
-                        .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                        .padding(.bottom, 3)
-                    } else {
-                        Text("Finalizado")
+                    if quickChallenge.alreadyBegin == false {
+                        Text("challengeNotStartedStatus")
                             .font(Tokens.FontStyle.caption.font(weigth: .regular))
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                             .padding(.vertical, Tokens.Spacing.quarck.value)
                             .padding(.horizontal, Tokens.Spacing.nano.value)
-                            .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
+                            .background(Tokens.Colors.Highlight.one.value)
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
-                    }
+                    } else {
+                        if quickChallenge.finished == false {
+                            Text("challengeOngoingStatus")
+                                .font(Tokens.FontStyle.caption.font(weigth: .regular))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.vertical, Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, Tokens.Spacing.nano.value)
+                                .background(Tokens.Colors.Highlight.four.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        } else {
+                            Text("challengeFinishedStatus")
+                                .font(Tokens.FontStyle.caption.font(weigth: .regular))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.vertical, Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, Tokens.Spacing.nano.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        }
+                                        }
                     Spacer()
                 }
             }

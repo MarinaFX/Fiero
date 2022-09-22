@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum SignupAlertCases {
     case emptyFields
@@ -7,7 +8,7 @@ enum SignupAlertCases {
     case connectionError
     case termsOfUse
     
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
             case .emptyFields:
                 return "Campos vazios"
@@ -22,7 +23,7 @@ enum SignupAlertCases {
         }
     }
     
-    var message: String {
+    var message: LocalizedStringKey {
         switch self {
             case .emptyFields:
                 return "Você precisa preencher todos os campos."
