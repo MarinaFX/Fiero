@@ -197,7 +197,6 @@ struct AccountLoginView: View {
 
                 if error == .wrongCredentials {
                     self.isShowingAlert = true
-                    print("aqui ó")
                 }
 
                 if error == .emailNotRegistrated {
