@@ -19,7 +19,7 @@ struct ChallengeCategoryCardView: View {
             
             VStack(spacing: Tokens.Spacing.quarck.value) {
                 if isAvailable {
-                    LottieView(fileName: "quantity2", reverse: false, loop: true)
+                    LottieView(fileName: "quantity", reverse: false, loop: false, secondAnimation: "quantity2", loopSecond: true)
                         .padding(.bottom, Tokens.Spacing.xxs.value)
                     
                     Text(title)

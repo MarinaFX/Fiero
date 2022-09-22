@@ -45,19 +45,19 @@ struct Member: Decodable, Encodable, Equatable, Identifiable {
         }
     }
     
-    static func getName(playerName: String) -> String {
-        var teamName: String = ""
+    static func getName(playerName: String) -> LocalizedStringKey {
+        var teamName: LocalizedStringKey = ""
         if let first = playerName.components(separatedBy: " ").first {
-            teamName = first
+            teamName = LocalizedStringKey(first)
         }
         
         switch playerName {
             case "player2":
-                return "Raposa"
+                return LocalizedStringKey("player2")
             case "player3":
-                return "Panda"
+                return LocalizedStringKey("player3")
             case "player4":
-                return "Leão"
+                return LocalizedStringKey("player4")
             default:
                 return teamName
         }

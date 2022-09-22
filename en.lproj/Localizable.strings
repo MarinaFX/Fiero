@@ -1,0 +1,190 @@
+/*
+  Localizable.strings
+  Fiero
+
+  Created by Brenda Linck on 16/09/22.
+  
+*/
+// MARK: - AccountLoginView
+    "Boas vindas, desafiante" = "Welcome, challenger";
+    "Fazer Login!" = "Login!";
+    "Ainda não tem uma conta?" = "Don't have an account yet?";
+    "Cadastre-se!" = "Register!";
+
+// MARK: - Onboarding
+// adicionar imagens em ingles
+"Pular" = "Skip";
+"Quero começar!" = "Lets Start!";
+
+
+// MARK: - Termos de Uso
+    "O Fiero é um aplicativo onde você pode criar desafios para interagir com seus amigos. Aqui você encontra nossos termos de uso e políticas de privacidade. Para utilizar o aplicativo é necessário que você leia e esteja de acordo com nossos termos." =   "Fiero is an application where you can create challenges to interact with your friends. Here you will find our terms of use and privacy policies. To use the application, you must read and agree to our terms." ;
+    "Dados:Nós pedimos alguns dados para você para que as funcionalidade do aplicativo funcionem, mas prezamos a segurança desses dados utilizando servidores na AWS e garantimos que seus dados não serão compartilhados." = "Data: We ask for some data from you in order for the app's functionality to work, but we value the security of this data using servers on AWS and we guarantee that your data will not be shared.";
+    "Os dados que solicitamos são:" =  "The data we request are:";
+    "Nome" = "Name";
+    "E-mail" = "E-mail";
+    "Localização" = "Location";
+    "Melhorias: Faremos análises do seu padrão de uso no aplicativo para identificar bugs e melhorias de usabilidade, mas todas as informações são anonimizadas pelo sistema automáticamente e não é possível correlacioná-las com você ou qualquer outro usuário do aplicativo. Para saber mais sobre, acesse nossa politica de privacidade na AppStore." = "Improvements: We will analyze your usage pattern in the app to identify bugs and usability improvements, but all information is anonymized by the system automatically and it is not possible to correlate it with you or any other user of the app. To learn more about it, access our privacy policy on the AppStore.";
+    "Restrição de idade: Nossa solução é voltada para o público maior de 3 anos e caso sejam identificados usuários que não cumpram esse requisito os seus dados serão completamente apagados de nossos servidores e o acesso ao aplicativo será bloqueado." = "Age restriction: Our solution is aimed at the public over 3 years old and if users are identified who do not meet this requirement, their data will be completely erased from our servers and access to the application will be blocked.";
+    "Termos de uso" = "Terms of Use";
+    "Fechar" = "Close";
+    "Fechar tela de termos de uso" = "Close terms of use screen";
+    "Eu concordo!" = "I agree";
+    "AccessibilityTermsOfUseFilled" = "Button: Checkbox agreeing with terms of use filled";
+    "AccessibilityTermsOfUseNotFilled" = "Button: Checkbox agreeing with terms of use not filled";
+
+// MARK: - UserSignupView
+    "Boas vindas, desafiante" = "Welcome, challenger";
+    "Nome" = "Name";
+    "E-mail" = "E-mail";
+    "Senha" = "Password";
+    "Concordo com os" = "I agree with";
+    "Termos de Uso" = "Terms of Use";
+    "Criar conta!" = "Create Account!";
+    "Já tem uma conta?" = "Already have an account?";
+    "Faça Login!" = "Login!";
+    "Termos de Uso" = "Terms of Use";
+    "Você deve ler e aceitar os termos de uso para poder criar uma conta." = "You must read and accept the terms of use in order to create an account.";
+    "OK" = "OK";
+
+// MARK: - LoginAlertCases
+    "Campos vazios" = "Empty Fields";
+    "Oops, e-mail inválido" = "Oops, invalid e-mail";
+    "Oops, erro no login" = "Oops, login error";
+    "Oops, muito desafiador" = "Oops, very challenging";
+    "Oops, não achamos esse perfil aqui" = "Oops, we couldn't find this profile here";
+    "Você precisa preencher todos os campos." = "You must fill in all fields.";
+    "O e-mail informado não é válido."  = "The email you entered is not valid." ;
+    "Seu e-mail ou senha estão incorretos." = "Your email or password is incorrect.";
+    "Tivemos um erro de conexão, tente mais tarde." = "We had a connection error, please try later.";
+    "Não encontramos uma conta vinculada ao seu e-mail." = "We couldn't find an account linked to your email.";
+
+
+// MARK: - SignupAlertCases
+
+    "Campos vazios" = "Empty Fields";
+    "E-mail inválido" = "Invalid E-mail";
+    "Conta existente" = "Existing account";
+    "Oops, muito desafiador" = "Oops, too challenging";
+    "Você precisa preencher todos os campos." = "You must fill in all fields.";
+    "O e-mail informado não é válido." = "The email provided is not valid";
+    "Já existe uma conta com o e-mail informado." = "An account with the given email already exists.";
+    "Tivemos um erro de conexão, tente mais tarde." = "We had a connection error, please try later.";
+
+// MARK: - TabBar
+    "Desafios" = "Challenges";
+    "Perfil" = "Profile";
+
+// MARK: - ChallengeListScreenView
+    "Apagar desafio" = "Delete challenge";
+    "Oops, muito desafiador!" = "Oops, too challenging!";
+    "Não conseguimos buscar seus desafios agora, tente novamente" = "
+We can't get your challenges now, try again";
+    "Meus desafios" = "My challenges";
+
+//MARK: - EmptyChallengesView
+    "Tá tão vazio por aqui,\nbora vencer uns desafios?" = "It's so empty around here,\nlet's win some challenges?";
+    "Criar um desafio!" = "Create a challenge!";
+    "Meus desafios" = "My challenges";
+    "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
+        "OK" = "OK";
+
+// MARK: - Quick: QCNamingView
+    "Defina o nome\ndo seu desafio" = "Set the name\nof your challenge";
+    "Próximo" = "Next";
+    "Voltar" = "Back";
+    "Nome vazio" = "Empty name";
+    "Preencha o nome do seu desafio para continuar" = "Fill in the name of your challenge to continue";
+
+// MARK: - Quick: ChallengeCreatedView
+    "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
+    "Desafio criado com sucesso" = "Successfully created challenge";
+    "Começar desafio!" = "Start challenge!";
+    "Ir para lista de desafios" = "Go to challenge list";
+    "Voltar para o início" = "Back to challenge";
+    "Erro" = "Error";
+
+// MARK: - Quick: ChallengeSelectionView
+    "pickChallengeType" = "Choose a challenge type";
+    "amountChallengeTypeTitle" =  "Amount \nchallenge";
+    "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
+    "timeChallengeTypeTitle" = "Time \nchallenge";
+    "timeChallengeTypeSubtitle" = "Wins whoever has the highest \nscore in the set time wins.";
+    "bestOfChallengeTitle" = "Round \nchalenge";
+    "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
+
+// MARK: - Quick: ChallengeParticipantsView
+    "Escolha a quantidade\nde participantes" = "Choose the number\nof participants";
+    "numberOfChallengers %lld" = "Will be %lld challengers";
+    "Voltar" = "Back";
+
+// MARK: - Quick - Details - ChallengeDetailsView
+    "Desafio de quantidade" = "Amount challenge";
+    "Objetivo" = "Goal";
+    "%lld pontos" = "%lld points";
+    "Participantes" = "Participants";
+    "Continuar desafio" = "Continue challenge";
+    "Desafio finalizado" = "Challenge completed";
+    "Voltar para meus desafios" = "Back to my challenges";
+    "Começar desafio!" = "Start challenge!";
+    "Apagar desafio" = "Delete challenge";
+
+// MARK: - Quick - Details - DetailsAlertCases
+    "Apagar desafio" = "Delete challenge";
+    "Erro de conexão" = "Connection error";
+    "Erro de salvamento" = "Save error";
+    "Erro ao apagar desafio" = "Error deleting challenge";
+    "Essa ação não poderá ser desfeita." = "This action cannot be undone.";
+    "Não foi possível iniciar o desafio, tente novamente mais tarde." = "Unable to start challenge, please try again later.";
+    "Você ainda pode ver os pontos salvos localmente, mas a pontuação não pode ser salva na nuvem." = "You can still see the points saved locally, but the score cannot be saved to the cloud.";
+    "Não foi possível apagar o desafio, tente novamente mais tarde." = "Unable to delete challenge, please try again later.";
+    "Cancelar" = "Cancel";
+    "OK" = "OK";
+
+// MARK: - Quick - Details - ChallengeListCell
+    "challengeNotStartedStatus" = "Not started";
+    "challengeOngoingStatus" = "Ongoing";
+    "challengeFinishedStatus" = "Finished";
+
+// MARK: - Quick - Ongoing - PauseScreen
+
+    "Continuar desafio" = "Continue challenge";
+    "Visão geral do desafio" = "Challenge overview";
+    "Finalizar desafio" = "Finish challenge";
+    "Você tem certeza que deseja finalizar este desafio?" = "Are you sure you want to finish this challenge?";
+
+// MARK: - Quick - Ongoing - WinScreen
+    "Finalizar desafio" = "Finish challenge";
+    "Continuar marcando pontos" = "Keep Scoring Points";
+
+// MARK: - Quick - Amout - QCAmountWinRulesView
+    "Oops, muito desafiador" = "Oops, too challenging";
+    "Valor Inválido" = "Invalid value";
+    "Defina os pontos necessários para a vitória" = "Set the points needed for victory";
+    "Criar desafio" = "Create challenge";
+    "Voltar" = "Back";
+    "Não conseguimos criar o seu desafio, tente mais tarde." = "We were unable to create your challenge, please try later.";
+    "Você precisa informar um número maior que 0" = "We were unable to create your challenge, please try later.";
+    "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
+
+// MARK: - Profile
+    "Você é uma máquina de vencer" = "You are a winning machine";
+    "Apagar conta" = "Delete account";
+    "Oops, muito desafiador!" = "Oops, too challenging!";
+    "Deletar conta" = "Delete account";
+    "Essa ação não poderá ser desfeita." = "This action cannot be undone.";
+    "Apagar minha conta" = "Delete my account";
+    "Sair da conta" = "Logout";
+
+// MARK: - DesignSysten - Card - ChallengeCategoryCardView
+    "Escolher esse" = "Choose this";
+
+// MARK: - DesignSysten - Card - ChallengeCellComponent
+//    "Desafiantes: \(player1)" + " e " + "\(player2)" = "Desafiantes: \(player1)" + " e " + "\(player2)";
+
+// MARK: - Members - Players
+ "player2" = "Fox";
+ "player3" = "Panda";
+ "player4" = "Lion";
+
+

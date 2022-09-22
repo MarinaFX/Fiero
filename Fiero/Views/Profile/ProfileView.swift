@@ -20,6 +20,16 @@ struct ProfileView: View {
             VStack {
                 ProfilePictureComponent(nameUser: UserViewModel.getUserNameFromDefaults())
                 Spacer()
+                Text("Você é uma máquina de vencer")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
+                LottieView(fileName: "tonto2", reverse: false, loop: true)
+        
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
+                    self.userViewModel.activeAlert = .logOut
+                    self.userViewModel.showingAlertToTrue()
+                })
                 ButtonComponent(style: .destructive(isEnabled: true), text: "Apagar conta", action: {
                     self.userViewModel.activeAlert = .confirmAccountDelete
                     self.userViewModel.showingAlertToTrue()
@@ -27,9 +37,6 @@ struct ProfileView: View {
             }
             .padding(Tokens.Spacing.defaultMargin.value)
         }
-        .onAppear(perform: {
-            print("defaults: \(self.userViewModel.teste())")
-        })
         .alert(isPresented: $userViewModel.showingAlert) {
             switch self.userViewModel.activeAlert {
                     case .error:
@@ -42,7 +49,7 @@ struct ProfileView: View {
                         )
                     case .confirmAccountDelete:
                         return Alert(
-                            title: Text("Deletar conta"),
+                            title: Text("Apagar conta"),
                             message: Text("Essa ação não poderá ser desfeita."),
                             primaryButton: .destructive(Text("Apagar minha conta")) {
                                 self.userViewModel.deleteAccount()
@@ -65,14 +72,26 @@ struct ProfileView: View {
                                 self.userViewModel.showingAlertToFalse()
                             }
                         )
-                case .none:
-                    return Alert(
-                        title: Text("Oops, muito desafiador!"),
-                        message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
-                        dismissButton: .default(Text("OK")){
-                            self.userViewModel.showingAlertToFalse()
-                        }
-                    )
+                    case .logOut:
+                        return Alert(
+                            title: Text("Sair da conta"),
+                            message: Text(""),
+                            primaryButton: .destructive(Text("Sair da conta")) {
+                                self.userViewModel.cleanDefaults()
+                                self.userViewModel.isLogged = false
+                            },
+                            secondaryButton: .cancel(Text("Cancelar")){
+                                self.userViewModel.showingAlertToFalse()
+                            }
+                        )
+                    case .none:
+                        return Alert(
+                            title: Text("Oops, muito desafiador!"),
+                            message: Text("Não conseguimos excluir sua conta no momento, tente mais tarde."),
+                            dismissButton: .default(Text("OK")){
+                                self.userViewModel.showingAlertToFalse()
+                            }
+                        )
             }
         }
     }

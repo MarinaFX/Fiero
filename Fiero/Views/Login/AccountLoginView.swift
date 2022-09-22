@@ -64,12 +64,12 @@ struct AccountLoginView: View {
                 .environmentObject(self.userViewModel)
         } else {
             ZStack {
-                Tokens.Colors.Brand.Primary.pure.value.ignoresSafeArea()
+                Tokens.Colors.Background.dark.value.ignoresSafeArea()
+                
                 //MARK: Login Form
                 VStack {
                     if !userViewModel.keyboardShown  {
-                        Image("Olhos")
-                            .padding(.vertical, Tokens.Spacing.sm.value)
+                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: true, aspectFill: false, secondAnimation: "LoginAnimationEnd", loopSecond: true)
                     }
                     Text("Boas vindas, desafiante")
                         .font(largeTitleFont)
@@ -97,7 +97,7 @@ struct AccountLoginView: View {
                         .padding(.vertical, nanoSpacing)
                     //MARK: Buttons
                     ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Fazer login!",
+                                    text: "Fazer Login!",
                                     action: {
                         if emailText.isEmpty || passwordText.isEmpty {
                             self.userViewModel.loginAlertCases = .emptyFields
@@ -106,8 +106,7 @@ struct AccountLoginView: View {
                             self.userViewModel.loginAlertCases = .invalidEmail
                             isShowingAlert.toggle()
                         } else {
-                            self.userViewModel.login(email: self.emailText, password: self.passwordText)
-                                
+                            self.userViewModel.login(email: self.emailText, password: self.passwordText)    
                         }
                     })
                     
@@ -159,8 +158,8 @@ struct AccountLoginView: View {
                         })
                     case .wrongCredentials:
                         return Alert(title: Text(LoginAlertCases.wrongCredentials.title),
-                                            message: Text(LoginAlertCases.wrongCredentials.message),
-                                            dismissButton: .cancel(Text("OK")) {
+                                     message: Text(LoginAlertCases.wrongCredentials.message),
+                                     dismissButton: .cancel(Text("OK")) {
                             self.isShowingAlert = false
                             self.userViewModel.removeLoadingAnimation()
                         })
@@ -189,7 +188,7 @@ struct AccountLoginView: View {
             .onChange(of: self.userViewModel.user, perform: { user in
                 self.user = user
             })
-            .onChange(of: self.userViewModel.loginAlertCases, perform: { error in
+            .onReceive(self.userViewModel.$loginAlertCases.dropFirst(), perform: { error in
                 let error = error
 
                 if error == .invalidEmail {
