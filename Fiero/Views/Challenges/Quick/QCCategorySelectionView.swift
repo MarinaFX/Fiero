@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ChallengesCategoryInfo {
     let style: CardCategoryStyles
-    let title: String
-    let subtitle: String
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey
 }
 
 struct QCCategorySelectionView: View {
@@ -25,14 +25,14 @@ struct QCCategorySelectionView: View {
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
     var items: [ChallengesCategoryInfo] = [ChallengesCategoryInfo(style: .amount,
-                                                                  title: "Desafio de\nquantidade",
-                                                                  subtitle: "Vence quem fizer atingir\na pontuação primeiro."),
+                                                                  title: "amountChallengeTypeTitle",
+                                                                  subtitle: "amountChallengeTypeSubtitle"),
                                               ChallengesCategoryInfo(style: .blocked,
-                                                                     title: "Desafio de\ntempo",
-                                                                     subtitle: "Vence quem fizer\na maior pontuação\nno tempo definido."),
+                                                                     title: "timeChallengeTypeTitle",
+                                                                     subtitle: "timeChallengeTypeSubtitle"),
                                               ChallengesCategoryInfo(style: .blocked,
-                                                                     title: "Desafio de\nrounds",
-                                                                     subtitle: "Competição de 3\nou 5 rounds.")]
+                                                                     title: "bestOfChallengeTitle",
+                                                                     subtitle: "bestOfChallengeSubtitle")]
     
     var body: some View {
         let widthHStack: CGFloat = widthFocussedCard + ((widthUnfocussedCard + cardSpacing) * CGFloat((items.count - 1)))
@@ -42,7 +42,7 @@ struct QCCategorySelectionView: View {
                 
                 Spacer()
                 
-                Text("Escolha um\ntipo de desafio")
+                Text("pickChallengeType")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                 .padding(.horizontal, Tokens.Spacing.xs.value)

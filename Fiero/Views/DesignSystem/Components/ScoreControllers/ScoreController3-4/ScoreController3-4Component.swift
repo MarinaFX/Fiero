@@ -23,7 +23,7 @@ struct ScoreController3_4Component: View {
     @Binding var isFinished: Bool
     @Binding var isShowingAlertOnDetailsScreen: Bool
 
-    private(set) var playerName: String
+    private(set) var playerName: LocalizedStringKey
     private(set) var challengeId: String
     private(set) var teamId: String
     private(set) var memberId: String

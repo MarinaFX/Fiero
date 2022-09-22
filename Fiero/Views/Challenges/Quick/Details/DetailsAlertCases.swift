@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum DetailsAlertCases {
     case deleteChallenge
@@ -13,7 +14,7 @@ enum DetailsAlertCases {
     case failureWhileSavingPoints
     case failureDeletingChallenge
     
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
             case .deleteChallenge:
                 return "Apagar desafio"
@@ -26,7 +27,7 @@ enum DetailsAlertCases {
         }
     }
     
-    var message: String {
+    var message: LocalizedStringKey {
         switch self {
             case .deleteChallenge:
                 return "Essa ação não poderá ser desfeita."
@@ -39,7 +40,7 @@ enum DetailsAlertCases {
         }
     }
     
-    var primaryButtonText: String {
+    var primaryButtonText: LocalizedStringKey {
         switch self {
             case .deleteChallenge:
                 return "Cancelar"

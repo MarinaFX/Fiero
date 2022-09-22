@@ -16,7 +16,7 @@ import SwiftUI
 //MARK: - View
 struct ButtonComponent: View {
     @State var style: ButtonStyles
-    @State var text: String
+    @State var text: LocalizedStringKey
     
     var action: () -> Void
     

@@ -30,7 +30,9 @@
     "Fechar" = "Close";
     "Fechar tela de termos de uso" = "Close terms of use screen";
     "Eu concordo!" = "I agree";
-    
+    "AccessibilityTermsOfUseFilled" = "Button: Checkbox agreeing with terms of use filled";
+    "AccessibilityTermsOfUseNotFilled" = "Button: Checkbox agreeing with terms of use not filled";
+
 // MARK: - UserSignupView
     "Boas vindas, desafiante" = "Welcome, challenger";
     "Nome" = "Name";
@@ -74,7 +76,7 @@
     "Perfil" = "Profile";
 
 // MARK: - ChallengeListScreenView
-    "Apagar desafio" = "Erase challenge";
+    "Apagar desafio" = "Delete challenge";
     "Oops, muito desafiador!" = "Oops, too challenging!";
     "Não conseguimos buscar seus desafios agora, tente novamente" = "
 We can't get your challenges now, try again";
@@ -96,52 +98,53 @@ We can't get your challenges now, try again";
 
 // MARK: - Quick: ChallengeCreatedView
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
-    "Desafio criado com sucesso" = "Challenge created successfully";
+    "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
     "Ir para lista de desafios" = "Go to challenge list";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
 // MARK: - Quick: ChallengeSelectionView
-    "Desafio de\nquantidade" =  "Amount \nchallenge";
-    "Vence quem fizer atingir\na pontuação primeiro." = "Whoever gets the score first wins.";
-    "Desafio de \ntempo" = "Time \nchallenge";
-    "Vence quem fizer a maior \npontuação no tempo definido." = "Whoever has the highest score in the set time wins.";
-    "Desafio de\nrounds" = "Round \nchallenge";
-    "Competições de três ou\ncinco rounds." = "Three or five round competitions.";
+    "pickChallengeType" = "Choose a challenge type";
+    "amountChallengeTypeTitle" =  "Amount \nchallenge";
+    "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
+    "timeChallengeTypeTitle" = "Time \nchallenge";
+    "timeChallengeTypeSubtitle" = "Wins whoever has the highest \nscore in the set time wins.";
+    "bestOfChallengeTitle" = "Round \nchalenge";
+    "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
 
 // MARK: - Quick: ChallengeParticipantsView
     "Escolha a quantidade\nde participantes" = "Choose the number\nof participants";
-    "Serão \(tabViewSelection) desafiantes" = "Will be \(tabViewSelection) challenging";
+    "numberOfChallengers %lld" = "Will be %lld challengers";
     "Voltar" = "Back";
 
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Amount challenge";
     "Objetivo" = "Goal";
-    "\(quickChallenge.goal) pontos" = "\(quickChallenge.goal) points";
+    "%lld pontos" = "%lld points";
     "Participantes" = "Participants";
     "Continuar desafio" = "Continue challenge";
     "Desafio finalizado" = "Challenge completed";
     "Voltar para meus desafios" = "Back to my challenges";
     "Começar desafio!" = "Start challenge!";
-    "Apagar desafio" = "Erase challenge";
+    "Apagar desafio" = "Delete challenge";
 
 // MARK: - Quick - Details - DetailsAlertCases
-    "Apagar desafio" = "Erase challenge";
+    "Apagar desafio" = "Delete challenge";
     "Erro de conexão" = "Connection error";
     "Erro de salvamento" = "Save error";
     "Erro ao apagar desafio" = "Error deleting challenge";
     "Essa ação não poderá ser desfeita." = "This action cannot be undone.";
     "Não foi possível iniciar o desafio, tente novamente mais tarde." = "Unable to start challenge, please try again later.";
     "Você ainda pode ver os pontos salvos localmente, mas a pontuação não pode ser salva na nuvem." = "You can still see the points saved locally, but the score cannot be saved to the cloud.";
-    "Não foi possível apagar o desafio, tente novamente mais tarde." =
-"Unable to delete challenge, please try again later.";
+    "Não foi possível apagar o desafio, tente novamente mais tarde." = "Unable to delete challenge, please try again later.";
     "Cancelar" = "Cancel";
     "OK" = "OK";
 
 // MARK: - Quick - Details - ChallengeListCell
-    "Em andamento" = "Ongoing";
-    "Finalizado" = "Finished";
+    "challengeNotStartedStatus" = "Not started";
+    "challengeOngoingStatus" = "Ongoing";
+    "challengeFinishedStatus" = "Finished";
 
 // MARK: - Quick - Ongoing - PauseScreen
 
@@ -166,17 +169,22 @@ We can't get your challenges now, try again";
 
 // MARK: - Profile
     "Você é uma máquina de vencer" = "You are a winning machine";
-    "Apagar conta" = "Erase account";
+    "Apagar conta" = "Delete account";
     "Oops, muito desafiador!" = "Oops, too challenging!";
     "Deletar conta" = "Delete account";
     "Essa ação não poderá ser desfeita." = "This action cannot be undone.";
-    "Apagar minha conta" = "Erase my account";
+    "Apagar minha conta" = "Delete my account";
+    "Sair da conta" = "Logout";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
-    "Escolher esse" = "This is the chosen";
+    "Escolher esse" = "Choose this";
 
 // MARK: - DesignSysten - Card - ChallengeCellComponent
 //    "Desafiantes: \(player1)" + " e " + "\(player2)" = "Desafiantes: \(player1)" + " e " + "\(player2)";
 
+// MARK: - Members - Players
+ "player2" = "Fox";
+ "player3" = "Panda";
+ "player4" = "Lion";
 
 

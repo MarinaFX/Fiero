@@ -103,21 +103,23 @@
     "Erro" = "Erro";
 
 // MARK: - Quick: ChallengeSelectionView
-    "Desafio de\"Vence quem fizer atingir\na pontuação primeiro." = "Desafio de\"Vence quem fizer atingir\na pontuação primeiro.";
-    "Desafio de \ntempo" = "Desafio de \ntempo";
-    "Vence quem fizer a maior \npontuação no tempo definido." = "Vence quem fizer a maior \npontuação no tempo definido.";
-    "Desafio de\nrounds" = "Desafio de\nrounds";
-    "Competições de três ou\ncinco rounds." = "Competições de três ou\ncinco rounds.";
+    "pickChallengeType" = "Escolha um\ntipo de desafio";
+    "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
+    "amountChallengeTypeSubtitle" = "Vence quem fizer atingir \na pontuação primeiro.";
+    "timeChallengeTypeTitle" = "Desafio de \ntempo";
+    "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
+    "bestOfChallengeTitle" = "Desafio de\nrounds";
+    "bestOfChallengeSubtitle" = "Competições de três ou\ncinco rounds.";
 
 // MARK: - Quick: ChallengeParticipantsView
     "Escolha a quantidade\nde participantes" = "Escolha a quantidade\nde participantes";
-    "Serão \(tabViewSelection) desafiantes" = "Serão \(tabViewSelection) desafiantes";
+    "numberOfChallengers %lld" = "Serão %lld desafiantes";
     "Voltar" = "Voltar";
 
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Desafio de quantidade";
     "Objetivo" = "Objetivo";
-//    "\(quickChallenge.goal) pontos" = "\(quickChallenge.goal) pontos";
+    "%lld pontos" = "%lld pontos";
     "Participantes" = "Participantes";
     "Continuar desafio" = "Continuar desafio";
     "Desafio finalizado" = "Desafio finalizado";
@@ -144,8 +146,9 @@
     "OK" = "OK";
 
 // MARK: - Quick - Details - ChallengeListCell
-    "Em andamento" = "Em andamento";
-    "Finalizado" = "Finalizado";
+    "challengeNotStartedStatus" = "Não iniciado";
+    "challengeOngoingStatus" = "Em andamento";
+    "challengeFinishedStatus" = "Finalizado";
 
 // MARK: - Quick - Ongoing - PauseScreen
 
@@ -176,6 +179,7 @@
     "Deletar conta" = "Deletar conta";
     "Essa ação não poderá ser desfeita." = "Essa ação não poderá ser desfeita.";
     "Apagar minha conta" = "Apagar minha conta";
+    "Sair da conta" = "Sair da conta";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Escolher esse";
@@ -183,5 +187,8 @@
 // MARK: - DesignSysten - Card - ChallengeCellComponent
 //    "Desafiantes: \(player1)" + " e " + "\(player2)" = "Desafiantes: \(player1)" + " e " + "\(player2)";
 
-
+// MARK: - Members - Players
+ "player2" = "Raposa";
+ "player3" = "Panda";
+ "player4" = "Leão";
 
