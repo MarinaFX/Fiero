@@ -158,8 +158,8 @@ struct AccountLoginView: View {
                         })
                     case .wrongCredentials:
                         return Alert(title: Text(LoginAlertCases.wrongCredentials.title),
-                                            message: Text(LoginAlertCases.wrongCredentials.message),
-                                            dismissButton: .cancel(Text("OK")) {
+                                     message: Text(LoginAlertCases.wrongCredentials.message),
+                                     dismissButton: .cancel(Text("OK")) {
                             self.isShowingAlert = false
                             self.userViewModel.removeLoadingAnimation()
                         })
@@ -188,7 +188,7 @@ struct AccountLoginView: View {
             .onChange(of: self.userViewModel.user, perform: { user in
                 self.user = user
             })
-            .onChange(of: self.userViewModel.loginAlertCases, perform: { error in
+            .onReceive(self.userViewModel.$loginAlertCases.dropFirst(), perform: { error in
                 let error = error
 
                 if error == .invalidEmail {
