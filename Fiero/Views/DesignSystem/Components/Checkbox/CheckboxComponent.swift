@@ -19,8 +19,8 @@ import SwiftUI
 
 struct CheckboxComponent: View {
     @State var style: CheckboxStyles
-    @State var text: String
-    @State var linkedText: String?
+    @State var text: LocalizedStringKey
+    @State var linkedText: LocalizedStringKey?
     @Binding var isChecked: Bool
     var checkboxHandler: (_ isChecked: Bool) -> Void
     var linkedTextHandler: (() -> Void)?
@@ -34,16 +34,16 @@ struct CheckboxComponent: View {
                     isChecked.toggle()
                     checkboxHandler(isChecked)
                 }
-                .accessibilityLabel(isChecked ? "Botão: caixa de seleção de \(text) \(linkedText ?? "") preenchida" : "Botão: caixa de seleção de \(text) \(linkedText ?? "") não preenchida")
+                .accessibilityLabel(isChecked ? LocalizedStringKey("AccessibilityTermsOfUseFilled") : LocalizedStringKey("AccessibilityTermsOfUseNotFilled"))
             HStack(spacing: 4){
                 Text(text)
                     .foregroundColor(style.color)
                     .font(style.textFont)
-                    .accessibilityLabel("\(text) \(linkedText ?? "")")
+
                 Text(linkedText ?? "")
                     .foregroundColor(style.color)
                     .font(style.linkedTextFont)
-                    .accessibilityLabel("Clique para acessar \(linkedText ?? "")")
+                    .accessibilityLabel("Aperte para acessar os termos de uso")
                     .onTapGesture(perform: linkedTextHandler ?? {})
             }
           

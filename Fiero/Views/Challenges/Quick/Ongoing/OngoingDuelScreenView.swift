@@ -11,8 +11,11 @@ struct OngoingDuelScreenView: View {
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
+    @Binding var isShowingAlertOnDetailsScreen: Bool
     
-    //MARK: Colors
+    @State var isFinished: Bool = false
+    
+    //MARK: - Tokens
     var firstBackgroundColor: Color {
         return Tokens.Colors.Highlight.four.value
     }
@@ -22,17 +25,20 @@ struct OngoingDuelScreenView: View {
     var buttonColor: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
-    //MARK: Spacings
-    var spacingNano: Double {
-        return Tokens.Spacing.nano.value
+    var vStackPadding: Double {
+        return Tokens.Spacing.defaultMargin.value
     }
-    var spacingXXXS: Double {
-        return Tokens.Spacing.xxxs.value
+    var vStackSpacing: Double {
+        return Tokens.Spacing.lg.value
     }
-    var spacingXS: Double {
-        return Tokens.Spacing.xs.value
+    var pauseNameButton: String {
+        return "pause.circle.fill"
+    }
+    var eyesName: String {
+        return "Olhos"
     }
     
+    //MARK: - Body
     var body: some View {
         ZStack {
             firstBackgroundColor.ignoresSafeArea()
@@ -44,29 +50,62 @@ struct OngoingDuelScreenView: View {
                         self.didTapPauseButton.toggle()
                         Haptics.shared.play(.light)
                     } label: {
-                        Image(systemName: "pause.circle.fill")
+                        Image(systemName: pauseNameButton)
                             .resizable()
                             .foregroundColor(buttonColor)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 50, height: 50)
                     }
-                }.padding(.horizontal, Tokens.Spacing.defaultMargin.value
-                )
+                }
+                .padding(.horizontal, vStackPadding)
+                
                 ZStack {
                     firstBackgroundColor.ignoresSafeArea()
-                    VStack(spacing: Tokens.Spacing.lg.value) {
+                    VStack(spacing: vStackSpacing) {
                         
-                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[0].id, memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND", playerName: Member.getName(playerName: self.quickChallenge.teams[0].name))
-                            .padding(.horizontal, Tokens.Spacing.lg.value)
-                        Image("Olhos")
+                        DuelScoreComponent(style: .first,
+                                           maxValue: self.quickChallenge.goal,
+                                           isFinished: $isFinished,
+                                           quickChallenge: $quickChallenge,
+                                           playerScore: Binding(self.$quickChallenge.teams[0].members)?.first?.score ?? .constant(10),
+                                           
+                                           isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
+                                           
+                                           challengeId: self.quickChallenge.id,
+                                           
+                                           teamId: self.quickChallenge.teams[0].id,
+                                           
+                                           memberId: self.quickChallenge.teams[0].members?.first?.id ?? "ID NOT FOUND",
+                                           
+                                           playerName: Member.getName(playerName: self.quickChallenge.teams[0].name))
+                        .padding(.horizontal, vStackSpacing)
+                        Image(eyesName)
                     }
+                    NavigationLink("", isActive: $isFinished) {
+                        WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                    }
+                    .hidden()
                 }
                 
                 ZStack {
                     secondBackgroundColor.ignoresSafeArea()
-                    VStack(spacing: Tokens.Spacing.lg.value) {
-                        DuelScoreComponent(style: .first, maxValue: self.quickChallenge.goal, playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10), challengeId: self.quickChallenge.id, teamId: self.quickChallenge.teams[1].id, memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND", playerName: Member.getName(playerName: self.quickChallenge.teams[1].name))
-                            .padding(.horizontal, Tokens.Spacing.lg.value)
-                        Image("Olhos")
+                    VStack(spacing: vStackSpacing) {
+                        DuelScoreComponent(style: .first,
+                                           maxValue: self.quickChallenge.goal,
+                                           isFinished: $isFinished,
+                                           quickChallenge: $quickChallenge,
+                                           playerScore: Binding(self.$quickChallenge.teams[1].members)?.first?.score ?? .constant(10),
+                                           
+                                           isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen,
+                                           
+                                           challengeId: self.quickChallenge.id,
+                                           
+                                           teamId: self.quickChallenge.teams[1].id,
+                                           
+                                           memberId: self.quickChallenge.teams[1].members?.first?.id ?? "ID NOT FOUND",
+                                           
+                                           playerName: Member.getName(playerName: self.quickChallenge.teams[1].name))
+                        .padding(.horizontal, vStackSpacing)
+                        Image(eyesName)
                     }
                 }
             }
@@ -84,6 +123,6 @@ struct OngoingDuelScreenView_Previews: PreviewProvider {
                                                                         Team(id: "teste3", name: "player3", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 43, userId: "", teamId: "", beginDate: "", botPicture: "player3", createdAt: "", updatedAt: "")]),
                                                                         Team(id: "teste4", name: "player4", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 200, userId: "", teamId: "", beginDate: "", botPicture: "player4", createdAt: "", updatedAt: "")])
                                                                     ],
-                                                                owner: User(email: "teste", name: "teste"))))
+                                                                owner: User(email: "teste", name: "teste"))), isShowingAlertOnDetailsScreen: .constant(true))
     }
 }

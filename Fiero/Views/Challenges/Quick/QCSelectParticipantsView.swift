@@ -51,26 +51,26 @@ struct QCSelectParticipantsView: View {
                 .tabViewStyle(PageTabViewStyle())
                 
                 switch tabViewSelection {
-                case 2:
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                        self.pushNextView.toggle()
-                    })
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                case 3:
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                        self.pushNextView.toggle()
-                    })
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                case 4:
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                        self.pushNextView.toggle()
-                    })
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                default:
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Serão \(tabViewSelection) desafiantes", action: {
-                        self.pushNextView.toggle()
-                    })
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    case 2:
+                        ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
+                            self.pushNextView.toggle()
+                        })
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    case 3:
+                        ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
+                            self.pushNextView.toggle()
+                        })
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    case 4:
+                        ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
+                            self.pushNextView.toggle()
+                        })
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    default:
+                        ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
+                            self.pushNextView.toggle()
+                        })
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 }
                 
                 Button(action: {

@@ -180,6 +180,7 @@ enum Tokens {
             case four //dark green
             case five //blue
             case six //light green
+            case seven // pink
             
             var value: Color {
                 switch self {
@@ -197,6 +198,8 @@ enum Tokens {
                         return Color(red: 0.173, green: 0.157, blue: 0.89, opacity: 1)
                     case .six:
                         return Color(red: 0.941, green: 0.345, blue: 0.357, opacity: 1)
+                    case .seven:
+                        return Color(red: 1, green: 0, blue: 0.267, opacity: 1)
                 }
             }
         }

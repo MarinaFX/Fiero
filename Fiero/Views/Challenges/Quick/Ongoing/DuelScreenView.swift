@@ -12,10 +12,11 @@ struct DuelScreenView: View {
     @State var didFinishChallenge: Bool = false
     @State var isPresentingAlert: Bool = false
     @Binding var quickChallenge: QuickChallenge
+    @Binding var isShowingAlertOnDetailsScreen: Bool
 
     var body: some View {
         ZStack {
-            OngoingDuelScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: $didTapPauseButton)
+            OngoingDuelScreenView(quickChallenge: self.$quickChallenge, didTapPauseButton: $didTapPauseButton, isShowingAlertOnDetailsScreen: self.$isShowingAlertOnDetailsScreen)
             if self.didTapPauseButton {
                 PauseScreen(didTapPauseButton: $didTapPauseButton, didFinishChallenge: $didFinishChallenge, quickChallenge: $quickChallenge)
                 if self.didFinishChallenge {
@@ -29,10 +30,10 @@ struct DuelScreenView: View {
 struct DuelScreenView_Previews: PreviewProvider {
     static var previews: some View {
         DuelScreenView(quickChallenge: .constant(QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 2, createdAt: "teste", updatedAt: "teste", teams:
-                                                                    [
-                                                                        Team(id: "teste1", name: "player1", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 22, userId: "", teamId: "", beginDate: "", botPicture: "player1", createdAt: "", updatedAt: "")]),
-                                                                        Team(id: "teste2", name: "player2", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 12, userId: "", teamId: "", beginDate: "", botPicture: "player2", createdAt: "", updatedAt: "")])
-                                                                    ],
-                                                                                                                owner: User(email: "teste", name: "teste"))))
+                        [
+                        Team(id: "teste1", name: "player1", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 22, userId: "", teamId: "", beginDate: "", botPicture: "player1", createdAt: "", updatedAt: "")]),
+                        Team(id: "teste2", name: "player2", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 12, userId: "", teamId: "", beginDate: "", botPicture: "player2", createdAt: "", updatedAt: "")])
+                        ],
+                        owner: User(email: "teste", name: "teste"))), isShowingAlertOnDetailsScreen: .constant(true))
     }
 }

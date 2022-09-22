@@ -15,13 +15,15 @@ struct EmptyChallengesView: View {
 
         VStack {
             Spacer()
+            Spacer()
             
-            LottieView(fileName: "tonto", reverse: false, loop: true).frame(width: 350 , height: 200)
+            LottieView(fileName: "sad", reverse: false, loop: true).frame(width: 300 , height: 150)
             
-            Text("Você não é ruim,\nsó ainda não ganhou.")
+            Text("Tá tão vazio por aqui,\nbora vencer uns desafios?")
                 .multilineTextAlignment(.center)
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+            Spacer()
             
             ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
                 self.isPresented.toggle()
@@ -31,14 +33,16 @@ struct EmptyChallengesView: View {
             
             Spacer()
             
+            
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(action: {
                         self.isPresented.toggle()
                     }, label: {
                         Image(systemName: "plus")
+                            .foregroundColor(Tokens.Colors.Highlight.seven.value)
                             .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                            .foregroundColor(.white)
+                           
                     })
                     .buttonStyle(.plain)
                 })
