@@ -75,7 +75,8 @@ struct HomeView: View {
                         }, label: {
                             Image(systemName: "plus")
                                 .foregroundColor(Tokens.Colors.Highlight.seven.value)
-                                .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .rounded))
+                                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
+                                .padding(.trailing, Tokens.Spacing.nano.value)
                         })
                     }
                 }
