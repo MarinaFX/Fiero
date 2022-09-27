@@ -74,8 +74,8 @@ struct HomeView: View {
                             Haptics.shared.play(.heavy)
                         }, label: {
                             Image(systemName: "plus")
-                                .font(Tokens.FontStyle.title2.font(weigth: .bold))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .foregroundColor(Tokens.Colors.Highlight.seven.value)
+                                .font(Tokens.FontStyle.title3.font(weigth: .bold, design: .rounded))
                         })
                     }
                 }

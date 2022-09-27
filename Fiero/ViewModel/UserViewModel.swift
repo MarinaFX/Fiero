@@ -80,10 +80,12 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
+                        self?.signupAlertCases = .connectionError
+                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
@@ -145,10 +147,12 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
+                        self?.loginAlertCases = .connectionError
+                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
@@ -183,7 +187,7 @@ class UserViewModel: ObservableObject {
                 
                 self?.keyValueStorage.set(password, forKey: UDKeys.password.description)
                 self?.keyValueStorage.set(email, forKey: UDKeys.email.description)
-                self?.removeLoadingAnimation()
+                self?.isShowingLoading = false
                 self?.isLogged = true
                 
             })
