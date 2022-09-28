@@ -221,7 +221,8 @@ struct AccountLoginView: View {
                 }
                 
             }.onDisappear {
-                AppDelegate.orientationLock = .all // Unlocking the rotation when leaving the view
+                // Unlocking the rotation when leaving the view
+                // AppDelegate.orientationLock = .all
             }
             .preferredColorScheme(.dark)
         }
