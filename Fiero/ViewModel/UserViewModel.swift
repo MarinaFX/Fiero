@@ -26,14 +26,6 @@ class UserViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isLogged = false
 
-    private let BASE_URL: String = "localhost"
-    //private let BASE_URL: String = "10.41.48.196"
-    //private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
-    private let ENDPOINT_SIGNUP: String = "/user/register"
-    private let ENDPOINT_LOGIN: String = "/user/login"
-    private let ENDPOINT_DELETE_USER: String = "/user"
-    private let ENDPOINT_TOKEN: String = "/user/token"
-
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
     private var refreshTokenSubscription: AnyCancellable?
@@ -71,7 +63,10 @@ class UserViewModel: ObservableObject {
         }
         """
         
-        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_SIGNUP, authToken: "")
+        let request = makePOSTRequest(json: json, scheme: "http", port: 3333,
+                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      endPoint: UserEndpointEnum.SIGNUP.description,
+                                      authToken: "")
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
@@ -80,10 +75,12 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
+                        self?.signupAlertCases = .connectionError
+                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
@@ -136,7 +133,10 @@ class UserViewModel: ObservableObject {
         }
         """
         
-        let request = makePOSTRequest(json: userJSON, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_LOGIN, authToken: "")
+        let request = makePOSTRequest(json: userJSON, scheme: "http", port: 3333,
+                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      endPoint: UserEndpointEnum.LOGIN.description,
+                                      authToken: "")
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
@@ -145,10 +145,12 @@ class UserViewModel: ObservableObject {
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
+                        self?.loginAlertCases = .connectionError
+                        self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
                 }
@@ -183,7 +185,7 @@ class UserViewModel: ObservableObject {
                 
                 self?.keyValueStorage.set(password, forKey: UDKeys.password.description)
                 self?.keyValueStorage.set(email, forKey: UDKeys.email.description)
-                self?.removeLoadingAnimation()
+                self?.isShowingLoading = false
                 self?.isLogged = true
                 
             })
@@ -216,7 +218,10 @@ class UserViewModel: ObservableObject {
         }
         """
         
-        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_TOKEN, authToken: "")
+        let request = makePOSTRequest(json: json, scheme: "http", port: 3333,
+                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      endPoint: UserEndpointEnum.TOKEN.description,
+                                      authToken: "")
         
         
         self.client.perform(for: request)
@@ -260,7 +265,10 @@ class UserViewModel: ObservableObject {
                 .eraseToAnyPublisher()
         }
         
-        let request = makeDELETERequest(param: userId, scheme: "http", port: 3333, baseURL: self.BASE_URL, endPoint: self.ENDPOINT_DELETE_USER, authToken: userToken)
+        let request = makeDELETERequest(param: userId, scheme: "http", port: 3333,
+                                        baseURL: FieroAPIEnum.BASE_URL.description,
+                                        endPoint: UserEndpointEnum.DELETE_USER.description,
+                                        authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: UserDELETEResponse.self, decoder: JSONDecoder())

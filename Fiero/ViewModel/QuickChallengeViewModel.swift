@@ -16,16 +16,6 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
-    
-    private let BASE_URL: String = "localhost"
-    //private let BASE_URL: String = "10.41.48.196"
-    //private let BASE_URL: String = "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
-    private let ENDPOINT_CREATE_CHALLENGE: String = "/quickChallenge/create"
-    private let ENDPOINT_GET_CHALLENGES: String = "/quickChallenge/createdByMe"
-    private let ENDPOINT_DELETE_CHALLENGES: String = "/quickChallenge"
-    private let ENDPOINT_PATCH_CHALLENGES_BEGIN: String = "/quickChallenge"
-    private let ENDPOINT_PATCH_CHALLENGES_FINISHED: String = "/quickChallenge"
-    private let ENDPOINT_PATCH_CHALLENGES_SCORE: String = "/quickChallenge"
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -65,7 +55,10 @@ class QuickChallengeViewModel: ObservableObject {
         """
         print(challengeJson)
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_CREATE_CHALLENGE, authToken: userToken)
+        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
+                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
+                                      authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
@@ -115,7 +108,10 @@ class QuickChallengeViewModel: ObservableObject {
                 .eraseToAnyPublisher()
         }
         
-        let request = makeGETRequest(scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_GET_CHALLENGES, authToken: userToken)
+        let request = makeGETRequest(scheme: "http", port: 3333,
+                                     baseURL: FieroAPIEnum.BASE_URL.description,
+                                     endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
+                                     authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
@@ -162,7 +158,10 @@ class QuickChallengeViewModel: ObservableObject {
         }
         self.serverResponse = .unknown
 
-        let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_DELETE_CHALLENGES, authToken: userToken)
+        let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
+                                        baseURL: FieroAPIEnum.BASE_URL.description,
+                                        endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
+                                        authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .print("operation")
@@ -212,7 +211,13 @@ class QuickChallengeViewModel: ObservableObject {
         }
         """
         print(json)
-        let request = makePATCHRequest(json: json, param: challengeId, variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_BEGIN, authToken: userToken)
+        let request = makePATCHRequest(json: json, param: challengeId,
+                                       variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
+                                       scheme: "http",
+                                       port: 3333,
+                                       baseURL: FieroAPIEnum.BASE_URL.description,
+                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
+                                       authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
@@ -265,7 +270,12 @@ class QuickChallengeViewModel: ObservableObject {
         }
         """
         print(json)
-        let request = makePATCHRequest(json: json, param: challengeId, variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_FINISHED, authToken: userToken)
+        let request = makePATCHRequest(json: json, param: challengeId,
+                                       variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
+                                       scheme: "http", port: 3333,
+                                       baseURL: FieroAPIEnum.BASE_URL.description,
+                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
+                                       authToken: userToken)
         
         self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
@@ -313,7 +323,14 @@ class QuickChallengeViewModel: ObservableObject {
         """
         print(json)
         
-        let request = makePATCHRequestScore(json: json, challengeId: challengeId, teamId: teamId, memberId: memberId, variableToBePatched: VariablesToBePatchedQuickChallenge.score.description, scheme: "http", port: 3333, baseURL: BASE_URL, endPoint: ENDPOINT_PATCH_CHALLENGES_SCORE, authToken: userToken)
+        let request = makePATCHRequestScore(json: json, challengeId: challengeId,
+                                            teamId: teamId, memberId: memberId,
+                                            variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
+                                            scheme: "http",
+                                            port: 3333,
+                                            baseURL: FieroAPIEnum.BASE_URL.description,
+                                            endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
+                                            authToken: userToken)
         
         let operation = self.client.perform(for: request)
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())

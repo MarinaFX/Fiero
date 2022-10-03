@@ -32,21 +32,6 @@ struct EmptyChallengesView: View {
             .padding()
             
             Spacer()
-            
-            
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing, content: {
-                    Button(action: {
-                        self.isPresented.toggle()
-                    }, label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(Tokens.Colors.Highlight.seven.value)
-                            .font(Tokens.FontStyle.body.font(weigth: .bold, design: .rounded))
-                           
-                    })
-                    .buttonStyle(.plain)
-                })
-            }
         }
         .navigationTitle("Meus desafios")
         .environment(\.colorScheme, .dark)
