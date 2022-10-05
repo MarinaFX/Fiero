@@ -105,7 +105,7 @@ We can't get your challenges now, try again";
     "Erro" = "Error";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Choose a challenge type";
+    "pickChallengeType" = "Choose a \nchallenge type";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
     "timeChallengeTypeTitle" = "Time \nchallenge";
