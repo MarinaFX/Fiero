@@ -57,7 +57,7 @@ class QuickChallengeViewModel: ObservableObject {
                                                      baseURL: FieroAPIEnum.BASE_URL.description,
                                                      endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
                                                      authToken: $0)
-                print("new authtoken: \($0)")
+
                 return self.client.perform(for: request)
             })
             .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
@@ -107,7 +107,6 @@ class QuickChallengeViewModel: ObservableObject {
                                              baseURL: FieroAPIEnum.BASE_URL.description,
                                              endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
                                              authToken: $0)
-                print("new token: \($0)")
                 return self.client.perform(for: request)
             })
             .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
@@ -147,20 +146,14 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Delete User Challenges
     @discardableResult
     func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        self.serverResponse = .unknown
-
-        let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
-                                        baseURL: FieroAPIEnum.BASE_URL.description,
-                                        endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
-                                        authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
-            .print("operation")
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
+                                                baseURL: FieroAPIEnum.BASE_URL.description,
+                                                endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
+                                                authToken: authToken)
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -175,14 +168,11 @@ class QuickChallengeViewModel: ObservableObject {
                         print("Successfully created publisher")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    print(self?.serverResponse.statusCode as Any)
+                guard let _ = rawURLResponse.item else {
+                    print("error while trying to delete challenge: \(self?.serverResponse.statusCode as Any)")
                     return
                 }
                 self?.challengesList.removeAll(where: { $0.id == id} )
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
-                print(response)
             })
             .store(in: &cancellables)
         
