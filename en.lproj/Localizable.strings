@@ -203,27 +203,27 @@ We can't get your challenges now, try again";
 
 //MARK: Alerts
 //MARK: Invalid Email
-"invalidEmailTitle" = "Invalid email"
-"invalidEmailMessage" = "Was that too challenging? The email you inserted is invalid"
-"invalidEmailPrimaryButton" = "Ok!"
+"invalidEmailTitle" = "Invalid email";
+"invalidEmailMessage" = "Was that too challenging? The email you inserted is invalid";
+"invalidEmailPrimaryButton" = "Ok!";
 
 //MARK: Account Not Found
-"accountNotFoundTitle" = "We are just confused as you are"
-"accountNotFoundMessage" = "We didn't find any account connected to this email, would you like to Signup?"
-"accountNotFoundPrimaryButton" = "Create account"
+"accountNotFoundTitle" = "We are just confused as you are";
+"accountNotFoundMessage" = "We didn't find any account connected to this email, would you like to Signup?";
+"accountNotFoundPrimaryButton" = "Create account";
 
 //MARK: Wrong Code
-"wrongCodeTitle" = "Wrong Code"
-"wrongCodeMessage" = "The code you just inserted does not match the one we sent to your email!"
-"wrongCodePrimaryButton" = "Resend code"
-"wrongCodeSecondaryButton" = "Back to Login"
+"wrongCodeTitle" = "Wrong Code";
+"wrongCodeMessage" = "The code you just inserted does not match the one we sent to your email!";
+"wrongCodePrimaryButton" = "Resend code";
+"wrongCodeSecondaryButton" = "Back to Login";
 
 //MARK: Internal Server Error
-"internalServerErrorTitle" = "Its not you! Its us."
-"internalServerErrorMessage" = "We've had internal difficulties. Please, try again later"
-"internalServerErrorPrimaryButton" = "Ok"
+"internalServerErrorTitle" = "Its not you! Its us.";
+"internalServerErrorMessage" = "We've had internal difficulties. Please, try again later";
+"internalServerErrorPrimaryButton" = "Ok";
 
 //MARK: Password reset
-"passwordResetTitle" = "Your super secret password was saved"
-"passwordResetMessage" = "This time we challenge you not to forget it, but no pressure"
-"passwordResetPrimaryButton" = "Deal Fiero"
+"passwordResetTitle" = "Your super secret password was saved";
+"passwordResetMessage" = "This time we challenge you not to forget it, but no pressure";
+"passwordResetPrimaryButton" = "Deal Fiero";
