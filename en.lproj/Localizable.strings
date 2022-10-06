@@ -187,4 +187,43 @@ We can't get your challenges now, try again";
  "player3" = "Panda";
  "player4" = "Lion";
 
+//MARK: - Account Recovery
+//MARK: Insert email for recovery screen
+"navigationTitle" = "Recover Account";
+"titleLabel" = "If remembering passwords were to be a challenge, we would be all losers.";
+"textFieldPlaceholder" = "Type your email";
+"buttonLabel" = "Recover Account";
 
+//MARK: Insert code and password screen
+"titleLabel" = "Insert the code we've just sent to your email and your new password";
+"verificationCodeTextFieldPlaceholder" = "Validation Code";
+"passwordTextFieldPlaceholder" = "New Password";
+"confirmPasswordTextFieldPlaceholder" = "Confirm new password";
+"buttonLabel" = "Change password";
+
+//MARK: Alerts
+//MARK: Invalid Email
+"invalidEmailTitle" = "Invalid email"
+"invalidEmailMessage" = "Was that too challenging? The email you inserted is invalid"
+"invalidEmailPrimaryButton" = "Ok!"
+
+//MARK: Account Not Found
+"accountNotFoundTitle" = "We are just confused as you are"
+"accountNotFoundMessage" = "We didn't find any account connected to this email, would you like to Signup?"
+"accountNotFoundPrimaryButton" = "Create account"
+
+//MARK: Wrong Code
+"wrongCodeTitle" = "Wrong Code"
+"wrongCodeMessage" = "The code you just inserted does not match the one we sent to your email!"
+"wrongCodePrimaryButton" = "Resend code"
+"wrongCodeSecondaryButton" = "Back to Login"
+
+//MARK: Internal Server Error
+"internalServerErrorTitle" = "Its not you! Its us."
+"internalServerErrorMessage" = "We've had internal difficulties. Please, try again later"
+"internalServerErrorPrimaryButton" = "Ok"
+
+//MARK: Password reset
+"passwordResetTitle" = "Your super secret password was saved"
+"passwordResetMessage" = "This time we challenge you not to forget it, but no pressure"
+"passwordResetPrimaryButton" = "Deal Fiero"
