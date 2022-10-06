@@ -184,28 +184,24 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Begin Challenge Update
     func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        
         let json = """
         {
             "alreadyBegin" : \(alreadyBegin)
         }
         """
-        print(json)
-        let request = makePATCHRequest(json: json, param: challengeId,
-                                       variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
-                                       scheme: "http",
-                                       port: 3333,
-                                       baseURL: FieroAPIEnum.BASE_URL.description,
-                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
-                                       authToken: userToken)
         
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePATCHRequest(json: json, param: challengeId,
+                                               variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
+                                               scheme: "http",
+                                               port: 3333,
+                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
+                                               authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -225,6 +221,8 @@ class QuickChallengeViewModel: ObservableObject {
                     self?.serverResponse.statusCode = rawURLResponse.statusCode
                     return
                 }
+                print("successfully began challenge: \(rawURLResponse.statusCode)")
+                
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
