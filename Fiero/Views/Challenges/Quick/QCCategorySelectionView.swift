@@ -43,10 +43,10 @@ struct QCCategorySelectionView: View {
                 Spacer()
                 
                 Text("pickChallengeType")
-                .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
-                .padding(.horizontal, Tokens.Spacing.xs.value)
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .multilineTextAlignment(.center)
+                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .frame(minHeight: 82)
 
                 HStack(alignment: .center,spacing: cardSpacing) {
                     ForEach(0 ..< items.count) { index in
