@@ -127,7 +127,6 @@ struct ChallengeDetailsView: View {
                                     text: "Voltar para meus desafios") {
                         self.presentationMode.wrappedValue.dismiss()
                     }
-                    
                 }
                 .padding(.vertical, nanoSpacing)
                 //MARK: - Alert
@@ -170,7 +169,8 @@ struct ChallengeDetailsView: View {
                         return Alert(title: Text("not expected"))
                     }
                 })
-                //MARK: - Toolbar
+                //MARK: - Navigation
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -198,7 +198,8 @@ struct ChallengeDetailsView: View {
                         }
                     }
                 }
-            }.accentColor(Color.white)
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
     
