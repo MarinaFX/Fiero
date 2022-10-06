@@ -70,24 +70,20 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Publisher failed with: \(error)")
+                    print("Failed to create request to create challenge endpoint: \(error)")
                 case .finished:
-                    print("Publisher received sucessfully")
+                    print("Successfully created request to create challenges endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
                     print("error response status code: \(rawURLResponse.statusCode)")
                     return
                 }
                 
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.newlyCreatedChallenge = response.quickChallenge[0]
                 self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
-                print("successful response: \(response)")
-                print("response status code: \(rawURLResponse.statusCode)")
-
+                print("Successfully created challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -100,8 +96,6 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Get User Challenges
     @discardableResult
     func getUserChallenges() -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        
         let operation = self.authTokenService.getAuthToken()
             .flatMap({
                 let request = makeGETRequest(scheme: "http", port: 3333,
@@ -120,21 +114,20 @@ class QuickChallengeViewModel: ObservableObject {
                 switch completion {
                 case .failure(let error):
                     self.showingAlertToTrue()
-                    print("Publisher failed with: \(error)")
+                    print("Failed to create request to fetch user challenges endpoint: \(error)")
                 case .finished:
-                    print("Publisher received sucessfully")
+                    print("Successfully created request to fetch user challenges endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
+                    print("error fetching challenges: \(rawURLResponse.statusCode)")
+                    if rawURLResponse.statusCode == 401 {
+                        self?.showingAlertToTrue()
+                    }
                     return
                 }
                 self?.challengesList = response.quickChallenges
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
-                if self?.serverResponse.statusCode == 401 {
-                    self?.showingAlertToTrue()
-                }
+                print("Successfully fetched challenges: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -164,16 +157,17 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to create request to delete challenge endpoint: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to delete challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let _ = rawURLResponse.item else {
-                    print("error while trying to delete challenge: \(self?.serverResponse.statusCode as Any)")
+                    print("error while trying to delete challenge: \(rawURLResponse.statusCode)")
                     return
                 }
-                self?.challengesList.removeAll(where: { $0.id == id} )
+                self?.challengesList.removeAll(where: { $0.id == id })
+                print("Successfully deleted challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -213,17 +207,15 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to create request to begin challenge endpoint: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to begin challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item
-                else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                guard let response = rawURLResponse.item else {
+                    print("Error while trying to begin challenge: \(rawURLResponse.statusCode)")
                     return
                 }
-                print("successfully began challenge: \(rawURLResponse.statusCode)")
                 
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
@@ -233,6 +225,7 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     self?.challengesList = challengesList
                 }
+                print("successfully began challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -272,17 +265,17 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to request finish challenge: \(error)")
+                        print("Failed to create request finish challenge endpoint: \(error)")
                     case .finished:
                         print("Successfully created request to finish challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item
                 else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
                     return
                 }
-                print("Successfully finished challenge")
+                
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
@@ -291,6 +284,8 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     self?.challengesList = challengesList
                 }
+                print("Successfully finished challenge: \(rawURLResponse.statusCode)")
+
             })
             .store(in: &cancellables)
         
@@ -322,7 +317,7 @@ class QuickChallengeViewModel: ObservableObject {
                                                     baseURL: FieroAPIEnum.BASE_URL.description,
                                                     endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
                                                     authToken: authToken)
-                print("token: \(authToken)")
+                
                 return self.client.perform(for: request)
             })
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
@@ -333,10 +328,12 @@ class QuickChallengeViewModel: ObservableObject {
         operation
             .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
                 if case .failure = rawURLResponse {
+                    print("Error while trying to save score: \(rawURLResponse.statusCode)")
                     return self.getUserChallenges()
                         .eraseToAnyPublisher()
                 }
                 else {
+                    print("Successfully saved score: \(rawURLResponse.statusCode)")
                     return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
                         .eraseToAnyPublisher()
                 }
