@@ -38,6 +38,7 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Create Quick Challenge
+    @discardableResult
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
         let challengeJson = """
         {
@@ -183,6 +184,7 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Begin Challenge Update
+    @discardableResult
     func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
         let json = """
         {
@@ -241,36 +243,38 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Fisnih Challenge Update
-    func finishChallenge(challengeId: String, finished: Bool) {
-        self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return
-        }
-        
+    @discardableResult
+    func finishChallenge(challengeId: String, finished: Bool) -> AnyPublisher<Void, Error> {
         let json = """
         {
             "finished" : \(finished)
         }
         """
-        print(json)
-        let request = makePATCHRequest(json: json, param: challengeId,
-                                       variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
-                                       scheme: "http", port: 3333,
-                                       baseURL: FieroAPIEnum.BASE_URL.description,
-                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
-                                       authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                
+                let request = makePATCHRequest(json: json, param: challengeId,
+                                               variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
+                                               scheme: "http", port: 3333,
+                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
+                                               authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to request finish challenge: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to finish challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item
@@ -278,6 +282,7 @@ class QuickChallengeViewModel: ObservableObject {
                     self?.serverResponse.statusCode = rawURLResponse.statusCode
                     return
                 }
+                print("Successfully finished challenge")
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
@@ -288,6 +293,11 @@ class QuickChallengeViewModel: ObservableObject {
                 }
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
     }
     
     //MARK: - Patch Score
