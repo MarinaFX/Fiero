@@ -19,6 +19,7 @@ class QuickChallengeViewModel: ObservableObject {
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
+    private(set) var authTokenService: AuthTokenService
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     var sortedList: [QuickChallenge] {
@@ -26,10 +27,13 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Init
-    init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
+    init (client: HTTPClient = URLSession.shared,
+          keyValueStorage: KeyValueStorage = UserDefaults.standard,
+          authTokenService: AuthTokenService = AuthTokenServiceImpl()) {
         self.client = client
         self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+        self.authTokenService = authTokenService
         self.newlyCreatedChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     }
     
@@ -101,19 +105,16 @@ class QuickChallengeViewModel: ObservableObject {
     @discardableResult
     func getUserChallenges() -> AnyPublisher<Void, Error> {
         self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("Nao foi possivel achar o token do usuario")
-            
-            return Empty()
-                .eraseToAnyPublisher()
-        }
         
-        let request = makeGETRequest(scheme: "http", port: 3333,
-                                     baseURL: FieroAPIEnum.BASE_URL.description,
-                                     endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
-                                     authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({
+                let request = makeGETRequest(scheme: "http", port: 3333,
+                                             baseURL: FieroAPIEnum.BASE_URL.description,
+                                             endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
+                                             authToken: $0)
+                print("new token: \($0)")
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)

@@ -33,7 +33,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     //MARK: - WIP - Still relies on waiting 20 minutes
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("✅✅✅ sceneDidBecomeActive ✅✅✅")
-        self.userViewModel.refreshAuthToken()
+        self.userViewModel?.refreshAuthToken()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {

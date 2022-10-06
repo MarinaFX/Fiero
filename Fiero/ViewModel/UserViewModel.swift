@@ -304,6 +304,7 @@ class UserViewModel: ObservableObject {
     }
     
     //MARK: - Refresh Token
+    //TODO: - Delete func + call new refresh token before each API call
     func refreshableToken() {
         guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description),
               let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
