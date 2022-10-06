@@ -7,6 +7,8 @@ enum LoginAlertCases {
     case wrongCredentials
     case connectionError
     case emailNotRegistrated
+    case accountAlreadyExists
+    case termsOfUse
     
     var title: LocalizedStringKey {
         switch self {
@@ -20,6 +22,10 @@ enum LoginAlertCases {
             return "Oops, muito desafiador"
         case .emailNotRegistrated:
             return "Oops, não achamos esse perfil aqui"
+        case .accountAlreadyExists:
+            return "Conta existente"
+        case .termsOfUse:
+            return "Termos de Uso"
         }
     }
     
@@ -35,6 +41,10 @@ enum LoginAlertCases {
             return "Tivemos um erro de conexão, tente mais tarde."
         case .emailNotRegistrated:
             return "Não encontramos uma conta vinculada ao seu e-mail."
+        case .accountAlreadyExists:
+            return "Já existe uma conta com o e-mail informado."
+        case .termsOfUse:
+            return "Você deve ler e aceitar os termos de uso para poder criar uma conta."
         }
     }
 }
