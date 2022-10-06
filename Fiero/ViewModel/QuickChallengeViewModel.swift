@@ -39,13 +39,6 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Create Quick Challenge
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                .eraseToAnyPublisher()
-        }
-        self.serverResponse = .unknown
-        
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -57,14 +50,16 @@ class QuickChallengeViewModel: ObservableObject {
             "maxTeams" : \(maxTeams)
         }
         """
-        print(challengeJson)
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
-                                      endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
-                                      authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({
+                let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
+                                                     baseURL: FieroAPIEnum.BASE_URL.description,
+                                                     endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
+                                                     authToken: $0)
+                print("new authtoken: \($0)")
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
