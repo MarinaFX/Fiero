@@ -303,30 +303,28 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Patch Score
     @discardableResult
     func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken") else {
-            print("nao achou token")
-            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                .eraseToAnyPublisher()
-        }
         
         let json = """
         {
             "score" : \(score)
         }
         """
-        print(json)
         
-        let request = makePATCHRequestScore(json: json, challengeId: challengeId,
-                                            teamId: teamId, memberId: memberId,
-                                            variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
-                                            scheme: "http",
-                                            port: 3333,
-                                            baseURL: FieroAPIEnum.BASE_URL.description,
-                                            endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
-                                            authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePATCHRequestScore(json: json,
+                                                    challengeId: challengeId,
+                                                    teamId: teamId,
+                                                    memberId: memberId,
+                                                    variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
+                                                    scheme: "http",
+                                                    port: 3333,
+                                                    baseURL: FieroAPIEnum.BASE_URL.description,
+                                                    endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
+                                                    authToken: authToken)
+                print("token: \(authToken)")
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
