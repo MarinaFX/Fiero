@@ -16,8 +16,6 @@ struct AccountLoginView: View {
     @Environment(\.sizeCategory) var dynamicTypeCategory
     
     @EnvironmentObject var userViewModel: UserViewModel
-    @EnvironmentObject var userViewModelSignup: UserViewModel
-    
     
     //MARK: - Variables Login View
     @State private(set) var user: User = .init(email: "", name: "", password: "")
@@ -26,6 +24,7 @@ struct AccountLoginView: View {
     @State private var isFieldIncorrect: Bool = false
     @State private var isShowingSignupSheet: Bool = false
     @State private var isShowingAlert: Bool = false
+    @State private var ended: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
     
     private let namePlaceholder: String = "Name"
@@ -79,8 +78,11 @@ struct AccountLoginView: View {
             
             //MARK: Login Form
             VStack {
-                if !userViewModel.keyboardShown  {
-                    LottieView(fileName: "LoginAnimationStart", reverse: false, loop: false, aspectFill: false, secondAnimation: "LoginAnimationEnd", loopSecond: true)
+                ZStack {
+                    if !userViewModel.keyboardShown  {
+                        LottieView(fileName: "LoginAnimationEnd", reverse: false, loop: true, aspectFill: false, ended: $ended).opacity(ended ? 1 : 0)
+                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: false, aspectFill: false, ended: $ended).opacity(ended ? 0 : 1)
+                    }
                 }
                 Text("Boas vindas, desafiante")
                     .font(largeTitleFont)
@@ -117,9 +119,6 @@ struct AccountLoginView: View {
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Criar conta!",
                                         action: {
-                            print(username)
-                            print(email)
-                            print(password)
                             if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
                                 self.userViewModel.loginAlertCases = .emptyFields
                                 isShowingAlert.toggle()
@@ -130,7 +129,7 @@ struct AccountLoginView: View {
                                 self.userViewModel.loginAlertCases = .termsOfUse
                                 isShowingAlert.toggle()
                             } else {
-                                self.userViewModelSignup.signup(for: User(email: self.email, name: self.username, password: self.password))
+                                self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
                             }
                         })
                         //MARK: Last elements
@@ -208,7 +207,7 @@ struct AccountLoginView: View {
                     VStack {
                         Spacer()
                         //TODO: - change name of animation loading
-                        LottieView(fileName: "loading", reverse: false, loop: true).frame(width: 200, height: 200)
+                        LottieView(fileName: "loading", reverse: false, loop: true, ended: $ended).frame(width: 200, height: 200)
                         Spacer()
                     }
                 }
@@ -252,15 +251,15 @@ struct AccountLoginView: View {
                     self.userViewModel.removeLoadingAnimation()
                 })
             case .accountAlreadyExists:
-                return Alert(title: Text(SignupAlertCases.accountAlreadyExists.title),
-                             message: Text(SignupAlertCases.accountAlreadyExists.message),
+                return Alert(title: Text(LoginAlertCases.accountAlreadyExists.title),
+                             message: Text(LoginAlertCases.accountAlreadyExists.message),
                              dismissButton: .cancel(Text("OK")) {
                     self.isShowingAlert = false
                     self.userViewModel.removeLoadingAnimation()
                 })
             case .termsOfUse:
-                return Alert(title: Text(SignupAlertCases.termsOfUse.title),
-                             message: Text(SignupAlertCases.termsOfUse.message),
+                return Alert(title: Text(LoginAlertCases.termsOfUse.title),
+                             message: Text(LoginAlertCases.termsOfUse.message),
                              dismissButton: .cancel(Text("OK")) {
                     self.isShowingAlert = false
                     self.userViewModel.removeLoadingAnimation()
@@ -296,6 +295,18 @@ struct AccountLoginView: View {
             }
             
             if error == .accountAlreadyExists {
+                self.isShowingAlert = true
+            }
+            
+            if error == .emailNotRegistrated {
+                self.isShowingAlert = true
+            }
+            
+            if error == .accountAlreadyExists {
+                self.isShowingAlert = true
+            }
+            
+            if error == .termsOfUse {
                 self.isShowingAlert = true
             }
         })
