@@ -198,7 +198,7 @@ class UserViewModel: ObservableObject {
     }
     
     //MARK: - Get AuthToken
-    func getAuthToken() {
+    func refreshAuthToken() {
         guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
             print("Não ha nenhum email de usuario salvo")
             
