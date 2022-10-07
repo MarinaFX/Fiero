@@ -245,6 +245,107 @@ class UserViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    @discardableResult
+    func sendVerificationCode(for email: String) -> AnyPublisher<Void, Error> {
+        let json = """
+        {
+            "email" : "\(email)"
+        }
+        """
+        
+        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.VERIFICATION_CODE.description, authToken: "")
+        
+        let operation = self.client.perform(for: request)
+            .tryMap({ $1 as? HTTPURLResponse })
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                    case .failure(let error):
+                        print("Failed to create request to verificationCode endpoint: \(error)")
+                    case .finished:
+                        print("Successfully created request to signup endpoint")
+                }
+            }, receiveValue: { response in
+                guard let response = response else {
+                    print("There was an error while trying to send the verification code to the email: \(String(describing: response?.statusCode))")
+                    return
+                }
+                
+                if response.statusCode == 201 {
+                    print("Successfully sent verification code to email \(email): status code \(response.statusCode)")
+                }
+                else {
+                    print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                }
+            })
+            .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
+    @discardableResult
+    func resetAccountPassword(with newPassword: String, using verificationCode: String) -> AnyPublisher<Void, Error> {
+        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
+            print("no email was found")
+            
+            return Empty(outputType: Void.self, failureType: Error.self)
+                .eraseToAnyPublisher()
+        }
+        
+        let json = """
+        {
+            "newPassword" : "\(newPassword)",
+            "verificationCode" : "\(verificationCode)",
+            "email" : "\(email)"
+        }
+        """
+        
+        let request = makePATCHRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.RESET_PASSWORD.description, authToken: "")
+        
+        
+        let operation = self.client.perform(for: request)
+            .tryMap({ $1 as? HTTPURLResponse })
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                    case .failure(let error):
+                        print("Failed to create request to reset password endpoint: \(error)")
+                    case .finished:
+                        print("Successfully created request to reset password endpoint")
+                }
+            }, receiveValue: { response in
+                guard let response = response else {
+                    print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
+                    return
+                }
+                
+                if response.statusCode == 200 {
+                    print("Successfully reset password: status code \(response.statusCode)")
+                }
+                else {
+                    print("There was an error while trying to reset the password: \(String(describing: response.statusCode))")
+                }
+            })
+            .store(in: &cancellables)
+        
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
     //MARK: - Get AuthToken
     @discardableResult
     func refreshAuthToken() -> AnyPublisher<String, Error> {
