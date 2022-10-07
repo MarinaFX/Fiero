@@ -28,6 +28,9 @@ struct QCChallengeCreatedView: View {
     
     @Binding var quickChallenge: QuickChallenge
     
+    @State private var ended: Bool = false
+
+    
     var challengeType: QCType
     var challengeName: String
     var challengeParticipants: Int
@@ -48,7 +51,7 @@ struct QCChallengeCreatedView: View {
         VStack {
             Spacer()
             
-            LottieView(fileName: "success-loop", reverse: false, loop: true).frame(width: 350 , height: 200)
+            LottieView(fileName: "success-loop", reverse: false, loop: true, ended: $ended).frame(width: 350 , height: 200)
             
             Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)

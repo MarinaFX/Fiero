@@ -22,6 +22,9 @@ struct ChallengeDetailsView: View {
     @State var present3or4OngoingChallenge: Bool = false
     @State var isPresentingLoading: Bool = false
     
+    @State private var ended: Bool = false
+
+    
     @Binding var quickChallenge: QuickChallenge
     
     //MARK: - Body
@@ -193,7 +196,7 @@ struct ChallengeDetailsView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false, ended: $ended).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }

@@ -19,7 +19,6 @@ class UserViewModel: ObservableObject {
     @Published private(set) var user: User
     @Published var keyboardShown: Bool = false
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
-    @Published var signupAlertCases: SignupAlertCases = .emptyFields
     @Published var isShowingLoading: Bool = false
     @Published var activeAlert: ActiveAlert?
     @Published var showingAlert = false
@@ -80,7 +79,7 @@ class UserViewModel: ObservableObject {
                 switch completion {
                     case .failure(let error):
                         print("completion failed with: \(error)")
-                        self?.signupAlertCases = .connectionError
+                        self?.loginAlertCases = .connectionError
                         self?.isShowingLoading = false
                     case .finished:
                         print("finished successfully")
@@ -91,13 +90,13 @@ class UserViewModel: ObservableObject {
                     
                     switch rawURLResponse.statusCode {
                         case 400:
-                            self?.signupAlertCases = .invalidEmail
+                            self?.loginAlertCases = .invalidEmail
                         case 409:
-                            self?.signupAlertCases = .accountAlreadyExists
+                            self?.loginAlertCases = .accountAlreadyExists
                         case 500:
-                            self?.signupAlertCases = .connectionError
+                            self?.loginAlertCases = .connectionError
                         default:
-                            self?.signupAlertCases = .connectionError
+                            self?.loginAlertCases = .connectionError
                     }
                     self?.isShowingLoading = false
                     return
