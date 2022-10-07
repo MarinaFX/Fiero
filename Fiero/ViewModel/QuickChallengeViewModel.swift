@@ -12,13 +12,13 @@ import Combine
 class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var challengesList: [QuickChallenge] = []
-    @Published var serverResponse: ServerResponse
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
+    private(set) var authTokenService: AuthTokenService
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     var sortedList: [QuickChallenge] {
@@ -26,22 +26,18 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Init
-    init (client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
+    init (client: HTTPClient = URLSession.shared,
+          keyValueStorage: KeyValueStorage = UserDefaults.standard,
+          authTokenService: AuthTokenService = AuthTokenServiceImpl()) {
         self.client = client
-        self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+        self.authTokenService = authTokenService
         self.newlyCreatedChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     }
     
     //MARK: - Create Quick Challenge
+    @discardableResult
     func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                .eraseToAnyPublisher()
-        }
-        self.serverResponse = .unknown
-        
         let challengeJson = """
         {
             "name" : "\(name)",
@@ -53,14 +49,16 @@ class QuickChallengeViewModel: ObservableObject {
             "maxTeams" : \(maxTeams)
         }
         """
-        print(challengeJson)
         
-        let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
-                                      endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
-                                      authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({
+                let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
+                                                     baseURL: FieroAPIEnum.BASE_URL.description,
+                                                     endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
+                                                     authToken: $0)
+
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -70,24 +68,19 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Publisher failed with: \(error)")
+                    print("Failed to create request to create challenge endpoint: \(error)")
                 case .finished:
-                    print("Publisher received sucessfully")
+                    print("Successfully created request to create challenges endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
                     print("error response status code: \(rawURLResponse.statusCode)")
                     return
                 }
                 
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.newlyCreatedChallenge = response.quickChallenge[0]
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
-                print("successful response: \(response)")
-                print("response status code: \(rawURLResponse.statusCode)")
-
+                print("Successfully created challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -100,20 +93,14 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Get User Challenges
     @discardableResult
     func getUserChallenges() -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("Nao foi possivel achar o token do usuario")
-            
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        
-        let request = makeGETRequest(scheme: "http", port: 3333,
-                                     baseURL: FieroAPIEnum.BASE_URL.description,
-                                     endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
-                                     authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({
+                let request = makeGETRequest(scheme: "http", port: 3333,
+                                             baseURL: FieroAPIEnum.BASE_URL.description,
+                                             endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
+                                             authToken: $0)
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -124,21 +111,20 @@ class QuickChallengeViewModel: ObservableObject {
                 switch completion {
                 case .failure(let error):
                     self.showingAlertToTrue()
-                    print("Publisher failed with: \(error)")
+                    print("Failed to create request to fetch user challenges endpoint: \(error)")
                 case .finished:
-                    print("Publisher received sucessfully")
+                    print("Successfully created request to fetch user challenges endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    print("error while fetching challenges: \(String(describing: self?.serverResponse.statusCode))")
+                    print("error fetching challenges: \(rawURLResponse.statusCode)")
+                    if rawURLResponse.statusCode == 401 {
+                        self?.showingAlertToTrue()
+                    }
                     return
                 }
                 self?.challengesList = response.quickChallenges
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
-                if self?.serverResponse.statusCode == 401 {
-                    self?.showingAlertToTrue()
-                }
+                print("Successfully fetched challenges: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -151,20 +137,14 @@ class QuickChallengeViewModel: ObservableObject {
     //MARK: - Delete User Challenges
     @discardableResult
     func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        self.serverResponse = .unknown
-
-        let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
-                                        baseURL: FieroAPIEnum.BASE_URL.description,
-                                        endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
-                                        authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
-            .print("operation")
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
+                                                baseURL: FieroAPIEnum.BASE_URL.description,
+                                                endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
+                                                authToken: authToken)
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -174,19 +154,17 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to create request to delete challenge endpoint: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to delete challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    print(self?.serverResponse.statusCode as Any)
+                guard let _ = rawURLResponse.item else {
+                    print("error while trying to delete challenge: \(rawURLResponse.statusCode)")
                     return
                 }
-                self?.challengesList.removeAll(where: { $0.id == id} )
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
-                print(response)
+                self?.challengesList.removeAll(where: { $0.id == id })
+                print("Successfully deleted challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -197,29 +175,26 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Begin Challenge Update
+    @discardableResult
     func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        
         let json = """
         {
             "alreadyBegin" : \(alreadyBegin)
         }
         """
-        print(json)
-        let request = makePATCHRequest(json: json, param: challengeId,
-                                       variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
-                                       scheme: "http",
-                                       port: 3333,
-                                       baseURL: FieroAPIEnum.BASE_URL.description,
-                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
-                                       authToken: userToken)
         
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePATCHRequest(json: json, param: challengeId,
+                                               variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
+                                               scheme: "http",
+                                               port: 3333,
+                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
+                                               authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -229,16 +204,16 @@ class QuickChallengeViewModel: ObservableObject {
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to create request to begin challenge endpoint: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to begin challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item
-                else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                guard let response = rawURLResponse.item else {
+                    print("Error while trying to begin challenge: \(rawURLResponse.statusCode)")
                     return
                 }
+                
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
@@ -247,6 +222,7 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     self?.challengesList = challengesList
                 }
+                print("successfully began challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
         
@@ -257,43 +233,46 @@ class QuickChallengeViewModel: ObservableObject {
     }
     
     //MARK: - Fisnih Challenge Update
-    func finishChallenge(challengeId: String, finished: Bool) {
-        self.serverResponse = .unknown
-        guard let userToken = keyValueStorage.string(forKey: "AuthToken") else {
-            print("NO USER TOKEN FOUND!")
-            return
-        }
-        
+    @discardableResult
+    func finishChallenge(challengeId: String, finished: Bool) -> AnyPublisher<Void, Error> {
         let json = """
         {
             "finished" : \(finished)
         }
         """
-        print(json)
-        let request = makePATCHRequest(json: json, param: challengeId,
-                                       variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
-                                       scheme: "http", port: 3333,
-                                       baseURL: FieroAPIEnum.BASE_URL.description,
-                                       endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
-                                       authToken: userToken)
         
-        self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                
+                let request = makePATCHRequest(json: json, param: challengeId,
+                                               variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
+                                               scheme: "http", port: 3333,
+                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
+                                               authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
             .sink(receiveCompletion: { result in
                 switch result {
                     case .failure(let error):
-                        print("Failed to create publisher: \(error)")
+                        print("Failed to create request finish challenge endpoint: \(error)")
                     case .finished:
-                        print("Successfully created publisher")
+                        print("Successfully created request to finish challenge endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item
                 else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
                     return
                 }
+                
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
@@ -302,37 +281,42 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     self?.challengesList = challengesList
                 }
+                print("Successfully finished challenge: \(rawURLResponse.statusCode)")
+
             })
             .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
     }
     
     //MARK: - Patch Score
     @discardableResult
     func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Void, Error> {
-        self.serverResponse = .unknown
-        guard let userToken = self.keyValueStorage.string(forKey: "AuthToken") else {
-            print("nao achou token")
-            return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                .eraseToAnyPublisher()
-        }
         
         let json = """
         {
             "score" : \(score)
         }
         """
-        print(json)
         
-        let request = makePATCHRequestScore(json: json, challengeId: challengeId,
-                                            teamId: teamId, memberId: memberId,
-                                            variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
-                                            scheme: "http",
-                                            port: 3333,
-                                            baseURL: FieroAPIEnum.BASE_URL.description,
-                                            endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
-                                            authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePATCHRequestScore(json: json,
+                                                    challengeId: challengeId,
+                                                    teamId: teamId,
+                                                    memberId: memberId,
+                                                    variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
+                                                    scheme: "http",
+                                                    port: 3333,
+                                                    baseURL: FieroAPIEnum.BASE_URL.description,
+                                                    endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
+                                                    authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -341,10 +325,12 @@ class QuickChallengeViewModel: ObservableObject {
         operation
             .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
                 if case .failure = rawURLResponse {
+                    print("Error while trying to save score: \(rawURLResponse.statusCode)")
                     return self.getUserChallenges()
                         .eraseToAnyPublisher()
                 }
                 else {
+                    print("Successfully saved score: \(rawURLResponse.statusCode)")
                     return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
                         .eraseToAnyPublisher()
                 }
