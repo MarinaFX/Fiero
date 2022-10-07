@@ -196,16 +196,17 @@
 //MARK: - Account Recovery
 //MARK: Insert email for recovery screen
 "navigationTitle" = "Recuperar conta";
-"titleLabel" = "Se lembrar senhas fosse um desafio, todos nós seríamos perdedores.";
+"forgotYourPassword" = "Esqueceu sua senha?";
+"recoverAccountTitleLabel" = "Se lembrar senhas fosse um desafio, todos nós seríamos perdedores.";
 "textFieldPlaceholder" = "Digite o seu e-mail";
 "buttonLabel" = "Recuperar senha";
 
 //MARK: Insert code and password screen
-"titleLabel" = "Digite o código que enviamos para o seu e-mail e a nova senha";
+"verificationcationCodeTitleLabel" = "Digite o código que enviamos para o seu e-mail e a nova senha!";
 "verificationCodeTextFieldPlaceholder" = "Código de validação";
 "passwordTextFieldPlaceholder" = "Nova senha";
 "confirmPasswordTextFieldPlaceholder" = "Confirme a nova senha";
-"buttonLabel" = "Mudar senha";
+"changePasswordButtonLabel" = "Mudar senha";
 
 //MARK: Alerts
 //MARK: Invalid Email
