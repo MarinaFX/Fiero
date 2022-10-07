@@ -78,11 +78,11 @@ class UserViewModel: ObservableObject {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
-                        print("completion failed with: \(error)")
+                        print("Failed to create request to signup endpoint: \(error)")
                         self?.loginAlertCases = .connectionError
                         self?.isShowingLoading = false
                     case .finished:
-                        print("finished successfully")
+                        print("Successfully created request to signup endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
@@ -148,11 +148,11 @@ class UserViewModel: ObservableObject {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
-                        print("completion failed with: \(error)")
+                        print("Failed to create request to login endpoint: \(error)")
                         self?.loginAlertCases = .connectionError
                         self?.isShowingLoading = false
                     case .finished:
-                        print("finished successfully")
+                        print("Successfully created request to login endpoint")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
