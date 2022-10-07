@@ -55,6 +55,8 @@ enum UserEndpointEnum: CustomStringConvertible {
     case LOGIN
     case DELETE_USER
     case TOKEN
+    case VERIFICATION_CODE
+    case RESET_PASSWORD
     
     var description: String {
         switch self {
@@ -66,6 +68,10 @@ enum UserEndpointEnum: CustomStringConvertible {
                 return "/user"
             case .TOKEN:
                 return "/user/token"
+            case .VERIFICATION_CODE:
+                return "/user/verificationCode"
+            case .RESET_PASSWORD:
+                return "/user/password"
         }
     }
 }
