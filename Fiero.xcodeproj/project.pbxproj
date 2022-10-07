@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -65,6 +65,9 @@
 		1B9092A42878AD320039EBB7 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */; };
+		1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */; };
+		1BC4CFDB28EF5A9E0039A230 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */; };
+		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
 		489B528E28A575A400ADAF49 /* Ongoing3_4ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		62A9849B28D210C200AE77B5 /* success-loop.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849A28D210C200AE77B5 /* success-loop.json */; };
@@ -200,6 +203,9 @@
 		1B9092A32878AD320039EBB7 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		1B9092A62878AD740039EBB7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginResponse.swift; sourceTree = "<group>"; };
+		1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenService.swift; sourceTree = "<group>"; };
+		1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
@@ -450,6 +456,8 @@
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
 				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
 				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
+				1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */,
+				1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -570,6 +578,7 @@
 				1B8CD34828889F1000D2F703 /* Team.swift */,
 				1B6020C728A1940200AEF47B /* Member.swift */,
 				1B56226328E3817400C505DC /* FieroAPI.swift */,
+				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -890,7 +899,7 @@
 				};
 			};
 			buildConfigurationList = 1B4135B028597E8900C7094A /* Build configuration list for PBXProject "Fiero" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1006,6 +1015,7 @@
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
+				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStep.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
@@ -1044,7 +1054,9 @@
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 				CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */,
+				1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */,
 				DFF31A0828C7D7EC002EFD9D /* OnboardingCard.swift in Sources */,
+				1BC4CFDB28EF5A9E0039A230 /* Data+Extensions.swift in Sources */,
 				DFF31A0928C7D7EC002EFD9D /* Onboarding.swift in Sources */,
 				CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */,
 			);
