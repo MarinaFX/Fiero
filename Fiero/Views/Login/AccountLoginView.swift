@@ -10,23 +10,36 @@ import Combine
 
 //MARK: - Account Login View
 struct AccountLoginView: View {
-    //MARK: Variables Setup
+    
+    //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
-
+    
     @EnvironmentObject var userViewModel: UserViewModel
-
+    
+    //MARK: - Variables Login View
     @State private(set) var user: User = .init(email: "", name: "", password: "")
     @State private var emailText: String = ""
     @State private var passwordText: String = ""
     @State private var isFieldIncorrect: Bool = false
     @State private var isShowingSignupSheet: Bool = false
     @State private var isShowingAlert: Bool = false
+    @State private var ended: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
-
+    
     private let namePlaceholder: String = "Name"
     private let emailPlaceholder: String = "E-mail"
     private let passwordPlaceholder: String = "Senha"
+    
+    //MARK: - Variables Sigup View
+    @State private var email: String = ""
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var moving = false
+    @State private var hasAcceptedTermsOfUse = false
+    @State private var isShowingTermsOfUseSheet = false
+    @State private var isLoginScreenSheetShowing: Bool = false
+    @State private var isShowingTermsOfUseAlert: Bool = false
     
     var nanoSpacing: Double {
         return Tokens.Spacing.nano.value
@@ -59,175 +72,265 @@ struct AccountLoginView: View {
     
     //MARK: body View
     var body: some View {
-        if isShowingSignupSheet{
-            UserSignupView()
-                .environmentObject(self.userViewModel)
-        } else {
-            ZStack {
-                Tokens.Colors.Background.dark.value.ignoresSafeArea()
-                
-                //MARK: Login Form
-                VStack {
+        
+        ZStack {
+            Tokens.Colors.Background.dark.value.ignoresSafeArea()
+            
+            //MARK: Login Form
+            VStack {
+                ZStack {
                     if !userViewModel.keyboardShown  {
-                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: true, aspectFill: false, secondAnimation: "LoginAnimationEnd", loopSecond: true)
+                        LottieView(fileName: "LoginAnimationEnd", reverse: false, loop: true, aspectFill: false, ended: $ended).opacity(ended ? 1 : 0)
+                        LottieView(fileName: "LoginAnimationStart", reverse: false, loop: false, aspectFill: false, ended: $ended).opacity(ended ? 0 : 1)
                     }
-                    Text("Boas vindas, desafiante")
-                        .font(largeTitleFont)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding(.vertical, smallSpacing)
-                    //MARK: TextFields
-                    CustomTextFieldView(type: .none,
-                                        style: .primary,
-                                        placeholder: emailPlaceholder,
-                                        keyboardType: .emailAddress,
-                                        isSecure: false,
-                                        isLowCase: true ,
-                                        isWrong: .constant(false),
-                                        text: self.$emailText)
+                }
+                Text("Boas vindas, desafiante")
+                    .font(largeTitleFont)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .padding(.vertical, smallSpacing)
+                
+                if isShowingSignupSheet{
+                    //MARK: - Sigup View
+                    Group{
+                        //MARK: TextFilds elements
+                        VStack(spacing: Tokens.Spacing.xxxs.value){
+                            CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
+                            
+                            CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
+                            
+                            CustomTextFieldView(type: .both,style: .primary, helperText: "", placeholder: "Senha", isSecure: true, isLowCase: true ,isWrong: .constant(false), text: $password)
+                        }
+                        //MARK: Button and CheckBox
+                        CheckboxComponent(style: .dark,
+                                          text: "Concordo com os",
+                                          linkedText: "Termos de Uso",
+                                          isChecked: $hasAcceptedTermsOfUse,
+                                          checkboxHandler: { isChecked in
+                            print(isChecked)
+                        },
+                                          linkedTextHandler: {
+                            isShowingTermsOfUseSheet.toggle()
+                        })
+                        .sheet(isPresented: $isShowingTermsOfUseSheet) {
+                            TermsOfUseSheetView(termsOfUseAccept: $hasAcceptedTermsOfUse)
+                        }
                         
-                    
-                    CustomTextFieldView(type: .icon,
-                                        style: .primary,
-                                        placeholder: passwordPlaceholder,
-                                        isSecure: true,
-                                        isLowCase: true ,
-                                        isWrong: .constant(false),
-                                        text: self.$passwordText)
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "Criar conta!",
+                                        action: {
+                            if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
+                                self.userViewModel.loginAlertCases = .emptyFields
+                                isShowingAlert.toggle()
+                            } else if !self.email.contains("@") || !self.email.contains("."){
+                                self.userViewModel.loginAlertCases = .invalidEmail
+                                isShowingAlert.toggle()
+                            } else if !hasAcceptedTermsOfUse {
+                                self.userViewModel.loginAlertCases = .termsOfUse
+                                isShowingAlert.toggle()
+                            } else {
+                                self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
+                            }
+                        })
+                        //MARK: Last elements
+                        HStack{
+                            Text("Já tem uma conta?")
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .font(Tokens.FontStyle.callout.font())
+                            Button("Faça Login!") {
+                                self.isShowingSignupSheet.toggle()
+                            }
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                        }
+                    }
+                } else {
+                    //MARK: - Login View
+                    Group{
+                        //MARK: TextFields
+                        CustomTextFieldView(type: .none,
+                                            style: .primary,
+                                            placeholder: emailPlaceholder,
+                                            keyboardType: .emailAddress,
+                                            isSecure: false,
+                                            isLowCase: true ,
+                                            isWrong: .constant(false),
+                                            text: self.$emailText)
+                        
+                        
+                        CustomTextFieldView(type: .icon,
+                                            style: .primary,
+                                            placeholder: passwordPlaceholder,
+                                            isSecure: true,
+                                            isLowCase: true ,
+                                            isWrong: .constant(false),
+                                            text: self.$passwordText)
                         .padding(.vertical, nanoSpacing)
-                    //MARK: Buttons
-                    ButtonComponent(style: .secondary(isEnabled: true),
-                                    text: "Fazer Login!",
-                                    action: {
-                        if emailText.isEmpty || passwordText.isEmpty {
-                            self.userViewModel.loginAlertCases = .emptyFields
-                            isShowingAlert.toggle()
-                        } else if !emailText.contains("@") || !emailText.contains("."){
-                            self.userViewModel.loginAlertCases = .invalidEmail
-                            isShowingAlert.toggle()
-                        } else {
-                            self.userViewModel.login(email: self.emailText, password: self.passwordText)    
-                        }
-                    })
-                    
-                    HStack {
-                        Text("Ainda não tem uma conta?")
-                            .font(textFont)
-                            .foregroundColor(color)
-                            .accessibilityLabel("")
+                        //MARK: Buttons
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "Fazer Login!",
+                                        action: {
+                            if emailText.isEmpty || passwordText.isEmpty {
+                                self.userViewModel.loginAlertCases = .emptyFields
+                                isShowingAlert.toggle()
+                            } else if !emailText.contains("@") || !emailText.contains("."){
+                                self.userViewModel.loginAlertCases = .invalidEmail
+                                isShowingAlert.toggle()
+                            } else {
+                                self.userViewModel.login(email: self.emailText, password: self.passwordText)
+                            }
+                        })
                         
-                        Button(action: {
-                            self.isShowingSignupSheet.toggle()
-                        }, label: {
-                            Text("Cadastre-se!")
-                                .font(textButtonFont)
+                        HStack {
+                            Text("Ainda não tem uma conta?")
+                                .font(textFont)
                                 .foregroundColor(color)
-                                .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
-                        })
-                    }
-                    .padding(.top, smallSpacing)
-                }
-                .padding(.horizontal, smallSpacing)
-                if userViewModel.isShowingLoading {
-                    ZStack {
-                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
-                        VStack {
-                            Spacer()
-                            //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false, loop: true).frame(width: 200, height: 200)
-                            Spacer()
+                                .accessibilityLabel("")
+                            
+                            Button(action: {
+                                self.isShowingSignupSheet.toggle()
+                            }, label: {
+                                Text("Cadastre-se!")
+                                    .font(textButtonFont)
+                                    .foregroundColor(color)
+                                    .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
+                            })
                         }
+                        .padding(.top, smallSpacing)
                     }
                 }
             }
-            .alert(isPresented: self.$isShowingAlert, content: {
-                switch self.userViewModel.loginAlertCases {
-                    case .emptyFields:
-                        return Alert(title: Text(LoginAlertCases.emptyFields.title),
-                                     message: Text(LoginAlertCases.emptyFields.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                            self.isShowingAlert = false
-                            self.userViewModel.removeLoadingAnimation()
-                        })
-                    case .invalidEmail:
-                        return Alert(title: Text(LoginAlertCases.invalidEmail.title),
-                                     message: Text(LoginAlertCases.invalidEmail.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                            self.isShowingAlert = false
-                            self.userViewModel.removeLoadingAnimation()
-                        })
-                    case .wrongCredentials:
-                        return Alert(title: Text(LoginAlertCases.wrongCredentials.title),
-                                     message: Text(LoginAlertCases.wrongCredentials.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                            self.isShowingAlert = false
-                            self.userViewModel.removeLoadingAnimation()
-                        })
-                    case .connectionError:
-                        return Alert(title: Text(LoginAlertCases.connectionError.title),
-                                     message: Text(LoginAlertCases.connectionError.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                            self.isShowingAlert = false
-                            self.userViewModel.removeLoadingAnimation()
-                        })
-                    case .emailNotRegistrated:
-                        return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
-                                     message: Text(LoginAlertCases.emailNotRegistrated.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                            self.isShowingAlert = false
-                            self.userViewModel.removeLoadingAnimation()
-                        })
+            .padding(.horizontal, smallSpacing)
+            if userViewModel.isShowingLoading {
+                ZStack {
+                    Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                    VStack {
+                        Spacer()
+                        //TODO: - change name of animation loading
+                        LottieView(fileName: "loading", reverse: false, loop: true, ended: $ended).frame(width: 200, height: 200)
+                        Spacer()
+                    }
                 }
-            })
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
-                self.userViewModel.onKeyboardDidSHow()
             }
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                self.userViewModel.onKeyboardDidHide()
-            }
-            .onChange(of: self.userViewModel.user, perform: { user in
-                self.user = user
-            })
-            .onReceive(self.userViewModel.$loginAlertCases.dropFirst(), perform: { error in
-                let error = error
-
-                if error == .invalidEmail {
-                    self.isShowingAlert = true
-                }
-
-                if error == .wrongCredentials {
-                    self.isShowingAlert = true
-                }
-
-                if error == .emailNotRegistrated {
-                    self.isShowingAlert = true
-                }
-
-                if error == .connectionError {
-                    self.isShowingAlert = true
-                }
-            })
-            .onAppear {
-                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-                AppDelegate.orientationLock = .portrait // And making sure it stays that way
-                                                
-                let defaults = UserDefaults.standard
-                
-                let email = defaults.string(forKey: UDKeys.email.description) ?? ""
-                let password = defaults.string(forKey: UDKeys.password.description) ?? ""
-                
-                if (!(email.isEmpty) || !(password.isEmpty))  {
-                    self.userViewModel.isLogged = true
-                }
-                
-            }.onDisappear {
-                // Unlocking the rotation when leaving the view
-                // AppDelegate.orientationLock = .all
-            }
-            .preferredColorScheme(.dark)
         }
+        .alert(isPresented: self.$isShowingAlert, content: {
+            switch self.userViewModel.loginAlertCases {
+            case .emptyFields:
+                return Alert(title: Text(LoginAlertCases.emptyFields.title),
+                             message: Text(LoginAlertCases.emptyFields.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .invalidEmail:
+                return Alert(title: Text(LoginAlertCases.invalidEmail.title),
+                             message: Text(LoginAlertCases.invalidEmail.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .wrongCredentials:
+                return Alert(title: Text(LoginAlertCases.wrongCredentials.title),
+                             message: Text(LoginAlertCases.wrongCredentials.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .connectionError:
+                return Alert(title: Text(LoginAlertCases.connectionError.title),
+                             message: Text(LoginAlertCases.connectionError.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .emailNotRegistrated:
+                return Alert(title: Text(LoginAlertCases.emailNotRegistrated.title),
+                             message: Text(LoginAlertCases.emailNotRegistrated.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .accountAlreadyExists:
+                return Alert(title: Text(LoginAlertCases.accountAlreadyExists.title),
+                             message: Text(LoginAlertCases.accountAlreadyExists.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            case .termsOfUse:
+                return Alert(title: Text(LoginAlertCases.termsOfUse.title),
+                             message: Text(LoginAlertCases.termsOfUse.message),
+                             dismissButton: .cancel(Text("OK")) {
+                    self.isShowingAlert = false
+                    self.userViewModel.removeLoadingAnimation()
+                })
+            }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+            self.userViewModel.onKeyboardDidSHow()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+            self.userViewModel.onKeyboardDidHide()
+        }
+        .onChange(of: self.userViewModel.user, perform: { user in
+            self.user = user
+        })
+        .onReceive(self.userViewModel.$loginAlertCases.dropFirst(), perform: { error in
+            let error = error
+            
+            if error == .invalidEmail {
+                self.isShowingAlert = true
+            }
+            
+            if error == .wrongCredentials {
+                self.isShowingAlert = true
+            }
+            
+            if error == .emailNotRegistrated {
+                self.isShowingAlert = true
+            }
+            
+            if error == .connectionError {
+                self.isShowingAlert = true
+            }
+            
+            if error == .accountAlreadyExists {
+                self.isShowingAlert = true
+            }
+            
+            if error == .emailNotRegistrated {
+                self.isShowingAlert = true
+            }
+            
+            if error == .accountAlreadyExists {
+                self.isShowingAlert = true
+            }
+            
+            if error == .termsOfUse {
+                self.isShowingAlert = true
+            }
+        })
+        .onAppear {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+            AppDelegate.orientationLock = .portrait // And making sure it stays that way
+            
+            let defaults = UserDefaults.standard
+            
+            let email = defaults.string(forKey: UDKeys.email.description) ?? ""
+            let password = defaults.string(forKey: UDKeys.password.description) ?? ""
+            
+            if (!(email.isEmpty) || !(password.isEmpty))  {
+                self.userViewModel.isLogged = true
+            }
+            
+        }.onDisappear {
+            // Unlocking the rotation when leaving the view
+            // AppDelegate.orientationLock = .all
+        }
+        .preferredColorScheme(.dark)
     }
 }
+
 
 struct AccountLoginView_Previews: PreviewProvider {
     static var previews: some View {

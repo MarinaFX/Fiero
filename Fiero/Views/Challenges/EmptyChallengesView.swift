@@ -10,6 +10,9 @@ import SwiftUI
 struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
     @ObservedObject var target = RefreshControlTarget()
+    
+    @State private var ended: Bool = false
+
 
     var body: some View {
 
@@ -17,7 +20,7 @@ struct EmptyChallengesView: View {
             Spacer()
             Spacer()
             
-            LottieView(fileName: "sad", reverse: false, loop: true).frame(width: 300 , height: 150)
+            LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 150)
             
             Text("Tá tão vazio por aqui,\nbora vencer uns desafios?")
                 .multilineTextAlignment(.center)

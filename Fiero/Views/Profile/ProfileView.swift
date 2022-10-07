@@ -12,6 +12,8 @@ struct ProfileView: View {
 
     @EnvironmentObject var userViewModel: UserViewModel
     
+    @State private var ended: Bool = false
+    
     @State private var subscriptions: Set<AnyCancellable> = []
     
     var body: some View {
@@ -24,7 +26,7 @@ struct ProfileView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
-                LottieView(fileName: "tonto2", reverse: false, loop: true)
+                LottieView(fileName: "tonto2", reverse: false, loop: true, ended: $ended)
         
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
                     self.userViewModel.activeAlert = .logOut
