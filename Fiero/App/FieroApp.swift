@@ -30,7 +30,6 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
         print("✅✅✅ sceneWillEnterForeground ✅✅✅")
     }
     
-    //MARK: - WIP - Still relies on waiting 20 minutes
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("✅✅✅ sceneDidBecomeActive ✅✅✅")
         self.userViewModel?.refreshAuthToken()
@@ -44,7 +43,6 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
 @main
 struct FieroApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
     
     init() {
         UINavigationBar.appearance().tintColor = .white

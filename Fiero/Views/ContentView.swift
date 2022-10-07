@@ -39,7 +39,6 @@ struct ContentView: View {
                     .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
                     .onAppear(perform: {
-                        self.userViewModel.refreshableToken()
                         self.sceneDelegate.userViewModel = self.userViewModel
                     })
                 }

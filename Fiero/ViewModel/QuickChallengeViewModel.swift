@@ -12,7 +12,6 @@ import Combine
 class QuickChallengeViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published var challengesList: [QuickChallenge] = []
-    @Published var serverResponse: ServerResponse
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
@@ -31,7 +30,6 @@ class QuickChallengeViewModel: ObservableObject {
           keyValueStorage: KeyValueStorage = UserDefaults.standard,
           authTokenService: AuthTokenService = AuthTokenServiceImpl()) {
         self.client = client
-        self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
         self.authTokenService = authTokenService
         self.newlyCreatedChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
@@ -81,7 +79,6 @@ class QuickChallengeViewModel: ObservableObject {
                 }
                 
                 self?.newlyCreatedChallenge = response.quickChallenge[0]
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.challengesList.append(contentsOf: response.quickChallenge)
                 print("Successfully created challenge: \(rawURLResponse.statusCode)")
             })

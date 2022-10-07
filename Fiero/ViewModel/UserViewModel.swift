@@ -17,7 +17,6 @@ enum ActiveAlert {
 class UserViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var user: User
-    @Published var serverResponse: ServerResponse
     @Published var keyboardShown: Bool = false
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
     @Published var signupAlertCases: SignupAlertCases = .emptyFields
@@ -28,15 +27,17 @@ class UserViewModel: ObservableObject {
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
-    private var refreshTokenSubscription: AnyCancellable?
+    private(set) var authTokenService: AuthTokenService
     var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Init
-    init(client: HTTPClient = URLSession.shared, keyValueStorage: KeyValueStorage = UserDefaults.standard) {
+    init(client: HTTPClient = URLSession.shared,
+         keyValueStorage: KeyValueStorage = UserDefaults.standard,
+         authTokenService: AuthTokenService = AuthTokenServiceImpl()) {
         self.user = User(email: "", name: "", password: "")
         self.client = client
-        self.serverResponse = .unknown
         self.keyValueStorage = keyValueStorage
+        self.authTokenService = authTokenService
     }
     
     //MARK: - Keyboard Detection
@@ -86,7 +87,7 @@ class UserViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print("Error when trying to create account: \(rawURLResponse.statusCode)")
                     
                     switch rawURLResponse.statusCode {
                         case 400:
@@ -101,14 +102,13 @@ class UserViewModel: ObservableObject {
                     self?.isShowingLoading = false
                     return
                 }
-                print("Signup status code: \(rawURLResponse.statusCode)")
+                print("Successfully created account: \(rawURLResponse.statusCode)")
                 self?.keyValueStorage.set(response.token, forKey: UDKeys.authToken.description)
                 self?.keyValueStorage.set(response.user.id, forKey: UDKeys.userID.description)
                 self?.keyValueStorage.set(response.user.name, forKey: UDKeys.username.description)
                 self?.keyValueStorage.set(response.user.email, forKey: UDKeys.email.description)
                 self?.keyValueStorage.set(user.password!, forKey: UDKeys.password.description)
 
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
                 self?.isShowingLoading = false
                 self?.isLogged = true
             })
@@ -126,6 +126,7 @@ class UserViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.isShowingLoading = true
         }
+        
         let userJSON = """
         {
             "password" : "\(password)",
@@ -156,7 +157,7 @@ class UserViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print("Error while trying to login: \(rawURLResponse.statusCode)")
                     
                     switch rawURLResponse.statusCode {
                         case 400:
@@ -170,21 +171,19 @@ class UserViewModel: ObservableObject {
                         default:
                             self?.loginAlertCases = .connectionError
                     }
-                    print("Login status code: \(rawURLResponse.statusCode)")
                     self?.isShowingLoading = false
                     
                     return
                 }
-                print("Login status code: \(rawURLResponse.statusCode)")
-                print("Login token: \(response.token)")
+                print("Successfully logged in: \(rawURLResponse.statusCode)")
                 self?.user = response.user
                 self?.user.token = response.token
                 
                 self?.keyValueStorage.set(self?.user.id, forKey: UDKeys.userID.description)
                 self?.keyValueStorage.set(self?.user.token, forKey: UDKeys.authToken.description)
-                
                 self?.keyValueStorage.set(password, forKey: UDKeys.password.description)
                 self?.keyValueStorage.set(email, forKey: UDKeys.email.description)
+                
                 self?.isShowingLoading = false
                 self?.isLogged = true
                 
@@ -197,67 +196,9 @@ class UserViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    //MARK: - Get AuthToken
-    func refreshAuthToken() {
-        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
-            print("Não ha nenhum email de usuario salvo")
-            
-            return
-        }
-        
-        guard let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
-            print("Não ha nenhuma senha de usuario salva")
-            
-            return
-        }
-        
-        let json = """
-        {
-            "email" : "\(email)",
-            "password" : "\(password)"
-        }
-        """
-        
-        let request = makePOSTRequest(json: json, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
-                                      endPoint: UserEndpointEnum.TOKEN.description,
-                                      authToken: "")
-        
-        
-        self.client.perform(for: request)
-            .decodeHTTPResponse(type: UserTokenResponse.self, decoder: JSONDecoder())
-            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                    case .failure(let error):
-                        print("request failed with: \(error)")
-                    case .finished:
-                        print("request successful")
-                }
-            }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
-                    print(self?.serverResponse.statusCode as Any)
-                    return
-                }
-                
-                print("getToken successful: \(rawURLResponse.statusCode)")
-                
-                self?.keyValueStorage.set(response.token, forKey: UDKeys.authToken.description)
-            })
-            .store(in: &cancellables)
-    }
-    
     //MARK: - Delete Account
+    @discardableResult
     func deleteAccount() -> AnyPublisher<Void, Error> {
-        guard let userToken = self.keyValueStorage.string(forKey: UDKeys.authToken.description) else {
-            print("Nao foi possivel achar o token do usuario")
-            
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        
         guard let userId = self.keyValueStorage.string(forKey: UDKeys.userID.description) else {
             print("Nao foi possivel achar o ID do usuario")
             
@@ -265,12 +206,15 @@ class UserViewModel: ObservableObject {
                 .eraseToAnyPublisher()
         }
         
-        let request = makeDELETERequest(param: userId, scheme: "http", port: 3333,
-                                        baseURL: FieroAPIEnum.BASE_URL.description,
-                                        endPoint: UserEndpointEnum.DELETE_USER.description,
-                                        authToken: userToken)
-        
-        let operation = self.client.perform(for: request)
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeDELETERequest(param: userId, scheme: "http", port: 3333,
+                                                baseURL: FieroAPIEnum.BASE_URL.description,
+                                                endPoint: UserEndpointEnum.DELETE_USER.description,
+                                                authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
             .decodeHTTPResponse(type: UserDELETEResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
@@ -280,18 +224,17 @@ class UserViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                     case .failure(let error):
-                        print("Error while performing request: \(error)")
+                        print("Error to create delete account request: \(error)")
                     case .finished:
-                        print("Successfully performed request")
+                        print("Successfully created delete account request")
                 }
             }, receiveValue: { [weak self] rawURLResponse in
                 guard let _ = rawURLResponse.item else {
-                    self?.serverResponse.statusCode = rawURLResponse.statusCode
+                    print("Error when trying to delete account: \(rawURLResponse.statusCode)")
                     self?.activeAlert = .error
                     return
                 }
-                
-                self?.serverResponse.statusCode = rawURLResponse.statusCode
+                print("Successfully deleted account: \(rawURLResponse.statusCode)")
                 self?.activeAlert = .confirmAccountDelete
             })
             .store(in: &cancellables)
@@ -303,28 +246,10 @@ class UserViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    //MARK: - Refresh Token
-    //TODO: - Delete func + call new refresh token before each API call
-    func refreshableToken() {
-        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description),
-              let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
-            print("NO USER SAVED IN DEFAULTS")
-            return
-        }
-        
-        guard refreshTokenSubscription == nil else {
-            print("Has token subscription")
-            return
-        }
-        
-        self.refreshTokenSubscription = Timer.publish(every: 1200, on: .main, in: .default)
-            .autoconnect()
-            .receive(on: DispatchQueue.global(qos: .userInitiated))
-            .flatMap({ _ in
-                return self.login(email: email, password: password)
-                    .eraseToAnyPublisher()
-            })
-            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
+    //MARK: - Get AuthToken
+    @discardableResult
+    func refreshAuthToken() -> AnyPublisher<String, Error> {
+        self.authTokenService.getAuthToken()
     }
     
     func removeLoadingAnimation() {

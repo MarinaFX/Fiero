@@ -56,7 +56,7 @@ struct ProfileView: View {
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .finished:
-                                                print("Successfully deleted account")
+                                                print("Successfully shared delete account subscriptions to ProfileView")
                                             case .failure(_):
                                                 self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()
