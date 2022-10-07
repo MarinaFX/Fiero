@@ -59,6 +59,7 @@ struct QCChallengeCreatedView: View {
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.top, Tokens.Spacing.sm.value)
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             
             Spacer()
             
