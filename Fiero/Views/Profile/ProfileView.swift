@@ -27,10 +27,6 @@ struct ProfileView: View {
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
                 LottieView(fileName: "tonto2", reverse: false, loop: true, ended: $ended)
-                
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Send verification code", action: {
-                    self.userViewModel.sendVerificationCode(for: "flemis@flemis.com")
-                })
         
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
                     self.userViewModel.activeAlert = .logOut
