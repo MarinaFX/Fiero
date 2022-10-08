@@ -27,9 +27,11 @@ struct AccountLoginView: View {
     @State private var ended: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
     
-    private let namePlaceholder: String = "Name"
-    private let emailPlaceholder: String = "E-mail"
-    private let passwordPlaceholder: String = "Senha"
+    @State var isPresentingRecoverPasswordSheet: Bool = false
+    
+    private let namePlaceholder: LocalizedStringKey = "Name"
+    private let emailPlaceholder: LocalizedStringKey = "E-mail"
+    private let passwordPlaceholder: LocalizedStringKey = "Senha"
     
     //MARK: - Variables Sigup View
     @State private var email: String = ""
@@ -50,6 +52,9 @@ struct AccountLoginView: View {
     var SmSpacing: Double {
         return Tokens.Spacing.sm.value
     }
+    var quarck: Double {
+        return Tokens.Spacing.quarck.value
+    }
     
     var color: Color {
         return Tokens.Colors.Neutral.High.pure.value
@@ -60,7 +65,7 @@ struct AccountLoginView: View {
     }
     var largeTitleFont: Font {
         return Tokens.FontStyle.title.font(weigth: .bold,
-                                            design: .default)
+                                           design: .default)
     }
     var textFont: Font {
         return Tokens.FontStyle.callout.font()
@@ -72,7 +77,6 @@ struct AccountLoginView: View {
     
     //MARK: body View
     var body: some View {
-        
         ZStack {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             
@@ -167,6 +171,23 @@ struct AccountLoginView: View {
                                             text: self.$passwordText)
                         .padding(.vertical, nanoSpacing)
                         //MARK: Buttons
+                        Button(action: {
+                            self.isPresentingRecoverPasswordSheet.toggle()
+                        }, label: {
+                            Text("forgotYourPassword")
+                                .font(textFont)
+                                .foregroundColor(color)
+                                .accessibilityLabel("teste")
+                        })
+                        .padding(.top, nanoSpacing )
+                        .padding(.bottom, nanoSpacing + quarck)
+                        .sheet(isPresented: $isPresentingRecoverPasswordSheet) {
+                            NavigationView {
+                                RecoverPasswordEmailStep()
+                                    .navigationBarItems(trailing: Button("Fechar", action: {self.isPresentingRecoverPasswordSheet.toggle()}))
+                                    .navigationBarTitle("navigationTitle", displayMode: .inline)
+                            }
+                        }
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "Fazer Login!",
                                         action: {

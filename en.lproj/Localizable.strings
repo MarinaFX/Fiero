@@ -190,16 +190,17 @@ We can't get your challenges now, try again";
 //MARK: - Account Recovery
 //MARK: Insert email for recovery screen
 "navigationTitle" = "Recover Account";
-"titleLabel" = "If remembering passwords were to be a challenge, we would be all losers.";
+"forgotYourPassword" = "Forgot your password?";
+"recoverAccountTitleLabel" = "If remembering passwords were to be a challenge, we would be all losers.";
 "textFieldPlaceholder" = "Type your email";
 "buttonLabel" = "Recover Account";
 
 //MARK: Insert code and password screen
-"titleLabel" = "Insert the code we've just sent to your email and your new password";
+"verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
 "verificationCodeTextFieldPlaceholder" = "Validation Code";
 "passwordTextFieldPlaceholder" = "New Password";
 "confirmPasswordTextFieldPlaceholder" = "Confirm new password";
-"buttonLabel" = "Change password";
+"changePasswordButtonLabel" = "Change password";
 
 //MARK: Alerts
 //MARK: Invalid Email
