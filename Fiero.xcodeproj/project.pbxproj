@@ -37,7 +37,7 @@
 		1B4135C028597E8F00C7094A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B4135BF28597E8F00C7094A /* Preview Assets.xcassets */; };
 		1B4135D428597E8F00C7094A /* FieroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D328597E8F00C7094A /* FieroUITests.swift */; };
 		1B4135D628597E8F00C7094A /* FieroUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */; };
-		1B46849728C786BF0041BFED /* UDKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46849628C786BF0041BFED /* UDKeys.swift */; };
+		1B46849728C786BF0041BFED /* UDKeysEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46849628C786BF0041BFED /* UDKeysEnum.swift */; };
 		1B56226428E3817400C505DC /* FieroAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B56226328E3817400C505DC /* FieroAPI.swift */; };
 		1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */; };
 		1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */; };
@@ -48,13 +48,15 @@
 		1B6020CA28A1AD8300AEF47B /* MockKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */; };
 		1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */; };
 		1B6020D028A1B26C00AEF47B /* ListWithoutSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */; };
+		1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */; };
+		1B68C74F28F48F850098BAA4 /* ActiveAlertEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */; };
 		1B7BF1A528BD61630017EF9C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7BF1A428BD61630017EF9C /* Lottie */; };
 		1B89B3C828D250F10071A339 /* LoginAnimationStart.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C728D250F10071A339 /* LoginAnimationStart.json */; };
 		1B89B3CA28D250FE0071A339 /* LoginAnimationEnd.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
 		1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */; };
 		1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */; };
-		1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCType.swift */; };
+		1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34628887ADE00D2F703 /* QCTypeEnum.swift */; };
 		1B8CD34928889F1000D2F703 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD34828889F1000D2F703 /* Team.swift */; };
 		1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */; };
 		1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FB39C286F6EEF00B9F868 /* Tokens.swift */; };
@@ -176,7 +178,7 @@
 		1B4135CF28597E8F00C7094A /* FieroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FieroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B4135D328597E8F00C7094A /* FieroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITests.swift; sourceTree = "<group>"; };
 		1B4135D528597E8F00C7094A /* FieroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1B46849628C786BF0041BFED /* UDKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDKeys.swift; sourceTree = "<group>"; };
+		1B46849628C786BF0041BFED /* UDKeysEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDKeysEnum.swift; sourceTree = "<group>"; };
 		1B56226328E3817400C505DC /* FieroAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieroAPI.swift; sourceTree = "<group>"; };
 		1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B5B7CE328761F7800B4628F /* TextFieldStyleVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyleVariant.swift; sourceTree = "<group>"; };
@@ -187,12 +189,14 @@
 		1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeyValueStorage.swift; sourceTree = "<group>"; };
 		1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesListScreenView.swift; sourceTree = "<group>"; };
 		1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
+		1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryAccountErrorCases.swift; sourceTree = "<group>"; };
+		1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlertEnum.swift; sourceTree = "<group>"; };
 		1B89B3C728D250F10071A339 /* LoginAnimationStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationStart.json; sourceTree = "<group>"; };
 		1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationEnd.json; sourceTree = "<group>"; };
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
 		1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallenge.swift; sourceTree = "<group>"; };
 		1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeResponses.swift; sourceTree = "<group>"; };
-		1B8CD34628887ADE00D2F703 /* QCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCType.swift; sourceTree = "<group>"; };
+		1B8CD34628887ADE00D2F703 /* QCTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCTypeEnum.swift; sourceTree = "<group>"; };
 		1B8CD34828889F1000D2F703 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChallengesView.swift; sourceTree = "<group>"; };
 		1B8FB39C286F6EEF00B9F868 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
@@ -371,10 +375,13 @@
 		1B3ED07528809D8100E1538B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+				1B56226328E3817400C505DC /* FieroAPI.swift */,
 				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
-				1B8CD34628887ADE00D2F703 /* QCType.swift */,
-				1B46849628C786BF0041BFED /* UDKeys.swift */,
+				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+				1B8CD34628887ADE00D2F703 /* QCTypeEnum.swift */,
+				1B46849628C786BF0041BFED /* UDKeysEnum.swift */,
+				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
+				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -454,8 +461,6 @@
 				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
 				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
-				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
-				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
 				1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */,
 				1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */,
 			);
@@ -498,6 +503,14 @@
 				1B6020C528A0B03D00AEF47B /* QuickChallengeViewModelTests.swift */,
 			);
 			path = Challenges;
+			sourceTree = "<group>";
+		};
+		1B68C75028F48FB20098BAA4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		1B8FB399286F6E7600B9F868 /* Views */ = {
@@ -571,14 +584,15 @@
 		1B9092A52878AD580039EBB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1B68C75028F48FB20098BAA4 /* Protocols */,
 				1B9092A62878AD740039EBB7 /* User.swift */,
 				1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */,
 				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
 				1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */,
 				1B8CD34828889F1000D2F703 /* Team.swift */,
 				1B6020C728A1940200AEF47B /* Member.swift */,
-				1B56226328E3817400C505DC /* FieroAPI.swift */,
 				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
+				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1019,6 +1033,7 @@
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStep.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
+				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */,
@@ -1026,7 +1041,7 @@
 				CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
-				1B8CD34728887ADE00D2F703 /* QCType.swift in Sources */,
+				1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
@@ -1034,7 +1049,8 @@
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */,
-				1B46849728C786BF0041BFED /* UDKeys.swift in Sources */,
+				1B68C74F28F48F850098BAA4 /* ActiveAlertEnum.swift in Sources */,
+				1B46849728C786BF0041BFED /* UDKeysEnum.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,

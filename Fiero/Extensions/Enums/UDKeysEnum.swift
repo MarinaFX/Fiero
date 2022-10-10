@@ -1,5 +1,5 @@
 //
-//  UDKeys.swift
+//  UDKeysEnum.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 06/09/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UDKeys: CustomStringConvertible {
+enum UDKeysEnum: CustomStringConvertible {
     case userID
     case username
     case email

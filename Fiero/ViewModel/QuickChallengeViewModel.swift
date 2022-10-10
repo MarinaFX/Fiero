@@ -37,7 +37,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Create Quick Challenge
     @discardableResult
-    func createQuickChallenge(name: String, challengeType: QCType, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
+    func createQuickChallenge(name: String, challengeType: QCTypeEnum, goal: Int, goalMeasure: String, online: Bool = false, numberOfTeams: Int, maxTeams: Int) -> AnyPublisher<Void, Error> {
         let challengeJson = """
         {
             "name" : "\(name)",

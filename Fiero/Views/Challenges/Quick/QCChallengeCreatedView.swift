@@ -31,7 +31,7 @@ struct QCChallengeCreatedView: View {
     @State private var ended: Bool = false
 
     
-    var challengeType: QCType
+    var challengeType: QCTypeEnum
     var challengeName: String
     var challengeParticipants: Int
     var goal: Int
