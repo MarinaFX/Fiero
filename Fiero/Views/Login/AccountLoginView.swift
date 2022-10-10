@@ -75,6 +75,10 @@ struct AccountLoginView: View {
                                              design: .default)
     }
     
+    init() {
+        UINavigationBar.appearance().backgroundColor = UIColor(Tokens.Colors.Background.dark.value)
+        }
+    
     //MARK: body View
     var body: some View {
         ZStack {
@@ -224,6 +228,7 @@ struct AccountLoginView: View {
             }
             .padding(.horizontal, smallSpacing)
             .padding(.bottom, Tokens.Spacing.xxxs.value)
+                
             if userViewModel.isShowingLoading {
                 ZStack {
                     Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)

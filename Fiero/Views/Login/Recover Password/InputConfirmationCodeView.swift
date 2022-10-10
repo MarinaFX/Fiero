@@ -26,62 +26,63 @@ struct InputConfirmationCodeView: View {
     var body: some View {
         ZStack {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
-            
-            VStack (spacing: Tokens.Spacing.xxxs.value){
-                Spacer()
-                Text("verificationcationCodeTitleLabel")
-                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, Tokens.Spacing.nano.value)
-                
-                CustomTextFieldView(
-                    type: .none,
-                    style: .primary,
-                    placeholder: "verificationCodeTextFieldPlaceholder",
-                    keyboardType: .alphabet,
-                    isSecure: false,
-                    isLowCase: true ,
-                    isWrong: .constant(false),
-                    text: self.$confirmationCode)
-                
-                CustomTextFieldView(
-                    type: .none,
-                    style: .primary,
-                    placeholder: "passwordTextFieldPlaceholder",
-                    keyboardType: .alphabet,
-                    isSecure: false,
-                    isLowCase: true ,
-                    isWrong: .constant(false),
-                    text: self.$confirmationCode)
-                
-                CustomTextFieldView(
-                    type: .none,
-                    style: .primary,
-                    placeholder: "confirmPasswordTextFieldPlaceholder",
-                    keyboardType: .alphabet,
-                    isSecure: false,
-                    isLowCase: true ,
-                    isWrong: .constant(false),
-                    text: self.$confirmationCode)
-                
-                ButtonComponent(
-                    style: .primary(isEnabled: true),
-                    text: "changePasswordButtonLabel",
-                    action: {
-                        //TODO: - verify confirmation code before go to next step
-                        self.isPresentingNewPassword.toggle()
-                    })
-                ButtonComponent(
-                    style: .black(isEnabled: true),
-                    text: "resendEmailVerification",
-                    action: {
-                        //TODO: - verify confirmation code before go to next step
-        
-                    })
-                
-            }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
+            ScrollView{
+                VStack (spacing: Tokens.Spacing.xxxs.value){
+                    Spacer()
+                    Text("verificationcationCodeTitleLabel")
+                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, Tokens.Spacing.nano.value)
+                    
+                    CustomTextFieldView(
+                        type: .none,
+                        style: .primary,
+                        placeholder: "verificationCodeTextFieldPlaceholder",
+                        keyboardType: .alphabet,
+                        isSecure: false,
+                        isLowCase: true ,
+                        isWrong: .constant(false),
+                        text: self.$confirmationCode)
+                    
+                    CustomTextFieldView(
+                        type: .none,
+                        style: .primary,
+                        placeholder: "passwordTextFieldPlaceholder",
+                        keyboardType: .alphabet,
+                        isSecure: false,
+                        isLowCase: true ,
+                        isWrong: .constant(false),
+                        text: self.$confirmationCode)
+                    
+                    CustomTextFieldView(
+                        type: .none,
+                        style: .primary,
+                        placeholder: "confirmPasswordTextFieldPlaceholder",
+                        keyboardType: .alphabet,
+                        isSecure: false,
+                        isLowCase: true ,
+                        isWrong: .constant(false),
+                        text: self.$confirmationCode)
+                    
+                    ButtonComponent(
+                        style: .primary(isEnabled: true),
+                        text: "changePasswordButtonLabel",
+                        action: {
+                            //TODO: - verify confirmation code before go to next step
+                            self.isPresentingNewPassword.toggle()
+                        })
+                    ButtonComponent(
+                        style: .black(isEnabled: true),
+                        text: "resendEmailVerification",
+                        action: {
+                            //TODO: - verify confirmation code before go to next step
+                            
+                        })
+                    
+                }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
+            }
         }
         .navigationBarHidden(true)
     }
