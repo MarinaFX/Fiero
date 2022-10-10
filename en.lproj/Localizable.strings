@@ -14,6 +14,15 @@
 // MARK: - Onboarding
 // adicionar imagens em ingles
 "Pular" = "Skip";
+"firstImage" = "OnboardingNameENG";
+"firstTitle" = "Challenge your friends";
+"firstDescription" = "A challenge between friends is a fun way to have healthy competition and create memories together.";
+"secondImage" = "OnboardingDuelENG";
+"secondTitle" = "Look at the score";
+"secondDescription" = "After defining how many people are participating in your challenge, add the score that will define victory.";
+"thirdImage" = "OnboardingChallengeType";
+"thirdTitle" = "Multiple challenges";
+"thirdDescription" = "It's one step forward and two steps back! You are a winning machine, practice.";
 "Quero começar!" = "Lets Start!";
 
 

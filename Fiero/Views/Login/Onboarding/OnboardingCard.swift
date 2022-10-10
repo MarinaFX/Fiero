@@ -9,61 +9,44 @@ import Foundation
 import SwiftUI
 
 struct OnboardingCard: View {
-    
     @State var image: String
-    @Binding private(set) var isFirstLogin: Bool
-    @State var final: Bool = false
-    @State var onboardingId: Int = 0
-    @State private var animationAmount = 0.0
-    
+    @State var degrees: Double
+    @State var title: String
+    @State var description: String
+  
     var body: some View {
-        if onboardingId == 3 {
-            ZStack {
-                VStack {
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.width, alignment: .center)
-
-                    ButtonComponent(style: .tertiary(isEnabled: true),
-                                    text: "Quero começar!",
-                                    action: {
-                        self.isFirstLogin.toggle()
-                    })
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    .padding(.bottom, Tokens.Spacing.md.value)
-                }
+        VStack(alignment: .center) {
+            Image(NSLocalizedString(image, comment: ""))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width * 0.47)
+                .rotationEffect(.degrees(degrees))
+                .padding(.top, Tokens.Spacing.quarck.value)
+            
+            VStack(alignment: .center, spacing: Tokens.Spacing.nano.value) {
+                Text(NSLocalizedString(title, comment: ""))
+                    .font(Tokens.FontStyle.title.font(weigth: .bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                
+                Text(NSLocalizedString(description, comment: ""))
+                    .font(Tokens.FontStyle.subheadline.font())
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             }
-        } else if onboardingId == 2 {
-            ZStack {
-                VStack {
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.main.bounds.height * 0.8, alignment: .center)
-                        .frame(width: UIScreen.main.bounds.width * 0.8, alignment: .center)
-
-                }
-            }
-        } else if onboardingId == 1 {
-            ZStack {
-                VStack {
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.main.bounds.height, alignment: .center)
-                        .frame(width: UIScreen.main.bounds.width, alignment: .center)
-                        .padding(.bottom, Tokens.Spacing.sm.value)
-
-                }
-            }
+            .padding(.all, Tokens.Spacing.xs.value)
         }
     }
 }
 
 struct OnboardingCard_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingCard(image: "Pontuacao", isFirstLogin: .constant(true))
+        ZStack {
+            Tokens.Colors.Background.dark.value
+                .edgesIgnoringSafeArea(.all)
+            
+            OnboardingCard(image: "firstImage", degrees: 3.18, title: "firstTitle", description: "firstDescription")
+        }
     }
 }
 
