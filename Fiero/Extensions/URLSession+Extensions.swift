@@ -127,6 +127,35 @@ public func makePATCHRequest
     return request
 }
 
+public func makePATCHRequest
+(
+    json: String,
+    scheme: String,
+    port: Int,
+    baseURL: String,
+    endPoint: String,
+    authToken: String
+) -> URLRequest {
+    let requestBody = json.data(using: .utf8)!
+    
+    var urlComponents = URLComponents()
+    urlComponents.scheme = scheme
+    urlComponents.port = port
+    urlComponents.host = baseURL
+    urlComponents.path = endPoint
+    
+    let url = urlComponents.url!
+    var request = URLRequest(url: url)
+    
+    request.httpMethod = "PATCH"
+    request.httpBody = requestBody
+
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.addValue(authToken, forHTTPHeaderField: "authToken")
+    
+    return request
+}
+
 public func makePATCHRequestScore
 (
     json: String,

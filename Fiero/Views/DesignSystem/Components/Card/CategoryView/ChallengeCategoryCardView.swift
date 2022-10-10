@@ -12,6 +12,8 @@ struct ChallengeCategoryCardView: View {
     @State var style: CardCategoryStyles
     @Binding var isPlaying: Bool
     
+    @State private var ended: Bool = false
+    
     var title: LocalizedStringKey
     var subtitle: LocalizedStringKey
     
@@ -21,13 +23,17 @@ struct ChallengeCategoryCardView: View {
                 .cornerRadius(style.cardCornerRadius)
             
             VStack(spacing: style.vStackSpacing) {
-                if style == .amount {
-                    LottieView(fileName: "quantity", reverse: false, loop: false, secondAnimation: "quantity2", loopSecond: true, isPaused: !isPlaying)
-                        .padding(.bottom, style.lottieSpacing)
-                }
-                else {
-                    LottieView(fileName: style.lottieName, reverse: false, loop: style.lottieLoop, isPaused: !isPlaying)
-                        .padding(.bottom, style.lottieSpacing)
+                ZStack {
+                    if style == .amount {
+                        LottieView(fileName: "quantity2", reverse: false, loop: true, aspectFill: false, isPaused: !isPlaying, ended: $ended).opacity(ended ? 1 : 0)
+                            .padding(.bottom, style.lottieSpacing)
+                        LottieView(fileName: "quantity", reverse: false, loop: false, aspectFill: false, isPaused: !isPlaying, ended: $ended).opacity(ended ? 0 : 1)
+                            .padding(.bottom, style.lottieSpacing)
+                    }
+                    else {
+                        LottieView(fileName: style.lottieName, reverse: false, loop: style.lottieLoop, isPaused: !isPlaying, ended: $ended)
+                            .padding(.bottom, style.lottieSpacing)
+                    }
                 }
                 
                 Text(title)

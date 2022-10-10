@@ -22,6 +22,9 @@ struct ChallengeDetailsView: View {
     @State var present3or4OngoingChallenge: Bool = false
     @State var isPresentingLoading: Bool = false
     
+    @State private var ended: Bool = false
+
+    
     @Binding var quickChallenge: QuickChallenge
     
     //MARK: - Body
@@ -127,7 +130,6 @@ struct ChallengeDetailsView: View {
                                     text: "Voltar para meus desafios") {
                         self.presentationMode.wrappedValue.dismiss()
                     }
-                    
                 }
                 .padding(.vertical, nanoSpacing)
                 //MARK: - Alert
@@ -170,7 +172,8 @@ struct ChallengeDetailsView: View {
                         return Alert(title: Text("not expected"))
                     }
                 })
-                //MARK: - Toolbar
+                //MARK: - Navigation
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -193,12 +196,13 @@ struct ChallengeDetailsView: View {
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false, ended: $ended).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }
                 }
-            }.accentColor(Color.white)
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
     

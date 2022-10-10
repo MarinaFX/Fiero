@@ -26,8 +26,10 @@ struct QCChallengeCreatedView: View {
     @State var isPresentingAlert: Bool = false
     @State var subscriptions: Set<AnyCancellable> = []
     
-    @Binding var serverResponse: ServerResponse
     @Binding var quickChallenge: QuickChallenge
+    
+    @State private var ended: Bool = false
+
     
     var challengeType: QCType
     var challengeName: String
@@ -49,7 +51,7 @@ struct QCChallengeCreatedView: View {
         VStack {
             Spacer()
             
-            LottieView(fileName: "success-loop", reverse: false, loop: true).frame(width: 350 , height: 200)
+            LottieView(fileName: "success-loop", reverse: false, loop: true, ended: $ended).frame(width: 350 , height: 200)
             
             Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)
@@ -117,7 +119,7 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView(serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
+        QCChallengeCreatedView(quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
             .environmentObject(QuickChallengeViewModel())
     }

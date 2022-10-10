@@ -10,6 +10,8 @@ import UXCamSwiftUI
 import UXCam
 
 struct ContentView: View {
+    @EnvironmentObject var sceneDelegate: SceneDelegate
+    
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
@@ -37,7 +39,7 @@ struct ContentView: View {
                     .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
                     .onAppear(perform: {
-                        self.userViewModel.refreshableToken()
+                        self.sceneDelegate.userViewModel = self.userViewModel
                     })
                 }
             }

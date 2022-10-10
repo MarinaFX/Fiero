@@ -12,6 +12,8 @@ struct ProfileView: View {
 
     @EnvironmentObject var userViewModel: UserViewModel
     
+    @State private var ended: Bool = false
+    
     @State private var subscriptions: Set<AnyCancellable> = []
     
     var body: some View {
@@ -24,7 +26,7 @@ struct ProfileView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                     .font(Tokens.FontStyle.title3.font(weigth: .regular, design: .default))
-                LottieView(fileName: "tonto2", reverse: false, loop: true)
+                LottieView(fileName: "tonto2", reverse: false, loop: true, ended: $ended)
         
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
                     self.userViewModel.activeAlert = .logOut
@@ -56,7 +58,7 @@ struct ProfileView: View {
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .finished:
-                                                print("Successfully deleted account")
+                                                print("Successfully shared delete account subscriptions to ProfileView")
                                             case .failure(_):
                                                 self.userViewModel.activeAlert = .error
                                                 self.userViewModel.showingAlertToTrue()
