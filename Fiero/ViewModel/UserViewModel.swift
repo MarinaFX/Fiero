@@ -324,7 +324,7 @@ class UserViewModel: ObservableObject {
                     case .finished:
                         print("Successfully created request to reset password endpoint")
                 }
-            }, receiveValue: { response in
+            }, receiveValue: { [weak self] response in
                 guard let response = response else {
                     print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
                     return
@@ -332,6 +332,8 @@ class UserViewModel: ObservableObject {
                 
                 if response.statusCode == 200 {
                     print("Successfully reset password: status code \(response.statusCode)")
+                    
+                    self?.keyValueStorage.set(newPassword, forKey: UDKeys.password.description)
                 }
                 else {
                     print("There was an error while trying to reset the password: \(String(describing: response.statusCode))")

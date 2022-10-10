@@ -77,11 +77,12 @@ class AuthTokenServiceImpl: AuthTokenService {
                 switch completion {
                     case .failure(let error):
                         self?.keyValueStorage.set(nil, forKey: UDKeys.authToken.description)
-                        print("request failed with: \(error)")
+                        print("Failed to create request to fetch token endpoint: \(error)")
                     case .finished:
-                        print("request successful")
+                        print("Successfully created request to fetch token endpoint")
                 }
             }, receiveValue: { [weak self] token in
+                print("Successfully generated new token")
                 self?.keyValueStorage.set(token, forKey: UDKeys.authToken.description)
             })
             .store(in: &cancellables)
