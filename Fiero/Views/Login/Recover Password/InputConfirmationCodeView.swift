@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputConfirmationCode: View {
+struct InputConfirmationCodeView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var userViewModel: UserViewModel
@@ -83,6 +83,6 @@ struct InputConfirmationCode: View {
 
 struct InputConfirmationCode_Previews: PreviewProvider {
     static var previews: some View {
-        InputConfirmationCode()
+        InputConfirmationCodeView()
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecoverPasswordEmailStep: View {
+struct RecoverPasswordEmailStepView: View {
     @Environment(\.presentationMode) var presentationMode
     
 
@@ -45,7 +45,7 @@ struct RecoverPasswordEmailStep: View {
                             self.isPresentingConfirmCodeScreen.toggle()
                         })
                     NavigationLink("", isActive: self.$isPresentingConfirmCodeScreen) {
-                        InputConfirmationCode()
+                        InputConfirmationCodeView()
                     }.hidden()
                     
                 }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
@@ -56,6 +56,6 @@ struct RecoverPasswordEmailStep: View {
 
 struct RecoverPasswordEmailStep_Previews: PreviewProvider {
     static var previews: some View {
-        RecoverPasswordEmailStep()
+        RecoverPasswordEmailStepView()
     }
 }
