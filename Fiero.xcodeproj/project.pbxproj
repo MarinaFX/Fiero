@@ -65,6 +65,7 @@
 		1B9092A42878AD320039EBB7 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A32878AD320039EBB7 /* UserViewModel.swift */; };
 		1B9092A72878AD740039EBB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A62878AD740039EBB7 /* User.swift */; };
 		1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */; };
+		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */; };
 		1BC4CFDB28EF5A9E0039A230 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */; };
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
@@ -207,6 +208,7 @@
 		1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* Ongoing3_4ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ongoing3_4ScreenView.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		62A9849A28D210C200AE77B5 /* success-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-loop.json"; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				484F33E428F0A129005A8563 /* Players */,
 				DF96CC6A28C7CAA300D17B37 /* Fonts */,
 				1BC68C55288F32130055135D /* Info.plist */,
 				1B90929F2878ACE50039EBB7 /* App */,
@@ -600,6 +603,14 @@
 				1B0A029F2887ACD400C4A421 /* BestOf */,
 			);
 			path = WIP;
+			sourceTree = "<group>";
+		};
+		484F33E428F0A129005A8563 /* Players */ = {
+			isa = PBXGroup;
+			children = (
+				484F33E528F0A1FB005A8563 /* SoundPlayer.swift */,
+			);
+			path = Players;
 			sourceTree = "<group>";
 		};
 		48D6EDC828A2D3A30069FCE9 /* ScoreController3-4 */ = {
@@ -977,6 +988,7 @@
 				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
 				CCBAEBDE28A6C9D0005D0FFC /* DuelScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
+				484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */,
 				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
 				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
