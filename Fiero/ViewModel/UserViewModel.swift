@@ -274,6 +274,7 @@ class UserViewModel: ObservableObject {
                 
                 switch response.statusCode {
                     case 201:
+                        self?.recoveryAccountErrorCases = .none
                         print("Successfully sent verification code to email \(email): status code \(response.statusCode)")
                     case 404:
                         self?.recoveryAccountErrorCases = .noEmailFound
