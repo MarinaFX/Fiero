@@ -207,6 +207,7 @@
 "passwordTextFieldPlaceholder" = "Nova senha";
 "confirmPasswordTextFieldPlaceholder" = "Confirme a nova senha";
 "changePasswordButtonLabel" = "Mudar senha";
+"resendEmailVerification"= "Reenviar código de validação";
 
 //MARK: Alerts
 //MARK: Invalid Email

@@ -179,7 +179,6 @@ struct AccountLoginView: View {
                             Text("forgotYourPassword")
                                 .font(textFont)
                                 .foregroundColor(color)
-                                .accessibilityLabel("teste")
                         })
                         .padding(.top, nanoSpacing )
                         .padding(.bottom, nanoSpacing + quarck)

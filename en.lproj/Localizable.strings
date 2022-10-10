@@ -201,6 +201,7 @@ We can't get your challenges now, try again";
 "passwordTextFieldPlaceholder" = "New Password";
 "confirmPasswordTextFieldPlaceholder" = "Confirm new password";
 "changePasswordButtonLabel" = "Change password";
+"resendEmailVerification"= "Resend validation code";
 
 //MARK: Alerts
 //MARK: Invalid Email

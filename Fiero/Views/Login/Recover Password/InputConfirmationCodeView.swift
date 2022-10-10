@@ -11,10 +11,18 @@ struct InputConfirmationCodeView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var userViewModel: UserViewModel
-
+    
     @State private var confirmationCode: String = ""
     @State var isPresentingNewPassword: Bool = false
-
+    
+    
+    var textFont: Font {
+        return Tokens.FontStyle.callout.font()
+    }
+    var color: Color {
+        return Tokens.Colors.Neutral.High.pure.value
+    }
+    
     var body: some View {
         ZStack {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
@@ -57,24 +65,22 @@ struct InputConfirmationCodeView: View {
                     isLowCase: true ,
                     isWrong: .constant(false),
                     text: self.$confirmationCode)
-                if userViewModel.keyboardShown {
-                    ButtonComponent(
-                        style: .primary(isEnabled: true),
-                        text: "changePasswordButtonLabel",
-                        action: {
-                            //TODO: - verify confirmation code before go to next step
-                            self.isPresentingNewPassword.toggle()
-                        })
-                    .padding(.bottom, Tokens.Spacing.sm.value)
-                } else {
-                    ButtonComponent(
-                        style: .primary(isEnabled: true),
-                        text: "changePasswordButtonLabel",
-                        action: {
-                            //TODO: - verify confirmation code before go to next step
-                            self.isPresentingNewPassword.toggle()
-                        })
-                }
+                
+                ButtonComponent(
+                    style: .primary(isEnabled: true),
+                    text: "changePasswordButtonLabel",
+                    action: {
+                        //TODO: - verify confirmation code before go to next step
+                        self.isPresentingNewPassword.toggle()
+                    })
+                ButtonComponent(
+                    style: .black(isEnabled: true),
+                    text: "resendEmailVerification",
+                    action: {
+                        //TODO: - verify confirmation code before go to next step
+        
+                    })
+                
             }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
         }
         .navigationBarHidden(true)
