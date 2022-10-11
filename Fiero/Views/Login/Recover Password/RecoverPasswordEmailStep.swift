@@ -88,12 +88,12 @@ struct RecoverPasswordEmailStep: View {
                     case .noEmailFound:
                         return Alert(title: Text(RecoveryAccountErrorCases.noEmailFound.title),
                                      message: Text(RecoveryAccountErrorCases.noEmailFound.message),
-                                     primaryButton: .default(Text(RecoveryAccountErrorCases.noEmailFound.primaryButton), action: {
+                                     primaryButton: .destructive(Text(RecoveryAccountErrorCases.noEmailFound.secondaryButton), action: {
                             self.isPresentingErrorAlert = false
-                            self.presentationMode.wrappedValue.dismiss()
                         }),
-                                     secondaryButton: .destructive(Text(RecoveryAccountErrorCases.noEmailFound.secondaryButton), action: {
+                                     secondaryButton: .default(Text(RecoveryAccountErrorCases.noEmailFound.primaryButton), action: {
                             self.isPresentingErrorAlert = false
+                            RootViewController.popToRootViewController()
                         }))
                     case .internalServerError:
                         return Alert(title: Text(RecoveryAccountErrorCases.internalServerError.title),

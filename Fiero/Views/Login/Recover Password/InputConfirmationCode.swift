@@ -110,7 +110,7 @@ struct InputConfirmationCode: View {
                            }),
                                         secondaryButton: .destructive(Text(RecoveryAccountSecondStepErrorCases.wrongCode.secondaryButton), action: {
                                self.isPresentingErrorAlert = false
-                               self.presentationMode.wrappedValue.dismiss()
+                                RootViewController.popToRootViewController()
                            }))
                 case .unmatchedPasswords:
                     return Alert(title: Text(RecoveryAccountSecondStepErrorCases.unmatchedPasswords.title),
