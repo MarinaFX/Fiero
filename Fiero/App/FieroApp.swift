@@ -28,6 +28,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     
     func sceneWillEnterForeground(_ scene: UIScene) {
         print("✅✅✅ sceneWillEnterForeground ✅✅✅")
+        SoundPlayer.initVarsFromUserDefaults()
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
