@@ -12,18 +12,16 @@ import Combine
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
     
     @State var isPresentingAlert: Bool = false
-    @State var presentDuelOngoingChallenge: Bool = false
-    @State var present3or4OngoingChallenge: Bool = false
+    @State var isPresentingOngoing: Bool = false
     @State var isPresentingLoading: Bool = false
     
     @State private var ended: Bool = false
-
+    
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -33,16 +31,12 @@ struct ChallengeDetailsView: View {
             ZStack {
                 backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                if self.quickChallenge.maxTeams == 2 {
-                    NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                        DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                    }.hidden()
+                
+                NavigationLink("", isActive: self.$isPresentingOngoing) {
+                    OngoingWithPause(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
                 }
-                else {
-                    NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                    }.hidden()
-                }
+                .hidden()
+                
                 ScrollView(showsIndicators: false) {
                     //MARK: - Top Components
                     VStack {
@@ -102,14 +96,8 @@ struct ChallengeDetailsView: View {
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
                                     case .finished:
-                                        if self.quickChallenge.maxTeams == 2 {
-                                            self.isPresentingLoading.toggle()
-                                            self.presentDuelOngoingChallenge.toggle()
-                                        }
-                                        else {
-                                            self.isPresentingLoading.toggle()
-                                            self.present3or4OngoingChallenge.toggle()
-                                        }
+                                        self.isPresentingLoading.toggle()
+                                        self.isPresentingOngoing.toggle()
                                     case .failure:
                                         quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
                                         self.isPresentingAlert.toggle()

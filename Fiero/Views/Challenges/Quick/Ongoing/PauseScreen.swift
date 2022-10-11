@@ -40,11 +40,12 @@ struct PauseScreen: View {
         ZStack {
             backgroundColor
                 .opacity(0.8)
-            VStack(spacing: Tokens.Spacing.nano.value) {
+            VStack(alignment: .center,spacing: Tokens.Spacing.nano.value) {
                 Spacer()
                 Text(self.quickChallenge.name)
                     .foregroundColor(textColor)
                     .font(textFont)
+                    .multilineTextAlignment(.center)
                     .padding(.bottom, Tokens.Spacing.xxxs.value)
                 ButtonComponent(style: .primary(isEnabled: true), text: "Continuar desafio") {
                     self.didTapPauseButton.toggle()
