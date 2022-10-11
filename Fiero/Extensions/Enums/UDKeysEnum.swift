@@ -14,6 +14,7 @@ enum UDKeysEnum: CustomStringConvertible {
     case password
     case authToken
     case isFirstOpen
+    case recoveryAccountEmail
     
     var description: String {
         switch self {
@@ -28,7 +29,9 @@ enum UDKeysEnum: CustomStringConvertible {
             case .authToken:
                 return "AuthToken"
             case .isFirstOpen:
-                    return "isFirstOpen"
+                return "isFirstOpen"
+            case .recoveryAccountEmail:
+                return "recoveryAccountEmail"
         }
     }
 }

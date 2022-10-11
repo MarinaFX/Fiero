@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
+//MARK: - RecoveryAccountErrorCases
 enum RecoveryAccountErrorCases {
     case none
     case emptyFields
     case invalidEmail
     case noEmailFound
-    case wrongCode
     case internalServerError
     
     var title: LocalizedStringKey {
@@ -26,8 +26,6 @@ enum RecoveryAccountErrorCases {
                 return "invalidEmailTitle"
             case .noEmailFound:
                 return "accountNotFoundTitle"
-            case .wrongCode:
-                return ""
             case .internalServerError:
                 return "internalServerErrorTitle"
         }
@@ -43,8 +41,6 @@ enum RecoveryAccountErrorCases {
                 return "invalidEmailMessage"
             case .noEmailFound:
                 return "accountNotFoundMessage"
-            case .wrongCode:
-                return ""
             case .internalServerError:
                 return "internalServerErrorMessage"
         }
@@ -60,8 +56,6 @@ enum RecoveryAccountErrorCases {
                 return "invalidEmailPrimaryButton"
             case .noEmailFound:
                 return "accountNotFoundPrimaryButton"
-            case .wrongCode:
-                return "wrongCodePrimaryButton"
             case .internalServerError:
                 return "internalServerErrorPrimaryButton"
         }
@@ -77,8 +71,75 @@ enum RecoveryAccountErrorCases {
                 return ""
             case .noEmailFound:
                 return "Cancelar"
+            case .internalServerError:
+                return ""
+        }
+    }
+}
+
+//MARK: - RecoveryAccountSecondStepErrorCases
+enum RecoveryAccountSecondStepErrorCases {
+    case none
+    case emptyFields
+    case wrongCode
+    case unmatchedPasswords
+    case internalServerError
+    
+    var title: LocalizedStringKey {
+        switch self {
+            case .none:
+                return "passwordResetTitle"
+            case .emptyFields:
+                return "emptyFieldsSecondTitle"
+            case .wrongCode:
+                return "wrongCodeTitle"
+            case .unmatchedPasswords:
+                return "unmatchedPasswordsTitle"
+            case .internalServerError:
+                return "internalServerErrorTitle"
+        }
+    }
+    
+    var message: LocalizedStringKey {
+        switch self {
+            case .none:
+                return "passwordResetMessage"
+            case .emptyFields:
+                return "emptyFieldsSecondMessage"
+            case .wrongCode:
+                return "wrongCodeMessage"
+            case .unmatchedPasswords:
+                return "unmatchedPasswordsMessage"
+            case .internalServerError:
+                return "internalServerErrorMessage"
+        }
+    }
+    
+    var primaryButton: LocalizedStringKey {
+        switch self {
+            case .none:
+                return "passwordResetPrimaryButton"
+            case .emptyFields:
+                return "emptyFieldsPrimaryButton"
+            case .wrongCode:
+                return "wrongCodePrimaryButton"
+            case .unmatchedPasswords:
+                return "OK"
+            case .internalServerError:
+                return "internalServerErrorPrimaryButton"
+        }
+    }
+    
+    var secondaryButton: LocalizedStringKey {
+        switch self {
+            case .none:
+                return ""
+            case .emptyFields:
+                return ""
             case .wrongCode:
                 return "wrongCodeSecondaryButton"
+            case .unmatchedPasswords:
+                return "Cancelar"
             case .internalServerError:
                 return ""
         }

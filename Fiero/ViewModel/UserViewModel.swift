@@ -16,6 +16,7 @@ class UserViewModel: ObservableObject {
     @Published var activeAlert: ActiveAlertEnum?
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
     @Published var recoveryAccountErrorCases: RecoveryAccountErrorCases = .none
+    @Published var recoveryAccountSecondStepErrorCases: RecoveryAccountSecondStepErrorCases = .none
     @Published var isLogged = false
     @Published var showingAlert = false
     @Published var keyboardShown: Bool = false
@@ -274,6 +275,7 @@ class UserViewModel: ObservableObject {
                 
                 switch response.statusCode {
                     case 201:
+                        self?.keyValueStorage.set(email, forKey: UDKeysEnum.recoveryAccountEmail.description)
                         self?.recoveryAccountErrorCases = .none
                         print("Successfully sent verification code to email \(email): status code \(response.statusCode)")
                     case 404:
@@ -296,8 +298,8 @@ class UserViewModel: ObservableObject {
     
     @discardableResult
     func resetAccountPassword(with newPassword: String, using verificationCode: String) -> AnyPublisher<Void, Error> {
-        guard let email = self.keyValueStorage.string(forKey: UDKeysEnum.email.description) else {
-            print("no email was found")
+        guard let email = self.keyValueStorage.string(forKey: UDKeysEnum.recoveryAccountEmail.description) else {
+            print("no recovery email was found")
             
             return Empty(outputType: Void.self, failureType: Error.self)
                 .eraseToAnyPublisher()
@@ -310,12 +312,11 @@ class UserViewModel: ObservableObject {
             "email" : "\(email)"
         }
         """
-        
+        print(json)
         let request = makePATCHRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.RESET_PASSWORD.description, authToken: "")
         
-        
         let operation = self.client.perform(for: request)
-            .tryMap({ $1 as? HTTPURLResponse })
+            .tryMap({ $1 as! HTTPURLResponse })
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -329,22 +330,29 @@ class UserViewModel: ObservableObject {
                         print("Successfully created request to reset password endpoint")
                 }
             }, receiveValue: { [weak self] response in
-                guard let response = response else {
-                    print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
-                    return
-                }
+//                guard let response = response else {
+//                    print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
+//                    return
+//                }
                 
-                if response.statusCode == 200 {
-                    print("Successfully reset password: status code \(response.statusCode)")
-                    
-                    self?.keyValueStorage.set(newPassword, forKey: UDKeysEnum.password.description)
-                }
-                else {
-                    print("There was an error while trying to reset the password: \(String(describing: response.statusCode))")
+                switch response.statusCode {
+                    case 200:
+                        print("Successfully reset password: status code \(response.statusCode)")
+                        
+                        self?.recoveryAccountSecondStepErrorCases = .none
+                        self?.keyValueStorage.set(newPassword, forKey: UDKeysEnum.password.description)
+                    case 401:
+                        self?.recoveryAccountSecondStepErrorCases = .wrongCode
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    case 500:
+                        self?.recoveryAccountSecondStepErrorCases = .internalServerError
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    default:
+                        self?.recoveryAccountSecondStepErrorCases = .internalServerError
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
                 }
             })
             .store(in: &cancellables)
-        
         
         return operation
             .map({ _ in () })

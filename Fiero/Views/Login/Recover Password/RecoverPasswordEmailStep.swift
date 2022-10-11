@@ -59,7 +59,7 @@ struct RecoverPasswordEmailStep: View {
                             }
                         })
                     NavigationLink("", isActive: self.$isPresentingConfirmCodeScreen) {
-                        InputConfirmationCode()
+                        InputConfirmationCode(email: self.$emailText)
                     }.hidden()
                     
                 }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
@@ -95,11 +95,6 @@ struct RecoverPasswordEmailStep: View {
                                      secondaryButton: .destructive(Text(RecoveryAccountErrorCases.noEmailFound.secondaryButton), action: {
                             self.isPresentingErrorAlert = false
                         }))
-                    case .wrongCode:
-                        return Alert(title: Text(RecoveryAccountErrorCases.wrongCode.title),
-                                     message: Text(RecoveryAccountErrorCases.wrongCode.message),
-                                     dismissButton: .cancel(Text("OK")) {
-                        })
                     case .internalServerError:
                         return Alert(title: Text(RecoveryAccountErrorCases.internalServerError.title),
                                      message: Text(RecoveryAccountErrorCases.internalServerError.message),

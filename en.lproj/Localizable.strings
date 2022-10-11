@@ -239,9 +239,12 @@ We can't get your challenges now, try again";
 "wrongCodeSecondaryButton" = "Back to Login";
 
 //MARK: Empty Fields
-"emptyFieldsTitle" = "Empty fields";
-"emptyFieldsMessage" = "In order to reset your password, you must fill in the textfields above";
-"emptyFieldsPrimaryButton" = "Ok!";
+"emptyFieldsSecondTitle" = "Empty fields";
+"emptyFieldsSecondMessage" = "In order to reset your password, you must fill in the textfields above";
+
+//MARK: Unmatched passwords
+"unmatchedPasswordsTitle" = "Was it too challenging to type your new password twice?";
+"unmatchedPasswordsMessage" = "In order to set your new password, both fields must match";
 
 //MARK: Password reset
 "passwordResetTitle" = "Your super secret password was saved";
