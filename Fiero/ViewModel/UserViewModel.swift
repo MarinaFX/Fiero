@@ -330,11 +330,6 @@ class UserViewModel: ObservableObject {
                         print("Successfully created request to reset password endpoint")
                 }
             }, receiveValue: { [weak self] response in
-//                guard let response = response else {
-//                    print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
-//                    return
-//                }
-                
                 switch response.statusCode {
                     case 200:
                         print("Successfully reset password: status code \(response.statusCode)")
