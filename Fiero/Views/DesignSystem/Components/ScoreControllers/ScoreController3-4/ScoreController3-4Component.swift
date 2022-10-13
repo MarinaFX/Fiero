@@ -52,6 +52,7 @@ struct ScoreController: View {
                             isLongPressing = false
                             isFinished = true
                         }
+                        SoundPlayer.playSound(soundName: Sounds.negativePoint, soundExtension: Sounds.negativePoint.soundExtension, soundType: SoundTypes.action)
                         Haptics.shared.play(.light)
                     }
 
@@ -98,6 +99,7 @@ struct ScoreController: View {
                             isLongPressing = false
                             isFinished = true
                         }
+                        SoundPlayer.playSound(soundName: Sounds.positivePoint, soundExtension: Sounds.positivePoint.soundExtension, soundType: SoundTypes.action)
                         Haptics.shared.play(.light)
                     }
 
