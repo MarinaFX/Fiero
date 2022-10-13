@@ -73,7 +73,7 @@ struct QCCategorySelectionView: View {
                 
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
-                    Haptics.shared.play(.light)
+                    HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                 }, label: {
                     Text("Voltar")
                         .bold()

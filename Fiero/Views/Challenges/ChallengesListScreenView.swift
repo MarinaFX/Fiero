@@ -71,7 +71,7 @@ struct HomeView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             isPresentingQuickChallengeCreation = true
-                            Haptics.shared.play(.heavy)
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
                             Image(systemName: "plus")
                                 .foregroundColor(Tokens.Colors.Highlight.one.value)

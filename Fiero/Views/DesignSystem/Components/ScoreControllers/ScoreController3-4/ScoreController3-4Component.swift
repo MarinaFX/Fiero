@@ -52,7 +52,7 @@ struct ScoreController: View {
                             isLongPressing = false
                             isFinished = true
                         }
-                        Haptics.shared.play(.light)
+                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                     }
 
                     .gesture(
@@ -71,7 +71,7 @@ struct ScoreController: View {
                                             isLongPressing = false
                                             isFinished = true
                                         }
-                                        Haptics.shared.play(.light)
+                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                     })
                                 }
                             })
@@ -98,7 +98,7 @@ struct ScoreController: View {
                             isLongPressing = false
                             isFinished = true
                         }
-                        Haptics.shared.play(.light)
+                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                     }
 
                     .gesture(
@@ -117,7 +117,7 @@ struct ScoreController: View {
                                             isLongPressing = false
                                             isFinished = true
                                         }
-                                        Haptics.shared.play(.light)
+                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                     })
                                 }
                             })

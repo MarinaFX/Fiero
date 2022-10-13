@@ -23,7 +23,7 @@ struct ButtonComponent: View {
     var body: some View {
         Button(action: {
             action()
-            Haptics.shared.play(.light)
+            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
         }, label: {
             Text(text)
                 .foregroundColor(style.fontColor)
