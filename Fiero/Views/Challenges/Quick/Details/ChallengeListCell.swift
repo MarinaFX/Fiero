@@ -16,7 +16,7 @@ struct ChallengeListCell: View {
     
     var body: some View {
         HStack {
-            if quickChallenge.type == QCType.amount.description{
+            if quickChallenge.type == QCTypeEnum.amount.description{
                 LottieView(fileName: "quantity-list-cell", reverse: false, loop: true, ended: $ended)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30)

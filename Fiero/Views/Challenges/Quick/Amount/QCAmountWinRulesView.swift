@@ -41,7 +41,7 @@ struct QCAmountWinRulesView: View {
     
     var primaryColor: Color
     var secondaryColor: Color
-    var challengeType: QCType
+    var challengeType: QCTypeEnum
     var challengeName: String
     var challengeParticipants: Int
     var goalMeasure: String {

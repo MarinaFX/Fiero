@@ -16,6 +16,8 @@ extension URLSession: HTTPClient {
     }
 }
 
+extension UserDefaults: KeyValueStorage { }
+
 public func makeGETRequest
 (
     scheme: String,
@@ -39,7 +41,6 @@ public func makeGETRequest
     
     return request
 }
-extension UserDefaults: KeyValueStorage { }
 
 public func makePOSTRequest
     (

@@ -15,7 +15,7 @@ struct TabBarView: View {
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().backgroundColor = UIColor(Tokens.Colors.Neutral.Low.dark.value)
         UITabBar.appearance().unselectedItemTintColor = UIColor(Tokens.Colors.Neutral.Low.light.value)
-        UserDefaults.standard.set("alreadyOpen", forKey: UDKeys.isFirstOpen.description)
+        UserDefaults.standard.set("alreadyOpen", forKey: UDKeysEnum.isFirstOpen.description)
     }
     
     var body: some View {

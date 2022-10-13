@@ -1,5 +1,5 @@
 //
-//  QCType.swift
+//  QCTypeEnum.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 20/07/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum QCType: CustomStringConvertible, Equatable {
+enum QCTypeEnum: CustomStringConvertible, Equatable {
     case amount
     case byTime(String = "seconds")
     case bestOf

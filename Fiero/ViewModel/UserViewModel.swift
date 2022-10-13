@@ -9,20 +9,18 @@ import Foundation
 import Combine
 import SwiftUI
 
-enum ActiveAlert {
-    case confirmAccountDelete, error, logOut
-}
-
 //MARK: UserViewModel
 class UserViewModel: ObservableObject {
     //MARK: - Variables Setup
     @Published private(set) var user: User
-    @Published var keyboardShown: Bool = false
+    @Published var activeAlert: ActiveAlertEnum?
     @Published var loginAlertCases: LoginAlertCases = .emptyFields
-    @Published var isShowingLoading: Bool = false
-    @Published var activeAlert: ActiveAlert?
-    @Published var showingAlert = false
+    @Published var recoveryAccountErrorCases: RecoveryAccountErrorCases = .none
+    @Published var recoveryAccountSecondStepErrorCases: RecoveryAccountSecondStepErrorCases = .none
     @Published var isLogged = false
+    @Published var showingAlert = false
+    @Published var keyboardShown: Bool = false
+    @Published var isShowingLoading: Bool = false
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -102,11 +100,11 @@ class UserViewModel: ObservableObject {
                     return
                 }
                 print("Successfully created account: \(rawURLResponse.statusCode)")
-                self?.keyValueStorage.set(response.token, forKey: UDKeys.authToken.description)
-                self?.keyValueStorage.set(response.user.id, forKey: UDKeys.userID.description)
-                self?.keyValueStorage.set(response.user.name, forKey: UDKeys.username.description)
-                self?.keyValueStorage.set(response.user.email, forKey: UDKeys.email.description)
-                self?.keyValueStorage.set(user.password!, forKey: UDKeys.password.description)
+                self?.keyValueStorage.set(response.token, forKey: UDKeysEnum.authToken.description)
+                self?.keyValueStorage.set(response.user.id, forKey: UDKeysEnum.userID.description)
+                self?.keyValueStorage.set(response.user.name, forKey: UDKeysEnum.username.description)
+                self?.keyValueStorage.set(response.user.email, forKey: UDKeysEnum.email.description)
+                self?.keyValueStorage.set(user.password!, forKey: UDKeysEnum.password.description)
 
                 self?.isShowingLoading = false
                 self?.isLogged = true
@@ -178,10 +176,10 @@ class UserViewModel: ObservableObject {
                 self?.user = response.user
                 self?.user.token = response.token
                 
-                self?.keyValueStorage.set(self?.user.id, forKey: UDKeys.userID.description)
-                self?.keyValueStorage.set(self?.user.token, forKey: UDKeys.authToken.description)
-                self?.keyValueStorage.set(password, forKey: UDKeys.password.description)
-                self?.keyValueStorage.set(email, forKey: UDKeys.email.description)
+                self?.keyValueStorage.set(self?.user.id, forKey: UDKeysEnum.userID.description)
+                self?.keyValueStorage.set(self?.user.token, forKey: UDKeysEnum.authToken.description)
+                self?.keyValueStorage.set(password, forKey: UDKeysEnum.password.description)
+                self?.keyValueStorage.set(email, forKey: UDKeysEnum.email.description)
                 
                 self?.isShowingLoading = false
                 self?.isLogged = true
@@ -198,7 +196,7 @@ class UserViewModel: ObservableObject {
     //MARK: - Delete Account
     @discardableResult
     func deleteAccount() -> AnyPublisher<Void, Error> {
-        guard let userId = self.keyValueStorage.string(forKey: UDKeys.userID.description) else {
+        guard let userId = self.keyValueStorage.string(forKey: UDKeysEnum.userID.description) else {
             print("Nao foi possivel achar o ID do usuario")
             
             return Empty()
@@ -269,17 +267,25 @@ class UserViewModel: ObservableObject {
                     case .finished:
                         print("Successfully created request to signup endpoint")
                 }
-            }, receiveValue: { response in
+            }, receiveValue: { [weak self] response in
                 guard let response = response else {
                     print("There was an error while trying to send the verification code to the email: \(String(describing: response?.statusCode))")
                     return
                 }
                 
-                if response.statusCode == 201 {
-                    print("Successfully sent verification code to email \(email): status code \(response.statusCode)")
-                }
-                else {
-                    print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                switch response.statusCode {
+                    case 201:
+                        self?.keyValueStorage.set(email, forKey: UDKeysEnum.recoveryAccountEmail.description)
+                        self?.recoveryAccountErrorCases = .none
+                        print("Successfully sent verification code to email \(email): status code \(response.statusCode)")
+                    case 404:
+                        self?.recoveryAccountErrorCases = .noEmailFound
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    case 500:
+                        self?.recoveryAccountErrorCases = .internalServerError
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    default:
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
                 }
             })
             .store(in: &cancellables)
@@ -292,8 +298,8 @@ class UserViewModel: ObservableObject {
     
     @discardableResult
     func resetAccountPassword(with newPassword: String, using verificationCode: String) -> AnyPublisher<Void, Error> {
-        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description) else {
-            print("no email was found")
+        guard let email = self.keyValueStorage.string(forKey: UDKeysEnum.recoveryAccountEmail.description) else {
+            print("no recovery email was found")
             
             return Empty(outputType: Void.self, failureType: Error.self)
                 .eraseToAnyPublisher()
@@ -306,12 +312,11 @@ class UserViewModel: ObservableObject {
             "email" : "\(email)"
         }
         """
-        
+        print(json)
         let request = makePATCHRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.RESET_PASSWORD.description, authToken: "")
         
-        
         let operation = self.client.perform(for: request)
-            .tryMap({ $1 as? HTTPURLResponse })
+            .tryMap({ $1 as! HTTPURLResponse })
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -325,22 +330,24 @@ class UserViewModel: ObservableObject {
                         print("Successfully created request to reset password endpoint")
                 }
             }, receiveValue: { [weak self] response in
-                guard let response = response else {
-                    print("There was an error while trying to reset the password: \(String(describing: response?.statusCode))")
-                    return
-                }
-                
-                if response.statusCode == 200 {
-                    print("Successfully reset password: status code \(response.statusCode)")
-                    
-                    self?.keyValueStorage.set(newPassword, forKey: UDKeys.password.description)
-                }
-                else {
-                    print("There was an error while trying to reset the password: \(String(describing: response.statusCode))")
+                switch response.statusCode {
+                    case 200:
+                        print("Successfully reset password: status code \(response.statusCode)")
+                        
+                        self?.recoveryAccountSecondStepErrorCases = .none
+                        self?.keyValueStorage.set(newPassword, forKey: UDKeysEnum.password.description)
+                    case 401:
+                        self?.recoveryAccountSecondStepErrorCases = .wrongCode
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    case 500:
+                        self?.recoveryAccountSecondStepErrorCases = .internalServerError
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
+                    default:
+                        self?.recoveryAccountSecondStepErrorCases = .internalServerError
+                        print("There was an error while trying to send the verification code to email \(email): status code \(response.statusCode)")
                 }
             })
             .store(in: &cancellables)
-        
         
         return operation
             .map({ _ in () })
@@ -369,15 +376,15 @@ class UserViewModel: ObservableObject {
     //MARK: STATIC FUNCTIONS
     //MARK: Getters
     static func getUserIDFromDefaults() -> String {
-        return UserDefaults.standard.string(forKey: UDKeys.userID.description) ?? "no user id found"
+        return UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "no user id found"
     }
     
     static func getUserNameFromDefaults() -> String {
-        return UserDefaults.standard.string(forKey: UDKeys.username.description) ?? "Alpaca Enfurecida"
+        return UserDefaults.standard.string(forKey: UDKeysEnum.username.description) ?? "Alpaca Enfurecida"
     }
     
     static func getUserEmailFromDefaults() -> String {
-        return UserDefaults.standard.string(forKey: UDKeys.username.description) ?? "no user email found"
+        return UserDefaults.standard.string(forKey: UDKeysEnum.username.description) ?? "no user email found"
     }
     
     static func getUserFromDefaults() -> User {
@@ -386,19 +393,19 @@ class UserViewModel: ObservableObject {
     
     //MARK: Setters
     static func saveUserNameOnDefaults(name: String) {
-        UserDefaults.standard.set(name, forKey: UDKeys.username.description)
+        UserDefaults.standard.set(name, forKey: UDKeysEnum.username.description)
     }
     
     static func saveUserCredentialsOnDefaults(for email: String, and password: String) {
-        UserDefaults.standard.set(email, forKey: UDKeys.email.description)
-        UserDefaults.standard.set(password, forKey: UDKeys.password.description)
+        UserDefaults.standard.set(email, forKey: UDKeysEnum.email.description)
+        UserDefaults.standard.set(password, forKey: UDKeysEnum.password.description)
     }
     
     func cleanDefaults() {
-        UserDefaults.standard.set("", forKey: UDKeys.email.description)
-        UserDefaults.standard.set("", forKey: UDKeys.password.description)
-        UserDefaults.standard.set("", forKey: UDKeys.authToken.description)
-        UserDefaults.standard.set("", forKey: UDKeys.userID.description)
+        UserDefaults.standard.set("", forKey: UDKeysEnum.email.description)
+        UserDefaults.standard.set("", forKey: UDKeysEnum.password.description)
+        UserDefaults.standard.set("", forKey: UDKeysEnum.authToken.description)
+        UserDefaults.standard.set("", forKey: UDKeysEnum.userID.description)
     }
     
 }
