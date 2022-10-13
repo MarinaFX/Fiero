@@ -75,10 +75,6 @@ struct AccountLoginView: View {
                                              design: .default)
     }
     
-    init() {
-        UINavigationBar.appearance().backgroundColor = UIColor(Tokens.Colors.Background.dark.value)
-        }
-    
     //MARK: body View
     var body: some View {
         ZStack {
