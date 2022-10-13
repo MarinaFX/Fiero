@@ -16,10 +16,25 @@ struct ProfileView: View {
     
     @State private var subscriptions: Set<AnyCancellable> = []
     
+    @State private var settingsScreen: Bool = false
+    
     var body: some View {
         ZStack {
             Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
             VStack {
+                HStack {
+                    Spacer()
+                    Image(systemName: "gearshape")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .sheet(isPresented: $settingsScreen) {
+                            SettingsView()
+                                .id(settingsScreen)
+                        }
+                        .onTapGesture {
+                            self.settingsScreen = true
+                        }
+                }
                 ProfilePictureComponent(nameUser: UserViewModel.getUserNameFromDefaults())
                 Spacer()
                 Text("Você é uma máquina de vencer")
