@@ -7,50 +7,52 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class SoundPlayer {
     private static var isActionSoundsActive: Bool?
     
     private static var isEnvironmentSoundsActive: Bool?
     
+    private static var player: AVAudioPlayer?
     
     public static func actionSoundsToggle(){
         if self.isActionSoundsActive != nil {
             self.isActionSoundsActive?.toggle()
-            UserDefaults.standard.set(self.isActionSoundsActive, forKey: SoundType.action.description)
+            UserDefaults.standard.set(self.isActionSoundsActive, forKey: SoundTypes.action.description)
         }
     }
     
     public static func environmentSoundsToggle(){
         if self.isEnvironmentSoundsActive != nil {
             self.isEnvironmentSoundsActive?.toggle()
-            UserDefaults.standard.set(self.isEnvironmentSoundsActive, forKey: SoundType.environment.description)
+            UserDefaults.standard.set(self.isEnvironmentSoundsActive, forKey: SoundTypes.environment.description)
         }
     }
     
     public static func initVarsFromUserDefaults() {
-        if let action = UserDefaults.standard.value(forKey: SoundType.action.description) as? Bool, let environment = UserDefaults.standard.value(forKey: SoundType.environment.description) as? Bool {
+        if let action = UserDefaults.standard.value(forKey: SoundTypes.action.description) as? Bool, let environment = UserDefaults.standard.value(forKey: SoundTypes.environment.description) as? Bool {
             self.isActionSoundsActive = action
             self.isEnvironmentSoundsActive = environment
         }
         else {
             self.isActionSoundsActive = true
-            UserDefaults.standard.set(self.isActionSoundsActive, forKey: SoundType.action.description)
+            UserDefaults.standard.set(self.isActionSoundsActive, forKey: SoundTypes.action.description)
         
             self.isEnvironmentSoundsActive = true
-            UserDefaults.standard.set(self.isEnvironmentSoundsActive, forKey: SoundType.environment.description)
+            UserDefaults.standard.set(self.isEnvironmentSoundsActive, forKey: SoundTypes.environment.description)
         }
     }
     
-    public static func playSound(soundName: String, soundType: SoundType) {
+    public static func playSound(soundName: Sounds, soundExtension: SoundExtensions, soundType: SoundTypes) {
         if let isActionSoundsActive = isActionSoundsActive, let isEnvironmentSoundsActive = isEnvironmentSoundsActive {
             if (soundType == .action && isActionSoundsActive) || (soundType == .environment && isEnvironmentSoundsActive) {
-                if let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
+                if let asset = NSDataAsset(name: soundName.description) {
                     do {
-                        let player: AVAudioPlayer = try AVAudioPlayer(contentsOf: url)
+                        self.player = try AVAudioPlayer(data: asset.data, fileTypeHint: soundExtension.description)
 
-                        player.prepareToPlay()
-                        player.play()
+                        self.player?.prepareToPlay()
+                        self.player?.play()
                     } catch let error as NSError {
                         print(error.description)
                     }
@@ -60,7 +62,7 @@ class SoundPlayer {
     }
 }
 
-enum SoundType {
+enum SoundTypes {
     case action, environment
     
     var description: String {
@@ -69,6 +71,51 @@ enum SoundType {
                 return "actionSound"
             case .environment:
                 return "environmentSound"
+        }
+    }
+}
+
+enum SoundExtensions {
+    case mp3, mpeg, wav
+    
+    var description: String {
+        switch self {
+            case .mp3:
+                return "mp3"
+            case .mpeg:
+                return "mpeg"
+            case .wav:
+                return "wav"
+        }
+    }
+}
+
+enum Sounds {
+    case cavalo, negativePoint, positivePoint, metal
+    
+    var description: String {
+        switch self {
+            case .cavalo:
+                return "cavalo"
+            case .negativePoint:
+                return "negativePoint"
+            case .positivePoint:
+                return "positivePoint"
+            case .metal:
+                return "metal"
+        }
+    }
+    
+    var soundExtension: SoundExtensions {
+        switch self {
+            case .cavalo:
+                return .mp3
+            case .negativePoint:
+                return .wav
+            case .positivePoint:
+                return .wav
+            case .metal:
+                return .mp3
         }
     }
 }

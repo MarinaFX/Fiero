@@ -197,22 +197,31 @@ We can't get your challenges now, try again";
  "player4" = "Lion";
 
 //MARK: - Account Recovery
-//MARK: Insert email for recovery screen
+//MARK: Shared Alerts
+//MARK: Internal Server Error
+"internalServerErrorTitle" = "Its not you! Its us.";
+"internalServerErrorMessage" = "We've had internal difficulties. Please, try again later";
+"internalServerErrorPrimaryButton" = "Ok";
+
+//MARK: Screens
+//MARK: Insert email for recovery
 "navigationTitle" = "Recover Account";
 "forgotYourPassword" = "Forgot your password?";
 "recoverAccountTitleLabel" = "If remembering passwords were to be a challenge, we would be all losers.";
 "textFieldPlaceholder" = "Type your email";
 "buttonLabel" = "Recover Account";
 
-//MARK: Insert code and password screen
-"verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
-"verificationCodeTextFieldPlaceholder" = "Validation Code";
-"passwordTextFieldPlaceholder" = "New Password";
-"confirmPasswordTextFieldPlaceholder" = "Confirm new password";
-"changePasswordButtonLabel" = "Change password";
-"resendEmailVerification"= "Resend validation code";
-
 //MARK: Alerts
+//MARK: Successfully sent email
+"successfullySentEmailTitle" = "Its time to check your inbox";
+"successfullySentEmailMessage" = "If you find that looking for the verification code is too challenging, maybe give a look at your spam box.";
+"successfullySentEmailPrimaryButton" = "Ok!";
+
+//MARK: Empty Fields
+"emptyFieldsTitle" = "Empty email ";
+"emptyFieldsMessage" = "In order to recover your account, you must fill in the textfield with your email";
+"emptyFieldsPrimaryButton" = "Ok!";
+
 //MARK: Invalid Email
 "invalidEmailTitle" = "Invalid email";
 "invalidEmailMessage" = "Was that too challenging? The email you inserted is invalid";
@@ -223,16 +232,28 @@ We can't get your challenges now, try again";
 "accountNotFoundMessage" = "We didn't find any account connected to this email, would you like to Signup?";
 "accountNotFoundPrimaryButton" = "Create account";
 
+//MARK: Screens
+//MARK: Insert code and password
+"verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
+"verificationCodeTextFieldPlaceholder" = "Validation code";
+"passwordTextFieldPlaceholder" = "New password";
+"confirmPasswordTextFieldPlaceholder" = "Confirm new password";
+"changePasswordButtonLabel" = "Change password";
+
+//MARK: Alerts
 //MARK: Wrong Code
 "wrongCodeTitle" = "Wrong Code";
 "wrongCodeMessage" = "The code you just inserted does not match the one we sent to your email!";
 "wrongCodePrimaryButton" = "Resend code";
 "wrongCodeSecondaryButton" = "Back to Login";
 
-//MARK: Internal Server Error
-"internalServerErrorTitle" = "Its not you! Its us.";
-"internalServerErrorMessage" = "We've had internal difficulties. Please, try again later";
-"internalServerErrorPrimaryButton" = "Ok";
+//MARK: Empty Fields
+"emptyFieldsSecondTitle" = "Empty fields";
+"emptyFieldsSecondMessage" = "In order to reset your password, you must fill in the textfields above";
+
+//MARK: Unmatched passwords
+"unmatchedPasswordsTitle" = "Was it too challenging to type your new password twice?";
+"unmatchedPasswordsMessage" = "In order to set your new password, both fields must match";
 
 //MARK: Password reset
 "passwordResetTitle" = "Your super secret password was saved";

@@ -75,10 +75,6 @@ struct AccountLoginView: View {
                                              design: .default)
     }
     
-    init() {
-        UINavigationBar.appearance().backgroundColor = UIColor(Tokens.Colors.Background.dark.value)
-        }
-    
     //MARK: body View
     var body: some View {
         ZStack {
@@ -344,8 +340,8 @@ struct AccountLoginView: View {
             
             let defaults = UserDefaults.standard
             
-            let email = defaults.string(forKey: UDKeys.email.description) ?? ""
-            let password = defaults.string(forKey: UDKeys.password.description) ?? ""
+            let email = defaults.string(forKey: UDKeysEnum.email.description) ?? ""
+            let password = defaults.string(forKey: UDKeysEnum.password.description) ?? ""
             
             if (!(email.isEmpty) || !(password.isEmpty))  {
                 self.userViewModel.isLogged = true

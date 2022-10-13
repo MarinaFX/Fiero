@@ -23,7 +23,7 @@ class AuthTokenServiceImpl: AuthTokenService {
     }
     
     func getAuthToken() -> AnyPublisher<String, Error> {
-        guard let authToken = self.keyValueStorage.string(forKey: UDKeys.authToken.description) else {
+        guard let authToken = self.keyValueStorage.string(forKey: UDKeysEnum.authToken.description) else {
             return requestUpdatedAuthToken()
         }
         
@@ -48,8 +48,8 @@ class AuthTokenServiceImpl: AuthTokenService {
     }
     
     private func requestUpdatedAuthToken() -> AnyPublisher<String, Error> {
-        guard let email = self.keyValueStorage.string(forKey: UDKeys.email.description),
-              let password = self.keyValueStorage.string(forKey: UDKeys.password.description) else {
+        guard let email = self.keyValueStorage.string(forKey: UDKeysEnum.email.description),
+              let password = self.keyValueStorage.string(forKey: UDKeysEnum.password.description) else {
             
             let error = NSError(domain: "fiero", code: -1)
             return Fail(outputType: String.self, failure: error as Error).eraseToAnyPublisher()
@@ -76,14 +76,14 @@ class AuthTokenServiceImpl: AuthTokenService {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                     case .failure(let error):
-                        self?.keyValueStorage.set(nil, forKey: UDKeys.authToken.description)
+                        self?.keyValueStorage.set(nil, forKey: UDKeysEnum.authToken.description)
                         print("Failed to create request to fetch token endpoint: \(error)")
                     case .finished:
                         print("Successfully created request to fetch token endpoint")
                 }
             }, receiveValue: { [weak self] token in
                 print("Successfully generated new token")
-                self?.keyValueStorage.set(token, forKey: UDKeys.authToken.description)
+                self?.keyValueStorage.set(token, forKey: UDKeysEnum.authToken.description)
             })
             .store(in: &cancellables)
         
