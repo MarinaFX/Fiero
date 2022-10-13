@@ -59,7 +59,7 @@ struct RecoverPasswordEmailStepView: View {
                             }
                         })
                     NavigationLink("", isActive: self.$isPresentingConfirmCodeScreen) {
-                        InputConfirmationCode(email: self.$emailText)
+                        InputConfirmationCodeView(email: self.$emailText)
                     }.hidden()
                     
                 }.padding(.horizontal,Tokens.Spacing.defaultMargin.value)
