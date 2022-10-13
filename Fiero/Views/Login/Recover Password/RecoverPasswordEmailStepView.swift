@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecoverPasswordEmailStep: View {
+struct RecoverPasswordEmailStepView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userViewModel: UserViewModel
 
@@ -109,6 +109,6 @@ struct RecoverPasswordEmailStep: View {
 
 struct RecoverPasswordEmailStep_Previews: PreviewProvider {
     static var previews: some View {
-        RecoverPasswordEmailStep()
+        RecoverPasswordEmailStepView()
     }
 }

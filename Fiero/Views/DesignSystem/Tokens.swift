@@ -222,18 +222,17 @@ enum Tokens {
     
     //MARK: - Fonts
     enum FontStyle {
-        case caption2
-        case caption //xxs
-        case footnote
-        case subheadline
-        case callout //xs
-        case body
-        case headline
-        case title3 //sm
-        case title2 //=22 md= 24
-        case title //=28 md= 24
-        case largeTitle //=34 lg =32
-        //xg= 40 
+        case caption2 //11.0
+        case caption //12.0
+        case footnote //13.0
+        case subheadline //15.0
+        case callout //16.0
+        case body //17.0
+        case headline //17.0 semibold
+        case title3 //20.0
+        case title2 //22.0
+        case title //28.0
+        case largeTitle //34.0
         
         var style: Font.TextStyle {
             switch self {

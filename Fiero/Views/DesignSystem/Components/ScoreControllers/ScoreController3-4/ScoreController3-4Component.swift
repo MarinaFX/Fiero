@@ -1,5 +1,5 @@
 //
-//  ScoreController3-4Component.swift
+//  ScoreController.swift
 //  Fiero
 //
 //  Created by Lucas Dimer Justo on 09/08/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct ScoreController3_4Component: View {
+struct ScoreController: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private(set) var timeWithoutClick: Int = 0
@@ -142,9 +142,9 @@ struct ScoreController3_4Component: View {
     }
 }
 
-struct ScoreController3_4Component_Previews: PreviewProvider {
+struct ScoreController_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(playerScore: .constant(2.0),
+        ScoreController(playerScore: .constant(2.0),
                                     quickChallenge: .constant(QuickChallenge(id: "",
                                                                              name: "",
                                                                              invitationCode: "",

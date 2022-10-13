@@ -75,6 +75,10 @@ struct AccountLoginView: View {
                                              design: .default)
     }
     
+    init() {
+        UINavigationBar.appearance().backgroundColor = UIColor(Tokens.Colors.Background.dark.value)
+        }
+    
     //MARK: body View
     var body: some View {
         ZStack {
@@ -116,6 +120,7 @@ struct AccountLoginView: View {
                                           linkedTextHandler: {
                             isShowingTermsOfUseSheet.toggle()
                         })
+                        .padding(.vertical, Tokens.Spacing.nano.value)
                         .sheet(isPresented: $isShowingTermsOfUseSheet) {
                             TermsOfUseSheetView(termsOfUseAccept: $hasAcceptedTermsOfUse)
                         }
@@ -147,6 +152,7 @@ struct AccountLoginView: View {
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .font(Tokens.FontStyle.callout.font(weigth: .bold))
                         }
+                        .padding(.top, smallSpacing)
                     }
                 } else {
                     //MARK: - Login View
@@ -177,13 +183,12 @@ struct AccountLoginView: View {
                             Text("forgotYourPassword")
                                 .font(textFont)
                                 .foregroundColor(color)
-                                .accessibilityLabel("teste")
                         })
                         .padding(.top, nanoSpacing )
                         .padding(.bottom, nanoSpacing + quarck)
                         .sheet(isPresented: $isPresentingRecoverPasswordSheet) {
                             NavigationView {
-                                RecoverPasswordEmailStep()
+                                RecoverPasswordEmailStepView()
                                     .navigationBarItems(trailing: Button("Fechar", action: {self.isPresentingRecoverPasswordSheet.toggle()}))
                                     .navigationBarTitle("navigationTitle", displayMode: .inline)
                             }
@@ -222,6 +227,8 @@ struct AccountLoginView: View {
                 }
             }
             .padding(.horizontal, smallSpacing)
+            .padding(.bottom, Tokens.Spacing.xxxs.value)
+                
             if userViewModel.isShowingLoading {
                 ZStack {
                     Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
