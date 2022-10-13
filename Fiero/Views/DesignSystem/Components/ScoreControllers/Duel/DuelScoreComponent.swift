@@ -53,7 +53,7 @@ struct DuelScoreComponent: View {
                                 isLongPressing = false
                                 isFinished = true
                             }
-                            Haptics.shared.play(.light)
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                         }
 
                         .gesture(
@@ -72,7 +72,7 @@ struct DuelScoreComponent: View {
                                                 isLongPressing = false
                                                 isFinished = true
                                             }
-                                            Haptics.shared.play(.light)
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                         })
                                     }
                                 })
@@ -97,7 +97,7 @@ struct DuelScoreComponent: View {
                                 isLongPressing = false
                                 isFinished = true
                             }
-                            Haptics.shared.play(.light)
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                         }
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -115,7 +115,7 @@ struct DuelScoreComponent: View {
                                                 isLongPressing = false
                                                 isFinished = true
                                             }
-                                            Haptics.shared.play(.light)
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                         })
                                     }
                                 })

@@ -160,7 +160,7 @@ struct OngoingScreen: View {
                 
                 Button {
                     didTapPauseButton.toggle()
-                    Haptics.shared.play(.light)
+                    HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                 } label: {
                     Image(systemName: "pause.circle.fill")
                         .resizable()
