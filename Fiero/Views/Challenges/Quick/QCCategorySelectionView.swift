@@ -56,6 +56,7 @@ struct QCCategorySelectionView: View {
                                    height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
                             .opacity(isFocused(index: index) ? 1.0 : 0.4)
                             .onTapGesture {
+                                SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
                                 if index == 0 {
                                     presentNextScreen.toggle()
                                 }
