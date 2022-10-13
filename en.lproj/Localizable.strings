@@ -214,7 +214,7 @@ We can't get your challenges now, try again";
 //MARK: Alerts
 //MARK: Successfully sent email
 "successfullySentEmailTitle" = "Its time to check your inbox";
-"successfullySentEmailMessage" = "If you find that looking for the verification code is too challenging, maybe give a look in your spam box.";
+"successfullySentEmailMessage" = "If you find that looking for the verification code is too challenging, maybe give a look at your spam box.";
 "successfullySentEmailPrimaryButton" = "Ok!";
 
 //MARK: Empty Fields
@@ -235,8 +235,8 @@ We can't get your challenges now, try again";
 //MARK: Screens
 //MARK: Insert code and password
 "verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
-"verificationCodeTextFieldPlaceholder" = "Validation Code";
-"passwordTextFieldPlaceholder" = "New Password";
+"verificationCodeTextFieldPlaceholder" = "Validation code";
+"passwordTextFieldPlaceholder" = "New password";
 "confirmPasswordTextFieldPlaceholder" = "Confirm new password";
 "changePasswordButtonLabel" = "Change password";
 
