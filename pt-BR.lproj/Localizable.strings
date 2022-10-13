@@ -105,7 +105,7 @@
 // MARK: - Quick: ChallengeSelectionView
     "pickChallengeType" = "Escolha um\ntipo de desafio";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
-    "amountChallengeTypeSubtitle" = "Vence quem fizer atingir \na pontuação primeiro.";
+    "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
     "timeChallengeTypeTitle" = "Desafio de \ntempo";
     "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";

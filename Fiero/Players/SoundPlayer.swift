@@ -91,7 +91,7 @@ enum SoundExtensions {
 }
 
 enum Sounds {
-    case cavalo, negativePoint, positivePoint, decisive
+    case cavalo, negativePoint, positivePoint, metal
     
     var description: String {
         switch self {
@@ -101,8 +101,8 @@ enum Sounds {
                 return "negativePoint"
             case .positivePoint:
                 return "positivePoint"
-            case .decisive:
-                return "decisive"
+            case .metal:
+                return "metal"
         }
     }
     
@@ -114,7 +114,7 @@ enum Sounds {
                 return .wav
             case .positivePoint:
                 return .wav
-            case .decisive:
+            case .metal:
                 return .mp3
         }
     }
