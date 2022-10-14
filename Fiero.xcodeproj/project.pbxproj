@@ -72,6 +72,8 @@
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
 		1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
+		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
+		488919FA28F8AF0200958743 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F928F8AF0200958743 /* SettingsView.swift */; };
 		489B528E28A575A400ADAF49 /* OngoingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B528D28A575A400ADAF49 /* OngoingScreen.swift */; };
 		48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */; };
 		62A9849B28D210C200AE77B5 /* success-loop.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849A28D210C200AE77B5 /* success-loop.json */; };
@@ -213,6 +215,8 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
+		488919F928F8AF0200958743 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		489B528D28A575A400ADAF49 /* OngoingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingScreen.swift; sourceTree = "<group>"; };
 		48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScoreController3-4Component.swift"; sourceTree = "<group>"; };
 		62A9849A28D210C200AE77B5 /* success-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-loop.json"; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 		484F33E428F0A129005A8563 /* Players */ = {
 			isa = PBXGroup;
 			children = (
+				488919F728F8A93000958743 /* HapticsController.swift */,
 				484F33E528F0A1FB005A8563 /* SoundPlayer.swift */,
 			);
 			path = Players;
@@ -768,6 +773,7 @@
 			isa = PBXGroup;
 			children = (
 				DF7DCDB228AEB9F400B387BA /* ProfileView.swift */,
+				488919F928F8AF0200958743 /* SettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1042,6 +1048,7 @@
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
 				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
+				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */,
@@ -1070,6 +1077,7 @@
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				489B528E28A575A400ADAF49 /* OngoingScreen.swift in Sources */,
 				DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */,
+				488919FA28F8AF0200958743 /* SettingsView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */,

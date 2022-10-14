@@ -185,6 +185,12 @@ We can't get your challenges now, try again";
     "Apagar minha conta" = "Delete my account";
     "Sair da conta" = "Logout";
 
+// MARK: - Settings
+    "Efeitos sonoros" = "Sound effects";
+    "Feedback tátil" = "Haptics feedback";
+    "Configurações" = "Settings";
+    "Feito!" = "Done!";
+
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Choose this";
 

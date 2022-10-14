@@ -190,6 +190,12 @@
     "Apagar minha conta" = "Apagar minha conta";
     "Sair da conta" = "Sair da conta";
 
+// MARK: - Settings
+    "Efeitos sonoros" = "Efeitos sonoros";
+    "Feedback tátil" = "Feedback tátil";
+    "Configurações" = "Configurações";
+    "Feito!" = "Feito!";
+
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Escolher esse";
 
