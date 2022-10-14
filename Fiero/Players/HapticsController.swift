@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import SwiftUI
 
 class HapticsController {
     
     static let shared = HapticsController()
-    private(set) var hapticStatus = UserDefaults.standard.bool(forKey: "HapticsFeedback")
+    public static var isHapticsActiveBinding: Binding<Bool> = .init {
+        print("getting")
+        return (UserDefaults.standard.value(forKey: "HapticsFeedback") as? Bool) ?? true
+    } set: { newValue in
+        print("setting: \(newValue)")
+        UserDefaults.standard.set(newValue, forKey: "HapticsFeedback")
+    }
     
     func activateHaptics(hapticsfeedback: HapticFeedbackCase) {
-        if hapticStatus {
+        if (UserDefaults.standard.value(forKey: "HapticsFeedback") as? Bool) ?? true {
             switch hapticsfeedback {
             case .light:
                 let generator = UIImpactFeedbackGenerator(style: .light)
@@ -27,7 +34,6 @@ class HapticsController {
     
     func saveHapticsSettings(status: Bool) {
         UserDefaults.standard.setValue(status, forKey: "HapticsFeedback")
-        hapticStatus = UserDefaults.standard.bool(forKey: "HapticsFeedback")
     }
 }
 

@@ -15,8 +15,9 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: Tokens.Spacing.xxs.value) {
                 Toggle("Efeitos sonoros", isOn: SoundPlayer.isActionSoundsActiveBinding)
+                Toggle("Feedback tátil", isOn: HapticsController.isHapticsActiveBinding)
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
                     self.userViewModel.activeAlert = .logOut
@@ -33,14 +34,6 @@ struct SettingsView: View {
                 Button("Feito!") {
                     self.presentationMode.wrappedValue.dismiss()
                 }
-            }
-            .onAppear {
-                print(UserDefaults.standard.value(forKey: SoundTypes.action.description) as? Bool)
-                print(SoundPlayer.isActionSoundsActiveBinding.wrappedValue)
-            }
-            .onDisappear {
-                print(UserDefaults.standard.value(forKey: SoundTypes.action.description) as? Bool)
-                print(SoundPlayer.isActionSoundsActiveBinding.wrappedValue)
             }
         }
     }
