@@ -22,7 +22,7 @@ struct PermanentKeyboard: UIViewRepresentable {
     class Coordinator: NSObject, UITextFieldDelegate {
         
         public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            return range.location < 18
+            return range.location < 13
         }
         
         //MARK: - Variables Setup
@@ -65,7 +65,7 @@ struct PermanentKeyboard: UIViewRepresentable {
         textField.textColor = UIColor(cgColor: Tokens.Colors.Neutral.High.pure.value.cgColor!)
         textField.layer.backgroundColor = UIColor.clear.cgColor
         
-        let font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        let font = UIFont.preferredFont(forTextStyle: .title1)
         textField.font = font
         
         textField.keyboardType = self.keyboardType

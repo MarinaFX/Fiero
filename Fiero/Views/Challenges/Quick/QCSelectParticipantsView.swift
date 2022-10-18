@@ -16,7 +16,7 @@ struct QCSelectParticipantsView: View {
     
     var primaryColor: Color
     var secondaryColor: Color
-    var challengeType: QCType
+    var challengeType: QCTypeEnum
     var challengeName: String
 
     var body: some View {

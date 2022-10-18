@@ -35,7 +35,7 @@ struct CustomTextFieldView: View {
     var type: TextFieldType = .none
     var style: Variant = .primary
     var helperText: String = ""
-    var placeholder: String
+    var placeholder: LocalizedStringKey
     var keyboardType: UIKeyboardType = .default
     
     @State private(set) var isSecure: Bool = false
@@ -58,7 +58,7 @@ struct CustomTextFieldView: View {
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
-                                    .accessibilityLabel("Escreva \(placeholder)")
+                                    .accessibilityLabel(placeholder)
                         }
                             .autocapitalization(.none)
                     }else{
@@ -70,7 +70,7 @@ struct CustomTextFieldView: View {
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
-                                    .accessibilityLabel("Escreva \(placeholder)")
+                                    .accessibilityLabel(placeholder)
                         }
                     }
                     
@@ -85,7 +85,7 @@ struct CustomTextFieldView: View {
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
-                                    .accessibilityLabel("Escreva \(self.placeholder)")
+                                    .accessibilityLabel(placeholder)
                         }
                             .keyboardType(self.keyboardType)
                             .autocapitalization(.none)
@@ -98,7 +98,7 @@ struct CustomTextFieldView: View {
                             .placeholder(when: text.isEmpty) {
                                 Text(self.placeholder).foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                     .padding(.leading, Tokens.Spacing.xxxs.value)
-                                    .accessibilityLabel("Escreva \(self.placeholder)")
+                                    .accessibilityLabel(placeholder)
                         }
                     }
                 }

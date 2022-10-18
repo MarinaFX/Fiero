@@ -12,15 +12,16 @@ import Combine
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
     
     @State var isPresentingAlert: Bool = false
-    @State var presentDuelOngoingChallenge: Bool = false
-    @State var present3or4OngoingChallenge: Bool = false
+    @State var isPresentingOngoing: Bool = false
     @State var isPresentingLoading: Bool = false
+    
+    @State private var ended: Bool = false
+    
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -28,331 +29,219 @@ struct ChallengeDetailsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
-                VStack {
-                    //MARK: - Accessibility Layout
-                    if self.sizeCategory.isAccessibilityCategory {
-                        ScrollView(showsIndicators: false) {
-                            //MARK: - Top Components
-                            ZStack {
-                                VStack(spacing: Tokens.Spacing.xxs.value) {
-                                    VStack {
-                                        Text("Desafio de quantidade")
-                                            .multilineTextAlignment(.center)
-                                            .font(descriptionFont)
-                                            .foregroundColor(color)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .padding(.horizontal, 10)
-                                        
-                                        Text(quickChallenge.name)
-                                            .font(.system(size: 40))
-                                            .fontWeight(.heavy)
-                                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                            .multilineTextAlignment(.center)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .padding(.horizontal, 10)
-                                    }.padding(.top, Tokens.Spacing.sm.value)
-                                    
-                                    VStack {
-                                        Text("Objetivo")
-                                            .multilineTextAlignment(.center)
-                                            .font(descriptionFont)
-                                            .foregroundColor(color)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .padding(.horizontal, 10)
-                                        
-                                        Text("\(quickChallenge.goal) pontos")
-                                            .font(.system(size: 40))
-                                            .fontWeight(.heavy)
-                                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                            .multilineTextAlignment(.center)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .padding(.horizontal, 10)
-                                    }.padding(.bottom, Tokens.Spacing.sm.value)
-                                }
+                backgroundColor
+                    .edgesIgnoringSafeArea(.all)
+                
+                NavigationLink("", isActive: self.$isPresentingOngoing) {
+                    OngoingWithPause(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
+                }
+                .hidden()
+                
+                ScrollView(showsIndicators: false) {
+                    //MARK: - Top Components
+                    VStack {
+                        VStack(alignment: .center, spacing: extraExtraSmallSpacing) {
+                            VStack(alignment: .center, spacing: nanoSpacing) {
+                                Text("Desafio de quantidade")
+                                    .font(descriptionFont)
+                                    .foregroundColor(foregroundColor)
+                                    .padding(.top, smallSpacing)
+                                
+                                Text(quickChallenge.name)
+                                    .font(largeTitleFont)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(foregroundColor)
+                                    .padding(.horizontal, nanoSpacing)
                             }
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
-                                    .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: 2)
-                            )
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                            .padding(.bottom, Tokens.Spacing.sm.value)
-
-                            //MARK: - Mid Components
-                            Text("Participantes")
-                                .font(titleFont2)
-                                .foregroundColor(color)
                             
-                            GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
-                                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                            
-                            //MARK: - Bottom Components
-                            Spacer()
-                            VStack(spacing: quarkSpacing) {
-                                if self.quickChallenge.maxTeams == 2 {
-                                    NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                                        DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                                    }.hidden()
-                                }
-                                else {
-                                    NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                        Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                                    }.hidden()
-                                }
+                            VStack(alignment: .center, spacing: nanoSpacing) {
+                                Text("Objetivo")
+                                    .font(descriptionFont)
+                                    .foregroundColor(foregroundColor)
                                 
-                                if !self.quickChallenge.finished {
-                                    ButtonComponent(style: .secondary(isEnabled: true),
-                                                    text: self.quickChallenge.alreadyBegin ?
-                                                    "Continuar desafio" : "Começar desafio!") {
-                                        self.isPresentingLoading.toggle()
-                                        print(quickChallenge.teams.count)
-                                        self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                            .sink(receiveCompletion: { completion in
-                                                switch completion {
-                                                    case .finished:
-                                                        if self.quickChallenge.maxTeams == 2 {
-                                                            self.isPresentingLoading.toggle()
-                                                            self.presentDuelOngoingChallenge.toggle()
-                                                        }
-                                                        else {
-                                                            self.isPresentingLoading.toggle()
-                                                            self.present3or4OngoingChallenge.toggle()
-                                                        }
-                                                    case .failure:
-                                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                                        self.isPresentingAlert.toggle()
-                                                        self.isPresentingLoading.toggle()
-                                                        print(self.isPresentingLoading)
-                                                }
-                                            }, receiveValue: { _ in })
-                                            .store(in: &subscriptions)
-                                    }
-                                } else {
-                                    ButtonComponent(style: .secondary(isEnabled: false),
-                                                    text: "Desafio finalizado", action: {})
-                                }
-                                
-                                ButtonComponent(style: .black(isEnabled: true),
-                                                text: "Voltar para meus desafios") {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
-                            }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                        }
-                    }
-                    //MARK: - Standard Layout
-                    else {
-                        //MARK: - Top Components
-                        ZStack {
-                            VStack(spacing: Tokens.Spacing.xxs.value) {
-                                VStack {
-                                    Text("Desafio de quantidade")
-                                        .multilineTextAlignment(.center)
-                                        .font(descriptionFont)
-                                        .foregroundColor(color)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.top, Tokens.Spacing.nano.value)
-                                        .padding(.horizontal, 5)
-                                    
-                                    Text(quickChallenge.name)
-                                        .font(.system(size: 40))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                        .multilineTextAlignment(.center)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.horizontal, 5)
-                                }.padding(.top, Tokens.Spacing.nano.value)
-                                
-                                VStack {
-                                    Text("Objetivo")
-                                        .multilineTextAlignment(.center)
-                                        .font(descriptionFont)
-                                        .foregroundColor(color)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                    
-                                    Text("\(quickChallenge.goal) pontos")
-                                        .font(.system(size: 40))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                        .multilineTextAlignment(.center)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.horizontal, 5)
-                                }.padding(.bottom, Tokens.Spacing.sm.value)
+                                Text("\(quickChallenge.goal) pontos")
+                                    .font(largeTitleFont)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(foregroundColor)
+                                    .padding(.bottom, smallSpacing)
+                                    .padding(.horizontal, nanoSpacing)
                             }
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(width: UIScreen.main.bounds.width * 0.9)
                         .overlay(
-                            RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
-                                .stroke(Tokens.Colors.Neutral.High.pure.value, lineWidth: 2)
+                            RoundedRectangle(cornerRadius: borderSmall)
+                                .stroke(foregroundColor, lineWidth: 2)
                         )
-                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                        .padding(.bottom, Tokens.Spacing.sm.value)
-
-                        //MARK: - Mid Components
-                        Text("Participantes")
-                            .font(titleFont2)
-                            .foregroundColor(color)
-                        
-                        GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                        
-                        //MARK: - Bottom Components
-                        Spacer()
-                        VStack(spacing: quarkSpacing) {
-                            if self.quickChallenge.maxTeams == 2 {
-                                NavigationLink("", isActive: self.$presentDuelOngoingChallenge) {
-                                    DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                                }.hidden()
-                            }
-                            else {
-                                NavigationLink("", isActive: self.$present3or4OngoingChallenge) {
-                                    Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-                                }.hidden()
-                            }
-                            
-                            if !self.quickChallenge.finished {
-                                ButtonComponent(style: .secondary(isEnabled: true),
-                                                text: self.quickChallenge.alreadyBegin ?
-                                                "Continuar desafio" : "Começar desafio!") {
-                                    self.isPresentingLoading.toggle()
-                                    print(quickChallenge.teams.count)
-                                    self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                        .sink(receiveCompletion: { completion in
-                                            switch completion {
-                                                case .finished:
-                                                    if self.quickChallenge.maxTeams == 2 {
-                                                        self.isPresentingLoading.toggle()
-                                                        self.presentDuelOngoingChallenge.toggle()
-                                                    }
-                                                    else {
-                                                        self.isPresentingLoading.toggle()
-                                                        self.present3or4OngoingChallenge.toggle()
-                                                    }
-                                                case .failure:
-                                                    quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
-                                                    self.isPresentingAlert.toggle()
-                                                    self.isPresentingLoading.toggle()
-                                                    print(self.isPresentingLoading)
-                                            }
-                                        }, receiveValue: { _ in })
-                                        .store(in: &subscriptions)
-                                }
-                            } else {
-                                ButtonComponent(style: .secondary(isEnabled: false),
-                                                text: "Desafio finalizado", action: {})
-                            }
-                            
-                            ButtonComponent(style: .black(isEnabled: true),
-                                            text: "Voltar para meus desafios") {
-                                self.presentationMode.wrappedValue.dismiss()
-                            }
-                        }.padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                        .padding(.top, nanoSpacing)
+                        .padding(.bottom, smallSpacing)
+                    }
+                    
+                    //MARK: - Mid Components
+                    Text("Participantes")
+                        .font(titleFont2)
+                        .foregroundColor(foregroundColor)
+                    
+                    GroupComponent(scoreboard: true, style: [.participantDefault(isSmall: true)], quickChallenge: $quickChallenge)
+                        .padding(.horizontal, defaultMarginSpacing)
+                        .padding(.bottom, smallSpacing)
+                    
+                    //MARK: - Bottom Components
+                    if !self.quickChallenge.finished {
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: self.quickChallenge.alreadyBegin ?
+                                        "Continuar desafio" : "Começar desafio!") {
+                            self.isPresentingLoading.toggle()
+                            print(quickChallenge.teams.count)
+                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                    case .finished:
+                                        self.isPresentingLoading.toggle()
+                                        self.isPresentingOngoing.toggle()
+                                    case .failure:
+                                        quickChallengeViewModel.detailsAlertCases = .failureStartChallenge
+                                        self.isPresentingAlert.toggle()
+                                        self.isPresentingLoading.toggle()
+                                        print(self.isPresentingLoading)
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
+                        }
+                                        .padding(.horizontal, defaultMarginSpacing)
+                    } else {
+                        ButtonComponent(style: .secondary(isEnabled: false),
+                                        text: "Desafio finalizado", action: {})
+                        .padding(.horizontal, defaultMarginSpacing)
+                    }
+                    
+                    ButtonComponent(style: .black(isEnabled: true),
+                                    text: "Voltar para meus desafios") {
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
+                .padding(.vertical, nanoSpacing)
+                //MARK: - Alert
                 .alert(isPresented: self.$isPresentingAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
-                        case .deleteChallenge:
-                            return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
-                                         message: Text(DetailsAlertCases.deleteChallenge.message),
-                                         primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
-                                self.isPresentingAlert = false
-                            }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                                self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
-                                    .sink { completion in
-                                        switch completion {
-                                            case .finished:
-                                                self.presentationMode.wrappedValue.dismiss()
-                                            case .failure(let error):
-                                                print(error)
-                                                self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
-                                                self.isPresentingAlert.toggle()
-                                        }
-                                    } receiveValue: { _ in }
-                                    .store(in: &subscriptions)
-                            }))
-                        case .failureStartChallenge:
-                            return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
-                                         message: Text(DetailsAlertCases.failureStartChallenge.message),
-                                         dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
-                                self.isPresentingAlert = false
-                                self.presentationMode.wrappedValue.dismiss()
-                            }))
-                        case .failureWhileSavingPoints:
-                            return Alert(title: Text(DetailsAlertCases.failureWhileSavingPoints.title),
-                                         message: Text(DetailsAlertCases.failureWhileSavingPoints.message),
-                                         dismissButton: .cancel(Text(DetailsAlertCases.failureWhileSavingPoints.primaryButtonText), action: {
-                                self.isPresentingAlert = false
-                                self.presentationMode.wrappedValue.dismiss()
-                            }))
-                        case .failureDeletingChallenge:
-                            return Alert(title: Text("not expected"))
+                    case .deleteChallenge:
+                        return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
+                                     message: Text(DetailsAlertCases.deleteChallenge.message),
+                                     primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                        }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                            self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                                .sink { completion in
+                                    switch completion {
+                                    case .finished:
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    case .failure(let error):
+                                        print(error)
+                                        self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
+                                        self.isPresentingAlert.toggle()
+                                    }
+                                } receiveValue: { _ in }
+                                .store(in: &subscriptions)
+                        }))
+                    case .failureStartChallenge:
+                        return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
+                                     message: Text(DetailsAlertCases.failureStartChallenge.message),
+                                     dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                            self.presentationMode.wrappedValue.dismiss()
+                        }))
+                    case .failureWhileSavingPoints:
+                        return Alert(title: Text(DetailsAlertCases.failureWhileSavingPoints.title),
+                                     message: Text(DetailsAlertCases.failureWhileSavingPoints.message),
+                                     dismissButton: .cancel(Text(DetailsAlertCases.failureWhileSavingPoints.primaryButtonText), action: {
+                            self.isPresentingAlert = false
+                            self.presentationMode.wrappedValue.dismiss()
+                        }))
+                    case .failureDeletingChallenge:
+                        return Alert(title: Text("not expected"))
                     }
                 })
+                //MARK: - Navigation
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             self.isPresentingAlert.toggle()
-                            Haptics.shared.play(.heavy)
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
                             Image(systemName: "trash")
-                                .font(Tokens.FontStyle.callout.font(weigth: .bold))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .font(descriptionFontBold)
+                                .foregroundColor(foregroundColor)
                         })
                     }
                 }
+                //MARK: - Loading
                 if isPresentingLoading {
                     ZStack {
-                        Tokens.Colors.Neutral.Low.pure.value.edgesIgnoringSafeArea(.all).opacity(0.9)
+                        loadingBackgroundColor
+                            .edgesIgnoringSafeArea(.all)
+                            .opacity(0.9)
                         VStack {
                             Spacer()
                             //TODO: - change name of animation loading
-                            LottieView(fileName: "loading", reverse: false, loop: false).frame(width: 200, height: 200)
+                            LottieView(fileName: "loading", reverse: false, loop: false, ended: $ended).frame(width: 200, height: 200)
                             Spacer()
                         }
                     }
                 }
-            }.accentColor(Color.white)
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
     
     //MARK: - DS Tokens
-    var color: Color {
+    
+    //MARK: Color
+    var backgroundColor: Color {
+        return Tokens.Colors.Background.dark.value
+    }
+    var foregroundColor: Color {
         return Tokens.Colors.Neutral.High.pure.value
     }
-    var quarkSpacing: CGFloat {
-        return Tokens.Spacing.quarck.value
+    var loadingBackgroundColor: Color {
+        return Tokens.Colors.Neutral.Low.pure.value
     }
+    //MARK: Spacing
     var nanoSpacing: CGFloat {
         return Tokens.Spacing.nano.value
     }
     var smallSpacing: CGFloat {
-        return Tokens.Spacing.xxxs.value
+        return Tokens.Spacing.sm.value
     }
-    var extraExtraExtraSmallSpacing: CGFloat {
-        return Tokens.Spacing.xxxs.value
+    var extraExtraSmallSpacing: CGFloat {
+        return Tokens.Spacing.xxs.value
     }
-    var largeSpacing: CGFloat {
-        return Tokens.Spacing.lg.value
+    var defaultMarginSpacing: CGFloat {
+        return Tokens.Spacing.defaultMargin.value
+    }
+    //MARK: Border
+    var borderSmall: CGFloat {
+        return Tokens.Border.BorderRadius.small.value
+    }
+    //MARK: Font
+    var descriptionFont: Font {
+        return Tokens.FontStyle.callout.font()
+    }
+    var descriptionFontBold: Font {
+        return Tokens.FontStyle.callout.font(weigth: .bold)
     }
     var titleFont2: Font {
         return Tokens.FontStyle.title2.font(weigth: .bold)
     }
-    var titleFont: Font {
-        return Tokens.FontStyle.title.font(weigth: .bold)
-    }
     var largeTitleFont: Font {
-        return Tokens.FontStyle.largeTitle.font(weigth: .bold)
-    }
-    var descriptionFont: Font {
-        return Tokens.FontStyle.callout.font()
+        return Tokens.FontStyle.largeTitle.font(weigth: .heavy)
     }
 }
 
 //MARK: - Previews
 struct ChallengeDetailsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeDetailsView(quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty"))))
+        ChallengeDetailsView(quickChallenge: .constant(QuickChallenge(id: "", name: "Girls Challenge part 1", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty"))))
             .environmentObject(QuickChallengeViewModel())
     }
 }

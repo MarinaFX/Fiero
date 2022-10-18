@@ -46,6 +46,16 @@ struct DuelScoreComponent: View {
                         .resizable()
                         .foregroundColor(style.buttonColor)
                         .frame(width: buttonFrame, height: buttonFrame)
+                        .onTapGesture {
+                            self.playerScore -= 1
+                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                self.timer?.invalidate()
+                                isLongPressing = false
+                                isFinished = true
+                            }
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                        }
+
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .global)
                                 .onEnded({ value in
@@ -62,7 +72,7 @@ struct DuelScoreComponent: View {
                                                 isLongPressing = false
                                                 isFinished = true
                                             }
-                                            Haptics.shared.play(.light)
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                         })
                                     }
                                 })
@@ -80,6 +90,15 @@ struct DuelScoreComponent: View {
                         .resizable()
                         .foregroundColor(style.buttonColor)
                         .frame(width: buttonFrame, height: buttonFrame)
+                        .onTapGesture {
+                            self.playerScore += 1
+                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                self.timer?.invalidate()
+                                isLongPressing = false
+                                isFinished = true
+                            }
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                        }
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .global)
                                 .onEnded({ value in
@@ -96,7 +115,7 @@ struct DuelScoreComponent: View {
                                                 isLongPressing = false
                                                 isFinished = true
                                             }
-                                            Haptics.shared.play(.light)
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                         })
                                     }
                                 })

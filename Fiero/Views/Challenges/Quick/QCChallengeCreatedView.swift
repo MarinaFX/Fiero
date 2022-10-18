@@ -21,15 +21,16 @@ struct QCChallengeCreatedView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var didPushToHomeScreen: Bool = false
-    @State var presentDuelChallenge: Bool = false
-    @State var present3Or4Challenge: Bool = false
+    @State var isPresentingChallenge: Bool = false
     @State var isPresentingAlert: Bool = false
     @State var subscriptions: Set<AnyCancellable> = []
     
-    @Binding var serverResponse: ServerResponse
     @Binding var quickChallenge: QuickChallenge
     
-    var challengeType: QCType
+    @State private var ended: Bool = false
+
+    
+    var challengeType: QCTypeEnum
     var challengeName: String
     var challengeParticipants: Int
     var goal: Int
@@ -49,13 +50,14 @@ struct QCChallengeCreatedView: View {
         VStack {
             Spacer()
             
-            LottieView(fileName: "success-loop", reverse: false, loop: true).frame(width: 350 , height: 200)
+            LottieView(fileName: "success-loop", reverse: false, loop: true, ended: $ended).frame(width: 350 , height: 200)
             
             Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.top, Tokens.Spacing.sm.value)
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             
             Spacer()
             
@@ -68,12 +70,7 @@ struct QCChallengeCreatedView: View {
                             case .failure(_):
                                 self.isPresentingAlert.toggle()
                             case .finished:
-                                if self.quickChallenge.maxTeams == 2 {
-                                    self.presentDuelChallenge.toggle()
-                                }
-                                else {
-                                    self.present3Or4Challenge.toggle()
-                                }
+                                self.isPresentingChallenge.toggle()
                         }
                     }, receiveValue: { _ in ()})
                     .store(in: &subscriptions)
@@ -91,13 +88,8 @@ struct QCChallengeCreatedView: View {
             })
             .padding(.bottom, Tokens.Spacing.xxxs.value)
             
-            NavigationLink("", isActive: self.$presentDuelChallenge) {
-                DuelScreenView(quickChallenge: $quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
-            }
-            .hidden()
-            
-            NavigationLink("", isActive: self.$present3Or4Challenge) {
-                Ongoing3Or4WithPauseScreenView(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
+            NavigationLink("", isActive: self.$isPresentingChallenge) {
+                OngoingWithPause(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
             }
             .hidden()
         }
@@ -116,7 +108,7 @@ struct QCChallengeCreatedView: View {
 
 struct QuickChallengeCreatedView_Previews: PreviewProvider {
     static var previews: some View {
-        QCChallengeCreatedView(serverResponse: .constant(.badRequest), quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
+        QCChallengeCreatedView(quickChallenge: .constant(QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), challengeType: .amount, challengeName: "", challengeParticipants: 0, goal: 0)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
             .environmentObject(QuickChallengeViewModel())
     }

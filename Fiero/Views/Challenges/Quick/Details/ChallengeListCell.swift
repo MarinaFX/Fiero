@@ -11,10 +11,13 @@ struct ChallengeListCell: View {
     
     @Binding var quickChallenge: QuickChallenge
     
+    @State private var ended: Bool = false
+
+    
     var body: some View {
         HStack {
-            if quickChallenge.type == QCType.amount.description{
-                LottieView(fileName: "quantity-list-cell", reverse: false, loop: true)
+            if quickChallenge.type == QCTypeEnum.amount.description{
+                LottieView(fileName: "quantity-list-cell", reverse: false, loop: true, ended: $ended)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 30)
                     .padding(.horizontal, Tokens.Spacing.nano.value)

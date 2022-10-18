@@ -21,6 +21,7 @@ struct LottieView: UIViewRepresentable {
     var secondAnimation: String?
     var loopSecond: Bool?
     var isPaused: Bool = false
+    @Binding var ended: Bool
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -32,7 +33,6 @@ struct LottieView: UIViewRepresentable {
         } else {
             animationView.contentMode = .scaleAspectFit
         }
-        
         if loop {
             animationView.loopMode = .loop
         } else {
@@ -42,7 +42,6 @@ struct LottieView: UIViewRepresentable {
             animationView.loopMode = .autoReverse
         }
         animationView.backgroundBehavior = .pauseAndRestore
-        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
         
@@ -59,24 +58,10 @@ struct LottieView: UIViewRepresentable {
             context.coordinator.parent.animationView.stop()
         }
         else {
-            if let secondAnimation = secondAnimation {
-                let secondAnimation = Animation.named(secondAnimation)
-                context.coordinator.parent.animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.playOnce, completion: { finished in
-                    if finished {
-                        context.coordinator.parent.animationView.animation = secondAnimation
-                        guard let loopSecond = loopSecond else {
-                            context.coordinator.parent.animationView.loopMode = .playOnce
-                            return
-                        }
-                        
-                        if loopSecond { context.coordinator.parent.animationView.loopMode = .loop }
-
-                        context.coordinator.parent.animationView.play()
-                    }
-                })
-            }
-            else {
-                context.coordinator.parent.animationView.play()
+            context.coordinator.parent.animationView.play { finished in
+                if finished {
+                    self.ended = true
+                }
             }
         }
     }

@@ -10,6 +10,8 @@ import UXCamSwiftUI
 import UXCam
 
 struct ContentView: View {
+    @EnvironmentObject var sceneDelegate: SceneDelegate
+    
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
@@ -20,7 +22,7 @@ struct ContentView: View {
         UXCam.optIntoSchematicRecordings()
         let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
         UXCamSwiftUI.start(with: config)
-        if UserDefaults.standard.string(forKey: UDKeys.isFirstOpen.description) ?? "" == "alreadyOpen" {
+        if UserDefaults.standard.string(forKey: UDKeysEnum.isFirstOpen.description) ?? "" == "alreadyOpen" {
             isFirstLogin = false
         } else {
             isFirstLogin = true
@@ -37,7 +39,7 @@ struct ContentView: View {
                     .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
                     .onAppear(perform: {
-                        self.userViewModel.refreshableToken()
+                        self.sceneDelegate.userViewModel = self.userViewModel
                     })
                 }
             }

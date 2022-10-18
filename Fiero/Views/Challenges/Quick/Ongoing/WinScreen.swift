@@ -19,6 +19,9 @@ struct WinScreen: View {
     @State var isAnimating = true   
     @State var winnerName: String
     
+    @State private var ended: Bool = false
+
+    
     var foreverAnimation: Animation {
         Animation.linear(duration: 4.0)
             .repeatForever(autoreverses: false)
@@ -28,7 +31,7 @@ struct WinScreen: View {
         ZStack {
             Tokens.Colors.Background.dark.value
             
-            LottieView(fileName: "winAnimation", reverse: false, loop: true, aspectFill: true)
+            LottieView(fileName: "winAnimation", reverse: false, loop: true, aspectFill: true, ended: $ended)
             
             Image("bg_winner")
                 .rotationEffect(Angle(degrees: self.isAnimating ? self.angle : 360.0))
