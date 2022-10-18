@@ -18,7 +18,7 @@ struct TimeChallengeWinRulesView: View {
         
     private(set) var primaryColor: Color
     private(set) var secondaryColor: Color
-    private(set) var challengeType: QCType
+    private(set) var challengeType: QCTypeEnum
     private(set) var challengeName: String
     private(set) var challengeParticipants: Int
     

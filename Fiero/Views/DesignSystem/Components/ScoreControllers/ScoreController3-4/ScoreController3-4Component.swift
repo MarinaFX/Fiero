@@ -1,5 +1,5 @@
 //
-//  ScoreController3-4Component.swift
+//  ScoreController.swift
 //  Fiero
 //
 //  Created by Lucas Dimer Justo on 09/08/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct ScoreController3_4Component: View {
+struct ScoreController: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private(set) var timeWithoutClick: Int = 0
@@ -45,6 +45,20 @@ struct ScoreController3_4Component: View {
                     .resizable()
                     .foregroundColor(color)
                     .frame(width: buttonFrame, height: buttonFrame)
+                    .onTapGesture {
+                        self.playerScore -= 1
+                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                            self.timer?.invalidate()
+                            isLongPressing = false
+                            isFinished = true
+                        }
+
+                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                        
+                        SoundPlayer.playSound(soundName: Sounds.negativePoint, soundExtension: Sounds.negativePoint.soundExtension, soundType: SoundTypes.action)
+                        Haptics.shared.play(.light)
+                    }
+
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .global)
                             .onEnded({ value in
@@ -61,7 +75,7 @@ struct ScoreController3_4Component: View {
                                             isLongPressing = false
                                             isFinished = true
                                         }
-                                        Haptics.shared.play(.light)
+                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                     })
                                 }
                             })
@@ -81,6 +95,20 @@ struct ScoreController3_4Component: View {
                     .resizable()
                     .foregroundColor(color)
                     .frame(width: buttonFrame, height: buttonFrame)
+                    .onTapGesture {
+                        self.playerScore += 1
+                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                            self.timer?.invalidate()
+                            isLongPressing = false
+                            isFinished = true
+                        }
+
+                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+
+                        SoundPlayer.playSound(soundName: Sounds.positivePoint, soundExtension: Sounds.positivePoint.soundExtension, soundType: SoundTypes.action)
+                        Haptics.shared.play(.light)
+                    }
+
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .global)
                             .onEnded({ value in
@@ -97,7 +125,7 @@ struct ScoreController3_4Component: View {
                                             isLongPressing = false
                                             isFinished = true
                                         }
-                                        Haptics.shared.play(.light)
+                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                                     })
                                 }
                             })
@@ -122,9 +150,9 @@ struct ScoreController3_4Component: View {
     }
 }
 
-struct ScoreController3_4Component_Previews: PreviewProvider {
+struct ScoreController_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreController3_4Component(playerScore: .constant(2.0),
+        ScoreController(playerScore: .constant(2.0),
                                     quickChallenge: .constant(QuickChallenge(id: "",
                                                                              name: "",
                                                                              invitationCode: "",

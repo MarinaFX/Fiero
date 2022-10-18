@@ -43,10 +43,10 @@ struct QCCategorySelectionView: View {
                 Spacer()
                 
                 Text("pickChallengeType")
-                .multilineTextAlignment(.center)
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
-                .padding(.horizontal, Tokens.Spacing.xs.value)
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .multilineTextAlignment(.center)
+                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .frame(minHeight: 82)
 
                 HStack(alignment: .center,spacing: cardSpacing) {
                     ForEach(0 ..< items.count) { index in
@@ -56,6 +56,7 @@ struct QCCategorySelectionView: View {
                                    height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
                             .opacity(isFocused(index: index) ? 1.0 : 0.4)
                             .onTapGesture {
+                                SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
                                 if index == 0 {
                                     presentNextScreen.toggle()
                                 }
@@ -73,7 +74,7 @@ struct QCCategorySelectionView: View {
                 
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
-                    Haptics.shared.play(.light)
+                    HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                 }, label: {
                     Text("Voltar")
                         .bold()

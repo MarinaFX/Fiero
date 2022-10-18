@@ -21,9 +21,9 @@ enum ButtonStyles {
         case .secondary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.light.value
         case .black:
-            return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value;
+            return isEnabled ? .clear : Tokens.Colors.Neutral.Low.light.value;
         case .tertiary:
-            return Tokens.Colors.Highlight.seven.value
+                return isEnabled ? Tokens.Colors.Highlight.seven.value : Tokens.Colors.Neutral.Low.light.value
         case .destructive:
             return isEnabled ? .clear : Tokens.Colors.Neutral.Low.dark.value
         }
@@ -56,11 +56,11 @@ enum ButtonStyles {
     var fontColor: Color {
         switch self {
         case .primary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .secondary(let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.Low.pure.value : Tokens.Colors.Neutral.High.dark.value
+            return isEnabled ? Tokens.Colors.Neutral.Low.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .black(isEnabled: let isEnabled):
-            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.High.dark.value
+            return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .tertiary(let isEnabled):
             return isEnabled ? Tokens.Colors.Neutral.High.pure.value : Tokens.Colors.Neutral.Low.pure.value
         case .destructive(isEnabled: let isEnabled):

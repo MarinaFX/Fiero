@@ -17,7 +17,7 @@ struct QCNamingView: View {
     
     var primaryColor: Color
     var secondaryColor: Color
-    var challengeType: QCType
+    var challengeType: QCTypeEnum
         
     //MARK: - Body
     var body: some View {

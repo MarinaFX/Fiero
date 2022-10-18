@@ -15,6 +15,15 @@
 // MARK: - Onboarding
 // adicionar imagens em ingles
 "Pular" = "Pular";
+"firstImage" = "OnboardingNamePT";
+"firstTitle" = "Desafie seus amigos";
+"firstDescription" = "Um desafio entre amigos é uma maneira divertida de ter uma competição saudável e criar memórias juntas.";
+"secondImage" = "OnboardingDuelPT";
+"secondTitle" = "Olho na pontuação";
+"secondDescription" = "Depois de definir quantas pessoas estão participando do seu desafio, adicione a pontuação que definirá a vitória.";
+"thirdImage" = "OnboardingChallengeType";
+"thirdTitle" = "Múltiplos desafios";
+"thirdDescription" = "É um passo pra frente e dois pra trás! Você é uma máquina de vencer, pratique.";
 "Quero começar!" = "Quero começar!";
 
 
@@ -105,7 +114,7 @@
 // MARK: - Quick: ChallengeSelectionView
     "pickChallengeType" = "Escolha um\ntipo de desafio";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
-    "amountChallengeTypeSubtitle" = "Vence quem fizer atingir \na pontuação primeiro.";
+    "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
     "timeChallengeTypeTitle" = "Desafio de \ntempo";
     "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";
@@ -181,14 +190,84 @@
     "Apagar minha conta" = "Apagar minha conta";
     "Sair da conta" = "Sair da conta";
 
+// MARK: - Settings
+    "Efeitos sonoros" = "Efeitos sonoros";
+    "Feedback tátil" = "Feedback tátil";
+    "Configurações" = "Configurações";
+    "Feito!" = "Feito!";
+
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Escolher esse";
 
 // MARK: - DesignSysten - Card - ChallengeCellComponent
 //    "Desafiantes: \(player1)" + " e " + "\(player2)" = "Desafiantes: \(player1)" + " e " + "\(player2)";
 
-// MARK: - Members - Players
+//MARK: - Members
+//MARK: Players
  "player2" = "Raposa";
  "player3" = "Panda";
  "player4" = "Leão";
 
+//MARK: - Account Recovery
+//MARK: Shared Alerts
+//MARK: Internal Server Error
+"internalServerErrorTitle" = "Não é você! Somos nós.";
+"internalServerErrorMessage" = "Tivemos um erro interno, por favor tente novamente mais tarde. ";
+"internalServerErrorPrimaryButton" = "Ok";
+
+//MARK: Screens
+//MARK: Insert email for recovery
+"navigationTitle" = "Recuperar conta";
+"forgotYourPassword" = "Esqueceu sua senha?";
+"recoverAccountTitleLabel" = "Se lembrar senhas fosse um desafio, todos nós seríamos perdedores.";
+"textFieldPlaceholder" = "Digite o seu e-mail";
+"buttonLabel" = "Recuperar senha";
+
+//MARK: Alerts
+//MARK: Successfully sent email
+"successfullySentEmailTitle" = "É hora de olhar seu e-mail";
+"successfullySentEmailMessage" = "Se estiver muito desafiador achar o código de verificação, tente olhar na caixa de spam.";
+"successfullySentEmailPrimaryButton" = "Ok";
+
+//MARK: Empty Fields
+"emptyFieldsTitle" = "E-mail vazio";
+"emptyFieldsMessage" = "Você precisa preencher o e-mail para recuperar a conta.";
+"emptyFieldsPrimaryButton" = "Ok!";
+
+//MARK: Invalid Email
+"invalidEmailTitle" = "E-mail inválido";
+"invalidEmailMessage" = "Isso foi muito desafiador? O e-mail que você digitou não é válido.";
+"invalidEmailPrimaryButton" = "Ok!";
+
+//MARK: Account Not Found
+"accountNotFoundTitle" = "Estamos tão confusos quanto você";
+"accountNotFoundMessage" = "Não encontramos uma conta para este e-mail, gostaria de se cadastrar?";
+"accountNotFoundPrimaryButton" = "Criar conta";
+
+//MARK: Screens
+//MARK: Insert code and password
+"verificationcationCodeTitleLabel" = "Digite o código que enviamos para o seu e-mail e a nova senha!";
+"verificationCodeTextFieldPlaceholder" = "Código de validação";
+"passwordTextFieldPlaceholder" = "Nova senha";
+"confirmPasswordTextFieldPlaceholder" = "Confirme a nova senha";
+"changePasswordButtonLabel" = "Mudar senha";
+
+//MARK: Alerts
+//MARK: Wrong Code
+"wrongCodeTitle" = "Código inválido";
+"wrongCodeMessage" = "O código que você digitou não confere com o que enviamos para o seu e-mail!";
+"wrongCodePrimaryButton" = "Reenviar código";
+"wrongCodeSecondaryButton" = "Voltar para o login";
+
+//MARK: Empty Fields
+"emptyFieldsSecondTitle" = "Campos Vazios";
+"emptyFieldsSecondMessage" = "Você precisa preencher todos os campos para recuperar a conta.";
+
+//MARK: Unmatched passwords
+"unmatchedPasswordsTitle" = "Foi desafiador digitar sua nova senha duas vezes?";
+"unmatchedPasswordsMessage" = "Para alterar a senha você precisa inserir ela nos dois campos sem errar.";
+
+//MARK: Password reset
+"passwordResetTitle" = "Sua senha super secreta foi cadastrada";
+"passwordResetMessage" = "Te desafiamos a não esquecer dessa vez. Mas sem pressão. ";
+"passwordResetPrimaryButton" = "Combinado, Fiero";
