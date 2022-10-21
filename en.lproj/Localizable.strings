@@ -127,6 +127,14 @@ We can't get your challenges now, try again";
     "numberOfChallengers %lld" = "Will be %lld challengers";
     "Voltar" = "Back";
 
+//MARK: - Quick - InviteChallengerView
+    "inviteNavTitle" = "Invite challenger";
+    "inviteCloseButton" = "Close";
+    "inviteTitle" = "Challenge your friends!";
+    "inviteDescription" = "Use the code below to invite your friends to the challenge";
+    "inviteButtonCodeText" = "Click to copy";
+    "inviteButtonBackToDetails" = "Back to details";
+
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Amount challenge";
     "Objetivo" = "Goal";
