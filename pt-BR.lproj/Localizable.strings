@@ -95,6 +95,12 @@
     "Meus desafios" = "Meus desafios";
     "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
         "OK" = "OK";
+//MARK: - EnterWithCode
+    "enterWithCodeNavTitle" = "Entrar por código";
+    "enterWithCodeCloseButton" = "Fechar";
+    "enterWithCodeDescription" = "Cole o código do desafio aqui para participar com seus amigos";
+    "enterWithCodePlaceholder" = "Código do desafio";
+    "enterWithCodeButtonText" = "Entrar no desafio";
 
 // MARK: - Quick: QCNamingView
     "Defina o nome\ndo seu desafio" = "Defina o nome\ndo seu desafio";
