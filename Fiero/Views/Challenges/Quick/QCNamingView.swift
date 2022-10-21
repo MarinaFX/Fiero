@@ -25,7 +25,7 @@ struct QCNamingView: View {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
                 //MARK: - Header
-                CustomProgressBar(currentPage: .first, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+                CustomProgressBar(currentPage: .second)
                     .padding()
                 
                 Text("Defina o nome\ndo seu desafio")

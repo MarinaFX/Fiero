@@ -13,6 +13,7 @@ struct CustomProgressBar: View {
         case first
         case second
         case third
+        case fourth
     }
     
     @State private var currentProgress: CGFloat = 0.0
@@ -25,11 +26,11 @@ struct CustomProgressBar: View {
         VStack {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Tokens.Colors.Neutral.Low.dark.value)
+                    .foregroundColor(Tokens.Colors.Neutral.Low.light.value)
                     .frame(width: 300, height: 10)
                 
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(primaryColor)
+                    .foregroundColor(Tokens.Colors.Highlight.two.value)
                     .frame(width: 300*currentProgress, height: 10)
             }
         }
@@ -39,11 +40,13 @@ struct CustomProgressBar: View {
                     case .zero:
                         self.currentProgress = 0.0
                     case .first:
-                        self.currentProgress = 0.25
+                        self.currentProgress = 0.2
                     case .second:
-                        self.currentProgress = 0.5
+                        self.currentProgress = 0.4
                     case .third:
-                        self.currentProgress = 0.75
+                        self.currentProgress = 0.6
+                    case .fourth:
+                        self.currentProgress = 0.8
                 }
             }
         }
@@ -52,6 +55,6 @@ struct CustomProgressBar: View {
 
 struct CustomProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomProgressBar()
+        CustomProgressBar(currentPage: .third)
     }
 }

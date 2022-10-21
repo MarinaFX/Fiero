@@ -98,6 +98,12 @@ We can't get your challenges now, try again";
     "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
         "OK" = "OK";
 
+//MARK: - Quick: OnlineOrOfflineView
+    "screenTitle" = "Challenge type";
+    "firstCardDescription" = "I want to invite my friends to play with me. Each from your cell phone.";
+    "secondCardDescription" = "I want to control the scores of all participants through my cell phone.";
+    "backButton" = "Back";
+
 // MARK: - Quick: QCNamingView
     "Defina o nome\ndo seu desafio" = "Set the name\nof your challenge";
     "Próximo" = "Next";

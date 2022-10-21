@@ -23,7 +23,7 @@ struct QCSelectParticipantsView: View {
         ZStack {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
-                CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+                CustomProgressBar(currentPage: .third)
                     .padding()
                 
                 Text("Escolha a quantidade\nde participantes")

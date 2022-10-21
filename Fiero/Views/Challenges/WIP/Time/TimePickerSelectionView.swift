@@ -25,7 +25,7 @@ struct TimePickerSelectionView: View {
     
     var body: some View {
         VStack {
-            CustomProgressBar(currentPage: .third, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+            CustomProgressBar(currentPage: .third)
                 .padding()
             
             Text("Timer")
