@@ -109,7 +109,6 @@ struct OnlineChallengeDetailsView: View {
                     
                     NavigationLink("", destination: ParticipantsList(), isActive: self.$isPresentingParticipantsList).hidden()
                         
-                    
                     ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: { })
                         .padding(.horizontal, defaultMarginSpacing)
                         .padding(.vertical, extraExtraSmallSpacing)

@@ -11,25 +11,63 @@ struct ParticipantsList: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    var array = ["Teste", "Teste","Teste","Teste","Teste","Teste"]
+    var array = ["EU","Teste","Teste","Teste","Teste","Teste"]
+    @State private var ended: Bool = false
     
     var body: some View {
-        List {
-            ForEach(array, id: \.self) { x in
-                Text("\(x)")
-                    .foregroundColor(foregroundColor)
-            }
-            .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                Button(role: .destructive, action: {
-                }, label: {
-                    Label("Delete", systemImage: "trash")
+        if array.count > 1 {
+            List {
+                ForEach(array, id: \.self) { x in
+                    Text("\(x)")
+                        .foregroundColor(foregroundColor)
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                    Button(role: .destructive, action: {
+                    }, label: {
+                        Label("Delete", systemImage: "trash")
+                    })
                 })
-            })
+            }
+            .preferredColorScheme(.dark)
+            .listStyle(.plain)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
+        } else {
+            VStack {
+                List {
+                    ForEach(array, id: \.self) { x in
+                        Text("\(x)")
+                            .foregroundColor(foregroundColor)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                        Button(role: .destructive, action: {
+                        }, label: {
+                            Label("Delete", systemImage: "trash")
+                        })
+                    })
+                }
+                .disabled(true)
+                .preferredColorScheme(.dark)
+                .listStyle(.plain)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: backButton)
+                .frame(height: 50)
+                Spacer()
+                LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 250)
+                
+                Text("Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                    .padding(.horizontal, defaultMarginSpacing)
+                Spacer()
+                
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: { })
+                    .padding(.horizontal, defaultMarginSpacing)
+                    .padding(.vertical, extraExtraSmallSpacing)
+            }
+            .preferredColorScheme(.dark)
         }
-        .listStyle(.plain)
-        .preferredColorScheme(.dark)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
     }
     
     var backButton : some View { Button(action: {
@@ -50,6 +88,14 @@ struct ParticipantsList: View {
     }
     var foregroundColor: Color {
         return Tokens.Colors.Neutral.High.pure.value
+    }
+    
+    //MARK: Spacing
+    var defaultMarginSpacing: CGFloat {
+        return Tokens.Spacing.defaultMargin.value
+    }
+    var extraExtraSmallSpacing: CGFloat {
+        return Tokens.Spacing.xxxs.value
     }
 }
 
