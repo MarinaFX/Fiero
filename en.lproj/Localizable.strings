@@ -141,6 +141,7 @@ We can't get your challenges now, try again";
     "Convidar Participante" = "Invite friends";
     "Ver todos" = "See all";
     "Detalhes do desafio" = "Challenge details";
+    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid \nto challenge your friends?";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Delete challenge";

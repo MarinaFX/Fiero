@@ -11,7 +11,8 @@ struct ParticipantsList: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    var array = ["EU","Teste","Teste","Teste","Teste","Teste"]
+//    var array = ["EU","Teste","Teste","Teste","Teste","Teste"]
+    var array = ["EU"]
     @State private var ended: Bool = false
     
     var body: some View {

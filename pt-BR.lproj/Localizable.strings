@@ -145,6 +145,7 @@
     "Convidar Participante" = "Convidar Amigos";
     "Ver todos" = "Ver todos";
     "Detalhes do desafio" = "Detalhes do desafio";
+    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Apagar desafio";
