@@ -38,7 +38,7 @@ class AuthTokenServiceImpl: AuthTokenService {
         let now = Date()
         let distance = abs(expDate.timeIntervalSince1970 - now.timeIntervalSince1970)
         
-        if expDate < now || distance <= 120 {
+        if expDate < now || distance <= 82800 {
             return requestUpdatedAuthToken()
         } else {
             return Just(authToken)

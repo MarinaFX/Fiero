@@ -15,6 +15,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
+    @Published var joinChallengeAlertCases: JoinChallengeAlertCases = 
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -171,6 +172,63 @@ class QuickChallengeViewModel: ObservableObject {
         return operation
             .map { _ in () }
             .mapError { $0 as Error }
+            .eraseToAnyPublisher()
+    }
+    
+    @discardableResult
+    func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
+        let json = """
+        {
+            "invitationCode" : "\(code)"
+        }
+        """
+        
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.ENTER_CHALLENGE.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation.sink(receiveCompletion: { completion in
+            switch completion {
+                case .failure(let error):
+                    print("Failed to create request to join challenge endpoint: \(error)")
+                case .finished:
+                    print("Successfully created request to join challenges endpoint")
+            }
+        }, receiveValue: { rawURLResponse in
+            guard let response = rawURLResponse.item else {
+                
+                if rawURLResponse.statusCode == 404 {
+                    self.joinChallengeAlertCases = .challengeNotFound
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 409 {
+                    self.joinChallengeAlertCases = .alreadyJoinedChallenge
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 500 {
+                    self.joinChallengeAlertCases = .internalServerError
+                    return
+                }
+            }
+            
+            print("Successfully joined challenge: \(rawURLResponse.statusCode)")
+            
+            self.challengesList.append(contentsOf: response.quickChallenge)
+        })
+        .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
