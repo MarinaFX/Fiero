@@ -90,6 +90,7 @@
     "Não conseguimos buscar seus desafios agora, tente novamente" = "
 We can't get your challenges now, try again";
     "Meus desafios" = "My challenges";
+    "Entrar por código" = "Join with code";
 
 //MARK: - EmptyChallengesView
     "Tá tão vazio por aqui,\nbora vencer uns desafios?" = "It's so empty around here,\nlet's win some challenges?";

@@ -27,14 +27,19 @@ struct EmptyChallengesView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
             Spacer()
-            
-            ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
-                self.isPresented.toggle()
-            })
-            
-            .padding()
-            
+            VStack  {
+                ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                    self.isPresented.toggle()
+                })
+                
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                
+                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código", action: {
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            }
             Spacer()
+            
         }
         .navigationTitle("Meus desafios")
         .environment(\.colorScheme, .dark)
