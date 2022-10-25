@@ -121,6 +121,8 @@
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		DFF31A0828C7D7EC002EFD9D /* OnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */; };
 		DFF31A0928C7D7EC002EFD9D /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0728C7D7EC002EFD9D /* Onboarding.swift */; };
+		F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8320F70290717D400FED9AF /* ParticipantsList.swift */; };
+		F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */; };
 		F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834EEBD28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift */; };
 		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
 		F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0192881D73C00264114 /* RoundScoreComponent.swift */; };
@@ -267,6 +269,8 @@
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCard.swift; sourceTree = "<group>"; };
 		DFF31A0728C7D7EC002EFD9D /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		F8320F70290717D400FED9AF /* ParticipantsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantsList.swift; sourceTree = "<group>"; };
+		F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineChallengeDetailsView.swift; sourceTree = "<group>"; };
 		F834EEBD28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordEmailStepView.swift; sourceTree = "<group>"; };
 		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
 		F85EE0192881D73C00264114 /* RoundScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreComponent.swift; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 		CCFA55A728888A6500740663 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				F8320F6F290717D400FED9AF /* OnlineDetails */,
 				CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */,
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
 				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
@@ -799,6 +804,15 @@
 				DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F8320F6F290717D400FED9AF /* OnlineDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F8320F70290717D400FED9AF /* ParticipantsList.swift */,
+				F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */,
+			);
+			path = OnlineDetails;
 			sourceTree = "<group>";
 		};
 		F834EEBC28F09D1B00D44C49 /* Recover Password */ = {
@@ -1047,6 +1061,7 @@
 				1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */,
 				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
+				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
@@ -1078,6 +1093,7 @@
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
+				F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */,
 				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */,
