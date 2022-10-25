@@ -8,12 +8,15 @@
 import Foundation
 
 enum JoinChallengeAlertCases {
+    case none
     case challengeNotFound
     case alreadyJoinedChallenge
     case internalServerError
     
     var title: String {
         switch self {
+            case .none:
+                return ""
             case .challengeNotFound:
                 return "implement string title"
             case .alreadyJoinedChallenge:
@@ -25,6 +28,8 @@ enum JoinChallengeAlertCases {
     
     var message: String {
         switch self {
+            case .none:
+                return ""
             case .challengeNotFound:
                 return "implement string message"
             case .alreadyJoinedChallenge:
@@ -36,6 +41,8 @@ enum JoinChallengeAlertCases {
     
     var primaryButton: String {
         switch self {
+            case .none:
+                return ""
             case .challengeNotFound:
                 return "implement primary button"
             case .alreadyJoinedChallenge:
@@ -47,6 +54,8 @@ enum JoinChallengeAlertCases {
     
     var secondaryButton: String {
         switch self {
+            case .none:
+                return ""
             case .challengeNotFound:
                 return "implement secondary Button"
             case .alreadyJoinedChallenge:

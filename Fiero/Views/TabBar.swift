@@ -29,10 +29,27 @@ struct TabBarView: View {
             .tabItem {
                 Label("Perfil", systemImage: "person")
             }
+            
+            TesteView()
+            .tabItem {
+                Label("Teste", systemImage: "person")
+            }
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
         .accentColor(Tokens.Colors.Highlight.one.value)
+    }
+}
+
+struct TesteView: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+
+    var body: some View {
+        VStack {
+            ButtonComponent(style: .secondary(isEnabled: true), text: "entrar no desafio", action: {
+                self.quickChallengeViewModel.enterChallenge(by: "ABGLZ")
+            })
+        }
     }
 }
 

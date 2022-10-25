@@ -15,7 +15,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
-    @Published var joinChallengeAlertCases: JoinChallengeAlertCases = 
+    @Published var joinChallengeAlertCases: JoinChallengeAlertCases = .challengeNotFound
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -189,7 +189,7 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -201,28 +201,33 @@ class QuickChallengeViewModel: ObservableObject {
                 case .finished:
                     print("Successfully created request to join challenges endpoint")
             }
-        }, receiveValue: { rawURLResponse in
+        }, receiveValue: { [weak self] rawURLResponse in
             guard let response = rawURLResponse.item else {
                 
                 if rawURLResponse.statusCode == 404 {
-                    self.joinChallengeAlertCases = .challengeNotFound
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .challengeNotFound
                     return
                 }
                 
                 if rawURLResponse.statusCode == 409 {
-                    self.joinChallengeAlertCases = .alreadyJoinedChallenge
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .alreadyJoinedChallenge
                     return
                 }
                 
                 if rawURLResponse.statusCode == 500 {
-                    self.joinChallengeAlertCases = .internalServerError
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .internalServerError
                     return
                 }
+                print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                return
             }
             
             print("Successfully joined challenge: \(rawURLResponse.statusCode)")
             
-            self.challengesList.append(contentsOf: response.quickChallenge)
+            self?.challengesList.append(response.quickChallenge)
         })
         .store(in: &cancellables)
         
