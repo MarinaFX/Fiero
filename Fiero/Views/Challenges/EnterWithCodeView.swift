@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EnterWithCode: View {
+struct EnterWithCodeView: View {
     
     @State private var challengeCode: String = ""
     
@@ -51,6 +51,6 @@ struct EnterWithCode: View {
 
 struct EnterWithCode_Previews: PreviewProvider {
     static var previews: some View {
-        EnterWithCode()
+        EnterWithCodeView()
     }
 }
