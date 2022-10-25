@@ -11,15 +11,14 @@ struct ParticipantsList: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-//    var array = ["EU","Teste","Teste","Teste","Teste","Teste"]
-    var array = ["EU"]
+    var participantsList = ["EU"]
     @State private var ended: Bool = false
     
     var body: some View {
-        if array.count > 1 {
+        if participantsList.count > 1 {
             List {
-                ForEach(array, id: \.self) { x in
-                    Text("\(x)")
+                ForEach(participantsList, id: \.self) { participant in
+                    Text("\(participant)")
                         .foregroundColor(foregroundColor)
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
@@ -36,8 +35,8 @@ struct ParticipantsList: View {
         } else {
             VStack {
                 List {
-                    ForEach(array, id: \.self) { x in
-                        Text("\(x)")
+                    ForEach(participantsList, id: \.self) { participant in
+                        Text("\(participant)")
                             .foregroundColor(foregroundColor)
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
