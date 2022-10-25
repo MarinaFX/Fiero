@@ -191,7 +191,7 @@ struct ChallengesListScreenView: View {
             .listStyle(.plain)
             VStack{
                 Spacer()
-                ButtonComponent(style: .tertiary(isEnabled: true), text: "Entrar por código") {
+                ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
                     
                 }
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
