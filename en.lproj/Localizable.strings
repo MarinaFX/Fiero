@@ -97,6 +97,12 @@ We can't get your challenges now, try again";
     "Meus desafios" = "My challenges";
     "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
         "OK" = "OK";
+//MARK: - EnterWithCode
+    "enterWithCodeNavTitle" = "Enter with code";
+    "enterWithCodeCloseButton" = "Close";
+    "enterWithCodeDescription" = "Paste the challenge code here to participate with your friends";
+    "enterWithCodePlaceholder" = "Challenge code";
+    "enterWithCodeButtonText" = "Enter the challenge";
 
 // MARK: - Quick: QCNamingView
     "Defina o nome\ndo seu desafio" = "Set the name\nof your challenge";
