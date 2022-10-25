@@ -88,6 +88,7 @@
     "Oops, muito desafiador!" = "Oops, muito desafiador!";
     "Não conseguimos buscar seus desafios agora, tente novamente" = "Não conseguimos buscar seus desafios agora, tente novamente";
     "Meus desafios" = "Meus desafios";
+    "Entrar por código" = "Entrar por código";
 
 //MARK: - EmptyChallengesView
     "Tá tão vazio por aqui,\nbora vencer uns desafios?" = "Tá tão vazio por aqui,\nbora vencer uns desafios?";
@@ -95,6 +96,12 @@
     "Meus desafios" = "Meus desafios";
     "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
         "OK" = "OK";
+//MARK: - EnterWithCode
+    "enterWithCodeNavTitle" = "Entrar por código";
+    "enterWithCodeCloseButton" = "Fechar";
+    "enterWithCodeDescription" = "Cole o código do desafio aqui para participar com seus amigos";
+    "enterWithCodePlaceholder" = "Código do desafio";
+    "enterWithCodeButtonText" = "Entrar no desafio";
 
 //MARK: - Quick: OnlineOrOfflineView
     "screenTitle" = "Tipo de desafio";
@@ -131,6 +138,14 @@
     "numberOfChallengers %lld" = "Serão %lld desafiantes";
     "Voltar" = "Voltar";
 
+//MARK: - Quick - InviteChallengerView
+    "inviteNavTitle" = "Convidar desafiante";
+    "inviteCloseButton" = "Fechar";
+    "inviteTitle" = "Desafie seus amigos!";
+    "inviteDescription" = "Use o código abaixo para convidar os seus amigos para o desafio";
+    "inviteButtonCodeText" = "Clique para copiar";
+    "inviteButtonBackToDetails" = "Voltar para os detalhes";
+
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Desafio de quantidade";
     "Objetivo" = "Objetivo";
@@ -147,6 +162,11 @@
     "Desafio finalizado" = "Desafio finalizado";
     "Voltar para meus desafios" = "Voltar para meus desafios";
     "Apagar desafio" = "Apagar desafio";
+    "Tipo" = "Tipo";
+    "Convidar Participante" = "Convidar Amigos";
+    "Ver todos" = "Ver todos";
+    "Detalhes do desafio" = "Detalhes do desafio";
+    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Apagar desafio";

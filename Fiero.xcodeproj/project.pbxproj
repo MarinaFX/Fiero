@@ -95,6 +95,8 @@
 		CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */; };
 		CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE82900728A0038737A /* CreationSmallCardView.swift */; };
 		CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */; };
+		CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEE29032FE80038737A /* InviteChallengerView.swift */; };
+		CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEC290318280038737A /* EnterWithCodeView.swift */; };
 		CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */; };
 		CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */; };
 		CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559928873BC900740663 /* BestOfComponent.swift */; };
@@ -121,6 +123,8 @@
 		DFD4FED328B92DD700169C20 /* quantity.gif in Resources */ = {isa = PBXBuildFile; fileRef = DFD4FED228B92DD700169C20 /* quantity.gif */; };
 		DFF31A0828C7D7EC002EFD9D /* OnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */; };
 		DFF31A0928C7D7EC002EFD9D /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF31A0728C7D7EC002EFD9D /* Onboarding.swift */; };
+		F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8320F70290717D400FED9AF /* ParticipantsList.swift */; };
+		F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */; };
 		F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834EEBD28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift */; };
 		F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0172881D30700264114 /* RoundScoreStyle.swift */; };
 		F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EE0192881D73C00264114 /* RoundScoreComponent.swift */; };
@@ -240,6 +244,8 @@
 		CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineOrOfflineView.swift; sourceTree = "<group>"; };
 		CCE03FE82900728A0038737A /* CreationSmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardView.swift; sourceTree = "<group>"; };
 		CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardStyles.swift; sourceTree = "<group>"; };
+		CCE03FEE29032FE80038737A /* InviteChallengerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteChallengerView.swift; sourceTree = "<group>"; };
+		CCE03FEC290318280038737A /* EnterWithCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithCodeView.swift; sourceTree = "<group>"; };
 		CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeComponent.swift; sourceTree = "<group>"; };
 		CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeStyles.swift; sourceTree = "<group>"; };
 		CCFA559928873BC900740663 /* BestOfComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfComponent.swift; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 		DFD4FED228B92DD700169C20 /* quantity.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = quantity.gif; sourceTree = "<group>"; };
 		DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCard.swift; sourceTree = "<group>"; };
 		DFF31A0728C7D7EC002EFD9D /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		F8320F70290717D400FED9AF /* ParticipantsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantsList.swift; sourceTree = "<group>"; };
+		F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineChallengeDetailsView.swift; sourceTree = "<group>"; };
 		F834EEBD28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordEmailStepView.swift; sourceTree = "<group>"; };
 		F85EE0172881D30700264114 /* RoundScoreStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreStyle.swift; sourceTree = "<group>"; };
 		F85EE0192881D73C00264114 /* RoundScoreComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundScoreComponent.swift; sourceTree = "<group>"; };
@@ -308,6 +316,7 @@
 			children = (
 				1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */,
 				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
+				CCE03FEC290318280038737A /* EnterWithCodeView.swift */,
 				1B0A02802885DBE900C4A421 /* Quick */,
 				1BC68C56289806850055135D /* WIP */,
 			);
@@ -748,9 +757,11 @@
 		CCFA55A728888A6500740663 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				F8320F6F290717D400FED9AF /* OnlineDetails */,
 				CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */,
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
 				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
+				CCE03FEE29032FE80038737A /* InviteChallengerView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -807,6 +818,15 @@
 				DFF31A0628C7D7EC002EFD9D /* OnboardingCard.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F8320F6F290717D400FED9AF /* OnlineDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F8320F70290717D400FED9AF /* ParticipantsList.swift */,
+				F8320F71290717D400FED9AF /* OnlineChallengeDetailsView.swift */,
+			);
+			path = OnlineDetails;
 			sourceTree = "<group>";
 		};
 		F834EEBC28F09D1B00D44C49 /* Recover Password */ = {
@@ -1033,6 +1053,7 @@
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
+				CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */,
 				CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
 				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
@@ -1053,6 +1074,7 @@
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
 				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
+				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
@@ -1071,6 +1093,7 @@
 				CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
+				CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */,
 				1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
@@ -1085,6 +1108,7 @@
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
+				F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */,
 				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
 				CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */,
