@@ -37,7 +37,7 @@ struct InviteChallengerView: View {
                         .padding(.bottom, Tokens.Spacing.xxs.value)
                     
                     Button {
-                        print("código copiado")
+                        copyInviteCode()
                     } label: {
                         Text(LocalizedStringKey("inviteButtonCodeText"))
                             .font(Tokens.FontStyle.caption.font())
@@ -60,6 +60,10 @@ struct InviteChallengerView: View {
             .navigationTitle(LocalizedStringKey("inviteNavTitle"))
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    func copyInviteCode() {
+         UIPasteboard.general.string = self.inviteCode
     }
 }
 
