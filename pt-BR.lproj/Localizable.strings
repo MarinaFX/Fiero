@@ -103,6 +103,12 @@
     "enterWithCodePlaceholder" = "Código do desafio";
     "enterWithCodeButtonText" = "Entrar no desafio";
 
+//MARK: - Quick: OnlineOrOfflineView
+    "screenTitle" = "Tipo de desafio";
+    "firstCardDescription" = "Quero convidar meus amigos pra jogarem comigo. Cada um do seu celular.";
+    "secondCardDescription" = "Quero controlar a pontuação de todos os participantes através do meu celular.";
+    "backButton" = "Voltar";
+
 // MARK: - Quick: QCNamingView
     "Defina o nome\ndo seu desafio" = "Defina o nome\ndo seu desafio";
     "Próximo" = "Próximo";

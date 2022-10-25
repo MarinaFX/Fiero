@@ -18,7 +18,7 @@ struct BestOfChallengeWinRulesView: View {
 
     var body: some View {
         VStack {
-            CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+            CustomProgressBar(currentPage: .second)
                 .padding()
             
             Text("Melhor de")

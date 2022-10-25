@@ -63,7 +63,7 @@ struct QCCategorySelectionView: View {
                             }
                         
                         NavigationLink("", isActive: self.$presentNextScreen) {
-                            QCNamingView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                            OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                         }
                         .hidden()
                     }

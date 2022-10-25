@@ -14,7 +14,6 @@
 		1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A028B28871BE700C4A421 /* QCNamingView.swift */; };
 		1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */; };
 		1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */; };
-		1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */; };
 		1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02972887498B00C4A421 /* CustomProgressBar.swift */; };
 		1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */; };
 		1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */; };
@@ -93,6 +92,9 @@
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
 		CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */; };
 		CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */; };
+		CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */; };
+		CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE82900728A0038737A /* CreationSmallCardView.swift */; };
+		CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */; };
 		CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEE29032FE80038737A /* InviteChallengerView.swift */; };
 		CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEC290318280038737A /* EnterWithCodeView.swift */; };
 		CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */; };
@@ -158,7 +160,6 @@
 		1B0A028B28871BE700C4A421 /* QCNamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCNamingView.swift; sourceTree = "<group>"; };
 		1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentKeyboard.swift; sourceTree = "<group>"; };
 		1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCSelectParticipantsView.swift; sourceTree = "<group>"; };
-		1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeParticipantsSelectionCardView.swift; sourceTree = "<group>"; };
 		1B0A02972887498B00C4A421 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
 		1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCAmountWinRulesView.swift; sourceTree = "<group>"; };
 		1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCChallengeCreatedView.swift; sourceTree = "<group>"; };
@@ -240,6 +241,9 @@
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 		CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
+		CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineOrOfflineView.swift; sourceTree = "<group>"; };
+		CCE03FE82900728A0038737A /* CreationSmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardView.swift; sourceTree = "<group>"; };
+		CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardStyles.swift; sourceTree = "<group>"; };
 		CCE03FEE29032FE80038737A /* InviteChallengerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteChallengerView.swift; sourceTree = "<group>"; };
 		CCE03FEC290318280038737A /* EnterWithCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithCodeView.swift; sourceTree = "<group>"; };
 		CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeComponent.swift; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 		1B0A02802885DBE900C4A421 /* Quick */ = {
 			isa = PBXGroup;
 			children = (
+				CCE03FE5290072360038737A /* OnlineOrOfflineView */,
 				CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */,
 				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
 				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
@@ -338,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				CC5E0B3528D4B96E001FE6FB /* CategoryView */,
-				1B0A0294288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift */,
 				1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */,
 			);
 			path = Card;
@@ -721,6 +725,16 @@
 			path = Checkbox;
 			sourceTree = "<group>";
 		};
+		CCE03FE5290072360038737A /* OnlineOrOfflineView */ = {
+			isa = PBXGroup;
+			children = (
+				CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */,
+				CCE03FE82900728A0038737A /* CreationSmallCardView.swift */,
+				CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */,
+			);
+			path = OnlineOrOfflineView;
+			sourceTree = "<group>";
+		};
 		CCFA559228872CDF00740663 /* ChallengeTypes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1058,14 +1072,15 @@
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
-				1B0A0295288748BD00C4A421 /* ChallengeParticipantsSelectionCardView.swift in Sources */,
 				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
 				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
+				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
 				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
+				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
@@ -1105,6 +1120,7 @@
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */,
+				CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */,
 				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
