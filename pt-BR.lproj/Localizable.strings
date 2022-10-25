@@ -131,6 +131,14 @@
     "numberOfChallengers %lld" = "Serão %lld desafiantes";
     "Voltar" = "Voltar";
 
+//MARK: - Quick - InviteChallengerView
+    "inviteNavTitle" = "Convidar desafiante";
+    "inviteCloseButton" = "Fechar";
+    "inviteTitle" = "Desafie seus amigos!";
+    "inviteDescription" = "Use o código abaixo para convidar os seus amigos para o desafio";
+    "inviteButtonCodeText" = "Clique para copiar";
+    "inviteButtonBackToDetails" = "Voltar para os detalhes";
+
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Desafio de quantidade";
     "Objetivo" = "Objetivo";
