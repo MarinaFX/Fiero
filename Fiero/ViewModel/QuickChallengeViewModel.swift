@@ -46,8 +46,8 @@ class QuickChallengeViewModel: ObservableObject {
             "goal" : \(goal),
             "goalMeasure" : "\(goalMeasure)",
             "online" : \(online),
-            "numberOfTeams" : \(numberOfTeams),
-            "maxTeams" : \(maxTeams)
+            "numberOfTeams" : \(online ? 1 : numberOfTeams),
+            "maxTeams" : \(online ? 9999 : maxTeams)
         }
         """
         
