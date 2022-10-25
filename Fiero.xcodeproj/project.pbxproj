@@ -69,6 +69,7 @@
 		1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */; };
 		1BC4CFDB28EF5A9E0039A230 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */; };
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
+		1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */; };
 		1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
@@ -218,6 +219,7 @@
 		1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				1B46849628C786BF0041BFED /* UDKeysEnum.swift */,
 				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
 				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
+				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
+				1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */,
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */,

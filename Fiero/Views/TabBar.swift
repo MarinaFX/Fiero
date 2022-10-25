@@ -29,6 +29,7 @@ struct TabBarView: View {
             .tabItem {
                 Label("Perfil", systemImage: "person")
             }
+            
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
