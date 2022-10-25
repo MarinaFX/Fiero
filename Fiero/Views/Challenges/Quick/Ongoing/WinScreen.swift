@@ -14,6 +14,7 @@ struct WinScreen: View {
     @Binding var isFinished: Bool
     @State private var animationBG = 0.0
     @State private var animationText = 0.0
+//    @Binding var howManyTimes: Double
     
     @State var angle: Double = 0.0
     @State var isAnimating = true   
@@ -91,6 +92,10 @@ struct WinScreen: View {
             .frame(maxHeight: UIScreen.main.bounds.height)
             .padding(.horizontal)
         }
+//        .onAppear(perform: {
+//            howManyTimes += 1
+//            print(howManyTimes)
+//        })
         .navigationBarHidden(true)
     }
 }
