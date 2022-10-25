@@ -15,7 +15,7 @@ struct OngoingScreen: View {
     @Binding var isShowingAlertOnDetailsScreen: Bool
     
     @State var isFinished: Bool = false
-    @State var howManyTimes = 0.0
+    @State var howManyTimesWinAnimationDidAppear = 0.0
     
     //MARK: - Tokens
     var foregroundColor: Color {
@@ -82,13 +82,13 @@ struct OngoingScreen: View {
                                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                             }
                         }
-                        if howManyTimes <= 1 {
+                        if howManyTimesWinAnimationDidAppear <= 1 {
                             NavigationLink("", isActive: $isFinished) {
                                 WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
                             }
                             .onAppear(perform: {
-                                howManyTimes += 1
-                                print(howManyTimes)
+                                howManyTimesWinAnimationDidAppear += 1
+                                print(howManyTimesWinAnimationDidAppear)
                             })
                             .hidden()
                         }
@@ -153,13 +153,13 @@ struct OngoingScreen: View {
                             }
                         }
                     }
-                    if howManyTimes <= 1 {
+                    if howManyTimesWinAnimationDidAppear <= 1 {
                         NavigationLink("", isActive: $isFinished) {
                             WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
                         }
                         .onAppear(perform: {
-                            howManyTimes += 1
-                            print(howManyTimes)
+                            howManyTimesWinAnimationDidAppear += 1
+                            print(howManyTimesWinAnimationDidAppear)
                         })
                         .hidden()
                     }
