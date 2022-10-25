@@ -38,11 +38,11 @@ struct OnlineOrOfflineView: View {
                     .multilineTextAlignment(.center)
                 
                 TabView(selection: $tabViewSelection) {
-                    OnlineOrOfflineCard(styles: .online)
+                    CreationSmallCardView(styles: .online)
                         .tag(1)
                         .padding(.all, Tokens.Spacing.sm.value)
                         .frame(height: UIScreen.main.bounds.height * 0.35)
-                    OnlineOrOfflineCard(styles: .offline)
+                    CreationSmallCardView(styles: .offline)
                         .tag(2)
                         .padding(.all, Tokens.Spacing.sm.value)
                         .frame(height: UIScreen.main.bounds.height * 0.35)

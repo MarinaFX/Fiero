@@ -35,16 +35,19 @@ struct QCSelectParticipantsView: View {
                 Spacer()
                 
                 TabView(selection: self.$tabViewSelection) {
-                    ChallengeParticipantsSelectionCardView(amount: "2")
+                    CreationSmallCardView(styles: .amount, amount: "2")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(2)
                     
-                    ChallengeParticipantsSelectionCardView(amount: "3")
+                    CreationSmallCardView(styles: .amount, amount: "3")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(3)
                     
-                    ChallengeParticipantsSelectionCardView(amount: "4")
+                    CreationSmallCardView(styles: .amount, amount: "4")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(4)
                     
                 }

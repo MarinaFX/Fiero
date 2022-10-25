@@ -1,5 +1,5 @@
 //
-//  OnlineOrOfflineStyles.swift
+//  CreationSmallCardStyles.swift
 //  Fiero
 //
 //  Created by Natália Brocca dos Santos on 19/10/22.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-enum OnlineOrOfflineStyles {
+enum CreationSmallCardStyles {
     case online
     case offline
+    case amount
     
     var title: String {
         switch self {
@@ -17,6 +18,8 @@ enum OnlineOrOfflineStyles {
             return "Online"
         case .offline:
             return "Offline"
+        case .amount:
+            return ""
         }
     }
     
@@ -26,7 +29,13 @@ enum OnlineOrOfflineStyles {
             return "firstCardDescription"
         case .offline:
             return "secondCardDescription"
+        case .amount:
+            return ""
         }
+    }
+    
+    var numberFont: CGFloat {
+        return 200
     }
     
     var titleFont: Font {
