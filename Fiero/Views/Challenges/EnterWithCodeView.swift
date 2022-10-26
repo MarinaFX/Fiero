@@ -55,6 +55,10 @@ struct EnterWithCodeView: View {
                                                 if self.quickChallengeViewModel.joinChallengeAlertCases != .none {
                                                     self.isShowingErrorAlert = true
                                                 }
+                                                else {
+                                                    self.dismiss()
+                                                }
+                                                
                                                 return
                                         }
                                     }, receiveValue: { _ in () })
