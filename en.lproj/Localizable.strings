@@ -291,3 +291,25 @@ We can't get your challenges now, try again";
 "passwordResetTitle" = "Your super secret password was saved";
 "passwordResetMessage" = "This time we challenge you not to forget it, but no pressure";
 "passwordResetPrimaryButton" = "Deal Fiero";
+
+//MARK: - Join Challenge
+//MARK: Alerts
+//MARK: challengeNotFound
+"joinChallengeNotFoundTitle" = "Its not us! Its you.";
+"joinChallengeNotFoundMessage" = "We couldn't find any challenge with the given code";
+"joinChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: alreadyJoinedChallenge
+"joinAlreadyJoinedChallengeTitle" = "You can't be in and out of a challenge";
+"joinAlreadyJoinedChallengeMessage" = "Right now you are already in this challenge";
+"joinAlreadyJoinedChallengePrimaryButton" = "Ok!";
+
+//MARK: internalServerError
+"joinInternalServerErrorTitle" = "Its not you! Its us.";
+"joinInternalServerErrorMessage" = "We've had internal difficulties, try again later";
+"joinInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: invalidCode
+"joinInvalidCodeTitle" = "Its not us! Its you.";
+"joinInvalidCodeMessage" = "Was it too challenging to get the code right? The code must only contain 5 characters";
+"joinInvalidCodePrimaryButton" = "Ok!";

@@ -297,3 +297,25 @@
 "passwordResetTitle" = "Sua senha super secreta foi cadastrada";
 "passwordResetMessage" = "Te desafiamos a não esquecer dessa vez. Mas sem pressão. ";
 "passwordResetPrimaryButton" = "Combinado, Fiero";
+
+//MARK: - Join Challenge
+//MARK: Alerts
+//MARK: challengeNotFound
+"joinChallengeNotFoundTitle" = "Não somos nós! É você!";
+"joinChallengeNotFoundMessage" = "Não conseguimos encontrar um desafio com esse código";
+"joinChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: alreadyJoinedChallenge
+"joinAlreadyJoinedChallengeTitle" = "Mas tu é insistente, hein?";
+"joinAlreadyJoinedChallengeMessage" = "Você já está participanto deste desafio.";
+"joinAlreadyJoinedChallengePrimaryButton" = "Ok!";
+
+//MARK: internalServerError
+"joinInternalServerErrorTitle" = "Não somos nós! É você!";
+"joinInternalServerErrorMessage" = "Houve um problema em nossos servidores, tente mais tarde.";
+"joinInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: invalidCode
+"joinInvalidCodeTitle" = "Não somos nós! É você!";
+"joinInvalidCodeMessage" = "Foi muito desafiador acertar o código? Ele deve conter apenas 5 caracteres";
+"joinInvalidCodePrimaryButton" = "Ok!";
