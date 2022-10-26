@@ -33,13 +33,12 @@ struct QCAmountWinRulesView: View {
    
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var errorState: ErrorState?
-    
-    @State var isOnline: Bool
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
     @State var quickChallenge: QuickChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     
+    var isOnline: Bool
     var primaryColor: Color
     var secondaryColor: Color
     var challengeType: QCTypeEnum

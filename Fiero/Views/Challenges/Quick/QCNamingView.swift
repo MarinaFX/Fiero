@@ -14,8 +14,8 @@ struct QCNamingView: View {
     @State private var isNavActiveForAmount: Bool = false
     @State var challengeName: String = ""
     @State var isPresentingAlert: Bool = false
-    @State var isOnline: Bool
     
+    var isOnline: Bool
     var primaryColor: Color
     var secondaryColor: Color
     var challengeType: QCTypeEnum
