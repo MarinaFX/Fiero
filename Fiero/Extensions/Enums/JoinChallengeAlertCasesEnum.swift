@@ -6,62 +6,57 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum JoinChallengeAlertCases {
+enum JoinChallengeAlertCasesEnum {
     case none
     case challengeNotFound
     case alreadyJoinedChallenge
     case internalServerError
+    case invalidCode
     
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
             case .none:
                 return ""
             case .challengeNotFound:
-                return "implement string title"
+                return "joinChallengeNotFoundTitle"
             case .alreadyJoinedChallenge:
-                return "implement string title"
+                return "joinAlreadyJoinedChallengeTitle"
             case .internalServerError:
-                return "implement string title"
+                return "joinInternalServerErrorTitle"
+            case .invalidCode:
+                return "joinInvalidCodeTitle"
         }
     }
     
-    var message: String {
+    var message: LocalizedStringKey {
         switch self {
             case .none:
                 return ""
             case .challengeNotFound:
-                return "implement string message"
+                return "joinChallengeNotFoundMessage"
             case .alreadyJoinedChallenge:
-                return "implement string message"
+                return "joinAlreadyJoinedChallengeMessage"
             case .internalServerError:
-                return "implement string message"
+                return "joinInternalServerErrorMessage"
+            case .invalidCode:
+                return "joinInvalidCodeMessage"
         }
     }
     
-    var primaryButton: String {
+    var primaryButton: LocalizedStringKey {
         switch self {
             case .none:
                 return ""
             case .challengeNotFound:
-                return "implement primary button"
+                return "joinChallengeNotFoundPrimaryButton"
             case .alreadyJoinedChallenge:
-                return "implement primary button"
+                return "joinAlreadyJoinedChallengePrimaryButton"
             case .internalServerError:
-                return "implement primary button"
-        }
-    }
-    
-    var secondaryButton: String {
-        switch self {
-            case .none:
-                return ""
-            case .challengeNotFound:
-                return "implement secondary Button"
-            case .alreadyJoinedChallenge:
-                return "implement secondary Button"
-            case .internalServerError:
-                return "implement secondary Button"
+                return "joinInternalServerErrorPrimaryButton"
+            case .invalidCode:
+                return "joinInvalidCodePrimaryButton"
         }
     }
 }
