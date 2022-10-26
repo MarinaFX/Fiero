@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EnterWithCodeView: View {
+    @Environment(\.dismiss) var dismiss
     
     @State private var challengeCode: String = ""
     
@@ -42,6 +43,17 @@ struct EnterWithCodeView: View {
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     .padding(.bottom, Tokens.Spacing.sm.value)
                 }
+                
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing, content: {
+                        Button(action: {
+                            self.dismiss()
+                        }, label: {
+                            Text("Fechar")
+                                .foregroundColor(.white)
+                        })
+                    })
+                })
             }
             .navigationTitle(LocalizedStringKey("enterWithCodeNavTitle"))
             .navigationBarTitleDisplayMode(.inline)

@@ -139,6 +139,7 @@ struct ChallengesListScreenView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var isShowingErrorAlert: Bool = false
+    @State var isShowingEnterWithCodeView: Bool = false
     
     @Binding var quickChallenges: [QuickChallenge]
     @Binding var focusedChallenge: QuickChallenge?
@@ -181,6 +182,9 @@ struct ChallengesListScreenView: View {
                 })
                 
             }
+            .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                EnterWithCodeView()
+            })
             .fullScreenCover(item: $focusedChallenge) { item in
                 ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
                     .environmentObject(self.quickChallengeViewModel)
@@ -192,7 +196,7 @@ struct ChallengesListScreenView: View {
             VStack{
                 Spacer()
                 ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
-                    
+                    self.isShowingEnterWithCodeView = true
                 }
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .padding(.bottom, Tokens.Spacing.defaultMargin.value)
