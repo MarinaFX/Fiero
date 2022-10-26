@@ -15,6 +15,7 @@ struct OngoingScreen: View {
     @Binding var isShowingAlertOnDetailsScreen: Bool
     
     @State var isFinished: Bool = false
+    @State var howManyTimesWinAnimationDidAppear = 0.0
     
     //MARK: - Tokens
     var foregroundColor: Color {
@@ -81,10 +82,16 @@ struct OngoingScreen: View {
                                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                             }
                         }
-                        NavigationLink("", isActive: $isFinished) {
-                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                        if howManyTimesWinAnimationDidAppear <= 1 {
+                            NavigationLink("", isActive: $isFinished) {
+                                WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                            }
+                            .onAppear(perform: {
+                                howManyTimesWinAnimationDidAppear += 1
+                                print(howManyTimesWinAnimationDidAppear)
+                            })
+                            .hidden()
                         }
-                        .hidden()
                     }
                     .edgesIgnoringSafeArea(.bottom)
                 }
@@ -146,11 +153,16 @@ struct OngoingScreen: View {
                             }
                         }
                     }
-                    
-                    NavigationLink("", isActive: $isFinished) {
-                        WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                    if howManyTimesWinAnimationDidAppear <= 1 {
+                        NavigationLink("", isActive: $isFinished) {
+                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                        }
+                        .onAppear(perform: {
+                            howManyTimesWinAnimationDidAppear += 1
+                            print(howManyTimesWinAnimationDidAppear)
+                        })
+                        .hidden()
                     }
-                    .hidden()
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
