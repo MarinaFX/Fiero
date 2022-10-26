@@ -14,6 +14,7 @@ struct QCNamingView: View {
     @State private var isNavActiveForAmount: Bool = false
     @State var challengeName: String = ""
     @State var isPresentingAlert: Bool = false
+    @State var isOnline: Bool
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -61,7 +62,11 @@ struct QCNamingView: View {
                 .padding(.vertical, Tokens.Spacing.xxxs.value)
 
                 NavigationLink("", isActive: $isNavActiveForAmount) {
-                    QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                    if isOnline {
+                        QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .amount, challengeName: self.challengeName, challengeParticipants: 1)
+                    } else {
+                        QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                    }
                 }.hidden()
             }
             .alert(isPresented: $isPresentingAlert, content: {
@@ -79,6 +84,6 @@ struct QCNamingView: View {
 
 struct QuickChallengeNamingView_Previews: PreviewProvider {
     static var previews: some View {
-        QCNamingView(primaryColor: .red, secondaryColor: .white, challengeType: .amount)
+        QCNamingView(isOnline: true, primaryColor: .red, secondaryColor: .white, challengeType: .amount)
     }
 }

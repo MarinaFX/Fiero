@@ -86,7 +86,7 @@ struct QCSelectParticipantsView: View {
                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                 
                 NavigationLink("", isActive: self.$pushNextView, destination: {
-                    QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+                    QCAmountWinRulesView(isOnline: false, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
                 })
             }
             .onChange(of: self.tabViewSelection, perform: { tabViewSelection in

@@ -10,20 +10,20 @@ import Combine
 
 //MARK: QCAmountWinRulesView
 struct QCAmountWinRulesView: View {
-    enum ErrorState: CustomStringConvertible {
+    enum ErrorState {
         case failedToCreateChallenge
         case negativeAmount
         case invalidInput
         
         
-        var description: String {
+        var description: LocalizedStringKey {
             switch self {
                 case .failedToCreateChallenge:
                     return "Oops, muito desafiador"
                 case .negativeAmount:
-                    return "Valor Inválido"
+                    return "negativeAmount"
                 case .invalidInput:
-                    return "Valor Inválido"
+                    return "invalidInput"
             }
         }
     }
@@ -34,6 +34,7 @@ struct QCAmountWinRulesView: View {
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var errorState: ErrorState?
     
+    @State var isOnline: Bool
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
@@ -79,7 +80,7 @@ struct QCAmountWinRulesView: View {
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
                     if let goal = Int(self.goal) {
                         if goal > 0 {
-                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, online: isOnline, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
                                         case .failure:
@@ -144,6 +145,6 @@ struct QCAmountWinRulesView: View {
 
 struct QuantityChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        QCAmountWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 0)
+        QCAmountWinRulesView(isOnline: false, primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 0)
     }
 }
