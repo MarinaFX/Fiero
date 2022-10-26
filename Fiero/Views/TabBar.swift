@@ -30,6 +30,10 @@ struct TabBarView: View {
                 Label("Perfil", systemImage: "person")
             }
             
+            EnterWithCodeView()
+                .tabItem{
+                    Label("Entrar", systemImage: "person")
+                }
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)

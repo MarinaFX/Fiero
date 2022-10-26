@@ -15,7 +15,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
-    @Published var joinChallengeAlertCases: JoinChallengeAlertCases = .challengeNotFound
+    @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -194,10 +194,11 @@ class QuickChallengeViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .share()
         
-        operation.sink(receiveCompletion: { completion in
+        operation.sink(receiveCompletion: { [weak self] completion in
             switch completion {
                 case .failure(let error):
                     print("Failed to create request to join challenge endpoint: \(error)")
+                    self?.joinChallengeAlertCases = .internalServerError
                 case .finished:
                     print("Successfully created request to join challenges endpoint")
             }
@@ -227,6 +228,7 @@ class QuickChallengeViewModel: ObservableObject {
             
             print("Successfully joined challenge: \(rawURLResponse.statusCode)")
             
+            self?.joinChallengeAlertCases = .none
             self?.challengesList.append(response.quickChallenge)
         })
         .store(in: &cancellables)
