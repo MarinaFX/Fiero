@@ -11,7 +11,7 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
     
     var id: String
     var name: String
-    var invitationCode: String
+    var invitationCode: String?
     var type: String
     var goal: Int
     var goalMeasure: String
