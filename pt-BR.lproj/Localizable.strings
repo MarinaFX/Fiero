@@ -187,6 +187,8 @@
     "challengeNotStartedStatus" = "Não iniciado";
     "challengeOngoingStatus" = "Em andamento";
     "challengeFinishedStatus" = "Finalizado";
+    "Online" = "Online";
+    "challengeAdm" = "Administrador";
 
 // MARK: - Quick - Ongoing - PauseScreen
 

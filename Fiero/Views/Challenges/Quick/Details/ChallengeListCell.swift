@@ -12,7 +12,7 @@ struct ChallengeListCell: View {
     @Binding var quickChallenge: QuickChallenge
     
     @State private var ended: Bool = false
-
+    
     
     var body: some View {
         HStack {
@@ -31,36 +31,37 @@ struct ChallengeListCell: View {
                     Spacer()
                 }
                 HStack {
-                    if quickChallenge.alreadyBegin == false {
-                        Text("challengeNotStartedStatus")
-                            .font(Tokens.FontStyle.caption.font(weigth: .regular))
-                            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                    if quickChallenge.finished {
+                        Text("challengeFinishedStatus")
+                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .padding(.vertical, Tokens.Spacing.quarck.value)
                             .padding(.horizontal, Tokens.Spacing.nano.value)
-                            .background(Tokens.Colors.Highlight.one.value)
+                            .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
                     } else {
-                        if quickChallenge.finished == false {
-                            Text("challengeOngoingStatus")
-                                .font(Tokens.FontStyle.caption.font(weigth: .regular))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        if quickChallenge.online {
+                            Text("Online")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                 .padding(.vertical, Tokens.Spacing.quarck.value)
                                 .padding(.horizontal, Tokens.Spacing.nano.value)
                                 .background(Tokens.Colors.Highlight.four.value)
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                                 .padding(.bottom, 3)
-                        } else {
-                            Text("challengeFinishedStatus")
-                                .font(Tokens.FontStyle.caption.font(weigth: .regular))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .padding(.vertical, Tokens.Spacing.quarck.value)
-                                .padding(.horizontal, Tokens.Spacing.nano.value)
-                                .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
-                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                                .padding(.bottom, 3)
                         }
-                                        }
+                    }
+                    if quickChallenge.owner.name == UserViewModel.getUserNameFromDefaults() {
+                        Text("challengeAdm")
+                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                            .padding(.vertical, Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .background(Tokens.Colors.Highlight.five.value)
+                            .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                            .padding(.bottom, 3)
+                    }
                     Spacer()
                 }
             }
