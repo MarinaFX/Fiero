@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RecoverPasswordEmailStepView: View {
-    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userViewModel: UserViewModel
 
     @State private var emailText: String = ""

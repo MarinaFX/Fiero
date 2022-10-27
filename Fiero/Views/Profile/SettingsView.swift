@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
-    @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
@@ -32,7 +30,7 @@ struct SettingsView: View {
             .navigationBarTitle("Configurações", displayMode: .inline)
             .toolbar {
                 Button("Feito!") {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }
             }
         }

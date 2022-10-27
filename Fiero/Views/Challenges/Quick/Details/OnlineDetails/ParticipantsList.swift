@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ParticipantsList: View {
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @Binding var quickChallenge: QuickChallenge
     
     @State private var ended: Bool = false
+    @State private var isPresentingInvite: Bool = false
     
     var body: some View {
         if quickChallenge.teams.count > 1 {
@@ -63,16 +63,21 @@ struct ParticipantsList: View {
                     .padding(.horizontal, defaultMarginSpacing)
                 Spacer()
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: { })
-                    .padding(.horizontal, defaultMarginSpacing)
-                    .padding(.vertical, extraExtraSmallSpacing)
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: {
+                    isPresentingInvite = true
+                })
+                .sheet(isPresented: $isPresentingInvite, content: {
+                    InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                })
+                .padding(.horizontal, defaultMarginSpacing)
+                .padding(.vertical, extraExtraSmallSpacing)
             }
             .preferredColorScheme(.dark)
         }
     }
     
     var backButton : some View { Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
+            self.dismiss()
             }) {
                 HStack {
                     Image(systemName: "chevron.left")

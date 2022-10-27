@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct EnterWithCodeView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var challengeCode: String = ""
@@ -56,7 +56,7 @@ struct EnterWithCodeView: View {
                                                     self.isShowingErrorAlert = true
                                                 }
                                                 else {
-                                                    presentationMode.wrappedValue.dismiss()
+                                                    self.dismiss()
                                                 }
                                                 
                                                 return
@@ -99,7 +99,7 @@ struct EnterWithCodeView: View {
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }, label: {
                         Text("Fechar")
                             .foregroundColor(.white)

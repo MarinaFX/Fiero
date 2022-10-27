@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InviteChallengerView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State var inviteCode: String
     
@@ -53,7 +53,7 @@ struct InviteChallengerView: View {
                     Spacer()
                     
                     ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
-                        presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }
                     .padding(.bottom, Tokens.Spacing.md.value)
                 }
@@ -64,7 +64,7 @@ struct InviteChallengerView: View {
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }, label: {
                         Text("Fechar")
                             .foregroundColor(.white)

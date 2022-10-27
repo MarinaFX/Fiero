@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QCSelectParticipantsView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State var challengeParticipants: Int = 2
     @State var tabViewSelection: Int = 2
@@ -77,7 +77,7 @@ struct QCSelectParticipantsView: View {
                 }
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }, label: {
                     Text("Voltar")
                         .bold()

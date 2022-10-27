@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimePickerSelectionView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State private(set) var valueSelection: Int = 0
     @State private(set) var measureSelection: String = ""
@@ -47,7 +47,7 @@ struct TimePickerSelectionView: View {
             Spacer()
             
             Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
+                self.dismiss()
             }, label: {
                 Text("Voltar")
                     .bold()

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct OngoingScreen: View {
-    @Environment(\.presentationMode) var presentationMode
-    
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     @Binding var isShowingAlertOnDetailsScreen: Bool
