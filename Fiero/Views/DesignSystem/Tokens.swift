@@ -173,14 +173,14 @@ enum Tokens {
         
         //MARK: - Colors | Highlight
         enum Highlight {
-            case wrong
-            case one //purple
-            case two //yellow
-            case three //little pink
-            case four //dark green
+            case wrong //orange?
+            case one //yellow
+            case two //purple
+            case three //red
+            case four //ligth green
             case five //blue
-            case six //light green
-            case seven // pink
+            case six //light red
+            case seven // strong red
             
             var value: Color {
                 switch self {

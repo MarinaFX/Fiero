@@ -180,6 +180,8 @@ We can't get your challenges now, try again";
     "challengeNotStartedStatus" = "Not started";
     "challengeOngoingStatus" = "Ongoing";
     "challengeFinishedStatus" = "Finished";
+    "Online" = "Online";
+    "challengeAdm" = "Administrator";
 
 // MARK: - Quick - Ongoing - PauseScreen
 
