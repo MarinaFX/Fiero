@@ -12,9 +12,7 @@ import Combine
 struct AccountLoginView: View {
     
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.sizeCategory) var dynamicTypeCategory
-    
     @EnvironmentObject var userViewModel: UserViewModel
     
     //MARK: - Variables Login View
@@ -25,8 +23,7 @@ struct AccountLoginView: View {
     @State private var isShowingSignupSheet: Bool = false
     @State private var isShowingAlert: Bool = false
     @State private var ended: Bool = false
-    @State private var subscriptions: Set<AnyCancellable> = []
-    
+    @State private var subscriptions: Set<AnyCancellable> = []    
     @State var isPresentingRecoverPasswordSheet: Bool = false
     
     private let namePlaceholder: LocalizedStringKey = "Name"

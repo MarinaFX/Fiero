@@ -10,35 +10,35 @@ import Combine
 
 //MARK: QCAmountWinRulesView
 struct QCAmountWinRulesView: View {
-    enum ErrorState: CustomStringConvertible {
+    enum ErrorState {
         case failedToCreateChallenge
         case negativeAmount
         case invalidInput
         
         
-        var description: String {
+        var description: LocalizedStringKey {
             switch self {
                 case .failedToCreateChallenge:
                     return "Oops, muito desafiador"
                 case .negativeAmount:
-                    return "Valor Inválido"
+                    return "negativeAmount"
                 case .invalidInput:
-                    return "Valor Inválido"
+                    return "invalidInput"
             }
         }
     }
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
    
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var errorState: ErrorState?
-    
     @State var goal: String = ""
     @State var pushNextView: Bool = false
     @State var isPresentingAlert: Bool = false
     @State var quickChallenge: QuickChallenge = QuickChallenge(id: "", name: "", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))
     
+    var isOnline: Bool
     var primaryColor: Color
     var secondaryColor: Color
     var challengeType: QCTypeEnum
@@ -59,7 +59,7 @@ struct QCAmountWinRulesView: View {
         ZStack{
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
-                CustomProgressBar(currentPage: .third, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+                CustomProgressBar(currentPage: .fourth)
                     .padding()
                 
                 Text("Defina os pontos necessários para a vitória")
@@ -79,7 +79,7 @@ struct QCAmountWinRulesView: View {
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
                     if let goal = Int(self.goal) {
                         if goal > 0 {
-                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, online: isOnline, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {
                                         case .failure:
@@ -104,7 +104,7 @@ struct QCAmountWinRulesView: View {
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }, label: {
                     Text("Voltar")
                         .bold()
@@ -144,6 +144,6 @@ struct QCAmountWinRulesView: View {
 
 struct QuantityChallengeWinRulesView_Previews: PreviewProvider {
     static var previews: some View {
-        QCAmountWinRulesView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 0)
+        QCAmountWinRulesView(isOnline: false, primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "", challengeParticipants: 0)
     }
 }

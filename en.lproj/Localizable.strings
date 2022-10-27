@@ -90,6 +90,7 @@
     "Não conseguimos buscar seus desafios agora, tente novamente" = "
 We can't get your challenges now, try again";
     "Meus desafios" = "My challenges";
+    "Entrar por código" = "Join with code";
 
 //MARK: - EmptyChallengesView
     "Tá tão vazio por aqui,\nbora vencer uns desafios?" = "It's so empty around here,\nlet's win some challenges?";
@@ -97,6 +98,21 @@ We can't get your challenges now, try again";
     "Meus desafios" = "My challenges";
     "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)" = "Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)";
         "OK" = "OK";
+//MARK: - EnterWithCode
+    "enterWithCodeNavTitle" = "Enter with code";
+    "enterWithCodeCloseButton" = "Close";
+    "enterWithCodeDescription" = "Paste the challenge code here to participate with your friends";
+    "enterWithCodePlaceholder" = "Challenge code";
+    "enterWithCodeButtonText" = "Enter the challenge";
+
+//MARK: - ChallengeTypes
+    "amount" = "of amount";
+
+//MARK: - Quick: OnlineOrOfflineView
+    "screenTitle" = "Challenge type";
+    "firstCardDescription" = "I want to invite my friends to play with me. Each from your cell phone.";
+    "secondCardDescription" = "I want to control the scores of all participants through my cell phone.";
+    "backButton" = "Back";
 
 // MARK: - Quick: QCNamingView
     "Defina o nome\ndo seu desafio" = "Set the name\nof your challenge";
@@ -127,16 +143,31 @@ We can't get your challenges now, try again";
     "numberOfChallengers %lld" = "Will be %lld challengers";
     "Voltar" = "Back";
 
+//MARK: - Quick - InviteChallengerView
+    "inviteNavTitle" = "Invite challenger";
+    "inviteCloseButton" = "Close";
+    "inviteTitle" = "Challenge your friends!";
+    "inviteDescription" = "Use the code below to invite your friends to the challenge";
+    "inviteButtonCodeText" = "Click to copy";
+    "inviteButtonBackToDetails" = "Back to details";
+
 // MARK: - Quick - Details - ChallengeDetailsView
     "Desafio de quantidade" = "Amount challenge";
     "Objetivo" = "Goal";
     "%lld pontos" = "%lld points";
+    "points" = "points";
     "Participantes" = "Participants";
     "Continuar desafio" = "Continue challenge";
+    "Começar desafio!" = "Start challenge!";
     "Desafio finalizado" = "Challenge completed";
     "Voltar para meus desafios" = "Back to my challenges";
-    "Começar desafio!" = "Start challenge!";
+    "backButtonText" = "My challenges";
     "Apagar desafio" = "Delete challenge";
+    "Tipo" = "Type";
+    "Convidar Participante" = "Invite friends";
+    "Ver todos" = "See all";
+    "Detalhes do desafio" = "Challenge details";
+    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid \nto challenge your friends?";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Delete challenge";
@@ -154,6 +185,8 @@ We can't get your challenges now, try again";
     "challengeNotStartedStatus" = "Not started";
     "challengeOngoingStatus" = "Ongoing";
     "challengeFinishedStatus" = "Finished";
+    "Online" = "Online";
+    "challengeAdm" = "Administrator";
 
 // MARK: - Quick - Ongoing - PauseScreen
 
@@ -167,11 +200,13 @@ We can't get your challenges now, try again";
     "Continuar marcando pontos" = "Keep Scoring Points";
 
 // MARK: - Quick - Amout - QCAmountWinRulesView
-    "Oops, muito desafiador" = "Oops, too challenging";
-    "Valor Inválido" = "Invalid value";
     "Defina os pontos necessários para a vitória" = "Set the points needed for victory";
-    "Criar desafio" = "Create challenge";
+    "botãoComeçar" = "Start";
     "Voltar" = "Back";
+    "Oops, muito desafiador" = "Oops, too challenging";
+    "negativeAmount" = "Invalid value";
+    "invalidInput" = "Invalid value";
+    "Criar desafio" = "Create challenge";
     "Não conseguimos criar o seu desafio, tente mais tarde." = "We were unable to create your challenge, please try later.";
     "Você precisa informar um número maior que 0" = "We were unable to create your challenge, please try later.";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
@@ -265,3 +300,25 @@ We can't get your challenges now, try again";
 "passwordResetTitle" = "Your super secret password was saved";
 "passwordResetMessage" = "This time we challenge you not to forget it, but no pressure";
 "passwordResetPrimaryButton" = "Deal Fiero";
+
+//MARK: - Join Challenge
+//MARK: Alerts
+//MARK: challengeNotFound
+"joinChallengeNotFoundTitle" = "Its not us! Its you.";
+"joinChallengeNotFoundMessage" = "We couldn't find any challenge with the given code";
+"joinChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: alreadyJoinedChallenge
+"joinAlreadyJoinedChallengeTitle" = "You can't be in and out of a challenge";
+"joinAlreadyJoinedChallengeMessage" = "Right now you are already in this challenge";
+"joinAlreadyJoinedChallengePrimaryButton" = "Ok!";
+
+//MARK: internalServerError
+"joinInternalServerErrorTitle" = "Its not you! Its us.";
+"joinInternalServerErrorMessage" = "We've had internal difficulties, try again later";
+"joinInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: invalidCode
+"joinInvalidCodeTitle" = "Its not us! Its you.";
+"joinInvalidCodeMessage" = "Was it too challenging to get the code right? The code must only contain 5 characters";
+"joinInvalidCodePrimaryButton" = "Ok!";

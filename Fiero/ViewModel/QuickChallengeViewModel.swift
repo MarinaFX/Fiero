@@ -15,6 +15,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
+    @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -45,8 +46,8 @@ class QuickChallengeViewModel: ObservableObject {
             "goal" : \(goal),
             "goalMeasure" : "\(goalMeasure)",
             "online" : \(online),
-            "numberOfTeams" : \(numberOfTeams),
-            "maxTeams" : \(maxTeams)
+            "numberOfTeams" : \(online ? 1 : numberOfTeams),
+            "maxTeams" : \(online ? 9999 : maxTeams)
         }
         """
         
@@ -171,6 +172,70 @@ class QuickChallengeViewModel: ObservableObject {
         return operation
             .map { _ in () }
             .mapError { $0 as Error }
+            .eraseToAnyPublisher()
+    }
+    
+    @discardableResult
+    func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
+        let json = """
+        {
+            "invitationCode" : "\(code)"
+        }
+        """
+        
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.ENTER_CHALLENGE.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation.sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+                case .failure(let error):
+                    print("Failed to create request to join challenge endpoint: \(error)")
+                    self?.joinChallengeAlertCases = .internalServerError
+                case .finished:
+                    print("Successfully created request to join challenges endpoint")
+            }
+        }, receiveValue: { [weak self] rawURLResponse in
+            guard let response = rawURLResponse.item else {
+                
+                if rawURLResponse.statusCode == 404 {
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .challengeNotFound
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 409 {
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .alreadyJoinedChallenge
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 500 {
+                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                    self?.joinChallengeAlertCases = .internalServerError
+                    return
+                }
+                print("error while trying to join challenge: \(rawURLResponse.statusCode)")
+                return
+            }
+            
+            print("Successfully joined challenge: \(rawURLResponse.statusCode)")
+            
+            self?.joinChallengeAlertCases = .none
+            self?.challengesList.append(response.quickChallenge)
+        })
+        .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     

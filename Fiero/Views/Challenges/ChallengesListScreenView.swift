@@ -139,6 +139,7 @@ struct ChallengesListScreenView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var isShowingErrorAlert: Bool = false
+    @State var isShowingEnterWithCodeView: Bool = false
     
     @Binding var quickChallenges: [QuickChallenge]
     @Binding var focusedChallenge: QuickChallenge?
@@ -161,33 +162,52 @@ struct ChallengesListScreenView: View {
     
     //MARK: body
     var body: some View {
-        List(self.quickChallenges, id: \.self) { challenge in
-            ZStack {
-                ChallengeListCell(quickChallenge: .constant(challenge))
-            }
-            .onTapGesture {
-                self.focusedChallenge = challenge
-            }
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
-            .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                Button(role: .destructive, action: {
+        ZStack {
+            List(self.quickChallenges, id: \.self) { challenge in
+                ZStack {
+                    ChallengeListCell(quickChallenge: .constant(challenge))
+                }
+                .onTapGesture {
                     self.focusedChallenge = challenge
-                    self.isShowingDeleteAlert.toggle()
-                }, label: {
-                    Label("Delete", systemImage: "trash")
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                    Button(role: .destructive, action: {
+                        self.focusedChallenge = challenge
+                        self.isShowingDeleteAlert.toggle()
+                    }, label: {
+                        Label("Delete", systemImage: "trash")
+                    })
                 })
-            })
-            
+                
+            }
+            .fullScreenCover(item: $focusedChallenge) { item in
+                if item.online {
+                    OnlineChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
+                else {
+                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
+            }
+            .refreshable {
+                self.quickChallengeViewModel.getUserChallenges()
+            }
+            .listStyle(.plain)
+            VStack{
+                Spacer()
+                ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
+                    self.isShowingEnterWithCodeView = true
+                }
+                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                    EnterWithCodeView()
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                .padding(.bottom, Tokens.Spacing.defaultMargin.value)
+            }
         }
-        .fullScreenCover(item: $focusedChallenge) { item in
-            ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
-                .environmentObject(self.quickChallengeViewModel)
-        }
-        .refreshable {
-            self.quickChallengeViewModel.getUserChallenges()
-        }
-        .listStyle(.plain)
     }
 }
 

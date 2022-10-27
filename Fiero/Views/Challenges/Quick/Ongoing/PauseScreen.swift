@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PauseScreen: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
 
     @Binding var didTapPauseButton: Bool
@@ -51,7 +51,7 @@ struct PauseScreen: View {
                     self.didTapPauseButton.toggle()
                 }
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Visão geral do desafio") {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }
                 ButtonComponent(style: .black(isEnabled: true), text: "Finalizar desafio") {
                     isShowingAlert.toggle()
@@ -60,7 +60,7 @@ struct PauseScreen: View {
                     Alert(title: Text("Finalizar desafio"),
                           message: Text("Você tem certeza que deseja finalizar este desafio?"), primaryButton: .destructive(Text("Finalizar desafio"), action: {
                         quickChallengeViewModel.finishChallenge(challengeId: quickChallenge.id, finished: true)
-                        presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }), secondaryButton: .cancel(Text("Cancelar")))
                 })
             }

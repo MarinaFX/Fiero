@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct InputConfirmationCodeView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var userViewModel: UserViewModel
 
     @State private var confirmationCode: String = ""
     @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    
+    @State private var confirmPassword: String = ""    
     @State private var isPresentingErrorAlert: Bool = false
     @State var isPresentingNewPassword: Bool = false
     

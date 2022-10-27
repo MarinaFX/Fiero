@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct WinScreen: View {
-    
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @Binding var isFinished: Bool
+    
+    @State private var ended: Bool = false
     @State private var animationBG = 0.0
     @State private var animationText = 0.0
-    
     @State var angle: Double = 0.0
     @State var isAnimating = true   
     @State var winnerName: String
-    
-    @State private var ended: Bool = false
-
     
     var foreverAnimation: Animation {
         Animation.linear(duration: 4.0)
@@ -84,7 +81,7 @@ struct WinScreen: View {
                 })
                 ButtonComponent(style: .black(isEnabled: true), text: "Continuar marcando pontos", action: {
                     isFinished = false
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 })
                 .padding(.bottom, Tokens.Spacing.sm.value)
             }

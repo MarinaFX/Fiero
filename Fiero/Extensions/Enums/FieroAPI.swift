@@ -15,7 +15,7 @@ enum FieroAPIEnum: CustomStringConvertible {
     var description: String {
         switch self {
             case .BASE_URL:
-                return "localhost"//"ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
+                return "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
             case .localhost:
                 return "localhost"
             case .localIP:
@@ -28,6 +28,7 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
     case CREATE_CHALLENGE
     case GET_CHALLENGES
     case DELETE_CHALLENGES
+    case ENTER_CHALLENGE
     case PATCH_CHALLENGES_BEGIN
     case PATCH_CHALLENGES_FINISHED
     case PATCH_CHALLENGES_SCORE
@@ -37,9 +38,11 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
             case .CREATE_CHALLENGE:
                 return "/quickChallenge/create"
             case .GET_CHALLENGES:
-                return "/quickChallenge/createdByMe"
+                return "/quickChallenge/playing"
             case .DELETE_CHALLENGES:
                 return "/quickChallenge"
+            case .ENTER_CHALLENGE:
+                return "/quickChallenge/join"
             case .PATCH_CHALLENGES_BEGIN:
                 return "/quickChallenge"
             case .PATCH_CHALLENGES_FINISHED:

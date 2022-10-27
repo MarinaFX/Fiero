@@ -16,8 +16,6 @@ import Combine
 //MARK: QCChallengeCreatedView
 struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var didPushToHomeScreen: Bool = false
