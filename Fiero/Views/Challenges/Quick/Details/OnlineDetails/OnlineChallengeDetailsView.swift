@@ -120,7 +120,7 @@ struct OnlineChallengeDetailsView: View {
                     
                     NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                         
-                    ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                    ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
                         .padding(.horizontal, defaultMarginSpacing)
                         .padding(.vertical, extraExtraSmallSpacing)
                 }
