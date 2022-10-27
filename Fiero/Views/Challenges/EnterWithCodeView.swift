@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct EnterWithCodeView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var challengeCode: String = ""
@@ -54,6 +55,10 @@ struct EnterWithCodeView: View {
                                                 if self.quickChallengeViewModel.joinChallengeAlertCases != .none {
                                                     self.isShowingErrorAlert = true
                                                 }
+                                                else {
+                                                    self.dismiss()
+                                                }
+                                                
                                                 return
                                         }
                                     }, receiveValue: { _ in () })
@@ -64,6 +69,17 @@ struct EnterWithCodeView: View {
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     .padding(.bottom, Tokens.Spacing.sm.value)
                 }
+                
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing, content: {
+                        Button(action: {
+                            self.dismiss()
+                        }, label: {
+                            Text("Fechar")
+                                .foregroundColor(.white)
+                        })
+                    })
+                })
             }
             .alert(self.quickChallengeViewModel.joinChallengeAlertCases.title,
                    isPresented: self.$isShowingErrorAlert,
