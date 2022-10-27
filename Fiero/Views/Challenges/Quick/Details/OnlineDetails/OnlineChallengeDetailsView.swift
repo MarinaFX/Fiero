@@ -14,7 +14,6 @@ struct OnlineChallengeDetailsView: View {
     
     @Binding var quickChallenge: QuickChallenge
     
-    @State private var subscriptions: Set<AnyCancellable> = []
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
     
