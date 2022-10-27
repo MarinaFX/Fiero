@@ -199,7 +199,7 @@ struct ChallengesListScreenView: View {
             VStack{
                 Spacer()
                 ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
-                    isShowingEnterWithCodeView = true
+                    self.isShowingEnterWithCodeView = true
                 }
                 .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
                     EnterWithCodeView()
