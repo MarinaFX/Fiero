@@ -178,6 +178,7 @@ class UserViewModel: ObservableObject {
                 
                 self?.keyValueStorage.set(self?.user.id, forKey: UDKeysEnum.userID.description)
                 self?.keyValueStorage.set(self?.user.token, forKey: UDKeysEnum.authToken.description)
+                self?.keyValueStorage.set(response.user.name, forKey: UDKeysEnum.username.description)
                 self?.keyValueStorage.set(password, forKey: UDKeysEnum.password.description)
                 self?.keyValueStorage.set(email, forKey: UDKeysEnum.email.description)
                 
@@ -196,16 +197,9 @@ class UserViewModel: ObservableObject {
     //MARK: - Delete Account
     @discardableResult
     func deleteAccount() -> AnyPublisher<Void, Error> {
-        guard let userId = self.keyValueStorage.string(forKey: UDKeysEnum.userID.description) else {
-            print("Nao foi possivel achar o ID do usuario")
-            
-            return Empty()
-                .eraseToAnyPublisher()
-        }
-        
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
-                let request = makeDELETERequest(param: userId, scheme: "http", port: 3333,
+                let request = makeDELETERequest(scheme: "http", port: 3333,
                                                 baseURL: FieroAPIEnum.BASE_URL.description,
                                                 endPoint: UserEndpointEnum.DELETE_USER.description,
                                                 authToken: authToken)

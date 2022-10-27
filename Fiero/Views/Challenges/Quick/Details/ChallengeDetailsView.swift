@@ -11,17 +11,14 @@ import Combine
 //MARK: ChallengeDetailsView
 struct ChallengeDetailsView: View {
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
-    
+    @State private var ended: Bool = false
     @State var isPresentingAlert: Bool = false
     @State var isPresentingOngoing: Bool = false
     @State var isPresentingLoading: Bool = false
-    
-    @State private var ended: Bool = false
-    
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -116,7 +113,7 @@ struct ChallengeDetailsView: View {
                     
                     ButtonComponent(style: .black(isEnabled: true),
                                     text: "Voltar para meus desafios") {
-                        self.presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }
                 }
                 .padding(.vertical, nanoSpacing)
@@ -133,7 +130,7 @@ struct ChallengeDetailsView: View {
                                 .sink { completion in
                                     switch completion {
                                     case .finished:
-                                        self.presentationMode.wrappedValue.dismiss()
+                                        self.dismiss()
                                     case .failure(let error):
                                         print(error)
                                         self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
@@ -147,14 +144,14 @@ struct ChallengeDetailsView: View {
                                      message: Text(DetailsAlertCases.failureStartChallenge.message),
                                      dismissButton: .cancel(Text(DetailsAlertCases.failureStartChallenge.primaryButtonText), action: {
                             self.isPresentingAlert = false
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.dismiss()
                         }))
                     case .failureWhileSavingPoints:
                         return Alert(title: Text(DetailsAlertCases.failureWhileSavingPoints.title),
                                      message: Text(DetailsAlertCases.failureWhileSavingPoints.message),
                                      dismissButton: .cancel(Text(DetailsAlertCases.failureWhileSavingPoints.primaryButtonText), action: {
                             self.isPresentingAlert = false
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.dismiss()
                         }))
                     case .failureDeletingChallenge:
                         return Alert(title: Text("not expected"))

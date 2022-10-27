@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TermsOfUseSheetView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @Binding var termsOfUseAccept: Bool
     
@@ -87,13 +87,13 @@ struct TermsOfUseSheetView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     Button("Fechar") {
-                        presentationMode.wrappedValue.dismiss()
+                        self.dismiss()
                     }
                     .accessibilityLabel("Fechar tela de termos de uso")
                 }
                 ButtonComponent(style: .primary(isEnabled: true), text: "Eu concordo!", action: {
                     termsOfUseAccept = true
-                    presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 })
                 .padding(.all, spacing)
             }

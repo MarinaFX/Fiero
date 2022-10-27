@@ -12,10 +12,8 @@ class HapticsController {
     
     static let shared = HapticsController()
     public static var isHapticsActiveBinding: Binding<Bool> = .init {
-        print("getting")
         return (UserDefaults.standard.value(forKey: "HapticsFeedback") as? Bool) ?? true
     } set: { newValue in
-        print("setting: \(newValue)")
         UserDefaults.standard.set(newValue, forKey: "HapticsFeedback")
     }
     

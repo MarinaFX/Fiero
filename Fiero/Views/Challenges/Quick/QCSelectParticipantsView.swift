@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QCSelectParticipantsView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State var challengeParticipants: Int = 2
     @State var tabViewSelection: Int = 2
@@ -23,7 +23,7 @@ struct QCSelectParticipantsView: View {
         ZStack {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack {
-                CustomProgressBar(currentPage: .second, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor)
+                CustomProgressBar(currentPage: .third)
                     .padding()
                 
                 Text("Escolha a quantidade\nde participantes")
@@ -35,16 +35,19 @@ struct QCSelectParticipantsView: View {
                 Spacer()
                 
                 TabView(selection: self.$tabViewSelection) {
-                    ChallengeParticipantsSelectionCardView(amount: "2")
+                    CreationSmallCardView(styles: .amount, amount: "2")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(2)
                     
-                    ChallengeParticipantsSelectionCardView(amount: "3")
+                    CreationSmallCardView(styles: .amount, amount: "3")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(3)
                     
-                    ChallengeParticipantsSelectionCardView(amount: "4")
+                    CreationSmallCardView(styles: .amount, amount: "4")
                         .padding(Tokens.Spacing.sm.value)
+                        .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(4)
                     
                 }
@@ -74,7 +77,7 @@ struct QCSelectParticipantsView: View {
                 }
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }, label: {
                     Text("Voltar")
                         .bold()
@@ -83,7 +86,7 @@ struct QCSelectParticipantsView: View {
                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                 
                 NavigationLink("", isActive: self.$pushNextView, destination: {
-                    QCAmountWinRulesView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+                    QCAmountWinRulesView(isOnline: false, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
                 })
             }
             .onChange(of: self.tabViewSelection, perform: { tabViewSelection in

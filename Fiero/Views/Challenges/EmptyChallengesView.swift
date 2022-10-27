@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
-    @State var isPresented: Bool = false
     @ObservedObject var target = RefreshControlTarget()
-    
-    @State private var ended: Bool = false
 
+    @State private var ended: Bool = false
+    @State var isPresented: Bool = false
 
     var body: some View {
 
@@ -27,14 +26,19 @@ struct EmptyChallengesView: View {
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
             Spacer()
-            
-            ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
-                self.isPresented.toggle()
-            })
-            
-            .padding()
-            
+            VStack  {
+                ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                    self.isPresented.toggle()
+                })
+                
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                
+                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código", action: {
+                })
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+            }
             Spacer()
+            
         }
         .navigationTitle("Meus desafios")
         .environment(\.colorScheme, .dark)
@@ -42,33 +46,6 @@ struct EmptyChallengesView: View {
         .fullScreenCover(isPresented: $isPresented) {
             QCCategorySelectionView()
         }
-    }
-}
-
-struct AvailableSoonView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        VStack(alignment: .center) {
-            Text("Wow, calma la fela. Parece que você encontrou uma funcionalidade ainda em desenvolvimento. \nLogo logo você terá ela em suas mãos (ou desafios)")
-                .multilineTextAlignment(.leading)
-                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .padding()
-            
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Text("OK")
-                                .font(Tokens.FontStyle.body.font(weigth: .bold, design: .default))
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        })
-                    })
-                })
-        }
-        .makeDarkModeFullScreen()
     }
 }
 

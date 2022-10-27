@@ -13,10 +13,8 @@ import SwiftUI
 class SoundPlayer {
     
     public static var isActionSoundsActiveBinding: Binding<Bool> = .init {
-        print("getting")
         return (UserDefaults.standard.value(forKey: SoundTypes.action.description) as? Bool) ?? true
     } set: { newValue in
-        print("setting: \(newValue)")
         UserDefaults.standard.set(newValue, forKey: SoundTypes.action.description)
     }
     
