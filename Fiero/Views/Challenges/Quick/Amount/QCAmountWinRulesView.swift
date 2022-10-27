@@ -28,7 +28,7 @@ struct QCAmountWinRulesView: View {
         }
     }
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
    
     @State private var subscriptions: Set<AnyCancellable> = []
@@ -104,7 +104,7 @@ struct QCAmountWinRulesView: View {
                 .padding(.horizontal, Tokens.Spacing.xxxs.value)
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }, label: {
                     Text("Voltar")
                         .bold()

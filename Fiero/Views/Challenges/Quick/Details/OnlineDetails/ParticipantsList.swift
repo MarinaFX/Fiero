@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ParticipantsList: View {
+    @Environment(\.dismiss) var dismiss
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Binding var quickChallenge: QuickChallenge
     
-    var participantsList = ["EU"]
     @State private var ended: Bool = false
+    @State private var isPresentingInvite: Bool = false
     
     var body: some View {
-        if participantsList.count > 1 {
+        if quickChallenge.teams.count > 1 {
             List {
-                ForEach(participantsList, id: \.self) { participant in
-                    Text("\(participant)")
+                ForEach(self.$quickChallenge.teams) { participant in
+                    Text(participant.name.wrappedValue)
                         .foregroundColor(foregroundColor)
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
@@ -35,8 +36,8 @@ struct ParticipantsList: View {
         } else {
             VStack {
                 List {
-                    ForEach(participantsList, id: \.self) { participant in
-                        Text("\(participant)")
+                    ForEach(self.$quickChallenge.teams) { participant in
+                        Text(participant.name.wrappedValue)
                             .foregroundColor(foregroundColor)
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
@@ -62,16 +63,21 @@ struct ParticipantsList: View {
                     .padding(.horizontal, defaultMarginSpacing)
                 Spacer()
                 
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: { })
-                    .padding(.horizontal, defaultMarginSpacing)
-                    .padding(.vertical, extraExtraSmallSpacing)
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: {
+                    isPresentingInvite = true
+                })
+                .sheet(isPresented: $isPresentingInvite, content: {
+                    InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                })
+                .padding(.horizontal, defaultMarginSpacing)
+                .padding(.vertical, extraExtraSmallSpacing)
             }
             .preferredColorScheme(.dark)
         }
     }
     
     var backButton : some View { Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
+            self.dismiss()
             }) {
                 HStack {
                     Image(systemName: "chevron.left")
@@ -101,6 +107,10 @@ struct ParticipantsList: View {
 
 struct ParticipantsList_Previews: PreviewProvider {
     static var previews: some View {
-        ParticipantsList()
+        ParticipantsList(quickChallenge: .constant(QuickChallenge(id: "teste", name: "Truco", invitationCode: "teste", type: "Quantidade", goal: 3, goalMeasure: "unity", finished: false, ownerId: "teste", online: false, alreadyBegin: true, maxTeams: 4, createdAt: "teste", updatedAt: "teste", teams:
+                                                                    [
+                                                                        Team(id: "teste1", name: "Nome do jogador", quickChallengeId: "teste", ownerId: "teste", createdAt: "", updatedAt: "", members: [Member(id: "", score: 22, userId: "", teamId: "", beginDate: "", botPicture: "player1", createdAt: "", updatedAt: "")]),
+                                                                    ],
+                                                                                                                owner: User(email: "teste", name: "teste"))))
     }
 }

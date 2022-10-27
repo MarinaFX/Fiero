@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnlineOrOfflineView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var pushNextView: Bool = false
@@ -66,7 +66,7 @@ struct OnlineOrOfflineView: View {
                 }
                 
                 ButtonComponent(style: .black(isEnabled: true), text: LocalizedStringKey("backButton")) {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }
             }
             .navigationBarHidden(true)

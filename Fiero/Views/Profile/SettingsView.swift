@@ -9,9 +9,7 @@ import SwiftUI
 import Combine
 
 struct SettingsView: View {
-    
-    @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var subscriptions: Set<AnyCancellable> = []
@@ -35,7 +33,7 @@ struct SettingsView: View {
             .navigationBarTitle("Configurações", displayMode: .inline)
             .toolbar {
                 Button("Feito!") {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }
             }
         }

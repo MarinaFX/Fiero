@@ -9,7 +9,7 @@ import SwiftUI
 //MARK: QCNamingView
 struct QCNamingView: View {
     //MARK: - Variables Setup
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     @State private var isNavActiveForAmount: Bool = false
     @State var challengeName: String = ""
@@ -53,7 +53,7 @@ struct QCNamingView: View {
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }, label: {
                     Text("Voltar")
                         .bold()

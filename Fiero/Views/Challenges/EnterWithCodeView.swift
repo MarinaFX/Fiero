@@ -69,17 +69,6 @@ struct EnterWithCodeView: View {
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     .padding(.bottom, Tokens.Spacing.sm.value)
                 }
-                
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigationBarTrailing, content: {
-                        Button(action: {
-                            self.dismiss()
-                        }, label: {
-                            Text("Fechar")
-                                .foregroundColor(.white)
-                        })
-                    })
-                })
             }
             .alert(self.quickChallengeViewModel.joinChallengeAlertCases.title,
                    isPresented: self.$isShowingErrorAlert,
@@ -107,6 +96,16 @@ struct EnterWithCodeView: View {
             })
             .navigationTitle(LocalizedStringKey("enterWithCodeNavTitle"))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        self.dismiss()
+                    }, label: {
+                        Text("Fechar")
+                            .foregroundColor(.white)
+                    })
+                })
+            })
         }
     }
 }

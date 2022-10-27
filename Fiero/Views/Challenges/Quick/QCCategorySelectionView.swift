@@ -14,7 +14,7 @@ struct ChallengesCategoryInfo {
 }
 
 struct QCCategorySelectionView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State private var scrollOffset: CGFloat = 0.0
     @State var presentNextScreen: Bool = false
@@ -73,7 +73,7 @@ struct QCCategorySelectionView: View {
                 
                 
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                     HapticsController.shared.activateHaptics(hapticsfeedback: .light)
                 }, label: {
                     Text("Voltar")
