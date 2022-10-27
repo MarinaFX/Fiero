@@ -13,6 +13,7 @@ struct OnlineOrOfflineView: View {
     
     @State var pushNextView: Bool = false
     @State var tabViewSelection: Int = 1
+    @State var isOnline: Bool = false
     
     var primaryColor: Color
     var secondaryColor: Color
@@ -24,7 +25,7 @@ struct OnlineOrOfflineView: View {
             Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
             
             NavigationLink("", isActive: self.$pushNextView, destination: {
-                QCNamingView(primaryColor: primaryColor, secondaryColor: secondaryColor, challengeType: challengeType)
+                QCNamingView(isOnline: isOnline, primaryColor: primaryColor, secondaryColor: secondaryColor, challengeType: challengeType)
             })
             .hidden()
             
@@ -52,19 +53,13 @@ struct OnlineOrOfflineView: View {
                 switch tabViewSelection {
                     case 1:
                         ButtonComponent(style: .secondary(isEnabled: true), text: "Online!") {
-                            print("online")
-                            pushNextView.toggle()
-                        }
-                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    case 2:
-                        ButtonComponent(style: .secondary(isEnabled: true), text: "Offline!") {
-                            print("offline")
+                            isOnline = true
                             pushNextView.toggle()
                         }
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     default:
                         ButtonComponent(style: .secondary(isEnabled: true), text: "Offline!") {
-                            print("offline")
+                            isOnline = false
                             pushNextView.toggle()
                         }
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)

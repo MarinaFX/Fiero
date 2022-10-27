@@ -105,6 +105,9 @@ We can't get your challenges now, try again";
     "enterWithCodePlaceholder" = "Challenge code";
     "enterWithCodeButtonText" = "Enter the challenge";
 
+//MARK: - ChallengeTypes
+    "amount" = "of amount";
+
 //MARK: - Quick: OnlineOrOfflineView
     "screenTitle" = "Challenge type";
     "firstCardDescription" = "I want to invite my friends to play with me. Each from your cell phone.";
@@ -193,11 +196,13 @@ We can't get your challenges now, try again";
     "Continuar marcando pontos" = "Keep Scoring Points";
 
 // MARK: - Quick - Amout - QCAmountWinRulesView
-    "Oops, muito desafiador" = "Oops, too challenging";
-    "Valor Inválido" = "Invalid value";
     "Defina os pontos necessários para a vitória" = "Set the points needed for victory";
-    "Criar desafio" = "Create challenge";
+    "botãoComeçar" = "Start";
     "Voltar" = "Back";
+    "Oops, muito desafiador" = "Oops, too challenging";
+    "negativeAmount" = "Invalid value";
+    "invalidInput" = "Invalid value";
+    "Criar desafio" = "Create challenge";
     "Não conseguimos criar o seu desafio, tente mais tarde." = "We were unable to create your challenge, please try later.";
     "Você precisa informar um número maior que 0" = "We were unable to create your challenge, please try later.";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
