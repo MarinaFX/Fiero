@@ -74,7 +74,7 @@ public func makePOSTRequest
 
 public func makeDELETERequest
 (
-    param: String,
+    param: String = "",
     scheme: String,
     port: Int,
     baseURL: String,
@@ -85,7 +85,7 @@ public func makeDELETERequest
     urlComponents.scheme = scheme
     urlComponents.port = port
     urlComponents.host = baseURL
-    urlComponents.path = endPoint + "/\(param)"
+    urlComponents.path = endPoint + (!param.isEmpty ? "/\(param)" : "")
     
     let url = urlComponents.url!
     var request = URLRequest(url: url)
