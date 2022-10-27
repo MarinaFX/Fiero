@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct OnlineChallengeDetailsView: View {
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
+    @Binding var quickChallenge: QuickChallenge
+    
+    @State private var subscriptions: Set<AnyCancellable> = []
     @State private var isPresentingParticipantsList: Bool = false
+    @State private var isPresentingInvite: Bool = false
     
     var body: some View {
         NavigationView {
@@ -31,7 +38,7 @@ struct OnlineChallengeDetailsView: View {
                                     .foregroundColor(foregroundColor)
                                     .padding(.top, extraSmallSpacing)
                                 
-                                Text("Virar cachaça")
+                                Text(quickChallenge.name)
                                     .font(largeTitleFont)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(foregroundColor)
@@ -43,7 +50,7 @@ struct OnlineChallengeDetailsView: View {
                                     .font(descriptionFont)
                                     .foregroundColor(foregroundColor)
                                 
-                                Text("5 pontos")
+                                Text("\(quickChallenge.goal) points")
                                     .font(largeTitleFont)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(foregroundColor)
@@ -72,7 +79,7 @@ struct OnlineChallengeDetailsView: View {
                     //MARK: - Invite Participants
                     HStack {
                         Button {
-                            
+                            isPresentingInvite = true
                         } label: {
                             Text("Convidar Participante")
                                 .font(descriptionFontBold)
@@ -82,11 +89,15 @@ struct OnlineChallengeDetailsView: View {
                                 .padding(.trailing, 16)
                         }
                     }
+                    .sheet(isPresented: $isPresentingInvite, content: {
+                        InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                    })
                     .foregroundColor(foregroundColor)
                     .background(.clear)
                     .padding(.horizontal, defaultMarginSpacing)
                     .padding(.top, extraSmallSpacing)
                     .padding(.bottom, extraExtraSmallSpacing)
+                    
                     
                     //MARK: - List of Participants
                     HStack {
@@ -107,11 +118,23 @@ struct OnlineChallengeDetailsView: View {
                     .cornerRadius(borderSmall)
                     .padding(.horizontal, defaultMarginSpacing)
                     
-                    NavigationLink("", destination: ParticipantsList(), isActive: self.$isPresentingParticipantsList).hidden()
+                    NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                         
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: { })
+                    ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
                         .padding(.horizontal, defaultMarginSpacing)
                         .padding(.vertical, extraExtraSmallSpacing)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button {
+                        self.dismiss()
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                            Text("backButtonText")
+                        }
+                    }
                 }
             }
         }
@@ -165,6 +188,7 @@ struct OnlineChallengeDetailsView: View {
 
 struct OnlineChallengeDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        OnlineChallengeDetailsView()
+        OnlineChallengeDetailsView(quickChallenge: .constant(QuickChallenge(id: "", name: "Girls Challenge part 1", invitationCode: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: true, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [Team(id: "id", name: "Naty", quickChallengeId: "id", createdAt: "", updatedAt: ""), Team(id: "id2", name: "player2", quickChallengeId: "id", createdAt: "", updatedAt: "")], owner: User(email: "a@naty.pq", name: "naty"))))
+            .environmentObject(QuickChallengeViewModel())
     }
 }

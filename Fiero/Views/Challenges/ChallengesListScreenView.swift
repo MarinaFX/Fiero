@@ -182,12 +182,15 @@ struct ChallengesListScreenView: View {
                 })
                 
             }
-            .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
-                EnterWithCodeView()
-            })
             .fullScreenCover(item: $focusedChallenge) { item in
-                ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
-                    .environmentObject(self.quickChallengeViewModel)
+                if item.online {
+                    OnlineChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
+                else {
+                    ChallengeDetailsView(quickChallenge: getBindingWith(id: item.id))
+                        .environmentObject(self.quickChallengeViewModel)
+                }
             }
             .refreshable {
                 self.quickChallengeViewModel.getUserChallenges()
@@ -196,8 +199,11 @@ struct ChallengesListScreenView: View {
             VStack{
                 Spacer()
                 ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
-                    self.isShowingEnterWithCodeView = true
+                    isShowingEnterWithCodeView = true
                 }
+                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                    EnterWithCodeView()
+                })
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .padding(.bottom, Tokens.Spacing.defaultMargin.value)
             }

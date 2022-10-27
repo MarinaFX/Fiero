@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct InviteChallengerView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var inviteCode: String
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -50,8 +53,7 @@ struct InviteChallengerView: View {
                     Spacer()
                     
                     ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
-                        //TODO: dismiss to details
-                        print("voltar para detalhes")
+                        presentationMode.wrappedValue.dismiss()
                     }
                     .padding(.bottom, Tokens.Spacing.md.value)
                 }
@@ -59,6 +61,16 @@ struct InviteChallengerView: View {
             }
             .navigationTitle(LocalizedStringKey("inviteNavTitle"))
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Text("Fechar")
+                            .foregroundColor(.white)
+                    })
+                })
+            })
         }
     }
     
