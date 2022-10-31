@@ -148,7 +148,7 @@ We can't get your challenges now, try again";
     "inviteCloseButton" = "Close";
     "inviteTitle" = "Challenge your friends!";
     "inviteDescription" = "Use the code below to invite your friends to the challenge";
-    "inviteButtonCodeText" = "Click to copy";
+    "inviteButtonCodeText" = "Tap to copy";
     "inviteButtonBackToDetails" = "Back to details";
 
 // MARK: - Quick - Details - ChallengeDetailsView

@@ -146,7 +146,7 @@
     "inviteCloseButton" = "Fechar";
     "inviteTitle" = "Desafie seus amigos!";
     "inviteDescription" = "Use o código abaixo para convidar os seus amigos para o desafio";
-    "inviteButtonCodeText" = "Clique para copiar";
+    "inviteButtonCodeText" = "Toque para copiar";
     "inviteButtonBackToDetails" = "Voltar para os detalhes";
 
 // MARK: - Quick - Details - ChallengeDetailsView
