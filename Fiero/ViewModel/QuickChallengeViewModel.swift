@@ -136,9 +136,19 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    enum FieroError: Int, Error {
+        case notFound = 404
+        case internalServerError = 500
+        case unauthorized = 403
+        case success = 200
+        case created = 201
+        case conflict = 409
+        case unknown = -1
+    }
+    
     //MARK: - Get Challenge by id
     @discardableResult
-    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge?, Error> {
+    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge, FieroError> {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
                 let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
@@ -148,41 +158,39 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (FieroError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? FieroError ?? .unknown })
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
             switch completion {
                 case .failure(let error):
+                    switch error {
+                        case .notFound:
+                            self?.getChallengeAlertCases = .challengeNotFound
+                        case .internalServerError:
+                            self?.getChallengeAlertCases = .internalServerError
+                        case .unauthorized:
+                            self?.getChallengeAlertCases = .userNotInChallenge
+                        default:
+                            self?.getChallengeAlertCases = .internalServerError
+                    }
                     print("Failed to create request to get challenge endpoint: \(error)")
                 case .finished:
                     print("Successfully created request to get challenge endpoint")
             }
-        }, receiveValue: { [weak self] rawURLResponse in
-            guard let _ = rawURLResponse.item else {
-                
-                if rawURLResponse.statusCode == 404 {
-                    self?.getChallengeAlertCases = .challengeNotFound
-                }
-                
-                if rawURLResponse.statusCode == 403 {
-                    self?.getChallengeAlertCases = .userNotInChallenge
-                }
-                
-                if rawURLResponse.statusCode == 500 {
-                    self?.getChallengeAlertCases = .internalServerError
-                }
-                return
-            }
-            
-            print("Successfully get challenge: \(rawURLResponse.statusCode)")
-            
-        })
+        }, receiveValue: { _ in })
         .store(in: &cancellables)
         
         return operation
-            .map({ $0.item?.quickChallenge })
-            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
