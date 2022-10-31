@@ -11,6 +11,7 @@ struct InviteChallengerView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var inviteCode: String
+    @State var inviteCodeArray: Array = ["a", "a", "a", "a", "a"]
     
     var body: some View {
         NavigationView {
@@ -18,25 +19,25 @@ struct InviteChallengerView: View {
                 Tokens.Colors.Background.dark.value
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack {
+                VStack (spacing: Tokens.Spacing.xs.value){
                     Spacer()
                     
                     Text(LocalizedStringKey("inviteTitle"))
                         .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
-                        .padding(.bottom, Tokens.Spacing.xxxs.value)
                     
                     Text(LocalizedStringKey("inviteDescription"))
                         .font(Tokens.FontStyle.callout.font())
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                         .multilineTextAlignment(.center)
-                        .padding(.bottom, Tokens.Spacing.xs.value)
+                        .frame(width: UIScreen.main.bounds.height * 0.3)
                     
-                    Text(inviteCode)
-                        .font(Font.system(size: 60))
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    HStack {
+                        ForEach(inviteCodeArray, id: \.self) {
+                            LetterComponent(letter: $0)
+                        }
+                    }.frame(height: 80)
                         .padding(.bottom, Tokens.Spacing.xxs.value)
                     
                     Button {
@@ -45,7 +46,8 @@ struct InviteChallengerView: View {
                         Text(LocalizedStringKey("inviteButtonCodeText"))
                             .font(Tokens.FontStyle.caption.font())
                             .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
-                            .padding(Tokens.Spacing.nano.value)
+                            .padding(.vertical, Tokens.Spacing.nano.value)
+                            .padding(.horizontal, Tokens.Spacing.xxxs.value)
                             .background(Tokens.Colors.Neutral.High.pure.value)
                             .cornerRadius(Tokens.Border.BorderRadius.normal.value)
                     }
@@ -72,10 +74,14 @@ struct InviteChallengerView: View {
                 })
             })
         }
+        .onAppear() {
+            inviteCodeArray = inviteCode.map { String($0) }
+            print(inviteCodeArray[0])
+        }
     }
     
     func copyInviteCode() {
-         UIPasteboard.general.string = self.inviteCode
+        UIPasteboard.general.string = self.inviteCode
     }
 }
 
