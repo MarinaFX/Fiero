@@ -16,6 +16,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
+    @Published var getChallengeAlertCases: GetChallengeAlertCasesEnum = .challengeNotFound
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -135,6 +136,56 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Get Challenge by id
+    @discardableResult
+    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge?, Error> {
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
+            .sink(receiveCompletion: { completion in
+            switch completion {
+                case .failure(let error):
+                    print("Failed to create request to get challenge endpoint: \(error)")
+                case .finished:
+                    print("Successfully created request to get challenge endpoint")
+            }
+        }, receiveValue: { [weak self] rawURLResponse in
+            guard let _ = rawURLResponse.item else {
+                
+                if rawURLResponse.statusCode == 404 {
+                    self?.getChallengeAlertCases = .challengeNotFound
+                }
+                
+                if rawURLResponse.statusCode == 403 {
+                    self?.getChallengeAlertCases = .userNotInChallenge
+                }
+                
+                if rawURLResponse.statusCode == 500 {
+                    self?.getChallengeAlertCases = .internalServerError
+                }
+                return
+            }
+            
+            print("Successfully get challenge: \(rawURLResponse.statusCode)")
+            
+        })
+        .store(in: &cancellables)
+        
+        return operation
+            .map({ $0.item?.quickChallenge })
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
     //MARK: - Delete User Challenges
     @discardableResult
     func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
@@ -175,6 +226,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Enter Challenge by code
     @discardableResult
     func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
         let json = """
