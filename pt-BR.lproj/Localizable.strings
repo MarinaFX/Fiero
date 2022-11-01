@@ -102,6 +102,7 @@
     "enterWithCodeDescription" = "Cole o código do desafio aqui para participar com seus amigos";
     "enterWithCodePlaceholder" = "Código do desafio";
     "enterWithCodeButtonText" = "Entrar no desafio";
+    "openScanQRCodeButtonText" = "Escanear QR Code";
 
 //MARK: - ChallengeTypes
     "amount" = "de quantidade";

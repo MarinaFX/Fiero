@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct InviteChallengerView: View {
     @Environment(\.dismiss) var dismiss

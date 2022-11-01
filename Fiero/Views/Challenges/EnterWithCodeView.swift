@@ -65,6 +65,10 @@ struct EnterWithCodeView: View {
                                     .store(in: &subscriptions)
                             }
                         }
+                        ButtonComponent(style: .secondary(isEnabled: true),
+                                        text: "openScanQRCodeButtonText") {
+                            
+                        }
                     }
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     .padding(.bottom, Tokens.Spacing.sm.value)
