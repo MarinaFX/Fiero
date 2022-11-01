@@ -8,15 +8,24 @@
 import Foundation
 import SwiftUI
 
+enum LetterType {
+    case input, onlyView
+}
+
 //MARK: - View
 struct LetterComponent: View {
     
     @State var letter: String?
+    @State var variant: LetterType
     
     var body: some View {
         ZStack {
-            Tokens.Colors.Brand.Primary.light.value
-            Text(letter ?? "A")
+            if variant == LetterType.onlyView {
+                Tokens.Colors.Brand.Primary.light.value
+            } else {
+                Tokens.Colors.Neutral.Low.dark.value
+            }
+            Text(letter?.uppercased() ?? "A")
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .multilineTextAlignment(.center)
@@ -29,6 +38,6 @@ struct LetterComponent: View {
 //MARK: - Preview
 struct LetterComponent_Previews: PreviewProvider {
     static var previews: some View {
-        LetterComponent(letter: "A")
+        LetterComponent(letter: "A", variant: .input)
     }
 }

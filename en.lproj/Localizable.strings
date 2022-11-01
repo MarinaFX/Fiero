@@ -101,7 +101,7 @@ We can't get your challenges now, try again";
 //MARK: - EnterWithCode
     "enterWithCodeNavTitle" = "Enter with code";
     "enterWithCodeCloseButton" = "Close";
-    "enterWithCodeDescription" = "Paste the challenge code here to participate with your friends";
+    "enterWithCodeDescription" = "Input the challenge code";
     "enterWithCodePlaceholder" = "Challenge code";
     "enterWithCodeButtonText" = "Enter the challenge";
     "openScanQRCodeButtonText" = "Scan QR Code";
@@ -147,7 +147,7 @@ We can't get your challenges now, try again";
 //MARK: - Quick - InviteChallengerView
     "inviteNavTitle" = "Invite challenger";
     "inviteCloseButton" = "Close";
-    "inviteTitle" = "Challenge your friends!";
+    "inviteTitle" = "Challenge\nyour friends!";
     "inviteDescription" = "Use the code below to invite your friends to the challenge";
     "inviteButtonCodeText" = "Tap to copy";
     "inviteButtonBackToDetails" = "Back to details";

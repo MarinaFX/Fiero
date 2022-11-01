@@ -22,55 +22,58 @@ struct InviteChallengerView: View {
                 Tokens.Colors.Background.dark.value
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack (spacing: Tokens.Spacing.xs.value){
-                    Spacer()
-                    
-                    Text(LocalizedStringKey("inviteTitle"))
-                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                    
-                    Text(LocalizedStringKey("inviteDescription"))
-                        .font(Tokens.FontStyle.callout.font())
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                        .frame(width: UIScreen.main.bounds.height * 0.3)
-                    VStack (spacing: Tokens.Spacing.xxs.value){
-                        Image(uiImage: generateQRCode(from: "\(inviteCode)"))
-                            .interpolation(.none)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: UIScreen.main.bounds.height*0.19, height: UIScreen.main.bounds.height*0.19)
-                            .padding(Tokens.Spacing.xxxs.value)
-                            .background(Tokens.Colors.Neutral.High.pure.value)
-                    }.cornerRadius(Tokens.Border.BorderRadius.normal.value)
-                    
-                    HStack {
-                        ForEach(inviteCodeArray, id: \.self) {
-                            LetterComponent(letter: $0)
+                ScrollView (showsIndicators: false) {
+                    VStack (spacing: Tokens.Spacing.xs.value){
+                        Spacer()
+                        
+                        Text(LocalizedStringKey("inviteTitle"))
+                            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, Tokens.Spacing.md.value)
+                            .padding(.top, Tokens.Spacing.lg.value)
+                        
+                        Text(LocalizedStringKey("inviteDescription"))
+                            .font(Tokens.FontStyle.callout.font())
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .multilineTextAlignment(.center)
+                            .frame(width: UIScreen.main.bounds.height * 0.3)
+                        
+                        VStack (spacing: Tokens.Spacing.xxs.value){
+                            Image(uiImage: generateQRCode(from: "\(inviteCode)"))
+                                .interpolation(.none)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: UIScreen.main.bounds.height*0.15, height: UIScreen.main.bounds.height*0.15)
+                                .padding(Tokens.Spacing.xxxs.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value)
+                        }.cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        
+                        HStack {
+                            ForEach(inviteCodeArray, id: \.self) {
+                                LetterComponent(letter: $0, variant: .onlyView)
+                            }
+                        }.frame(height: 80)
+                        
+                        Button {
+                            copyInviteCode()
+                        } label: {
+                            Text(LocalizedStringKey("inviteButtonCodeText"))
+                                .font(Tokens.FontStyle.caption.font())
+                                .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                                .padding(.vertical, Tokens.Spacing.nano.value)
+                                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.normal.value)
                         }
-                    }.frame(height: 80)
-                    
-                    Button {
-                        copyInviteCode()
-                    } label: {
-                        Text(LocalizedStringKey("inviteButtonCodeText"))
-                            .font(Tokens.FontStyle.caption.font())
-                            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
-                            .padding(.vertical, Tokens.Spacing.nano.value)
-                            .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                            .background(Tokens.Colors.Neutral.High.pure.value)
-                            .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        
+                        ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
+                            self.dismiss()
+                        }
+                        .padding(.bottom, Tokens.Spacing.md.value)
                     }
-                    
-                    Spacer()
-                    
-                    ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
-                        self.dismiss()
-                    }
-                    .padding(.bottom, Tokens.Spacing.md.value)
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 }
-                .padding(.horizontal, Tokens.Spacing.xl.value)
             }
             .navigationTitle(LocalizedStringKey("inviteNavTitle"))
             .navigationBarTitleDisplayMode(.inline)
