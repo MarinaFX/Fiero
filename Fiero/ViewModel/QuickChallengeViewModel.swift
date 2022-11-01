@@ -136,19 +136,9 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    enum FieroError: Int, Error {
-        case notFound = 404
-        case internalServerError = 500
-        case unauthorized = 403
-        case success = 200
-        case created = 201
-        case conflict = 409
-        case unknown = -1
-    }
-    
     //MARK: - Get Challenge by id
     @discardableResult
-    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge, FieroError> {
+    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
                 let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
@@ -163,10 +153,10 @@ class QuickChallengeViewModel: ObservableObject {
                     return quickChallenge
                 }
                 else {
-                    throw (FieroError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
                 }
             })
-            .mapError({ $0 as? FieroError ?? .unknown })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
         operation
