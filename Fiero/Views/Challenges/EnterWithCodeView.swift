@@ -12,6 +12,8 @@ struct EnterWithCodeView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
+    @State var isPresentingQRCodeReader: Bool = false
+
     @State private var challengeCode: String = ""
     @State private var isShowingErrorAlert: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
@@ -67,7 +69,11 @@ struct EnterWithCodeView: View {
                         }
                         ButtonComponent(style: .secondary(isEnabled: true),
                                         text: "openScanQRCodeButtonText") {
-                            
+                            self.isPresentingQRCodeReader = true
+                        }.fullScreenCover(isPresented: $isPresentingQRCodeReader) {
+                            QRCodeScanScreen(codeReadByCamera: $challengeCode)
+                        }.onChange(of: challengeCode) { _ in
+                            isPresentingQRCodeReader = false
                         }
                     }
                     .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
