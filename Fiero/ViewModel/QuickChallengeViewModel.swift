@@ -16,6 +16,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
+    @Published var editPlayerScoreAlertCases: EditPlayerScoreAlertCasesEnum = .playerNotInChallenge
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -359,7 +360,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Patch Score
     @discardableResult
-    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Void, Error> {
+    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Member, HTTPResponseError> {
         
         let json = """
         {
@@ -385,27 +386,41 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> Member in
+                if let member = rawURLResponse.item?.member {
+                    return member
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
         operation
-            .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
-                if case .failure = rawURLResponse {
-                    print("Error while trying to save score: \(rawURLResponse.statusCode)")
-                    return self.getUserChallenges()
-                        .eraseToAnyPublisher()
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                    case .failure(let error):
+                        switch error {
+                            case .badRequest:
+                                self?.editPlayerScoreAlertCases = .challengeError
+                            case .notFound:
+                                self?.editPlayerScoreAlertCases = .challengeNotFound
+                            case .internalServerError:
+                                self?.editPlayerScoreAlertCases = .internalServerError
+                            case .unauthorized:
+                                self?.editPlayerScoreAlertCases = .playerNotInChallenge
+                            default:
+                                self?.editPlayerScoreAlertCases = .unknown
+                        }
+                        print("Failed to create request to patch score endpoint: \(error)")
+                    case .finished:
+                        print("Successfully created request to patch score endpoint")
                 }
-                else {
-                    print("Successfully saved score: \(rawURLResponse.statusCode)")
-                    return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                        .eraseToAnyPublisher()
-                }
-            }
-            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
         
         return operation
-            .map({ _ in ()})
-            .mapError({ $0 as Error})
             .eraseToAnyPublisher()
     }
     
