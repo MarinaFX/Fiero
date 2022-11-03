@@ -19,7 +19,7 @@ struct EnterWithCodeView: View {
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var challengeCodeArray: [String] = ["_", "_", "_", "_", "_"]
     @FocusState private var keyboardFocused: Bool
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -34,7 +34,7 @@ struct EnterWithCodeView: View {
                             .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .padding(.horizontal, Tokens.Spacing.md.value)
-                            .padding(.top, Tokens.Spacing.lg.value)
+//                            .padding(.top, Tokens.Spacing.lg.value)
                         
                         VStack(spacing: Tokens.Spacing.xxxs.value) {
                             
@@ -58,6 +58,11 @@ struct EnterWithCodeView: View {
                                                 }
                                             }
                                         }
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                    keyboardFocused = true
+                                                }
+                                            }
                                 }
                                 HStack {
                                     ForEach(challengeCodeArray, id: \.self) {
