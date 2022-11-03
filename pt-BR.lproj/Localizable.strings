@@ -104,6 +104,10 @@
     "enterWithCodeButtonText" = "Entrar no desafio";
     "openScanQRCodeButtonText" = "Escanear QR Code";
 
+//MARK: - EnterWithQRCode
+    "titleQRCodeView" = "Aponte a câmera\npara o QRCode";
+    "backButtonQRCodeView" = "Voltar";
+
 //MARK: - ChallengeTypes
     "amount" = "de quantidade";
 

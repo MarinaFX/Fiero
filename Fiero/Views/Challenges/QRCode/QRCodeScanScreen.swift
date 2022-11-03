@@ -18,7 +18,7 @@ struct QRCodeScanScreen: View {
         ZStack {
             QRCodeReader(text: $codeReadByCamera).ignoresSafeArea()
             VStack {
-                Text("Aponte a câmera\npara o QR Code")
+                Text(LocalizedStringKey("titleQRCodeView"))
                     .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
@@ -34,7 +34,7 @@ struct QRCodeScanScreen: View {
             VStack {
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true),
-                                text: "Digitar código",
+                                text: "backButtonQRCodeView",
                                 action: {
                     presentationMode.wrappedValue.dismiss()
                 }).padding(.bottom, Tokens.Spacing.sm.value)

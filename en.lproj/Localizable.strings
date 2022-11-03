@@ -106,6 +106,10 @@ We can't get your challenges now, try again";
     "enterWithCodeButtonText" = "Enter the challenge";
     "openScanQRCodeButtonText" = "Scan QR Code";
 
+//MARK: - EnterWithQRCode
+    "titleQRCodeView" = "Scan the QR Code\nwith the camera";
+    "backButtonQRCodeView" = "Back";
+
 //MARK: - ChallengeTypes
     "amount" = "of amount";
 
