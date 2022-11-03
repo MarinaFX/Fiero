@@ -40,6 +40,7 @@ struct EnterWithCodeView: View {
                             ZStack {
                                 HStack {
                                     TextField("", text: $challengeCode.max(5))
+                                        .disableAutocorrection(true)    
                                         .textCase(.uppercase)
                                         .opacity(0)
                                         .foregroundColor(.clear)
