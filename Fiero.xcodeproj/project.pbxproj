@@ -105,7 +105,6 @@
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
 		DF06F8D529114C7C00A170C2 /* QRCodeScanScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */; };
-		DF06F8D729114C7C00A170C2 /* ManualInputCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D329114C7C00A170C2 /* ManualInputCodeScreen.swift */; };
 		DF06F8D829114C7C00A170C2 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D429114C7C00A170C2 /* ScanViewController.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
 		DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF588A3029105AF000F10E02 /* LetterComponent.swift */; };
@@ -260,7 +259,6 @@
 		CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsView.swift; sourceTree = "<group>"; };
 		CCFA55AA288899F900740663 /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
 		DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScanScreen.swift; sourceTree = "<group>"; };
-		DF06F8D329114C7C00A170C2 /* ManualInputCodeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualInputCodeScreen.swift; sourceTree = "<group>"; };
 		DF06F8D429114C7C00A170C2 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		DF49516828B902650046A2CD /* GIfImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfImage.swift; sourceTree = "<group>"; };
 		DF588A3029105AF000F10E02 /* LetterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterComponent.swift; sourceTree = "<group>"; };
@@ -782,7 +780,6 @@
 		DF06F8D029114C6A00A170C2 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				DF06F8D329114C7C00A170C2 /* ManualInputCodeScreen.swift */,
 				DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */,
 				DF06F8D429114C7C00A170C2 /* ScanViewController.swift */,
 			);
@@ -1072,7 +1069,6 @@
 				484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */,
 				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
 				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
-				DF06F8D729114C7C00A170C2 /* ManualInputCodeScreen.swift in Sources */,
 				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
 				1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */,
 				1B6020C828A1940200AEF47B /* Member.swift in Sources */,
