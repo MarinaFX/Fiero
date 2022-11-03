@@ -31,7 +31,6 @@ struct InviteChallengerView: View {
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, Tokens.Spacing.md.value)
-                            .padding(.top, Tokens.Spacing.lg.value)
                         
                         Text(LocalizedStringKey("inviteDescription"))
                             .font(Tokens.FontStyle.callout.font())

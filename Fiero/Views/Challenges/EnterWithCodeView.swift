@@ -34,7 +34,6 @@ struct EnterWithCodeView: View {
                             .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .padding(.horizontal, Tokens.Spacing.md.value)
-//                            .padding(.top, Tokens.Spacing.lg.value)
                         
                         VStack(spacing: Tokens.Spacing.xxxs.value) {
                             
