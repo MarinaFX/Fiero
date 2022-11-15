@@ -8,6 +8,7 @@
 import Foundation
 
 enum HTTPResponseError: Int, Error {
+    case badRequest = 400
     case notFound = 404
     case internalServerError = 500
     case unauthorized = 403

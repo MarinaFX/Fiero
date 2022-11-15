@@ -178,7 +178,7 @@ public func makePATCHRequestScore
     urlComponents.port = port
     urlComponents.host = baseURL
     urlComponents.path = endPoint + "/\(challengeId)" + "/team" + "/\(teamId)" + "/member" + "/\(memberId)" + "/\(variableToBePatched)"
-    print(urlComponents.url!)
+
     let url = urlComponents.url!
     var request = URLRequest(url: url)
     
