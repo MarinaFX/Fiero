@@ -22,8 +22,9 @@
 		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
 		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
-		1B3271C129119609003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C029119609003935BB /* HTTPResponseError.swift */; };
 		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
+		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
+		1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
@@ -171,8 +172,9 @@
 		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
 		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
-		1B3271C029119609003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
 		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
+		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
+		1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -406,8 +408,9 @@
 				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
 				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
 				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
-				1B3271C029119609003935BB /* HTTPResponseError.swift */,
 				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
+				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
+				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1087,6 +1090,7 @@
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
 				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
+				1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
@@ -1106,6 +1110,7 @@
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
 				CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */,
 				1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */,
+				1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
