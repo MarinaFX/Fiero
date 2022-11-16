@@ -16,6 +16,8 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
+    @Published var editPlayerScoreAlertCases: EditPlayerScoreAlertCasesEnum = .playerNotInChallenge
+    @Published var getChallengeAlertCases: GetChallengeAlertCasesEnum = .challengeNotFound
 
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
@@ -135,6 +137,54 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Get Challenge by id
+    @discardableResult
+    func getChallenge(by id: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
+            .share()
+        
+        operation
+            .sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+                case .failure(let error):
+                    switch error {
+                        case .notFound:
+                            self?.getChallengeAlertCases = .challengeNotFound
+                        case .internalServerError:
+                            self?.getChallengeAlertCases = .internalServerError
+                        case .unauthorized:
+                            self?.getChallengeAlertCases = .userNotInChallenge
+                        default:
+                            self?.getChallengeAlertCases = .internalServerError
+                    }
+                    print("Failed to create request to get challenge endpoint: \(error)")
+                case .finished:
+                    print("Successfully created request to get challenge endpoint")
+            }
+        }, receiveValue: { _ in })
+        .store(in: &cancellables)
+        
+        return operation
+            .eraseToAnyPublisher()
+    }
+    
     //MARK: - Delete User Challenges
     @discardableResult
     func deleteChallenge(by id: String) -> AnyPublisher<Void, Error> {
@@ -175,6 +225,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Enter Challenge by code
     @discardableResult
     func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
         let json = """
@@ -359,7 +410,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Patch Score
     @discardableResult
-    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Void, Error> {
+    func patchScore(challengeId: String, teamId: String, memberId: String, score: Double) -> AnyPublisher<Member, HTTPResponseError> {
         
         let json = """
         {
@@ -385,27 +436,41 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> Member in
+                if let member = rawURLResponse.item?.member {
+                    return member
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
         operation
-            .flatMap { rawURLResponse -> AnyPublisher<Void, Error> in
-                if case .failure = rawURLResponse {
-                    print("Error while trying to save score: \(rawURLResponse.statusCode)")
-                    return self.getUserChallenges()
-                        .eraseToAnyPublisher()
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                    case .failure(let error):
+                        switch error {
+                            case .badRequest:
+                                self?.editPlayerScoreAlertCases = .challengeError
+                            case .notFound:
+                                self?.editPlayerScoreAlertCases = .challengeNotFound
+                            case .internalServerError:
+                                self?.editPlayerScoreAlertCases = .internalServerError
+                            case .unauthorized:
+                                self?.editPlayerScoreAlertCases = .playerNotInChallenge
+                            default:
+                                self?.editPlayerScoreAlertCases = .unknown
+                        }
+                        print("Failed to create request to patch score endpoint: \(error)")
+                    case .finished:
+                        print("Successfully created request to patch score endpoint")
                 }
-                else {
-                    print("Successfully saved score: \(rawURLResponse.statusCode)")
-                    return Empty(completeImmediately: true, outputType: Void.self, failureType: Error.self)
-                        .eraseToAnyPublisher()
-                }
-            }
-            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
         
         return operation
-            .map({ _ in ()})
-            .mapError({ $0 as Error})
             .eraseToAnyPublisher()
     }
     
