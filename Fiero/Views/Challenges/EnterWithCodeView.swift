@@ -104,7 +104,7 @@ struct EnterWithCodeView: View {
                                             text: "openScanQRCodeButtonText") {
                                 self.isPresentingQRCodeReader = true
                             }.fullScreenCover(isPresented: $isPresentingQRCodeReader) {
-                                QRCodeScanScreen(codeReadByCamera: $challengeCode)
+                                QRCodeScanView(codeReadByCamera: $challengeCode)
                             }.onChange(of: challengeCode) { _ in
                                 isPresentingQRCodeReader = false
                             }
@@ -157,16 +157,5 @@ struct EnterWithCodeView: View {
 struct EnterWithCode_Previews: PreviewProvider {
     static var previews: some View {
         EnterWithCodeView()
-    }
-}
-
-extension Binding where Value == String {
-    func max(_ limit: Int) -> Self {
-        if self.wrappedValue.count > limit {
-            DispatchQueue.main.async {
-                self.wrappedValue = String(self.wrappedValue.dropLast())
-            }
-        }
-        return self
     }
 }

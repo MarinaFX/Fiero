@@ -1,5 +1,5 @@
 //
-//  QRCodeInviteChallenges.swift
+//  QRCodeChallengeInviteView.swift
 //  Fiero
 //
 //  Created by Marcelo Diefenbach on 31/10/22.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
-struct QRCodeInviteChallenges: View {
+struct QRCodeChallengeInviteView: View {
     
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
@@ -44,8 +44,8 @@ struct QRCodeInviteChallenges: View {
     }
 }
 
-struct QRCodeInviteChallenges_Previews: PreviewProvider {
+struct QRCodeInviteChallengeView_Previews: PreviewProvider {
     static var previews: some View {
-        QRCodeInviteChallenges(QRCodeString: "ChaljZOxijOIZjxczxlksadasdasdnonjnkjnenge UUID")
+        QRCodeChallengeInviteView(QRCodeString: "ChaljZOxijOIZjxczxlksadasdasdnonjnkjnenge UUID")
     }
 }

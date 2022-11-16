@@ -1,5 +1,5 @@
 //
-//  QRCodeScan.swift
+//  QRCodeScanView.swift
 //  Fiero
 //
 //  Created by Marcelo Diefenbach on 01/11/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct QRCodeScanScreen: View {
+struct QRCodeScanView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var codeReadByCamera: String
@@ -43,9 +43,9 @@ struct QRCodeScanScreen: View {
     }
 }
 
-struct QRCodeScanScreen_Previews: PreviewProvider {
+struct QRCodeScanView_Previews: PreviewProvider {
     static var previews: some View {
-        QRCodeScanScreen(codeReadByCamera: .constant(""))
+        QRCodeScanView(codeReadByCamera: .constant(""))
     }
 }
 

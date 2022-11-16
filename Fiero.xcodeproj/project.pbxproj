@@ -71,6 +71,9 @@
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
 		1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */; };
 		1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */; };
+		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
+		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
+		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
 		488919FA28F8AF0200958743 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F928F8AF0200958743 /* SettingsView.swift */; };
@@ -104,7 +107,7 @@
 		CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A328887EFE00740663 /* ParticipantComponent.swift */; };
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
-		DF06F8D529114C7C00A170C2 /* QRCodeScanScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */; };
+		DF06F8D529114C7C00A170C2 /* QRCodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */; };
 		DF06F8D829114C7C00A170C2 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D429114C7C00A170C2 /* ScanViewController.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
 		DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF588A3029105AF000F10E02 /* LetterComponent.swift */; };
@@ -224,6 +227,9 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
+		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
+		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
 		488919F928F8AF0200958743 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -258,7 +264,7 @@
 		CCFA55A528887F2300740663 /* ParticipantStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantStyles.swift; sourceTree = "<group>"; };
 		CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsView.swift; sourceTree = "<group>"; };
 		CCFA55AA288899F900740663 /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
-		DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScanScreen.swift; sourceTree = "<group>"; };
+		DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScanView.swift; sourceTree = "<group>"; };
 		DF06F8D429114C7C00A170C2 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		DF49516828B902650046A2CD /* GIfImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfImage.swift; sourceTree = "<group>"; };
 		DF588A3029105AF000F10E02 /* LetterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterComponent.swift; sourceTree = "<group>"; };
@@ -491,6 +497,8 @@
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
 				1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */,
 				1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */,
+				1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */,
+				1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -773,6 +781,7 @@
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
 				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
 				CCE03FEE29032FE80038737A /* InviteChallengerView.swift */,
+				1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -780,7 +789,7 @@
 		DF06F8D029114C6A00A170C2 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				DF06F8D129114C7C00A170C2 /* QRCodeScanScreen.swift */,
+				DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */,
 				DF06F8D429114C7C00A170C2 /* ScanViewController.swift */,
 			);
 			path = QRCode;
@@ -1147,14 +1156,17 @@
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				489B528E28A575A400ADAF49 /* OngoingScreen.swift in Sources */,
 				DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */,
-				DF06F8D529114C7C00A170C2 /* QRCodeScanScreen.swift in Sources */,
+				DF06F8D529114C7C00A170C2 /* QRCodeScanView.swift in Sources */,
 				488919FA28F8AF0200958743 /* SettingsView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
+				1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
+				1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */,
 				CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */,
 				CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */,
 				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
+				1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 				CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */,
@@ -1337,7 +1349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = 6525BU9D84;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
@@ -1369,7 +1381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = 6525BU9D84;
+				DEVELOPMENT_TEAM = GYMDP69744;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
