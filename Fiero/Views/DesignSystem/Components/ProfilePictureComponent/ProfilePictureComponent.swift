@@ -1,5 +1,5 @@
 //
-//  Profile Picture Component.swift
+//  ProfilePictureComponent.swift
 //  Fiero
 //
 //  Created by Marcelo Diefenbach on 18/08/22.
