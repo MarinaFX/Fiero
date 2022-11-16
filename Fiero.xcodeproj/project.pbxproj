@@ -22,8 +22,9 @@
 		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
 		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
-		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
 		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
+		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
+		1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */; };
 		1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
@@ -120,7 +121,7 @@
 		DF73C75D28BF9C760079DBB0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C75C28BF9C760079DBB0 /* loading.json */; };
 		DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76428BFC84F0079DBB0 /* quantity.json */; };
 		DF73C76928BFD7780079DBB0 /* tonto.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76828BFD7780079DBB0 /* tonto.json */; };
-		DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */; };
+		DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */; };
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };
 		DF94518528C2851F00744BAC /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = DF94518428C2851F00744BAC /* success.gif */; };
@@ -178,8 +179,9 @@
 		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
 		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
-		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
+		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
+		1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -280,7 +282,7 @@
 		DF73C75C28BF9C760079DBB0 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		DF73C76428BFC84F0079DBB0 /* quantity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quantity.json; sourceTree = "<group>"; };
 		DF73C76828BFD7780079DBB0 /* tonto.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tonto.json; sourceTree = "<group>"; };
-		DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Picture Component.swift"; sourceTree = "<group>"; };
+		DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureComponent.swift; sourceTree = "<group>"; };
 		DF7DCDB228AEB9F400B387BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DF7DCDB428AEC17B00B387BA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		DF94518428C2851F00744BAC /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
 				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
 				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
+				1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */,
 				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
 				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
 				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
@@ -574,7 +577,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DF588A3229105EDE00F10E02 /* InviteCodeScreem */,
+				DF588A3229105EDE00F10E02 /* InviteCode */,
 				DF7DCDAF28AEB63500B387BA /* ProfilePictureComponent */,
 				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
@@ -804,12 +807,12 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
-		DF588A3229105EDE00F10E02 /* InviteCodeScreem */ = {
+		DF588A3229105EDE00F10E02 /* InviteCode */ = {
 			isa = PBXGroup;
 			children = (
 				DF588A3029105AF000F10E02 /* LetterComponent.swift */,
 			);
-			path = InviteCodeScreem;
+			path = InviteCode;
 			sourceTree = "<group>";
 		};
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
@@ -835,7 +838,7 @@
 		DF7DCDAF28AEB63500B387BA /* ProfilePictureComponent */ = {
 			isa = PBXGroup;
 			children = (
-				DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */,
+				DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */,
 			);
 			path = ProfilePictureComponent;
 			sourceTree = "<group>";
@@ -1096,6 +1099,7 @@
 				CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */,
+				1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */,
 				DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */,
@@ -1134,7 +1138,7 @@
 				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
-				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
+				DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */,
 				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
 				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
@@ -1158,7 +1162,6 @@
 				1B46849728C786BF0041BFED /* UDKeysEnum.swift in Sources */,
 				1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
-				1B3271C129119609003935BB /* HTTPResponseError.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
 				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
 				F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */,

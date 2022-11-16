@@ -16,6 +16,7 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var newlyCreatedChallenge: QuickChallenge
     @Published var detailsAlertCases: DetailsAlertCases = .deleteChallenge
     @Published var joinChallengeAlertCases: JoinChallengeAlertCasesEnum = .challengeNotFound
+    @Published var exitChallengeAlertCases: ExitChallengeAlertCasesEnum = .userOrChallengeNotFound
     @Published var editPlayerScoreAlertCases: EditPlayerScoreAlertCasesEnum = .playerNotInChallenge
     @Published var getChallengeAlertCases: GetChallengeAlertCasesEnum = .challengeNotFound
 
@@ -471,6 +472,63 @@ class QuickChallengeViewModel: ObservableObject {
             .store(in: &cancellables)
         
         return operation
+            .eraseToAnyPublisher()
+    }
+    
+    @discardableResult
+    func exitChallenge(by id: String) -> AnyPublisher<Void, Error> {
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.EXIT_CHALLENGE.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation.sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+                case .failure(let error):
+                    print("Failed to create request to exit challenge endpoint: \(error)")
+                    self?.exitChallengeAlertCases = .internalServerError
+                case .finished:
+                    print("Successfully created request to exit challenge endpoint")
+            }
+        }, receiveValue: { [weak self] rawURLResponse in
+            guard let _ = rawURLResponse.item else {
+                
+                if rawURLResponse.statusCode == 400 {
+                    print("error while trying to exit challenge: \(rawURLResponse.statusCode)")
+                    self?.exitChallengeAlertCases = .userNotInChallenge
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 404 {
+                    print("error while trying to exit challenge: \(rawURLResponse.statusCode)")
+                    self?.exitChallengeAlertCases = .userOrChallengeNotFound
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 500 {
+                    print("error while trying to exit challenge: \(rawURLResponse.statusCode)")
+                    self?.exitChallengeAlertCases = .internalServerError
+                    return
+                }
+                print("error while trying to exit challenge: \(rawURLResponse.statusCode)")
+                return
+            }
+            
+            print("Successfully removed challenge: \(rawURLResponse.statusCode)")
+            
+            self?.exitChallengeAlertCases = .none
+        })
+        .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
