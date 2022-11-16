@@ -22,106 +22,109 @@ struct OnlineChallengeDetailsView: View {
             ZStack {
                 backgroundColor
                     .edgesIgnoringSafeArea(.all)
-                VStack {
-                    Image("OnlineDetails")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.horizontal, smallSpacing)
-                        .padding(.bottom, quarckSpacing)
-                    //MARK: - Info Component
+                ScrollView (showsIndicators: false) {
                     VStack {
-                        VStack(alignment: .center, spacing: extraExtraSmallSpacing) {
-                            VStack(alignment: .center, spacing: nanoSpacing) {
-                                Text("Desafio de quantidade")
-                                    .font(descriptionFont)
-                                    .foregroundColor(foregroundColor)
-                                    .padding(.top, extraSmallSpacing)
+                        Image("OnlineDetails")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, smallSpacing)
+                            .padding(.bottom, extraSmallSpacing)
+                            .padding(.trailing, smallSpacing)
+                        //MARK: - Info Component
+                        VStack {
+                            VStack(alignment: .center, spacing: extraExtraSmallSpacing) {
+                                VStack(alignment: .center, spacing: nanoSpacing) {
+                                    Text("Desafio de quantidade")
+                                        .font(descriptionFont)
+                                        .foregroundColor(foregroundColor)
+                                        .padding(.top, extraSmallSpacing)
+                                    
+                                    Text(quickChallenge.name)
+                                        .font(largeTitleFont)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(foregroundColor)
+                                        .padding(.horizontal, nanoSpacing)
+                                }
                                 
-                                Text(quickChallenge.name)
-                                    .font(largeTitleFont)
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(foregroundColor)
-                                    .padding(.horizontal, nanoSpacing)
+                                VStack(alignment: .center, spacing: nanoSpacing) {
+                                    Text("Objetivo")
+                                        .font(descriptionFont)
+                                        .foregroundColor(foregroundColor)
+                                    
+                                    Text("\(quickChallenge.goal) points")
+                                        .font(largeTitleFont)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(foregroundColor)
+                                        .padding(.horizontal, nanoSpacing)
+                                }
+                                VStack(alignment: .center, spacing: nanoSpacing) {
+                                    Text("Tipo")
+                                        .font(descriptionFont)
+                                        .foregroundColor(foregroundColor)
+                                    
+                                    Text("Online")
+                                        .font(largeTitleFont)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(foregroundColor)
+                                        .padding(.bottom, extraSmallSpacing)
+                                        .padding(.horizontal, nanoSpacing)
+                                }
                             }
-                            
-                            VStack(alignment: .center, spacing: nanoSpacing) {
-                                Text("Objetivo")
-                                    .font(descriptionFont)
-                                    .foregroundColor(foregroundColor)
-                                
-                                Text("\(quickChallenge.goal) points")
-                                    .font(largeTitleFont)
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(foregroundColor)
-                                    .padding(.horizontal, nanoSpacing)
-                            }
-                            VStack(alignment: .center, spacing: nanoSpacing) {
-                                Text("Tipo")
-                                    .font(descriptionFont)
-                                    .foregroundColor(foregroundColor)
-                                
-                                Text("Online")
-                                    .font(largeTitleFont)
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(foregroundColor)
-                                    .padding(.bottom, extraSmallSpacing)
-                                    .padding(.horizontal, nanoSpacing)
-                            }
+                            .frame(width: UIScreen.main.bounds.width * 0.9)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: borderSmall)
+                                    .stroke(foregroundColor, lineWidth: 2)
+                            )
                         }
-                        .frame(width: UIScreen.main.bounds.width * 0.9)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: borderSmall)
-                                .stroke(foregroundColor, lineWidth: 2)
-                        )
-                    }
-                    
-                    //MARK: - Invite Participants
-                    HStack {
-                        Button {
-                            isPresentingInvite = true
-                        } label: {
-                            Text("Convidar Participante")
-                                .font(descriptionFontBold)
-                                .padding(.leading, 16)
-                            Image(systemName: "square.and.arrow.up")
-                                .font(descriptionFontBold)
-                                .padding(.trailing, 16)
-                        }
-                    }
-                    .sheet(isPresented: $isPresentingInvite, content: {
-                        InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
-                    })
-                    .foregroundColor(foregroundColor)
-                    .background(.clear)
-                    .padding(.horizontal, defaultMarginSpacing)
-                    .padding(.top, extraSmallSpacing)
-                    .padding(.bottom, extraExtraSmallSpacing)
-                    
-                    
-                    //MARK: - List of Participants
-                    HStack {
-                        Button {
-                            isPresentingParticipantsList.toggle()
-                        } label: {
-                            Text("Participantes")
-                                .padding(.leading, 16)
-                            Spacer()
-                            Text("Ver todos")
-                            Image(systemName: "chevron.right")
-                                .padding(.trailing, 16)
-                        }
-                    }
-                    .foregroundColor(foregroundColor)
-                    .frame(maxHeight: 44)
-                    .background(Tokens.Colors.Neutral.Low.dark.value)
-                    .cornerRadius(borderSmall)
-                    .padding(.horizontal, defaultMarginSpacing)
-                    
-                    NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                         
-                    ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                        //MARK: - Invite Participants
+                        HStack {
+                            Button {
+                                isPresentingInvite = true
+                            } label: {
+                                Text("Convidar Participante")
+                                    .font(descriptionFontBold)
+                                    .padding(.leading, 16)
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(descriptionFontBold)
+                                    .padding(.trailing, 16)
+                            }
+                        }
+                        .sheet(isPresented: $isPresentingInvite, content: {
+                            InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                        })
+                        .foregroundColor(foregroundColor)
+                        .background(.clear)
                         .padding(.horizontal, defaultMarginSpacing)
-                        .padding(.vertical, extraExtraSmallSpacing)
+                        .padding(.top, extraSmallSpacing)
+                        .padding(.bottom, extraExtraSmallSpacing)
+                        
+                        
+                        //MARK: - List of Participants
+                        HStack {
+                            Button {
+                                isPresentingParticipantsList.toggle()
+                            } label: {
+                                Text("Participantes")
+                                    .padding(.leading, 16)
+                                Spacer()
+                                Text("Ver todos")
+                                Image(systemName: "chevron.right")
+                                    .padding(.trailing, 16)
+                            }
+                        }
+                        .foregroundColor(foregroundColor)
+                        .frame(height: 44)
+                        .background(Tokens.Colors.Neutral.Low.dark.value)
+                        .cornerRadius(borderSmall)
+                        .padding(.horizontal, defaultMarginSpacing)
+                        
+                        NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
+                            
+                        ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                            .padding(.horizontal, defaultMarginSpacing)
+                            .padding(.vertical, extraExtraSmallSpacing)
+                    }
                 }
             }
             .toolbar {
