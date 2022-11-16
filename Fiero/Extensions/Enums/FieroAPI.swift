@@ -27,9 +27,11 @@ enum FieroAPIEnum: CustomStringConvertible {
 enum QuickChallengeEndpointEnum: CustomStringConvertible {
     case CREATE_CHALLENGE
     case GET_CHALLENGES
+    case GET_CHALLENGE
     case DELETE_CHALLENGES
     case ENTER_CHALLENGE
     case REMOVE_PARTICIPANT
+    case EXIT_CHALLENGE
     case PATCH_CHALLENGES_BEGIN
     case PATCH_CHALLENGES_FINISHED
     case PATCH_CHALLENGES_SCORE
@@ -40,8 +42,12 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
                 return "/quickChallenge/create"
             case .GET_CHALLENGES:
                 return "/quickChallenge/playing"
+            case .GET_CHALLENGE:
+                return "/quickChallenge"
             case .DELETE_CHALLENGES:
                 return "/quickChallenge"
+            case .EXIT_CHALLENGE:
+                return "/quickChallenge/exit"
             case .ENTER_CHALLENGE:
                 return "/quickChallenge/join"
             case .REMOVE_PARTICIPANT:

@@ -22,6 +22,10 @@
 		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
 		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
+		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
+		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
+		1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */; };
+		1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */; };
 		1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */; };
 		1B3ED070287F39EC00E1538B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED06F287F39EC00E1538B /* HTTPClient.swift */; };
 		1B3ED072287F45DE00E1538B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */; };
@@ -71,6 +75,9 @@
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
 		1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */; };
 		1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */; };
+		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
+		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
+		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
 		488919FA28F8AF0200958743 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F928F8AF0200958743 /* SettingsView.swift */; };
@@ -96,22 +103,25 @@
 		CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */; };
 		CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE82900728A0038737A /* CreationSmallCardView.swift */; };
 		CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */; };
-		CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEE29032FE80038737A /* InviteChallengerView.swift */; };
 		CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEC290318280038737A /* EnterWithCodeView.swift */; };
+		CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEE29032FE80038737A /* InviteChallengerView.swift */; };
 		CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */; };
 		CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */; };
 		CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA559928873BC900740663 /* BestOfComponent.swift */; };
 		CCFA55A428887EFE00740663 /* ParticipantComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A328887EFE00740663 /* ParticipantComponent.swift */; };
 		CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55A528887F2300740663 /* ParticipantStyles.swift */; };
 		CCFA55AB288899F900740663 /* GroupComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA55AA288899F900740663 /* GroupComponent.swift */; };
+		DF06F8D529114C7C00A170C2 /* QRCodeScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */; };
+		DF06F8D829114C7C00A170C2 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06F8D429114C7C00A170C2 /* ScanViewController.swift */; };
 		DF49516928B902650046A2CD /* GIfImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49516828B902650046A2CD /* GIfImage.swift */; };
+		DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF588A3029105AF000F10E02 /* LetterComponent.swift */; };
 		DF7226F728C13EE400237621 /* quantity2.json in Resources */ = {isa = PBXBuildFile; fileRef = DF7226F628C13EE400237621 /* quantity2.json */; };
 		DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75728BF85B60079DBB0 /* Haptics.swift */; };
 		DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF73C75928BF97F80079DBB0 /* LottieView.swift */; };
 		DF73C75D28BF9C760079DBB0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C75C28BF9C760079DBB0 /* loading.json */; };
 		DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76428BFC84F0079DBB0 /* quantity.json */; };
 		DF73C76928BFD7780079DBB0 /* tonto.json in Resources */ = {isa = PBXBuildFile; fileRef = DF73C76828BFD7780079DBB0 /* tonto.json */; };
-		DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */; };
+		DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */; };
 		DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB228AEB9F400B387BA /* ProfileView.swift */; };
 		DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7DCDB428AEC17B00B387BA /* TabBar.swift */; };
 		DF94518528C2851F00744BAC /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = DF94518428C2851F00744BAC /* success.gif */; };
@@ -169,6 +179,10 @@
 		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
 		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
+		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
+		1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
+		1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		1B3ED06F287F39EC00E1538B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1B3ED071287F45DE00E1538B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -221,6 +235,9 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
+		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
+		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
 		488919F928F8AF0200958743 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -246,8 +263,8 @@
 		CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineOrOfflineView.swift; sourceTree = "<group>"; };
 		CCE03FE82900728A0038737A /* CreationSmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardView.swift; sourceTree = "<group>"; };
 		CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardStyles.swift; sourceTree = "<group>"; };
-		CCE03FEE29032FE80038737A /* InviteChallengerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteChallengerView.swift; sourceTree = "<group>"; };
 		CCE03FEC290318280038737A /* EnterWithCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithCodeView.swift; sourceTree = "<group>"; };
+		CCE03FEE29032FE80038737A /* InviteChallengerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteChallengerView.swift; sourceTree = "<group>"; };
 		CCFA559528872D1B00740663 /* QuantityTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeComponent.swift; sourceTree = "<group>"; };
 		CCFA559728872D2E00740663 /* QuantityTimeStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTimeStyles.swift; sourceTree = "<group>"; };
 		CCFA559928873BC900740663 /* BestOfComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfComponent.swift; sourceTree = "<group>"; };
@@ -255,14 +272,17 @@
 		CCFA55A528887F2300740663 /* ParticipantStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantStyles.swift; sourceTree = "<group>"; };
 		CCFA55A828888A7F00740663 /* ChallengeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsView.swift; sourceTree = "<group>"; };
 		CCFA55AA288899F900740663 /* GroupComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupComponent.swift; sourceTree = "<group>"; };
+		DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeScanView.swift; sourceTree = "<group>"; };
+		DF06F8D429114C7C00A170C2 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		DF49516828B902650046A2CD /* GIfImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfImage.swift; sourceTree = "<group>"; };
+		DF588A3029105AF000F10E02 /* LetterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterComponent.swift; sourceTree = "<group>"; };
 		DF7226F628C13EE400237621 /* quantity2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quantity2.json; sourceTree = "<group>"; };
 		DF73C75728BF85B60079DBB0 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		DF73C75928BF97F80079DBB0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DF73C75C28BF9C760079DBB0 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		DF73C76428BFC84F0079DBB0 /* quantity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = quantity.json; sourceTree = "<group>"; };
 		DF73C76828BFD7780079DBB0 /* tonto.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tonto.json; sourceTree = "<group>"; };
-		DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Picture Component.swift"; sourceTree = "<group>"; };
+		DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureComponent.swift; sourceTree = "<group>"; };
 		DF7DCDB228AEB9F400B387BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DF7DCDB428AEC17B00B387BA /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		DF94518428C2851F00744BAC /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
@@ -316,6 +336,7 @@
 		1B0A027F2885DBE400C4A421 /* Challenges */ = {
 			isa = PBXGroup;
 			children = (
+				DF06F8D029114C6A00A170C2 /* QRCode */,
 				1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */,
 				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
 				CCE03FEC290318280038737A /* EnterWithCodeView.swift */,
@@ -402,6 +423,10 @@
 				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
 				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
 				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
+				1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */,
+				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
+				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
+				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -484,6 +509,8 @@
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
 				1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */,
 				1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */,
+				1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */,
+				1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -550,6 +577,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DF588A3229105EDE00F10E02 /* InviteCode */,
 				DF7DCDAF28AEB63500B387BA /* ProfilePictureComponent */,
 				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
 				1B0A02A62887CAAF00C4A421 /* Picker */,
@@ -765,8 +793,26 @@
 				CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */,
 				DFAF4EDE28D243150022A731 /* ChallengeListCell.swift */,
 				CCE03FEE29032FE80038737A /* InviteChallengerView.swift */,
+				1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		DF06F8D029114C6A00A170C2 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				DF06F8D129114C7C00A170C2 /* QRCodeScanView.swift */,
+				DF06F8D429114C7C00A170C2 /* ScanViewController.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
+		DF588A3229105EDE00F10E02 /* InviteCode */ = {
+			isa = PBXGroup;
+			children = (
+				DF588A3029105AF000F10E02 /* LetterComponent.swift */,
+			);
+			path = InviteCode;
 			sourceTree = "<group>";
 		};
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
@@ -792,7 +838,7 @@
 		DF7DCDAF28AEB63500B387BA /* ProfilePictureComponent */ = {
 			isa = PBXGroup;
 			children = (
-				DF7DCDB028AEB65000B387BA /* Profile Picture Component.swift */,
+				DF7DCDB028AEB65000B387BA /* ProfilePictureComponent.swift */,
 			);
 			path = ProfilePictureComponent;
 			sourceTree = "<group>";
@@ -1053,6 +1099,8 @@
 				CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */,
+				1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */,
+				DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */,
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
@@ -1068,11 +1116,13 @@
 				CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */,
 				DF49516928B902650046A2CD /* GIfImage.swift in Sources */,
 				1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */,
+				DF06F8D829114C7C00A170C2 /* ScanViewController.swift in Sources */,
 				1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */,
 				F8E7C7712887B4CD0035E2CE /* ChallengeCellComponent.swift in Sources */,
 				1B3ED07B2881E16700E1538B /* HTTPResult.swift in Sources */,
 				1B9092A42878AD320039EBB7 /* UserViewModel.swift in Sources */,
 				DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */,
+				1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */,
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
@@ -1080,6 +1130,7 @@
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
 				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
+				1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
@@ -1087,7 +1138,7 @@
 				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
-				DF7DCDB128AEB65000B387BA /* Profile Picture Component.swift in Sources */,
+				DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */,
 				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
 				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
@@ -1099,6 +1150,7 @@
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
 				CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */,
 				1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */,
+				1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
@@ -1120,13 +1172,17 @@
 				1B8CD354288A7FF400D2F703 /* EmptyChallengesView.swift in Sources */,
 				489B528E28A575A400ADAF49 /* OngoingScreen.swift in Sources */,
 				DF94A38E28C2236F003B47B8 /* WinScreen.swift in Sources */,
+				DF06F8D529114C7C00A170C2 /* QRCodeScanView.swift in Sources */,
 				488919FA28F8AF0200958743 /* SettingsView.swift in Sources */,
 				1B90929C2878A5A40039EBB7 /* ButtonStyles.swift in Sources */,
+				1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
+				1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */,
 				CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */,
 				CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */,
 				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,
 				1B5B7CE428761F7800B4628F /* TextFieldStyleVariant.swift in Sources */,
+				1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */,
 				1B3ED07D2881E1A100E1538B /* Publisher+Extensions.swift in Sources */,
 				1B3ED07728809DAF00E1538B /* ServerResponse.swift in Sources */,
 				CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */,

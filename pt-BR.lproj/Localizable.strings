@@ -99,9 +99,14 @@
 //MARK: - EnterWithCode
     "enterWithCodeNavTitle" = "Entrar por código";
     "enterWithCodeCloseButton" = "Fechar";
-    "enterWithCodeDescription" = "Cole o código do desafio aqui para participar com seus amigos";
+    "enterWithCodeDescription" = "Insira o código do desafio";
     "enterWithCodePlaceholder" = "Código do desafio";
     "enterWithCodeButtonText" = "Entrar no desafio";
+    "openScanQRCodeButtonText" = "Escanear QR Code";
+
+//MARK: - EnterWithQRCode
+    "titleQRCodeView" = "Aponte a câmera\npara o QRCode";
+    "backButtonQRCodeView" = "Voltar";
 
 //MARK: - ChallengeTypes
     "amount" = "de quantidade";
@@ -144,9 +149,9 @@
 //MARK: - Quick - InviteChallengerView
     "inviteNavTitle" = "Convidar desafiante";
     "inviteCloseButton" = "Fechar";
-    "inviteTitle" = "Desafie seus amigos!";
+    "inviteTitle" = "Desafie\nseus amigos!";
     "inviteDescription" = "Use o código abaixo para convidar os seus amigos para o desafio";
-    "inviteButtonCodeText" = "Clique para copiar";
+    "inviteButtonCodeText" = "Toque para copiar";
     "inviteButtonBackToDetails" = "Voltar para os detalhes";
 
 // MARK: - Quick - Details - ChallengeDetailsView
