@@ -16,14 +16,14 @@
 // adicionar imagens em ingles
 "Pular" = "Pular";
 "firstImage" = "OnboardingNamePT";
-"firstTitle" = "Desafie seus amigos";
-"firstDescription" = "Um desafio entre amigos é uma maneira divertida de ter uma competição saudável e criar memórias juntas.";
+"firstTitle" = "Desafios personalizados";
+"firstDescription" = "Crie desafios para fazer \ncom os seus amigos";
 "secondImage" = "OnboardingDuelPT";
-"secondTitle" = "Olho na pontuação";
-"secondDescription" = "Depois de definir quantas pessoas estão participando do seu desafio, adicione a pontuação que definirá a vitória.";
+"secondTitle" = "Marque os pontos";
+"secondDescription" = "Marque seus pontos e acompanhe as\npontuações de seus desafiantes";
 "thirdImage" = "OnboardingChallengeType";
-"thirdTitle" = "Múltiplos desafios";
-"thirdDescription" = "É um passo pra frente e dois pra trás! Você é uma máquina de vencer, pratique.";
+"thirdTitle" = "Desafios online e offline";
+"thirdDescription" = "Convide seus amigos e mostre que\nvocê é uma máquina de vencer";
 "Quero começar!" = "Quero começar!";
 
 
@@ -135,6 +135,8 @@
     "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";
     "bestOfChallengeSubtitle" = "Competições de três ou\ncinco rounds.";
+    "volleiChallengeTitle" = "Vôlei";
+    "volleiChallengeSubtitle" = "Um set de 25 pontos";
 
 // MARK: - Quick: ChallengeParticipantsView
     "Escolha a quantidade\nde participantes" = "Escolha a quantidade\nde participantes";
