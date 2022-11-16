@@ -78,6 +78,7 @@
 		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
 		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
+		1BF3DA782925573800BAED81 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA772925573800BAED81 /* LeaderboardView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
 		488919FA28F8AF0200958743 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F928F8AF0200958743 /* SettingsView.swift */; };
@@ -238,6 +239,7 @@
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
+		1BF3DA772925573800BAED81 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
 		488919F928F8AF0200958743 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1BF3DA762925571E00BAED81 /* Online */,
 				DF588A3229105EDE00F10E02 /* InviteCode */,
 				DF7DCDAF28AEB63500B387BA /* ProfilePictureComponent */,
 				CC4FEDE628A191D100E53C39 /* ScoreControllers */,
@@ -663,6 +666,14 @@
 				1B0A029F2887ACD400C4A421 /* BestOf */,
 			);
 			path = WIP;
+			sourceTree = "<group>";
+		};
+		1BF3DA762925571E00BAED81 /* Online */ = {
+			isa = PBXGroup;
+			children = (
+				1BF3DA772925573800BAED81 /* LeaderboardView.swift */,
+			);
+			path = Online;
 			sourceTree = "<group>";
 		};
 		484F33E428F0A129005A8563 /* Players */ = {
@@ -1143,6 +1154,7 @@
 				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
+				1BF3DA782925573800BAED81 /* LeaderboardView.swift in Sources */,
 				CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */,
 				DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */,
 				CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */,
