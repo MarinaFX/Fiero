@@ -349,7 +349,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    //MARK: - Fisnih Challenge Update
+    //MARK: - Finish Challenge Update
     @discardableResult
     func finishChallenge(challengeId: String, finished: Bool) -> AnyPublisher<Void, Error> {
         let json = """
@@ -475,6 +475,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Exit Challenge
     @discardableResult
     func exitChallenge(by id: String) -> AnyPublisher<Void, Error> {
         let operation = self.authTokenService.getAuthToken()
@@ -532,6 +533,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Remove Participant
     @discardableResult
     func remove(participant userID: String, from challengeID: String) -> AnyPublisher<Void, Error> {
         let json = """
