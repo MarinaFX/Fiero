@@ -20,6 +20,7 @@ extension UserDefaults: KeyValueStorage { }
 
 public func makeGETRequest
 (
+    param: String = "",
     scheme: String,
     port: Int,
     baseURL: String,
@@ -30,8 +31,8 @@ public func makeGETRequest
     urlComponents.scheme = scheme
     urlComponents.port = port
     urlComponents.host = baseURL
-    urlComponents.path = endPoint
-    
+    urlComponents.path = endPoint + (!param.isEmpty ? "/\(param)" : "")
+
     let url = urlComponents.url!
     var request = URLRequest(url: url)
     
@@ -177,7 +178,7 @@ public func makePATCHRequestScore
     urlComponents.port = port
     urlComponents.host = baseURL
     urlComponents.path = endPoint + "/\(challengeId)" + "/team" + "/\(teamId)" + "/member" + "/\(memberId)" + "/\(variableToBePatched)"
-    print(urlComponents.url!)
+
     let url = urlComponents.url!
     var request = URLRequest(url: url)
     

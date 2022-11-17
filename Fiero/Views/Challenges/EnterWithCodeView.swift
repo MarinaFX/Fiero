@@ -12,43 +12,78 @@ struct EnterWithCodeView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
+    @State var isPresentingQRCodeReader: Bool = false
+    
     @State private var challengeCode: String = ""
     @State private var isShowingErrorAlert: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
+    @State private var challengeCodeArray: [String] = ["_", "_", "_", "_", "_"]
+    @FocusState private var keyboardFocused: Bool
     
     var body: some View {
         NavigationView {
             ZStack {
                 Tokens.Colors.Background.dark.value
                     .edgesIgnoringSafeArea(.all)
-                
-                VStack(spacing: Tokens.Spacing.xs.value) {
-                    Spacer()
-                    
-                    Text(LocalizedStringKey("enterWithCodeDescription"))
-                        .multilineTextAlignment(.center)
-                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .padding(.horizontal, Tokens.Spacing.lg.value)
-                    
-                    VStack(spacing: Tokens.Spacing.xxxs.value) {
-                        CustomTextFieldView(placeholder: "enterWithCodePlaceholder",
-                                            keyboardType: .alphabet,
-                                            isSecure: false,
-                                            isLowCase: true,
-                                            isWrong: .constant(false),
-                                            text: $challengeCode)
-
-                        ButtonComponent(style: .primary(isEnabled: true),
-                                        text: "enterWithCodeButtonText") {
-                            if self._challengeCode.wrappedValue.count < 5 || self._challengeCode.wrappedValue.count > 5 {
-                                self.quickChallengeViewModel.joinChallengeAlertCases = .invalidCode
-                                self.isShowingErrorAlert = true
-                            }
-                            else {
-                                self.quickChallengeViewModel.enterChallenge(by: self.challengeCode)
-                                    .sink(receiveCompletion: { completion in
-                                        switch completion {
+                ScrollView (showsIndicators: false) {
+                    VStack(spacing: Tokens.Spacing.xs.value) {
+                        Spacer()
+                        
+                        Text(LocalizedStringKey("enterWithCodeDescription"))
+                            .multilineTextAlignment(.center)
+                            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .padding(.horizontal, Tokens.Spacing.md.value)
+                        
+                        VStack(spacing: Tokens.Spacing.xxxs.value) {
+                            
+                            ZStack {
+                                HStack {
+                                    TextField("", text: $challengeCode.max(5))
+                                        .disableAutocorrection(true)    
+                                        .textCase(.uppercase)
+                                        .opacity(0)
+                                        .foregroundColor(.clear)
+                                        .focused($keyboardFocused)
+                                        .onChange(of: challengeCode) { _ in
+                                            
+                                            challengeCodeArray = challengeCode.map { String($0) }
+                                            
+                                            if challengeCodeArray.count < 6 {
+                                                if challengeCodeArray.count != 5 {
+                                                    let times = 5 - challengeCodeArray.count
+                                                    for _ in 1...times {
+                                                        challengeCodeArray.append("_")
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                    keyboardFocused = true
+                                                }
+                                            }
+                                }
+                                HStack {
+                                    ForEach(challengeCodeArray, id: \.self) {
+                                        LetterComponent(letter: $0, variant: .input)
+                                    }
+                                }
+                            }.frame(height: 80)
+                                .onTapGesture {
+                                    keyboardFocused = true
+                                }
+                            
+                            ButtonComponent(style: .primary(isEnabled: true),
+                                            text: "enterWithCodeButtonText") {
+                                if self._challengeCode.wrappedValue.count < 5 || self._challengeCode.wrappedValue.count > 5 {
+                                    self.quickChallengeViewModel.joinChallengeAlertCases = .invalidCode
+                                    self.isShowingErrorAlert = true
+                                }
+                                else {
+                                    self.quickChallengeViewModel.enterChallenge(by: self.challengeCode)
+                                        .sink(receiveCompletion: { completion in
+                                            switch completion {
                                             case .failure(_):
                                                 self.isShowingErrorAlert = true
                                             case .finished:
@@ -60,14 +95,23 @@ struct EnterWithCodeView: View {
                                                 }
                                                 
                                                 return
-                                        }
-                                    }, receiveValue: { _ in () })
-                                    .store(in: &subscriptions)
+                                            }
+                                        }, receiveValue: { _ in () })
+                                        .store(in: &subscriptions)
+                                }
+                            }
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: "openScanQRCodeButtonText") {
+                                self.isPresentingQRCodeReader = true
+                            }.fullScreenCover(isPresented: $isPresentingQRCodeReader) {
+                                QRCodeScanView(codeReadByCamera: $challengeCode)
+                            }.onChange(of: challengeCode) { _ in
+                                isPresentingQRCodeReader = false
                             }
                         }
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                        .padding(.bottom, Tokens.Spacing.xs.value)
                     }
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    .padding(.bottom, Tokens.Spacing.sm.value)
                 }
             }
             .alert(self.quickChallengeViewModel.joinChallengeAlertCases.title,
@@ -82,16 +126,16 @@ struct EnterWithCodeView: View {
                 })
             }, message: { error in
                 switch error {
-                    case .none:
-                        Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
-                    case .challengeNotFound:
-                        Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
-                    case .alreadyJoinedChallenge:
-                        Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
-                    case .invalidCode:
-                        Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
-                    case .internalServerError:
-                        Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
+                case .none:
+                    Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
+                case .challengeNotFound:
+                    Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
+                case .alreadyJoinedChallenge:
+                    Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
+                case .invalidCode:
+                    Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
+                case .internalServerError:
+                    Text(self.quickChallengeViewModel.joinChallengeAlertCases.message)
                 }
             })
             .navigationTitle(LocalizedStringKey("enterWithCodeNavTitle"))
