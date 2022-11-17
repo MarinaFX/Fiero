@@ -13,10 +13,13 @@ struct LeaderboardView: View {
     var body: some View {
         HStack {
             LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.one.value, placement: .second)
+                .padding(.vertical)
+                .padding(.leading)
             
             LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.three.value, placement: .first)
             
             LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.two.value, placement: .third)
+                .padding(.trailing)
         }
         .environment(\.colorScheme, .dark)
         .background(Tokens.Colors.Neutral.Low.pure.value)
@@ -51,6 +54,7 @@ struct LeaderboardParticipantView: View {
                 .padding(Tokens.Spacing.quarck.value)
             
             Text("9.666")
+                .bold()
         }
     }
 }

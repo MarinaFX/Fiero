@@ -16,6 +16,7 @@ struct OnlineChallengeDetailsView: View {
     
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
+    @State private var isPresetingOngoingView: Bool = false
     
     var body: some View {
         NavigationView {
@@ -120,8 +121,12 @@ struct OnlineChallengeDetailsView: View {
                         .padding(.horizontal, defaultMarginSpacing)
                         
                         NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
-                            
-                        ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                        
+                        NavigationLink("", destination: OnlineOngoingChallengeView(), isActive: self.$isPresetingOngoingView).hidden()
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                            self.isPresetingOngoingView.toggle()
+                        })
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.vertical, extraExtraSmallSpacing)
                     }

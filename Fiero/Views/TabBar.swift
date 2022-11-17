@@ -42,6 +42,13 @@ struct TabBarView: View {
                           systemImage: "person")
                 }
                 .tag(3)
+            
+            OnlineOngoingChallengeView()
+                .tabItem {
+                    Label("Perfil",
+                          systemImage: "person")
+                }
+                .tag(4)
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)
