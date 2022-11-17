@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TabBarView: View {
     
+    @State private var firstTab = 2
+    
     init() {
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().backgroundImage = UIImage()
@@ -19,16 +21,27 @@ struct TabBarView: View {
     }
     
     var body: some View {
-        TabView {
+        TabView(selection: $firstTab) {
             HomeView()
-            .tabItem {
-                Label("Desafios", systemImage: "list.triangle")
-            }
+                .tabItem {
+                    Label("Desafios",
+                          systemImage: "list.triangle")
+                }
+                .tag(1)
+            
+            QCCategorySelectionView()
+                .tabItem {
+                    Label("Criar",
+                          systemImage: "plus")
+                }
+                .tag(2)
             
             ProfileView()
-            .tabItem {
-                Label("Perfil", systemImage: "person")
-            }
+                .tabItem {
+                    Label("Perfil",
+                          systemImage: "person")
+                }
+                .tag(3)
         }
         .preferredColorScheme(.dark)
         .environment(\.colorScheme, .dark)

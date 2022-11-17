@@ -91,6 +91,9 @@ struct QCChallengeCreatedView: View {
             }
             .hidden()
         }
+        .onTapGesture {
+            RootViewController.popToRootViewController()
+        }
         .alert(isPresented: self.$isPresentingAlert, content: {
             return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),
                          message: Text(DetailsAlertCases.failureStartChallenge.message),
