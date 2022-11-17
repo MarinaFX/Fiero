@@ -81,6 +81,7 @@
 
 // MARK: - TabBar
     "Desafios" = "Desafios";
+    "Criar" = "Criar";
     "Perfil" = "Perfil";
 
 // MARK: - ChallengeListScreenView
@@ -128,7 +129,7 @@
     "Erro" = "Erro";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Escolha um\ntipo de desafio";
+    "homeScreenTitle" = "É hora de se desafiar";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
     "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
     "timeChallengeTypeTitle" = "Desafio de \ntempo";

@@ -82,6 +82,7 @@
 
 // MARK: - TabBar
     "Desafios" = "Challenges";
+    "Criar" = "Create";
     "Perfil" = "Profile";
 
 // MARK: - ChallengeListScreenView
@@ -130,7 +131,7 @@ We can't get your challenges now, try again";
     "Erro" = "Error";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Choose a \nchallenge type";
+    "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
     "timeChallengeTypeTitle" = "Time \nchallenge";
