@@ -14,8 +14,10 @@ struct OnlineChallengeDetailsView: View {
     
     @Binding var quickChallenge: QuickChallenge
     
+    @State private var subscriptions: Set<AnyCancellable> = []
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
+    @State private var isPresentingAlert: Bool = false
     
     var body: some View {
         let isOwner = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) == quickChallenge.ownerId
@@ -143,6 +145,7 @@ struct OnlineChallengeDetailsView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
+                            self.isPresentingAlert = true
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
@@ -153,6 +156,39 @@ struct OnlineChallengeDetailsView: View {
                     }
                     
                 }
+                .alert(isPresented: self.$isPresentingAlert, content: {
+                    switch quickChallengeViewModel.detailsAlertCases {
+                        case .deleteChallenge:
+                            return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
+                                         message: Text(DetailsAlertCases.deleteChallenge.message),
+                                         primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
+                                self.isPresentingAlert = false
+                            }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
+                                self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
+                                    .sink { completion in
+                                        switch completion {
+                                        case .finished:
+                                            self.dismiss()
+                                        case .failure(let error):
+                                            print(error)
+                                            self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
+                                            self.isPresentingAlert.toggle()
+                                        }
+                                    } receiveValue: { _ in }
+                                    .store(in: &subscriptions)
+                            }))
+                        case .failureDeletingChallenge:
+                                return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
+                                    self.isPresentingAlert = false
+                                    self.dismiss()
+                                }))
+                        default:
+                            return Alert(title: Text("Sorry"), message: Text("Something went wrong."), dismissButton: .cancel(Text("ok"), action: {
+                                self.isPresentingAlert = false
+                                self.dismiss()
+                            }))
+                    }
+                })
             }
             else {
                 //if is not owner (toolbar with if is only available at ios 16+)
