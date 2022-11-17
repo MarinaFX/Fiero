@@ -76,6 +76,7 @@ public func makePOSTRequest
 public func makeDELETERequest
 (
     param: String = "",
+    body: String = "",
     scheme: String,
     port: Int,
     baseURL: String,
@@ -91,6 +92,7 @@ public func makeDELETERequest
     let url = urlComponents.url!
     var request = URLRequest(url: url)
     request.httpMethod = "DELETE"
+    request.httpBody = body.data(using: .utf8)!
 
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue(authToken, forHTTPHeaderField: "authToken")

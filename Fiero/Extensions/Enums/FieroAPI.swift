@@ -30,6 +30,7 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
     case GET_CHALLENGE
     case DELETE_CHALLENGES
     case ENTER_CHALLENGE
+    case REMOVE_PARTICIPANT
     case EXIT_CHALLENGE
     case PATCH_CHALLENGES_BEGIN
     case PATCH_CHALLENGES_FINISHED
@@ -49,6 +50,8 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
                 return "/quickChallenge/exit"
             case .ENTER_CHALLENGE:
                 return "/quickChallenge/join"
+            case .REMOVE_PARTICIPANT:
+                return "/quickChallenge/removeParticipant"
             case .PATCH_CHALLENGES_BEGIN:
                 return "/quickChallenge"
             case .PATCH_CHALLENGES_FINISHED:
