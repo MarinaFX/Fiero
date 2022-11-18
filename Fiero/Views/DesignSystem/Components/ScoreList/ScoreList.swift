@@ -16,7 +16,7 @@ struct ScoreList: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            Text("\(position)")
+            Text("\(position)º")
                 .font(style.numberFont)
             ZStack {
                 HStack {
@@ -31,12 +31,12 @@ struct ScoreList: View {
                         .foregroundColor(style.labelColor)
                         .padding(.trailing, style.spacing)
                 }
+                .padding(.vertical)
             }
             .frame(maxWidth: .infinity, maxHeight: 48 , alignment: .leading)
             .background(style.backgroundColor)
             .cornerRadius(style.borderRadius)
         }
-        .padding(.horizontal, 20)
     }
 }
 

@@ -79,6 +79,7 @@
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
 		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
 		1BF3DA782925573800BAED81 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA772925573800BAED81 /* LeaderboardView.swift */; };
+		1BF3DA7B2926B81E00BAED81 /* OnlineOngoingChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7A2926B81E00BAED81 /* OnlineOngoingChallengeView.swift */; };
 		484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F33E528F0A1FB005A8563 /* SoundPlayer.swift */; };
 		488919F828F8A93000958743 /* HapticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F728F8A93000958743 /* HapticsController.swift */; };
 		488919FA28F8AF0200958743 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488919F928F8AF0200958743 /* SettingsView.swift */; };
@@ -242,6 +243,7 @@
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
 		1BF3DA772925573800BAED81 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		1BF3DA7A2926B81E00BAED81 /* OnlineOngoingChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineOngoingChallengeView.swift; sourceTree = "<group>"; };
 		484F33E528F0A1FB005A8563 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		488919F728F8A93000958743 /* HapticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticsController.swift; sourceTree = "<group>"; };
 		488919F928F8AF0200958743 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -681,6 +683,14 @@
 			path = Online;
 			sourceTree = "<group>";
 		};
+		1BF3DA792926B78800BAED81 /* Online */ = {
+			isa = PBXGroup;
+			children = (
+				1BF3DA7A2926B81E00BAED81 /* OnlineOngoingChallengeView.swift */,
+			);
+			path = Online;
+			sourceTree = "<group>";
+		};
 		484F33E428F0A129005A8563 /* Players */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +756,7 @@
 		CCA2215728A18E09006AA03F /* Ongoing */ = {
 			isa = PBXGroup;
 			children = (
+				1BF3DA792926B78800BAED81 /* Online */,
 				CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */,
 				489B528D28A575A400ADAF49 /* OngoingScreen.swift */,
 				DF94A38D28C2236F003B47B8 /* WinScreen.swift */,
@@ -1124,6 +1135,7 @@
 				CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */,
+				1BF3DA7B2926B81E00BAED81 /* OnlineOngoingChallengeView.swift in Sources */,
 				1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */,
 				DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,

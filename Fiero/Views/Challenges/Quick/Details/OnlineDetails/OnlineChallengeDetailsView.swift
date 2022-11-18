@@ -16,6 +16,9 @@ struct OnlineChallengeDetailsView: View {
     
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
+    @State private var isPresetingOngoingView: Bool = false
+    @State private var isPresentingAlertError: Bool = false
+    @State private var subscriptions: Set<AnyCancellable> = []
     
     var body: some View {
         NavigationView {
@@ -120,8 +123,21 @@ struct OnlineChallengeDetailsView: View {
                         .padding(.horizontal, defaultMarginSpacing)
                         
                         NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
-                            
-                        ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                        
+                        NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure(_):
+                                            self.isPresentingAlertError = true
+                                        case .finished:
+                                            self.isPresetingOngoingView.toggle()
+                                    }
+                                }, receiveValue: { _ in () })
+                                .store(in: &subscriptions)
+                        })
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.vertical, extraExtraSmallSpacing)
                     }
