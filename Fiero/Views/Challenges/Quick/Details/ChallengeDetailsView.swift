@@ -133,7 +133,7 @@ struct ChallengeDetailsView: View {
                                         self.dismiss()
                                     case .failure(let error):
                                         print(error)
-                                        self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
+                                        self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                                         self.isPresentingAlert.toggle()
                                     }
                                 } receiveValue: { _ in }
@@ -154,10 +154,7 @@ struct ChallengeDetailsView: View {
                             self.dismiss()
                         }))
                     case .failureDeletingChallenge:
-                            return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
-                                self.isPresentingAlert = false
-                                self.dismiss()
-                            }))
+                        return Alert(title: Text("not expected"))
                     }
                 })
                 //MARK: - Navigation
