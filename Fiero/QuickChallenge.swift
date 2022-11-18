@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
     
@@ -29,6 +30,32 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
         hasher.combine(id)
         hasher.combine(name)
         hasher.combine(ownerId)
+    }
+    
+    func getRanking() -> [Team] {
+        return self.teams.sorted(by: { $0.getTotalScore() > $1.getTotalScore() })
+    }
+    
+    func getTeamPositionAtRanking(teamId: String) -> Int {
+        let orderedTeams: [Team] = self.getRanking()
+        for index in 0..<orderedTeams.count {
+            if(orderedTeams[index].id == teamId) {
+                return index
+            }
+        }
+        return -1
+    }
+    
+    func getTeamIdByMemberId(memberId: String) -> String {
+        for team in teams {
+            guard let members = team.members else { return "" }
+            for member in members {
+                if member.userId == memberId {
+                    return team.id
+                }
+            }
+        }
+        return ""
     }
     
     static func == (lhs: QuickChallenge, rhs: QuickChallenge) -> Bool {

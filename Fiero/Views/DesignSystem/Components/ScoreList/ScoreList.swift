@@ -16,7 +16,7 @@ struct ScoreList: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            Text("\(position)")
+            Text("\(position)º")
                 .font(style.numberFont)
             ZStack {
                 HStack {

@@ -10,10 +10,20 @@ import SwiftUI
 import Combine
 
 struct OnlineOngoingChallengeView: View {
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    
+    @State var subscriptions: Set<AnyCancellable> = []
+    
+    @Binding var quickChallenge: QuickChallenge
+    
+    private var score: Double {
+        return self.quickChallenge.teams.filter({ $0.members?.first?.userId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description)}).first?.members?.first?.score ?? -1.0
+    }
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                Text("Me diga aonde você vai \nque eu vou varrendo")
+                Text(self.quickChallenge.name)
                     .multilineTextAlignment(.center)
                     .lineLimit(5)
                     .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
@@ -26,13 +36,13 @@ struct OnlineOngoingChallengeView: View {
                 Text("Você")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
-                PlayerScoreControllerView()
+                PlayerScoreControllerView(quickChallenge: self.$quickChallenge)
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
                 Text("Lideres")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
-                LeaderboardView()
+                LeaderboardView(quickChallenge: self.$quickChallenge)
                     .cornerRadius(Tokens.Border.BorderRadius.small.value)
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
@@ -40,9 +50,7 @@ struct OnlineOngoingChallengeView: View {
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
                 VStack(spacing: Tokens.Spacing.nano.value) {
-                    ScoreList(style: .owner, position: 15, name: "Você", points: 99)
-                    ScoreList(style: .player, position: 15, name: "Você", points: 99)
-                    ScoreList(style: .player, position: 15, name: "Você", points: 99)
+                    RankedPlayersView(quickChallenge: self.$quickChallenge, userPosition: self.quickChallenge.getTeamPositionAtRanking(teamId: self.quickChallenge.getTeamIdByMemberId(memberId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "")))
                 }
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .padding(.bottom, Tokens.Spacing.sm.value)
@@ -50,7 +58,12 @@ struct OnlineOngoingChallengeView: View {
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarTrailing ,content: {
                         Button(action: {
-                            
+                            self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                                .sink(receiveCompletion: { _ in
+                                }, receiveValue: { quickChallenge in
+                                    self.quickChallenge = quickChallenge
+                                })
+                                .store(in: &subscriptions)
                         }, label: {
                             Image(systemName: "arrow.triangle.2.circlepath")
                         })
@@ -63,7 +76,62 @@ struct OnlineOngoingChallengeView: View {
     }
 }
 
+struct RankedPlayersView: View {
+    
+    @Binding var quickChallenge: QuickChallenge
+    
+    var userPosition: Int = 0
+    
+    var body: some View {
+        if self.quickChallenge.teams.count >= 3 {
+            if userPosition == 0 {
+                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                
+                ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                
+                ScoreList(style: .player, position: userPosition + 3, name: self.quickChallenge.getRanking()[userPosition+2].name, points: Int(self.quickChallenge.getRanking()[userPosition+2].getTotalScore()))
+            }
+            else {
+                if userPosition == self.quickChallenge.teams.count - 1 {
+                    ScoreList(style: .player, position: userPosition - 1, name: self.quickChallenge.getRanking()[userPosition-2].name, points: Int(self.quickChallenge.getRanking()[userPosition-2].getTotalScore()))
+                    
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                }
+                else {
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    
+                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                }
+            }
+        }
+        else {
+            if self.quickChallenge.teams.count == 2 {
+                if userPosition == 0 {
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    
+                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                }
+                else {
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                }
+            }
+            else {
+                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+            }
+        }
+    }
+}
+
 struct PlayerScoreControllerView: View {
+    
+    @Binding var quickChallenge: QuickChallenge
+    
     var body: some View {
         RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
             .padding(.horizontal, 32)
@@ -86,7 +154,7 @@ struct PlayerScoreControllerView: View {
                     
                     Spacer()
                     
-                    Text("1234")
+                    Text(String(format: "%.0f", self.quickChallenge.teams.first(where: { $0.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description)})?.getTotalScore() ?? -1.0))
                         .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
                     
                     Spacer()
@@ -110,6 +178,6 @@ struct PlayerScoreControllerView: View {
 
 struct OnlineOngoingChallengeView_Previews: PreviewProvider {
     static var previews: some View {
-        OnlineOngoingChallengeView()
+        OnlineOngoingChallengeView(quickChallenge: .constant(QuickChallenge(id: "", name: "", type: "", goal: 0, goalMeasure: "", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 0, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))))
     }
 }

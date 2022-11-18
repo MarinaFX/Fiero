@@ -17,6 +17,8 @@ struct OnlineChallengeDetailsView: View {
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
     @State private var isPresetingOngoingView: Bool = false
+    @State private var isPresentingAlertError: Bool = false
+    @State private var subscriptions: Set<AnyCancellable> = []
     
     var body: some View {
         NavigationView {
@@ -122,10 +124,19 @@ struct OnlineChallengeDetailsView: View {
                         
                         NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                         
-                        NavigationLink("", destination: OnlineOngoingChallengeView(), isActive: self.$isPresetingOngoingView).hidden()
+                        NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                         
                         ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                            self.isPresetingOngoingView.toggle()
+                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure(_):
+                                            self.isPresentingAlertError = true
+                                        case .finished:
+                                            self.isPresetingOngoingView.toggle()
+                                    }
+                                }, receiveValue: { _ in () })
+                                .store(in: &subscriptions)
                         })
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.vertical, extraExtraSmallSpacing)
