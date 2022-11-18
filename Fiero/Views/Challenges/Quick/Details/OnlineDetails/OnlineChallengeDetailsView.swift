@@ -17,7 +17,8 @@ struct OnlineChallengeDetailsView: View {
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
-    @State private var isPresentingAlert: Bool = false
+    @State private var isPresentingDeleteAlert: Bool = false
+    @State private var isPresentingExitAlert: Bool = false
     @State private var isPresetingOngoingView: Bool = false
     @State private var isPresentingAlertError: Bool = false
     
@@ -189,7 +190,7 @@ struct OnlineChallengeDetailsView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            self.isPresentingAlert = true
+                            self.isPresentingDeleteAlert = true
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
@@ -200,13 +201,13 @@ struct OnlineChallengeDetailsView: View {
                     }
                     
                 }
-                .alert(isPresented: self.$isPresentingAlert, content: {
+                .alert(isPresented: self.$isPresentingDeleteAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
                         case .deleteChallenge:
                             return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
                                          message: Text(DetailsAlertCases.deleteChallenge.message),
                                          primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
-                                self.isPresentingAlert = false
+                                self.isPresentingDeleteAlert = false
                             }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                                 self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                                     .sink { completion in
@@ -216,19 +217,19 @@ struct OnlineChallengeDetailsView: View {
                                         case .failure(let error):
                                             print(error)
                                             self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
-                                            self.isPresentingAlert.toggle()
+                                            self.isPresentingDeleteAlert.toggle()
                                         }
                                     } receiveValue: { _ in }
                                     .store(in: &subscriptions)
                             }))
                         case .failureDeletingChallenge:
                                 return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
-                                    self.isPresentingAlert = false
+                                    self.isPresentingDeleteAlert = false
                                     self.dismiss()
                                 }))
                         default:
                             return Alert(title: Text("Sorry"), message: Text("Something went wrong."), dismissButton: .cancel(Text("ok"), action: {
-                                self.isPresentingAlert = false
+                                self.isPresentingDeleteAlert = false
                                 self.dismiss()
                             }))
                     }
@@ -344,8 +345,47 @@ struct OnlineChallengeDetailsView: View {
                         }
                     }
                 }
+                .alert(isPresented: self.$isPresentingExitAlert, content: {
+                    switch self.quickChallengeViewModel.exitChallengeAlertCases {
+                        case .exitChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.exitChallenge.title),
+                                         message: Text(ExitChallengeAlertCasesEnum.exitChallenge.message),
+                                         primaryButton: .cancel(Text(ExitChallengeAlertCasesEnum.exitChallenge.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }), secondaryButton: .destructive(Text("Sair do desafio"), action: {
+                                self.quickChallengeViewModel.exitChallenge(by: self.quickChallenge.id)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .finished:
+                                                self.dismiss()
+                                            case .failure(let error):
+                                                print(error)
+                                                self.quickChallengeViewModel.exitChallengeAlertCases = .internalServerError
+                                                self.isPresentingExitAlert.toggle()
+                                        }
+                                    }, receiveValue: { _ in () })
+                                    .store(in: &subscriptions)
+                            }))
+                        case .userOrChallengeNotFound:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.title), message: Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .userNotInChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.userNotInChallenge.title), message: Text(ExitChallengeAlertCasesEnum.userNotInChallenge.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.userNotInChallenge.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .internalServerError:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.internalServerError.title), message: Text(ExitChallengeAlertCasesEnum.internalServerError.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.internalServerError.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .none:
+                            return Alert(title: Text("not expected"))
+                    }
+                })
+                
+                
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Button {
                             self.dismiss()
                         } label: {
@@ -354,6 +394,18 @@ struct OnlineChallengeDetailsView: View {
                                 Text("backButtonText")
                             }
                         }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.isPresentingExitAlert = true
+                            self.quickChallengeViewModel.exitChallengeAlertCases = .exitChallenge
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
+                        }, label: {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .font(descriptionFontBold)
+                                .foregroundColor(foregroundColor)
+                        })
                     }
                 }
             }
