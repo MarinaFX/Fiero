@@ -36,7 +36,7 @@ struct OnlineOngoingChallengeView: View {
                 Text("Você")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
-                PlayerScoreControllerView(quickChallenge: self.$quickChallenge)
+                PlayerScoreControllerView(quickChallenge: self.$quickChallenge, teamId: self.quickChallenge.getTeamIdByMemberId(memberId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
                 Text("Lideres")
@@ -85,44 +85,44 @@ struct RankedPlayersView: View {
     var body: some View {
         if self.quickChallenge.teams.count >= 3 {
             if userPosition == 0 {
-                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
                 
-                ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, quickChallenge: self.$quickChallenge)
                 
-                ScoreList(style: .player, position: userPosition + 3, name: self.quickChallenge.getRanking()[userPosition+2].name, points: Int(self.quickChallenge.getRanking()[userPosition+2].getTotalScore()))
+                ScoreList(style: .player, position: userPosition + 3, name: self.quickChallenge.getRanking()[userPosition+2].name, quickChallenge: self.$quickChallenge)
             }
             else {
                 if userPosition == self.quickChallenge.teams.count - 1 {
-                    ScoreList(style: .player, position: userPosition - 1, name: self.quickChallenge.getRanking()[userPosition-2].name, points: Int(self.quickChallenge.getRanking()[userPosition-2].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition - 1, name: self.quickChallenge.getRanking()[userPosition-2].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
                 }
                 else {
-                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, quickChallenge: self.$quickChallenge)
                 }
             }
         }
         else {
             if self.quickChallenge.teams.count == 2 {
                 if userPosition == 0 {
-                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, points: Int(self.quickChallenge.getRanking()[userPosition+1].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition + 2, name: self.quickChallenge.getRanking()[userPosition+1].name, quickChallenge: self.$quickChallenge)
                 }
                 else {
-                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, points: Int(self.quickChallenge.getRanking()[userPosition-1].getTotalScore()))
+                    ScoreList(style: .player, position: userPosition, name: self.quickChallenge.getRanking()[userPosition-1].name, quickChallenge: self.$quickChallenge)
                     
-                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                    ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
                 }
             }
             else {
-                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, points: Int(self.quickChallenge.getRanking()[userPosition].getTotalScore()))
+                ScoreList(style: .owner, position: userPosition + 1, name: self.quickChallenge.getRanking()[userPosition].name, quickChallenge: self.$quickChallenge)
             }
         }
     }
@@ -131,6 +131,7 @@ struct RankedPlayersView: View {
 struct PlayerScoreControllerView: View {
     
     @Binding var quickChallenge: QuickChallenge
+    let teamId: String
     
     var body: some View {
         RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
@@ -140,7 +141,10 @@ struct PlayerScoreControllerView: View {
             .overlay(content: {
                 HStack {
                     Button(action: {
-                        
+                        let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                        if position >= 0 {
+                            self.quickChallenge.teams[position].members?[0].score -= 1
+                        }
                     }, label: {
                         Circle()
                             .foregroundColor(.white)
@@ -160,7 +164,10 @@ struct PlayerScoreControllerView: View {
                     Spacer()
                     
                     Button(action: {
-                        
+                        let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                        if position >= 0 {
+                            self.quickChallenge.teams[position].members?[0].score += 1
+                        }
                     }, label: {
                         Circle()
                             .foregroundColor(.white)
