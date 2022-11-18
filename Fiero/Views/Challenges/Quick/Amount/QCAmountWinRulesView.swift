@@ -72,7 +72,7 @@ struct QCAmountWinRulesView: View {
                 
                 Spacer()
                 
-                PermanentKeyboard(text: self.$goal, keyboardType: .numberPad)
+                CreationFlowTextViewComponent(text: self.$goal, style: .points)
                 
                 Spacer()
                 
