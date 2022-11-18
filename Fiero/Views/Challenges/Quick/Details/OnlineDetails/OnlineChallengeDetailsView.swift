@@ -86,65 +86,25 @@ struct OnlineChallengeDetailsView: View {
                             }
                             
                             
-
-                    //MARK: - Invite Participants
-                        HStack {
-                            Button {
-                                isPresentingInvite = true
-                            } label: {
-                                Text("Convidar Participante")
-                                    .font(descriptionFontBold)
-                                    .padding(.leading, 16)
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(descriptionFontBold)
-                                    .padding(.trailing, 16)
+                            
+                            //MARK: - Invite Participants
+                            HStack {
+                                Button {
+                                    isPresentingInvite = true
+                                } label: {
+                                    Text("Convidar Participante")
+                                        .font(descriptionFontBold)
+                                        .padding(.leading, 16)
+                                    Image(systemName: "square.and.arrow.up")
+                                        .font(descriptionFontBold)
+                                        .padding(.trailing, 16)
+                                }
                             }
-                        }
-                        .sheet(isPresented: $isPresentingInvite, content: {
-                            InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
-                        })
-                        .foregroundColor(foregroundColor)
-                        .background(.clear)
-                        .padding(.horizontal, defaultMarginSpacing)
-                        .padding(.top, extraSmallSpacing)
-                        .padding(.bottom, extraExtraSmallSpacing)
-                        
-                        
-                        //MARK: - List of Participants
-                        HStack {
-                            Button {
-                                isPresentingParticipantsList.toggle()
-                            } label: {
-                                Text("Participantes")
-                                    .padding(.leading, 16)
-                                Spacer()
-                                Text("Ver todos")
-                                Image(systemName: "chevron.right")
-                                    .padding(.trailing, 16)
-                            }
-                        }
-                        .foregroundColor(foregroundColor)
-                        .frame(height: 44)
-                        .background(Tokens.Colors.Neutral.Low.dark.value)
-                        .cornerRadius(borderSmall)
-                        .padding(.horizontal, defaultMarginSpacing)
-                        
-                        NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
-                        
-                        NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
-                        
-                        ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                        case .failure(_):
-                                            self.isPresentingAlertError = true
-                                        case .finished:
-                                            self.isPresetingOngoingView.toggle()
-                                    }
-                                }, receiveValue: { _ in () })
-                                .store(in: &subscriptions)
-                        })
+                            .sheet(isPresented: $isPresentingInvite, content: {
+                                InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                            })
+                            .foregroundColor(foregroundColor)
+                            .background(.clear)
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.top, extraSmallSpacing)
                             .padding(.bottom, extraExtraSmallSpacing)
@@ -171,9 +131,23 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
-                                .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.vertical, extraExtraSmallSpacing)
+                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.isPresentingAlertError = true
+                                            case .finished:
+                                                self.isPresetingOngoingView.toggle()
+                                        }
+                                    }, receiveValue: { _ in () })
+                                    .store(in: &subscriptions)
+                            })
+                            .padding(.horizontal, defaultMarginSpacing)
+                            .padding(.top, extraSmallSpacing)
+                            .padding(.bottom, extraExtraSmallSpacing)
                         }
                     }
                 }
@@ -212,21 +186,21 @@ struct OnlineChallengeDetailsView: View {
                                 self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                                     .sink { completion in
                                         switch completion {
-                                        case .finished:
-                                            self.dismiss()
-                                        case .failure(let error):
-                                            print(error)
-                                            self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
-                                            self.isPresentingDeleteAlert.toggle()
+                                            case .finished:
+                                                self.dismiss()
+                                            case .failure(let error):
+                                                print(error)
+                                                self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
+                                                self.isPresentingDeleteAlert.toggle()
                                         }
                                     } receiveValue: { _ in }
                                     .store(in: &subscriptions)
                             }))
                         case .failureDeletingChallenge:
-                                return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
-                                    self.isPresentingDeleteAlert = false
-                                    self.dismiss()
-                                }))
+                            return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
+                                self.isPresentingDeleteAlert = false
+                                self.dismiss()
+                            }))
                         default:
                             return Alert(title: Text("Sorry"), message: Text("Something went wrong."), dismissButton: .cancel(Text("ok"), action: {
                                 self.isPresentingDeleteAlert = false
@@ -339,9 +313,20 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                            
+                            if self.quickChallenge.alreadyBegin {
+                                ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
+                                    self.isPresetingOngoingView.toggle()
+                                })
                                 .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.vertical, extraExtraSmallSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            }
+                            else {
+                                Text("Hmmm, parece que o dono do desafio \nestá com medo de perder para você \ne não iniciou esse desafio")
+                                    .multilineTextAlignment(.center)
+                            }
                         }
                     }
                 }
