@@ -39,16 +39,25 @@ struct QCSelectParticipantsView: View {
                         .padding(Tokens.Spacing.sm.value)
                         .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(2)
+                        .onTapGesture {
+                            self.pushNextView.toggle()
+                        }
                     
                     CreationSmallCardView(styles: .amount, amount: "3")
                         .padding(Tokens.Spacing.sm.value)
                         .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(3)
+                        .onTapGesture {
+                            self.pushNextView.toggle()
+                        }
                     
                     CreationSmallCardView(styles: .amount, amount: "4")
                         .padding(Tokens.Spacing.sm.value)
                         .frame(height: UIScreen.main.bounds.height * 0.35)
                         .tag(4)
+                        .onTapGesture {
+                            self.pushNextView.toggle()
+                        }
                     
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -60,11 +69,6 @@ struct QCSelectParticipantsView: View {
                         })
                         .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                     case 3:
-                        ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
-                            self.pushNextView.toggle()
-                        })
-                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    case 4:
                         ButtonComponent(style: .secondary(isEnabled: true), text: "numberOfChallengers \(tabViewSelection)", action: {
                             self.pushNextView.toggle()
                         })
