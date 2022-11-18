@@ -144,7 +144,6 @@ struct OnlineChallengeDetailsView: View {
                                 }, receiveValue: { _ in () })
                                 .store(in: &subscriptions)
                         })
->>>>>>> dev
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.top, extraSmallSpacing)
                             .padding(.bottom, extraExtraSmallSpacing)
