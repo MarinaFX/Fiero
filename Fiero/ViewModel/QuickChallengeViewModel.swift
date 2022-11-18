@@ -349,7 +349,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    //MARK: - Fisnih Challenge Update
+    //MARK: - Finish Challenge Update
     @discardableResult
     func finishChallenge(challengeId: String, finished: Bool) -> AnyPublisher<Void, Error> {
         let json = """
@@ -475,6 +475,7 @@ class QuickChallengeViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    //MARK: - Exit Challenge
     @discardableResult
     func exitChallenge(by id: String) -> AnyPublisher<Void, Error> {
         let operation = self.authTokenService.getAuthToken()
@@ -523,6 +524,71 @@ class QuickChallengeViewModel: ObservableObject {
             print("Successfully removed challenge: \(rawURLResponse.statusCode)")
             
             self?.exitChallengeAlertCases = .none
+        })
+        .store(in: &cancellables)
+        
+        return operation
+            .map({ _ in () })
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
+    //MARK: - Remove Participant
+    @discardableResult
+    func remove(participant userID: String, from challengeID: String) -> AnyPublisher<Void, Error> {
+        let json = """
+        {
+            "userToDeleteId" : "\(userID)"
+        }
+        """
+        
+        let operation = self.authTokenService.getAuthToken()
+            .flatMap({ authToken in
+                let request = makeDELETERequest(param: challengeID, body: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.REMOVE_PARTICIPANT.description, authToken: authToken)
+                
+                return self.client.perform(for: request)
+            })
+            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
+            .receive(on: DispatchQueue.main)
+            .share()
+        
+        operation
+            .sink(receiveCompletion: { completion in
+            switch completion {
+                case .failure(let error):
+                    print("Failed to create request to remove participant from challenge endpoint: \(error)")
+                case .finished:
+                    print("Failed to create request to remove participant from challenge endpoint")
+            }
+        }, receiveValue: { rawURLResponse in
+            guard let response =  rawURLResponse.item else {
+                if rawURLResponse.statusCode == 404 {
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 400 {
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 401 {
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
+                    return
+                }
+                
+                if rawURLResponse.statusCode == 500 {
+                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
+                    return
+                }
+                
+                return
+            }
+            
+            print("Succesfully removed user from challenge: \(rawURLResponse.statusCode)")
+            
+            
         })
         .store(in: &cancellables)
         

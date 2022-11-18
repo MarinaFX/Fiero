@@ -82,6 +82,7 @@
 
 // MARK: - TabBar
     "Desafios" = "Challenges";
+    "Criar" = "Create";
     "Perfil" = "Profile";
 
 // MARK: - ChallengeListScreenView
@@ -130,12 +131,12 @@ We can't get your challenges now, try again";
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
     "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
-    "Ir para lista de desafios" = "Go to challenge list";
+    "Ir para a página inicial" = "Go to home page";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Choose a \nchallenge type";
+    "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
     "timeChallengeTypeTitle" = "Time \nchallenge";

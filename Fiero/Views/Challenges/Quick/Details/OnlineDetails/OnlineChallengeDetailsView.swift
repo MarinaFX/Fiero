@@ -18,6 +18,8 @@ struct OnlineChallengeDetailsView: View {
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
     @State private var isPresentingAlert: Bool = false
+    @State private var isPresetingOngoingView: Bool = false
+    @State private var isPresentingAlertError: Bool = false
     
     var body: some View {
         let isOwner = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) == quickChallenge.ownerId
@@ -82,24 +84,67 @@ struct OnlineChallengeDetailsView: View {
                                 )
                             }
                             
-                            //MARK: - Invite Participants
-                            HStack {
-                                Button {
-                                    isPresentingInvite = true
-                                } label: {
-                                    Text("Convidar Participante")
-                                        .font(descriptionFontBold)
-                                        .padding(.leading, 16)
-                                    Image(systemName: "square.and.arrow.up")
-                                        .font(descriptionFontBold)
-                                        .padding(.trailing, 16)
-                                }
+                            
+
+                    //MARK: - Invite Participants
+                        HStack {
+                            Button {
+                                isPresentingInvite = true
+                            } label: {
+                                Text("Convidar Participante")
+                                    .font(descriptionFontBold)
+                                    .padding(.leading, 16)
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(descriptionFontBold)
+                                    .padding(.trailing, 16)
                             }
-                            .sheet(isPresented: $isPresentingInvite, content: {
-                                InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
-                            })
-                            .foregroundColor(foregroundColor)
-                            .background(.clear)
+                        }
+                        .sheet(isPresented: $isPresentingInvite, content: {
+                            InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                        })
+                        .foregroundColor(foregroundColor)
+                        .background(.clear)
+                        .padding(.horizontal, defaultMarginSpacing)
+                        .padding(.top, extraSmallSpacing)
+                        .padding(.bottom, extraExtraSmallSpacing)
+                        
+                        
+                        //MARK: - List of Participants
+                        HStack {
+                            Button {
+                                isPresentingParticipantsList.toggle()
+                            } label: {
+                                Text("Participantes")
+                                    .padding(.leading, 16)
+                                Spacer()
+                                Text("Ver todos")
+                                Image(systemName: "chevron.right")
+                                    .padding(.trailing, 16)
+                            }
+                        }
+                        .foregroundColor(foregroundColor)
+                        .frame(height: 44)
+                        .background(Tokens.Colors.Neutral.Low.dark.value)
+                        .cornerRadius(borderSmall)
+                        .padding(.horizontal, defaultMarginSpacing)
+                        
+                        NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
+                        
+                        NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure(_):
+                                            self.isPresentingAlertError = true
+                                        case .finished:
+                                            self.isPresetingOngoingView.toggle()
+                                    }
+                                }, receiveValue: { _ in () })
+                                .store(in: &subscriptions)
+                        })
+>>>>>>> dev
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.top, extraSmallSpacing)
                             .padding(.bottom, extraExtraSmallSpacing)
