@@ -387,3 +387,8 @@
 "removePlayerErrorWhenRemovingPlayerFromChallengeTitle" = "Não é nenhum de nós.";
 "removePlayerErrorWhenRemovingPlayerFromChallengeMessage" = "Não foi possível remover essa pessoa do desafio, tente mais tarde.";
 "removePlayerErrorWhenRemovingPlayerFromChallengePrimaryButton" = "Ok!";
+
+//MARK: - OnlineOngoingChallengeView
+"playerLabel" = "Você";
+"leadersLabel" = "Líderes";
+"positionLabel" = "Sua posição";

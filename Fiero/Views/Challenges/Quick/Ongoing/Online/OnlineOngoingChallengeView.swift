@@ -14,10 +14,11 @@ struct OnlineOngoingChallengeView: View {
     
     @State var subscriptions: Set<AnyCancellable> = []
     @State private var originalScore: Double = 0.0
-    @State private var timeRemaining = 15
+    @State private var timeRemaining = 7
     
     @Binding var quickChallenge: QuickChallenge
     
+    let timeThreshold = 7
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var score: Double {
@@ -34,23 +35,23 @@ struct OnlineOngoingChallengeView: View {
                     .padding(.bottom, Tokens.Spacing.nano.value)
                     .padding(.top, UIScreen.main.bounds.height * 0.06)
                 
-                Text("10 dias para o final do desafio")
+                Text("\(quickChallenge.goal) pontos")
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
-                Text("Você")
+                Text("playerLabel")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
                 PlayerScoreControllerView(quickChallenge: self.$quickChallenge, originalScore: self.$originalScore, teamId: self.quickChallenge.getTeamIdByMemberId(memberUserId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
-                Text("Lideres")
+                Text("leadersLabel")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
                 LeaderboardView(quickChallenge: self.$quickChallenge)
                     .cornerRadius(Tokens.Border.BorderRadius.small.value)
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
-                Text("Sua posição")
+                Text("positionLabel")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
                 VStack(spacing: Tokens.Spacing.nano.value) {
@@ -80,14 +81,14 @@ struct OnlineOngoingChallengeView: View {
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .failure(_):
-                                                self.timeRemaining = 15
+                                                self.timeRemaining = self.timeThreshold
                                             case .finished:
                                                 print("updated view scores")
                                         }
                                     }, receiveValue: { quickChallenge in
                                         self.quickChallenge = quickChallenge
                                         self.originalScore = actualScore
-                                        self.timeRemaining = 15
+                                        self.timeRemaining = self.timeThreshold
                                     })
                                     .store(in: &subscriptions)
                             }
@@ -96,13 +97,13 @@ struct OnlineOngoingChallengeView: View {
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
                                             case .failure(_):
-                                                self.timeRemaining = 15
+                                                self.timeRemaining = self.timeThreshold
                                             case .finished:
                                                 print("updated view scores")
                                         }
                                     }, receiveValue: { quickChallenge in
                                         self.quickChallenge = quickChallenge
-                                        self.timeRemaining = 15
+                                        self.timeRemaining = self.timeThreshold
                                     })
                                     .store(in: &subscriptions)
                             }
@@ -136,13 +137,13 @@ struct OnlineOngoingChallengeView: View {
                     .sink(receiveCompletion: { completion in
                         switch completion {
                             case .failure(_):
-                                self.timeRemaining = 15
+                                self.timeRemaining = self.timeThreshold
                             case .finished:
                                 print("updated view scores")
                         }
                     }, receiveValue: { quickChallenge in
                         self.quickChallenge = quickChallenge
-                        self.timeRemaining = 15
+                        self.timeRemaining = self.timeThreshold
                     })
                     .store(in: &subscriptions)
             }

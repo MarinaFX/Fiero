@@ -12,20 +12,23 @@ struct ScoreList: View {
     
     @State var position: Int
     @State var name: String
+    @State var formattedPosition: String = ""
     @Binding var quickChallenge: QuickChallenge
     
     var body: some View {
         HStack(spacing: 20) {
-            Text("\(position)º")
+            Text(self.formattedPosition)
                 .font(style.numberFont)
+            
             ZStack {
                 HStack {
                     Text("\(name)")
                         .font(style.cellFont)
                         .foregroundColor(style.labelColor)
                         .padding(.leading, style.spacing)
-                        
+                    
                     Spacer()
+                    
                     Text(String(format: "%.0f", self.quickChallenge.getRanking()[position-1].getTotalScore()))
                         .font(style.cellFont)
                         .foregroundColor(style.labelColor)
@@ -37,8 +40,14 @@ struct ScoreList: View {
             .background(style.backgroundColor)
             .cornerRadius(style.borderRadius)
         }
+        .onAppear(perform: {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .ordinal
+            self.formattedPosition = formatter.string(from: NSNumber(value: UInt(self.position))) ?? ""
+        })
     }
 }
+
 
 struct ScoreList_Previews: PreviewProvider {
     static var previews: some View {

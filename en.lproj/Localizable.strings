@@ -388,3 +388,9 @@ We can't get your challenges now, try again";
 "removePlayerErrorWhenRemovingPlayerFromChallengeTitle" = "Its neither of us.";
 "removePlayerErrorWhenRemovingPlayerFromChallengeMessage" = "Unable to remove this player from this challenge at the moment, try again later";
 "removePlayerErrorWhenRemovingPlayerFromChallengePrimaryButton" = "Ok!";
+
+
+//MARK: - OnlineOngoingChallengeView
+"playerLabel" = "You";
+"leadersLabel" = "Leaders";
+"positionLabel" = "Your position";
