@@ -59,10 +59,8 @@ struct CreationFlowTextViewComponent: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView(frame: CGRect(x: 0,
-                                                y: 0,
-                                                width: UIScreen.main.bounds.width - 50,
-                                                height: UIScreen.main.bounds.height/4))
+        let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
         textView.font = style.textFont
         textView.textColor = UIColor(cgColor: style.textColor)
         textView.layer.backgroundColor = style.backgroundColor
