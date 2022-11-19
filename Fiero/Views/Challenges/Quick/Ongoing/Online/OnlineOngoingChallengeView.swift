@@ -13,8 +13,12 @@ struct OnlineOngoingChallengeView: View {
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var subscriptions: Set<AnyCancellable> = []
+    @State private var originalScore: Double = 0.0
+    @State private var timeRemaining = 15
     
     @Binding var quickChallenge: QuickChallenge
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var score: Double {
         return self.quickChallenge.teams.filter({ $0.members?.first?.userId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description)}).first?.members?.first?.score ?? -1.0
@@ -36,7 +40,7 @@ struct OnlineOngoingChallengeView: View {
                 Text("Você")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
-                PlayerScoreControllerView(quickChallenge: self.$quickChallenge, teamId: self.quickChallenge.getTeamIdByMemberId(memberId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
+                PlayerScoreControllerView(quickChallenge: self.$quickChallenge, originalScore: self.$originalScore, teamId: self.quickChallenge.getTeamIdByMemberId(memberUserId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
                 Text("Lideres")
@@ -50,7 +54,7 @@ struct OnlineOngoingChallengeView: View {
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
                 VStack(spacing: Tokens.Spacing.nano.value) {
-                    RankedPlayersView(quickChallenge: self.$quickChallenge, userPosition: self.quickChallenge.getTeamPositionAtRanking(teamId: self.quickChallenge.getTeamIdByMemberId(memberId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "")))
+                    RankedPlayersView(quickChallenge: self.$quickChallenge, userPosition: self.quickChallenge.getTeamPositionAtRanking(teamId: self.quickChallenge.getTeamIdByMemberId(memberUserId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "")))
                 }
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 .padding(.bottom, Tokens.Spacing.sm.value)
@@ -58,12 +62,54 @@ struct OnlineOngoingChallengeView: View {
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarTrailing ,content: {
                         Button(action: {
-                            self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
-                                .sink(receiveCompletion: { _ in
-                                }, receiveValue: { quickChallenge in
-                                    self.quickChallenge = quickChallenge
-                                })
-                                .store(in: &subscriptions)
+                            guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
+                            
+                            let memberId = self.quickChallenge.getMemberIdByUserId(userId: userId)
+                            
+                            let teamId = self.quickChallenge.getTeamIdByMemberId(memberUserId: userId)
+                            
+                            let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                            
+                            guard let actualScore = self.quickChallenge.teams[position].members?[0].score else { return }
+                            
+                            if actualScore != originalScore {
+                                self.quickChallengeViewModel.patchScore(challengeId: self.quickChallenge.id, teamId: teamId, memberId: memberId, score: actualScore)
+                                    .flatMap({ _ in
+                                        return self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                                    })
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.timeRemaining = 15
+                                                print("resetou timer")
+                                            case .finished:
+                                                print("updated view scores")
+                                        }
+                                    }, receiveValue: { quickChallenge in
+                                        self.quickChallenge = quickChallenge
+                                        self.originalScore = actualScore
+                                        self.timeRemaining = 15
+                                        print("resetou timer")
+                                    })
+                                    .store(in: &subscriptions)
+                            }
+                            else {
+                                self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.timeRemaining = 15
+                                                print("resetou timer")
+                                            case .finished:
+                                                print("updated view scores")
+                                        }
+                                    }, receiveValue: { quickChallenge in
+                                        self.quickChallenge = quickChallenge
+                                        self.timeRemaining = 15
+                                        print("resetou timer")
+                                    })
+                                    .store(in: &subscriptions)
+                            }
                         }, label: {
                             Image(systemName: "arrow.triangle.2.circlepath")
                         })
@@ -71,6 +117,43 @@ struct OnlineOngoingChallengeView: View {
                 })
             }
         }
+        .onReceive(self.timer, perform: { time in
+            if self.timeRemaining > 0 {
+                print(self.timeRemaining)
+                self.timeRemaining -= 1
+            }
+            else {
+                print("salvou")
+                guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
+                
+                let memberId = self.quickChallenge.getMemberIdByUserId(userId: userId)
+                
+                let teamId = self.quickChallenge.getTeamIdByMemberId(memberUserId: userId)
+                
+                let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                
+                guard let actualScore = self.quickChallenge.teams[position].members?[0].score else { return }
+                
+                self.quickChallengeViewModel.patchScore(challengeId: self.quickChallenge.id, teamId: teamId, memberId: memberId, score: actualScore)
+                    .flatMap({ _ in
+                        return self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                    })
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                            case .failure(_):
+                                self.timeRemaining = 15
+                                print("resetou timer")
+                            case .finished:
+                                print("updated view scores")
+                        }
+                    }, receiveValue: { quickChallenge in
+                        self.quickChallenge = quickChallenge
+                        self.timeRemaining = 15
+                        print("resetou timer")
+                    })
+                    .store(in: &subscriptions)
+            }
+        })
         .environment(\.colorScheme, .dark)
         .makeDarkModeFullScreen()
     }
@@ -131,6 +214,8 @@ struct RankedPlayersView: View {
 struct PlayerScoreControllerView: View {
     
     @Binding var quickChallenge: QuickChallenge
+    @Binding var originalScore: Double
+    
     let teamId: String
     
     var body: some View {
@@ -178,6 +263,12 @@ struct PlayerScoreControllerView: View {
                                     .foregroundColor(.black)
                             })
                     })
+                }
+            })
+            .onAppear(perform: {
+                let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                if position >= 0 {
+                    self.originalScore = self.quickChallenge.teams[position].members?[0].score ?? -1.0
                 }
             })
     }

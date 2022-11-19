@@ -17,12 +17,13 @@ struct LeaderboardView: View {
             if self.quickChallenge.teams.count > 1 {
                 //second place
                 LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.one.value, placement: .second, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[1].id)
-                    .padding(.vertical)
                     .padding(.leading)
             }
             if self.quickChallenge.teams.count > 0 {
                 //first place
                 LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.three.value, placement: .first, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[0].id)
+                    .padding(.vertical)
+                    .padding(.horizontal)
             }
             
             if self.quickChallenge.teams.count > 2 {
