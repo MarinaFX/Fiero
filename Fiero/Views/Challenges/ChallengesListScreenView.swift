@@ -216,17 +216,6 @@ struct ChallengesListScreenView: View {
                 self.quickChallengeViewModel.getUserChallenges()
             }
             .listStyle(.plain)
-            VStack{
-                Spacer()
-                ButtonComponent(style: .primary(isEnabled: true), text: "Entrar por código") {
-                    self.isShowingEnterWithCodeView = true
-                }
-                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
-                    EnterWithCodeView()
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                .padding(.bottom, Tokens.Spacing.defaultMargin.value)
-            }
         }
     }
 }

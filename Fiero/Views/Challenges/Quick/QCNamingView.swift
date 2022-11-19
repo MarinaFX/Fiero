@@ -74,10 +74,8 @@ struct QCNamingView: View {
             .alert(isPresented: $isPresentingAlert, content: {
                 Alert(title: Text("Nome vazio"),
                       message: Text("Preencha o nome do seu desafio para continuar"),
-                      dismissButton: .cancel(Text("Ok"), action: {
-                    
-                })
-                )
+                      dismissButton: .cancel(Text("Ok"), action: {    
+                }))
             })
             .navigationBarHidden(true)
         }

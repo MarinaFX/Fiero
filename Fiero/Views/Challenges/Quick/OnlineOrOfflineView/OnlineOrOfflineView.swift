@@ -44,10 +44,18 @@ struct OnlineOrOfflineView: View {
                             .tag(1)
                             .padding(.all, Tokens.Spacing.sm.value)
                             .frame(height: UIScreen.main.bounds.height * 0.35)
+                            .onTapGesture {
+                                isOnline = true
+                                presentNextScreen = true
+                            }
                         CreationSmallCardView(styles: .offline)
                             .tag(2)
                             .padding(.all, Tokens.Spacing.sm.value)
                             .frame(height: UIScreen.main.bounds.height * 0.35)
+                            .onTapGesture {
+                                isOnline = false
+                                presentNextScreen = true
+                            }
                     }
                     .tabViewStyle(PageTabViewStyle())
                     
