@@ -81,6 +81,7 @@
 
 // MARK: - TabBar
     "Desafios" = "Desafios";
+    "Criar" = "Criar";
     "Perfil" = "Perfil";
 
 // MARK: - ChallengeListScreenView
@@ -128,12 +129,12 @@
     "Não conseguimos \ncriar seu desafio" = "Não conseguimos \ncriar seu desafio";
     "Desafio criado com sucesso" = "Desafio criado com sucesso";
     "Começar desafio!" = "Começar desafio!";
-    "Ir para lista de desafios" = "Ir para lista de desafios";
+    "Ir para a página inicial" = "Ir para a página inicial";
     "Voltar para o início" = "Voltar para o início";
     "Erro" = "Erro";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Escolha um\ntipo de desafio";
+    "homeScreenTitle" = "É hora de se desafiar";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
     "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
     "timeChallengeTypeTitle" = "Desafio de \ntempo";
@@ -327,3 +328,68 @@
 "joinInvalidCodeTitle" = "Não somos nós! É você!";
 "joinInvalidCodeMessage" = "Foi muito desafiador acertar o código? Ele deve conter apenas 5 caracteres";
 "joinInvalidCodePrimaryButton" = "Ok!";
+
+//MARK: - Exit from Challenge
+//MARK: - Alerts
+//MARK: ExitChallenge
+"exitChallengeTitle" = "Muito desafiador?";
+"exitChallengeMessage" = "Está tudo bem em sair do desafio, todo mundo ja tiltou alguma vez na vida.";
+"exitChallengePrimaryButton" = "Sim, eu desisto";
+"exitChallengeSecondaryButton" = "Pfff! ainda vou virar";
+
+//MARK: userOrChallengeNotFound
+"exitChallengeUserOrChallengeNotFoundTitle" = "Não somos nós! É você!";
+"exitChallengeUserOrChallengeNotFoundMessage" = "Parece que você está sendo assombrado. Tanto esse usuário quanto esse desafio não existem.";
+"exitChallengeUserOrChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: userNotInChallenge
+"exitChallengeUserNotInChallengeTitle" = "Não somos nós! É você!";
+"exitChallengeUserNotInChallengeMessage" = "Você não pode sair de algo que nunca entrou";
+"exitChallengeUserNotInChallengePrimaryButton" = "Ok!";
+
+//MARK: internalServerError
+"exitChallengeInternalServerErrorTitle" = "Não é você! Somos nós.";
+"exitChallengeInternalServerErrorMessage" = "Houve um problema em nossos servidores, tente mais tarde.";
+"exitChallengeInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: errorWhenTryingToLeaveChallenge
+"exitChallengeErrorWhenTryingToLeaveChallengeTitle" = "Não é nenhum de nós.";
+"exitChallengeErrorWhenTryingToLeaveChallengeMessage" = "Não foi possível sair do desafio no momento, tente mais tarde.";
+"exitChallengeErrorWhenTryingToLeaveChallengePrimaryButton" = "Ok!";
+
+//MARK: - Remove players from Challenge
+//MARK: - Alerts
+//MARK: UserOrChallengeNotFound
+"removePlayerUserOrChallengeNotFoundTitle" = "Não somos nós! É você!";
+"removePlayerUserOrChallengeNotFoundMessage" = "Parece que você está sendo assombrado. Tanto esse usuário quanto esse desafio não existem.";
+"removePlayerUserOrChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: RemoveItSelf
+"removePlayerRemoveItSelfTitle" = "Não somos nós! É você!";
+"removePlayerRemoveItSelfMessage" = "Não é possível se remover de algo seu";
+"removePlayerRemoveItSelfPrimaryButton" = "Ok!";
+
+//MARK: UnauthorizedToRemove
+"removePlayerUnauthorizedToRemoveTitle" = "Não somos nós! É você!";
+"removePlayerUnauthorizedToRemoveMessage" = "A menos que você seja o dono desse desafio, você não pode remover outros";
+"removePlayerUnauthorizedToRemovePrimaryButton" = "Ok!";
+
+//MARK: UserNotInThisChallenge
+"removePlayerUserNotInThisChallengeTitle" = "Não somos nós! É você!";
+"removePlayerUserNotInThisChallengeMessage" = "Não é possível remover alguém que nunca esteve aqui";
+"removePlayerUserNotInThisChallengePrimaryButton" = "Ok!";
+
+//MARK: InternalServerError
+"removePlayerInternalServerErrorTitle" = "Não é você! Somos nós.";
+"removePlayerInternalServerErrorMessage" = "Houve um problema em nossos servidores, tente mais tarde.";
+"removePlayerInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: ErrorWhenRemovingPlayerFromChallenge
+"removePlayerErrorWhenRemovingPlayerFromChallengeTitle" = "Não é nenhum de nós.";
+"removePlayerErrorWhenRemovingPlayerFromChallengeMessage" = "Não foi possível remover essa pessoa do desafio, tente mais tarde.";
+"removePlayerErrorWhenRemovingPlayerFromChallengePrimaryButton" = "Ok!";
+
+//MARK: - OnlineOngoingChallengeView
+"playerLabel" = "Você";
+"leadersLabel" = "Líderes";
+"positionLabel" = "Sua posição";

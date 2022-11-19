@@ -14,10 +14,13 @@ struct ChallengesCategoryInfo {
 }
 
 struct QCCategorySelectionView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismissView
     
     @State private var scrollOffset: CGFloat = 0.0
     @State var presentNextScreen: Bool = false
+    @State var isShowingEnterWithCodeView = false
+    
+    var didComeFromEmptyOrHomeView: Bool = false
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -39,15 +42,6 @@ struct QCCategorySelectionView: View {
         
         NavigationView{
             VStack {
-                
-                Spacer()
-                
-                Text("pickChallengeType")
-                    .multilineTextAlignment(.center)
-                    .font(Tokens.FontStyle.largeTitle.font(weigth: .bold, design: .default))
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .frame(minHeight: 82)
-
                 HStack(alignment: .center,spacing: cardSpacing) {
                     ForEach(0 ..< items.count) { index in
                         
@@ -56,34 +50,40 @@ struct QCCategorySelectionView: View {
                                    height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
                             .opacity(isFocused(index: index) ? 1.0 : 0.4)
                             .onTapGesture {
-                                SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
                                 if index == 0 {
+                                    SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
                                     presentNextScreen.toggle()
                                 }
                             }
+                            .fullScreenCover(isPresented: $presentNextScreen) {
+                                OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                            }
                         
-                        NavigationLink("", isActive: self.$presentNextScreen) {
-                            OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
-                        }
-                        .hidden()
+                        
+                        
                     }
                 }
                 .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCard + 50), alignment: .center)
+                .padding(.top, Tokens.Spacing.xxl.value)
                 .modifier(ScrollingHStackModifier(items: items.count, itemWidth: widthUnfocussedCard, itemSpacing: cardSpacing, scrollOffset: $scrollOffset))
                 
-                
-                Button(action: {
-                    self.dismiss()
-                    HapticsController.shared.activateHaptics(hapticsfeedback: .light)
-                }, label: {
-                    Text("Voltar")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
+                    isShowingEnterWithCodeView = true
+                }
+                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                    EnterWithCodeView()
                 })
-                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                .frame(height: 10)
+                .padding(.top, 0)
+                
+                if didComeFromEmptyOrHomeView {
+                    ButtonComponent(style: .black(isEnabled: true), text: "Voltar") {
+                        RootViewController.dismissSheetFlow()
+                    }
+                }
             }
             .makeDarkModeFullScreen()
-            .navigationBarHidden(true)
+            .navigationTitle(LocalizedStringKey("homeScreenTitle"))
 
         }
     }

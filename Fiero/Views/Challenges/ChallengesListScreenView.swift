@@ -17,8 +17,8 @@ struct HomeView: View {
     @State var isPresentingChallengeDetails: Bool = false
     @State var isPresented: Bool = false
     @State var focusedChallenge: QuickChallenge?
-    @State var isShowingDeleteAlert: Bool = false
     @State var isShowingDeleteErrorAlert: Bool = false
+    @State var isShowingExitErrorAlert: Bool = false
 
     @State var subscriptions: Set<AnyCancellable> = []
     
@@ -33,15 +33,15 @@ struct HomeView: View {
     private var isShowingAlert: Binding<Bool> {
         Binding(get: {
             self.quickChallengeViewModel.showingAlert ||
-            self.isShowingDeleteAlert ||
-            self.isShowingDeleteErrorAlert
+            self.isShowingDeleteErrorAlert ||
+            self.isShowingExitErrorAlert
         }, set: { _ in
             if self.quickChallengeViewModel.showingAlert {
                 self.quickChallengeViewModel.showingAlert = false
-            } else if isShowingDeleteAlert {
-                self.isShowingDeleteAlert = false
-            } else {
+            } else if isShowingDeleteErrorAlert {
                 self.isShowingDeleteErrorAlert = false
+            } else {
+                self.isShowingExitErrorAlert = false
             }
         })
     }
@@ -57,14 +57,15 @@ struct HomeView: View {
                         ChallengesListScreenView(
                             quickChallenges: self.quickChallenges,
                             focusedChallenge: self.$focusedChallenge,
-                            isShowingDeleteAlert: self.$isShowingDeleteAlert)
+                            isShowingDeleteErrorAlert: self.$isShowingDeleteErrorAlert,
+                            isShowingExitErrorAlert: self.$isShowingExitErrorAlert)
                     }
                     else {
                         EmptyChallengesView()
                     }
                 }
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
-                    QCCategorySelectionView()
+                    QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
                 }
                 
                 .toolbar {
@@ -85,28 +86,7 @@ struct HomeView: View {
                     self.quickChallengeViewModel.getUserChallenges()    
                 })
                 .alert(isPresented: self.isShowingAlert, content: {
-                    if isShowingDeleteAlert {
-                        return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
-                                     message: Text(DetailsAlertCases.deleteChallenge.message),
-                                     primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
-                            self.isShowingDeleteAlert = false
-                        }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
-                            guard let challenge = focusedChallenge else {
-                                return
-                            }
-                            
-                            self.quickChallengeViewModel.deleteChallenge(by: challenge.id)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                        case .finished:
-                                            print("delete successfully")
-                                        case .failure(_):
-                                            self.isShowingDeleteErrorAlert = true
-                                    }
-                                }, receiveValue: { _ in })
-                                .store(in: &subscriptions)
-                        }))
-                    } else if self.quickChallengeViewModel.showingAlert {
+                    if self.quickChallengeViewModel.showingAlert {
                         return Alert(
                             title: Text("Oops, muito desafiador!"),
                             message: Text("Não conseguimos buscar seus desafios agora, tente novamente"),
@@ -120,7 +100,14 @@ struct HomeView: View {
                                      dismissButton: .cancel(Text(DetailsAlertCases.failureDeletingChallenge.primaryButtonText), action: {
                             self.isShowingDeleteErrorAlert = false
                         }))
-                    } else {
+                    } else if self.isShowingExitErrorAlert {
+                        return Alert(title: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.title),
+                                     message: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.message),
+                                     dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.primaryButton), action: {
+                            self.isShowingExitErrorAlert = false
+                        }))
+                    }
+                    else {
                         return Alert(title: Text("not expected"))
                     }
                 })
@@ -137,13 +124,14 @@ struct ChallengesListScreenView: View {
     //MARK: Variables Setup
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @State var isShowingErrorAlert: Bool = false
     @State var isShowingEnterWithCodeView: Bool = false
+    @State private var subscriptions: Set<AnyCancellable> = []
     
     @Binding var quickChallenges: [QuickChallenge]
     @Binding var focusedChallenge: QuickChallenge?
     
-    @Binding var isShowingDeleteAlert: Bool
+    @Binding var isShowingDeleteErrorAlert: Bool
+    @Binding var isShowingExitErrorAlert: Bool
     
     func getBindingWith(id: String) -> Binding<QuickChallenge> {
         guard let index = self.quickChallenges.firstIndex(where: { $0.id == id }) else {
@@ -172,12 +160,45 @@ struct ChallengesListScreenView: View {
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                    Button(role: .destructive, action: {
-                        self.focusedChallenge = challenge
-                        self.isShowingDeleteAlert.toggle()
-                    }, label: {
-                        Label("Delete", systemImage: "trash")
-                    })
+                    if challenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) {
+                        Button(role: .destructive, action: {
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
+                            
+                            self.quickChallengeViewModel.deleteChallenge(by: challenge.id)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .finished:
+                                            print("delete successfully")
+                                        case .failure(_):
+                                            print("error while deleting challenge in view")
+                                            self.isShowingDeleteErrorAlert = true
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
+                        }, label: {
+                            Label("Delete", systemImage: "trash")
+                        })
+                    }
+                    else {
+                        Button(role: .destructive, action: {
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
+
+                            self.quickChallengeViewModel.exitChallenge(by: challenge.id)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .finished:
+                                            print("delete successfully")
+                                        case .failure(_):
+                                            print("error while deleting challenge in view")
+                                            self.isShowingExitErrorAlert = true
+                                    }
+                                }, receiveValue: { _ in () })
+                                .store(in: &subscriptions)
+                        }, label: {
+                            Label("Exit", systemImage: "rectangle.portrait.and.arrow.right")
+                        })
+                        .tint(Tokens.Colors.Highlight.one.value)
+                    }
                 })
                 
             }
@@ -212,7 +233,7 @@ struct ChallengesListScreenView: View {
 
 struct ChallengesListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengesListScreenView(quickChallenges: .constant([QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))]), focusedChallenge: .constant(QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), isShowingDeleteAlert: .constant(false))
+        ChallengesListScreenView(quickChallenges: .constant([QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))]), focusedChallenge: .constant(QuickChallenge(id: "", name: "flemis", invitationCode: "", type: "amount", goal: 115, goalMeasure: "unity", finished: false, ownerId: "", online: false, alreadyBegin: false, maxTeams: 2, createdAt: "", updatedAt: "", teams: [], owner: User(email: "", name: ""))), isShowingDeleteErrorAlert: .constant(false), isShowingExitErrorAlert: .constant(false))
             .environmentObject(QuickChallengeViewModel())
     }
 }
