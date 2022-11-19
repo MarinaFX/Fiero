@@ -123,7 +123,9 @@ class ScanViewController: UIViewController {
         captureSession.addOutput(deviceOutput)
         
         // MARK: Start Camera
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.captureSession.startRunning()
+        }
     }
     
     lazy var detectBarcodeRequest: VNDetectBarcodesRequest = {

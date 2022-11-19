@@ -229,7 +229,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Enter Challenge by code
     @discardableResult
-    func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
+    func enterChallenge(by code: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
         let json = """
         {
             "invitationCode" : "\(code)"
@@ -245,50 +245,40 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
-        operation.sink(receiveCompletion: { [weak self] completion in
+        operation
+            .sink(receiveCompletion: { [weak self] completion in
             switch completion {
                 case .failure(let error):
-                    print("Failed to create request to join challenge endpoint: \(error)")
-                    self?.joinChallengeAlertCases = .internalServerError
+                    print("Failed to created request to join challenges endpoint: \(error)")
+                    switch error {
+                        case .notFound:
+                            self?.joinChallengeAlertCases = .challengeNotFound
+                        case .conflict:
+                            self?.joinChallengeAlertCases = .alreadyJoinedChallenge
+                        default:
+                            self?.joinChallengeAlertCases = .internalServerError
+                    }
                 case .finished:
                     print("Successfully created request to join challenges endpoint")
             }
-        }, receiveValue: { [weak self] rawURLResponse in
-            guard let response = rawURLResponse.item else {
-                
-                if rawURLResponse.statusCode == 404 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .challengeNotFound
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 409 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .alreadyJoinedChallenge
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 500 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .internalServerError
-                    return
-                }
-                print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                return
-            }
-            
-            print("Successfully joined challenge: \(rawURLResponse.statusCode)")
-            
+        }, receiveValue: { [weak self] quickChallenge in
             self?.joinChallengeAlertCases = .none
-            self?.challengesList.append(response.quickChallenge)
+            self?.challengesList.append(quickChallenge)
         })
         .store(in: &cancellables)
         
         return operation
-            .map({ _ in () })
-            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     

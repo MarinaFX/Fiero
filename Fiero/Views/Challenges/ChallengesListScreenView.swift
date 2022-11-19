@@ -65,7 +65,7 @@ struct HomeView: View {
                     }
                 }
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
-                    QCCategorySelectionView()
+                    QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
                 }
                 
                 .toolbar {

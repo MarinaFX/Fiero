@@ -48,7 +48,7 @@ struct EmptyChallengesView: View {
         .environment(\.colorScheme, .dark)
         .makeDarkModeFullScreen()
         .fullScreenCover(isPresented: $isPresented) {
-            QCCategorySelectionView(didComeFromEmptyView: true)
+            QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
         }
     }
 }
