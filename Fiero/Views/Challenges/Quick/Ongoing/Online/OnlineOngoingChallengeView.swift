@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 
 struct OnlineOngoingChallengeView: View {
+    @Environment(\.dismiss) var dismissView
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var subscriptions: Set<AnyCancellable> = []
@@ -61,6 +62,44 @@ struct OnlineOngoingChallengeView: View {
                 .padding(.bottom, Tokens.Spacing.sm.value)
                 
                 .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        Button(role: .cancel, action: {
+                            guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
+                            
+                            let memberId = self.quickChallenge.getMemberIdByUserId(userId: userId)
+                            
+                            let teamId = self.quickChallenge.getTeamIdByMemberId(memberUserId: userId)
+                            
+                            let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                            
+                            guard let actualScore = self.quickChallenge.teams[position].members?[0].score else { return }
+                            
+                            self.quickChallengeViewModel.patchScore(challengeId: self.quickChallenge.id, teamId: teamId, memberId: memberId, score: actualScore)
+                                .flatMap({ _ in
+                                    return self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                                })
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure(_):
+                                            self.timeRemaining = self.timeThreshold
+                                        case .finished:
+                                            self.dismissView()
+                                    }
+                                }, receiveValue: { quickChallenge in
+                                    self.quickChallenge = quickChallenge
+                                    self.originalScore = actualScore
+                                    self.timeRemaining = self.timeThreshold
+                                })
+                                .store(in: &subscriptions)
+                            
+                        }, label: {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                
+                                Text("Back")
+                            }
+                        })
+                    })
                     ToolbarItem(placement: .navigationBarTrailing ,content: {
                         Button(action: {
                             guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
@@ -148,6 +187,7 @@ struct OnlineOngoingChallengeView: View {
                     .store(in: &subscriptions)
             }
         })
+        .navigationBarBackButtonHidden()
         .environment(\.colorScheme, .dark)
         .makeDarkModeFullScreen()
     }
