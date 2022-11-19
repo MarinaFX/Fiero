@@ -522,8 +522,9 @@ class QuickChallengeViewModel: ObservableObject {
                 return
             }
             
-            print("Successfully removed challenge: \(rawURLResponse.statusCode)")
-            
+            print("Successfully exited from challenge: \(rawURLResponse.statusCode)")
+            self?.challengesList.removeAll(where: { $0.id == id })
+
             self?.exitChallengeAlertCases = .none
         })
         .store(in: &cancellables)
