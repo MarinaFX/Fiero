@@ -81,7 +81,6 @@ struct OnlineOngoingChallengeView: View {
                                         switch completion {
                                             case .failure(_):
                                                 self.timeRemaining = 15
-                                                print("resetou timer")
                                             case .finished:
                                                 print("updated view scores")
                                         }
@@ -89,7 +88,6 @@ struct OnlineOngoingChallengeView: View {
                                         self.quickChallenge = quickChallenge
                                         self.originalScore = actualScore
                                         self.timeRemaining = 15
-                                        print("resetou timer")
                                     })
                                     .store(in: &subscriptions)
                             }
@@ -99,14 +97,12 @@ struct OnlineOngoingChallengeView: View {
                                         switch completion {
                                             case .failure(_):
                                                 self.timeRemaining = 15
-                                                print("resetou timer")
                                             case .finished:
                                                 print("updated view scores")
                                         }
                                     }, receiveValue: { quickChallenge in
                                         self.quickChallenge = quickChallenge
                                         self.timeRemaining = 15
-                                        print("resetou timer")
                                     })
                                     .store(in: &subscriptions)
                             }
@@ -123,7 +119,6 @@ struct OnlineOngoingChallengeView: View {
                 self.timeRemaining -= 1
             }
             else {
-                print("salvou")
                 guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
                 
                 let memberId = self.quickChallenge.getMemberIdByUserId(userId: userId)
@@ -142,14 +137,12 @@ struct OnlineOngoingChallengeView: View {
                         switch completion {
                             case .failure(_):
                                 self.timeRemaining = 15
-                                print("resetou timer")
                             case .finished:
                                 print("updated view scores")
                         }
                     }, receiveValue: { quickChallenge in
                         self.quickChallenge = quickChallenge
                         self.timeRemaining = 15
-                        print("resetou timer")
                     })
                     .store(in: &subscriptions)
             }
