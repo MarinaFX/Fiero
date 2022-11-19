@@ -10,6 +10,7 @@ import SwiftUI
 struct EmptyChallengesView: View {
     @ObservedObject var target = RefreshControlTarget()
 
+    @State private var isShowingEnterWithCodeView: Bool = false
     @State private var ended: Bool = false
     @State var isPresented: Bool = false
 
@@ -33,9 +34,12 @@ struct EmptyChallengesView: View {
                 
                 .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 
-                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código", action: {
+                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
+                    self.isShowingEnterWithCodeView = true
+                }
+                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                    EnterWithCodeView()
                 })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
             }
             Spacer()
             
@@ -44,7 +48,7 @@ struct EmptyChallengesView: View {
         .environment(\.colorScheme, .dark)
         .makeDarkModeFullScreen()
         .fullScreenCover(isPresented: $isPresented) {
-            QCCategorySelectionView()
+            QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
         }
     }
 }
