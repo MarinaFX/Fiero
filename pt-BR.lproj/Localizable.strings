@@ -216,7 +216,8 @@
     "Você precisa informar o número de pontos para a vitória" = "Você precisa informar o número de pontos para a vitória";
 
 // MARK: - Profile
-    "Você é uma máquina de vencer" = "Você é uma máquina de vencer";
+    "Fique ligado" = "Fique ligado, ";
+    "Novas funcionalidades" = "Novas funcionalidades em breve ;)";
     "Apagar conta" = "Apagar conta";
     "Oops, muito desafiador!" = "Oops, muito desafiador!";
     "Deletar conta" = "Deletar conta";
@@ -228,7 +229,7 @@
     "Efeitos sonoros" = "Efeitos sonoros";
     "Feedback tátil" = "Feedback tátil";
     "Configurações" = "Configurações";
-    "Feito!" = "Feito!";
+    "Pronto" = "Pronto";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Escolher esse";

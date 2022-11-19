@@ -218,7 +218,8 @@ We can't get your challenges now, try again";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
 
 // MARK: - Profile
-    "Você é uma máquina de vencer" = "You are a winning machine";
+    "Fique ligado" = "Stay tuned, ";
+    "Novas funcionalidades" = "New features coming soon ;)";
     "Apagar conta" = "Delete account";
     "Oops, muito desafiador!" = "Oops, too challenging!";
     "Deletar conta" = "Delete account";
@@ -230,7 +231,7 @@ We can't get your challenges now, try again";
     "Efeitos sonoros" = "Sound effects";
     "Feedback tátil" = "Haptics feedback";
     "Configurações" = "Settings";
-    "Feito!" = "Done!";
+    "Pronto" = "Done";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Choose this";
