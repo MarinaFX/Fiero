@@ -37,10 +37,12 @@ struct QCNamingView: View {
                     .padding(.bottom, Tokens.Spacing.quarck.value)
 
                 //MARK: Keyboard
-                PermanentKeyboard(text: self.$challengeName, keyboardType: .default, onCommit: {
+                
+                CreationFlowTextViewComponent(text: self.$challengeName, style: .name) {
                     isNavActiveForAmount.toggle()
-                })
+                }
                 .disabled(self.isNavActiveForAmount)
+                .padding(.top, Tokens.Spacing.xs.value)
                 
                 //MARK: - Bottom Buttons
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {

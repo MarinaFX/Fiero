@@ -91,6 +91,8 @@
 		62A9849F28D2216700AE77B5 /* tonto2.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849E28D2216600AE77B5 /* tonto2.json */; };
 		62B2943A28D4EF5100E69F69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62B2943C28D4EF5100E69F69 /* Localizable.strings */; };
 		CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D240128F4B8B500C51505 /* OngoingWithPause.swift */; };
+		CC38BDB42927F60000536E9C /* CreationFlowTextViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC38BDB32927F60000536E9C /* CreationFlowTextViewComponent.swift */; };
+		CC38BDB62927F67400536E9C /* CreationFlowTextViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC38BDB52927F67400536E9C /* CreationFlowTextViewStyles.swift */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
 		CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */; };
 		CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */; };
@@ -257,6 +259,8 @@
 		62B2943B28D4EF5100E69F69 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62B2943D28D4EF5300E69F69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CC0D240128F4B8B500C51505 /* OngoingWithPause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingWithPause.swift; sourceTree = "<group>"; };
+		CC38BDB32927F60000536E9C /* CreationFlowTextViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFlowTextViewComponent.swift; sourceTree = "<group>"; };
+		CC38BDB52927F67400536E9C /* CreationFlowTextViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFlowTextViewStyles.swift; sourceTree = "<group>"; };
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9D928BE8EE0006C0507 /* LoginAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertCases.swift; sourceTree = "<group>"; };
 		CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingModifier.swift; sourceTree = "<group>"; };
@@ -588,6 +592,7 @@
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CC38BDB22927F5BD00536E9C /* TextViews */,
 				1BF3DA762925571E00BAED81 /* Online */,
 				F8B889962925599E00870A34 /* ScoreList */,
 				DF588A3229105EDE00F10E02 /* InviteCode */,
@@ -709,6 +714,15 @@
 				48D6EDC928A2D48D0069FCE9 /* ScoreController3-4Component.swift */,
 			);
 			path = "ScoreController3-4";
+			sourceTree = "<group>";
+		};
+		CC38BDB22927F5BD00536E9C /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				CC38BDB32927F60000536E9C /* CreationFlowTextViewComponent.swift */,
+				CC38BDB52927F67400536E9C /* CreationFlowTextViewStyles.swift */,
+			);
+			path = TextViews;
 			sourceTree = "<group>";
 		};
 		CC4FEDE628A191D100E53C39 /* ScoreControllers */ = {
@@ -1156,6 +1170,7 @@
 				CCFA559828872D2E00740663 /* QuantityTimeStyles.swift in Sources */,
 				DF49516928B902650046A2CD /* GIfImage.swift in Sources */,
 				1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */,
+				CC38BDB62927F67400536E9C /* CreationFlowTextViewStyles.swift in Sources */,
 				DF06F8D829114C7C00A170C2 /* ScanViewController.swift in Sources */,
 				1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */,
 				F8E7C7712887B4CD0035E2CE /* ChallengeCellComponent.swift in Sources */,
@@ -1189,6 +1204,7 @@
 				DF7DCDB528AEC17B00B387BA /* TabBar.swift in Sources */,
 				CCA22155289C5589006AA03F /* ChallengeDetailsView.swift in Sources */,
 				1B4135B928597E8900C7094A /* FieroApp.swift in Sources */,
+				CC38BDB42927F60000536E9C /* CreationFlowTextViewComponent.swift in Sources */,
 				1B8CD3432887F8CF00D2F703 /* QuickChallenge.swift in Sources */,
 				CCE03FEF29032FE80038737A /* InviteChallengerView.swift in Sources */,
 				1B8CD34728887ADE00D2F703 /* QCTypeEnum.swift in Sources */,
