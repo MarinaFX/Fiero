@@ -22,6 +22,7 @@
 		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
 		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
+		1B28CE3329285259007D8130 /* RemovePlayerAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */; };
 		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
 		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
 		1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */; };
@@ -183,6 +184,7 @@
 		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
 		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
+		1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePlayerAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
 		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
 				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
 				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
+				1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 				1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */,
 				CCFA559628872D1B00740663 /* QuantityTimeComponent.swift in Sources */,
 				1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */,
+				1B28CE3329285259007D8130 /* RemovePlayerAlertCasesEnum.swift in Sources */,
 				CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */,
 				CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */,
 				CC91C91328A2F99D00044EA7 /* ElementsStyles.swift in Sources */,

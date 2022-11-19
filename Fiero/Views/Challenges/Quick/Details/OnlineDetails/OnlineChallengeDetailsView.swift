@@ -17,7 +17,8 @@ struct OnlineChallengeDetailsView: View {
     @State private var subscriptions: Set<AnyCancellable> = []
     @State private var isPresentingParticipantsList: Bool = false
     @State private var isPresentingInvite: Bool = false
-    @State private var isPresentingAlert: Bool = false
+    @State private var isPresentingDeleteAlert: Bool = false
+    @State private var isPresentingExitAlert: Bool = false
     @State private var isPresetingOngoingView: Bool = false
     @State private var isPresentingAlertError: Bool = false
     
@@ -85,65 +86,25 @@ struct OnlineChallengeDetailsView: View {
                             }
                             
                             
-
-                    //MARK: - Invite Participants
-                        HStack {
-                            Button {
-                                isPresentingInvite = true
-                            } label: {
-                                Text("Convidar Participante")
-                                    .font(descriptionFontBold)
-                                    .padding(.leading, 16)
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(descriptionFontBold)
-                                    .padding(.trailing, 16)
+                            
+                            //MARK: - Invite Participants
+                            HStack {
+                                Button {
+                                    isPresentingInvite = true
+                                } label: {
+                                    Text("Convidar Participante")
+                                        .font(descriptionFontBold)
+                                        .padding(.leading, 16)
+                                    Image(systemName: "square.and.arrow.up")
+                                        .font(descriptionFontBold)
+                                        .padding(.trailing, 16)
+                                }
                             }
-                        }
-                        .sheet(isPresented: $isPresentingInvite, content: {
-                            InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
-                        })
-                        .foregroundColor(foregroundColor)
-                        .background(.clear)
-                        .padding(.horizontal, defaultMarginSpacing)
-                        .padding(.top, extraSmallSpacing)
-                        .padding(.bottom, extraExtraSmallSpacing)
-                        
-                        
-                        //MARK: - List of Participants
-                        HStack {
-                            Button {
-                                isPresentingParticipantsList.toggle()
-                            } label: {
-                                Text("Participantes")
-                                    .padding(.leading, 16)
-                                Spacer()
-                                Text("Ver todos")
-                                Image(systemName: "chevron.right")
-                                    .padding(.trailing, 16)
-                            }
-                        }
-                        .foregroundColor(foregroundColor)
-                        .frame(height: 44)
-                        .background(Tokens.Colors.Neutral.Low.dark.value)
-                        .cornerRadius(borderSmall)
-                        .padding(.horizontal, defaultMarginSpacing)
-                        
-                        NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
-                        
-                        NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
-                        
-                        ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                            self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                        case .failure(_):
-                                            self.isPresentingAlertError = true
-                                        case .finished:
-                                            self.isPresetingOngoingView.toggle()
-                                    }
-                                }, receiveValue: { _ in () })
-                                .store(in: &subscriptions)
-                        })
+                            .sheet(isPresented: $isPresentingInvite, content: {
+                                InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                            })
+                            .foregroundColor(foregroundColor)
+                            .background(.clear)
                             .padding(.horizontal, defaultMarginSpacing)
                             .padding(.top, extraSmallSpacing)
                             .padding(.bottom, extraExtraSmallSpacing)
@@ -170,9 +131,23 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
-                                .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.vertical, extraExtraSmallSpacing)
+                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.isPresentingAlertError = true
+                                            case .finished:
+                                                self.isPresetingOngoingView.toggle()
+                                        }
+                                    }, receiveValue: { _ in () })
+                                    .store(in: &subscriptions)
+                            })
+                            .padding(.horizontal, defaultMarginSpacing)
+                            .padding(.top, extraSmallSpacing)
+                            .padding(.bottom, extraExtraSmallSpacing)
                         }
                     }
                 }
@@ -189,7 +164,7 @@ struct OnlineChallengeDetailsView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            self.isPresentingAlert = true
+                            self.isPresentingDeleteAlert = true
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
@@ -200,35 +175,35 @@ struct OnlineChallengeDetailsView: View {
                     }
                     
                 }
-                .alert(isPresented: self.$isPresentingAlert, content: {
+                .alert(isPresented: self.$isPresentingDeleteAlert, content: {
                     switch quickChallengeViewModel.detailsAlertCases {
                         case .deleteChallenge:
                             return Alert(title: Text(DetailsAlertCases.deleteChallenge.title),
                                          message: Text(DetailsAlertCases.deleteChallenge.message),
                                          primaryButton: .cancel(Text(DetailsAlertCases.deleteChallenge.primaryButtonText), action: {
-                                self.isPresentingAlert = false
+                                self.isPresentingDeleteAlert = false
                             }), secondaryButton: .destructive(Text("Apagar desafio"), action: {
                                 self.quickChallengeViewModel.deleteChallenge(by: quickChallenge.id)
                                     .sink { completion in
                                         switch completion {
-                                        case .finished:
-                                            self.dismiss()
-                                        case .failure(let error):
-                                            print(error)
-                                            self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
-                                            self.isPresentingAlert.toggle()
+                                            case .finished:
+                                                self.dismiss()
+                                            case .failure(let error):
+                                                print(error)
+                                                self.quickChallengeViewModel.detailsAlertCases = .failureDeletingChallenge
+                                                self.isPresentingDeleteAlert.toggle()
                                         }
                                     } receiveValue: { _ in }
                                     .store(in: &subscriptions)
                             }))
                         case .failureDeletingChallenge:
-                                return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
-                                    self.isPresentingAlert = false
-                                    self.dismiss()
-                                }))
+                            return Alert(title: Text("Failed to delete challenge"), message: Text("Something went wrong and we couldn't delete your challenge."), dismissButton: .cancel(Text("ok"), action: {
+                                self.isPresentingDeleteAlert = false
+                                self.dismiss()
+                            }))
                         default:
                             return Alert(title: Text("Sorry"), message: Text("Something went wrong."), dismissButton: .cancel(Text("ok"), action: {
-                                self.isPresentingAlert = false
+                                self.isPresentingDeleteAlert = false
                                 self.dismiss()
                             }))
                     }
@@ -338,14 +313,68 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: false), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: { })
+                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                            
+                            if self.quickChallenge.alreadyBegin {
+                                ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
+                                    self.isPresetingOngoingView.toggle()
+                                })
                                 .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.vertical, extraExtraSmallSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            }
+                            else {
+                                Text("Hmmm, parece que o dono do desafio \nestá com medo de perder para você \ne não iniciou esse desafio")
+                                    .multilineTextAlignment(.center)
+                            }
                         }
                     }
                 }
+                .alert(isPresented: self.$isPresentingExitAlert, content: {
+                    switch self.quickChallengeViewModel.exitChallengeAlertCases {
+                        case .exitChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.exitChallenge.title),
+                                         message: Text(ExitChallengeAlertCasesEnum.exitChallenge.message),
+                                         primaryButton: .cancel(Text(ExitChallengeAlertCasesEnum.exitChallenge.secondaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }), secondaryButton: .destructive(Text(ExitChallengeAlertCasesEnum.exitChallenge.primaryButton), action: {
+                                self.quickChallengeViewModel.exitChallenge(by: self.quickChallenge.id)
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .finished:
+                                                self.dismiss()
+                                            case .failure(let error):
+                                                print(error)
+                                                self.quickChallengeViewModel.exitChallengeAlertCases = .errorWhenTryingToLeaveChallenge
+                                                self.isPresentingExitAlert.toggle()
+                                        }
+                                    }, receiveValue: { _ in () })
+                                    .store(in: &subscriptions)
+                            }))
+                        case .userOrChallengeNotFound:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.title), message: Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.userOrChallengeNotFound.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .userNotInChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.userNotInChallenge.title), message: Text(ExitChallengeAlertCasesEnum.userNotInChallenge.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.userNotInChallenge.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .internalServerError:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.internalServerError.title), message: Text(ExitChallengeAlertCasesEnum.internalServerError.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.internalServerError.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .errorWhenTryingToLeaveChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.title), message: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .none:
+                            return Alert(title: Text("not expected"))
+                    }
+                })
+                
+                
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Button {
                             self.dismiss()
                         } label: {
@@ -354,6 +383,18 @@ struct OnlineChallengeDetailsView: View {
                                 Text("backButtonText")
                             }
                         }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            self.isPresentingExitAlert = true
+                            self.quickChallengeViewModel.exitChallengeAlertCases = .exitChallenge
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
+                        }, label: {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .font(descriptionFontBold)
+                                .foregroundColor(foregroundColor)
+                        })
                     }
                 }
             }

@@ -46,12 +46,33 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
         return -1
     }
     
-    func getTeamIdByMemberId(memberId: String) -> String {
+    func getTeamIndexById(teamId: String) -> Int {
+        for index in 0..<teams.count {
+            if teams[index].id == teamId {
+                return index
+            }
+        }
+        return -1
+    }
+    
+    func getTeamIdByMemberId(memberUserId: String) -> String {
         for team in teams {
             guard let members = team.members else { return "" }
             for member in members {
-                if member.userId == memberId {
+                if member.userId == memberUserId {
                     return team.id
+                }
+            }
+        }
+        return ""
+    }
+    
+    func getMemberIdByUserId(userId: String) -> String {
+        for team in teams {
+            guard let members = team.members else { return "" }
+            for member in members {
+                if member.userId == userId {
+                    return member.id
                 }
             }
         }
