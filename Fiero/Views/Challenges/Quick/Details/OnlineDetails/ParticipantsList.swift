@@ -6,33 +6,53 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ParticipantsList: View {
     @Environment(\.dismiss) var dismiss
-    
-    @Binding var quickChallenge: QuickChallenge
+    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var ended: Bool = false
     @State private var isPresentingInvite: Bool = false
+    @State private var subscriptions: Set<AnyCancellable> = []
+    
+    @Binding var quickChallenge: QuickChallenge
     
     var body: some View {
         if quickChallenge.teams.count > 1 {
-            List {
-                ForEach(self.$quickChallenge.teams) { participant in
+            if self.quickChallenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "" {
+                List(self.$quickChallenge.teams) { participant in
+                    Text(participant.name.wrappedValue)
+                        .foregroundColor(foregroundColor)
+                    
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
+                        Button(role: .destructive, action: {
+                            self.quickChallengeViewModel.remove(participant: participant.wrappedValue.ownerId ?? "", from: self.quickChallenge.id)
+                                .sink(receiveCompletion: { _ in }, receiveValue: { quickChallenge in
+                                    self.quickChallenge = quickChallenge
+                                })
+                                .store(in: &subscriptions)
+                        }, label: {
+                            Label("Delete", systemImage: "trash")
+                        })
+                    })
+                }
+                .preferredColorScheme(.dark)
+                .listStyle(.plain)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: backButton)
+                
+            }
+            else {
+                List(self.$quickChallenge.teams) { participant in
                     Text(participant.name.wrappedValue)
                         .foregroundColor(foregroundColor)
                 }
-                .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                    Button(role: .destructive, action: {
-                    }, label: {
-                        Label("Delete", systemImage: "trash")
-                    })
-                })
+                .preferredColorScheme(.dark)
+                .listStyle(.plain)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: backButton)
             }
-            .preferredColorScheme(.dark)
-            .listStyle(.plain)
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: backButton)
         } else {
             VStack {
                 List {
@@ -40,12 +60,6 @@ struct ParticipantsList: View {
                         Text(participant.name.wrappedValue)
                             .foregroundColor(foregroundColor)
                     }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
-                        Button(role: .destructive, action: {
-                        }, label: {
-                            Label("Delete", systemImage: "trash")
-                        })
-                    })
                 }
                 .disabled(true)
                 .preferredColorScheme(.dark)

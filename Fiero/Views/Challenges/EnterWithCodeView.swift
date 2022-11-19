@@ -81,7 +81,7 @@ struct EnterWithCodeView: View {
                                     self.isShowingErrorAlert = true
                                 }
                                 else {
-                                    self.quickChallengeViewModel.enterChallenge(by: self.challengeCode)
+                                    self.quickChallengeViewModel.enterChallenge(by: self.challengeCode.uppercased())
                                         .sink(receiveCompletion: { completion in
                                             switch completion {
                                             case .failure(_):

@@ -19,7 +19,8 @@ class QuickChallengeViewModel: ObservableObject {
     @Published var exitChallengeAlertCases: ExitChallengeAlertCasesEnum = .userOrChallengeNotFound
     @Published var editPlayerScoreAlertCases: EditPlayerScoreAlertCasesEnum = .playerNotInChallenge
     @Published var getChallengeAlertCases: GetChallengeAlertCasesEnum = .challengeNotFound
-
+    @Published var removePlayerAlertCases: RemovePlayerAlertCasesEnum = .userOrChallengeNotFound
+    
     private(set) var client: HTTPClient
     private(set) var keyValueStorage: KeyValueStorage
     private(set) var authTokenService: AuthTokenService
@@ -228,7 +229,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Enter Challenge by code
     @discardableResult
-    func enterChallenge(by code: String) -> AnyPublisher<Void, Error> {
+    func enterChallenge(by code: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
         let json = """
         {
             "invitationCode" : "\(code)"
@@ -244,50 +245,40 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
-        operation.sink(receiveCompletion: { [weak self] completion in
+        operation
+            .sink(receiveCompletion: { [weak self] completion in
             switch completion {
                 case .failure(let error):
-                    print("Failed to create request to join challenge endpoint: \(error)")
-                    self?.joinChallengeAlertCases = .internalServerError
+                    print("Failed to created request to join challenges endpoint: \(error)")
+                    switch error {
+                        case .notFound:
+                            self?.joinChallengeAlertCases = .challengeNotFound
+                        case .conflict:
+                            self?.joinChallengeAlertCases = .alreadyJoinedChallenge
+                        default:
+                            self?.joinChallengeAlertCases = .internalServerError
+                    }
                 case .finished:
                     print("Successfully created request to join challenges endpoint")
             }
-        }, receiveValue: { [weak self] rawURLResponse in
-            guard let response = rawURLResponse.item else {
-                
-                if rawURLResponse.statusCode == 404 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .challengeNotFound
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 409 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .alreadyJoinedChallenge
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 500 {
-                    print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                    self?.joinChallengeAlertCases = .internalServerError
-                    return
-                }
-                print("error while trying to join challenge: \(rawURLResponse.statusCode)")
-                return
-            }
-            
-            print("Successfully joined challenge: \(rawURLResponse.statusCode)")
-            
+        }, receiveValue: { [weak self] quickChallenge in
             self?.joinChallengeAlertCases = .none
-            self?.challengesList.append(response.quickChallenge)
+            self?.challengesList.append(quickChallenge)
         })
         .store(in: &cancellables)
         
         return operation
-            .map({ _ in () })
-            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
@@ -521,8 +512,9 @@ class QuickChallengeViewModel: ObservableObject {
                 return
             }
             
-            print("Successfully removed challenge: \(rawURLResponse.statusCode)")
-            
+            print("Successfully exited from challenge: \(rawURLResponse.statusCode)")
+            self?.challengesList.removeAll(where: { $0.id == id })
+
             self?.exitChallengeAlertCases = .none
         })
         .store(in: &cancellables)
@@ -535,7 +527,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Remove Participant
     @discardableResult
-    func remove(participant userID: String, from challengeID: String) -> AnyPublisher<Void, Error> {
+    func remove(participant userID: String, from challengeID: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
         let json = """
         {
             "userToDeleteId" : "\(userID)"
@@ -551,50 +543,43 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
         operation
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [weak self] completion in
             switch completion {
                 case .failure(let error):
+                    switch error {
+                        case .badRequest:
+                            self?.removePlayerAlertCases = .userNotInThisChallenge
+                        case .notFound:
+                            self?.removePlayerAlertCases = .userOrChallengeNotFound
+                        case .internalServerError:
+                            self?.removePlayerAlertCases = .internalServerError
+                        case .unauthorized:
+                            self?.removePlayerAlertCases = .unauthorizedToRemove
+                        case .success:
+                            self?.removePlayerAlertCases = .userRemoved
+                        default:
+                            self?.removePlayerAlertCases = .internalServerError
+                    }
                     print("Failed to create request to remove participant from challenge endpoint: \(error)")
                 case .finished:
-                    print("Failed to create request to remove participant from challenge endpoint")
+                    print("Successfully created request to remove participant from challenge endpoint")
             }
-        }, receiveValue: { rawURLResponse in
-            guard let response =  rawURLResponse.item else {
-                if rawURLResponse.statusCode == 404 {
-                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 400 {
-                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 401 {
-                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
-                    return
-                }
-                
-                if rawURLResponse.statusCode == 500 {
-                    print("Error while trying to finish challenge: \(rawURLResponse.statusCode)")
-                    return
-                }
-                
-                return
-            }
-            
-            print("Succesfully removed user from challenge: \(rawURLResponse.statusCode)")
-            
-            
-        })
+        }, receiveValue: { _ in })
         .store(in: &cancellables)
         
         return operation
-            .map({ _ in () })
-            .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
