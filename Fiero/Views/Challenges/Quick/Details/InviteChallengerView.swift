@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct InviteChallengerView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var inviteCode: String
+    @State var inviteCodeArray: Array = ["a", "a", "a", "a", "a"]
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     
     var body: some View {
         NavigationView {
@@ -18,46 +22,57 @@ struct InviteChallengerView: View {
                 Tokens.Colors.Background.dark.value
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack {
-                    Spacer()
-                    
-                    Text(LocalizedStringKey("inviteTitle"))
-                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, Tokens.Spacing.xxxs.value)
-                    
-                    Text(LocalizedStringKey("inviteDescription"))
-                        .font(Tokens.FontStyle.callout.font())
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, Tokens.Spacing.xs.value)
-                    
-                    Text(inviteCode)
-                        .font(Font.system(size: 60))
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .padding(.bottom, Tokens.Spacing.xxs.value)
-                    
-                    Button {
-                        copyInviteCode()
-                    } label: {
-                        Text(LocalizedStringKey("inviteButtonCodeText"))
-                            .font(Tokens.FontStyle.caption.font())
-                            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
-                            .padding(Tokens.Spacing.nano.value)
-                            .background(Tokens.Colors.Neutral.High.pure.value)
-                            .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                ScrollView (showsIndicators: false) {
+                    VStack (spacing: Tokens.Spacing.xs.value){
+                        Spacer()
+                        
+                        Text(LocalizedStringKey("inviteTitle"))
+                            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, Tokens.Spacing.md.value)
+                        
+                        Text(LocalizedStringKey("inviteDescription"))
+                            .font(Tokens.FontStyle.callout.font())
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .multilineTextAlignment(.center)
+                            .frame(width: UIScreen.main.bounds.height * 0.3)
+                        
+                        VStack (spacing: Tokens.Spacing.xxs.value){
+                            Image(uiImage: generateQRCode(from: "\(inviteCode)"))
+                                .interpolation(.none)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: UIScreen.main.bounds.height*0.15, height: UIScreen.main.bounds.height*0.15)
+                                .padding(Tokens.Spacing.xxxs.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value)
+                        }.cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        
+                        HStack {
+                            ForEach(inviteCodeArray, id: \.self) {
+                                LetterComponent(letter: $0, variant: .onlyView)
+                            }
+                        }.frame(height: 80)
+                        
+                        Button {
+                            copyInviteCode()
+                        } label: {
+                            Text(LocalizedStringKey("inviteButtonCodeText"))
+                                .font(Tokens.FontStyle.caption.font())
+                                .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+                                .padding(.vertical, Tokens.Spacing.nano.value)
+                                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.normal.value)
+                        }
+                        
+                        ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
+                            self.dismiss()
+                        }
+                        .padding(.bottom, Tokens.Spacing.md.value)
                     }
-                    
-                    Spacer()
-                    
-                    ButtonComponent(style: .black(isEnabled: true), text: "inviteButtonBackToDetails") {
-                        self.dismiss()
-                    }
-                    .padding(.bottom, Tokens.Spacing.md.value)
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                 }
-                .padding(.horizontal, Tokens.Spacing.xl.value)
             }
             .navigationTitle(LocalizedStringKey("inviteNavTitle"))
             .navigationBarTitleDisplayMode(.inline)
@@ -72,10 +87,26 @@ struct InviteChallengerView: View {
                 })
             })
         }
+        .onAppear() {
+            inviteCodeArray = inviteCode.map { String($0) }
+            print(inviteCodeArray[0])
+        }
     }
     
     func copyInviteCode() {
-         UIPasteboard.general.string = self.inviteCode
+        UIPasteboard.general.string = self.inviteCode
+    }
+    
+    //MARK: - This code transform string in QR Code Image
+    func generateQRCode(from string: String) -> UIImage {
+        filter.message = Data(string.utf8)
+
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
 }
 

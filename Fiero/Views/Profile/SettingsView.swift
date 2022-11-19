@@ -18,7 +18,9 @@ struct SettingsView: View {
         NavigationView {
             VStack(spacing: Tokens.Spacing.xxs.value) {
                 Toggle("Efeitos sonoros", isOn: SoundPlayer.isActionSoundsActiveBinding)
+                    .tint(Tokens.Colors.Highlight.four.value)
                 Toggle("Feedback tátil", isOn: HapticsController.isHapticsActiveBinding)
+                    .tint(Tokens.Colors.Highlight.four.value)
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Sair da conta", action: {
                     self.userViewModel.activeAlert = .logOut
@@ -32,8 +34,11 @@ struct SettingsView: View {
             .padding(Tokens.Spacing.defaultMargin.value)
             .navigationBarTitle("Configurações", displayMode: .inline)
             .toolbar {
-                Button("Feito!") {
+                Button {
                     self.dismiss()
+                } label: {
+                    Text(LocalizedStringKey("Pronto"))
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 }
             }
         }

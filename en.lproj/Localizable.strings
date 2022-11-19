@@ -82,6 +82,7 @@
 
 // MARK: - TabBar
     "Desafios" = "Challenges";
+    "Criar" = "Create";
     "Perfil" = "Profile";
 
 // MARK: - ChallengeListScreenView
@@ -101,9 +102,14 @@ We can't get your challenges now, try again";
 //MARK: - EnterWithCode
     "enterWithCodeNavTitle" = "Enter with code";
     "enterWithCodeCloseButton" = "Close";
-    "enterWithCodeDescription" = "Paste the challenge code here to participate with your friends";
+    "enterWithCodeDescription" = "Input the challenge code";
     "enterWithCodePlaceholder" = "Challenge code";
     "enterWithCodeButtonText" = "Enter the challenge";
+    "openScanQRCodeButtonText" = "Scan QR Code";
+
+//MARK: - EnterWithQRCode
+    "titleQRCodeView" = "Scan the QR Code\nwith the camera";
+    "backButtonQRCodeView" = "Back";
 
 //MARK: - ChallengeTypes
     "amount" = "of amount";
@@ -125,12 +131,12 @@ We can't get your challenges now, try again";
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
     "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
-    "Ir para lista de desafios" = "Go to challenge list";
+    "Ir para a página inicial" = "Go to home page";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
 // MARK: - Quick: ChallengeSelectionView
-    "pickChallengeType" = "Choose a \nchallenge type";
+    "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
     "timeChallengeTypeTitle" = "Time \nchallenge";
@@ -146,9 +152,9 @@ We can't get your challenges now, try again";
 //MARK: - Quick - InviteChallengerView
     "inviteNavTitle" = "Invite challenger";
     "inviteCloseButton" = "Close";
-    "inviteTitle" = "Challenge your friends!";
+    "inviteTitle" = "Challenge\nyour friends!";
     "inviteDescription" = "Use the code below to invite your friends to the challenge";
-    "inviteButtonCodeText" = "Click to copy";
+    "inviteButtonCodeText" = "Tap to copy";
     "inviteButtonBackToDetails" = "Back to details";
 
 // MARK: - Quick - Details - ChallengeDetailsView
@@ -173,11 +179,11 @@ We can't get your challenges now, try again";
     "Apagar desafio" = "Delete challenge";
     "Erro de conexão" = "Connection error";
     "Erro de salvamento" = "Save error";
-    "Erro ao apagar desafio" = "Error deleting challenge";
+    "Erro ao apagar desafio" = "Its neither of us.";
     "Essa ação não poderá ser desfeita." = "This action cannot be undone.";
     "Não foi possível iniciar o desafio, tente novamente mais tarde." = "Unable to start challenge, please try again later.";
     "Você ainda pode ver os pontos salvos localmente, mas a pontuação não pode ser salva na nuvem." = "You can still see the points saved locally, but the score cannot be saved to the cloud.";
-    "Não foi possível apagar o desafio, tente novamente mais tarde." = "Unable to delete challenge, please try again later.";
+    "Não foi possível apagar o desafio, tente novamente mais tarde." = "Unable to delete challenge, try again later";
     "Cancelar" = "Cancel";
     "OK" = "OK";
 
@@ -212,7 +218,8 @@ We can't get your challenges now, try again";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
 
 // MARK: - Profile
-    "Você é uma máquina de vencer" = "You are a winning machine";
+    "Fique ligado" = "Stay tuned, ";
+    "Novas funcionalidades" = "New features coming soon ;)";
     "Apagar conta" = "Delete account";
     "Oops, muito desafiador!" = "Oops, too challenging!";
     "Deletar conta" = "Delete account";
@@ -224,7 +231,7 @@ We can't get your challenges now, try again";
     "Efeitos sonoros" = "Sound effects";
     "Feedback tátil" = "Haptics feedback";
     "Configurações" = "Settings";
-    "Feito!" = "Done!";
+    "Pronto" = "Done";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Choose this";
@@ -322,3 +329,69 @@ We can't get your challenges now, try again";
 "joinInvalidCodeTitle" = "Its not us! Its you.";
 "joinInvalidCodeMessage" = "Was it too challenging to get the code right? The code must only contain 5 characters";
 "joinInvalidCodePrimaryButton" = "Ok!";
+
+//MARK: - Exit from Challenge
+//MARK: - Alerts
+//MARK: ExitChallenge
+"exitChallengeTitle" = "Too challenging?";
+"exitChallengeMessage" = "Its ok to leave the challening, everybody has rage quitted once in their life.";
+"exitChallengePrimaryButton" = "Yes, I give up";
+"exitChallengeSecondaryButton" = "No way! I will stay";
+
+//MARK: userOrChallengeNotFound
+"exitChallengeUserOrChallengeNotFoundTitle" = "Its not us! Its you.";
+"exitChallengeUserOrChallengeNotFoundMessage" = "Looks like your being haunted. Neither this user or this challenge exists";
+"exitChallengeUserOrChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: userNotInChallenge
+"exitChallengeUserNotInChallengeTitle" = "Its not us! Its you.";
+"exitChallengeUserNotInChallengeMessage" = "You can't exit from something you never entered";
+"exitChallengeUserNotInChallengePrimaryButton" = "Ok!";
+
+//MARK: internalServerError
+"exitChallengeInternalServerErrorTitle" = "Its not you! Its us.";
+"exitChallengeInternalServerErrorMessage" = "We've had internal difficulties, try again later";
+"exitChallengeInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: errorWhenTryingToLeaveChallenge
+"exitChallengeErrorWhenTryingToLeaveChallengeTitle" = "Its neither of us.";
+"exitChallengeErrorWhenTryingToLeaveChallengeMessage" = "Unable to exit from this challenge at the moment, try again later";
+"exitChallengeErrorWhenTryingToLeaveChallengePrimaryButton" = "Ok!";
+
+//MARK: - Remove players from Challenge
+//MARK: - Alerts
+//MARK: UserOrChallengeNotFound
+"removePlayerUserOrChallengeNotFoundTitle" = "Its not us! Its you.";
+"removePlayerUserOrChallengeNotFoundMessage" = "Looks like your being haunted. Neither this user or this challenge exists";
+"removePlayerUserOrChallengeNotFoundPrimaryButton" = "Ok!";
+
+//MARK: RemoveItSelf
+"removePlayerRemoveItSelfTitle" = "Its not us! Its you.";
+"removePlayerRemoveItSelfMessage" = "You can't remove yourself from something that is yours";
+"removePlayerRemoveItSelfPrimaryButton" = "Ok!";
+
+//MARK: UnauthorizedToRemove
+"removePlayerUnauthorizedToRemoveTitle" = "Its not us! Its you.";
+"removePlayerUnauthorizedToRemoveMessage" = "Unless your the owner of this challenge, you can't remove others";
+"removePlayerUnauthorizedToRemovePrimaryButton" = "Ok!";
+
+//MARK: UserNotInThisChallenge
+"removePlayerUserNotInThisChallengeTitle" = "Its not us! Its you.";
+"removePlayerUserNotInThisChallengeMessage" = "You can't remove someone that is not here";
+"removePlayerUserNotInThisChallengePrimaryButton" = "Ok!";
+
+//MARK: InternalServerError
+"removePlayerInternalServerErrorTitle" = "Its not you! Its us.";
+"removePlayerInternalServerErrorMessage" = "We've had internal difficulties, try again later";
+"removePlayerInternalServerErrorPrimaryButton" = "Ok!";
+
+//MARK: ErrorWhenRemovingPlayerFromChallenge
+"removePlayerErrorWhenRemovingPlayerFromChallengeTitle" = "Its neither of us.";
+"removePlayerErrorWhenRemovingPlayerFromChallengeMessage" = "Unable to remove this player from this challenge at the moment, try again later";
+"removePlayerErrorWhenRemovingPlayerFromChallengePrimaryButton" = "Ok!";
+
+
+//MARK: - OnlineOngoingChallengeView
+"playerLabel" = "You";
+"leadersLabel" = "Leaders";
+"positionLabel" = "Your position";
