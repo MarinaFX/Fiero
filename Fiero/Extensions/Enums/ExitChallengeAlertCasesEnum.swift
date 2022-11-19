@@ -13,18 +13,21 @@ enum ExitChallengeAlertCasesEnum {
     case userOrChallengeNotFound
     case userNotInChallenge
     case internalServerError
+    case errorWhenTryingToLeaveChallenge
     case none
     
     var title: LocalizedStringKey {
         switch self {
             case .exitChallenge:
-                return "exit challenge title"
+                return "exitChallengeTitle"
             case .userOrChallengeNotFound:
-                return "user or challenge not found title"
+                return "exitChallengeUserOrChallengeNotFoundTitle"
             case .userNotInChallenge:
-                return "user not in challenge title"
+                return "exitChallengeUserNotInChallengeTitle"
             case .internalServerError:
-                return "internal server error title"
+                return "exitChallengeInternalServerErrorTitle"
+            case .errorWhenTryingToLeaveChallenge:
+                return "exitChallengeErrorWhenTryingToLeaveChallengeTitle"
             case .none:
                 return "not expected"
         }
@@ -33,13 +36,15 @@ enum ExitChallengeAlertCasesEnum {
     var message: LocalizedStringKey {
         switch self {
             case .exitChallenge:
-                return "exit challenge message"
+                return "exitChallengeMessage"
             case .userOrChallengeNotFound:
-                return "user or challenge not found message"
+                return "exitChallengeUserOrChallengeNotFoundMessage"
             case .userNotInChallenge:
-                return "user not in challenge message"
+                return "exitChallengeUserNotInChallengeMessage"
             case .internalServerError:
-                return "internal server error message"
+                return "exitChallengeInternalServerErrorMessage"
+            case .errorWhenTryingToLeaveChallenge:
+                return "exitChallengeErrorWhenTryingToLeaveChallengeMessage"
             case .none:
                 return "not expected"
         }
@@ -48,15 +53,35 @@ enum ExitChallengeAlertCasesEnum {
     var primaryButton: LocalizedStringKey {
         switch self {
             case .exitChallenge:
-                return "exit challenge primaryButton"
+                return "exitChallengePrimaryButton"
             case .userOrChallengeNotFound:
-                return "user or challenge not found primaryButton"
+                return "exitChallengeUserOrChallengeNotFoundPrimaryButton"
             case .userNotInChallenge:
-                return "user not in challenge primaryButton"
+                return "exitChallengeUserNotInChallengePrimaryButton"
             case .internalServerError:
-                return "internal server error primaryButton"
+                return "exitChallengeInternalServerErrorPrimaryButton"
+            case .errorWhenTryingToLeaveChallenge:
+                return "exitChallengeErrorWhenTryingToLeaveChallengePrimaryButton"
+            case .none:
+                return "not expected"
+        }
+    }
+    
+    var secondaryButton: LocalizedStringKey {
+        switch self {
+            case .exitChallenge:
+                return "exitChallengeSecondaryButton"
+            case .userOrChallengeNotFound:
+                return ""
+            case .userNotInChallenge:
+                return ""
+            case .internalServerError:
+                return ""
+            case .errorWhenTryingToLeaveChallenge:
+                return ""
             case .none:
                 return "not expected"
         }
     }
 }
+

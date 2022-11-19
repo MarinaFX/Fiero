@@ -102,9 +102,9 @@ struct HomeView: View {
                             self.isShowingDeleteErrorAlert = false
                         }))
                     } else if self.isShowingExitErrorAlert {
-                        return Alert(title: Text(ExitChallengeAlertCasesEnum.internalServerError.title),
-                                     message: Text(ExitChallengeAlertCasesEnum.internalServerError.message),
-                                     dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.internalServerError.primaryButton), action: {
+                        return Alert(title: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.title),
+                                     message: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.message),
+                                     dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.primaryButton), action: {
                             self.isShowingExitErrorAlert = false
                         }))
                     }

@@ -335,9 +335,9 @@ struct OnlineChallengeDetailsView: View {
                         case .exitChallenge:
                             return Alert(title: Text(ExitChallengeAlertCasesEnum.exitChallenge.title),
                                          message: Text(ExitChallengeAlertCasesEnum.exitChallenge.message),
-                                         primaryButton: .cancel(Text(ExitChallengeAlertCasesEnum.exitChallenge.primaryButton), action: {
+                                         primaryButton: .cancel(Text(ExitChallengeAlertCasesEnum.exitChallenge.secondaryButton), action: {
                                 self.isPresentingExitAlert = false
-                            }), secondaryButton: .destructive(Text("Sair do desafio"), action: {
+                            }), secondaryButton: .destructive(Text(ExitChallengeAlertCasesEnum.exitChallenge.primaryButton), action: {
                                 self.quickChallengeViewModel.exitChallenge(by: self.quickChallenge.id)
                                     .sink(receiveCompletion: { completion in
                                         switch completion {
@@ -345,7 +345,7 @@ struct OnlineChallengeDetailsView: View {
                                                 self.dismiss()
                                             case .failure(let error):
                                                 print(error)
-                                                self.quickChallengeViewModel.exitChallengeAlertCases = .internalServerError
+                                                self.quickChallengeViewModel.exitChallengeAlertCases = .errorWhenTryingToLeaveChallenge
                                                 self.isPresentingExitAlert.toggle()
                                         }
                                     }, receiveValue: { _ in () })
@@ -361,6 +361,10 @@ struct OnlineChallengeDetailsView: View {
                             }))
                         case .internalServerError:
                             return Alert(title: Text(ExitChallengeAlertCasesEnum.internalServerError.title), message: Text(ExitChallengeAlertCasesEnum.internalServerError.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.internalServerError.primaryButton), action: {
+                                self.isPresentingExitAlert = false
+                            }))
+                        case .errorWhenTryingToLeaveChallenge:
+                            return Alert(title: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.title), message: Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.message), dismissButton: .cancel(Text(ExitChallengeAlertCasesEnum.errorWhenTryingToLeaveChallenge.primaryButton), action: {
                                 self.isPresentingExitAlert = false
                             }))
                         case .none:
