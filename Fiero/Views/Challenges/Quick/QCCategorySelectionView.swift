@@ -14,9 +14,13 @@ struct ChallengesCategoryInfo {
 }
 
 struct QCCategorySelectionView: View {
+    @Environment(\.dismiss) var dismissView
+    
     @State private var scrollOffset: CGFloat = 0.0
     @State var presentNextScreen: Bool = false
     @State var isShowingEnterWithCodeView = false
+    
+    var didComeFromEmptyView: Bool = false
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -71,6 +75,13 @@ struct QCCategorySelectionView: View {
                 })
                 .frame(height: 10)
                 .padding(.top, 0)
+                
+                if didComeFromEmptyView {
+                    ButtonComponent(style: .black(isEnabled: true), text: "Voltar") {
+                        RootViewController.dismissSheetFlow()
+                    }
+                }
+                
             }
             .makeDarkModeFullScreen()
             .navigationTitle(LocalizedStringKey("homeScreenTitle"))
