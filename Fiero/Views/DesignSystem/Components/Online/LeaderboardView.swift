@@ -33,7 +33,7 @@ struct LeaderboardView: View {
             }
         }
         .environment(\.colorScheme, .dark)
-        .background(Tokens.Colors.Neutral.Low.pure.value)
+        .background(Tokens.Colors.Neutral.Low.dark.value)
     }
 }
 
@@ -49,6 +49,9 @@ struct LeaderboardParticipantView: View {
     var teamId: String
     
     var body: some View {
+        
+        let name: String = self.quickChallenge.teams.first(where: { $0.id == teamId})?.name
+        ?? ""
         VStack {
             Circle()
                 .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.width * 0.25)
@@ -63,7 +66,7 @@ struct LeaderboardParticipantView: View {
                         })
                 })
             
-            Text(self.quickChallenge.teams.first(where: { $0.id == teamId})?.name ?? "")
+            Text(name.components(separatedBy: " ").first ?? "")
                 .padding(Tokens.Spacing.quarck.value)
             
             Text(String(format: "%.0f", self.quickChallenge.teams.first(where: { $0.id == teamId})?.getTotalScore() ?? -1.0))

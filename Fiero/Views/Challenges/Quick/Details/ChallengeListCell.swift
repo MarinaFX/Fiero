@@ -19,8 +19,9 @@ struct ChallengeListCell: View {
             if quickChallenge.type == QCTypeEnum.amount.description{
                 LottieView(fileName: "quantity-list-cell", reverse: false, loop: true, ended: $ended)
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 30)
-                    .padding(.horizontal, Tokens.Spacing.nano.value)
+                    .frame(width: 30, height: 70)
+                    .padding(.leading, Tokens.Spacing.nano.value)
+                    .padding(.trailing, Tokens.Spacing.xxxs.value)
             }
             VStack (spacing: Tokens.Spacing.nano.value) {
                 HStack {

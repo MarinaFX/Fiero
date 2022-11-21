@@ -20,7 +20,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                Color("background").ignoresSafeArea()
                 VStack {
                     HStack(spacing: 2) {
                         Text("Fique ligado")
@@ -28,7 +28,7 @@ struct ProfileView: View {
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .font(Tokens.FontStyle.title.font(design: .rounded))
                         
-                        Text(userName)
+                        Text(userName.components(separatedBy: " ").first ?? "")
                             .multilineTextAlignment(.center)
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                             .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))

@@ -15,11 +15,13 @@ struct OnlineOngoingChallengeView: View {
     
     @State var subscriptions: Set<AnyCancellable> = []
     @State private var originalScore: Double = 0.0
-    @State private var timeRemaining = 7
+    @State private var timeRemaining = 1
     
     @Binding var quickChallenge: QuickChallenge
     
-    let timeThreshold = 7
+    @State var isFinished: Bool = false
+    
+    let timeThreshold = 1
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var score: Double {
@@ -42,7 +44,7 @@ struct OnlineOngoingChallengeView: View {
                 Text("playerLabel")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
                 
-                PlayerScoreControllerView(quickChallenge: self.$quickChallenge, originalScore: self.$originalScore, teamId: self.quickChallenge.getTeamIdByMemberId(memberUserId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
+                PlayerScoreControllerView(quickChallenge: self.$quickChallenge, originalScore: self.$originalScore, isFinished: $isFinished, teamId: self.quickChallenge.getTeamIdByMemberId(memberUserId: UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? ""))
                     .padding(.bottom, Tokens.Spacing.xs.value)
                 
                 Text("leadersLabel")
@@ -74,23 +76,27 @@ struct OnlineOngoingChallengeView: View {
                             
                             guard let actualScore = self.quickChallenge.teams[position].members?[0].score else { return }
                             
-                            self.quickChallengeViewModel.patchScore(challengeId: self.quickChallenge.id, teamId: teamId, memberId: memberId, score: actualScore)
-                                .flatMap({ _ in
-                                    return self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
-                                })
-                                .sink(receiveCompletion: { completion in
-                                    switch completion {
-                                        case .failure(_):
-                                            self.timeRemaining = self.timeThreshold
-                                        case .finished:
-                                            self.dismissView()
-                                    }
-                                }, receiveValue: { quickChallenge in
-                                    self.quickChallenge = quickChallenge
-                                    self.originalScore = actualScore
-                                    self.timeRemaining = self.timeThreshold
-                                })
-                                .store(in: &subscriptions)
+                            if !quickChallenge.finished {
+                                self.quickChallengeViewModel.patchScore(challengeId: self.quickChallenge.id, teamId: teamId, memberId: memberId, score: actualScore)
+                                    .flatMap({ _ in
+                                        return self.quickChallengeViewModel.getChallenge(by: self.quickChallenge.id)
+                                    })
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.timeRemaining = self.timeThreshold
+                                            case .finished:
+                                                self.dismissView()
+                                        }
+                                    }, receiveValue: { quickChallenge in
+                                        self.quickChallenge = quickChallenge
+                                        self.originalScore = actualScore
+                                        self.timeRemaining = self.timeThreshold
+                                    })
+                                    .store(in: &subscriptions)
+                            } else {
+                                self.dismissView()
+                            }
                             
                         }, label: {
                             HStack {
@@ -102,6 +108,7 @@ struct OnlineOngoingChallengeView: View {
                     })
                     ToolbarItem(placement: .navigationBarTrailing ,content: {
                         Button(action: {
+                            
                             guard let userId = UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) else { return }
                             
                             let memberId = self.quickChallenge.getMemberIdByUserId(userId: userId)
@@ -152,6 +159,9 @@ struct OnlineOngoingChallengeView: View {
                     })
                 })
             }
+            NavigationLink("", isActive: $isFinished) {
+                WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "online")
+            }.hidden()
         }
         .onReceive(self.timer, perform: { time in
             if self.timeRemaining > 0 {
@@ -189,6 +199,9 @@ struct OnlineOngoingChallengeView: View {
         })
         .navigationBarBackButtonHidden()
         .environment(\.colorScheme, .dark)
+        .onChange(of: isFinished, perform: { _ in
+            quickChallengeViewModel.finishChallenge(challengeId: quickChallenge.id, finished: true)
+        })
         .makeDarkModeFullScreen()
     }
 }
@@ -249,6 +262,7 @@ struct PlayerScoreControllerView: View {
     
     @Binding var quickChallenge: QuickChallenge
     @Binding var originalScore: Double
+    @Binding var isFinished: Bool
     
     let teamId: String
     
@@ -256,24 +270,26 @@ struct PlayerScoreControllerView: View {
         RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
             .padding(.horizontal, 32)
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.1)
-            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+            .foregroundColor(Tokens.Colors.Neutral.Low.dark.value)
             .overlay(content: {
                 HStack {
-                    Button(action: {
-                        let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
-                        if position >= 0 {
-                            self.quickChallenge.teams[position].members?[0].score -= 1
-                        }
-                    }, label: {
-                        Circle()
-                            .foregroundColor(.white)
-                            .frame(width: 40, height: 40)
-                            .padding(.horizontal, 48)
-                            .overlay(content: {
-                                Image(systemName: "minus")
-                                    .foregroundColor(.black)
+                    if !quickChallenge.finished {
+                        Button(action: {
+                            let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                            if position >= 0 {
+                                self.quickChallenge.teams[position].members?[0].score -= 1
+                            }
+                            if self.quickChallenge.teams[position].members?[0].score == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                isFinished = true
+                            }
+                        }, label: {
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 48)
                             })
-                    })
+                    }
                     
                     Spacer()
                     
@@ -282,21 +298,23 @@ struct PlayerScoreControllerView: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
-                        if position >= 0 {
-                            self.quickChallenge.teams[position].members?[0].score += 1
-                        }
-                    }, label: {
-                        Circle()
-                            .foregroundColor(.white)
-                            .frame(width: 40, height: 40)
-                            .padding(.horizontal, 48)
-                            .overlay(content: {
-                                Image(systemName: "plus")
-                                    .foregroundColor(.black)
-                            })
-                    })
+                    if !quickChallenge.finished {
+                        Button(action: {
+                            let position = self.quickChallenge.getTeamIndexById(teamId: teamId)
+                            if position >= 0 {
+                                self.quickChallenge.teams[position].members?[0].score += 1
+                            }
+                            if self.quickChallenge.teams[position].members?[0].score == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                isFinished = true
+                            }
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 48)
+                        })
+                    }
                 }
             })
             .onAppear(perform: {
