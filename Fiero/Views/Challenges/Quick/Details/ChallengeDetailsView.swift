@@ -26,8 +26,7 @@ struct ChallengeDetailsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                backgroundColor
-                    .edgesIgnoringSafeArea(.all)
+                Color("background").ignoresSafeArea()
                 
                 NavigationLink("", isActive: self.$isPresentingOngoing) {
                     OngoingWithPause(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
@@ -163,13 +162,23 @@ struct ChallengeDetailsView: View {
                 //MARK: - Navigation
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        Button {
+                            self.dismiss()
+                        } label: {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                Text("backButtonText")
+                            }
+                        }
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             self.isPresentingAlert.toggle()
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
-                            Image(systemName: "trash")
+                            Image(systemName: "trash.fill")
                                 .font(descriptionFontBold)
                                 .foregroundColor(foregroundColor)
                         })

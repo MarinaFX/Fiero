@@ -67,19 +67,6 @@ struct HomeView: View {
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
                     QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
                 }
-                
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isPresentingQuickChallengeCreation = true
-                            HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
-                        }, label: {
-                            Image(systemName: "plus")
-                                .foregroundColor(Tokens.Colors.Highlight.one.value)
-                                .font(Tokens.FontStyle.title2.font(weigth: .bold, design: .rounded))
-                        })
-                    }
-                }
                 .navigationViewStyle(StackNavigationViewStyle())
                 .onAppear(perform: {
                     UITableView.appearance().refreshControl = UIRefreshControl()
@@ -150,6 +137,7 @@ struct ChallengesListScreenView: View {
     //MARK: body
     var body: some View {
         ZStack {
+            Color("background").ignoresSafeArea()
             List(self.quickChallenges, id: \.self) { challenge in
                 ZStack {
                     ChallengeListCell(quickChallenge: .constant(challenge))
@@ -176,7 +164,7 @@ struct ChallengesListScreenView: View {
                                 }, receiveValue: { _ in })
                                 .store(in: &subscriptions)
                         }, label: {
-                            Label("Delete", systemImage: "trash")
+                            Label("Delete", systemImage: "trash.fill")
                         })
                     }
                     else {
@@ -200,7 +188,6 @@ struct ChallengesListScreenView: View {
                         .tint(Tokens.Colors.Highlight.one.value)
                     }
                 })
-                
             }
             .fullScreenCover(item: $focusedChallenge) { item in
                 if item.online {

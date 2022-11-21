@@ -82,7 +82,7 @@ struct OngoingScreen: View {
                         }
                         if howManyTimesWinAnimationDidAppear <= 1 {
                             NavigationLink("", isActive: $isFinished) {
-                                WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                                WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "offline")
                             }
                             .onAppear(perform: {
                                 howManyTimesWinAnimationDidAppear += 1
@@ -153,7 +153,7 @@ struct OngoingScreen: View {
                     }
                     if howManyTimesWinAnimationDidAppear <= 1 {
                         NavigationLink("", isActive: $isFinished) {
-                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "offline")
                         }
                         .onAppear(perform: {
                             howManyTimesWinAnimationDidAppear += 1
