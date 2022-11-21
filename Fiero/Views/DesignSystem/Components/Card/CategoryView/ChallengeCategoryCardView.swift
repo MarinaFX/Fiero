@@ -46,7 +46,7 @@ struct ChallengeCategoryCardView: View {
                     .font(style.subtitleFont)
                     .foregroundColor(style.textColor)
                     .multilineTextAlignment(.center)
-                    .lineLimit(3)
+                    .lineLimit(5)
                     .padding(.bottom, style.subtitleSpacing)
                 
                 if style == .amount {
