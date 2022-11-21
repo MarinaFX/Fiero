@@ -37,7 +37,7 @@ struct LeaderboardView: View {
                 }
             }
             .environment(\.colorScheme, .dark)
-            .background(Tokens.Colors.Neutral.Low.pure.value)
+            .background(Tokens.Colors.Neutral.Low.dark.value)
         }
         else {
             HStack {
@@ -62,7 +62,7 @@ struct LeaderboardView: View {
                 }
             }
             .environment(\.colorScheme, .dark)
-            .background(Tokens.Colors.Neutral.Low.pure.value)
+            .background(Tokens.Colors.Neutral.Low.dark.value)
         }
     }
 }

@@ -14,6 +14,7 @@ struct ParticipantsList: View {
     
     @State private var ended: Bool = false
     @State private var isPresentingInvite: Bool = false
+    @State private var isPresentingErrorAlert: Bool = false
     @State private var subscriptions: Set<AnyCancellable> = []
     
     @Binding var quickChallenge: QuickChallenge
@@ -30,7 +31,14 @@ struct ParticipantsList: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
                             Button(role: .destructive, action: {
                                 self.quickChallengeViewModel.remove(participant: participant.wrappedValue.ownerId ?? "", from: self.quickChallenge.id)
-                                    .sink(receiveCompletion: { _ in }, receiveValue: { quickChallenge in
+                                    .sink(receiveCompletion: { completion in
+                                        switch completion {
+                                            case .failure(_):
+                                                self.isPresentingErrorAlert = true
+                                            case .finished:
+                                                print("removed participant in view")
+                                        }
+                                    }, receiveValue: { quickChallenge in
                                         self.quickChallenge = quickChallenge
                                     })
                                     .store(in: &subscriptions)
@@ -39,9 +47,37 @@ struct ParticipantsList: View {
                             })
                         })
                     }
+                    .alert(isPresented: self.$isPresentingErrorAlert, content: {
+                        switch self.quickChallengeViewModel.removePlayerAlertCases {
+                            case .userOrChallengeNotFound:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.userOrChallengeNotFound.title), message: Text(RemovePlayerAlertCasesEnum.userOrChallengeNotFound.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.userOrChallengeNotFound.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                            case .removeItSelf:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.removeItSelf.title), message: Text(RemovePlayerAlertCasesEnum.removeItSelf.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.removeItSelf.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                            case .unauthorizedToRemove:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.unauthorizedToRemove.title), message: Text(RemovePlayerAlertCasesEnum.unauthorizedToRemove.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.unauthorizedToRemove.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                            case .userNotInThisChallenge:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.userNotInThisChallenge.title), message: Text(RemovePlayerAlertCasesEnum.userNotInThisChallenge.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.userNotInThisChallenge.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                            case .internalServerError:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.internalServerError.title), message: Text(RemovePlayerAlertCasesEnum.internalServerError.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.internalServerError.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                            case .userRemoved:
+                                return Alert(title: Text(RemovePlayerAlertCasesEnum.userRemoved.title), message: Text(RemovePlayerAlertCasesEnum.userRemoved.message), dismissButton: .cancel(Text(RemovePlayerAlertCasesEnum.userRemoved.primaryButton), action: {
+                                    self.isPresentingErrorAlert = false
+                                }))
+                        }
+                    })
                     .listRowBackground(Color("background").ignoresSafeArea())
                     .preferredColorScheme(.dark)
-                    .listStyle(.plain)
+                    .listStyle(.insetGrouped)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: backButton)
 
@@ -54,7 +90,7 @@ struct ParticipantsList: View {
                     }
                     .listRowBackground(Tokens.Colors.Background.dark.value)
                     .preferredColorScheme(.dark)
-                    .listStyle(.plain)
+                    .listStyle(.insetGrouped)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: backButton)
                 }
