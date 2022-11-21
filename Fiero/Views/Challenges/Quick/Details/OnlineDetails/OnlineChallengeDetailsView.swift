@@ -28,8 +28,7 @@ struct OnlineChallengeDetailsView: View {
             if(isOwner) {
                 //if isOwner (toolbar with if is only available at ios 16+)
                 ZStack {
-                    backgroundColor
-                        .edgesIgnoringSafeArea(.all)
+                    Color("background").ignoresSafeArea()
                     ScrollView (showsIndicators: false) {
                         VStack {
                             Image("OnlineDetails")
@@ -177,7 +176,7 @@ struct OnlineChallengeDetailsView: View {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
-                            Image(systemName: "trash")
+                            Image(systemName: "trash.fill")
                                 .font(descriptionFontBold)
                                 .foregroundColor(foregroundColor)
                         })
@@ -221,8 +220,7 @@ struct OnlineChallengeDetailsView: View {
             else {
                 //if is not owner (toolbar with if is only available at ios 16+)
                 ZStack {
-                    backgroundColor
-                        .edgesIgnoringSafeArea(.all)
+                    Color("background").ignoresSafeArea()
                     ScrollView (showsIndicators: false) {
                         VStack {
                             Image("OnlineDetails")

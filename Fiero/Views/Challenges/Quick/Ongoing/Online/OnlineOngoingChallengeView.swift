@@ -15,13 +15,13 @@ struct OnlineOngoingChallengeView: View {
     
     @State var subscriptions: Set<AnyCancellable> = []
     @State private var originalScore: Double = 0.0
-    @State private var timeRemaining = 7
+    @State private var timeRemaining = 1
     
     @Binding var quickChallenge: QuickChallenge
     
     @State var isFinished: Bool = false
     
-    let timeThreshold = 7
+    let timeThreshold = 1
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var score: Double {
@@ -270,7 +270,7 @@ struct PlayerScoreControllerView: View {
         RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.small.value)
             .padding(.horizontal, 32)
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.1)
-            .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
+            .foregroundColor(Tokens.Colors.Neutral.Low.dark.value)
             .overlay(content: {
                 HStack {
                     if !quickChallenge.finished {
@@ -283,15 +283,12 @@ struct PlayerScoreControllerView: View {
                                 isFinished = true
                             }
                         }, label: {
-                            Circle()
-                                .foregroundColor(.white)
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
                                 .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
                                 .padding(.horizontal, 48)
-                                .overlay(content: {
-                                    Image(systemName: "minus")
-                                        .foregroundColor(.black)
-                                })
-                        })
+                            })
                     }
                     
                     Spacer()
@@ -311,14 +308,11 @@ struct PlayerScoreControllerView: View {
                                 isFinished = true
                             }
                         }, label: {
-                            Circle()
-                                .foregroundColor(.white)
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
                                 .frame(width: 40, height: 40)
+                                .foregroundColor(.white)
                                 .padding(.horizontal, 48)
-                                .overlay(content: {
-                                    Image(systemName: "plus")
-                                        .foregroundColor(.black)
-                                })
                         })
                     }
                 }
