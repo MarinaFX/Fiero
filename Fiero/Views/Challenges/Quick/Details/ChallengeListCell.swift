@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChallengeListCell: View {
-    
+    @Environment(\.sizeCategory) var sizeCategory
     @Binding var quickChallenge: QuickChallenge
     
     @State private var ended: Bool = false
@@ -23,47 +23,87 @@ struct ChallengeListCell: View {
                     .padding(.leading, Tokens.Spacing.nano.value)
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
             }
-            VStack (spacing: Tokens.Spacing.nano.value) {
+            VStack (alignment: .leading, spacing: Tokens.Spacing.nano.value) {
                 HStack {
                     Text(quickChallenge.name)
                         .font(Tokens.FontStyle.title.font(weigth: .bold))
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .fixedSize(horizontal: false, vertical: true)
+
                     Spacer()
                 }
-                HStack {
-                    if quickChallenge.finished {
-                        Text("challengeFinishedStatus")
-                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
-                            .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
-                            .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                            .padding(.bottom, 3)
-                    } else {
-                        if quickChallenge.online {
-                            Text("Online")
+                if self.sizeCategory.isAccessibilityCategory {
+                    VStack(alignment: .leading) {
+                        if quickChallenge.finished {
+                            Text("challengeFinishedStatus")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        } else {
+                            if quickChallenge.online {
+                                Text("Online")
+                                    .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                    .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                    .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                    .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                    .background(Tokens.Colors.Highlight.four.value)
+                                    .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                    .padding(.bottom, 3)
+                            }
+                        }
+                        if quickChallenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "" {
+                            Text("challengeAdm")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Highlight.five.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                //.padding(.bottom, 3)
+                        }
+                        Spacer()
+                    }
+                }
+                else {
+                    HStack {
+                        if quickChallenge.finished {
+                            Text("challengeFinishedStatus")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .padding(.vertical, Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, Tokens.Spacing.nano.value)
+                                .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        } else {
+                            if quickChallenge.online {
+                                Text("Online")
+                                    .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                    .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                    .padding(.vertical, Tokens.Spacing.quarck.value)
+                                    .padding(.horizontal, Tokens.Spacing.nano.value)
+                                    .background(Tokens.Colors.Highlight.four.value)
+                                    .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                    .padding(.bottom, 3)
+                            }
+                        }
+                        if quickChallenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "" {
+                            Text("challengeAdm")
                                 .font(Tokens.FontStyle.caption.font(weigth: .bold))
                                 .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                                 .padding(.vertical, Tokens.Spacing.quarck.value)
                                 .padding(.horizontal, Tokens.Spacing.nano.value)
-                                .background(Tokens.Colors.Highlight.four.value)
+                                .background(Tokens.Colors.Highlight.five.value)
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                                 .padding(.bottom, 3)
                         }
+                        Spacer()
                     }
-                    if quickChallenge.owner.name == UserViewModel.getUserNameFromDefaults() {
-                        Text("challengeAdm")
-                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
-                            .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
-                            .background(Tokens.Colors.Highlight.five.value)
-                            .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                            .padding(.bottom, 3)
-                    }
-                    Spacer()
                 }
             }
         }
