@@ -129,7 +129,7 @@
     "Não conseguimos \ncriar seu desafio" = "Não conseguimos \ncriar seu desafio";
     "Desafio criado com sucesso" = "Desafio criado com sucesso";
     "Começar desafio!" = "Começar desafio!";
-    "Ir para a página inicial" = "Ir para a página inicial";
+    "Ir para a tela de criação" = "Ir para a tela de criação";
     "Voltar para o início" = "Voltar para o início";
     "Erro" = "Erro";
 
@@ -172,6 +172,7 @@
     "Ver todos" = "Ver todos";
     "Detalhes do desafio" = "Detalhes do desafio";
     "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?";
+    "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio" = "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Apagar desafio";

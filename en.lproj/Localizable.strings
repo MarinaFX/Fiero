@@ -131,7 +131,7 @@ We can't get your challenges now, try again";
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
     "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
-    "Ir para a página inicial" = "Go to home page";
+    "Ir para a tela de criação" = "Go to creation screen";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
@@ -174,6 +174,7 @@ We can't get your challenges now, try again";
     "Ver todos" = "See all";
     "Detalhes do desafio" = "Challenge details";
     "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid \nto challenge your friends?";
+    "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio" = "Hmmm, looks like the challenge owner is afraid of losing to you and hasn't started this challenge";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Delete challenge";

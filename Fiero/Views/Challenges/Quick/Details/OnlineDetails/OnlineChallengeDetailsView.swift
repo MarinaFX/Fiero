@@ -324,8 +324,10 @@ struct OnlineChallengeDetailsView: View {
                                 .padding(.bottom, extraExtraSmallSpacing)
                             }
                             else {
-                                Text("Hmmm, parece que o dono do desafio \nestá com medo de perder para você \ne não iniciou esse desafio")
+                                Text(LocalizedStringKey("Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio"))
                                     .multilineTextAlignment(.center)
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.bottom, defaultMarginSpacing)
                             }
                         }
                     }
