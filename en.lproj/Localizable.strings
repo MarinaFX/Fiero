@@ -15,14 +15,14 @@
 // adicionar imagens em ingles
 "Pular" = "Skip";
 "firstImage" = "OnboardingNameENG";
-"firstTitle" = "Challenge your friends";
-"firstDescription" = "A challenge between friends is a fun way to have healthy competition and create memories together.";
+"firstTitle" = "Custom challenges";
+"firstDescription" = "Create challenges and\ncompete with your friends.";
 "secondImage" = "OnboardingDuelENG";
-"secondTitle" = "Look at the score";
-"secondDescription" = "After defining how many people are participating in your challenge, add the score that will define victory.";
+"secondTitle" = "Ongoing challenges";
+"secondDescription" = "View your points and track\nyour friends' points.";
 "thirdImage" = "OnboardingChallengeType";
-"thirdTitle" = "Multiple challenges";
-"thirdDescription" = "It's one step forward and two steps back! You are a winning machine, practice.";
+"thirdTitle" = "Online and offline challenges";
+"thirdDescription" = "Call your friends and show that\nyou are a winning machine!";
 "Quero começar!" = "Lets Start!";
 
 
@@ -233,6 +233,7 @@ We can't get your challenges now, try again";
     "Feedback tátil" = "Haptics feedback";
     "Configurações" = "Settings";
     "Pronto" = "Done";
+    "Tem certeza que deseja sair?" = "Are you sure you want to quit?";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Choose this";
