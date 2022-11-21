@@ -78,10 +78,15 @@ struct WinScreen: View {
                 Spacer()
                 ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar desafio", action: {
                     //TODO: - logic to finish challenge
-                })
+                    //combine call
+                    
+                    RootViewController.popToRootViewController()
+                }).hidden()
+                
                 ButtonComponent(style: .black(isEnabled: true), text: "Continuar marcando pontos", action: {
                     isFinished = false
-                    self.dismiss()
+//                    self.dismiss()
+                    RootViewController.popToRootViewController()
                 })
                 .padding(.bottom, Tokens.Spacing.sm.value)
             }

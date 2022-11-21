@@ -133,21 +133,30 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                    .sink(receiveCompletion: { completion in
-                                        switch completion {
+                            if self.quickChallenge.finished {
+                                ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
+
+                                })
+                                .padding(.horizontal, defaultMarginSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            } else {
+                                ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                                    self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                        .sink(receiveCompletion: { completion in
+                                            switch completion {
                                             case .failure(_):
                                                 self.isPresentingAlertError = true
                                             case .finished:
                                                 self.isPresetingOngoingView.toggle()
-                                        }
-                                    }, receiveValue: { _ in () })
-                                    .store(in: &subscriptions)
-                            })
-                            .padding(.horizontal, defaultMarginSpacing)
-                            .padding(.top, extraSmallSpacing)
-                            .padding(.bottom, extraExtraSmallSpacing)
+                                            }
+                                        }, receiveValue: { _ in () })
+                                        .store(in: &subscriptions)
+                                })
+                                .padding(.horizontal, defaultMarginSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            }
                         }
                     }
                 }
@@ -316,12 +325,22 @@ struct OnlineChallengeDetailsView: View {
                             NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                             
                             if self.quickChallenge.alreadyBegin {
-                                ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
-                                    self.isPresetingOngoingView.toggle()
-                                })
-                                .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.top, extraSmallSpacing)
-                                .padding(.bottom, extraExtraSmallSpacing)
+                                if self.quickChallenge.finished {
+                                    //TODO: - mudar o localizable
+                                    ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
+                                        self.isPresetingOngoingView.toggle()
+                                    })
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.top, extraSmallSpacing)
+                                    .padding(.bottom, extraExtraSmallSpacing)
+                                } else {
+                                    ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
+                                        self.isPresetingOngoingView.toggle()
+                                    })
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.top, extraSmallSpacing)
+                                    .padding(.bottom, extraExtraSmallSpacing)
+                                }
                             }
                             else {
                                 Text("Hmmm, parece que o dono do desafio \nestá com medo de perder para você \ne não iniciou esse desafio")
