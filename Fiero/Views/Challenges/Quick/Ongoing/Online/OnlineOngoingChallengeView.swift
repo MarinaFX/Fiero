@@ -160,7 +160,7 @@ struct OnlineOngoingChallengeView: View {
                 })
             }
             NavigationLink("", isActive: $isFinished) {
-                WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "online")
             }.hidden()
         }
         .onReceive(self.timer, perform: { time in
