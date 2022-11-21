@@ -10,6 +10,7 @@ import Combine
 
 struct ParticipantsList: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State private var ended: Bool = false
@@ -95,29 +96,58 @@ struct ParticipantsList: View {
                     .navigationBarItems(leading: backButton)
                 }
             } else {
-                VStack {
-                    Spacer()
-                    
-                    LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 250)
-                    
-                    Text("Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                        .padding(.horizontal, defaultMarginSpacing)
-                    
-                    Spacer()
-                    
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: {
-                        isPresentingInvite = true
-                    })
-                    .sheet(isPresented: $isPresentingInvite, content: {
-                        InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
-                    })
-                    .padding(.horizontal, defaultMarginSpacing)
-                    .padding(.vertical, extraExtraSmallSpacing)
+                if self.sizeCategory.isAccessibilityCategory {
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            Spacer()
+                            
+                            LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 250)
+                            
+                            Text("Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                                .padding(.horizontal, defaultMarginSpacing)
+                            
+                            Spacer()
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: {
+                                isPresentingInvite = true
+                            })
+                            .sheet(isPresented: $isPresentingInvite, content: {
+                                InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                            })
+                            .padding(.horizontal, defaultMarginSpacing)
+                            .padding(.vertical, extraExtraSmallSpacing)
+                        }
+                        .preferredColorScheme(.dark)
+                    }
                 }
-                .preferredColorScheme(.dark)
+                else {
+                    VStack {
+                        Spacer()
+                        
+                        LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 250)
+                        
+                        Text("Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                            .padding(.horizontal, defaultMarginSpacing)
+                        
+                        Spacer()
+                        
+                        ButtonComponent(style: .secondary(isEnabled: true), text: "Convidar Participante", action: {
+                            isPresentingInvite = true
+                        })
+                        .sheet(isPresented: $isPresentingInvite, content: {
+                            InviteChallengerView(inviteCode: quickChallenge.invitationCode ?? "")
+                        })
+                        .padding(.horizontal, defaultMarginSpacing)
+                        .padding(.vertical, extraExtraSmallSpacing)
+                    }
+                    .preferredColorScheme(.dark)
+                }
             }
         }
     }

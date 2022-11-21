@@ -66,7 +66,6 @@ struct QCCategorySelectionView: View {
                             }
                         }
                         .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCardAccessibility + 50), alignment: .center)
-                        //.padding(.top, Tokens.Spacing.xxl.value)
                         .modifier(ScrollingHStackModifier(items: items.count, itemWidth: widthUnfocussedCard, itemSpacing: cardSpacing, scrollOffset: $scrollOffset))
                         
                         ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
