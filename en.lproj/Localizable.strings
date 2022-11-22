@@ -15,14 +15,14 @@
 // adicionar imagens em ingles
 "Pular" = "Skip";
 "firstImage" = "OnboardingNameENG";
-"firstTitle" = "Challenge your friends";
-"firstDescription" = "A challenge between friends is a fun way to have healthy competition and create memories together.";
+"firstTitle" = "Custom challenges";
+"firstDescription" = "Create challenges and\ncompete with your friends.";
 "secondImage" = "OnboardingDuelENG";
-"secondTitle" = "Look at the score";
-"secondDescription" = "After defining how many people are participating in your challenge, add the score that will define victory.";
+"secondTitle" = "Ongoing challenges";
+"secondDescription" = "View your points and track\nyour friends' points.";
 "thirdImage" = "OnboardingChallengeType";
-"thirdTitle" = "Multiple challenges";
-"thirdDescription" = "It's one step forward and two steps back! You are a winning machine, practice.";
+"thirdTitle" = "Online and offline challenges";
+"thirdDescription" = "Call your friends and show that\nyou are a winning machine!";
 "Quero começar!" = "Lets Start!";
 
 
@@ -131,7 +131,7 @@ We can't get your challenges now, try again";
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
     "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
-    "Ir para a página inicial" = "Go to home page";
+    "Ir para a tela de criação" = "Go to creation screen";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
@@ -139,8 +139,8 @@ We can't get your challenges now, try again";
     "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
-    "timeChallengeTypeTitle" = "Time \nchallenge";
-    "timeChallengeTypeSubtitle" = "Wins whoever has the highest \nscore in the set time wins.";
+    "walkingChallengeTypeTitle" = "Walking \nchallenge";
+    "walkingChallengeTypeSubtitle" = "Whoever takes \nthe most steps wins.";
     "bestOfChallengeTitle" = "Round \nchalenge";
     "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
 
@@ -173,7 +173,8 @@ We can't get your challenges now, try again";
     "Convidar Participante" = "Invite friends";
     "Ver todos" = "See all";
     "Detalhes do desafio" = "Challenge details";
-    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid to\nchallenge your friends?";
+    "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid \nto challenge your friends?";
+    "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio" = "Hmmm, looks like the challenge owner is afraid of losing to you and hasn't started this challenge";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Delete challenge";

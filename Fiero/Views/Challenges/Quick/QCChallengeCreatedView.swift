@@ -81,7 +81,7 @@ struct QCChallengeCreatedView: View {
             Button(action: {
                 RootViewController.popToRootViewController()
             }, label: {
-                Text("Ir para lista de desafios")
+                Text("Ir para a tela de criação")
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })

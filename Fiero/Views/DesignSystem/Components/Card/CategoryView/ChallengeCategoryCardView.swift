@@ -23,6 +23,8 @@ struct ChallengeCategoryCardView: View {
                 .cornerRadius(style.cardCornerRadius)
             
             VStack(spacing: style.vStackSpacing) {
+                Spacer()
+                
                 ZStack {
                     if style == .amount {
                         LottieView(fileName: "quantity2", reverse: false, loop: true, aspectFill: false, isPaused: !isPlaying, ended: $ended).opacity(ended ? 1 : 0)
@@ -49,7 +51,7 @@ struct ChallengeCategoryCardView: View {
                     .lineLimit(5)
                     .padding(.bottom, style.subtitleSpacing)
                 
-                if style == .amount {
+                if style != .blocked {
                     Text("Escolher esse")
                         .padding(.horizontal, style.horizontalButtonSpacing)
                         .padding(.vertical, style.verticalButtonSpacing)
