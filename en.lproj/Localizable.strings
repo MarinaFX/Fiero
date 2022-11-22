@@ -139,8 +139,8 @@ We can't get your challenges now, try again";
     "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
-    "timeChallengeTypeTitle" = "Time \nchallenge";
-    "timeChallengeTypeSubtitle" = "Wins whoever has the highest \nscore in the set time wins.";
+    "walkingChallengeTypeTitle" = "Walking \nchallenge";
+    "walkingChallengeTypeSubtitle" = "Whoever takes \nthe most steps wins.";
     "bestOfChallengeTitle" = "Round \nchalenge";
     "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
 

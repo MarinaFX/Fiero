@@ -137,8 +137,8 @@
     "homeScreenTitle" = "É hora de se desafiar";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
     "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
-    "timeChallengeTypeTitle" = "Desafio de \ntempo";
-    "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
+    "walkingChallengeTypeTitle" = "Desafio de \ncaminhada";
+    "walkingChallengeTypeSubtitle" = "Vence quem \nder mais passos.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";
     "bestOfChallengeSubtitle" = "Competições de três ou\ncinco rounds.";
 
