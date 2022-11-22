@@ -82,4 +82,15 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
     static func == (lhs: QuickChallenge, rhs: QuickChallenge) -> Bool {
         return lhs.id == rhs.id && lhs.name == rhs.name && lhs.ownerId == rhs.ownerId
     }
+    
+    var createdAtDate: Date {
+        let correctTimestamp = "\(createdAt.dropLast())+0300"
+        return Self.dateFormatter.date(from: correctTimestamp) ?? Date()
+    }
+    
+    static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter
+    }()
 }

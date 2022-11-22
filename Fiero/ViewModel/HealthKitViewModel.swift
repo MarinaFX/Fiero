@@ -40,8 +40,8 @@ class HealthKitViewModel: ObservableObject {
         .eraseToAnyPublisher()
     }
     
-    func getStepCount() -> AnyPublisher<HKQuantity, Error> {
-        self.healthStore.subject(for: HKQuantityType.quantityType(forIdentifier: .stepCount)!)
+    func getStepCount(since startDate: Date) -> AnyPublisher<HKQuantity, Error> {
+        self.healthStore.subject(for: HKQuantityType.quantityType(forIdentifier: .stepCount)!, since: startDate)
             .eraseToAnyPublisher()
     }
 }

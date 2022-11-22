@@ -131,7 +131,7 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
+                            NavigationLink("", destination: self.quickChallenge.type == QCTypeEnum.amount.description ? AnyView(OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge)) : AnyView(HealthKitOngoingView(quickChallenge: self.$quickChallenge)), isActive: self.$isPresetingOngoingView).hidden()
                             
                             if self.quickChallenge.finished {
                                 ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
