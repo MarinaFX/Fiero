@@ -62,13 +62,8 @@ struct QCCategorySelectionView: View {
                                 OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                             }
                             .fullScreenCover(isPresented: $walkingPresentNextScreen) {
-                                NavigationView {
-                                    QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
-                                }
+                                QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
                             }
-                        
-                        
-                        
                     }
                 }
                 .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCard + 50), alignment: .center)

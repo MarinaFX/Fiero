@@ -23,6 +23,15 @@ struct ChallengeListCell: View {
                     .padding(.leading, Tokens.Spacing.nano.value)
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
             }
+            else {
+                if quickChallenge.type == QCTypeEnum.volleyball.description{
+                    LottieView(fileName: "steps", reverse: false, loop: true, ended: $ended)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 30, height: 70)
+                        .padding(.leading, Tokens.Spacing.nano.value)
+                        .padding(.trailing, Tokens.Spacing.xxxs.value)
+                }
+            }
             VStack (spacing: Tokens.Spacing.nano.value) {
                 HStack {
                     Text(quickChallenge.name)
@@ -41,18 +50,28 @@ struct ChallengeListCell: View {
                             .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
-                    } else {
-                        if quickChallenge.online {
-                            Text("Online")
-                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
-                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                                .padding(.vertical, Tokens.Spacing.quarck.value)
-                                .padding(.horizontal, Tokens.Spacing.nano.value)
-                                .background(Tokens.Colors.Highlight.four.value)
-                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                                .padding(.bottom, 3)
-                        }
                     }
+                    if quickChallenge.online {
+                        Text("Online")
+                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                            .padding(.vertical, Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .background(Tokens.Colors.Highlight.four.value)
+                            .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                            .padding(.bottom, 3)
+                    }
+                    if quickChallenge.type == QCTypeEnum.volleyball.description {
+                        Text("HeathKit")
+                            .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                            .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                            .padding(.vertical, Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .background(Tokens.Colors.Highlight.seven.value)
+                            .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                            .padding(.bottom, 3)
+                    }
+                    
                     if quickChallenge.owner.name == UserViewModel.getUserNameFromDefaults() {
                         Text("challengeAdm")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))

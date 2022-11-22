@@ -11,6 +11,7 @@ import Combine
 struct OnlineChallengeDetailsView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    @EnvironmentObject var healthKitViewModel: HealthKitViewModel
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -141,16 +142,46 @@ struct OnlineChallengeDetailsView: View {
                                 .padding(.bottom, extraExtraSmallSpacing)
                             } else {
                                 ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                                    self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                        .sink(receiveCompletion: { completion in
-                                            switch completion {
-                                            case .failure(_):
-                                                self.isPresentingAlertError = true
-                                            case .finished:
-                                                self.isPresetingOngoingView.toggle()
-                                            }
-                                        }, receiveValue: { _ in () })
-                                        .store(in: &subscriptions)
+                                    if self.quickChallenge.type == QCTypeEnum.volleyball.description {
+                                        self.healthKitViewModel.requestAuthorization()
+                                            .flatMap({ authorized -> AnyPublisher<Void, Error> in
+                                                if authorized {
+                                                    return self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                                        .mapError({ $0 as Error })
+                                                        .eraseToAnyPublisher()
+                                                }
+                                                else {
+                                                    return Fail(outputType: Void.self, failure: NSError(domain: "", code: 0, userInfo: nil) as Error).eraseToAnyPublisher()
+                                                }
+                                            })
+                                            .sink(receiveCompletion: { completion in
+                                                switch completion {
+                                                    case .failure(let error):
+                                                        if error is HTTPResponseError {
+                                                            self.isPresentingAlertError = true
+                                                        }
+                                                        else {
+                                                            //toggle de auth healthkit
+                                                        }
+                                                    case .finished:
+                                                        self.isPresetingOngoingView.toggle()
+                                                }
+                                            }, receiveValue: { _ in () })
+                                            .store(in: &subscriptions)
+                                    }
+                                    else {
+                                        // TODO: call getChallenge before beginChallenge
+                                        self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                            .sink(receiveCompletion: { completion in
+                                                switch completion {
+                                                case .failure(_):
+                                                    self.isPresentingAlertError = true
+                                                case .finished:
+                                                    self.isPresetingOngoingView.toggle()
+                                                }
+                                            }, receiveValue: { _ in () })
+                                            .store(in: &subscriptions)
+                                    }
                                 })
                                 .padding(.horizontal, defaultMarginSpacing)
                                 .padding(.top, extraSmallSpacing)

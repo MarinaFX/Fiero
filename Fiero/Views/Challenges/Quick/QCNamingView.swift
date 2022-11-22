@@ -22,63 +22,65 @@ struct QCNamingView: View {
         
     //MARK: - Body
     var body: some View {
-        ZStack{
-            Tokens.Colors.Background.dark.value.ignoresSafeArea()
-            VStack {
-                //MARK: - Header
-                CustomProgressBar(currentPage: .second)
-                    .padding()
-                
-                Text("Defina o nome\ndo seu desafio")
-                    .multilineTextAlignment(.center)
-                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    .padding(.top, Tokens.Spacing.xxxs.value)
-                    .padding(.bottom, Tokens.Spacing.quarck.value)
+        NavigationView {
+            ZStack{
+                Tokens.Colors.Background.dark.value.ignoresSafeArea()
+                VStack {
+                    //MARK: - Header
+                    CustomProgressBar(currentPage: .second)
+                        .padding()
+                    
+                    Text("Defina o nome\ndo seu desafio")
+                        .multilineTextAlignment(.center)
+                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .padding(.top, Tokens.Spacing.xxxs.value)
+                        .padding(.bottom, Tokens.Spacing.quarck.value)
 
-                //MARK: Keyboard
-                
-                CreationFlowTextViewComponent(text: self.$challengeName, style: .name) {
-                    isNavActiveForAmount.toggle()
-                }
-                .disabled(self.isNavActiveForAmount)
-                .padding(.top, Tokens.Spacing.xs.value)
-                
-                //MARK: - Bottom Buttons
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
-                    if challengeName == "" {
-                        isPresentingAlert = true
-                    } else {
+                    //MARK: Keyboard
+                    
+                    CreationFlowTextViewComponent(text: self.$challengeName, style: .name) {
                         isNavActiveForAmount.toggle()
                     }
-                })
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                
-                Button(action: {
-                    self.dismiss()
-                }, label: {
-                    Text("Voltar")
-                        .bold()
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                })
-                .padding(.vertical, Tokens.Spacing.xxxs.value)
+                    .disabled(self.isNavActiveForAmount)
+                    .padding(.top, Tokens.Spacing.xs.value)
+                    
+                    //MARK: - Bottom Buttons
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Próximo", action: {
+                        if challengeName == "" {
+                            isPresentingAlert = true
+                        } else {
+                            isNavActiveForAmount.toggle()
+                        }
+                    })
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    
+                    Button(action: {
+                        self.dismiss()
+                    }, label: {
+                        Text("Voltar")
+                            .bold()
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    })
+                    .padding(.vertical, Tokens.Spacing.xxxs.value)
 
-                NavigationLink("", isActive: $isNavActiveForAmount) {
-                    if isOnline {
-                        QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .amount, challengeName: self.challengeName, challengeParticipants: 1)
-                    }
-                    else {
-                        QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
-                    }
-                }.hidden()
+                    NavigationLink("", isActive: $isNavActiveForAmount) {
+                        if isOnline {
+                            QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: 1)
+                        }
+                        else {
+                            QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                        }
+                    }.hidden()
+                }
+                .alert(isPresented: $isPresentingAlert, content: {
+                    Alert(title: Text("Nome vazio"),
+                          message: Text("Preencha o nome do seu desafio para continuar"),
+                          dismissButton: .cancel(Text("Ok"), action: {
+                    }))
+                })
+                .navigationBarHidden(true)
             }
-            .alert(isPresented: $isPresentingAlert, content: {
-                Alert(title: Text("Nome vazio"),
-                      message: Text("Preencha o nome do seu desafio para continuar"),
-                      dismissButton: .cancel(Text("Ok"), action: {    
-                }))
-            })
-            .navigationBarHidden(true)
         }
     }
 }

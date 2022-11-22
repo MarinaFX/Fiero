@@ -52,6 +52,12 @@ struct QCAmountWinRulesView: View {
                 return measure
             case .bestOf:
                 return "rounds"
+            case .volleyball:
+                return "unity"
+            case .healthKit:
+                return "unity"
+            case .truco:
+                return "unity"
         }
     }
     
