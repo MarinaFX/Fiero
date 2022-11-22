@@ -17,10 +17,12 @@ struct QCCategorySelectionView: View {
     @Environment(\.dismiss) var dismissView
     
     @State private var scrollOffset: CGFloat = 0.0
-    @State var presentNextScreen: Bool = false
+    @State var amountPresentNextScreen: Bool = false
+    @State var walkingPresentNextScreen: Bool = false
     @State var isShowingEnterWithCodeView = false
     
     var didComeFromEmptyOrHomeView: Bool = false
+    var isOnline: Bool = true
     
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -30,9 +32,9 @@ struct QCCategorySelectionView: View {
     var items: [ChallengesCategoryInfo] = [ChallengesCategoryInfo(style: .amount,
                                                                   title: "amountChallengeTypeTitle",
                                                                   subtitle: "amountChallengeTypeSubtitle"),
-                                              ChallengesCategoryInfo(style: .blocked,
-                                                                     title: "timeChallengeTypeTitle",
-                                                                     subtitle: "timeChallengeTypeSubtitle"),
+                                           ChallengesCategoryInfo(style: .walking,
+                                                                     title: "walkingChallengeTypeTitle",
+                                                                     subtitle: "walkingChallengeTypeSubtitle"),
                                               ChallengesCategoryInfo(style: .blocked,
                                                                      title: "bestOfChallengeTitle",
                                                                      subtitle: "bestOfChallengeSubtitle")]
@@ -50,13 +52,19 @@ struct QCCategorySelectionView: View {
                                    height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
                             .opacity(isFocused(index: index) ? 1.0 : 0.4)
                             .onTapGesture {
-                                if index == 0 {
+                                if index != 2 {
                                     SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
-                                    presentNextScreen.toggle()
+                                    index == 0 ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
                                 }
                             }
-                            .fullScreenCover(isPresented: $presentNextScreen) {
+                        
+                            .fullScreenCover(isPresented: $amountPresentNextScreen) {
                                 OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                            }
+                            .fullScreenCover(isPresented: $walkingPresentNextScreen) {
+                                NavigationView {
+                                    QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                                }
                             }
                         
                         
