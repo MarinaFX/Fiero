@@ -52,6 +52,7 @@ struct QCChallengeCreatedView: View {
             
             Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.top, Tokens.Spacing.sm.value)
@@ -80,7 +81,7 @@ struct QCChallengeCreatedView: View {
             Button(action: {
                 RootViewController.popToRootViewController()
             }, label: {
-                Text("Ir para a tela de criação")
+                Text(LocalizedStringKey("Ir para a tela de criação"))
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })

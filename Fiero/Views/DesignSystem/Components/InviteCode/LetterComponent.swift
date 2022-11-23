@@ -9,24 +9,31 @@ import Foundation
 import SwiftUI
 
 enum LetterType {
-    case input, onlyView
+    case input
+    case onlyView
+    
+    var backgroundColor: Color {
+        switch self {
+        case .input:
+            return Tokens.Colors.Neutral.Low.dark.value
+        case .onlyView:
+            return Tokens.Colors.Brand.Primary.light.value
+        }
+    }
 }
 
 //MARK: - View
 struct LetterComponent: View {
-    
     @State var letter: String?
     @State var variant: LetterType
     
     var body: some View {
         ZStack {
-            if variant == LetterType.onlyView {
-                Tokens.Colors.Brand.Primary.light.value
-            } else {
-                Tokens.Colors.Neutral.Low.dark.value
-            }
+            variant.backgroundColor
+            
             Text(letter?.uppercased() ?? "A")
-                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                .font(Tokens.FontStyle.largeTitle.font(weigth: .bold,
+                                                       design: .rounded))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 16)

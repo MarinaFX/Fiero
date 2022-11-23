@@ -40,98 +40,104 @@ struct ScoreController: View {
             RoundedRectangle(cornerRadius: Tokens.Border.BorderRadius.normal.value)
                 .foregroundColor(Tokens.Colors.Neutral.Low.pure.value)
                 .opacity(0.2)
-            HStack {
-                Image(systemName: "minus.circle.fill")
-                    .resizable()
-                    .foregroundColor(color)
-                    .frame(width: buttonFrame, height: buttonFrame)
-                    .onTapGesture {
-                        self.playerScore -= 1
-                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
-                            self.timer?.invalidate()
-                            isLongPressing = false
-                            isFinished = true
+            VStack(spacing: 0) {
+                HStack {
+                    Image(systemName: "minus.circle.fill")
+                        .resizable()
+                        .foregroundColor(color)
+                        .frame(width: buttonFrame, height: buttonFrame)
+                        .onTapGesture {
+                            self.playerScore -= 1
+                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                self.timer?.invalidate()
+                                isLongPressing = false
+                                isFinished = true
+                            }
+
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                            
+                            SoundPlayer.playSound(soundName: Sounds.negativePoint, soundExtension: Sounds.negativePoint.soundExtension, soundType: SoundTypes.action)
+                            Haptics.shared.play(.light)
                         }
 
-                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                .onEnded({ value in
+                                    self.timer?.invalidate()
+                                    isLongPressing = false
+                                })
+                                .onChanged({ value in
+                                    if !isLongPressing {
+                                        isLongPressing = true
+                                        self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                            self.playerScore -= 1
+                                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                                self.timer?.invalidate()
+                                                isLongPressing = false
+                                                isFinished = true
+                                            }
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                                        })
+                                    }
+                                })
+                        )
+                    Spacer()
                         
-                        SoundPlayer.playSound(soundName: Sounds.negativePoint, soundExtension: Sounds.negativePoint.soundExtension, soundType: SoundTypes.action)
-                        Haptics.shared.play(.light)
-                    }
-
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onEnded({ value in
+                    Text("\(playerScore, specifier: "%.0f")")
+                            .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
+                            .foregroundColor(color)
+                    
+                    Spacer()
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .foregroundColor(color)
+                        .frame(width: buttonFrame, height: buttonFrame)
+                        .onTapGesture {
+                            self.playerScore += 1
+                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
                                 self.timer?.invalidate()
                                 isLongPressing = false
-                            })
-                            .onChanged({ value in
-                                if !isLongPressing {
-                                    isLongPressing = true
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                                        self.playerScore -= 1
-                                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
-                                            self.timer?.invalidate()
-                                            isLongPressing = false
-                                            isFinished = true
-                                        }
-                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
-                                    })
-                                }
-                            })
-                    )
-                Spacer()
-                VStack {
-                    Text("\(playerScore, specifier: "%.0f")")
-                        .font(Tokens.FontStyle.largeTitle.font(weigth: .bold))
-                        .foregroundColor(color)
-                    
-                    Text(playerName)
-                        .font(Tokens.FontStyle.callout.font())
-                        .foregroundColor(color)
-                }
-                Spacer()
-                Image(systemName: "plus.circle.fill")
-                    .resizable()
-                    .foregroundColor(color)
-                    .frame(width: buttonFrame, height: buttonFrame)
-                    .onTapGesture {
-                        self.playerScore += 1
-                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
-                            self.timer?.invalidate()
-                            isLongPressing = false
-                            isFinished = true
+                                isFinished = true
+                            }
+
+                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+
+                            SoundPlayer.playSound(soundName: Sounds.positivePoint, soundExtension: Sounds.positivePoint.soundExtension, soundType: SoundTypes.action)
+                            Haptics.shared.play(.light)
                         }
 
-                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
-
-                        SoundPlayer.playSound(soundName: Sounds.positivePoint, soundExtension: Sounds.positivePoint.soundExtension, soundType: SoundTypes.action)
-                        Haptics.shared.play(.light)
-                    }
-
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onEnded({ value in
-                                self.timer?.invalidate()
-                                isLongPressing = false
-                            })
-                            .onChanged({ value in
-                                if !isLongPressing {
-                                    isLongPressing = true
-                                    self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                                        self.playerScore += 1
-                                        if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
-                                            self.timer?.invalidate()
-                                            isLongPressing = false
-                                            isFinished = true
-                                        }
-                                        HapticsController.shared.activateHaptics(hapticsfeedback: .light)
-                                    })
-                                }
-                            })
-                    )
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                .onEnded({ value in
+                                    self.timer?.invalidate()
+                                    isLongPressing = false
+                                })
+                                .onChanged({ value in
+                                    if !isLongPressing {
+                                        isLongPressing = true
+                                        self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+                                            self.playerScore += 1
+                                            if playerScore == Double(quickChallenge.goal) && !quickChallenge.finished {
+                                                self.timer?.invalidate()
+                                                isLongPressing = false
+                                                isFinished = true
+                                            }
+                                            HapticsController.shared.activateHaptics(hapticsfeedback: .light)
+                                        })
+                                    }
+                                })
+                        )
+                }
+                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                .padding(.top, Tokens.Spacing.defaultMargin.value)
+                
+                Text(playerName)
+                    .font(Tokens.FontStyle.callout.font())
+                    .foregroundColor(color)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, Tokens.Spacing.quarck.value)
             }
-            .padding(.horizontal, Tokens.Spacing.xs.value)
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .center)
         .onDisappear(perform: {

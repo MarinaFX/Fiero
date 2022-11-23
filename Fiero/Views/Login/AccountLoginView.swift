@@ -93,129 +93,266 @@ struct AccountLoginView: View {
                 
                 if isShowingSignupSheet{
                     //MARK: - Sigup View
-                    Group{
-                        //MARK: TextFilds elements
-                        VStack(spacing: Tokens.Spacing.xxxs.value){
-                            CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
-                            
-                            CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
-                            
-                            CustomTextFieldView(type: .both,style: .primary, helperText: "", placeholder: "Senha", isSecure: true, isLowCase: true ,isWrong: .constant(false), text: $password)
-                        }
-                        //MARK: Button and CheckBox
-                        CheckboxComponent(style: .dark,
-                                          text: "Concordo com os",
-                                          linkedText: "Termos de Uso",
-                                          isChecked: $hasAcceptedTermsOfUse,
-                                          checkboxHandler: { isChecked in
-                            print(isChecked)
-                        },
-                                          linkedTextHandler: {
-                            isShowingTermsOfUseSheet.toggle()
-                        })
-                        .padding(.vertical, Tokens.Spacing.nano.value)
-                        .sheet(isPresented: $isShowingTermsOfUseSheet) {
-                            TermsOfUseSheetView(termsOfUseAccept: $hasAcceptedTermsOfUse)
-                        }
-                        
-                        ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: "Criar conta!",
-                                        action: {
-                            if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
-                                self.userViewModel.loginAlertCases = .emptyFields
-                                isShowingAlert.toggle()
-                            } else if !self.email.contains("@") || !self.email.contains("."){
-                                self.userViewModel.loginAlertCases = .invalidEmail
-                                isShowingAlert.toggle()
-                            } else if !hasAcceptedTermsOfUse {
-                                self.userViewModel.loginAlertCases = .termsOfUse
-                                isShowingAlert.toggle()
-                            } else {
-                                self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
+                    if dynamicTypeCategory > .extraExtraExtraLarge {
+                        ScrollView {
+                            Group{
+                                //MARK: TextFilds elements
+                                VStack(spacing: Tokens.Spacing.xxxs.value){
+                                    CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
+                                        .accessibilityLabel("accessibilityNamePlaceholder")
+                                    
+                                    CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
+                                        .accessibilityLabel("accessibilityEmailPlaceholder")
+                                    
+                                    CustomTextFieldView(type: .both,style: .primary, helperText: "", placeholder: "Senha", isSecure: true, isLowCase: true ,isWrong: .constant(false), text: $password)
+                                        .accessibilityLabel("accessibilityPasswordPlaceholder")
+                                }
+                                //MARK: Button and CheckBox
+                                CheckboxComponent(style: .dark,
+                                                  text: "Concordo com os",
+                                                  linkedText: "Termos de Uso",
+                                                  isChecked: $hasAcceptedTermsOfUse,
+                                                  checkboxHandler: { isChecked in
+                                    print(isChecked)
+                                },
+                                                  linkedTextHandler: {
+                                    isShowingTermsOfUseSheet.toggle()
+                                })
+                                .padding(.vertical, Tokens.Spacing.nano.value)
+                                .sheet(isPresented: $isShowingTermsOfUseSheet) {
+                                    TermsOfUseSheetView(termsOfUseAccept: $hasAcceptedTermsOfUse)
+                                }
+                                
+                                ButtonComponent(style: .secondary(isEnabled: true),
+                                                text: "Criar conta!",
+                                                action: {
+                                    if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
+                                        self.userViewModel.loginAlertCases = .emptyFields
+                                        isShowingAlert.toggle()
+                                    } else if !self.email.contains("@") || !self.email.contains("."){
+                                        self.userViewModel.loginAlertCases = .invalidEmail
+                                        isShowingAlert.toggle()
+                                    } else if !hasAcceptedTermsOfUse {
+                                        self.userViewModel.loginAlertCases = .termsOfUse
+                                        isShowingAlert.toggle()
+                                    } else {
+                                        self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
+                                    }
+                                })
+                                //MARK: Last elements
+                                HStack{
+                                    Text("Já tem uma conta?")
+                                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                        .font(Tokens.FontStyle.callout.font())
+                                    Button("Faça Login!") {
+                                        self.isShowingSignupSheet.toggle()
+                                    }
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                    .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                                }
+                                .padding(.top, smallSpacing)
                             }
-                        })
-                        //MARK: Last elements
-                        HStack{
-                            Text("Já tem uma conta?")
+                        }
+                    }
+                    else {
+                        Group{
+                            //MARK: TextFilds elements
+                            VStack(spacing: Tokens.Spacing.xxxs.value){
+                                CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "Nome", isLowCase: false , isWrong: .constant(false), text: $username)
+                                    .accessibilityLabel("accessibilityNamePlaceholder")
+                                
+                                CustomTextFieldView(type: .none, style: .primary, helperText: "", placeholder: "E-mail", keyboardType: .emailAddress, isLowCase: true ,isWrong: .constant(false), text: $email)
+                                    .accessibilityLabel("accessibilityEmailPlaceholder")
+                                
+                                CustomTextFieldView(type: .both,style: .primary, helperText: "", placeholder: "Senha", isSecure: true, isLowCase: true ,isWrong: .constant(false), text: $password)
+                                    .accessibilityLabel("accessibilityPasswordPlaceholder")
+                            }
+                            //MARK: Button and CheckBox
+                            CheckboxComponent(style: .dark,
+                                              text: "Concordo com os",
+                                              linkedText: "Termos de Uso",
+                                              isChecked: $hasAcceptedTermsOfUse,
+                                              checkboxHandler: { isChecked in
+                                print(isChecked)
+                            },
+                                              linkedTextHandler: {
+                                isShowingTermsOfUseSheet.toggle()
+                            })
+                            .padding(.vertical, Tokens.Spacing.nano.value)
+                            .sheet(isPresented: $isShowingTermsOfUseSheet) {
+                                TermsOfUseSheetView(termsOfUseAccept: $hasAcceptedTermsOfUse)
+                            }
+                            
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: "Criar conta!",
+                                            action: {
+                                if self.username.isEmpty || self.email.isEmpty || self.password.isEmpty {
+                                    self.userViewModel.loginAlertCases = .emptyFields
+                                    isShowingAlert.toggle()
+                                } else if !self.email.contains("@") || !self.email.contains("."){
+                                    self.userViewModel.loginAlertCases = .invalidEmail
+                                    isShowingAlert.toggle()
+                                } else if !hasAcceptedTermsOfUse {
+                                    self.userViewModel.loginAlertCases = .termsOfUse
+                                    isShowingAlert.toggle()
+                                } else {
+                                    self.userViewModel.signup(for: User(email: self.email, name: self.username, password: self.password))
+                                }
+                            })
+                            //MARK: Last elements
+                            HStack{
+                                Text("Já tem uma conta?")
+                                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                    .font(Tokens.FontStyle.callout.font())
+                                Button("Faça Login!") {
+                                    self.isShowingSignupSheet.toggle()
+                                }
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .font(Tokens.FontStyle.callout.font())
-                            Button("Faça Login!") {
-                                self.isShowingSignupSheet.toggle()
+                                .font(Tokens.FontStyle.callout.font(weigth: .bold))
                             }
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(Tokens.FontStyle.callout.font(weigth: .bold))
+                            .padding(.top, smallSpacing)
                         }
-                        .padding(.top, smallSpacing)
                     }
                 } else {
                     //MARK: - Login View
-                    Group{
-                        //MARK: TextFields
-                        CustomTextFieldView(type: .none,
-                                            style: .primary,
-                                            placeholder: emailPlaceholder,
-                                            keyboardType: .emailAddress,
-                                            isSecure: false,
-                                            isLowCase: true ,
-                                            isWrong: .constant(false),
-                                            text: self.$emailText)
-                        
-                        
-                        CustomTextFieldView(type: .icon,
-                                            style: .primary,
-                                            placeholder: passwordPlaceholder,
-                                            isSecure: true,
-                                            isLowCase: true ,
-                                            isWrong: .constant(false),
-                                            text: self.$passwordText)
-                        .padding(.vertical, nanoSpacing)
-                        //MARK: Buttons
-                        Button(action: {
-                            self.isPresentingRecoverPasswordSheet.toggle()
-                        }, label: {
-                            Text("forgotYourPassword")
-                                .font(textFont)
-                                .foregroundColor(color)
-                        })
-                        .padding(.top, nanoSpacing )
-                        .padding(.bottom, nanoSpacing + quarck)
-                        .sheet(isPresented: $isPresentingRecoverPasswordSheet) {
-                            NavigationView {
-                                RecoverPasswordEmailStepView()
-                                    .navigationBarItems(trailing: Button("Fechar", action: {self.isPresentingRecoverPasswordSheet.toggle()}))
-                                    .navigationBarTitle("navigationTitle", displayMode: .inline)
+                    Group {
+                        if dynamicTypeCategory > .extraExtraExtraLarge {
+                            ScrollView {
+                                //MARK: TextFields
+                                CustomTextFieldView(type: .none,
+                                                    style: .primary,
+                                                    placeholder: emailPlaceholder,
+                                                    keyboardType: .emailAddress,
+                                                    isSecure: false,
+                                                    isLowCase: true ,
+                                                    isWrong: .constant(false),
+                                                    text: self.$emailText)
+                                .accessibilityLabel("accessibilityEmailPlaceholder")
+                                
+                                CustomTextFieldView(type: .icon,
+                                                    style: .primary,
+                                                    placeholder: passwordPlaceholder,
+                                                    isSecure: true,
+                                                    isLowCase: true ,
+                                                    isWrong: .constant(false),
+                                                    text: self.$passwordText)
+                                .accessibilityLabel("accessibilityPasswordPlaceholder")
+                                .padding(.vertical, nanoSpacing)
+                                //MARK: Buttons
+                                Button(action: {
+                                    self.isPresentingRecoverPasswordSheet.toggle()
+                                }, label: {
+                                    Text("forgotYourPassword")
+                                        .font(textFont)
+                                        .foregroundColor(color)
+                                })
+                                .padding(.top, nanoSpacing )
+                                .padding(.bottom, nanoSpacing + quarck)
+                                .sheet(isPresented: $isPresentingRecoverPasswordSheet) {
+                                    NavigationView {
+                                        RecoverPasswordEmailStepView()
+                                            .navigationBarItems(trailing: Button("Fechar", action: {self.isPresentingRecoverPasswordSheet.toggle()}))
+                                            .navigationBarTitle("navigationTitle", displayMode: .inline)
+                                    }
+                                }
+                                ButtonComponent(style: .secondary(isEnabled: true),
+                                                text: "Fazer Login!",
+                                                action: {
+                                    if emailText.isEmpty || passwordText.isEmpty {
+                                        self.userViewModel.loginAlertCases = .emptyFields
+                                        isShowingAlert.toggle()
+                                    } else if !emailText.contains("@") || !emailText.contains("."){
+                                        self.userViewModel.loginAlertCases = .invalidEmail
+                                        isShowingAlert.toggle()
+                                    } else {
+                                        self.userViewModel.login(email: self.emailText, password: self.passwordText)
+                                    }
+                                })
+                                
+                                HStack {
+                                    Text("Ainda não tem uma conta?")
+                                        .font(textFont)
+                                        .foregroundColor(color)
+                                    
+                                    Button(action: {
+                                        self.isShowingSignupSheet.toggle()
+                                    }, label: {
+                                        Text("Cadastre-se!")
+                                            .font(textButtonFont)
+                                            .foregroundColor(color)
+                                    })
+                                }
+                                .padding(.top, smallSpacing)
                             }
                         }
-                        ButtonComponent(style: .secondary(isEnabled: true),
-                                        text: "Fazer Login!",
-                                        action: {
-                            if emailText.isEmpty || passwordText.isEmpty {
-                                self.userViewModel.loginAlertCases = .emptyFields
-                                isShowingAlert.toggle()
-                            } else if !emailText.contains("@") || !emailText.contains("."){
-                                self.userViewModel.loginAlertCases = .invalidEmail
-                                isShowingAlert.toggle()
-                            } else {
-                                self.userViewModel.login(email: self.emailText, password: self.passwordText)
-                            }
-                        })
-                        
-                        HStack {
-                            Text("Ainda não tem uma conta?")
-                                .font(textFont)
-                                .foregroundColor(color)
-                                .accessibilityLabel("")
+                        else {
+                            //MARK: TextFields
+                            CustomTextFieldView(type: .none,
+                                                style: .primary,
+                                                placeholder: emailPlaceholder,
+                                                keyboardType: .emailAddress,
+                                                isSecure: false,
+                                                isLowCase: true ,
+                                                isWrong: .constant(false),
+                                                text: self.$emailText)
+                            .accessibilityLabel("accessibilityEmailPlaceholder")
                             
+                            
+                            CustomTextFieldView(type: .icon,
+                                                style: .primary,
+                                                placeholder: passwordPlaceholder,
+                                                isSecure: true,
+                                                isLowCase: true ,
+                                                isWrong: .constant(false),
+                                                text: self.$passwordText)
+                            .accessibilityLabel("accessibilityPasswordPlaceholder")
+                            .padding(.vertical, nanoSpacing)
+                            //MARK: Buttons
                             Button(action: {
-                                self.isShowingSignupSheet.toggle()
+                                self.isPresentingRecoverPasswordSheet.toggle()
                             }, label: {
-                                Text("Cadastre-se!")
-                                    .font(textButtonFont)
+                                Text("forgotYourPassword")
+                                    .font(textFont)
                                     .foregroundColor(color)
-                                    .accessibilityLabel("Ainda não tem uma conta? Cadastre-se!")
                             })
+                            .padding(.top, nanoSpacing )
+                            .padding(.bottom, nanoSpacing + quarck)
+                            .sheet(isPresented: $isPresentingRecoverPasswordSheet) {
+                                NavigationView {
+                                    RecoverPasswordEmailStepView()
+                                        .navigationBarItems(trailing: Button("Fechar", action: {self.isPresentingRecoverPasswordSheet.toggle()}))
+                                        .navigationBarTitle("navigationTitle", displayMode: .inline)
+                                }
+                            }
+                            ButtonComponent(style: .secondary(isEnabled: true),
+                                            text: "Fazer Login!",
+                                            action: {
+                                if emailText.isEmpty || passwordText.isEmpty {
+                                    self.userViewModel.loginAlertCases = .emptyFields
+                                    isShowingAlert.toggle()
+                                } else if !emailText.contains("@") || !emailText.contains("."){
+                                    self.userViewModel.loginAlertCases = .invalidEmail
+                                    isShowingAlert.toggle()
+                                } else {
+                                    self.userViewModel.login(email: self.emailText, password: self.passwordText)
+                                }
+                            })
+                            
+                            HStack {
+                                Text("Ainda não tem uma conta?")
+                                    .font(textFont)
+                                    .foregroundColor(color)
+                                
+                                Button(action: {
+                                    self.isShowingSignupSheet.toggle()
+                                }, label: {
+                                    Text("Cadastre-se!")
+                                        .font(textButtonFont)
+                                        .foregroundColor(color)
+                                })
+                            }
+                            .padding(.top, smallSpacing)
                         }
-                        .padding(.top, smallSpacing)
                     }
                 }
             }

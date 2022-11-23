@@ -560,7 +560,7 @@ class QuickChallengeViewModel: ObservableObject {
                 case .failure(let error):
                     switch error {
                         case .badRequest:
-                            self?.removePlayerAlertCases = .userNotInThisChallenge
+                            self?.removePlayerAlertCases = .removeItSelf
                         case .notFound:
                             self?.removePlayerAlertCases = .userOrChallengeNotFound
                         case .internalServerError:
