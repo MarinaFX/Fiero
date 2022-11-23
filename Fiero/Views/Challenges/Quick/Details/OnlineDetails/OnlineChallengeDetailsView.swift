@@ -131,7 +131,7 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: ParticipantsList(quickChallenge: $quickChallenge), isActive: self.$isPresentingParticipantsList).hidden()
                             
-                            NavigationLink("", destination: self.quickChallenge.type == QCTypeEnum.amount.description ? AnyView(OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge)) : AnyView(HealthKitOngoingView(quickChallenge: self.$quickChallenge)), isActive: self.$isPresetingOngoingView).hidden()
+                            NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                             
                             if self.quickChallenge.finished {
                                 ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
@@ -364,7 +364,26 @@ struct OnlineChallengeDetailsView: View {
                                     .padding(.bottom, extraExtraSmallSpacing)
                                 } else {
                                     ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
-                                        self.isPresetingOngoingView.toggle()
+                                        if self.quickChallenge.type == QCTypeEnum.volleyball.description {
+                                            self.healthKitViewModel.requestAuthorization()
+                                                .sink(receiveCompletion: { completion in
+                                                    switch completion {
+                                                        case .failure(_):
+                                                            self.isPresentingAlertError = true
+                                                        case .finished:
+                                                            print("Authorized health access")
+                                                            //self.isPresetingOngoingView.toggle()
+                                                    }
+                                                }, receiveValue: { authorized in
+                                                    if authorized {
+                                                        self.isPresetingOngoingView.toggle()
+                                                    }
+                                                })
+                                                .store(in: &subscriptions)
+                                        }
+                                        else {
+                                            self.isPresetingOngoingView.toggle()
+                                        }
                                     })
                                     .padding(.horizontal, defaultMarginSpacing)
                                     .padding(.top, extraSmallSpacing)
