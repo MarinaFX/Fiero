@@ -11,7 +11,7 @@ struct ProfileBodyTextView: View {
     private let userName = UserViewModel.getUserNameFromDefaults()
     
     var body: some View {
-        Text("\(NSLocalizedString("Fique ligado", comment: "")) \(userName)")
+        Text("\(NSLocalizedString("Fique ligado", comment: "")) \(userName.components(separatedBy: " ").first ?? "")")
             .multilineTextAlignment(.center)
             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             .font(Tokens.FontStyle.title.font(design: .rounded))

@@ -64,7 +64,7 @@ struct QCCategorySelectionView: View {
                                 }
                                 .fullScreenCover(isPresented: $walkingPresentNextScreen) {
                                     NavigationView {
-                                        QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                                        QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
                                     }
                                 }
                         }
@@ -90,7 +90,6 @@ struct QCCategorySelectionView: View {
                 }
                 .makeDarkModeFullScreen()
                 .navigationTitle(LocalizedStringKey("homeScreenTitle"))
-//            }
             
         }
     }

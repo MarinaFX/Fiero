@@ -69,7 +69,7 @@ struct QCNamingView: View {
 
                         NavigationLink("", isActive: $isNavActiveForAmount) {
                             if isOnline {
-                                QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .amount, challengeName: self.challengeName, challengeParticipants: 1)
+                                QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: 1)
                             } else {
                                 QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
                             }
@@ -126,8 +126,8 @@ struct QCNamingView: View {
 
                     NavigationLink("", isActive: $isNavActiveForAmount) {
                         if isOnline {
-                            QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: .amount, challengeName: self.challengeName, challengeParticipants: 1)
-                        } 
+                            QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: 1)
+                        }
                         else {
                             QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
                         }

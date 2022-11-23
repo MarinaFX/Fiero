@@ -23,7 +23,16 @@ struct ChallengeListCell: View {
                     .padding(.leading, Tokens.Spacing.nano.value)
                     .padding(.trailing, Tokens.Spacing.xxxs.value)
             }
-            VStack (alignment: .leading, spacing: Tokens.Spacing.nano.value) {
+            else {
+                if quickChallenge.type == QCTypeEnum.volleyball.description{
+                    LottieView(fileName: "steps", reverse: false, loop: true, ended: $ended)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 30, height: 70)
+                        .padding(.leading, Tokens.Spacing.nano.value)
+                        .padding(.trailing, Tokens.Spacing.xxxs.value)
+                }
+            }
+            VStack (spacing: Tokens.Spacing.nano.value) {
                 HStack {
                     Text(quickChallenge.name)
                         .font(Tokens.FontStyle.title.font(weigth: .bold))
@@ -34,7 +43,7 @@ struct ChallengeListCell: View {
                     Spacer()
                 }
                 if self.sizeCategory.isAccessibilityCategory {
-                    VStack(alignment: .leading) {
+                    VStack {
                         if quickChallenge.finished {
                             Text("challengeFinishedStatus")
                                 .font(Tokens.FontStyle.caption.font(weigth: .bold))
@@ -44,19 +53,29 @@ struct ChallengeListCell: View {
                                 .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                                 .padding(.bottom, 3)
-                        } else {
-                            if quickChallenge.online {
-                                Text("Online")
-                                    .font(Tokens.FontStyle.caption.font(weigth: .bold))
-                                    .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                                    .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
-                                    .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
-                                    .background(Tokens.Colors.Highlight.four.value)
-                                    .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                                    .padding(.bottom, 3)
-                            }
                         }
-                        if quickChallenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "" {
+                        if quickChallenge.online {
+                            Text("Online")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Highlight.four.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        }
+                        if quickChallenge.type == QCTypeEnum.volleyball.description {
+                            Text("HealthKit")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Highlight.seven.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        }
+                        
+                        if quickChallenge.owner.name == UserViewModel.getUserNameFromDefaults() {
                             Text("challengeAdm")
                                 .font(Tokens.FontStyle.caption.font(weigth: .bold))
                                 .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
@@ -64,9 +83,8 @@ struct ChallengeListCell: View {
                                 .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                                 .background(Tokens.Colors.Highlight.five.value)
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                                //.padding(.bottom, 3)
+                                .padding(.bottom, 3)
                         }
-                        Spacer()
                     }
                 }
                 else {
@@ -75,29 +93,39 @@ struct ChallengeListCell: View {
                             Text("challengeFinishedStatus")
                                 .font(Tokens.FontStyle.caption.font(weigth: .bold))
                                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                                .padding(.vertical, Tokens.Spacing.quarck.value)
-                                .padding(.horizontal, Tokens.Spacing.nano.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                                 .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                                 .padding(.bottom, 3)
-                        } else {
-                            if quickChallenge.online {
-                                Text("Online")
-                                    .font(Tokens.FontStyle.caption.font(weigth: .bold))
-                                    .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                                    .padding(.vertical, Tokens.Spacing.quarck.value)
-                                    .padding(.horizontal, Tokens.Spacing.nano.value)
-                                    .background(Tokens.Colors.Highlight.four.value)
-                                    .cornerRadius(Tokens.Border.BorderRadius.circular.value)
-                                    .padding(.bottom, 3)
-                            }
                         }
-                        if quickChallenge.ownerId == UserDefaults.standard.string(forKey: UDKeysEnum.userID.description) ?? "" {
+                        if quickChallenge.online {
+                            Text("Online")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Highlight.four.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        }
+                        if quickChallenge.type == QCTypeEnum.volleyball.description {
+                            Text("HealthKit")
+                                .font(Tokens.FontStyle.caption.font(weigth: .bold))
+                                .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .background(Tokens.Colors.Highlight.seven.value)
+                                .cornerRadius(Tokens.Border.BorderRadius.circular.value)
+                                .padding(.bottom, 3)
+                        }
+                        
+                        if quickChallenge.owner.name == UserViewModel.getUserNameFromDefaults() {
                             Text("challengeAdm")
                                 .font(Tokens.FontStyle.caption.font(weigth: .bold))
                                 .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                                .padding(.vertical, Tokens.Spacing.quarck.value)
-                                .padding(.horizontal, Tokens.Spacing.nano.value)
+                                .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                                .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                                 .background(Tokens.Colors.Highlight.five.value)
                                 .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                                 .padding(.bottom, 3)

@@ -55,6 +55,8 @@ struct ScoreList: View {
             HStack(spacing: 20) {
                 Text(self.formattedPosition)
                     .font(style.numberFont)
+                    .multilineTextAlignment(.trailing)
+                    .frame(minWidth: UIScreen.main.bounds.width*0.12)
                 
                 ZStack {
                     HStack {
