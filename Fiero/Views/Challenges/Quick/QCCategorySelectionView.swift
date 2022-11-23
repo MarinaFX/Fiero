@@ -46,58 +46,9 @@ struct QCCategorySelectionView: View {
         let widthHStack: CGFloat = widthFocussedCard + ((widthUnfocussedCard + cardSpacing) * CGFloat((items.count - 1)))
         
         NavigationView{
-            if self.sizeCategory.isAccessibilityCategory {
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        HStack(alignment: .center,spacing: cardSpacing) {
-                            ForEach(0 ..< items.count) { index in
-                                
-                                ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
-                                    .frame(width: isFocused(index: index) ? widthFocussedCardAccessibility : widthUnfocussedCard,
-                                           height: isFocused(index: index) ? heightFocussedCardAccessibility : heightUnfocussedCard)
-                                    .opacity(isFocused(index: index) ? 1.0 : 0.4)
-                                    .onTapGesture {
-                                        if index != 2 {
-                                            SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
-                                            index == 0 ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
-                                        }
-                                    }
-                                    .fullScreenCover(isPresented: $amountPresentNextScreen) {
-                                        OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
-                                    }
-                                    .fullScreenCover(isPresented: $walkingPresentNextScreen) {
-                                        NavigationView {
-                                            QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
-                                        }
-                                    }
-                            }
-                            .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCardAccessibility), alignment: .center)
-                            .modifier(ScrollingHStackModifier(items: items.count, itemWidth: widthUnfocussedCard, itemSpacing: cardSpacing, scrollOffset: $scrollOffset))
-                            
-                            ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
-                                isShowingEnterWithCodeView = true
-                            }
-                            .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
-                                EnterWithCodeView()
-                            })
-                            .padding(.vertical, Tokens.Spacing.nano.value)
-                            
-                            if didComeFromEmptyOrHomeView {
-                                ButtonComponent(style: .black(isEnabled: true), text: "Voltar") {
-                                    RootViewController.dismissSheetFlow()
-                                }
-                            }
-                        }
-                        .makeDarkModeFullScreen()
-                        .navigationTitle(LocalizedStringKey("homeScreenTitle"))
-                    }
-                }
-            }
-            else {
                 VStack {
                     HStack(alignment: .center,spacing: cardSpacing) {
                         ForEach(0 ..< items.count) { index in
-                            
                             ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
                                 .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
                                        height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
@@ -139,7 +90,7 @@ struct QCCategorySelectionView: View {
                 }
                 .makeDarkModeFullScreen()
                 .navigationTitle(LocalizedStringKey("homeScreenTitle"))
-            }
+//            }
             
         }
     }

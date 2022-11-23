@@ -10,6 +10,9 @@
     "Fazer Login!" = "Login!";
     "Ainda não tem uma conta?" = "Don't have an account yet?";
     "Cadastre-se!" = "Register!";
+    "accessibilityEmailPlaceholder" = "Type your email";
+    "accessibilityPasswordPlaceholder" = "Type your password";
+    "accessibilityNamePlaceholder" = "Type your name";
 
 // MARK: - Onboarding
 // adicionar imagens em ingles
@@ -53,6 +56,7 @@
     "Já tem uma conta?" = "Already have an account?";
     "Faça Login!" = "Login!";
     "Termos de Uso" = "Terms of Use";
+    "accessTermsOfUseAccessibility" = "Tap to access Fiero terms of use";
     "Você deve ler e aceitar os termos de uso para poder criar uma conta." = "You must read and accept the terms of use in order to create an account.";
     "OK" = "OK";
 
@@ -219,6 +223,7 @@ We can't get your challenges now, try again";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
 
 // MARK: - Profile
+    "Perfil" = "Profile";
     "Fique ligado" = "Stay tuned, ";
     "Novas funcionalidades" = "New features coming soon ;)";
     "Apagar conta" = "Delete account";
@@ -286,8 +291,11 @@ We can't get your challenges now, try again";
 //MARK: Insert code and password
 "verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
 "verificationCodeTextFieldPlaceholder" = "Validation code";
+"accessibilityVerificationCodeTextFieldPlaceholder" = "Type the validation code";
 "passwordTextFieldPlaceholder" = "New password";
+"accessibilityPasswordTextFieldPlaceholder" = "Type your new password";
 "confirmPasswordTextFieldPlaceholder" = "Confirm new password";
+"accessibilityConfirmPasswordTextFieldPlaceholder" = "Type again your new password for confirmation";
 "changePasswordButtonLabel" = "Change password";
 
 //MARK: Alerts
