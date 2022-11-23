@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct OnlineChallengeDetailsView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     @EnvironmentObject var healthKitViewModel: HealthKitViewModel
@@ -115,16 +116,31 @@ struct OnlineChallengeDetailsView: View {
                                 Button {
                                     isPresentingParticipantsList.toggle()
                                 } label: {
-                                    Text("Participantes")
-                                        .padding(.leading, 16)
-                                    Spacer()
-                                    Text("Ver todos")
-                                    Image(systemName: "chevron.right")
-                                        .padding(.trailing, 16)
+                                    if self.sizeCategory.isAccessibilityCategory {
+                                        VStack {
+                                            Text("Participantes")
+                                                .padding(.horizontal, 16)
+                                            Spacer()
+                                            HStack {
+                                                Text("Ver todos")
+                                                Image(systemName: "chevron.right")
+                                                    .padding(.trailing, 16)
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        Text("Participantes")
+                                            .padding(.leading, 16)
+                                        Spacer()
+                                        Text("Ver todos")
+                                        Image(systemName: "chevron.right")
+                                            .padding(.trailing, 16)
+                                    }
                                 }
                             }
+                            .font(self.sizeCategory.isAccessibilityCategory ? Tokens.FontStyle.largeTitle.font() : Tokens.FontStyle.body.font())
                             .foregroundColor(foregroundColor)
-                            .frame(height: 44)
+                            .frame(minHeight: 50)
                             .background(Tokens.Colors.Neutral.Low.dark.value)
                             .cornerRadius(borderSmall)
                             .padding(.horizontal, defaultMarginSpacing)
@@ -335,16 +351,31 @@ struct OnlineChallengeDetailsView: View {
                                 Button {
                                     isPresentingParticipantsList.toggle()
                                 } label: {
-                                    Text("Participantes")
-                                        .padding(.leading, 16)
-                                    Spacer()
-                                    Text("Ver todos")
-                                    Image(systemName: "chevron.right")
-                                        .padding(.trailing, 16)
+                                    if self.sizeCategory.isAccessibilityCategory {
+                                        VStack {
+                                            Text("Participantes")
+                                                .padding(.horizontal, 16)
+                                            Spacer()
+                                            HStack {
+                                                Text("Ver todos")
+                                                Image(systemName: "chevron.right")
+                                                    .padding(.trailing, 16)
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        Text("Participantes")
+                                            .padding(.leading, 16)
+                                        Spacer()
+                                        Text("Ver todos")
+                                        Image(systemName: "chevron.right")
+                                            .padding(.trailing, 16)
+                                    }
                                 }
                             }
+                            .font(self.sizeCategory.isAccessibilityCategory ? Tokens.FontStyle.largeTitle.font() : Tokens.FontStyle.body.font())
                             .foregroundColor(foregroundColor)
-                            .frame(height: 44)
+                            .frame(minHeight: 50)
                             .background(Tokens.Colors.Neutral.Low.dark.value)
                             .cornerRadius(borderSmall)
                             .padding(.horizontal, defaultMarginSpacing)

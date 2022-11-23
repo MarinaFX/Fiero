@@ -14,6 +14,7 @@ struct ChallengesCategoryInfo {
 }
 
 struct QCCategorySelectionView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.dismiss) var dismissView
     
     @State private var scrollOffset: CGFloat = 0.0
@@ -27,67 +28,69 @@ struct QCCategorySelectionView: View {
     var cardSpacing: CGFloat = Tokens.Spacing.nano.value
     var widthUnfocussedCard: CGFloat = UIScreen.main.bounds.width * 0.6
     var widthFocussedCard: CGFloat = UIScreen.main.bounds.width * 0.8
+    var widthFocussedCardAccessibility: CGFloat = UIScreen.main.bounds.width * 0.8
     var heightUnfocussedCard: CGFloat = UIScreen.main.bounds.height * 0.5
     var heightFocussedCard: CGFloat = UIScreen.main.bounds.height * 0.6
+    var heightFocussedCardAccessibility: CGFloat = UIScreen.main.bounds.height * 0.95
     var items: [ChallengesCategoryInfo] = [ChallengesCategoryInfo(style: .amount,
                                                                   title: "amountChallengeTypeTitle",
                                                                   subtitle: "amountChallengeTypeSubtitle"),
                                            ChallengesCategoryInfo(style: .walking,
-                                                                     title: "walkingChallengeTypeTitle",
-                                                                     subtitle: "walkingChallengeTypeSubtitle"),
-                                              ChallengesCategoryInfo(style: .blocked,
-                                                                     title: "bestOfChallengeTitle",
-                                                                     subtitle: "bestOfChallengeSubtitle")]
+                                                                  title: "walkingChallengeTypeTitle",
+                                                                  subtitle: "walkingChallengeTypeSubtitle"),
+                                           ChallengesCategoryInfo(style: .blocked,
+                                                                  title: "bestOfChallengeTitle",
+                                                                  subtitle: "bestOfChallengeSubtitle")]
     
     var body: some View {
         let widthHStack: CGFloat = widthFocussedCard + ((widthUnfocussedCard + cardSpacing) * CGFloat((items.count - 1)))
         
         NavigationView{
-            VStack {
-                HStack(alignment: .center,spacing: cardSpacing) {
-                    ForEach(0 ..< items.count) { index in
-                        
-                        ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
-                            .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
-                                   height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
-                            .opacity(isFocused(index: index) ? 1.0 : 0.4)
-                            .onTapGesture {
-                                if index != 2 {
-                                    SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
-                                    index == 0 ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
+                VStack {
+                    HStack(alignment: .center,spacing: cardSpacing) {
+                        ForEach(0 ..< items.count) { index in
+                            ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
+                                .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
+                                       height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
+                                .opacity(isFocused(index: index) ? 1.0 : 0.4)
+                                .onTapGesture {
+                                    if index != 2 {
+                                        SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
+                                        index == 0 ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
+                                    }
                                 }
-                            }
-                        
-                            .fullScreenCover(isPresented: $amountPresentNextScreen) {
-                                OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
-                            }
-                            .fullScreenCover(isPresented: $walkingPresentNextScreen) {
-                                QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
-                            }
+                                .fullScreenCover(isPresented: $amountPresentNextScreen) {
+                                    OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                                }
+                                .fullScreenCover(isPresented: $walkingPresentNextScreen) {
+                                    NavigationView {
+                                        QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
+                                    }
+                                }
+                        }
+                    }
+                    .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCard + 50), alignment: .center)
+                    .padding(.top, Tokens.Spacing.xxl.value)
+                    .modifier(ScrollingHStackModifier(items: items.count, itemWidth: widthUnfocussedCard, itemSpacing: cardSpacing, scrollOffset: $scrollOffset))
+                    
+                    ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
+                        isShowingEnterWithCodeView = true
+                    }
+                    .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                        EnterWithCodeView()
+                    })
+                    .frame(height: 10)
+                    .padding(.top, 0)
+                    
+                    if didComeFromEmptyOrHomeView {
+                        ButtonComponent(style: .black(isEnabled: true), text: "Voltar") {
+                            RootViewController.dismissSheetFlow()
+                        }
                     }
                 }
-                .frame(width: CGFloat(widthHStack), height: CGFloat(heightFocussedCard + 50), alignment: .center)
-                .padding(.top, Tokens.Spacing.xxl.value)
-                .modifier(ScrollingHStackModifier(items: items.count, itemWidth: widthUnfocussedCard, itemSpacing: cardSpacing, scrollOffset: $scrollOffset))
-                
-                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
-                    isShowingEnterWithCodeView = true
-                }
-                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
-                    EnterWithCodeView()
-                })
-                .frame(height: 10)
-                .padding(.top, 0)
-                
-                if didComeFromEmptyOrHomeView {
-                    ButtonComponent(style: .black(isEnabled: true), text: "Voltar") {
-                        RootViewController.dismissSheetFlow()
-                    }
-                }
-            }
-            .makeDarkModeFullScreen()
-            .navigationTitle(LocalizedStringKey("homeScreenTitle"))
-
+                .makeDarkModeFullScreen()
+                .navigationTitle(LocalizedStringKey("homeScreenTitle"))
+            
         }
     }
     

@@ -9,31 +9,61 @@ import Foundation
 import SwiftUI
 
 struct LeaderboardView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     
     @Binding var quickChallenge: QuickChallenge
         
     var body: some View {
-        HStack {
-            if self.quickChallenge.teams.count > 1 {
-                //second place
-                LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.one.value, placement: .second, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[1].id)
-                    .padding(.leading)
+        if self.sizeCategory.isAccessibilityCategory {
+            VStack {
+                if self.quickChallenge.teams.count > 1 {
+                    //second place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.one.value, placement: .second, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[1].id)
+                        .padding(.vertical)
+                        .padding(.horizontal)
+                }
+                if self.quickChallenge.teams.count > 0 {
+                    //first place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.three.value, placement: .first, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[0].id)
+                        .padding(.vertical)
+                        .padding(.horizontal)
+                }
+                
+                if self.quickChallenge.teams.count > 2 {
+                    //third place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.two.value, placement: .third, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[2].id)
+                        .padding(.vertical)
+                        .padding(.horizontal)
+                }
             }
-            if self.quickChallenge.teams.count > 0 {
-                //first place
-                LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.three.value, placement: .first, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[0].id)
-                    .padding(.vertical)
-                    .padding(.horizontal)
-            }
-            
-            if self.quickChallenge.teams.count > 2 {
-                //third place
-                LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.two.value, placement: .third, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[2].id)
-                .padding(.trailing)
-            }
+            .environment(\.colorScheme, .dark)
+            .background(Tokens.Colors.Neutral.Low.dark.value)
         }
-        .environment(\.colorScheme, .dark)
-        .background(Tokens.Colors.Neutral.Low.dark.value)
+        else {
+            HStack {
+                if self.quickChallenge.teams.count > 1 {
+                    //second place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.one.value, placement: .second, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[1].id)
+                        .padding(.vertical)
+                        .padding(.leading)
+                }
+                if self.quickChallenge.teams.count > 0 {
+                    //first place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.three.value, placement: .first, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[0].id)
+                        .padding(.vertical)
+                        .padding(.horizontal)
+                }
+                
+                if self.quickChallenge.teams.count > 2 {
+                    //third place
+                    LeaderboardParticipantView(colorFill: Tokens.Colors.Highlight.two.value, placement: .third, quickChallenge: self.$quickChallenge, teamId:  self.quickChallenge.getRanking()[2].id)
+                        .padding(.vertical)
+                        .padding(.trailing)
+                }
+            }
+            .environment(\.colorScheme, .dark)
+            .background(Tokens.Colors.Neutral.Low.dark.value)
+        }
     }
 }
 

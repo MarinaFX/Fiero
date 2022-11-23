@@ -39,11 +39,12 @@ struct CheckboxComponent: View {
                 Text(text)
                     .foregroundColor(style.color)
                     .font(style.textFont)
+                    .accessibilityLabel("")
 
                 Text(linkedText ?? "")
                     .foregroundColor(style.color)
                     .font(style.linkedTextFont)
-                    .accessibilityLabel("Aperte para acessar os termos de uso")
+                    .accessibilityLabel("accessTermsOfUseAccessibility")
                     .onTapGesture(perform: linkedTextHandler ?? {})
             }
           

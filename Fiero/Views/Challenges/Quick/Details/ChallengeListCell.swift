@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChallengeListCell: View {
-    
+    @Environment(\.sizeCategory) var sizeCategory
     @Binding var quickChallenge: QuickChallenge
     
     @State private var ended: Bool = false
@@ -38,6 +38,8 @@ struct ChallengeListCell: View {
                         .font(Tokens.FontStyle.title.font(weigth: .bold))
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .fixedSize(horizontal: false, vertical: true)
+
                     Spacer()
                 }
                 HStack {
@@ -45,8 +47,8 @@ struct ChallengeListCell: View {
                         Text("challengeFinishedStatus")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                             .background(Tokens.Colors.Neutral.High.pure.value.opacity(0.2))
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
@@ -55,8 +57,8 @@ struct ChallengeListCell: View {
                         Text("Online")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                             .background(Tokens.Colors.Highlight.four.value)
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
@@ -65,8 +67,8 @@ struct ChallengeListCell: View {
                         Text("HealthKit")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                             .background(Tokens.Colors.Highlight.seven.value)
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)
@@ -76,8 +78,8 @@ struct ChallengeListCell: View {
                         Text("challengeAdm")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
-                            .padding(.vertical, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.nano.value)
+                            .padding(.vertical, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
+                            .padding(.horizontal, self.sizeCategory.isAccessibilityCategory ? Tokens.Spacing.xxxs.value : Tokens.Spacing.quarck.value)
                             .background(Tokens.Colors.Highlight.five.value)
                             .cornerRadius(Tokens.Border.BorderRadius.circular.value)
                             .padding(.bottom, 3)

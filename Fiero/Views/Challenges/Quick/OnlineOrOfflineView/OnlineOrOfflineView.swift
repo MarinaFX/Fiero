@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnlineOrOfflineView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var presentNextScreen: Bool = false
@@ -30,55 +31,109 @@ struct OnlineOrOfflineView: View {
                 })
                 .hidden()
                 
-                VStack {
-                    CustomProgressBar(currentPage: .first)
-                        .padding()
-                    
-                    Text(LocalizedStringKey("screenTitle"))
-                        .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .rounded))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                    
-                    TabView(selection: $tabViewSelection) {
-                        CreationSmallCardView(styles: .online)
-                            .tag(1)
-                            .padding(.all, Tokens.Spacing.sm.value)
-                            .frame(height: UIScreen.main.bounds.height * 0.35)
-                            .onTapGesture {
-                                isOnline = true
-                                presentNextScreen = true
+                if self.sizeCategory.isAccessibilityCategory {
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            CustomProgressBar(currentPage: .first)
+                                .padding()
+                            
+                            Text(LocalizedStringKey("screenTitle"))
+                                .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .rounded))
+                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                                .multilineTextAlignment(.center)
+                            
+                            TabView(selection: $tabViewSelection) {
+                                CreationSmallCardView(styles: .online)
+                                    .tag(1)
+                                    .padding(.all, Tokens.Spacing.sm.value)
+                                    .onTapGesture {
+                                        isOnline = true
+                                        presentNextScreen = true
+                                    }
+                                CreationSmallCardView(styles: .offline)
+                                    .tag(2)
+                                    .padding(.all, Tokens.Spacing.sm.value)
+                                    .onTapGesture {
+                                        isOnline = false
+                                        presentNextScreen = true
+                                    }
                             }
-                        CreationSmallCardView(styles: .offline)
-                            .tag(2)
-                            .padding(.all, Tokens.Spacing.sm.value)
-                            .frame(height: UIScreen.main.bounds.height * 0.35)
-                            .onTapGesture {
-                                isOnline = false
-                                presentNextScreen = true
+                            .frame(height: UIScreen.main.bounds.height * 0.8)
+                            .tabViewStyle(PageTabViewStyle())
+                            
+                            switch tabViewSelection {
+                                case 1:
+                                    ButtonComponent(style: .secondary(isEnabled: true), text: "Online!") {
+                                        isOnline = true
+                                        presentNextScreen = true
+                                    }
+                                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                                default:
+                                    ButtonComponent(style: .secondary(isEnabled: true), text: "Offline!") {
+                                        isOnline = false
+                                        presentNextScreen = true
+                                    }
+                                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
                             }
-                    }
-                    .tabViewStyle(PageTabViewStyle())
-                    
-                    switch tabViewSelection {
-                        case 1:
-                            ButtonComponent(style: .secondary(isEnabled: true), text: "Online!") {
-                                isOnline = true
-                                presentNextScreen = true
+                            
+                            ButtonComponent(style: .black(isEnabled: true), text: LocalizedStringKey("backButton")) {
+                                self.dismiss()
                             }
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                        default:
-                            ButtonComponent(style: .secondary(isEnabled: true), text: "Offline!") {
-                                isOnline = false
-                                presentNextScreen = true
-                            }
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    }
-                    
-                    ButtonComponent(style: .black(isEnabled: true), text: LocalizedStringKey("backButton")) {
-                        self.dismiss()
+                        }
+                        .navigationBarHidden(true)
                     }
                 }
-                .navigationBarHidden(true)
+                else {
+                    VStack {
+                        CustomProgressBar(currentPage: .first)
+                            .padding()
+                        
+                        Text(LocalizedStringKey("screenTitle"))
+                            .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .rounded))
+                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                            .multilineTextAlignment(.center)
+                        
+                        TabView(selection: $tabViewSelection) {
+                            CreationSmallCardView(styles: .online)
+                                .tag(1)
+                                .padding(.all, Tokens.Spacing.sm.value)
+                                .frame(height: UIScreen.main.bounds.height * 0.35)
+                                .onTapGesture {
+                                    isOnline = true
+                                    presentNextScreen = true
+                                }
+                            CreationSmallCardView(styles: .offline)
+                                .tag(2)
+                                .padding(.all, Tokens.Spacing.sm.value)
+                                .frame(height: UIScreen.main.bounds.height * 0.35)
+                                .onTapGesture {
+                                    isOnline = false
+                                    presentNextScreen = true
+                                }
+                        }
+                        .tabViewStyle(PageTabViewStyle())
+                        
+                        switch tabViewSelection {
+                            case 1:
+                                ButtonComponent(style: .secondary(isEnabled: true), text: "Online!") {
+                                    isOnline = true
+                                    presentNextScreen = true
+                                }
+                                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                            default:
+                                ButtonComponent(style: .secondary(isEnabled: true), text: "Offline!") {
+                                    isOnline = false
+                                    presentNextScreen = true
+                                }
+                                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                        }
+                        
+                        ButtonComponent(style: .black(isEnabled: true), text: LocalizedStringKey("backButton")) {
+                            self.dismiss()
+                        }
+                    }
+                    .navigationBarHidden(true)
+                }
             }
         }
     }

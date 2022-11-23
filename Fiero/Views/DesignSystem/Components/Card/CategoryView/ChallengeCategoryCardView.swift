@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChallengeCategoryCardView: View {
+    @Environment(\.dynamicTypeSize) var dynamicType
     
     @State var style: CardCategoryStyles
     @Binding var isPlaying: Bool
@@ -38,32 +39,46 @@ struct ChallengeCategoryCardView: View {
                     }
                 }
                 
-                Text(title)
-                    .font(style.titleFont)
-                    .foregroundColor(style.textColor)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, style.titleSpacing)
-                
-                Text(subtitle)
-                    .font(style.subtitleFont)
-                    .foregroundColor(style.textColor)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(3)
-                    .padding(.bottom, style.subtitleSpacing)
-                
-                if style != .blocked {
-                    Text("Escolher esse")
-                        .padding(.horizontal, style.horizontalButtonSpacing)
-                        .padding(.vertical, style.verticalButtonSpacing)
-                        .foregroundColor(style.textColor)
-                        .background(style.buttonBackgroundColor)
-                        .cornerRadius(style.buttonCornerRadius)
-                        .font(style.buttonFont)
-                    Spacer ()
+                if dynamicType > .xxxLarge {
+                    ScrollView {
+                        texts
+                    }
                 }
+                else {
+                    texts
+                }
+                
                 Spacer ()
             }
             .padding(.bottom, style.cardSpacing)
+        }
+    }
+    
+    var texts: some View {
+        VStack {
+            Text(title)
+                .font(style.titleFont)
+                .foregroundColor(style.textColor)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, style.titleSpacing)
+            
+            Text(subtitle)
+                .font(style.subtitleFont)
+                .foregroundColor(style.textColor)
+                .multilineTextAlignment(.center)
+                .lineLimit(5)
+                .padding(.bottom, style.subtitleSpacing)
+                .padding(.horizontal, Tokens.Spacing.quarck.value)
+            
+            if style != .blocked {
+                Text("Escolher esse")
+                    .padding(.horizontal, style.horizontalButtonSpacing)
+                    .padding(.vertical, style.verticalButtonSpacing)
+                    .foregroundColor(style.textColor)
+                    .background(style.buttonBackgroundColor)
+                    .cornerRadius(style.buttonCornerRadius)
+                    .font(style.buttonFont)
+            }
         }
     }
 }

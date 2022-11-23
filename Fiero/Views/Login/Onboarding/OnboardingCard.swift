@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct OnboardingCard: View {
+    @Environment(\.dynamicTypeSize) var dynamicType
+    
     @State var image: String
     @State var degrees: Double
     @State var title: String
@@ -23,19 +25,30 @@ struct OnboardingCard: View {
                 .rotationEffect(.degrees(degrees))
                 .padding(.top, Tokens.Spacing.quarck.value)
             
-            VStack(alignment: .center, spacing: Tokens.Spacing.nano.value) {
-                Text(NSLocalizedString(title, comment: ""))
-                    .font(Tokens.FontStyle.title.font(weigth: .bold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                
-                Text(NSLocalizedString(description, comment: ""))
-                    .font(Tokens.FontStyle.subheadline.font())
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            if dynamicType > .accessibility2 {
+                ScrollView {
+                    texts
+                }
             }
-            .padding(.all, Tokens.Spacing.xs.value)
+            else {
+                texts
+            }
         }
+    }
+    
+    var texts: some View {
+        VStack(alignment: .center, spacing: Tokens.Spacing.nano.value) {
+            Text(NSLocalizedString(title, comment: ""))
+                .font(Tokens.FontStyle.title.font(weigth: .bold))
+                .multilineTextAlignment(.center)
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+            
+            Text(NSLocalizedString(description, comment: ""))
+                .font(Tokens.FontStyle.subheadline.font())
+                .multilineTextAlignment(.center)
+                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+        }
+        .padding(.all, Tokens.Spacing.xs.value)
     }
 }
 
