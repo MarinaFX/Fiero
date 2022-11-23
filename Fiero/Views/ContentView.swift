@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @StateObject private var quickChallengeViewModel: QuickChallengeViewModel = QuickChallengeViewModel()
     @StateObject private var userViewModel: UserViewModel = UserViewModel()
+    @StateObject private var healthKitViewModel: HealthKitViewModel = HealthKitViewModel()
     
     @State private var pushHomeView: Bool = false
     @State private var isFirstLogin: Bool
@@ -38,6 +39,7 @@ struct ContentView: View {
                     TabBarView()
                     .environmentObject(self.quickChallengeViewModel)
                     .environmentObject(self.userViewModel)
+                    .environmentObject(self.healthKitViewModel)
                     .onAppear(perform: {
                         self.sceneDelegate.userViewModel = self.userViewModel
                     })

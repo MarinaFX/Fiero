@@ -2,12 +2,18 @@ import SwiftUI
 
 enum CardCategoryStyles {
     case amount
+    case walking
+    case volleyball
     case blocked
     
     //MARK: - Lottie
     var lottieName: String {
         switch self {
         case .amount:
+            return "quantity2"
+        case .walking:
+            return "steps"
+        case .volleyball:
             return "quantity2"
         case .blocked:
             return "blockCategory"
@@ -18,8 +24,13 @@ enum CardCategoryStyles {
         switch self {
         case .amount:
             return true
+        case .walking:
+            return true
+        case .volleyball:
+            return true
         case .blocked:
             return false
+        
         }
     }
     
@@ -79,8 +90,13 @@ enum CardCategoryStyles {
         switch self {
         case .amount:
             return Tokens.Spacing.nano.value
+        case .walking:
+            return Tokens.Spacing.nano.value
+        case .volleyball:
+            return Tokens.Spacing.nano.value
         case .blocked:
             return Tokens.Spacing.xxxs.value
+       
         }
     }
     

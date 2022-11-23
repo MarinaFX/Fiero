@@ -10,20 +10,22 @@
     "Fazer Login!" = "Fazer Login!";
     "Ainda não tem uma conta?" = "Ainda não tem uma conta?";
     "Cadastre-se!" = "Cadastre-se!";
-
+    "accessibilityEmailPlaceholder" = "Digite seu email";
+    "accessibilityPasswordPlaceholder" = "Digite sua senha";
+    "accessibilityNamePlaceholder" = "Digite seu nome";
 
 // MARK: - Onboarding
 // adicionar imagens em ingles
 "Pular" = "Pular";
 "firstImage" = "OnboardingNamePT";
-"firstTitle" = "Desafie seus amigos";
-"firstDescription" = "Um desafio entre amigos é uma maneira divertida de ter uma competição saudável e criar memórias juntas.";
+"firstTitle" = "Desafios personalizados";
+"firstDescription" = "Crie desafios para fazer \ncom os seus amigos.";
 "secondImage" = "OnboardingDuelPT";
-"secondTitle" = "Olho na pontuação";
-"secondDescription" = "Depois de definir quantas pessoas estão participando do seu desafio, adicione a pontuação que definirá a vitória.";
+"secondTitle" = "Marque os pontos";
+"secondDescription" = "Marque seus pontos e acompanhe as\npontuações de seus desafiantes.";
 "thirdImage" = "OnboardingChallengeType";
-"thirdTitle" = "Múltiplos desafios";
-"thirdDescription" = "É um passo pra frente e dois pra trás! Você é uma máquina de vencer, pratique.";
+"thirdTitle" = "Desafios online e offline";
+"thirdDescription" = "Convide seus amigos e mostre que\nvocê é uma máquina de vencer!";
 "Quero começar!" = "Quero começar!";
 
 
@@ -40,6 +42,8 @@
     "Fechar" = "Fechar";
     "Fechar tela de termos de uso" = "Fechar tela de termos de uso";
     "Eu concordo!" = "Eu concordo!";
+    "AccessibilityTermsOfUseFilled" = "Button: Checkbox agreeing with terms of use filled";
+    "accessibilityTermsOfUseNotFilled" = "Button: Checkbox agreeing with terms of use not filled";
     
 // MARK: - UserSignupView
     "Boas vindas, desafiante" = "Boas vindas, desafiante";
@@ -52,6 +56,7 @@
     "Já tem uma conta?" = "Já tem uma conta?";
     "Faça Login!" = "Faça Login!";
     "Termos de Uso" = "Termos de Uso";
+    "accessTermsOfUseAccessibility" = "Toque para acessar os termos de uso do Fiero";
     "Você deve ler e aceitar os termos de uso para poder criar uma conta." = "Você deve ler e aceitar os termos de uso para poder criar uma conta.";
     "OK" = "OK";
 
@@ -114,7 +119,7 @@
 
 //MARK: - Quick: OnlineOrOfflineView
     "screenTitle" = "Tipo de desafio";
-    "firstCardDescription" = "Quero convidar meus amigos pra jogarem comigo. Cada um do seu celular.";
+    "firstCardDescription" = "Quero convidar meus amigos para jogarem comigo. Cada um do seu celular.";
     "secondCardDescription" = "Quero controlar a pontuação de todos os participantes através do meu celular.";
     "backButton" = "Voltar";
 
@@ -129,7 +134,7 @@
     "Não conseguimos \ncriar seu desafio" = "Não conseguimos \ncriar seu desafio";
     "Desafio criado com sucesso" = "Desafio criado com sucesso";
     "Começar desafio!" = "Começar desafio!";
-    "Ir para a página inicial" = "Ir para a página inicial";
+    "Ir para a tela de criação" = "Ir para a tela de criação";
     "Voltar para o início" = "Voltar para o início";
     "Erro" = "Erro";
 
@@ -137,8 +142,8 @@
     "homeScreenTitle" = "É hora de se desafiar";
     "amountChallengeTypeTitle" = "Desafio de \nQuantidade";
     "amountChallengeTypeSubtitle" = "Vence quem atingir \na pontuação primeiro.";
-    "timeChallengeTypeTitle" = "Desafio de \ntempo";
-    "timeChallengeTypeSubtitle" = "Vence quem fizer a maior \npontuação no tempo definido.";
+    "walkingChallengeTypeTitle" = "Desafio de \ncaminhada";
+    "walkingChallengeTypeSubtitle" = "Vence quem \nder mais passos.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";
     "bestOfChallengeSubtitle" = "Competições de três ou\ncinco rounds.";
 
@@ -162,6 +167,7 @@
     "points" = "pontos";
     "Participantes" = "Participantes";
     "Continuar desafio" = "Continuar desafio";
+    "steps" = "passos";
     "Começar desafio!" = "Começar desafio!";
     "Desafio finalizado" = "Desafio finalizado";
     "Voltar para meus desafios" = "Voltar para meus desafios";
@@ -172,6 +178,7 @@
     "Ver todos" = "Ver todos";
     "Detalhes do desafio" = "Detalhes do desafio";
     "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?";
+    "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio" = "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Apagar desafio";
@@ -216,7 +223,8 @@
     "Você precisa informar o número de pontos para a vitória" = "Você precisa informar o número de pontos para a vitória";
 
 // MARK: - Profile
-    "Fique ligado" = "Fique ligado, ";
+    "Perfil" = "Perfil";
+    "Fique ligado" = "Fique de olho, ";
     "Novas funcionalidades" = "Novas funcionalidades em breve ;)";
     "Apagar conta" = "Apagar conta";
     "Oops, muito desafiador!" = "Oops, muito desafiador!";
@@ -230,6 +238,7 @@
     "Feedback tátil" = "Feedback tátil";
     "Configurações" = "Configurações";
     "Pronto" = "Pronto";
+    "Tem certeza que deseja sair?" = "Tem certeza que deseja sair?";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Escolher esse";
@@ -283,8 +292,11 @@
 //MARK: Insert code and password
 "verificationcationCodeTitleLabel" = "Digite o código que enviamos para o seu e-mail e a nova senha!";
 "verificationCodeTextFieldPlaceholder" = "Código de validação";
+"accessibilityVerificationCodeTextFieldPlaceholder" = "Digite o código de validação";
 "passwordTextFieldPlaceholder" = "Nova senha";
+"accessibilityPasswordTextFieldPlaceholder" = "Digite sua nova senha";
 "confirmPasswordTextFieldPlaceholder" = "Confirme a nova senha";
+"accessibilityConfirmPasswordTextFieldPlaceholder" = "Digite novamente sua nova senha para confirmação";
 "changePasswordButtonLabel" = "Mudar senha";
 
 //MARK: Alerts

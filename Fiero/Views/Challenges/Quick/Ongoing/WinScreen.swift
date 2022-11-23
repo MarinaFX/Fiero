@@ -18,6 +18,7 @@ struct WinScreen: View {
     @State var angle: Double = 0.0
     @State var isAnimating = true   
     @State var winnerName: String
+    @State var comeFrom: String
     
     var foreverAnimation: Animation {
         Animation.linear(duration: 4.0)
@@ -76,14 +77,20 @@ struct WinScreen: View {
             
             VStack {
                 Spacer()
-                ButtonComponent(style: .secondary(isEnabled: true), text: "Finalizar desafio", action: {
-                    //TODO: - logic to finish challenge
-                })
-                ButtonComponent(style: .black(isEnabled: true), text: "Continuar marcando pontos", action: {
-                    isFinished = false
-                    self.dismiss()
-                })
-                .padding(.bottom, Tokens.Spacing.sm.value)
+                if comeFrom == "online" {
+                    ButtonComponent(style: .black(isEnabled: true), text: "Finalizar desafio", action: {
+                        isFinished = false
+                        RootViewController.popToRootViewController()
+                    })
+                    .padding(.bottom, Tokens.Spacing.lg.value)
+                    
+                } else {
+                    ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar marcando pontos", action: {
+                        self.dismiss()
+                    })
+                    .padding(.bottom, Tokens.Spacing.lg.value)
+                    
+                }
             }
             .frame(maxHeight: UIScreen.main.bounds.height)
             .padding(.horizontal)
@@ -94,6 +101,6 @@ struct WinScreen: View {
 
 struct WinScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WinScreen(isFinished: .constant(true), winnerName: "Marcelo")
+        WinScreen(isFinished: .constant(true), winnerName: "Marcelo", comeFrom: "online")
     }
 }

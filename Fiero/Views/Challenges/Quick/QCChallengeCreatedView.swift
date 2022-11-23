@@ -40,6 +40,12 @@ struct QCChallengeCreatedView: View {
                 return measure
             case .bestOf:
                 return "rounds"
+            case .volleyball:
+                return "unity"
+            case .healthKit:
+                return "unity"
+            case .truco:
+                return "unity"
         }
     }
 
@@ -52,6 +58,7 @@ struct QCChallengeCreatedView: View {
             
             Text("Desafio criado com sucesso")
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
                 .font(Tokens.FontStyle.largeTitle.font(weigth: .semibold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .padding(.top, Tokens.Spacing.sm.value)
@@ -80,7 +87,7 @@ struct QCChallengeCreatedView: View {
             Button(action: {
                 RootViewController.popToRootViewController()
             }, label: {
-                Text("Ir para lista de desafios")
+                Text(LocalizedStringKey("Ir para a tela de criação"))
                     .bold()
                     .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
             })

@@ -55,6 +55,10 @@
 		1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */; };
 		1B68C74F28F48F850098BAA4 /* ActiveAlertEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */; };
 		1B7BF1A528BD61630017EF9C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B7BF1A428BD61630017EF9C /* Lottie */; };
+		1B7F15FA292D5A580065F9BC /* steps.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F15F9292D5A580065F9BC /* steps.json */; };
+		1B7F15FC292D5E6E0065F9BC /* HealthKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F15FB292D5E6E0065F9BC /* HealthKitViewModel.swift */; };
+		1B7F15FE292D603E0065F9BC /* HealthDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F15FD292D603E0065F9BC /* HealthDataError.swift */; };
+		1B7F1600292D60760065F9BC /* HealthStore+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F15FF292D60760065F9BC /* HealthStore+Extensions.swift */; };
 		1B89B3C828D250F10071A339 /* LoginAnimationStart.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C728D250F10071A339 /* LoginAnimationStart.json */; };
 		1B89B3CA28D250FE0071A339 /* LoginAnimationEnd.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */; };
 		1B8CD3412887F50B00D2F703 /* QuickChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */; };
@@ -91,6 +95,7 @@
 		62A9849F28D2216700AE77B5 /* tonto2.json in Resources */ = {isa = PBXBuildFile; fileRef = 62A9849E28D2216600AE77B5 /* tonto2.json */; };
 		62B2943A28D4EF5100E69F69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62B2943C28D4EF5100E69F69 /* Localizable.strings */; };
 		CC0D240228F4B8B500C51505 /* OngoingWithPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0D240128F4B8B500C51505 /* OngoingWithPause.swift */; };
+		CC0E281C292EB817001AD7AB /* ProfileBodyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0E281B292EB817001AD7AB /* ProfileBodyTextView.swift */; };
 		CC38BDB42927F60000536E9C /* CreationFlowTextViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC38BDB32927F60000536E9C /* CreationFlowTextViewComponent.swift */; };
 		CC38BDB62927F67400536E9C /* CreationFlowTextViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC38BDB52927F67400536E9C /* CreationFlowTextViewStyles.swift */; };
 		CC3AB9D828B95BB1006C0507 /* DetailsAlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */; };
@@ -221,6 +226,11 @@
 		1B6020CF28A1B26C00AEF47B /* ListWithoutSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithoutSeparator.swift; sourceTree = "<group>"; };
 		1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryAccountErrorCases.swift; sourceTree = "<group>"; };
 		1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlertEnum.swift; sourceTree = "<group>"; };
+		1B7F15F9292D5A580065F9BC /* steps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = steps.json; sourceTree = "<group>"; };
+		1B7F15FB292D5E6E0065F9BC /* HealthKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitViewModel.swift; sourceTree = "<group>"; };
+		1B7F15FD292D603E0065F9BC /* HealthDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataError.swift; sourceTree = "<group>"; };
+		1B7F15FF292D60760065F9BC /* HealthStore+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthStore+Extensions.swift"; sourceTree = "<group>"; };
+		1B7F1603292D81470065F9BC /* Fiero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fiero.entitlements; sourceTree = "<group>"; };
 		1B89B3C728D250F10071A339 /* LoginAnimationStart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationStart.json; sourceTree = "<group>"; };
 		1B89B3C928D250FE0071A339 /* LoginAnimationEnd.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginAnimationEnd.json; sourceTree = "<group>"; };
 		1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickChallengeViewModel.swift; sourceTree = "<group>"; };
@@ -259,6 +269,7 @@
 		62B2943B28D4EF5100E69F69 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		62B2943D28D4EF5300E69F69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CC0D240128F4B8B500C51505 /* OngoingWithPause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingWithPause.swift; sourceTree = "<group>"; };
+		CC0E281B292EB817001AD7AB /* ProfileBodyTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBodyTextView.swift; sourceTree = "<group>"; };
 		CC38BDB32927F60000536E9C /* CreationFlowTextViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFlowTextViewComponent.swift; sourceTree = "<group>"; };
 		CC38BDB52927F67400536E9C /* CreationFlowTextViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFlowTextViewStyles.swift; sourceTree = "<group>"; };
 		CC3AB9D728B95BB1006C0507 /* DetailsAlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAlertCases.swift; sourceTree = "<group>"; };
@@ -442,6 +453,8 @@
 				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
 				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
 				1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */,
+				1B7F15FD292D603E0065F9BC /* HealthDataError.swift */,
+				1B7F15FF292D60760065F9BC /* HealthStore+Extensions.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -472,6 +485,7 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
+				1B7F1603292D81470065F9BC /* Fiero.entitlements */,
 				484F33E428F0A129005A8563 /* Players */,
 				DF96CC6A28C7CAA300D17B37 /* Fonts */,
 				1BC68C55288F32130055135D /* Info.plist */,
@@ -644,6 +658,7 @@
 			children = (
 				1B8CD3402887F50B00D2F703 /* QuickChallengeViewModel.swift */,
 				1B9092A32878AD320039EBB7 /* UserViewModel.swift */,
+				1B7F15FB292D5E6E0065F9BC /* HealthKitViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -862,6 +877,7 @@
 		DF73C75B28BF9B4A0079DBB0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				1B7F15F9292D5A580065F9BC /* steps.json */,
 				62A9849E28D2216600AE77B5 /* tonto2.json */,
 				62A9849C28D2150D00AE77B5 /* sad.json */,
 				62A9849A28D210C200AE77B5 /* success-loop.json */,
@@ -891,6 +907,7 @@
 			isa = PBXGroup;
 			children = (
 				DF7DCDB228AEB9F400B387BA /* ProfileView.swift */,
+				CC0E281B292EB817001AD7AB /* ProfileBodyTextView.swift */,
 				488919F928F8AF0200958743 /* SettingsView.swift */,
 			);
 			path = Profile;
@@ -1107,6 +1124,7 @@
 				1B04557C28DB8938008ABA88 /* quantity-list-cell.json in Resources */,
 				62A9849D28D2150D00AE77B5 /* sad.json in Resources */,
 				DF73C76928BFD7780079DBB0 /* tonto.json in Resources */,
+				1B7F15FA292D5A580065F9BC /* steps.json in Resources */,
 				DF73C76528BFC84F0079DBB0 /* quantity.json in Resources */,
 				DFD4FED328B92DD700169C20 /* quantity.gif in Resources */,
 				DF94A39028C22381003B47B8 /* winAnimation.json in Resources */,
@@ -1149,12 +1167,14 @@
 				CCA3C24928760002007F6597 /* CheckboxComponent.swift in Sources */,
 				1B90929D2878A5A40039EBB7 /* ButtonComponent.swift in Sources */,
 				F85EE0182881D30700264114 /* RoundScoreStyle.swift in Sources */,
+				1B7F15FC292D5E6E0065F9BC /* HealthKitViewModel.swift in Sources */,
 				CCFA559A28873BC900740663 /* BestOfComponent.swift in Sources */,
 				CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */,
 				DF7DCDB328AEB9F400B387BA /* ProfileView.swift in Sources */,
 				1BF3DA7B2926B81E00BAED81 /* OnlineOngoingChallengeView.swift in Sources */,
 				1B3271C52914392A003935BB /* ExitChallengeAlertCasesEnum.swift in Sources */,
 				DF588A3129105AF000F10E02 /* LetterComponent.swift in Sources */,
+				CC0E281C292EB817001AD7AB /* ProfileBodyTextView.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */,
 				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
@@ -1194,6 +1214,7 @@
 				F8B88998292559C000870A34 /* ScoreList.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
+				1B7F15FE292D603E0065F9BC /* HealthDataError.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */,
 				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
 				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
@@ -1215,6 +1236,7 @@
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
 				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
+				1B7F1600292D60760065F9BC /* HealthStore+Extensions.swift in Sources */,
 				CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */,
 				1B68C74F28F48F850098BAA4 /* ActiveAlertEnum.swift in Sources */,
 				1B46849728C786BF0041BFED /* UDKeysEnum.swift in Sources */,
@@ -1422,6 +1444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Fiero/Fiero.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
@@ -1429,6 +1452,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read QRCode of challenge";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1440,7 +1467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1454,6 +1481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Fiero/Fiero.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
@@ -1461,6 +1489,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read QRCode of challenge";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1472,7 +1504,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OngoingScreen: View {
+    @Environment(\.dynamicTypeSize) var dynamicType
+    
     @Binding var quickChallenge: QuickChallenge
     @Binding var didTapPauseButton: Bool
     @Binding var isShowingAlertOnDetailsScreen: Bool
@@ -58,8 +60,15 @@ struct OngoingScreen: View {
                     VStack(spacing: 0) {
                         ForEach(self.$quickChallenge.teams) { team in
                             ZStack {
-                                Member.getColor(playerName: team.wrappedValue.name)
-                                    .ignoresSafeArea()
+                                if dynamicType > .xxxLarge {
+                                    Member.getColor(playerName: team.wrappedValue.name)
+                                        .ignoresSafeArea()
+                                        .frame(height: UIScreen.main.bounds.height * 0.4)
+                                }
+                                else {
+                                    Member.getColor(playerName: team.wrappedValue.name)
+                                        .ignoresSafeArea()
+                                }
                                 
                                 VStack(spacing: Tokens.Spacing.xxxs.value) {
                                     Image("Olhos")
@@ -76,13 +85,13 @@ struct OngoingScreen: View {
                                                                 memberId: team.wrappedValue.members?[0].id ?? "")
                                     .frame(height: UIScreen.main.bounds.height * 0.09)
                                 }
-                                .padding(.horizontal, Tokens.Spacing.xl.value)
+                                .padding(.horizontal, Tokens.Spacing.md.value)
                                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                             }
                         }
                         if howManyTimesWinAnimationDidAppear <= 1 {
                             NavigationLink("", isActive: $isFinished) {
-                                WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                                WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "offline")
                             }
                             .onAppear(perform: {
                                 howManyTimesWinAnimationDidAppear += 1
@@ -153,7 +162,7 @@ struct OngoingScreen: View {
                     }
                     if howManyTimesWinAnimationDidAppear <= 1 {
                         NavigationLink("", isActive: $isFinished) {
-                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca")
+                            WinScreen(isFinished: $isFinished, winnerName: "Alpaca", comeFrom: "offline")
                         }
                         .onAppear(perform: {
                             howManyTimesWinAnimationDidAppear += 1

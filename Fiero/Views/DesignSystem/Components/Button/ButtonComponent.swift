@@ -28,6 +28,7 @@ struct ButtonComponent: View {
             Text(text)
                 .foregroundColor(style.fontColor)
                 .font(style.font)
+                .multilineTextAlignment(.center)
                 .padding(style.padding)
                 .frame(maxWidth: .infinity)
                 .background(style.backgroundColor)

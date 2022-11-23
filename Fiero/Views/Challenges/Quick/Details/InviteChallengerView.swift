@@ -10,6 +10,8 @@ import CoreImage.CIFilterBuiltins
 
 struct InviteChallengerView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.sizeCategory) var dynamicTypeCategory
+    
     
     @State var inviteCode: String
     @State var inviteCodeArray: Array = ["a", "a", "a", "a", "a"]
@@ -48,11 +50,22 @@ struct InviteChallengerView: View {
                                 .background(Tokens.Colors.Neutral.High.pure.value)
                         }.cornerRadius(Tokens.Border.BorderRadius.normal.value)
                         
-                        HStack {
-                            ForEach(inviteCodeArray, id: \.self) {
-                                LetterComponent(letter: $0, variant: .onlyView)
+                        if dynamicTypeCategory > .extraExtraExtraLarge {
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack {
+                                    ForEach(inviteCodeArray, id: \.self) {
+                                        LetterComponent(letter: $0, variant: .onlyView)
+                                    }
+                                }.frame(height: 80)
                             }
-                        }.frame(height: 80)
+                        }
+                        else {
+                            HStack {
+                                ForEach(inviteCodeArray, id: \.self) {
+                                    LetterComponent(letter: $0, variant: .onlyView)
+                                }
+                            }.frame(height: 80)
+                        }
                         
                         Button {
                             copyInviteCode()

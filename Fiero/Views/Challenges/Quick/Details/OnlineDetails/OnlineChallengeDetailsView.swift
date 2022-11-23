@@ -9,8 +9,10 @@ import SwiftUI
 import Combine
 
 struct OnlineChallengeDetailsView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
+    @EnvironmentObject var healthKitViewModel: HealthKitViewModel
     
     @Binding var quickChallenge: QuickChallenge
     
@@ -28,8 +30,7 @@ struct OnlineChallengeDetailsView: View {
             if(isOwner) {
                 //if isOwner (toolbar with if is only available at ios 16+)
                 ZStack {
-                    backgroundColor
-                        .edgesIgnoringSafeArea(.all)
+                    Color("background").ignoresSafeArea()
                     ScrollView (showsIndicators: false) {
                         VStack {
                             Image("OnlineDetails")
@@ -115,16 +116,31 @@ struct OnlineChallengeDetailsView: View {
                                 Button {
                                     isPresentingParticipantsList.toggle()
                                 } label: {
-                                    Text("Participantes")
-                                        .padding(.leading, 16)
-                                    Spacer()
-                                    Text("Ver todos")
-                                    Image(systemName: "chevron.right")
-                                        .padding(.trailing, 16)
+                                    if self.sizeCategory.isAccessibilityCategory {
+                                        VStack {
+                                            Text("Participantes")
+                                                .padding(.horizontal, 16)
+                                            Spacer()
+                                            HStack {
+                                                Text("Ver todos")
+                                                Image(systemName: "chevron.right")
+                                                    .padding(.trailing, 16)
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        Text("Participantes")
+                                            .padding(.leading, 16)
+                                        Spacer()
+                                        Text("Ver todos")
+                                        Image(systemName: "chevron.right")
+                                            .padding(.trailing, 16)
+                                    }
                                 }
                             }
+                            .font(self.sizeCategory.isAccessibilityCategory ? Tokens.FontStyle.largeTitle.font() : Tokens.FontStyle.body.font())
                             .foregroundColor(foregroundColor)
-                            .frame(height: 44)
+                            .frame(minHeight: 50)
                             .background(Tokens.Colors.Neutral.Low.dark.value)
                             .cornerRadius(borderSmall)
                             .padding(.horizontal, defaultMarginSpacing)
@@ -133,21 +149,60 @@ struct OnlineChallengeDetailsView: View {
                             
                             NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                             
-                            ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
-                                self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
-                                    .sink(receiveCompletion: { completion in
-                                        switch completion {
-                                            case .failure(_):
-                                                self.isPresentingAlertError = true
-                                            case .finished:
-                                                self.isPresetingOngoingView.toggle()
-                                        }
-                                    }, receiveValue: { _ in () })
-                                    .store(in: &subscriptions)
-                            })
-                            .padding(.horizontal, defaultMarginSpacing)
-                            .padding(.top, extraSmallSpacing)
-                            .padding(.bottom, extraExtraSmallSpacing)
+                            if self.quickChallenge.finished {
+                                ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
+
+                                })
+                                .padding(.horizontal, defaultMarginSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            } else {
+                                ButtonComponent(style: .secondary(isEnabled: true), text: quickChallenge.alreadyBegin ? "Continuar desafio" : "Começar desafio!", action: {
+                                    if self.quickChallenge.type == QCTypeEnum.volleyball.description {
+                                        self.healthKitViewModel.requestAuthorization()
+                                            .flatMap({ authorized -> AnyPublisher<Void, Error> in
+                                                if authorized {
+                                                    return self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                                        .mapError({ $0 as Error })
+                                                        .eraseToAnyPublisher()
+                                                }
+                                                else {
+                                                    return Fail(outputType: Void.self, failure: NSError(domain: "", code: 0, userInfo: nil) as Error).eraseToAnyPublisher()
+                                                }
+                                            })
+                                            .sink(receiveCompletion: { completion in
+                                                switch completion {
+                                                    case .failure(let error):
+                                                        if error is HTTPResponseError {
+                                                            self.isPresentingAlertError = true
+                                                        }
+                                                        else {
+                                                            //toggle de auth healthkit
+                                                        }
+                                                    case .finished:
+                                                        self.isPresetingOngoingView.toggle()
+                                                }
+                                            }, receiveValue: { _ in () })
+                                            .store(in: &subscriptions)
+                                    }
+                                    else {
+                                        // TODO: call getChallenge before beginChallenge
+                                        self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
+                                            .sink(receiveCompletion: { completion in
+                                                switch completion {
+                                                case .failure(_):
+                                                    self.isPresentingAlertError = true
+                                                case .finished:
+                                                    self.isPresetingOngoingView.toggle()
+                                                }
+                                            }, receiveValue: { _ in () })
+                                            .store(in: &subscriptions)
+                                    }
+                                })
+                                .padding(.horizontal, defaultMarginSpacing)
+                                .padding(.top, extraSmallSpacing)
+                                .padding(.bottom, extraExtraSmallSpacing)
+                            }
                         }
                     }
                 }
@@ -168,7 +223,7 @@ struct OnlineChallengeDetailsView: View {
                             self.quickChallengeViewModel.detailsAlertCases = .deleteChallenge
                             HapticsController.shared.activateHaptics(hapticsfeedback: .heavy)
                         }, label: {
-                            Image(systemName: "trash")
+                            Image(systemName: "trash.fill")
                                 .font(descriptionFontBold)
                                 .foregroundColor(foregroundColor)
                         })
@@ -212,8 +267,7 @@ struct OnlineChallengeDetailsView: View {
             else {
                 //if is not owner (toolbar with if is only available at ios 16+)
                 ZStack {
-                    backgroundColor
-                        .edgesIgnoringSafeArea(.all)
+                    Color("background").ignoresSafeArea()
                     ScrollView (showsIndicators: false) {
                         VStack {
                             Image("OnlineDetails")
@@ -297,16 +351,31 @@ struct OnlineChallengeDetailsView: View {
                                 Button {
                                     isPresentingParticipantsList.toggle()
                                 } label: {
-                                    Text("Participantes")
-                                        .padding(.leading, 16)
-                                    Spacer()
-                                    Text("Ver todos")
-                                    Image(systemName: "chevron.right")
-                                        .padding(.trailing, 16)
+                                    if self.sizeCategory.isAccessibilityCategory {
+                                        VStack {
+                                            Text("Participantes")
+                                                .padding(.horizontal, 16)
+                                            Spacer()
+                                            HStack {
+                                                Text("Ver todos")
+                                                Image(systemName: "chevron.right")
+                                                    .padding(.trailing, 16)
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        Text("Participantes")
+                                            .padding(.leading, 16)
+                                        Spacer()
+                                        Text("Ver todos")
+                                        Image(systemName: "chevron.right")
+                                            .padding(.trailing, 16)
+                                    }
                                 }
                             }
+                            .font(self.sizeCategory.isAccessibilityCategory ? Tokens.FontStyle.largeTitle.font() : Tokens.FontStyle.body.font())
                             .foregroundColor(foregroundColor)
-                            .frame(height: 44)
+                            .frame(minHeight: 50)
                             .background(Tokens.Colors.Neutral.Low.dark.value)
                             .cornerRadius(borderSmall)
                             .padding(.horizontal, defaultMarginSpacing)
@@ -316,16 +385,47 @@ struct OnlineChallengeDetailsView: View {
                             NavigationLink("", destination: OnlineOngoingChallengeView(quickChallenge: self.$quickChallenge), isActive: self.$isPresetingOngoingView).hidden()
                             
                             if self.quickChallenge.alreadyBegin {
-                                ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
-                                    self.isPresetingOngoingView.toggle()
-                                })
-                                .padding(.horizontal, defaultMarginSpacing)
-                                .padding(.top, extraSmallSpacing)
-                                .padding(.bottom, extraExtraSmallSpacing)
+                                if self.quickChallenge.finished {
+                                    //TODO: - mudar o localizable
+                                    ButtonComponent(style: .secondary(isEnabled: false), text: "Desafio finalizado", action: {
+                                        self.isPresetingOngoingView.toggle()
+                                    })
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.top, extraSmallSpacing)
+                                    .padding(.bottom, extraExtraSmallSpacing)
+                                } else {
+                                    ButtonComponent(style: .secondary(isEnabled: true), text: "Continuar desafio", action: {
+                                        if self.quickChallenge.type == QCTypeEnum.volleyball.description {
+                                            self.healthKitViewModel.requestAuthorization()
+                                                .sink(receiveCompletion: { completion in
+                                                    switch completion {
+                                                        case .failure(_):
+                                                            self.isPresentingAlertError = true
+                                                        case .finished:
+                                                            print("Authorized health access")
+                                                            //self.isPresetingOngoingView.toggle()
+                                                    }
+                                                }, receiveValue: { authorized in
+                                                    if authorized {
+                                                        self.isPresetingOngoingView.toggle()
+                                                    }
+                                                })
+                                                .store(in: &subscriptions)
+                                        }
+                                        else {
+                                            self.isPresetingOngoingView.toggle()
+                                        }
+                                    })
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.top, extraSmallSpacing)
+                                    .padding(.bottom, extraExtraSmallSpacing)
+                                }
                             }
                             else {
-                                Text("Hmmm, parece que o dono do desafio \nestá com medo de perder para você \ne não iniciou esse desafio")
+                                Text(LocalizedStringKey("Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio"))
                                     .multilineTextAlignment(.center)
+                                    .padding(.horizontal, defaultMarginSpacing)
+                                    .padding(.bottom, defaultMarginSpacing)
                             }
                         }
                     }

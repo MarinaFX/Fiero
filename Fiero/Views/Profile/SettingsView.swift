@@ -80,7 +80,7 @@ struct SettingsView: View {
                 case .logOut:
                     return Alert(
                         title: Text("Sair da conta"),
-                        message: Text(""),
+                        message: Text("Tem certeza que deseja sair?"),
                         primaryButton: .destructive(Text("Sair da conta")) {
                             self.userViewModel.cleanDefaults()
                             self.userViewModel.isLogged = false

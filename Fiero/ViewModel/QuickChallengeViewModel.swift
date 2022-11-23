@@ -284,7 +284,7 @@ class QuickChallengeViewModel: ObservableObject {
     
     //MARK: - Begin Challenge Update
     @discardableResult
-    func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, Error> {
+    func beginChallenge(challengeId: String, alreadyBegin: Bool) -> AnyPublisher<Void, HTTPResponseError> {
         let json = """
         {
             "alreadyBegin" : \(alreadyBegin)
@@ -306,6 +306,15 @@ class QuickChallengeViewModel: ObservableObject {
             .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
+            .tryMap({ rawURLResponse -> QuickChallenge in
+                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                    return quickChallenge
+                }
+                else {
+                    throw (HTTPResponseError(rawValue: rawURLResponse.statusCode) ?? .unknown)
+                }
+            })
+            .mapError({ $0 as? HTTPResponseError ?? .unknown })
             .share()
         
         operation
@@ -316,27 +325,22 @@ class QuickChallengeViewModel: ObservableObject {
                     case .finished:
                         print("Successfully created request to begin challenge endpoint")
                 }
-            }, receiveValue: { [weak self] rawURLResponse in
-                guard let response = rawURLResponse.item else {
-                    print("Error while trying to begin challenge: \(rawURLResponse.statusCode)")
-                    return
-                }
+            }, receiveValue: { [weak self] quickChallenge in
                 
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
-                            challengesList[i] = response.quickChallenge
+                            challengesList[i] = quickChallenge
                         }
                     }
                     self?.challengesList = challengesList
                 }
-                print("successfully began challenge: \(rawURLResponse.statusCode)")
+                print("successfully began challenge")
             })
             .store(in: &cancellables)
         
         return operation
             .map({ _ in () })
-            .mapError({ $0 as Error})
             .eraseToAnyPublisher()
     }
     
@@ -560,7 +564,7 @@ class QuickChallengeViewModel: ObservableObject {
                 case .failure(let error):
                     switch error {
                         case .badRequest:
-                            self?.removePlayerAlertCases = .userNotInThisChallenge
+                            self?.removePlayerAlertCases = .removeItSelf
                         case .notFound:
                             self?.removePlayerAlertCases = .userOrChallengeNotFound
                         case .internalServerError:
