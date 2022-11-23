@@ -146,6 +146,8 @@
     "walkingChallengeTypeSubtitle" = "Vence quem \nder mais passos.";
     "bestOfChallengeTitle" = "Desafio de\nrounds";
     "bestOfChallengeSubtitle" = "Competições de três ou\ncinco rounds.";
+    "volleiChallengeTitle" = "Vôlei";
+    "volleiChallengeSubtitle" = "Um set de 25 pontos";
 
 // MARK: - Quick: ChallengeParticipantsView
     "Escolha a quantidade\nde participantes" = "Escolha a quantidade\nde participantes";

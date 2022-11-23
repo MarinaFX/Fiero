@@ -14,6 +14,7 @@
     "accessibilityPasswordPlaceholder" = "Type your password";
     "accessibilityNamePlaceholder" = "Type your name";
 
+
 // MARK: - Onboarding
 // adicionar imagens em ingles
 "Pular" = "Skip";
@@ -147,6 +148,8 @@ We can't get your challenges now, try again";
     "walkingChallengeTypeSubtitle" = "Whoever takes \nthe most steps wins.";
     "bestOfChallengeTitle" = "Round \nchalenge";
     "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
+    "volleiChallengeTitle" = "Volleyball";
+    "volleiChallengeSubtitle" = "A set of 25 points";
 
 // MARK: - Quick: ChallengeParticipantsView
     "Escolha a quantidade\nde participantes" = "Choose the number\nof participants";
