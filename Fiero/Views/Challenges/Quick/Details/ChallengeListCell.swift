@@ -62,7 +62,7 @@ struct ChallengeListCell: View {
                             .padding(.bottom, 3)
                     }
                     if quickChallenge.type == QCTypeEnum.volleyball.description {
-                        Text("HeathKit")
+                        Text("HealthKit")
                             .font(Tokens.FontStyle.caption.font(weigth: .bold))
                             .foregroundColor(Tokens.Colors.Neutral.High.dark.value)
                             .padding(.vertical, Tokens.Spacing.quarck.value)
