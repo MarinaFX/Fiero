@@ -41,6 +41,7 @@ struct InputConfirmationCodeView: View {
                         isLowCase: true ,
                         isWrong: .constant(false),
                         text: self.$confirmationCode)
+                    .accessibilityLabel("accessibilityVerificationCodeTextFieldPlaceholder")
                     
                     CustomTextFieldView(
                         type: .none,
@@ -51,6 +52,7 @@ struct InputConfirmationCodeView: View {
                         isLowCase: true ,
                         isWrong: .constant(false),
                         text: self.$password)
+                    .accessibilityLabel("accessibilityPasswordTextFieldPlaceholder")
                     
                     CustomTextFieldView(
                         type: .none,
@@ -61,6 +63,7 @@ struct InputConfirmationCodeView: View {
                         isLowCase: true ,
                         isWrong: .constant(false),
                         text: self.$confirmPassword)
+                    .accessibilityLabel("accessibilityConfirmPasswordTextFieldPlaceholder")
                     
                     if userViewModel.keyboardShown {
                         ButtonComponent(

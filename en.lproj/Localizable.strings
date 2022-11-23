@@ -10,6 +10,9 @@
     "Fazer Login!" = "Login!";
     "Ainda não tem uma conta?" = "Don't have an account yet?";
     "Cadastre-se!" = "Register!";
+    "accessibilityEmailPlaceholder" = "Type your email";
+    "accessibilityPasswordPlaceholder" = "Type your password";
+    "accessibilityNamePlaceholder" = "Type your name";
 
 
 // MARK: - Onboarding
@@ -20,10 +23,10 @@
 "firstDescription" = "Create challenges and\ncompete with your friends.";
 "secondImage" = "OnboardingDuelENG";
 "secondTitle" = "Ongoing challenges";
-"secondDescription" = "View your points and track\nyour friends' points";
+"secondDescription" = "View your points and track\nyour friends' points.";
 "thirdImage" = "OnboardingChallengeType";
 "thirdTitle" = "Online and offline challenges";
-"thirdDescription" = "Invite your friends and show that\nyou are a winning machine.";
+"thirdDescription" = "Call your friends and show that\nyou are a winning machine!";
 "Quero começar!" = "Lets Start!";
 
 
@@ -54,6 +57,7 @@
     "Já tem uma conta?" = "Already have an account?";
     "Faça Login!" = "Login!";
     "Termos de Uso" = "Terms of Use";
+    "accessTermsOfUseAccessibility" = "Tap to access Fiero terms of use";
     "Você deve ler e aceitar os termos de uso para poder criar uma conta." = "You must read and accept the terms of use in order to create an account.";
     "OK" = "OK";
 
@@ -132,7 +136,7 @@ We can't get your challenges now, try again";
     "Não conseguimos \ncriar seu desafio" = "We were unable to \ncreate your challenge";
     "Desafio criado com sucesso" = "Successfully created challenge";
     "Começar desafio!" = "Start challenge!";
-    "Ir para a página inicial" = "Go to home page";
+    "Ir para a tela de criação" = "Go to creation screen";
     "Voltar para o início" = "Back to challenge";
     "Erro" = "Error";
 
@@ -140,8 +144,8 @@ We can't get your challenges now, try again";
     "homeScreenTitle" = "Challenge yourself!";
     "amountChallengeTypeTitle" =  "Amount \nchallenge";
     "amountChallengeTypeSubtitle" = "Whoever gets the score first wins.";
-    "timeChallengeTypeTitle" = "Time \nchallenge";
-    "timeChallengeTypeSubtitle" = "Wins whoever has the highest \nscore in the set time wins.";
+    "walkingChallengeTypeTitle" = "Walking \nchallenge";
+    "walkingChallengeTypeSubtitle" = "Whoever takes \nthe most steps wins.";
     "bestOfChallengeTitle" = "Round \nchalenge";
     "bestOfChallengeSubtitle" = "Three or five round \ncompetitions.";
     "volleiChallengeTitle" = "Volleyball";
@@ -165,6 +169,7 @@ We can't get your challenges now, try again";
     "Objetivo" = "Goal";
     "%lld pontos" = "%lld points";
     "points" = "points";
+    "steps" = "steps";
     "Participantes" = "Participants";
     "Continuar desafio" = "Continue challenge";
     "Começar desafio!" = "Start challenge!";
@@ -177,6 +182,7 @@ We can't get your challenges now, try again";
     "Ver todos" = "See all";
     "Detalhes do desafio" = "Challenge details";
     "Você parece estar sozinho aqui. Ficou com medo \nde desafiar seus amigos?" = "You seem to be alone here. Were you afraid \nto challenge your friends?";
+    "Hmmm, parece que o dono do desafio está com medo de perder para você e não iniciou esse desafio" = "Hmmm, looks like the challenge owner is afraid of losing to you and hasn't started this challenge";
 
 // MARK: - Quick - Details - DetailsAlertCases
     "Apagar desafio" = "Delete challenge";
@@ -221,6 +227,7 @@ We can't get your challenges now, try again";
     "Você precisa informar o número de pontos para a vitória" = "You need to enter the number of points for the victory";
 
 // MARK: - Profile
+    "Perfil" = "Profile";
     "Fique ligado" = "Stay tuned, ";
     "Novas funcionalidades" = "New features coming soon ;)";
     "Apagar conta" = "Delete account";
@@ -235,6 +242,7 @@ We can't get your challenges now, try again";
     "Feedback tátil" = "Haptics feedback";
     "Configurações" = "Settings";
     "Pronto" = "Done";
+    "Tem certeza que deseja sair?" = "Are you sure you want to quit?";
 
 // MARK: - DesignSysten - Card - ChallengeCategoryCardView
     "Escolher esse" = "Choose this";
@@ -287,8 +295,11 @@ We can't get your challenges now, try again";
 //MARK: Insert code and password
 "verificationcationCodeTitleLabel" = "Insert the code we've just sent to your email and your new password";
 "verificationCodeTextFieldPlaceholder" = "Validation code";
+"accessibilityVerificationCodeTextFieldPlaceholder" = "Type the validation code";
 "passwordTextFieldPlaceholder" = "New password";
+"accessibilityPasswordTextFieldPlaceholder" = "Type your new password";
 "confirmPasswordTextFieldPlaceholder" = "Confirm new password";
+"accessibilityConfirmPasswordTextFieldPlaceholder" = "Type again your new password for confirmation";
 "changePasswordButtonLabel" = "Change password";
 
 //MARK: Alerts

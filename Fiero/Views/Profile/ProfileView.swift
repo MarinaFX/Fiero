@@ -9,46 +9,31 @@ import SwiftUI
 import Combine
 
 struct ProfileView: View {
-    
+    @Environment(\.sizeCategory) var dynamicTypeCategory
     @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var ended: Bool = false
     @State private var settingsScreen: Bool = false
     
-    let userName = UserViewModel.getUserNameFromDefaults()
-    
     var body: some View {
         NavigationView {
             ZStack {
-                Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
+                Color("background").ignoresSafeArea()
                 VStack {
-                    HStack(spacing: 2) {
-                        Text("Fique ligado")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(Tokens.FontStyle.title.font(design: .rounded))
-                        
-                        Text(userName)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .font(Tokens.FontStyle.title.font(weigth: .bold, design: .rounded))
-                            
+                    if dynamicTypeCategory > .accessibilityLarge {
+                        ScrollView(showsIndicators: true) {
+                           ProfileBodyTextView()
+                        }
                     }
-                    .padding(.top, Tokens.Spacing.nano.value)
-                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    .padding(.bottom, Tokens.Spacing.quarck.value)
-                    
-                    Text("Novas funcionalidades")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .font(Tokens.FontStyle.title3.font())
-                        .padding(.horizontal ,Tokens.Spacing.defaultMargin.value)
+                    else {
+                        ProfileBodyTextView()
+                    }
             
                     LottieView(fileName: "tonto2", reverse: false, loop: true, ended: $ended)
                     
                 }
-                .padding(.horizontal ,Tokens.Spacing.defaultMargin.value)
-                .navigationTitle("Profile")
+                .padding(.horizontal ,Tokens.Spacing.nano.value)
+                .navigationTitle("Perfil")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Image(systemName: "gearshape")

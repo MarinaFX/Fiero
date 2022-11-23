@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmptyChallengesView: View {
+    @Environment(\.sizeCategory) var sizeCategory
     @ObservedObject var target = RefreshControlTarget()
 
     @State private var isShowingEnterWithCodeView: Bool = false
@@ -15,40 +16,79 @@ struct EmptyChallengesView: View {
     @State var isPresented: Bool = false
 
     var body: some View {
-
-        VStack {
-            Spacer()
-            Spacer()
-            
-            LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 150)
-            
-            Text("Tá tão vazio por aqui,\nbora vencer uns desafios?")
-                .multilineTextAlignment(.center)
-                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
-            Spacer()
-            VStack  {
-                ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
-                    self.isPresented.toggle()
-                })
-                
-                .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                
-                ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
-                    self.isShowingEnterWithCodeView = true
+        if self.sizeCategory.isAccessibilityCategory {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    Spacer()
+                    Spacer()
+                    
+                    LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 150)
+                    
+                    Text("Tá tão vazio por aqui,\nbora vencer uns desafios?")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                        .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                    Spacer()
+                    VStack  {
+                        ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                            self.isPresented.toggle()
+                        })
+                        
+                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                        
+                        ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
+                            self.isShowingEnterWithCodeView = true
+                        }
+                        .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                            EnterWithCodeView()
+                        })
+                    }
+                    Spacer()
+                    
                 }
-                .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
-                    EnterWithCodeView()
-                })
+                .navigationTitle("Meus desafios")
+                .environment(\.colorScheme, .dark)
+                .makeDarkModeFullScreen()
+                .fullScreenCover(isPresented: $isPresented) {
+                    QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
+                }
             }
-            Spacer()
-            
         }
-        .navigationTitle("Meus desafios")
-        .environment(\.colorScheme, .dark)
-        .makeDarkModeFullScreen()
-        .fullScreenCover(isPresented: $isPresented) {
-            QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
+        else {
+            VStack {
+                Spacer()
+                Spacer()
+                
+                LottieView(fileName: "sad", reverse: false, loop: true, ended: $ended).frame(width: 300 , height: 150)
+                
+                Text("Tá tão vazio por aqui,\nbora vencer uns desafios?")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
+                Spacer()
+                VStack  {
+                    ButtonComponent(style: .primary(isEnabled: true), text: "Criar um desafio!", action: {
+                        self.isPresented.toggle()
+                    })
+                    
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                    
+                    ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
+                        self.isShowingEnterWithCodeView = true
+                    }
+                    .sheet(isPresented: self.$isShowingEnterWithCodeView, content: {
+                        EnterWithCodeView()
+                    })
+                }
+                Spacer()
+                
+            }
+            .navigationTitle("Meus desafios")
+            .environment(\.colorScheme, .dark)
+            .makeDarkModeFullScreen()
+            .fullScreenCover(isPresented: $isPresented) {
+                QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
+            }
         }
     }
 }
