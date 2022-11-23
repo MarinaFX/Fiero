@@ -166,6 +166,7 @@ We can't get your challenges now, try again";
     "Objetivo" = "Goal";
     "%lld pontos" = "%lld points";
     "points" = "points";
+    "steps" = "steps";
     "Participantes" = "Participants";
     "Continuar desafio" = "Continue challenge";
     "Começar desafio!" = "Start challenge!";

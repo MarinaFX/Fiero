@@ -1110,7 +1110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				62A9849B28D210C200AE77B5 /* success-loop.json in Resources */,
-				1B7F15F8292D4E840065F9BC /* steps.json in Resources */,
 				DF7226F728C13EE400237621 /* quantity2.json in Resources */,
 				62A9849F28D2216700AE77B5 /* tonto2.json in Resources */,
 				DF73C75D28BF9C760079DBB0 /* loading.json in Resources */,
@@ -1468,7 +1467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1505,7 +1504,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

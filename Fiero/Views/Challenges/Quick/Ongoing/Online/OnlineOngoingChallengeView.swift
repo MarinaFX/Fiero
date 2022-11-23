@@ -39,8 +39,14 @@ struct OnlineOngoingChallengeView: View {
                     .padding(.bottom, Tokens.Spacing.nano.value)
                     .padding(.top, UIScreen.main.bounds.height * 0.06)
                 
-                Text("\(quickChallenge.goal) pontos")
-                    .padding(.bottom, Tokens.Spacing.xs.value)
+                if quickChallenge.type == QCTypeEnum.volleyball.description {
+                    Text("\(quickChallenge.goal) steps")
+                        .padding(.bottom, Tokens.Spacing.xs.value)
+                }
+                else {
+                    Text("\(quickChallenge.goal) pontos")
+                        .padding(.bottom, Tokens.Spacing.xs.value)
+                }
                 
                 Text("playerLabel")
                     .font(Tokens.FontStyle.title2.font(weigth: .regular, design: .default))
