@@ -1448,14 +1448,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = 6525BU9D84;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read QRCode of challenge";
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1468,7 +1468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1485,14 +1485,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fiero/Preview Content\"";
-				DEVELOPMENT_TEAM = GYMDP69744;
+				DEVELOPMENT_TEAM = 6525BU9D84;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fiero/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to read QRCode of challenge";
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Fiero Would like to use HealthKit in order to use your health data in challenges.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1505,7 +1505,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
