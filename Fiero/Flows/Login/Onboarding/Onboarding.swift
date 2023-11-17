@@ -30,7 +30,7 @@ struct OnboardingScreen: View {
             Tokens.Colors.Background.dark.value.ignoresSafeArea()
             VStack() {
                 TabView(selection: $selectedItem) {
-                    ForEach(0 ..< pages.count) { index in
+                    ForEach(0 ..< pages.count, id: \.self) { index in
                         if dynamicType >= .accessibility1 {
                             ScrollView {
                                 OnboardingCard(image: pages[index].image,

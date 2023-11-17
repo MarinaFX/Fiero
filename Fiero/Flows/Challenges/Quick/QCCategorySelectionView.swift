@@ -48,7 +48,7 @@ struct QCCategorySelectionView: View {
         NavigationView{
                 VStack {
                     HStack(alignment: .center,spacing: cardSpacing) {
-                        ForEach(0 ..< items.count) { index in
+                        ForEach(0 ..< items.count, id: \.self) { index in
                             ChallengeCategoryCardView(style: items[index].style, isPlaying: .constant(isFocused(index: index)), title: items[index].title, subtitle: items[index].subtitle)
                                 .frame(width: isFocused(index: index) ? widthFocussedCard : widthUnfocussedCard,
                                        height: isFocused(index: index) ? heightFocussedCard : heightUnfocussedCard)
