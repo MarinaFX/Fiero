@@ -139,7 +139,7 @@ class ScanViewController: UIViewController {
         DispatchQueue.main.async {
             if let bestResult = request.results?.first as? VNBarcodeObservation,
                 let payload = bestResult.payloadStringValue {
-                if bestResult.symbology == .QR {
+                if bestResult.symbology == .qr {
                     guard let data = payload.data(using: .utf8) else { return }
                     self.process(data)
                     guard let jsonString = String(data: data, encoding: .utf8) else { return }

@@ -16,7 +16,7 @@ struct LottieView: UIViewRepresentable {
     var reverse: Bool
     var loop: Bool
     var aspectFill: Bool = false
-    let animationView = AnimationView()
+    let animationView = LottieAnimationView()
     
     var secondAnimation: String?
     var loopSecond: Bool?

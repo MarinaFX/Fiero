@@ -15,11 +15,11 @@ enum FieroAPIEnum: CustomStringConvertible {
     var description: String {
         switch self {
             case .BASE_URL:
-                return "ec2-18-231-120-184.sa-east-1.compute.amazonaws.com"
+                return "10.41.40.18" //ec2-18-231-120-184.sa-east-1.compute.amazonaws.com
             case .localhost:
                 return "localhost"
             case .localIP:
-                return "10.41.48.196"
+                return "10.41.40.18"
         }
     }
 }
