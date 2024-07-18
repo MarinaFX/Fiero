@@ -595,10 +595,11 @@
 		1B9092A52878AD580039EBB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B92823C2B082AD8006D2D7E /* API Responses */,
-				1B9092A62878AD740039EBB7 /* User.swift */,
+				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
 				1B8CD34828889F1000D2F703 /* Team.swift */,
 				1B6020C728A1940200AEF47B /* Member.swift */,
+				1B9092A62878AD740039EBB7 /* User.swift */,
+				1B92823C2B082AD8006D2D7E /* API Responses */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -660,7 +661,6 @@
 			isa = PBXGroup;
 			children = (
 				1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */,
-				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
 				1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */,
 			);
 			name = "API Responses";

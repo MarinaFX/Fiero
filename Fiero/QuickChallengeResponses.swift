@@ -7,29 +7,14 @@
 
 import Foundation
 
-struct QuickChallengeGETResponse: Decodable {
-    
-    var quickChallenges: [QuickChallenge]
+struct APIPluralResponse<T>: Codable where T: Codable {
+    var data: [T]
+    var timestamp: String
 }
 
-struct QuickChallengePOSTResponse: Codable {
-    
-    var quickChallenge: [QuickChallenge]
-}
-
-struct QuickChallengeDELETEResponse: Decodable {
-    
+struct APISingleResponse<T>: Codable where T: Codable {
+    var data: T?
     var message: String?
-}
-
-struct QuickChallengePATCHResponse: Codable {
-    
-    var quickChallenge: QuickChallenge
-    
-}
-
-struct QuickChallengePATCHScoreResponse: Codable {
-    
-    var member: Member
-
+    var member: Member?
+    var timestamp: String
 }
