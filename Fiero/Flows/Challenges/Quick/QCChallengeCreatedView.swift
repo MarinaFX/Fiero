@@ -18,7 +18,6 @@ struct QCChallengeCreatedView: View {
     //MARK: - Variables Setup
     @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
-    @State var didPushToHomeScreen: Bool = false
     @State var isPresentingChallenge: Bool = false
     @State var isPresentingAlert: Bool = false
     @State var subscriptions: Set<AnyCancellable> = []
@@ -97,9 +96,6 @@ struct QCChallengeCreatedView: View {
                 OngoingWithPause(quickChallenge: self.$quickChallenge, isShowingAlertOnDetailsScreen: self.$isPresentingAlert)
             }
             .hidden()
-        }
-        .onTapGesture {
-            RootViewController.popToRootViewController()
         }
         .alert(isPresented: self.$isPresentingAlert, content: {
             return Alert(title: Text(DetailsAlertCases.failureStartChallenge.title),

@@ -21,7 +21,7 @@ struct HomeView: View {
     @State var isShowingExitErrorAlert: Bool = false
 
     @State var subscriptions: Set<AnyCancellable> = []
-    
+        
     private var quickChallenges: Binding<[QuickChallenge]> {
         Binding(get: {
             return self.quickChallengeViewModel.sortedList
@@ -61,7 +61,7 @@ struct HomeView: View {
                             isShowingExitErrorAlert: self.$isShowingExitErrorAlert)
                     }
                     else {
-                        EmptyChallengesView()
+                        EmptyChallengesView(isPresented: $isPresentingQuickChallengeCreation)
                     }
                 }
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {

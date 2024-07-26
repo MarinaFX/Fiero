@@ -87,7 +87,6 @@ struct ChallengeDetailsView: View {
                                         text: self.quickChallenge.alreadyBegin ?
                                         "Continuar desafio" : "Começar desafio!") {
                             self.isPresentingLoading.toggle()
-                            print(quickChallenge.teams.count)
                             self.quickChallengeViewModel.beginChallenge(challengeId: self.quickChallenge.id, alreadyBegin: true)
                                 .sink(receiveCompletion: { completion in
                                     switch completion {

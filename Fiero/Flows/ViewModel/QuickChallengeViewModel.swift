@@ -64,7 +64,7 @@ class QuickChallengeViewModel: ObservableObject {
 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePOSTResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -83,8 +83,8 @@ class QuickChallengeViewModel: ObservableObject {
                     return
                 }
                 
-                self?.newlyCreatedChallenge = response.quickChallenge[0]
-                self?.challengesList.append(contentsOf: response.quickChallenge)
+                self?.newlyCreatedChallenge = response.data!
+                self?.challengesList.append(response.data!)
                 print("Successfully created challenge: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
@@ -106,7 +106,7 @@ class QuickChallengeViewModel: ObservableObject {
                                              authToken: $0)
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengeGETResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APIPluralResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -128,7 +128,7 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     return
                 }
-                self?.challengesList = response.quickChallenges
+                self?.challengesList = response.data
                 print("Successfully fetched challenges: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
@@ -148,11 +148,11 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> QuickChallenge in
-                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                if let quickChallenge = rawURLResponse.item?.data {
                     return quickChallenge
                 }
                 else {
@@ -198,7 +198,7 @@ class QuickChallengeViewModel: ObservableObject {
                                                 authToken: authToken)
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -242,11 +242,11 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> QuickChallenge in
-                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                if let quickChallenge = rawURLResponse.item?.data {
                     return quickChallenge
                 }
                 else {
@@ -303,11 +303,11 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> QuickChallenge in
-                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                if let quickChallenge = rawURLResponse.item?.data {
                     return quickChallenge
                 }
                 else {
@@ -365,7 +365,7 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -388,7 +388,7 @@ class QuickChallengeViewModel: ObservableObject {
                 if var challengesList = self?.challengesList {
                     for i in 0...challengesList.count-1 {
                         if(challengesList[i].id == challengeId) {
-                            challengesList[i] = response.quickChallenge
+                            challengesList[i] = response.data!
                         }
                     }
                     self?.challengesList = challengesList
@@ -429,11 +429,11 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHScoreResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<Member>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> Member in
-                if let member = rawURLResponse.item?.member {
+                if let member = rawURLResponse.item?.data {
                     return member
                 }
                 else {
@@ -479,7 +479,7 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengeDELETEResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<String>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -544,11 +544,11 @@ class QuickChallengeViewModel: ObservableObject {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: QuickChallengePATCHResponse.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> QuickChallenge in
-                if let quickChallenge = rawURLResponse.item?.quickChallenge {
+                if let quickChallenge = rawURLResponse.item?.data {
                     return quickChallenge
                 }
                 else {
