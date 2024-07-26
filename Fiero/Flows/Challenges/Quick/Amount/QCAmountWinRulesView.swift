@@ -64,177 +64,91 @@ struct QCAmountWinRulesView: View {
     
     var body: some View {
         ZStack{
-            Tokens.Colors.Background.dark.value.ignoresSafeArea()
-            if self.sizeCategory.isAccessibilityCategory {
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        CustomProgressBar(currentPage: .fourth)
-                            .padding()
-                        
-                        Text("Defina os pontos necessários para a vitória")
-                            .font(Tokens.FontStyle.title.font(weigth: .semibold, design: .default))
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, Tokens.Spacing.xxxs.value)
-                            .padding(.bottom, Tokens.Spacing.quarck.value)
-                            .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                        
-                        Spacer()
-                        
-                        CreationFlowTextViewComponent(text: self.$goal, style: .points)
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
-                        
-                        Spacer()
-                        
-                        ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
-                            if let goal = Int(self.goal) {
-                                if goal > 0 {
-                                    self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, online: isOnline, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
-                                        .sink(receiveCompletion: { completion in
-                                            switch completion {
-                                                case .failure:
-                                                    self.errorState = .failedToCreateChallenge
-                                                    self.isPresentingAlert.toggle()
-                                                case .finished:
-                                                    print("Request completed successfully")
-                                            }
-                                        }, receiveValue: { _ in })
-                                        .store(in: &subscriptions)
-                                } else {
-                                    self.errorState = .negativeAmount
-                                    self.isPresentingAlert.toggle()
-                                }
-                            }
-                            else {
-                                self.errorState = .invalidInput
-                                self.isPresentingAlert.toggle()
-                            }
-                        })
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, Tokens.Spacing.xxxs.value)
-                        .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                        
-                        Button(action: {
-                            self.dismiss()
-                        }, label: {
-                            Text("Voltar")
-                                .bold()
-                                .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        })
-                        .padding(.bottom)
-                        .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                        
-                        NavigationLink("", isActive: self.$pushNextView) {
-                            QCChallengeCreatedView(quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
-                        }
-                    }
-                    .alert(self.errorState?.description ?? "" , isPresented: self.$isPresentingAlert, presenting: self.errorState, actions: { error in
-                        Button(role: .cancel, action: {
-                            self.isPresentingAlert = false
-                        }, label: {
-                            Text("OK")
-                        })
-                    }, message: { error in
-                        switch error {
-                            case .failedToCreateChallenge:
-                                Text("Não conseguimos criar o seu desafio, tente mais tarde.")
-                            case .negativeAmount:
-                                Text("Você precisa informar um número maior que 0")
-                            case .invalidInput:
-                                Text("Você precisa informar o número de pontos para a vitória")
-                        }
-                    })
-                    .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
-                        self.quickChallenge = quickChallenge
-                        self.pushNextView.toggle()
-                    })
-                    .navigationBarHidden(true)
+            VStack {
+                CustomProgressBar(currentPage: .fourth)
+                    .padding()
+                
+                Text("Defina os pontos necessários para a vitória")
+                    .font(Tokens.FontStyle.title.font(weigth: .semibold, design: .default))
+                    .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, Tokens.Spacing.xxxs.value)
+                    .padding(.bottom, Tokens.Spacing.quarck.value)
+                    .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
+                
+                Spacer()
+                
+                CreationFlowTextViewComponent(text: self.$goal, style: .points) {
+                    self.pushNextView.toggle()
                 }
-            }
-            else {
-                VStack {
-                    CustomProgressBar(currentPage: .fourth)
-                        .padding()
-                    
-                    Text("Defina os pontos necessários para a vitória")
-                        .font(Tokens.FontStyle.title.font(weigth: .semibold, design: .default))
-                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, Tokens.Spacing.xxxs.value)
-                        .padding(.bottom, Tokens.Spacing.quarck.value)
-                        .padding(.horizontal, Tokens.Spacing.defaultMargin.value)
-                    
-                    Spacer()
-                    
-                    CreationFlowTextViewComponent(text: self.$goal, style: .points)
-                    
-                    Spacer()
-                    
-                    ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
-                        if let goal = Int(self.goal) {
-                            if goal > 0 {
-                                self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, online: isOnline, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
-                                    .sink(receiveCompletion: { completion in
-                                        switch completion {
-                                            case .failure:
-                                                self.errorState = .failedToCreateChallenge
-                                                self.isPresentingAlert.toggle()
-                                            case .finished:
-                                                print("Request completed successfully")
-                                        }
-                                    }, receiveValue: { _ in })
-                                    .store(in: &subscriptions)
-                            } else {
-                                self.errorState = .negativeAmount
-                                self.isPresentingAlert.toggle()
-                            }
-                        }
-                        else {
-                            self.errorState = .invalidInput
+                .disabled(self.pushNextView)
+                .padding(.top, Tokens.Spacing.xs.value)
+                
+                Spacer()
+                
+                ButtonComponent(style: .secondary(isEnabled: true), text: "Criar desafio", action: {
+                    if let goal = Int(self.goal) {
+                        if goal > 0 {
+                            self.quickChallengeViewModel.createQuickChallenge(name: self.challengeName, challengeType: self.challengeType, goal: goal, goalMeasure: self.goalMeasure, online: isOnline, numberOfTeams: self.challengeParticipants, maxTeams: self.challengeParticipants)
+                                .sink(receiveCompletion: { completion in
+                                    switch completion {
+                                        case .failure:
+                                            self.errorState = .failedToCreateChallenge
+                                            self.isPresentingAlert.toggle()
+                                        case .finished:
+                                            print("Request completed successfully")
+                                    }
+                                }, receiveValue: { _ in })
+                                .store(in: &subscriptions)
+                        } else {
+                            self.errorState = .negativeAmount
                             self.isPresentingAlert.toggle()
                         }
-                    })
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, Tokens.Spacing.xxxs.value)
-                    .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                    
-                    Button(action: {
-                        self.dismiss()
-                    }, label: {
-                        Text("Voltar")
-                            .bold()
-                            .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
-                    })
-                    .padding(.bottom)
-                    .padding(.horizontal, Tokens.Spacing.xxxs.value)
-                    
-                    NavigationLink("", isActive: self.$pushNextView) {
-                        QCChallengeCreatedView(quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
                     }
+                    else {
+                        self.errorState = .invalidInput
+                        self.isPresentingAlert.toggle()
+                    }
+                })
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, Tokens.Spacing.xxxs.value)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+                Button(action: {
+                    self.dismiss()
+                }, label: {
+                    Text("Voltar")
+                        .bold()
+                        .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
+                })
+                .padding(.bottom)
+                .padding(.horizontal, Tokens.Spacing.xxxs.value)
+                
+                NavigationLink("", isActive: self.$pushNextView) {
+                    QCChallengeCreatedView(quickChallenge: self.$quickChallenge, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants, goal: Int(self.goal) ?? 999)
                 }
-                .alert(self.errorState?.description ?? "" , isPresented: self.$isPresentingAlert, presenting: self.errorState, actions: { error in
-                    Button(role: .cancel, action: {
-                        self.isPresentingAlert = false
-                    }, label: {
-                        Text("OK")
-                    })
-                }, message: { error in
-                    switch error {
-                        case .failedToCreateChallenge:
-                            Text("Não conseguimos criar o seu desafio, tente mais tarde.")
-                        case .negativeAmount:
-                            Text("Você precisa informar um número maior que 0")
-                        case .invalidInput:
-                            Text("Você precisa informar o número de pontos para a vitória")
-                    }
-                })
-                .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
-                    self.quickChallenge = quickChallenge
-                    self.pushNextView.toggle()
-                })
-                .navigationBarHidden(true)
             }
+            .alert(self.errorState?.description ?? "" , isPresented: self.$isPresentingAlert, presenting: self.errorState, actions: { error in
+                Button(role: .cancel, action: {
+                    self.isPresentingAlert = false
+                }, label: {
+                    Text("OK")
+                })
+            }, message: { error in
+                switch error {
+                    case .failedToCreateChallenge:
+                        Text("Não conseguimos criar o seu desafio, tente mais tarde.")
+                    case .negativeAmount:
+                        Text("Você precisa informar um número maior que 0")
+                    case .invalidInput:
+                        Text("Você precisa informar o número de pontos para a vitória")
+                }
+            })
+            .onChange(of: self.quickChallengeViewModel.newlyCreatedChallenge, perform: { quickChallenge in
+                self.quickChallenge = quickChallenge
+                self.pushNextView.toggle()
+            })
+            .navigationBarHidden(true)
         }
     }
 }

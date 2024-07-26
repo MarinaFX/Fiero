@@ -64,9 +64,7 @@ class QuickChallengeViewModel: ObservableObject {
 
                 return self.client.perform(for: request)
             })
-            .print()
             .decodeHTTPResponse(type: APISingleResponse<QuickChallenge>.self, decoder: JSONDecoder())
-            .print()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()
@@ -435,7 +433,7 @@ class QuickChallengeViewModel: ObservableObject {
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .tryMap({ rawURLResponse -> Member in
-                if let member = rawURLResponse.item?.member {
+                if let member = rawURLResponse.item?.data {
                     return member
                 }
                 else {

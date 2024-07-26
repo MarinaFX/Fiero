@@ -15,6 +15,5 @@ struct APIPluralResponse<T>: Codable where T: Codable {
 struct APISingleResponse<T>: Codable where T: Codable {
     var data: T?
     var message: String?
-    var member: Member?
     var timestamp: String
 }
