@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import UXCamSwiftUI
-import UXCam
 
 struct ContentView: View {
     @EnvironmentObject var sceneDelegate: SceneDelegate
@@ -20,9 +18,6 @@ struct ContentView: View {
     @State private var isFirstLogin: Bool
 
     init() {
-        UXCam.optIntoSchematicRecordings()
-        let config = UXCamSwiftUI.Configuration(appKey: "7jcm86kt1or6528")
-        UXCamSwiftUI.start(with: config)
         if UserDefaults.standard.string(forKey: UDKeysEnum.isFirstOpen.description) ?? "" == "alreadyOpen" {
             isFirstLogin = false
         } else {
