@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Member: Decodable, Encodable, Equatable, Identifiable {
+struct Member: Codable, Equatable, Identifiable {
     
     var id: String
     var score: Double
