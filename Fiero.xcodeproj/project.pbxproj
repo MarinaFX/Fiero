@@ -18,10 +18,7 @@
 		1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */; };
 		1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */; };
 		1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */; };
-		1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */; };
-		1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
-		1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */; };
 		1B28CE3329285259007D8130 /* RemovePlayerAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */; };
 		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
 		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
@@ -187,10 +184,7 @@
 		1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCAmountWinRulesView.swift; sourceTree = "<group>"; };
 		1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCChallengeCreatedView.swift; sourceTree = "<group>"; };
 		1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeMetricSelectionCardView.swift; sourceTree = "<group>"; };
-		1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChallengeWinRulesView.swift; sourceTree = "<group>"; };
-		1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerSelectionView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
-		1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestOfChallengeWinRulesView.swift; sourceTree = "<group>"; };
 		1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePlayerAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
 		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
@@ -250,7 +244,7 @@
 		1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenService.swift; sourceTree = "<group>"; };
 		1BC4CFDA28EF5A9E0039A230 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
@@ -358,19 +352,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B0A027F2885DBE400C4A421 /* Challenges */ = {
-			isa = PBXGroup;
-			children = (
-				DF06F8D029114C6A00A170C2 /* QRCode */,
-				1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */,
-				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
-				CCE03FEC290318280038737A /* EnterWithCodeView.swift */,
-				1B0A02802885DBE900C4A421 /* Quick */,
-				1BC68C56289806850055135D /* WIP */,
-			);
-			path = Challenges;
-			sourceTree = "<group>";
-		};
 		1B0A02802885DBE900C4A421 /* Quick */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,23 +393,6 @@
 			path = Amount;
 			sourceTree = "<group>";
 		};
-		1B0A029E2887AC4A00C4A421 /* Time */ = {
-			isa = PBXGroup;
-			children = (
-				1B0A02A22887B6BF00C4A421 /* TimeChallengeWinRulesView.swift */,
-				1B0A02A42887C8CD00C4A421 /* TimePickerSelectionView.swift */,
-			);
-			path = Time;
-			sourceTree = "<group>";
-		};
-		1B0A029F2887ACD400C4A421 /* BestOf */ = {
-			isa = PBXGroup;
-			children = (
-				1B0A02AA2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift */,
-			);
-			path = BestOf;
-			sourceTree = "<group>";
-		};
 		1B0A02A62887CAAF00C4A421 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,21 +404,11 @@
 		1B3ED07528809D8100E1538B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				1B56226328E3817400C505DC /* FieroAPI.swift */,
-				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
-				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
-				1B8CD34628887ADE00D2F703 /* QCTypeEnum.swift */,
-				1B46849628C786BF0041BFED /* UDKeysEnum.swift */,
-				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
-				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
-				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
-				1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */,
-				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
-				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
-				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
-				1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */,
-				1B7F15FD292D603E0065F9BC /* HealthDataError.swift */,
-				1B7F15FF292D60760065F9BC /* HealthStore+Extensions.swift */,
+				1B9282402B083049006D2D7E /* API */,
+				1B9282432B083081006D2D7E /* User Defaults */,
+				1B9282422B083071006D2D7E /* Challenges */,
+				1B9282412B08305E006D2D7E /* HealthKit */,
+				1B92823F2B082EFF006D2D7E /* UI Alerts */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -462,9 +416,6 @@
 		1B4135AC28597E8900C7094A = {
 			isa = PBXGroup;
 			children = (
-				62B2943C28D4EF5100E69F69 /* Localizable.strings */,
-				DFD4FED028B9113000169C20 /* tonto.gif */,
-				DFD4FED228B92DD700169C20 /* quantity.gif */,
 				1B4135B728597E8900C7094A /* Fiero */,
 				1B4135C828597E8F00C7094A /* FieroTests */,
 				1B4135D228597E8F00C7094A /* FieroUITests */,
@@ -485,19 +436,15 @@
 		1B4135B728597E8900C7094A /* Fiero */ = {
 			isa = PBXGroup;
 			children = (
-				1B7F1603292D81470065F9BC /* Fiero.entitlements */,
-				484F33E428F0A129005A8563 /* Players */,
-				DF96CC6A28C7CAA300D17B37 /* Fonts */,
-				1BC68C55288F32130055135D /* Info.plist */,
 				1B90929F2878ACE50039EBB7 /* App */,
-				1B8FB399286F6E7600B9F868 /* Views */,
-				1B9092A02878ACF10039EBB7 /* ViewModel */,
+				1B92823D2B082AFC006D2D7E /* Service */,
+				1B9282392B082A16006D2D7E /* Flows */,
+				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
+				1B9282382B08298A006D2D7E /* Support */,
 				1B9092A52878AD580039EBB7 /* Model */,
-				1B90929E2878ACDA0039EBB7 /* Assets */,
-				1B5B7CDB2874BF4F00B4628F /* Extensions */,
 				1B4135BE28597E8F00C7094A /* Preview Content */,
-				DF73C75928BF97F80079DBB0 /* LottieView.swift */,
-				DF73C75B28BF9B4A0079DBB0 /* Lottie */,
+				1BC68C55288F32130055135D /* Info.plist */,
+				1B7F1603292D81470065F9BC /* Fiero.entitlements */,
 			);
 			path = Fiero;
 			sourceTree = "<group>";
@@ -532,7 +479,7 @@
 		1B5B7CDB2874BF4F00B4628F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1B3ED07528809D8100E1538B /* Enums */,
+				1B7F15FF292D60760065F9BC /* HealthStore+Extensions.swift */,
 				1B5B7CDC2874BF6A00B4628F /* View+Extensions.swift */,
 				1B3ED06D287F39DF00E1538B /* URLSession+Extensions.swift */,
 				1B3ED07C2881E1A100E1538B /* Publisher+Extensions.swift */,
@@ -582,27 +529,6 @@
 			path = Challenges;
 			sourceTree = "<group>";
 		};
-		1B68C75028F48FB20098BAA4 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
-		1B8FB399286F6E7600B9F868 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1B4135BA28597E8900C7094A /* ContentView.swift */,
-				DF7DCDB428AEC17B00B387BA /* TabBar.swift */,
-				1B0A027F2885DBE400C4A421 /* Challenges */,
-				1B5B7CE8287782ED00B4628F /* Login */,
-				DF91AD1928AFA81E00854686 /* Profile */,
-				1B8FB39E286F6EF300B9F868 /* DesignSystem */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		1B8FB39B286F6E8700B9F868 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,20 +555,23 @@
 			isa = PBXGroup;
 			children = (
 				1B8FB39C286F6EEF00B9F868 /* Tokens.swift */,
+				DF96CC6A28C7CAA300D17B37 /* Fonts */,
 				1B8FB39B286F6E8700B9F868 /* Components */,
 				1B5B7CE228761F2B00B4628F /* Enums */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		1B90929E2878ACDA0039EBB7 /* Assets */ = {
+		1B90929E2878ACDA0039EBB7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1B92823E2B082BAE006D2D7E /* GIFs */,
+				DF73C75B28BF9B4A0079DBB0 /* Lottie */,
+				DF73C75928BF97F80079DBB0 /* LottieView.swift */,
 				DF49516828B902650046A2CD /* GIfImage.swift */,
-				DF94518428C2851F00744BAC /* success.gif */,
 				1B4135BC28597E8F00C7094A /* Assets.xcassets */,
 			);
-			path = Assets;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1B90929F2878ACE50039EBB7 /* App */ = {
@@ -666,17 +595,144 @@
 		1B9092A52878AD580039EBB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B68C75028F48FB20098BAA4 /* Protocols */,
-				1B9092A62878AD740039EBB7 /* User.swift */,
-				1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */,
 				1B8CD3422887F8CF00D2F703 /* QuickChallenge.swift */,
-				1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */,
 				1B8CD34828889F1000D2F703 /* Team.swift */,
 				1B6020C728A1940200AEF47B /* Member.swift */,
-				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
-				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
+				1B9092A62878AD740039EBB7 /* User.swift */,
+				1B92823C2B082AD8006D2D7E /* API Responses */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		1B9282352B08294E006D2D7E /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				62B2943C28D4EF5100E69F69 /* Localizable.strings */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
+		1B9282382B08298A006D2D7E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED07528809D8100E1538B /* Enums */,
+				1B5B7CDB2874BF4F00B4628F /* Extensions */,
+				484F33E428F0A129005A8563 /* Players */,
+				1B90929E2878ACDA0039EBB7 /* Resources */,
+				1B9282352B08294E006D2D7E /* Localizations */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		1B9282392B082A16006D2D7E /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				1B92823B2B082AAA006D2D7E /* Main */,
+				1B5B7CE8287782ED00B4628F /* Login */,
+				1B92823A2B082A22006D2D7E /* Challenges */,
+				DF91AD1928AFA81E00854686 /* Profile */,
+				DF06F8D029114C6A00A170C2 /* QRCode */,
+				1B9092A02878ACF10039EBB7 /* ViewModel */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		1B92823A2B082A22006D2D7E /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				1B6020CD28A1B20B00AEF47B /* ChallengesListScreenView.swift */,
+				1B8CD353288A7FF400D2F703 /* EmptyChallengesView.swift */,
+				CCE03FEC290318280038737A /* EnterWithCodeView.swift */,
+				1B0A02802885DBE900C4A421 /* Quick */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		1B92823B2B082AAA006D2D7E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1B4135BA28597E8900C7094A /* ContentView.swift */,
+				DF7DCDB428AEC17B00B387BA /* TabBar.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1B92823C2B082AD8006D2D7E /* API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				1B9092A82878DB7C0039EBB7 /* UserLoginResponse.swift */,
+				1B8CD3442887FA8800D2F703 /* QuickChallengeResponses.swift */,
+			);
+			name = "API Responses";
+			sourceTree = "<group>";
+		};
+		1B92823D2B082AFC006D2D7E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
+				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
+				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1B92823E2B082BAE006D2D7E /* GIFs */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4FED028B9113000169C20 /* tonto.gif */,
+				DFD4FED228B92DD700169C20 /* quantity.gif */,
+				DF94518428C2851F00744BAC /* success.gif */,
+			);
+			path = GIFs;
+			sourceTree = "<group>";
+		};
+		1B92823F2B082EFF006D2D7E /* UI Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				1B68C74E28F48F850098BAA4 /* ActiveAlertEnum.swift */,
+				1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */,
+				1B3271C42914392A003935BB /* ExitChallengeAlertCasesEnum.swift */,
+				1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */,
+				1B3A1E97291039590026A992 /* GetChallengeAlertCasesEnum.swift */,
+				1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */,
+				1B68C74C28F48F660098BAA4 /* RecoveryAccountErrorCases.swift */,
+			);
+			path = "UI Alerts";
+			sourceTree = "<group>";
+		};
+		1B9282402B083049006D2D7E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1B3271BE2910A484003935BB /* HTTPResponseError.swift */,
+				1B56226328E3817400C505DC /* FieroAPI.swift */,
+				1B3ED07A2881E16600E1538B /* HTTPResult.swift */,
+				1B3ED07628809DAF00E1538B /* ServerResponse.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1B9282412B08305E006D2D7E /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F15FD292D603E0065F9BC /* HealthDataError.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		1B9282422B083071006D2D7E /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				1B8CD34628887ADE00D2F703 /* QCTypeEnum.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		1B9282432B083081006D2D7E /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				1B46849628C786BF0041BFED /* UDKeysEnum.swift */,
+			);
+			path = "User Defaults";
 			sourceTree = "<group>";
 		};
 		1B9658202881EE3300B774CB /* Login+Registration */ = {
@@ -687,15 +743,6 @@
 				1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */,
 			);
 			path = "Login+Registration";
-			sourceTree = "<group>";
-		};
-		1BC68C56289806850055135D /* WIP */ = {
-			isa = PBXGroup;
-			children = (
-				1B0A029E2887AC4A00C4A421 /* Time */,
-				1B0A029F2887ACD400C4A421 /* BestOf */,
-			);
-			path = WIP;
 			sourceTree = "<group>";
 		};
 		1BF3DA762925571E00BAED81 /* Online */ = {
@@ -1201,7 +1248,6 @@
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
 				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
-				1B0A02A52887C8CD00C4A421 /* TimePickerSelectionView.swift in Sources */,
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
 				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
 				DF73C75A28BF97F80079DBB0 /* LottieView.swift in Sources */,
@@ -1234,7 +1280,6 @@
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
 				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
-				1B0A02A32887B6BF00C4A421 /* TimeChallengeWinRulesView.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
 				1B7F1600292D60760065F9BC /* HealthStore+Extensions.swift in Sources */,
 				CC4FEDED28A1925800E53C39 /* DuelScoreComponent.swift in Sources */,
@@ -1243,7 +1288,6 @@
 				1B9092A92878DB7C0039EBB7 /* UserLoginResponse.swift in Sources */,
 				1B5B7CE62877588000B4628F /* AccountLoginView.swift in Sources */,
 				1B9092A72878AD740039EBB7 /* User.swift in Sources */,
-				1B0A02AB2887D8E400C4A421 /* BestOfChallengeWinRulesView.swift in Sources */,
 				F8320F72290717D400FED9AF /* ParticipantsList.swift in Sources */,
 				1B8CD34928889F1000D2F703 /* Team.swift in Sources */,
 				1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */,
