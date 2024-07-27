@@ -8,7 +8,8 @@
 import Foundation
 
 struct APIPluralResponse<T>: Codable where T: Codable {
-    var data: [T]
+    var data: [T]?
+    var message: String?
     var timestamp: String
 }
 

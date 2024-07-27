@@ -128,7 +128,7 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     return
                 }
-                self?.challengesList = response.data
+                self?.challengesList = response.data!
                 print("Successfully fetched challenges: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
