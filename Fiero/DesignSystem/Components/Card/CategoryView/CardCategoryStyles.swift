@@ -99,14 +99,4 @@ enum CardCategoryStyles {
        
         }
     }
-    
-    var subtitleSpacing: CGFloat {
-        return Tokens.Spacing.xxxs.value
-    }
-    
-    var cardSpacing: CGFloat {
-        return Tokens.Spacing.xxxs.value
-    }
-    
-    
 }

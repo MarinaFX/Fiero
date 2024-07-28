@@ -29,7 +29,7 @@ struct TabBarView: View {
                 }
                 .tag(1)
             
-            QCCategorySelectionView()
+            ChallengeSelectionView()
                 .tabItem {
                     Label("Criar",
                           systemImage: "plus")
