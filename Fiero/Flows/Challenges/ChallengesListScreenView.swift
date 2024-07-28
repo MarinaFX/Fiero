@@ -65,7 +65,7 @@ struct HomeView: View {
                     }
                 }
                 .fullScreenCover(isPresented: $isPresentingQuickChallengeCreation) {
-                    QCCategorySelectionView(didComeFromEmptyOrHomeView: true)
+                    ChallengeSelectionView(didComeFromEmptyOrHomeView: true)
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
                 .onAppear(perform: {

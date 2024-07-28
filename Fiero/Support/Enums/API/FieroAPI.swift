@@ -15,7 +15,7 @@ enum FieroAPIEnum: CustomStringConvertible {
     var description: String {
         switch self {
             case .BASE_URL:
-                return "ec2-3-138-121-168.us-east-2.compute.amazonaws.com"
+                return "localhost"//"ec2-3-138-121-168.us-east-2.compute.amazonaws.com"
             case .localhost:
                 return "localhost"
             case .localIP:
