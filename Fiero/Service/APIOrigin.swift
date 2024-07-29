@@ -7,6 +7,17 @@
 
 import Foundation
 
+enum SaveOrigin {
+    case challenge
+    
+    var value: String {
+        switch self {
+            case .challenge:
+                return QuickChallengeEndpointEnum.CREATE_CHALLENGE.description
+        }
+    }
+}
+
 enum FetchOrigin {
     case challenges
     case challenge(String)

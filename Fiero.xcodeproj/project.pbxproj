@@ -81,6 +81,7 @@
 		1BEE709E2C555CFD00D559D6 /* HTTPRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */; };
 		1BEE70A02C555D3500D559D6 /* APIOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709F2C555D3500D559D6 /* APIOrigin.swift */; };
 		1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A12C555D6200D559D6 /* APIError.swift */; };
+		1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A72C580B3400D559D6 /* DecoderClient.swift */; };
 		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
 		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
@@ -254,6 +255,7 @@
 		1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestFactory.swift; sourceTree = "<group>"; };
 		1BEE709F2C555D3500D559D6 /* APIOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIOrigin.swift; sourceTree = "<group>"; };
 		1BEE70A12C555D6200D559D6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		1BEE70A72C580B3400D559D6 /* DecoderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderClient.swift; sourceTree = "<group>"; };
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 				1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */,
 				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
 				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
+				1BEE70A72C580B3400D559D6 /* DecoderClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -1282,6 +1285,7 @@
 				1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */,
 				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
 				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
+				1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */,
 				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				F8B88998292559C000870A34 /* ScoreList.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,

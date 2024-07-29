@@ -45,7 +45,7 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
             case .GET_CHALLENGE:
                 return "/quickChallenge/"
             case .DELETE_CHALLENGES:
-                return "/quickChallenge/"
+                return "/quickChallenge"
             case .EXIT_CHALLENGE:
                 return "/quickChallenge/exit"
             case .ENTER_CHALLENGE:
