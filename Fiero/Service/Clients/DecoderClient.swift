@@ -8,6 +8,6 @@
 import Foundation
 import Combine
 
-protocol DecoderClient: TopLevelDecoder { }
+protocol DecoderClient: TopLevelDecoder where Input == Data { }
 
 extension JSONDecoder: DecoderClient { }

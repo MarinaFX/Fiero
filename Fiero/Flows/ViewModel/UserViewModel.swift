@@ -137,9 +137,7 @@ class UserViewModel: ObservableObject {
                                       authToken: "")
         
         let operation = self.client.perform(for: request)
-            .print()
             .decodeHTTPResponse(type: UserLoginResponse.self, decoder: JSONDecoder())
-            .print()
             .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .receive(on: DispatchQueue.main)
             .share()

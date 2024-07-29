@@ -27,6 +27,10 @@ protocol CombineAPIService {
     
     func fetch<T>(_ type: T.Type, path: FetchOrigin) -> AnyPublisher<T, APIError> where T: Codable
     
+    func fetch<T>(_ type: [T].Type, path: FetchOrigin) -> AnyPublisher<[T], APIError> where T: Codable
+    
+    func save<T>(_ type: T.Type, path: SaveOrigin, body: String) -> AnyPublisher<T, APIError> where T: Codable
+    
 }
 
 struct CombineAPIServiceImpl: CombineAPIService {
@@ -99,7 +103,7 @@ extension CombineAPIServiceImpl {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: APIPluralResponse<T>.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APIPluralResponse<T>.self, decoder: self.decoder)
             .tryMap({ rawURLResponse in
                 guard let item = rawURLResponse.item else {
                     throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
@@ -124,7 +128,7 @@ extension CombineAPIServiceImpl {
                 
                 return self.client.perform(for: request)
             })
-            .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: JSONDecoder())
+            .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: self.decoder)
             .tryMap({ rawURLResponse in
                 guard let item = rawURLResponse.item else {
                     throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
@@ -151,13 +155,34 @@ class TestViewModel: ObservableObject {
     func testeSingleChallenge() {
         var service = CombineAPIServiceImpl()
         
-        service.fetch([QuickChallenge].self, path: .challenges)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { challenges in
-                print("funfou \(challenges)")
-                self.challenges = challenges
-            })
-            .store(in: &subscriptions)
+//        service.fetch([QuickChallenge].self, path: .challenges)
+//            .subscribe(on: DispatchQueue.global(qos: .background))
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: { _ in }, receiveValue: { challenges in
+//                print("funfou \(challenges)")
+//                self.challenges = challenges
+//            })
+//            .store(in: &subscriptions)
+        
+//        let body = """
+//        {
+//            "name" : "Melhor de 3 contra baianinho de maua",
+//            "type" : "amount",
+//            "goal" : 3,
+//            "goalMeasure" : "unity",
+//            "online" : true,
+//            "numberOfTeams" : 1,
+//            "maxTeams" : 9999
+//        }
+//        """
+//        
+//        service.save(QuickChallenge.self, path: .challenge, body: body)
+//            .subscribe(on: DispatchQueue.global(qos: .background))
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: { _ in }, receiveValue: { quickChallenge in
+//                print("funfou \(quickChallenge)")
+//                self.challenge = quickChallenge
+//            })
+//            .store(in: &subscriptions)
     }
 }
