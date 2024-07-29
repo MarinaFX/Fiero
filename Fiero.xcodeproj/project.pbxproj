@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B04557C28DB8938008ABA88 /* quantity-list-cell.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B04557B28DB8937008ABA88 /* quantity-list-cell.json */; };
 		1B04557E28DCE835008ABA88 /* blockCategory.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B04557D28DCE835008ABA88 /* blockCategory.json */; };
-		1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */; };
-		1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */; };
+		1B0A02852885F03100C4A421 /* ChallengeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */; };
 		1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A028B28871BE700C4A421 /* QCNamingView.swift */; };
 		1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */; };
 		1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */; };
@@ -82,6 +81,7 @@
 		1BEE70A02C555D3500D559D6 /* APIOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709F2C555D3500D559D6 /* APIOrigin.swift */; };
 		1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A12C555D6200D559D6 /* APIError.swift */; };
 		1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A72C580B3400D559D6 /* DecoderClient.swift */; };
+		1BEE70A62C5614B300D559D6 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A52C5614B300D559D6 /* CarouselView.swift */; };
 		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
 		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
@@ -179,8 +179,7 @@
 /* Begin PBXFileReference section */
 		1B04557B28DB8937008ABA88 /* quantity-list-cell.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quantity-list-cell.json"; sourceTree = "<group>"; };
 		1B04557D28DCE835008ABA88 /* blockCategory.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockCategory.json; sourceTree = "<group>"; };
-		1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCategoryCardView.swift; sourceTree = "<group>"; };
-		1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCCategorySelectionView.swift; sourceTree = "<group>"; };
+		1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSelectionView.swift; sourceTree = "<group>"; };
 		1B0A028B28871BE700C4A421 /* QCNamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCNamingView.swift; sourceTree = "<group>"; };
 		1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentKeyboard.swift; sourceTree = "<group>"; };
 		1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCSelectParticipantsView.swift; sourceTree = "<group>"; };
@@ -256,6 +255,7 @@
 		1BEE709F2C555D3500D559D6 /* APIOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIOrigin.swift; sourceTree = "<group>"; };
 		1BEE70A12C555D6200D559D6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		1BEE70A72C580B3400D559D6 /* DecoderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderClient.swift; sourceTree = "<group>"; };
+		1BEE70A52C5614B300D559D6 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
@@ -366,8 +366,9 @@
 				CCE03FE5290072360038737A /* OnlineOrOfflineView */,
 				CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */,
 				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
+				1BEE70A52C5614B300D559D6 /* CarouselView.swift */,
 				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
-				1B0A02842885F03100C4A421 /* QCCategorySelectionView.swift */,
+				1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */,
 				1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */,
 				CCFA55A728888A6500740663 /* Details */,
 				CCA2215728A18E09006AA03F /* Ongoing */,
@@ -838,7 +839,6 @@
 			isa = PBXGroup;
 			children = (
 				CC5E0B3328D4A3F2001FE6FB /* CardCategoryStyles.swift */,
-				1B0A02812885DEA400C4A421 /* ChallengeCategoryCardView.swift */,
 			);
 			path = CategoryView;
 			sourceTree = "<group>";
@@ -1252,7 +1252,6 @@
 				CC0E281C292EB817001AD7AB /* ProfileBodyTextView.swift in Sources */,
 				F888EC032876010200445FED /* AlertComponent.swift in Sources */,
 				1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */,
-				1B0A02822885DEA400C4A421 /* ChallengeCategoryCardView.swift in Sources */,
 				1B9092982878A58B0039EBB7 /* CustomTextFieldView.swift in Sources */,
 				CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */,
 				CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */,
@@ -1283,12 +1282,13 @@
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
 				1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */,
-				1B0A02852885F03100C4A421 /* QCCategorySelectionView.swift in Sources */,
+				1B0A02852885F03100C4A421 /* ChallengeSelectionView.swift in Sources */,
 				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
 				1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */,
 				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				F8B88998292559C000870A34 /* ScoreList.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
+				1BEE70A62C5614B300D559D6 /* CarouselView.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
 				1B7F15FE292D603E0065F9BC /* HealthDataError.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */,
