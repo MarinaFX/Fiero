@@ -12,13 +12,11 @@ struct RoundedRectangleView: View {
     var item: CarouselContentItem
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 24)
-            .overlay(content: {
-                VStack {
-                    CarouselContentView(item: self.item)
-                }
-            })
-            .frame(width: UIScreen.main.bounds.width * 0.7, height: UIScreen.main.bounds.height * 0.5)
+        CarouselContentView(item: self.item)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 24)
+            }
             .foregroundStyle(Tokens.Colors.Neutral.Low.dark.value)
     }
 }
@@ -33,46 +31,58 @@ struct CarouselView: View {
     @Binding var walkingPresentNextScreen: Bool
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(self.items, id: \.self) { item in
-                    GeometryReader { proxy in
-                        let scale = self.getScale(proxy: proxy)
-                        
-                        RoundedRectangleView(item: item)
-                            .scaleEffect(.init(width: scale, height: scale))
-                            .animation(.spring(), value: 5)
-                            .padding(.vertical)
-                    }
-                    .onTapGesture(perform: {
-                        if item.challengeType != .round {
-                            SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
-                            item.challengeType == .amount ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    Spacer(minLength: 32)
+                    ForEach(self.items, id: \.self) { item in
+                        VStack {
+                            Spacer(minLength: 32)
+                            GeometryReader { geometry in
+                                let scale = self.getScale(proxy: geometry)
+                                RoundedRectangleView(item: item)
+                                    .scaleEffect(scale)
+                                    .animation(.spring(), value: scale)
+                                    .onTapGesture {
+                                        if item.challengeType != .round {
+                                            SoundPlayer.playSound(soundName: Sounds.metal, soundExtension: Sounds.metal.soundExtension, soundType: SoundTypes.action)
+                                            item.challengeType == .amount ? amountPresentNextScreen.toggle() : walkingPresentNextScreen.toggle()
+                                        }
+                                    }
+                                    .padding(.horizontal)
+                            }
+                            .frame(minWidth: 240, idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: .infinity, maxHeight: .infinity)
                         }
-                    })
-                    .frame(width: 240, height: UIScreen.main.bounds.height * 0.42)
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 128)
+                    }
+                    Spacer(minLength: 32)
                 }
+                .padding()
             }
-            .padding()
         }
     }
     
     private func getScale(proxy: GeometryProxy) -> CGFloat {
-        let midPoint: CGFloat = 115
+        let midPoint: CGFloat = 125
         
         let viewFrame = proxy.frame(in: CoordinateSpace.global)
         
         var scale: CGFloat = 1.0
         let deltaXAnimationThreshold: CGFloat = 125
         
-        let diffFromCenter = abs(midPoint - viewFrame.origin.x - deltaXAnimationThreshold / 2.3)
+        let diffFromCenter = abs(midPoint - viewFrame.origin.x - deltaXAnimationThreshold / 2)
         if diffFromCenter < deltaXAnimationThreshold {
-            scale = 1 + (deltaXAnimationThreshold - diffFromCenter) / 500
+            scale = 1 + (deltaXAnimationThreshold - diffFromCenter) / 600
         }
         
         return scale
+    }
+    
+    private func scaleForItem(geometry: GeometryProxy) -> CGFloat {
+        let midX = geometry.frame(in: .global).midX
+        let screenWidth = UIScreen.main.bounds.width
+        let scaleFactor = 1.0 // Adjust the scaling factor as needed
+        let distanceFromCenter = abs(screenWidth / 3 - midX)
+        return max(1 - distanceFromCenter / screenWidth * scaleFactor, 0.7) // Adjust the minimum scale as needed
     }
 }
 
@@ -94,13 +104,15 @@ struct CarouselContentView: View {
                 }
             }
             
-            Text(self.item.title)//"amountChallengeTypeTitle"
+            
+            Text(self.item.title)
+                .lineLimit(5)
                 .font(Tokens.FontStyle.title.font(weigth: .bold, design: .default))
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, Tokens.Spacing.nano.value)
             
-            Text(self.item.subtitle)//"amountChallengeTypeSubtitle"
+            Text(self.item.subtitle)
                 .font(Tokens.FontStyle.callout.font())
                 .foregroundColor(Tokens.Colors.Neutral.High.pure.value)
                 .multilineTextAlignment(.center)
@@ -116,7 +128,7 @@ struct CarouselContentView: View {
                 .cornerRadius(Tokens.Border.BorderRadius.normal.value)
                 .font(Tokens.FontStyle.callout.font(weigth: .bold, design: .default))
         }
-        .padding()
+        .aspectRatio(0.65, contentMode: .fit)
     }
 }
 

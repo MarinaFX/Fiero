@@ -40,6 +40,7 @@ struct ChallengeSelectionView: View {
                             QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
                         }
                     }
+                    
                 ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
                     isShowingEnterWithCodeView = true
                 }
@@ -54,6 +55,7 @@ struct ChallengeSelectionView: View {
                         RootViewController.dismissSheetFlow()
                     }
                 }
+                
             }
             .makeDarkModeFullScreen()
             .navigationTitle(LocalizedStringKey("homeScreenTitle"))

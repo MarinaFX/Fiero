@@ -33,7 +33,6 @@ extension View {
                   alignment: .top
                 )
             .background(color)
-            .ignoresSafeArea()
     }
 }
 
