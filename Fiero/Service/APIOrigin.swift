@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum UpdateOrigin {
+    case beginChallenge(String)
+    case endChallenge(String)
+    case updateScore
+    
+    var value: String {
+        switch self {
+            case .beginChallenge(let id):
+                return QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description + id + "/alreadyBegin"
+            case .updateScore:
+                return QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description
+            case .endChallenge(let id):
+                return QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description + id + "/finished"
+        }
+    }
+}
+
 enum SaveOrigin {
     case challenge
     

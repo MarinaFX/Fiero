@@ -47,7 +47,7 @@ struct CombineAPIServiceImpl: CombineAPIService {
     var requestClient: RequestClient
     
     var decoder: any Decoder
-    
+        
     init(client: any Client = URLSession.shared,
          storageClient: any StorageClient = UserDefaults.standard,
          authClient: any AuthClient = AuthTokenServiceImpl(),
@@ -80,18 +80,7 @@ extension CombineAPIServiceImpl {
                 return self.client.perform(for: request)
             })
             .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: self.decoder)
-            .tryMap({ rawURLResponse in
-                guard let item = rawURLResponse.item else {
-                    throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
-                }
-                
-                guard let data = item.data else {
-                    throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
-                }
-                
-                return data
-            })
-            .mapError({ _ in APIError(message: "Error while trying to map error -- ", timestamp: "\(Date.now)") })
+            .parseURLResponse()
             .eraseToAnyPublisher()
     }
     
@@ -129,18 +118,21 @@ extension CombineAPIServiceImpl {
                 return self.client.perform(for: request)
             })
             .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: self.decoder)
-            .tryMap({ rawURLResponse in
-                guard let item = rawURLResponse.item else {
-                    throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
-                }
+            .parseURLResponse()
+            .eraseToAnyPublisher()
+    }
+}
+
+extension CombineAPIServiceImpl {
+    func update<T>(_ type: T.Type = T.self, path: UpdateOrigin, body: String) -> AnyPublisher<T, APIError> where T: Codable {
+        return self.authClient.getAuthToken()
+            .flatMap({ authToken in
+                let request = self.requestClient.makeHTTPRequest(type: .PATCH, scheme: "http", port: 3333, host: FieroAPIEnum.BASE_URL.description, path: path.value, body: body, authToken: authToken)
                 
-                guard let data = item.data else {
-                    throw APIError(message: rawURLResponse.item?.message ?? "", timestamp: rawURLResponse.item?.timestamp ?? "")
-                }
-                
-                return data
+                return self.client.perform(for: request)
             })
-            .mapError({ _ in APIError(message: "", timestamp: "") })
+            .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: self.decoder)
+            .parseURLResponse()
             .eraseToAnyPublisher()
     }
 }
@@ -153,14 +145,21 @@ class TestViewModel: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     
     func testeSingleChallenge() {
-        var service = CombineAPIServiceImpl()
+        let service = CombineAPIServiceImpl()
         
-//        service.fetch([QuickChallenge].self, path: .challenges)
+//        service.fetch(QuickChallenge.self, path: .challenge("976b835e-e4c1-433b-bdc9-11a55431afab"))
 //            .subscribe(on: DispatchQueue.global(qos: .background))
 //            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: { _ in }, receiveValue: { challenges in
-//                print("funfou \(challenges)")
-//                self.challenges = challenges
+//            .sink(receiveCompletion: { completion in
+//                switch completion {
+//                    case .finished:
+//                        print("dale")
+//                    case .failure(let failure):
+//                        print(failure)
+//                }
+//            }, receiveValue: { challenge in
+//                print("funfou \(challenge)")
+//                self.challenge = challenge
 //            })
 //            .store(in: &subscriptions)
         
@@ -184,5 +183,27 @@ class TestViewModel: ObservableObject {
 //                self.challenge = quickChallenge
 //            })
 //            .store(in: &subscriptions)
+        
+        let body = """
+        {
+            "finished": true
+        }
+        """
+        
+        service.update(QuickChallenge.self, path: .endChallenge("7a3414cd-8e80-474a-8607-1438ef1ccc07"), body: body)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                    case .finished:
+                        print("dale")
+                    case .failure(let failure):
+                        print(failure)
+                }
+            }, receiveValue: { quickChallenge in
+                self.challenge = quickChallenge
+                print(self.challenge)
+            })
+            .store(in: &subscriptions)
     }
 }

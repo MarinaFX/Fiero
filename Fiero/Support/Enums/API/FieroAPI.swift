@@ -52,10 +52,11 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
                 return "/quickChallenge/join"
             case .REMOVE_PARTICIPANT:
                 return "/quickChallenge/removeParticipant"
+            
             case .PATCH_CHALLENGES_BEGIN:
-                return "/quickChallenge"
+                return "/quickChallenge/"
             case .PATCH_CHALLENGES_FINISHED:
-                return "/quickChallenge"
+                return "/quickChallenge/"
             case .PATCH_CHALLENGES_SCORE:
                 return "/quickChallenge"
         }
