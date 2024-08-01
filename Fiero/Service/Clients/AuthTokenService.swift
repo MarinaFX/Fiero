@@ -63,7 +63,7 @@ class AuthTokenServiceImpl: AuthTokenService {
         """
         
         let request = makePOSTRequest(json: json, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      baseURL: FieroAPIEnum.host.description,
                                       endPoint: UserEndpointEnum.TOKEN.description,
                                       authToken: "")
         

@@ -43,9 +43,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
 @main
 struct FieroApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    @StateObject var viewModel: TestViewModel = TestViewModel()
-    
+        
     init() {
         UINavigationBar.appearance().tintColor = .white
     }
@@ -53,10 +51,6 @@ struct FieroApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear(perform: {
-                    print("flemis")
-                    self.viewModel.testeSingleChallenge()
-                })
         }
     }
 }

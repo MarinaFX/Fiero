@@ -47,18 +47,13 @@ extension Publisher {
     {
         self.tryMap { rawURLResponse in
             switch rawURLResponse {
-                case .success(let item, _):
+                case .success(let item, _), .created(let item, _):
                     guard let data = item.data else {
                         throw Failure(message: "Error while trying to map data from item in response. API did not return a compatible error", timestamp: rawURLResponse.item?.timestamp ?? "\(Date.now.ISO8601Format(.iso8601))")
                     }
                     
                     return data
-                case .created(let item, _):
-                    guard let data = item.data else {
-                        throw Failure(message: "Error while trying to map data from item in response. API did not return a compatible error", timestamp: rawURLResponse.item?.timestamp ?? "\(Date.now.ISO8601Format(.iso8601))")
-                    }
-                    
-                    return data
+                
                 case .failure(let item, let statusCode):
                     throw Failure(message: item.message ?? "Error while trying to map failure from response. API did not return a compatible error", timestamp: item.timestamp)
             }

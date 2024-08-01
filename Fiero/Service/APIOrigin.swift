@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum DeleteOrigin {
+    case deleteChallenge(String)
+    case removeChallenger(String)
+    case exitChallenge(String)
+    
+    var value: String {
+        switch self {
+            case .deleteChallenge(let id):
+                return QuickChallengeEndpointEnum.DELETE_CHALLENGES.description + id
+            case .removeChallenger(let id):
+                return QuickChallengeEndpointEnum.REMOVE_PARTICIPANT.description + id
+            case .exitChallenge(let id):
+                return QuickChallengeEndpointEnum.EXIT_CHALLENGE.description + id
+        }
+    }
+}
+
 enum UpdateOrigin {
     case beginChallenge(String)
     case endChallenge(String)

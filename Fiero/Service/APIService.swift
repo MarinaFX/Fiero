@@ -29,7 +29,7 @@ protocol CombineAPIService {
     
     func fetch<T>(_ type: [T].Type, path: FetchOrigin) -> AnyPublisher<[T], APIError> where T: Codable
     
-    func save<T>(_ type: T.Type, path: SaveOrigin, body: String) -> AnyPublisher<T, APIError> where T: Codable
+    func save<T>(_ type: T.Type, path: SaveOrigin, body: String?) -> AnyPublisher<T, APIError> where T: Codable
     
 }
 
@@ -74,7 +74,7 @@ extension CombineAPIServiceImpl {
         return self.authClient.getAuthToken()
             .flatMap({ authToken in
                 let request = self.requestClient.makeHTTPRequest(type: .GET, scheme: "http", port: 3333,
-                                                            host: FieroAPIEnum.BASE_URL.description,
+                                                            host: FieroAPIEnum.host.description,
                                                             path: path.value, body: nil, authToken: authToken)
                 
                 return self.client.perform(for: request)
@@ -88,7 +88,7 @@ extension CombineAPIServiceImpl {
     func fetch<T>(_ type: [T].Type = [T].self, path: FetchOrigin) -> AnyPublisher<[T], APIError> where T: Codable {
         return self.authClient.getAuthToken()
             .flatMap({ authToken in
-                let request = self.requestClient.makeHTTPRequest(type: .GET, scheme: "http", port: 3333, host: FieroAPIEnum.BASE_URL.description, path: path.value, body: nil, authToken: authToken)
+                let request = self.requestClient.makeHTTPRequest(type: .GET, scheme: "http", port: 3333, host: FieroAPIEnum.host.description, path: path.value, body: nil, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -110,10 +110,10 @@ extension CombineAPIServiceImpl {
 }
 
 extension CombineAPIServiceImpl {
-    func save<T>(_ type: T.Type = T.self, path: SaveOrigin, body: String) -> AnyPublisher<T, APIError> where T: Codable {
+    func save<T>(_ type: T.Type = T.self, path: SaveOrigin, body: String? = nil) -> AnyPublisher<T, APIError> where T: Codable {
         return self.authClient.getAuthToken()
             .flatMap({ authToken in
-                let request = self.requestClient.makeHTTPRequest(type: .POST, scheme: "http", port: 3333, host: FieroAPIEnum.BASE_URL.description, path: path.value, body: body, authToken: authToken)
+                let request = self.requestClient.makeHTTPRequest(type: .POST, scheme: "http", port: 3333, host: FieroAPIEnum.host.description, path: path.value, body: body, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -124,10 +124,10 @@ extension CombineAPIServiceImpl {
 }
 
 extension CombineAPIServiceImpl {
-    func update<T>(_ type: T.Type = T.self, path: UpdateOrigin, body: String) -> AnyPublisher<T, APIError> where T: Codable {
+    func update<T>(_ type: T.Type = T.self, path: UpdateOrigin, body: String? = nil) -> AnyPublisher<T, APIError> where T: Codable {
         return self.authClient.getAuthToken()
             .flatMap({ authToken in
-                let request = self.requestClient.makeHTTPRequest(type: .PATCH, scheme: "http", port: 3333, host: FieroAPIEnum.BASE_URL.description, path: path.value, body: body, authToken: authToken)
+                let request = self.requestClient.makeHTTPRequest(type: .PATCH, scheme: "http", port: 3333, host: FieroAPIEnum.host.description, path: path.value, body: body, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -137,73 +137,40 @@ extension CombineAPIServiceImpl {
     }
 }
 
-
-class TestViewModel: ObservableObject {
-    @Published var challenge: QuickChallenge?
-    @Published var challenges: [QuickChallenge] = []
-    
-    private var subscriptions = Set<AnyCancellable>()
-    
-    func testeSingleChallenge() {
-        let service = CombineAPIServiceImpl()
-        
-//        service.fetch(QuickChallenge.self, path: .challenge("976b835e-e4c1-433b-bdc9-11a55431afab"))
-//            .subscribe(on: DispatchQueue.global(qos: .background))
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: { completion in
-//                switch completion {
-//                    case .finished:
-//                        print("dale")
-//                    case .failure(let failure):
-//                        print(failure)
-//                }
-//            }, receiveValue: { challenge in
-//                print("funfou \(challenge)")
-//                self.challenge = challenge
-//            })
-//            .store(in: &subscriptions)
-        
-//        let body = """
-//        {
-//            "name" : "Melhor de 3 contra baianinho de maua",
-//            "type" : "amount",
-//            "goal" : 3,
-//            "goalMeasure" : "unity",
-//            "online" : true,
-//            "numberOfTeams" : 1,
-//            "maxTeams" : 9999
-//        }
-//        """
-//        
-//        service.save(QuickChallenge.self, path: .challenge, body: body)
-//            .subscribe(on: DispatchQueue.global(qos: .background))
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: { _ in }, receiveValue: { quickChallenge in
-//                print("funfou \(quickChallenge)")
-//                self.challenge = quickChallenge
-//            })
-//            .store(in: &subscriptions)
-        
-        let body = """
-        {
-            "finished": true
-        }
-        """
-        
-        service.update(QuickChallenge.self, path: .endChallenge("7a3414cd-8e80-474a-8607-1438ef1ccc07"), body: body)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                    case .finished:
-                        print("dale")
-                    case .failure(let failure):
-                        print(failure)
-                }
-            }, receiveValue: { quickChallenge in
-                self.challenge = quickChallenge
-                print(self.challenge)
+extension CombineAPIServiceImpl {
+    func delete<T>(_ type: T.Type = T.self, path: DeleteOrigin, body: String? = nil) -> AnyPublisher<T, APIError> where T: Codable {
+        return self.authClient.getAuthToken()
+            .flatMap({ authToken in
+                let request = self.requestClient.makeHTTPRequest(type: .DELETE, scheme: "http", port: 3333, host: FieroAPIEnum.host.description, path: path.value, body: body, authToken: authToken)
+                
+                return self.client.perform(for: request)
             })
-            .store(in: &subscriptions)
+            .print("antes do decode")
+            .decodeHTTPResponse(type: APISingleResponse<T>.self, decoder: self.decoder)
+            .print("depois do decode")
+            .tryMap({ rawURLResponse in
+                switch rawURLResponse {
+                    case .success(let item, _), .created(let item, _):
+                        guard let data = item.data else {
+                            throw APIError(message: "Error while trying to map data from item in response. API did not return a compatible type", timestamp: rawURLResponse.item?.timestamp ?? "\(Date.now.ISO8601Format(.iso8601))")
+                        }
+                        
+                        guard let message = item.message else {
+                            throw APIError(message: "Error while trying to map message from item in response. API did not return a compatible message", timestamp: rawURLResponse.item?.timestamp ?? "\(Date.now.ISO8601Format(.iso8601))")
+                        }
+                        
+                        if message.contains("successful.") {
+                            return data
+                        }
+                        else {
+                            throw APIError(message: "Error while trying to verify message from item in response. API did not return a compatible message", timestamp: rawURLResponse.item?.timestamp ?? "\(Date.now.ISO8601Format(.iso8601))")
+                        }
+                    
+                    case .failure(let item, let statusCode):
+                        throw APIError(message: item.message ?? "Error while trying to map failure from response. API did not return a compatible error", timestamp: item.timestamp)
+                }
+            })
+            .mapError({ _ in APIError(message: "", timestamp: "") })
+            .eraseToAnyPublisher()
     }
 }
