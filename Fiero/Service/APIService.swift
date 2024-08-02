@@ -31,6 +31,9 @@ protocol CombineAPIService {
     
     func save<T>(_ type: T.Type, path: SaveOrigin, body: String?) -> AnyPublisher<T, APIError> where T: Codable
     
+    func update<T>(_ type: T.Type, path: UpdateOrigin, body: String?) -> AnyPublisher<T, APIError> where T: Codable
+    
+    func delete<T>(_ type: T.Type, path: DeleteOrigin, body: String?) -> AnyPublisher<T, APIError> where T: Codable
 }
 
 struct CombineAPIServiceImpl: CombineAPIService {
