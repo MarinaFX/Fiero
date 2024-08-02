@@ -35,6 +35,8 @@ struct CarouselView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
+                Spacer(minLength: 16)
+                
                 ForEach(self.items, id: \.self) { item in
                     GeometryReader { proxy in
                         let scale = self.getScale(proxy: proxy)
@@ -54,6 +56,7 @@ struct CarouselView: View {
                     .padding(.horizontal, 32)
                     .padding(.vertical, 128)
                 }
+                Spacer(minLength: 48)
             }
             .padding()
         }
