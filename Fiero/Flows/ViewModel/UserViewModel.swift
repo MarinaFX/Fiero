@@ -62,7 +62,7 @@ class UserViewModel: ObservableObject {
         """
         
         let request = makePOSTRequest(json: json, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      baseURL: FieroAPIEnum.host.description,
                                       endPoint: UserEndpointEnum.SIGNUP.description,
                                       authToken: "")
         
@@ -132,7 +132,7 @@ class UserViewModel: ObservableObject {
         """
         
         let request = makePOSTRequest(json: userJSON, scheme: "http", port: 3333,
-                                      baseURL: FieroAPIEnum.BASE_URL.description,
+                                      baseURL: FieroAPIEnum.host.description,
                                       endPoint: UserEndpointEnum.LOGIN.description,
                                       authToken: "")
         
@@ -200,7 +200,7 @@ class UserViewModel: ObservableObject {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
                 let request = makeDELETERequest(scheme: "http", port: 3333,
-                                                baseURL: FieroAPIEnum.BASE_URL.description,
+                                                baseURL: FieroAPIEnum.host.description,
                                                 endPoint: UserEndpointEnum.DELETE_USER.description,
                                                 authToken: authToken)
                 
@@ -245,7 +245,7 @@ class UserViewModel: ObservableObject {
         }
         """
         
-        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.VERIFICATION_CODE.description, authToken: "")
+        let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: UserEndpointEnum.VERIFICATION_CODE.description, authToken: "")
         
         let operation = self.client.perform(for: request)
             .tryMap({ $1 as? HTTPURLResponse })
@@ -307,7 +307,7 @@ class UserViewModel: ObservableObject {
         }
         """
         print(json)
-        let request = makePATCHRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: UserEndpointEnum.RESET_PASSWORD.description, authToken: "")
+        let request = makePATCHRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: UserEndpointEnum.RESET_PASSWORD.description, authToken: "")
         
         let operation = self.client.perform(for: request)
             .tryMap({ $1 as! HTTPURLResponse })

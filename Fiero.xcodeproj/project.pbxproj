@@ -76,6 +76,11 @@
 		1BC4CFDD28EF5AB10039A230 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4CFDC28EF5AB10039A230 /* String+Extensions.swift */; };
 		1BC813882907263C00F95614 /* JoinChallengeAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */; };
 		1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */; };
+		1BEE709C2C54AD4000D559D6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709B2C54AD4000D559D6 /* APIService.swift */; };
+		1BEE709E2C555CFD00D559D6 /* HTTPRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */; };
+		1BEE70A02C555D3500D559D6 /* APIOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709F2C555D3500D559D6 /* APIOrigin.swift */; };
+		1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A12C555D6200D559D6 /* APIError.swift */; };
+		1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A72C580B3400D559D6 /* DecoderClient.swift */; };
 		1BEE70A62C5614B300D559D6 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A52C5614B300D559D6 /* CarouselView.swift */; };
 		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
@@ -245,6 +250,11 @@
 		1BC68C55288F32130055135D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BC813872907263C00F95614 /* JoinChallengeAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1BCC6F6628F88A85002447D0 /* InputConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputConfirmationCodeView.swift; sourceTree = "<group>"; };
+		1BEE709B2C54AD4000D559D6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestFactory.swift; sourceTree = "<group>"; };
+		1BEE709F2C555D3500D559D6 /* APIOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIOrigin.swift; sourceTree = "<group>"; };
+		1BEE70A12C555D6200D559D6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		1BEE70A72C580B3400D559D6 /* DecoderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderClient.swift; sourceTree = "<group>"; };
 		1BEE70A52C5614B300D559D6 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
@@ -668,9 +678,11 @@
 		1B92823D2B082AFC006D2D7E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
 				DF73C75728BF85B60079DBB0 /* Haptics.swift */,
-				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
+				1BEE70A42C555D7A00D559D6 /* Clients */,
+				1BEE70A32C555D6B00D559D6 /* Error */,
+				1BEE709B2C54AD4000D559D6 /* APIService.swift */,
+				1BEE709F2C555D3500D559D6 /* APIOrigin.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -742,6 +754,25 @@
 				1B6020C928A1AD8300AEF47B /* MockKeyValueStorage.swift */,
 			);
 			path = "Login+Registration";
+			sourceTree = "<group>";
+		};
+		1BEE70A32C555D6B00D559D6 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				1BEE70A12C555D6200D559D6 /* APIError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		1BEE70A42C555D7A00D559D6 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */,
+				1BC4CFD828EF598F0039A230 /* AuthTokenService.swift */,
+				1B3ED06F287F39EC00E1538B /* HTTPClient.swift */,
+				1BEE70A72C580B3400D559D6 /* DecoderClient.swift */,
+			);
+			path = Clients;
 			sourceTree = "<group>";
 		};
 		1BF3DA762925571E00BAED81 /* Online */ = {
@@ -1250,8 +1281,10 @@
 				1B3A1E98291039590026A992 /* GetChallengeAlertCasesEnum.swift in Sources */,
 				1B8CD3452887FA8800D2F703 /* QuickChallengeResponses.swift in Sources */,
 				CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */,
+				1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */,
 				1B0A02852885F03100C4A421 /* ChallengeSelectionView.swift in Sources */,
 				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
+				1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */,
 				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
 				F8B88998292559C000870A34 /* ScoreList.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
@@ -1259,8 +1292,10 @@
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,
 				1B7F15FE292D603E0065F9BC /* HealthDataError.swift in Sources */,
 				DF7DCDB128AEB65000B387BA /* ProfilePictureComponent.swift in Sources */,
+				1BEE709C2C54AD4000D559D6 /* APIService.swift in Sources */,
 				1B68C74D28F48F660098BAA4 /* RecoveryAccountErrorCases.swift in Sources */,
 				488919F828F8A93000958743 /* HapticsController.swift in Sources */,
+				1BEE709E2C555CFD00D559D6 /* HTTPRequestFactory.swift in Sources */,
 				CC3AB9E028C1433E006C0507 /* ScrollingModifier.swift in Sources */,
 				F8E7C76F2887B12E0035E2CE /* ChallengeCellStyle.swift in Sources */,
 				1BF3DA782925573800BAED81 /* LeaderboardView.swift in Sources */,
@@ -1275,6 +1310,7 @@
 				1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */,
 				CC4FEDE928A1922900E53C39 /* DuelScoreStyle.swift in Sources */,
 				1B5B7CDD2874BF6A00B4628F /* View+Extensions.swift in Sources */,
+				1BEE70A02C555D3500D559D6 /* APIOrigin.swift in Sources */,
 				CC5E0B3428D4A3F2001FE6FB /* CardCategoryStyles.swift in Sources */,
 				1B9092992878A58B0039EBB7 /* PrimaryTextFieldStyle.swift in Sources */,
 				1B8FB39D286F6EEF00B9F868 /* Tokens.swift in Sources */,
@@ -1508,7 +1544,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1545,7 +1581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pazzi.marina.FieroApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

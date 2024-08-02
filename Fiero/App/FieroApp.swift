@@ -43,7 +43,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
 @main
 struct FieroApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+        
     init() {
         UINavigationBar.appearance().tintColor = .white
     }

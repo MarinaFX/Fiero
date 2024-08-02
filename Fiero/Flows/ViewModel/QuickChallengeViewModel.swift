@@ -58,7 +58,7 @@ class QuickChallengeViewModel: ObservableObject {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({
                 let request = makePOSTRequest(json: challengeJson, scheme: "http", port: 3333,
-                                                     baseURL: FieroAPIEnum.BASE_URL.description,
+                                                     baseURL: FieroAPIEnum.host.description,
                                                      endPoint: QuickChallengeEndpointEnum.CREATE_CHALLENGE.description,
                                                      authToken: $0)
 
@@ -101,7 +101,7 @@ class QuickChallengeViewModel: ObservableObject {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({
                 let request = makeGETRequest(scheme: "http", port: 3333,
-                                             baseURL: FieroAPIEnum.BASE_URL.description,
+                                             baseURL: FieroAPIEnum.host.description,
                                              endPoint: QuickChallengeEndpointEnum.GET_CHALLENGES.description,
                                              authToken: $0)
                 return self.client.perform(for: request)
@@ -128,7 +128,7 @@ class QuickChallengeViewModel: ObservableObject {
                     }
                     return
                 }
-                self?.challengesList = response.data
+                self?.challengesList = response.data!
                 print("Successfully fetched challenges: \(rawURLResponse.statusCode)")
             })
             .store(in: &cancellables)
@@ -144,7 +144,7 @@ class QuickChallengeViewModel: ObservableObject {
     func getChallenge(by id: String) -> AnyPublisher<QuickChallenge, HTTPResponseError> {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
-                let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
+                let request = makeGETRequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: QuickChallengeEndpointEnum.GET_CHALLENGE.description, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -193,7 +193,7 @@ class QuickChallengeViewModel: ObservableObject {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
                 let request = makeDELETERequest(param: id, scheme: "http", port: 3333,
-                                                baseURL: FieroAPIEnum.BASE_URL.description,
+                                                baseURL: FieroAPIEnum.host.description,
                                                 endPoint: QuickChallengeEndpointEnum.DELETE_CHALLENGES.description,
                                                 authToken: authToken)
                 return self.client.perform(for: request)
@@ -238,7 +238,7 @@ class QuickChallengeViewModel: ObservableObject {
         
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
-                let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.ENTER_CHALLENGE.description, authToken: authToken)
+                let request = makePOSTRequest(json: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: QuickChallengeEndpointEnum.ENTER_CHALLENGE.description, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -297,7 +297,7 @@ class QuickChallengeViewModel: ObservableObject {
                                                variableToBePatched: VariablesToBePatchedQuickChallenge.alreadyBegin.description,
                                                scheme: "http",
                                                port: 3333,
-                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               baseURL: FieroAPIEnum.host.description,
                                                endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_BEGIN.description,
                                                authToken: authToken)
                 
@@ -359,7 +359,7 @@ class QuickChallengeViewModel: ObservableObject {
                 let request = makePATCHRequest(json: json, param: challengeId,
                                                variableToBePatched: VariablesToBePatchedQuickChallenge.finished.description,
                                                scheme: "http", port: 3333,
-                                               baseURL: FieroAPIEnum.BASE_URL.description,
+                                               baseURL: FieroAPIEnum.host.description,
                                                endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_FINISHED.description,
                                                authToken: authToken)
                 
@@ -423,7 +423,7 @@ class QuickChallengeViewModel: ObservableObject {
                                                     variableToBePatched: VariablesToBePatchedQuickChallenge.score.description,
                                                     scheme: "http",
                                                     port: 3333,
-                                                    baseURL: FieroAPIEnum.BASE_URL.description,
+                                                    baseURL: FieroAPIEnum.host.description,
                                                     endPoint: QuickChallengeEndpointEnum.PATCH_CHALLENGES_SCORE.description,
                                                     authToken: authToken)
                 
@@ -475,7 +475,7 @@ class QuickChallengeViewModel: ObservableObject {
     func exitChallenge(by id: String) -> AnyPublisher<Void, Error> {
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
-                let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.EXIT_CHALLENGE.description, authToken: authToken)
+                let request = makeDELETERequest(param: id, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: QuickChallengeEndpointEnum.EXIT_CHALLENGE.description, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })
@@ -540,7 +540,7 @@ class QuickChallengeViewModel: ObservableObject {
         
         let operation = self.authTokenService.getAuthToken()
             .flatMap({ authToken in
-                let request = makeDELETERequest(param: challengeID, body: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.BASE_URL.description, endPoint: QuickChallengeEndpointEnum.REMOVE_PARTICIPANT.description, authToken: authToken)
+                let request = makeDELETERequest(param: challengeID, body: json, scheme: "http", port: 3333, baseURL: FieroAPIEnum.host.description, endPoint: QuickChallengeEndpointEnum.REMOVE_PARTICIPANT.description, authToken: authToken)
                 
                 return self.client.perform(for: request)
             })

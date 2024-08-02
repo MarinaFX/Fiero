@@ -8,14 +8,14 @@
 import Foundation
 
 enum FieroAPIEnum: CustomStringConvertible {
-    case BASE_URL
+    case host
     case localhost
     case localIP
     
     var description: String {
         switch self {
-            case .BASE_URL:
-                return "localhost"//"ec2-3-138-121-168.us-east-2.compute.amazonaws.com"
+            case .host:
+                return "localhost" //"ec2-3-138-121-168.us-east-2.compute.amazonaws.com"
             case .localhost:
                 return "localhost"
             case .localIP:
@@ -28,10 +28,12 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
     case CREATE_CHALLENGE
     case GET_CHALLENGES
     case GET_CHALLENGE
+    
     case DELETE_CHALLENGES
     case ENTER_CHALLENGE
     case REMOVE_PARTICIPANT
     case EXIT_CHALLENGE
+    
     case PATCH_CHALLENGES_BEGIN
     case PATCH_CHALLENGES_FINISHED
     case PATCH_CHALLENGES_SCORE
@@ -43,19 +45,21 @@ enum QuickChallengeEndpointEnum: CustomStringConvertible {
             case .GET_CHALLENGES:
                 return "/quickChallenge/playing"
             case .GET_CHALLENGE:
-                return "/quickChallenge"
+                return "/quickChallenge/"
+    
             case .DELETE_CHALLENGES:
-                return "/quickChallenge"
+                return "/quickChallenge/"
             case .EXIT_CHALLENGE:
-                return "/quickChallenge/exit"
+                return "/quickChallenge/exit/"
             case .ENTER_CHALLENGE:
                 return "/quickChallenge/join"
             case .REMOVE_PARTICIPANT:
-                return "/quickChallenge/removeParticipant"
+                return "/quickChallenge/removeParticipant/"
+            
             case .PATCH_CHALLENGES_BEGIN:
-                return "/quickChallenge"
+                return "/quickChallenge/"
             case .PATCH_CHALLENGES_FINISHED:
-                return "/quickChallenge"
+                return "/quickChallenge/"
             case .PATCH_CHALLENGES_SCORE:
                 return "/quickChallenge"
         }
