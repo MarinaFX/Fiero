@@ -1,5 +1,5 @@
 //
-//  QCSelectParticipantsView.swift
+//  PlayerQuantitySelectionView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QCSelectParticipantsView: View {
+struct PlayerQuantitySelectionView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var challengeParticipants: Int = 2
@@ -90,7 +90,7 @@ struct QCSelectParticipantsView: View {
                 .padding(.vertical, Tokens.Spacing.xxxs.value)
                 
                 NavigationLink("", isActive: self.$pushNextView, destination: {
-                    QCAmountWinRulesView(isOnline: false, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: self.challengeParticipants)
+                    WinScoreSelectionView(isOnline: false, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, numberOfTeams: self.challengeParticipants)
                 })
             }
             .onChange(of: self.tabViewSelection, perform: { tabViewSelection in
@@ -102,6 +102,6 @@ struct QCSelectParticipantsView: View {
 
 struct ChallengeParticipantsSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        QCSelectParticipantsView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "")
+        PlayerQuantitySelectionView(primaryColor: .red, secondaryColor: .red, challengeType: .amount, challengeName: "")
     }
 }

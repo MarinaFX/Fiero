@@ -26,6 +26,42 @@ struct QuickChallenge: Decodable, Encodable, Equatable, Identifiable, Hashable {
     var teams: [Team]
     var owner: User
     
+    init(id: String, name: String, invitationCode: String? = nil, type: String, goal: Int, goalMeasure: String, finished: Bool, ownerId: String, online: Bool, alreadyBegin: Bool, maxTeams: Int, createdAt: String, updatedAt: String, teams: [Team], owner: User) {
+        self.id = id
+        self.name = name
+        self.invitationCode = invitationCode
+        self.type = type
+        self.goal = goal
+        self.goalMeasure = goalMeasure
+        self.finished = finished
+        self.ownerId = ownerId
+        self.online = online
+        self.alreadyBegin = alreadyBegin
+        self.maxTeams = maxTeams
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.teams = teams
+        self.owner = owner
+    }
+    
+    init() {
+        self.id = UUID().uuidString
+        self.name = ""
+        self.invitationCode = ""
+        self.type = ""
+        self.goal = 0
+        self.goalMeasure = ""
+        self.finished = false
+        self.ownerId = UUID().uuidString
+        self.online = false
+        self.alreadyBegin = false
+        self.maxTeams = 0
+        self.createdAt = Date.now.ISO8601Format()
+        self.updatedAt = Date.now.ISO8601Format()
+        self.teams = []
+        self.owner = User(email: "", name: "")
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(name)
