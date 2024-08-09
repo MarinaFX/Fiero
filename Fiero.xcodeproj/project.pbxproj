@@ -10,14 +10,15 @@
 		1B04557C28DB8938008ABA88 /* quantity-list-cell.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B04557B28DB8937008ABA88 /* quantity-list-cell.json */; };
 		1B04557E28DCE835008ABA88 /* blockCategory.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B04557D28DCE835008ABA88 /* blockCategory.json */; };
 		1B0A02852885F03100C4A421 /* ChallengeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */; };
-		1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A028B28871BE700C4A421 /* QCNamingView.swift */; };
+		1B0A028C28871BE700C4A421 /* NameChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A028B28871BE700C4A421 /* NameChallengeView.swift */; };
 		1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */; };
-		1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */; };
+		1B0A0293288743C800C4A421 /* PlayerQuantitySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A0292288743C800C4A421 /* PlayerQuantitySelectionView.swift */; };
 		1B0A02982887498B00C4A421 /* CustomProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02972887498B00C4A421 /* CustomProgressBar.swift */; };
-		1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */; };
-		1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */; };
+		1B0A029A2887628400C4A421 /* WinScoreSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02992887628400C4A421 /* WinScoreSelectionView.swift */; };
+		1B0A029C2887680000C4A421 /* ChallengeCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A029B2887680000C4A421 /* ChallengeCreatedView.swift */; };
 		1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */; };
 		1B0A02A92887CACF00C4A421 /* CustomMultiWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */; };
+		1B1B53482C628F8D00AA9353 /* WinScoreSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B53472C628F8D00AA9353 /* WinScoreSelectionViewModel.swift */; };
 		1B28CE3329285259007D8130 /* RemovePlayerAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */; };
 		1B3271BF2910A484003935BB /* HTTPResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271BE2910A484003935BB /* HTTPResponseError.swift */; };
 		1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */; };
@@ -80,8 +81,8 @@
 		1BEE709E2C555CFD00D559D6 /* HTTPRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */; };
 		1BEE70A02C555D3500D559D6 /* APIOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE709F2C555D3500D559D6 /* APIOrigin.swift */; };
 		1BEE70A22C555D6200D559D6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A12C555D6200D559D6 /* APIError.swift */; };
-		1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A72C580B3400D559D6 /* DecoderClient.swift */; };
 		1BEE70A62C5614B300D559D6 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A52C5614B300D559D6 /* CarouselView.swift */; };
+		1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE70A72C580B3400D559D6 /* DecoderClient.swift */; };
 		1BF3DA7129245E6200BAED81 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */; };
 		1BF3DA7329245F7100BAED81 /* UIDeviceOrientation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */; };
 		1BF3DA752924609000BAED81 /* QRCodeChallengeInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */; };
@@ -112,7 +113,7 @@
 		CCA3C24D28774FF3007F6597 /* CheckboxStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */; };
 		CCBAEBDC28A55126005D0FFC /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */; };
 		CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */; };
-		CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */; };
+		CCE03FE7290072780038737A /* MultiplayerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE6290072780038737A /* MultiplayerSelectionView.swift */; };
 		CCE03FE92900728A0038737A /* CreationSmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FE82900728A0038737A /* CreationSmallCardView.swift */; };
 		CCE03FEB290073510038737A /* CreationSmallCardStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */; };
 		CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE03FEC290318280038737A /* EnterWithCodeView.swift */; };
@@ -180,14 +181,15 @@
 		1B04557B28DB8937008ABA88 /* quantity-list-cell.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quantity-list-cell.json"; sourceTree = "<group>"; };
 		1B04557D28DCE835008ABA88 /* blockCategory.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockCategory.json; sourceTree = "<group>"; };
 		1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeSelectionView.swift; sourceTree = "<group>"; };
-		1B0A028B28871BE700C4A421 /* QCNamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCNamingView.swift; sourceTree = "<group>"; };
+		1B0A028B28871BE700C4A421 /* NameChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChallengeView.swift; sourceTree = "<group>"; };
 		1B0A0290288724C200C4A421 /* PermanentKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentKeyboard.swift; sourceTree = "<group>"; };
-		1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCSelectParticipantsView.swift; sourceTree = "<group>"; };
+		1B0A0292288743C800C4A421 /* PlayerQuantitySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerQuantitySelectionView.swift; sourceTree = "<group>"; };
 		1B0A02972887498B00C4A421 /* CustomProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressBar.swift; sourceTree = "<group>"; };
-		1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCAmountWinRulesView.swift; sourceTree = "<group>"; };
-		1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCChallengeCreatedView.swift; sourceTree = "<group>"; };
+		1B0A02992887628400C4A421 /* WinScoreSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScoreSelectionView.swift; sourceTree = "<group>"; };
+		1B0A029B2887680000C4A421 /* ChallengeCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCreatedView.swift; sourceTree = "<group>"; };
 		1B0A02A02887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeMetricSelectionCardView.swift; sourceTree = "<group>"; };
 		1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMultiWheelPicker.swift; sourceTree = "<group>"; };
+		1B1B53472C628F8D00AA9353 /* WinScoreSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScoreSelectionViewModel.swift; sourceTree = "<group>"; };
 		1B28CE3229285259007D8130 /* RemovePlayerAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePlayerAlertCasesEnum.swift; sourceTree = "<group>"; };
 		1B3271BE2910A484003935BB /* HTTPResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseError.swift; sourceTree = "<group>"; };
 		1B3271C22911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerScoreAlertCasesEnum.swift; sourceTree = "<group>"; };
@@ -254,8 +256,8 @@
 		1BEE709D2C555CFD00D559D6 /* HTTPRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestFactory.swift; sourceTree = "<group>"; };
 		1BEE709F2C555D3500D559D6 /* APIOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIOrigin.swift; sourceTree = "<group>"; };
 		1BEE70A12C555D6200D559D6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		1BEE70A72C580B3400D559D6 /* DecoderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderClient.swift; sourceTree = "<group>"; };
 		1BEE70A52C5614B300D559D6 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		1BEE70A72C580B3400D559D6 /* DecoderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderClient.swift; sourceTree = "<group>"; };
 		1BF3DA7029245E6200BAED81 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA7229245F7100BAED81 /* UIDeviceOrientation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Extensions.swift"; sourceTree = "<group>"; };
 		1BF3DA742924609000BAED81 /* QRCodeChallengeInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeChallengeInviteView.swift; sourceTree = "<group>"; };
@@ -286,7 +288,7 @@
 		CCA3C24C28774FF3007F6597 /* CheckboxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyles.swift; sourceTree = "<group>"; };
 		CCBAEBDB28A55126005D0FFC /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
 		CCC64BA4287F3A1D00E59260 /* TermsOfUseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseSheetView.swift; sourceTree = "<group>"; };
-		CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineOrOfflineView.swift; sourceTree = "<group>"; };
+		CCE03FE6290072780038737A /* MultiplayerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerSelectionView.swift; sourceTree = "<group>"; };
 		CCE03FE82900728A0038737A /* CreationSmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardView.swift; sourceTree = "<group>"; };
 		CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationSmallCardStyles.swift; sourceTree = "<group>"; };
 		CCE03FEC290318280038737A /* EnterWithCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWithCodeView.swift; sourceTree = "<group>"; };
@@ -363,16 +365,13 @@
 		1B0A02802885DBE900C4A421 /* Quick */ = {
 			isa = PBXGroup;
 			children = (
-				CCE03FE5290072360038737A /* OnlineOrOfflineView */,
+				1B0A029B2887680000C4A421 /* ChallengeCreatedView.swift */,
 				CC3AB9DF28C1433E006C0507 /* ScrollingModifier.swift */,
-				1B0A028B28871BE700C4A421 /* QCNamingView.swift */,
 				1BEE70A52C5614B300D559D6 /* CarouselView.swift */,
-				1B0A029B2887680000C4A421 /* QCChallengeCreatedView.swift */,
-				1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */,
-				1B0A0292288743C800C4A421 /* QCSelectParticipantsView.swift */,
+				1B1B53462C628D3000AA9353 /* Creation Flow */,
+				CCE03FE5290072360038737A /* OnlineOrOfflineView */,
 				CCFA55A728888A6500740663 /* Details */,
 				CCA2215728A18E09006AA03F /* Ongoing */,
-				1B0A029D2887AC3B00C4A421 /* Amount */,
 			);
 			path = Quick;
 			sourceTree = "<group>";
@@ -394,20 +393,25 @@
 			path = ProgressBar;
 			sourceTree = "<group>";
 		};
-		1B0A029D2887AC3B00C4A421 /* Amount */ = {
-			isa = PBXGroup;
-			children = (
-				1B0A02992887628400C4A421 /* QCAmountWinRulesView.swift */,
-			);
-			path = Amount;
-			sourceTree = "<group>";
-		};
 		1B0A02A62887CAAF00C4A421 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
 				1B0A02A82887CACF00C4A421 /* CustomMultiWheelPicker.swift */,
 			);
 			path = Picker;
+			sourceTree = "<group>";
+		};
+		1B1B53462C628D3000AA9353 /* Creation Flow */ = {
+			isa = PBXGroup;
+			children = (
+				1B0A02842885F03100C4A421 /* ChallengeSelectionView.swift */,
+				CCE03FE6290072780038737A /* MultiplayerSelectionView.swift */,
+				1B0A028B28871BE700C4A421 /* NameChallengeView.swift */,
+				1B0A02992887628400C4A421 /* WinScoreSelectionView.swift */,
+				1B1B53472C628F8D00AA9353 /* WinScoreSelectionViewModel.swift */,
+				1B0A0292288743C800C4A421 /* PlayerQuantitySelectionView.swift */,
+			);
+			path = "Creation Flow";
 			sourceTree = "<group>";
 		};
 		1B3ED07528809D8100E1538B /* Enums */ = {
@@ -894,7 +898,6 @@
 		CCE03FE5290072360038737A /* OnlineOrOfflineView */ = {
 			isa = PBXGroup;
 			children = (
-				CCE03FE6290072780038737A /* OnlineOrOfflineView.swift */,
 				CCE03FE82900728A0038737A /* CreationSmallCardView.swift */,
 				CCE03FEA290073510038737A /* CreationSmallCardStyles.swift */,
 			);
@@ -1234,8 +1237,8 @@
 				1B6020CE28A1B20B00AEF47B /* ChallengesListScreenView.swift in Sources */,
 				1B3ED06E287F39DF00E1538B /* URLSession+Extensions.swift in Sources */,
 				484F33E628F0A1FB005A8563 /* SoundPlayer.swift in Sources */,
-				1B0A0293288743C800C4A421 /* QCSelectParticipantsView.swift in Sources */,
-				1B0A029C2887680000C4A421 /* QCChallengeCreatedView.swift in Sources */,
+				1B0A0293288743C800C4A421 /* PlayerQuantitySelectionView.swift in Sources */,
+				1B0A029C2887680000C4A421 /* ChallengeCreatedView.swift in Sources */,
 				1B0A02A12887B2AC00C4A421 /* ChallengeMetricSelectionCardView.swift in Sources */,
 				1BCC6F6728F88A85002447D0 /* InputConfirmationCodeView.swift in Sources */,
 				1B6020C828A1940200AEF47B /* Member.swift in Sources */,
@@ -1256,7 +1259,7 @@
 				CCE03FED290318280038737A /* EnterWithCodeView.swift in Sources */,
 				CC3AB9DA28BE8EE0006C0507 /* LoginAlertCases.swift in Sources */,
 				F888EC01287600C300445FED /* AlertStyles.swift in Sources */,
-				1B0A029A2887628400C4A421 /* QCAmountWinRulesView.swift in Sources */,
+				1B0A029A2887628400C4A421 /* WinScoreSelectionView.swift in Sources */,
 				F85EE01A2881D73C00264114 /* RoundScoreComponent.swift in Sources */,
 				48D6EDCA28A2D48D0069FCE9 /* ScoreController3-4Component.swift in Sources */,
 				1B4135BB28597E8900C7094A /* ContentView.swift in Sources */,
@@ -1273,7 +1276,7 @@
 				DF73C75828BF85B60079DBB0 /* Haptics.swift in Sources */,
 				1B3271C32911992E003935BB /* EditPlayerScoreAlertCasesEnum.swift in Sources */,
 				1B0A0291288724C200C4A421 /* PermanentKeyboard.swift in Sources */,
-				1B0A028C28871BE700C4A421 /* QCNamingView.swift in Sources */,
+				1B0A028C28871BE700C4A421 /* NameChallengeView.swift in Sources */,
 				CCC64BA5287F3A1D00E59260 /* TermsOfUseSheetView.swift in Sources */,
 				1B56226428E3817400C505DC /* FieroAPI.swift in Sources */,
 				F8320F73290717D400FED9AF /* OnlineChallengeDetailsView.swift in Sources */,
@@ -1285,8 +1288,9 @@
 				1B0A02852885F03100C4A421 /* ChallengeSelectionView.swift in Sources */,
 				1BC4CFD928EF598F0039A230 /* AuthTokenService.swift in Sources */,
 				1BEE70A82C580B3400D559D6 /* DecoderClient.swift in Sources */,
-				CCE03FE7290072780038737A /* OnlineOrOfflineView.swift in Sources */,
+				CCE03FE7290072780038737A /* MultiplayerSelectionView.swift in Sources */,
 				F8B88998292559C000870A34 /* ScoreList.swift in Sources */,
+				1B1B53482C628F8D00AA9353 /* WinScoreSelectionViewModel.swift in Sources */,
 				CCFA55A628887F2300740663 /* ParticipantStyles.swift in Sources */,
 				1BEE70A62C5614B300D559D6 /* CarouselView.swift in Sources */,
 				F834EEBE28F09D6800D44C49 /* RecoverPasswordEmailStepView.swift in Sources */,

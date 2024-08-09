@@ -1,5 +1,5 @@
 //
-//  QCNamingView.swift
+//  NameChallengeView.swift
 //  Fiero
 //
 //  Created by Marina De Pazzi on 19/07/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 //MARK: QCNamingView
-struct QCNamingView: View {
+struct NameChallengeView: View {
     //MARK: - Variables Setup
     @Environment(\.dismiss) var dismiss
     @Environment(\.sizeCategory) var sizeCategory
@@ -69,9 +69,9 @@ struct QCNamingView: View {
 
                         NavigationLink("", isActive: $isNavActiveForAmount) {
                             if isOnline {
-                                QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: 1)
+                                WinScoreSelectionView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, numberOfTeams: 1)
                             } else {
-                                QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                                PlayerQuantitySelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
                             }
                         }.hidden()
                     }
@@ -126,10 +126,10 @@ struct QCNamingView: View {
 
                     NavigationLink("", isActive: $isNavActiveForAmount) {
                         if isOnline {
-                            QCAmountWinRulesView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, challengeParticipants: 1)
+                            WinScoreSelectionView(isOnline: isOnline, primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName, numberOfTeams: 1)
                         }
                         else {
-                            QCSelectParticipantsView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
+                            PlayerQuantitySelectionView(primaryColor: self.primaryColor, secondaryColor: self.secondaryColor, challengeType: self.challengeType, challengeName: self.challengeName)
                         }
                     }.hidden()
                 }
@@ -147,6 +147,6 @@ struct QCNamingView: View {
 
 struct QuickChallengeNamingView_Previews: PreviewProvider {
     static var previews: some View {
-        QCNamingView(isOnline: true, primaryColor: .red, secondaryColor: .white, challengeType: .amount)
+        NameChallengeView(isOnline: true, primaryColor: .red, secondaryColor: .white, challengeType: .amount)
     }
 }

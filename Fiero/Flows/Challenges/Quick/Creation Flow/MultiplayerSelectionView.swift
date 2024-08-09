@@ -1,5 +1,5 @@
 //
-//  OnlineOrOfflineView.swift
+//  MultiplayerSelectionView.swift
 //  Fiero
 //
 //  Created by Natália Brocca dos Santos on 19/10/22.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct OnlineOrOfflineView: View {
+struct MultiplayerSelectionView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.sizeCategory) var sizeCategory
-    @EnvironmentObject var quickChallengeViewModel: QuickChallengeViewModel
     
     @State var presentNextScreen: Bool = false
     @State var tabViewSelection: Int = 1
@@ -27,7 +26,7 @@ struct OnlineOrOfflineView: View {
                 Tokens.Colors.Background.dark.value.edgesIgnoringSafeArea(.all)
                 
                 NavigationLink("", isActive: self.$presentNextScreen, destination: {
-                    QCNamingView(isOnline: isOnline, primaryColor: primaryColor, secondaryColor: secondaryColor, challengeType: challengeType)
+                    NameChallengeView(isOnline: isOnline, primaryColor: primaryColor, secondaryColor: secondaryColor, challengeType: challengeType)
                 })
                 .hidden()
                 
@@ -141,6 +140,6 @@ struct OnlineOrOfflineView: View {
 
 struct OnlineOrOfflineView_Previews: PreviewProvider {
     static var previews: some View {
-        OnlineOrOfflineView(primaryColor: .gray, secondaryColor: .purple, challengeType: .amount)
+        MultiplayerSelectionView(primaryColor: .gray, secondaryColor: .purple, challengeType: .amount)
     }
 }

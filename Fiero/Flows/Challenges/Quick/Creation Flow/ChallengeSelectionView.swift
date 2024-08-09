@@ -33,11 +33,11 @@ struct ChallengeSelectionView: View {
             VStack {                
                 CarouselView(items: self.items, amountPresentNextScreen: self.$amountPresentNextScreen, walkingPresentNextScreen: self.$walkingPresentNextScreen)
                     .fullScreenCover(isPresented: $amountPresentNextScreen) {
-                        OnlineOrOfflineView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
+                        MultiplayerSelectionView(primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .amount)
                     }
                     .fullScreenCover(isPresented: $walkingPresentNextScreen) {
                         NavigationView {
-                            QCNamingView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
+                            NameChallengeView(isOnline: isOnline, primaryColor: Tokens.Colors.Highlight.five.value, secondaryColor: Tokens.Colors.Highlight.two.value, challengeType: .volleyball)
                         }
                     }
                 ButtonComponent(style: .black(isEnabled: true), text: "Entrar por código") {
